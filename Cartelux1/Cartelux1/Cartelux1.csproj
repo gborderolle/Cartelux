@@ -81,6 +81,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -211,7 +213,24 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EntityDeploy Include="Models\CarteluxModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CarteluxModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\CarteluxModel.edmx.diagram">
+      <DependentUpon>CarteluxModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Models\CarteluxModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CarteluxModel.edmx</DependentUpon>
+      <LastGenOutput>CarteluxModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\CarteluxModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CarteluxModel.edmx</DependentUpon>
+      <LastGenOutput>CarteluxModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Pages\Formulario.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -394,6 +413,24 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CarteluxModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CarteluxModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CarteluxModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CarteluxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CarteluxModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CarteluxModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\formularios.cs">
+      <DependentUpon>CarteluxModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Pages\Formulario.aspx.cs">
       <DependentUpon>Formulario.aspx</DependentUpon>
@@ -429,6 +466,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\js\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
