@@ -6,13 +6,13 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Cartelux1</title>
+    <title>Cartelux Publicidad</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
     <%--<webopt:BundleReference runat="server" Path="~/Content/css" />--%>
-    <link rel="icon" href="Content/img/Cartelux1.ico" />
+    <link rel="icon" href="Content/img/Cartelux-bolas-ico2.ico" />
 
     <!-- JS -->
     <script type="text/javascript" src="/Content/js/jquery-3.2.1.min.js"></script>
@@ -34,6 +34,7 @@
         .container-full {
             margin: 0 auto;
             width: 90%;
+            background-color: #f2e0cf;
         }
     </style>
 

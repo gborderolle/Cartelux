@@ -1,30 +1,29 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Formulario.aspx.cs" Inherits="Cartelux1.Pages.Formulario" Title="Formulario" %>
-
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Formulario.aspx.cs" Inherits="Cartelux1.Pages.Formulario" Title="Cartelux Publicidad" %>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
 
     <!-- STYLES EXTENSION -->
 
     <!-- PAGE CSS -->
-    <%--<link rel="stylesheet" href="/Content/css/formulario.css" />--%>
+    <link rel="stylesheet" href="/Content/css/formulario.css" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="SubbodyContent" runat="server">
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
+    <img src="/Content/img/CX-Banner-form.png" alt="Cartelux" class="img-responsive" style="width: 100%;" />
     <div class="box box-default" style="margin: 20px;">
-        <div class="box-header with-border dark in" style="margin: auto; width: 50%; border: 4px solid #F70; padding: 10px;">
+        <div class="box-header with-border dark in div-form col-sm-12 col-md-6">
 
             <div class="row">
-                <div class="col-md-9">
+                <div class="col-sm-12 col-md-9">
                     <h2 style="color: #ea7209;">Por favor, ingrese los datos de su pedido</h2>
                 </div>
             </div>
             <br />
             <div class="row">
-                <div class="col-md-6" style="margin: auto;">
+                <div class="col-sm-12 col-md-6" style="margin: auto;">
                     <div class="login-container sub-form panel panel-default">
 
                         <div class="form-group">
