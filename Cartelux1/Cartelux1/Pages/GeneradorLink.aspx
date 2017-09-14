@@ -43,32 +43,14 @@
             </div>
             <hr />
             <div class="row" style="display: inline;">
-                <%--<input class="form-control text-to-copy" type="text" runat="server" id="txbLink" clientidmode="static" value="?" style="cursor: default; width: 70%; float: left" onclick="this.select();">
-                <input class="form-control btn-primary js-copy-btn" type="button" runat="server" id="btnCopy2" clientidmode="static" value="COPIAR" style="width: 20%; float: right">--%>
-                
                 <input class="form-control text-to-copy" id="txbLink" onclick="this.select();" value="?" readonly/>
                 <button class="form-control btn-primary js-copy-btn btn-sm" id="btnCopy" onclick="return false;">Copiar </button>
-
-                <%--<input data-clipboard-text="" onclick="return false" id="btnCopy1" clientidmode="static">--%>
-                <%--<button data-clipboard-text="" onclick="return false" id="btnCopy1" clientidmode="static"> data-clipboard-text=""
-                                    COPIAR
-                                </button>--%>
             </div>
             <br />
             <br />
             <br />
         </div>
     </div>
-
-
-    <%--    
-    <textarea class="text-to-copy">JS is the future.</textarea>
-    <p>
-        <button class="js-copy-btn">Copy text</button>
-    </p>
-    --%>
-
-
 
     <script type="text/javascript">
         //<![CDATA[
@@ -254,10 +236,5 @@
             }], "*")
         }
     </script>
-
-
-
-
-
 
 </asp:Content>
