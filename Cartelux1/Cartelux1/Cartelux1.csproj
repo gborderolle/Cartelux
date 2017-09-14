@@ -206,10 +206,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\formulario.css" />
+    <Content Include="Content\css\generador.css" />
     <Content Include="Content\img\Background.jpg" />
     <Content Include="Content\img\Cartelux1.ico" />
     <Content Include="Content\img\CX-Banner-form - Copy.png" />
     <Content Include="Content\img\CX-Banner-form.png" />
+    <Content Include="Content\js\generador.js" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -238,6 +240,7 @@
       <LastGenOutput>CarteluxModel.cs</LastGenOutput>
     </Content>
     <Content Include="Pages\Formulario.aspx" />
+    <Content Include="Pages\GeneradorLink.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -445,6 +448,13 @@
     <Compile Include="Pages\Formulario.aspx.designer.cs">
       <DependentUpon>Formulario.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\GeneradorLink.aspx.cs">
+      <DependentUpon>GeneradorLink.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\GeneradorLink.aspx.designer.cs">
+      <DependentUpon>GeneradorLink.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -471,7 +481,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\js\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

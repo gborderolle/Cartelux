@@ -108,7 +108,8 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+                <p>&copy; <%: DateTime.Now.Year %> - Bonisoft - Build: <%=Build_date%></p>
+                <p>Cartelux. Todos los derechos reservados, marca y empresa registrada, 2017.</p>
             </footer>
         </div>
     </form>

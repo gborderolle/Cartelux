@@ -16,9 +16,9 @@
     <div class="box box-default" style="margin: 20px;">
         <div class="box-header with-border dark in div-form col-sm-12 col-md-6">
 
-            <div class="row">
-                <div class="col-sm-12 col-md-9">
-                    <h2 style="color: #ea7209;">Por favor, ingrese los datos de su pedido</h2>
+             <div class="row" style="margin: 0; display: block;">
+                <div style="text-align: center;">
+                    <h2 style="color: #ea7209;">Ingrese los datos de su pedido</h2>
                 </div>
             </div>
             <br />
