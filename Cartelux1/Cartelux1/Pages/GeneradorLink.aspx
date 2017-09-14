@@ -25,7 +25,7 @@
 
             <div class="row" style="margin: 0; display: block;">
                 <div style="text-align: center;">
-                    <h2 id="lbl_h2" style="color: #ea7209;">Click para generar y copiar nuevo LINK de pedido</h2>
+                    <h2 id="lbl_h2" style="color: #ea7209;">Generar y copiar LINK del nuevo pedido</h2>
                 </div>
             </div>
             <br />
@@ -34,7 +34,7 @@
                     <div class="login-container sub-form panel panel-default">
 
                         <div class="form-group">
-                            <input class="form-control btn-warning" type="button" tabindex="1" autofocus runat="server" id="btnGenerar" clientidmode="static" value="Generar" title="Click para generar un LINK con ID único" onclick="generarLink();">
+                            <input class="form-control btn-warning" type="button" tabindex="1" runat="server" id="btnGenerar" clientidmode="static" value="Generar" title="Click para generar un LINK con ID único" onclick="generarLink();">
                         </div>
 
 
@@ -46,7 +46,7 @@
                 <%--<input class="form-control text-to-copy" type="text" runat="server" id="txbLink" clientidmode="static" value="?" style="cursor: default; width: 70%; float: left" onclick="this.select();">
                 <input class="form-control btn-primary js-copy-btn" type="button" runat="server" id="btnCopy2" clientidmode="static" value="COPIAR" style="width: 20%; float: right">--%>
                 
-                <textarea class="form-control text-to-copy" id="txbLink" onclick="this.select();" readonly>?</textarea>
+                <input class="form-control text-to-copy" id="txbLink" onclick="this.select();" value="?" readonly/>
                 <button class="form-control btn-primary js-copy-btn btn-sm" id="btnCopy" onclick="return false;">Copiar </button>
 
                 <%--<input data-clipboard-text="" onclick="return false" id="btnCopy1" clientidmode="static">--%>
