@@ -205,12 +205,27 @@
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\css\tether-theme-arrows-dark.min.css" />
+    <Content Include="Content\bootstrap\css\tether-theme-arrows.min.css" />
+    <Content Include="Content\bootstrap\css\tether-theme-basic.min.css" />
+    <Content Include="Content\bootstrap\css\tether.min.css" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\bootstrap\js\tether.min.js" />
     <Content Include="Content\css\formulario.css" />
     <Content Include="Content\css\generador.css" />
     <Content Include="Content\img\Background.jpg" />
     <Content Include="Content\img\Cartelux1.ico" />
     <Content Include="Content\img\CX-Banner-form - Copy.png" />
     <Content Include="Content\img\CX-Banner-form.png" />
+    <Content Include="Content\js\formulario.js" />
     <Content Include="Content\js\generador.js" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -228,6 +243,17 @@
     <Content Include="Models\CarteluxModel.edmx.diagram">
       <DependentUpon>CarteluxModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Properties\PublishProfiles\File System.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\CarteluxModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -239,8 +265,9 @@
       <DependentUpon>CarteluxModel.edmx</DependentUpon>
       <LastGenOutput>CarteluxModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Pages\Formulario.aspx" />
-    <Content Include="Pages\GeneradorLink.aspx" />
+    <Content Include="NOTAS.txt" />
+    <Content Include="Formulario.aspx" />
+    <Content Include="GeneradorLink.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -422,6 +449,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Global_Objects\Logs.cs" />
     <Compile Include="Models\CarteluxModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -441,18 +469,18 @@
       <DependentUpon>CarteluxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Pages\Formulario.aspx.cs">
+    <Compile Include="Formulario.aspx.cs">
       <DependentUpon>Formulario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Formulario.aspx.designer.cs">
+    <Compile Include="Formulario.aspx.designer.cs">
       <DependentUpon>Formulario.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\GeneradorLink.aspx.cs">
+    <Compile Include="GeneradorLink.aspx.cs">
       <DependentUpon>GeneradorLink.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\GeneradorLink.aspx.designer.cs">
+    <Compile Include="GeneradorLink.aspx.designer.cs">
       <DependentUpon>GeneradorLink.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

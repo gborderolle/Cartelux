@@ -108,8 +108,8 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Bonisoft - Build: <%=Build_date%></p>
-                <p>Cartelux. Todos los derechos reservados, marca y empresa registrada, 2017.</p>
+                <p>&copy; <%: DateTime.Now.Year %> - Cartelux - Build: <%=Build_date%></p>
+                <p>Cartelux Publicidad. Todos los derechos reservados, marca, empresa y software registrados, 2017.</p>
             </footer>
         </div>
     </form>

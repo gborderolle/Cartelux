@@ -14,7 +14,7 @@ namespace Cartelux1.Models
     
     public partial class formularios
     {
-        public int Formulario_ID { get; set; }
+        public string Formulario_ID { get; set; }
         public int Prospecto_ID { get; set; }
         public int Codigo { get; set; }
         public System.DateTime Datetime { get; set; }

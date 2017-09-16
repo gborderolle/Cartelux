@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Formulario_ID" />
           </Key>
-          <Property Name="Formulario_ID" Type="int" Nullable="false" />
+          <Property Name="Formulario_ID" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Prospecto_ID" Type="int" Nullable="false" />
           <Property Name="Codigo" Type="int" Nullable="false" />
           <Property Name="Datetime" Type="datetime" Nullable="false" />
@@ -34,7 +34,7 @@
           <Key>
             <PropertyRef Name="Formulario_ID" />
           </Key>
-          <Property Name="Formulario_ID" Type="Int32" Nullable="false" />
+          <Property Name="Formulario_ID" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Prospecto_ID" Type="Int32" Nullable="false" />
           <Property Name="Codigo" Type="Int32" Nullable="false" />
           <Property Name="Datetime" Type="DateTime" Nullable="false" Precision="3" />

@@ -1,0 +1,30 @@
+﻿*****FTP*****
+FTP: ftp.Smarterasp.net
+Port: 25
+User: DB_A29EFB_bonisoftdb_admin
+Pass: 154060gb
+
+--
+
+*****SQL*****
+Server: sql5020.smarterasp.net
+User: DB_A29EFB_bonisoftdb_admin
+Pass: 154060gb
+
+--
+
+*****Bonisoft*****
+User: boniadmin	
+Pass: 123456
+
+-------------------------------------
+
+Cartelux
+App: Formulario y Generador de IDs
+
+Server: sql5017.smarterasp.net
+BD: db_a2a582_carteluxdb
+User: DB_A2A582_carteluxdb_admin
+Pass: cartelux1234
+
+
