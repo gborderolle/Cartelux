@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Cartelux1.Global_Objects;
+using System;
 using System.Configuration;
 using System.Globalization;
-using System.Linq;
-using System.Web;
 using System.Web.Services;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Cartelux1
 {
@@ -17,11 +13,16 @@ namespace Cartelux1
 
         }
 
+        /// <summary>
+        /// Ejemplo: 20170918014644x644
+        /// Datetime=20170918014644 + x + Random=644
+        /// </summary>
+        /// <param name="dummy"></param>
+        /// <returns></returns>
         [WebMethod]
         public static string GenerarLink(string dummy)
         {
             string resultado = string.Empty;
-
             string url = "http://cartelux.uy/Pages/Formulario?ID=";
             if (ConfigurationManager.AppSettings != null)
             {
@@ -31,6 +32,8 @@ namespace Cartelux1
             if (!string.IsNullOrWhiteSpace(url))
             {
                 DateTime date = DateTime.Now;
+                resultado += date.ToString("yyyy-MM-dd-hh-mm-ss", CultureInfo.InvariantCulture).Replace("-", "");
+                resultado += "x";
                 Random ran = new Random();
                 int number = 0;
                 for (int i = 0; i < 3; i++)
@@ -38,16 +41,16 @@ namespace Cartelux1
                     number = ran.Next(0, 9);
                     resultado += number.ToString();
                 }
-                resultado += date.ToString("yyyy-MM-dd-hh-mm-ss", CultureInfo.InvariantCulture).Replace("-","");
-                for (int i = 0; i < 3; i++)
+                
+                string resultado_parcial = Utilities.Encrypt(resultado);
+                if (!string.IsNullOrWhiteSpace(resultado_parcial))
                 {
-                    number = ran.Next(0, 9);
-                    resultado += number.ToString();
+                    resultado = resultado_parcial;
                 }
                 resultado = url + resultado;
             }
             return resultado;
-        }
+        }        
 
     }
 }

@@ -24,5 +24,11 @@ namespace Cartelux1.Models
         public int Motivo_ID { get; set; }
         public string Texto { get; set; }
         public string Comentarios { get; set; }
+        public string Direccion { get; set; }
+        public string Barrio { get; set; }
+        public string Fecha { get; set; }
+        public string Detalles { get; set; }
+        public string Motivo_cod { get; set; }
+        public string Entrega_cod { get; set; }
     }
 }

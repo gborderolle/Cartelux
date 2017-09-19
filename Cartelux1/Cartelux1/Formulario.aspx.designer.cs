@@ -31,49 +31,157 @@ namespace Cartelux1 {
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txbTel;
         
         /// <summary>
-        /// txbEdad control.
+        /// rad_entrega1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txbEdad;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rad_entrega1;
         
         /// <summary>
-        /// txbMotivo control.
+        /// rad_entrega2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txbMotivo;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rad_entrega2;
         
         /// <summary>
-        /// Text1 control.
+        /// rad_entrega3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Text1;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rad_entrega3;
         
         /// <summary>
-        /// Text2 control.
+        /// rad_entrega4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Text2;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rad_entrega4;
         
         /// <summary>
-        /// Text3 control.
+        /// txbDireccion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Text3;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txbDireccion;
+        
+        /// <summary>
+        /// txbBarrio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txbBarrio;
+        
+        /// <summary>
+        /// txbFecha control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txbFecha;
+        
+        /// <summary>
+        /// rad_motivo1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rad_motivo1;
+        
+        /// <summary>
+        /// rad_motivo2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rad_motivo2;
+        
+        /// <summary>
+        /// rad_motivo3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rad_motivo3;
+        
+        /// <summary>
+        /// rad_motivo4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rad_motivo4;
+        
+        /// <summary>
+        /// rad_motivo5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rad_motivo5;
+        
+        /// <summary>
+        /// rad_motivo6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rad_motivo6;
+        
+        /// <summary>
+        /// rad_motivo7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rad_motivo7;
+        
+        /// <summary>
+        /// rad_motivo8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rad_motivo8;
+        
+        /// <summary>
+        /// rad_motivo9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rad_motivo9;
+        
+        /// <summary>
+        /// rad_motivo10 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rad_motivo10;
         
         /// <summary>
         /// txbTexto control.

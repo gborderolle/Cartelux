@@ -4,6 +4,12 @@
     <EntitySetMapping Name="formularios">
       <EntityTypeMapping TypeName="carteluxdbModel.formularios">
         <MappingFragment StoreEntitySet="formularios">
+          <ScalarProperty Name="Entrega_cod" ColumnName="Entrega_cod" />
+          <ScalarProperty Name="Motivo_cod" ColumnName="Motivo_cod" />
+          <ScalarProperty Name="Detalles" ColumnName="Detalles" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Barrio" ColumnName="Barrio" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
           <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
           <ScalarProperty Name="Texto" ColumnName="Texto" />
           <ScalarProperty Name="Motivo_ID" ColumnName="Motivo_ID" />
