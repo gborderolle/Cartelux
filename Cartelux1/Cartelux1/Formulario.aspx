@@ -10,13 +10,19 @@
     <!-- PAGE JS -->
     <script type="text/javascript" src="/Content/js/formulario.js"></script>
 
+    <style type="text/css">
+        .dropdown {
+            margin-bottom: 10px;
+        }
+    </style>
+
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="SubbodyContent" runat="server">
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <img src="/Content/img/CX-Banner-form.png" alt="Cartelux" class="img-responsive" style="width: 100%;" />
+    <img src="/Content/img/CX-Banner-form.jpg" alt="Cartelux" class="img-responsive" style="width: 100%;" />
     <div class="box box-default" style="margin: 20px;">
         <div class="box-header with-border dark in div-form col-sm-12 col-md-6">
 
@@ -41,25 +47,19 @@
                         <hr />
                         <label class="label-default">Entrega (si aplica)</label>
                         <br />
-                        <span class="label label-primary">Tipo de entrega</span>
-                        <div id="rad_entrega">
-                            <div class="radio-inline">
-                                <label>
-                                    <input id="rad_entrega1" type="radio" name="entrega" value="Colocación" runat="server" checked>Colocación</label>
-                            </div>
-                            <div class="radio-inline">
-                                <label>
-                                    <input id="rad_entrega2" type="radio" name="entrega" value="Entrega" runat="server">Envío a domicilio</label>
-                            </div>
-                            <div class="radio-inline">
-                                <label>
-                                    <input id="rad_entrega3" type="radio" name="entrega" value="Interior" runat="server">Envío al interior</label>
-                            </div>
-                            <div class="radio-inline">
-                                <label>
-                                    <input id="rad_entrega4" type="radio" name="entrega" value="Taller" runat="server">Retiro en taller</label>
-                            </div>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-info dropdown-toggle" type="button" data-toggle="dropdown">
+                                Tipo de entrega
+  <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" id="ddlTipoEntrega">
+                                <li><a href="javascript:;" onclick="return false;">Colocación</a></li>
+                                <li><a href="javascript:;" onclick="return false;">Envío a domicilio</a></li>
+                                <li><a href="javascript:;" onclick="return false;">Envío al interior</a></li>
+                                <li><a href="javascript:;" onclick="return false;">Retiro en taller</a></li>
+                            </ul>
                         </div>
+
                         <div class="form-group">
                             <input class="form-control txbEditable" placeholder="Dirección de colocación " type="text" tabindex="4" runat="server" id="txbDireccion">
                         </div>
@@ -73,54 +73,43 @@
                         <hr />
                         <label class="label-default">Cartel</label>
 
-                        <div id="rad_motivo">
-                            Motivo
-                            <div class="radio-inline">
-                                <label>
-                                    <input id="rad_motivo1" type="radio" name="motivo" value="EMP" runat="server" checked>Empresa</label>
-                            </div>
-                            <div class="radio-inline">
-                                <label>
-                                    <input id="rad_motivo2" type="radio" name="motivo" value="15" runat="server">15 Años</label>
-                            </div>
-                            <div class="radio-inline">
-                                <label>
-                                    <input id="rad_motivo3" type="radio" name="motivo" value="CUM" runat="server">Cumpleaños</label>
-                            </div>
-                            <div class="radio-inline">
-                                <label>
-                                    <input id="rad_motivo4" type="radio" name="motivo" value="REC" runat="server">Recibimiento</label>
-                            </div>
-                            <div class="radio-inline">
-                                <label>
-                                    <input id="rad_motivo5" type="radio" name="motivo" value="EVT" runat="server">Evento</label>
-                            </div>
-                            <div class="radio-inline">
-                                <label>
-                                    <input id="rad_motivo6" type="radio" name="motivo" value="AMR" runat="server">Amor</label>
-                            </div>
-                            <div class="radio-inline">
-                                <label>
-                                    <input id="rad_motivo7" type="radio" name="motivo" value="BDE" runat="server">Bienvenida/Despedida</label>
-                            </div>
-                            <div class="radio-inline">
-                                <label>
-                                    <input id="rad_motivo8" type="radio" name="motivo" value="SIN" runat="server">Sindicato</label>
-                            </div>
-                            <div class="radio-inline">
-                                <label>
-                                    <input id="rad_motivo9" type="radio" name="motivo" value="NAC" runat="server">Nacimiento</label>
-                            </div>
-                            <div class="radio-inline">
-                                <label>
-                                    <input id="rad_motivo10" type="radio" name="motivo" value="OTR" runat="server">Otro</label>
-                            </div>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-info dropdown-toggle" type="button" data-toggle="dropdown">
+                                Tamaño
+  <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" id="ddlTamano">
+                                <li><a href="javascript:;" onclick="return false;">1,5 mts</a></li>
+                                <li><a href="javascript:;" onclick="return false;">3 mts</a></li>
+                                <li><a href="javascript:;" onclick="return false;">5 mts</a></li>
+                                <li><a href="javascript:;" onclick="return false;">Otro</a></li>
+                            </ul>
                         </div>
+
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-info dropdown-toggle" type="button" data-toggle="dropdown">
+                                Motivo
+  <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" id="ddlMotivo">
+                                <li><a href="javascript:;" onclick="return false;">Empresa</a></li>
+                                <li><a href="javascript:;" onclick="return false;">15 Años</a></li>
+                                <li><a href="javascript:;" onclick="return false;">Cumpleaños</a></li>
+                                <li><a href="javascript:;" onclick="return false;">Recibimiento</a></li>
+                                <li><a href="javascript:;" onclick="return false;">Evento</a></li>
+                                <li><a href="javascript:;" onclick="return false;">Amor</a></li>
+                                <li><a href="javascript:;" onclick="return false;">Bienvenida/Despedida</a></li>
+                                <li><a href="javascript:;" onclick="return false;">Sindicato</a></li>
+                                <li><a href="javascript:;" onclick="return false;">Nacimiento</a></li>
+                                <li><a href="javascript:;" onclick="return false;">Otro</a></li>
+                            </ul>
+                        </div>
+
                         <div class="form-group">
                             <input class="form-control txbEditable" placeholder="Texto" type="text" tabindex="5" runat="server" required id="txbTexto">
                         </div>
                         <div class="form-group">
-                            <input class="form-control txbEditable" placeholder="Detalles de diseño" type="text" tabindex="5" runat="server" id="txbDetalles">
+                            <input class="form-control txbEditable" placeholder="Estilo de diseño" type="text" tabindex="5" runat="server" id="txbDetalles">
                         </div>
                         <div class="form-group">
                             <button class="form-control btn btn-primary" clientidmode="static" name="submit" type="submit" data-submit="...Confirmando" runat="server" id="btnConfirmar" onserverclick="btnConfirmar_ServerClick">Guardar y confirmar</button>
@@ -132,5 +121,8 @@
             </div>
         </div>
     </div>
+    <asp:HiddenField ID="hdn_ddlTipoEntrega" ClientIDMode="Static" runat="server" Value="" />
+    <asp:HiddenField ID="hdn_ddlTamano" ClientIDMode="Static" runat="server" Value="" />
+    <asp:HiddenField ID="hdn_ddlMotivo" ClientIDMode="Static" runat="server" Value="" />
 
 </asp:Content>

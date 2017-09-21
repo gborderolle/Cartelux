@@ -23,5 +23,6 @@
     <Property Name="Detalles" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Motivo_cod" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="Entrega_cod" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Tamano" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

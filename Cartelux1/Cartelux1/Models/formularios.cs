@@ -30,5 +30,6 @@ namespace Cartelux1.Models
         public string Detalles { get; set; }
         public string Motivo_cod { get; set; }
         public string Entrega_cod { get; set; }
+        public string Tamano { get; set; }
     }
 }

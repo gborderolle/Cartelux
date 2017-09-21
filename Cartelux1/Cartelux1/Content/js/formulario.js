@@ -1,7 +1,8 @@
 ﻿$(document).ready(function () {
     var ID = getUrlParameter('ID');
     if (ID != null && ID.length > 0) {
-
+        load_events();
+        load_ddls();
     } else {
         $("#btnEdit").hide();
     }
@@ -22,6 +23,26 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
+
+function load_ddls() {
+    $('#hdn_ddlTipoEntrega').val($(this).text());
+    $('#hdn_ddlTamano').val($(this).text());
+    $('#hdn_ddlMotivo').val($(this).text());
+}
+
+function load_events() {
+    $('#ddlTipoEntrega li').on('click', function () {
+        $('#hdn_ddlTipoEntrega').val($(this).text());
+    });
+
+    $('#ddlTamano li').on('click', function () {
+        $('#hdn_ddlTamano').val($(this).text());
+    });
+
+    $('#ddlMotivo li').on('click', function () {
+        $('#hdn_ddlMotivo').val($(this).text());
+    });
+}
 
 function editFields()
 {

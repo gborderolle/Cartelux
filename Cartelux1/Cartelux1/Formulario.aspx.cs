@@ -82,12 +82,13 @@ namespace Cartelux1
                         txbDireccion.Value = form.Direccion;
                         txbBarrio.Value = form.Barrio;
                         txbFecha.Value = form.Fecha;
-                        //rad.Value = form.Motivo_cod;
+                        hdn_ddlTipoEntrega.Value = form.Entrega_cod;
 
                         // Cartel
-                        //txbTel.Value = form.Entrega_cod;
                         txbTexto.Value = form.Texto;
                         txbDetalles.Value = form.Detalles;
+                        hdn_ddlTamano.Value = form.Tamano;
+                        hdn_ddlMotivo.Value = form.Motivo_cod;
 
                         SetFieldsReadOnly(true);
                     }
@@ -176,11 +177,13 @@ namespace Cartelux1
                     form.Direccion = txbDireccion.Value;
                     form.Barrio = txbBarrio.Value;
                     form.Fecha = txbFecha.Value;
-                    //rad.Value = form.Motivo_cod;
+                    form.Entrega_cod = hdn_ddlTipoEntrega.Value;
 
                     // Cartel
                     form.Texto = txbTexto.Value;
                     form.Detalles = txbDetalles.Value;
+                    form.Tamano = hdn_ddlTamano.Value;
+                    form.Motivo_cod = hdn_ddlMotivo.Value;
 
                     if (string.IsNullOrWhiteSpace(form.Formulario_ID))
                     {

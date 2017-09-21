@@ -20,6 +20,7 @@
     <Property Name="Detalles" Type="varchar" MaxLength="50" />
     <Property Name="Motivo_cod" Type="varchar" MaxLength="10" />
     <Property Name="Entrega_cod" Type="varchar" MaxLength="10" />
+    <Property Name="Tamano" Type="varchar" MaxLength="10" />
   </EntityType>
   <EntityContainer Name="carteluxdbModelStoreContainer">
     <EntitySet Name="formularios" EntityType="Self.formularios" Schema="dbo" store:Type="Tables" />

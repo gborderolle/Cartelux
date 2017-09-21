@@ -25,6 +25,7 @@
           <Property Name="Detalles" Type="varchar" MaxLength="50" />
           <Property Name="Motivo_cod" Type="varchar" MaxLength="10" />
           <Property Name="Entrega_cod" Type="varchar" MaxLength="10" />
+          <Property Name="Tamano" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityContainer Name="carteluxdbModelStoreContainer">
           <EntitySet Name="formularios" EntityType="Self.formularios" Schema="dbo" store:Type="Tables" />
@@ -56,6 +57,7 @@
           <Property Name="Detalles" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Motivo_cod" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Entrega_cod" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Tamano" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -66,6 +68,7 @@
           <EntitySetMapping Name="formularios">
             <EntityTypeMapping TypeName="carteluxdbModel.formularios">
               <MappingFragment StoreEntitySet="formularios">
+                <ScalarProperty Name="Tamano" ColumnName="Tamano" />
                 <ScalarProperty Name="Entrega_cod" ColumnName="Entrega_cod" />
                 <ScalarProperty Name="Motivo_cod" ColumnName="Motivo_cod" />
                 <ScalarProperty Name="Detalles" ColumnName="Detalles" />

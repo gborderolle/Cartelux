@@ -230,9 +230,12 @@
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\font-awesome\HELP-US-OUT.txt" />
     <Content Include="Content\img\Background.jpg" />
+    <Content Include="Content\img\Cartelux-bolas-ico2.ico" />
     <Content Include="Content\img\Cartelux1.ico" />
     <Content Include="Content\img\CX-Banner-form - Copy.png" />
+    <Content Include="Content\img\CX-Banner-form.jpg" />
     <Content Include="Content\img\CX-Banner-form.png" />
+    <Content Include="Content\img\CX-Banner-form1.png" />
     <Content Include="Content\js\clipboard.min.js" />
     <Content Include="Content\js\formulario.js" />
     <Content Include="Content\js\generador.js" />
