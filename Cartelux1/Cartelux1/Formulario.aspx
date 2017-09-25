@@ -10,9 +10,67 @@
     <!-- PAGE JS -->
     <script type="text/javascript" src="/Content/js/formulario.js"></script>
 
+    <script type="text/javascript">
+        $(function () {
+            $(".dropdown").selectmenu();
+        });
+
+        function ShowProgress() {
+            setTimeout(function () {
+                var modal = $('<div />');
+                modal.addClass("modal");
+                $('body').append(modal);
+                var loading = $(".loading");
+                loading.show();
+                var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                loading.css({ top: top, left: left });
+            }, 200);
+        }
+
+    </script>
+
     <style type="text/css">
-        .dropdown {
+        .ui-dialog-titlebar {
+            background-color: rgba(255, 119, 0, 0.78);
+        }
+
+        .ui-dialog-title {
+            color: whitesmoke;
+        }
+
+        .ui-dialog-buttonset > button {
+            background-color: rgb(254, 224, 134);
+        }
+
+        .ui-selectmenu-button {
             margin-bottom: 10px;
+            width: 100% !important;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: black;
+            z-index: 99;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+            -moz-opacity: 0.8;
+            min-height: 100%;
+            width: 100%;
+        }
+
+        .loading {
+            font-family: Arial;
+            font-size: 10pt;
+            border: 5px solid #67CFF5;
+            width: 200px;
+            height: 100px;
+            display: none;
+            position: fixed;
+            background-color: White;
+            z-index: 999;
         }
     </style>
 
@@ -47,63 +105,143 @@
                         <hr />
                         <label class="label-default">Entrega (si aplica)</label>
                         <br />
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-info dropdown-toggle" type="button" data-toggle="dropdown">
-                                Tipo de entrega
-  <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" id="ddlTipoEntrega">
-                                <li><a href="javascript:;" onclick="return false;">Colocación</a></li>
-                                <li><a href="javascript:;" onclick="return false;">Envío a domicilio</a></li>
-                                <li><a href="javascript:;" onclick="return false;">Envío al interior</a></li>
-                                <li><a href="javascript:;" onclick="return false;">Retiro en taller</a></li>
-                            </ul>
-                        </div>
+
+                        <select name="ddlTipoEntrega" id="ddlTipoEntrega" class="dropdown txbEditable" runat="server">
+                            <option disabled selected>Tipo de entrega</option>
+                            <option>Colocación</option>
+                            <option>Envío a domicilio</option>
+                            <option>Envío al interior</option>
+                            <option>Retiro en taller</option>
+                        </select>
 
                         <div class="form-group">
-                            <input class="form-control txbEditable" placeholder="Dirección de colocación " type="text" tabindex="4" runat="server" id="txbDireccion">
+                            <input class="form-control txbEditable" placeholder="Dirección de colocación" type="text" tabindex="4" runat="server" id="txbDireccion">
                         </div>
+
+                        <select name="ddlLugarEntrega" id="ddlLugarEntrega" class="dropdown txbEditable" runat="server">
+                            <option disabled selected>Lugar de colocación / entrega</option>
+                            <option disabled style="font-weight:bold">MONTEVIDEO</option>
+                            <option value="Aguada">Aguada</option>
+                            <option value="Aires puros">Aires puros</option>
+                            <option value="Arroyo seco">Arroyo seco</option>
+                            <option value="Atahualpa">Atahualpa</option>
+                            <option value="Barrio sur">Barrio sur</option>
+                            <option value="Bella vista">Bella vista</option>
+                            <option value="Belvedere">Belvedere</option>
+                            <option value="Bolivar">Bolivar</option>
+                            <option value="Brazo oriental">Brazo oriental</option>
+                            <option value="Buceo">Buceo</option>
+                            <option value="Capurro">Capurro</option>
+                            <option value="Carrasco">Carrasco</option>
+                            <option value="Carrasco norte">Carrasco norte</option>
+                            <option value="Centro">Centro</option>
+                            <option value="Cerrito de la victoria">Cerrito de la victoria</option>
+                            <option value="Ciudad vieja">Ciudad vieja</option>
+                            <option value="Colón">Colón</option>
+                            <option value="Conciliación">Conciliación</option>
+                            <option value="Cordón">Cordón</option>
+                            <option value="Flor de maroñas">Flor de maroñas</option>
+                            <option value="Goes">Goes</option>
+                            <option value="Ituzaingó">Ituzaingó</option>
+                            <option value="Jacinto vera">Jacinto vera</option>
+                            <option value="Jardines del Hipódromo">Jardines del Hipódromo</option>
+                            <option value="La blanqueada">La blanqueada</option>
+                            <option value="La comercial">La comercial</option>
+                            <option value="La figurita">La figurita</option>
+                            <option value="La teja">La teja</option>
+                            <option value="Larrañaga">Larrañaga</option>
+                            <option value="Las acacias">Las acacias</option>
+                            <option value="Lezica">Lezica</option>
+                            <option value="Malvín">Malvín</option>
+                            <option value="Malvín norte">Malvín norte</option>
+                            <option value="Manga">Manga</option>
+                            <option value="Maroñas">Maroñas</option>
+                            <option value="Mercado modelo">Mercado modelo</option>
+                            <option value="Nuevo parís">Nuevo parís</option>
+                            <option value="Pajas blancas">Pajas blancas</option>
+                            <option value="Palermo">Palermo</option>
+                            <option value="Parque batlle">Parque batlle</option>
+                            <option value="Parque guaraní">Parque guaraní</option>
+                            <option value="Parque rodó">Parque rodó</option>
+                            <option value="Paso de la arena">Paso de la arena</option>
+                            <option value="Peñarol">Peñarol</option>
+                            <option value="Piedras blancas">Piedras blancas</option>
+                            <option value="Pocitos">Pocitos</option>
+                            <option value="Prado">Prado</option>
+                            <option value="Punta carretas">Punta carretas</option>
+                            <option value="Reducto">Reducto</option>
+                            <option value="Retiro">Retiro</option>
+                            <option value="Santiago vázquez">Santiago vázquez</option>
+                            <option value="Sayago">Sayago</option>
+                            <option value="Tres cruces">Tres cruces</option>
+                            <option value="Tres ombúes">Tres ombúes</option>
+                            <option value="Unión">Unión</option>
+                            <option value="Villa Muñoz">Villa Muñoz</option>
+                            <option value="Villa del cerro">Villa del cerro</option>
+                            <option value="Villa dolores">Villa dolores</option>
+                            <option value="Villa española">Villa española</option>
+                            <option disabled style="font-weight:bold">CANELONES</option>
+                            <option value="Atlántida">Atlántida</option>
+                            <option value="Barros blancos">Barros blancos</option>
+                            <option value="Canelones">Canelones</option>
+                            <option value="Ciudad de la costa">Ciudad de la costa</option>
+                            <option value="Colonia nicolich">Colonia nicolich</option>
+                            <option value="Joaquín Suarez">Joaquín Suarez</option>
+                            <option value="La floresta">La floresta</option>
+                            <option value="La paz">La paz</option>
+                            <option value="Las piedras">Las piedras</option>
+                            <option value="Migues">Migues</option>
+                            <option value="Montes">Montes</option>
+                            <option value="Pando">Pando</option>
+                            <option value="Parque del plata">Parque del plata</option>
+                            <option value="Paso carrasco">Paso carrasco</option>
+                            <option value="Progreso">Progreso</option>
+                            <option value="Salinas">Salinas</option>
+                            <option value="San jacinto">San jacinto</option>
+                            <option value="Santa lucía">Santa lucía</option>
+                            <option value="Santa rosa">Santa rosa</option>
+                            <option value="Sauce">Sauce</option>
+                            <option value="Soca">Soca</option>
+                            <option value="Tala">Tala</option>
+                            <option value="Toledo">Toledo</option>
+                            <option disabled style="font-weight:bold">SAN JOSÉ</option>
+                            <option value="Ciudad del plata">Ciudad del plata</option>
+                            <option value="Elcida paullier">Elcida paullier</option>
+                            <option value="Libertad">Libertad</option>
+                            <option value="San josé">San josé</option>
+                            <option disabled style="font-weight:bold">OTRO</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+
                         <div class="form-group">
-                            <input class="form-control txbEditable" placeholder="Barrio de colocación " type="text" tabindex="4" runat="server" id="txbBarrio">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control txbEditable" placeholder="Fecha y hora de colocación " type="text" tabindex="4" runat="server" id="txbFecha">
+                            <input class="form-control txbEditable" placeholder="Día de colocación" type="text" tabindex="4" runat="server" id="txbFecha">
                         </div>
 
                         <hr />
                         <label class="label-default">Cartel</label>
 
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-info dropdown-toggle" type="button" data-toggle="dropdown">
-                                Tamaño
-  <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" id="ddlTamano">
-                                <li><a href="javascript:;" onclick="return false;">1,5 mts</a></li>
-                                <li><a href="javascript:;" onclick="return false;">3 mts</a></li>
-                                <li><a href="javascript:;" onclick="return false;">5 mts</a></li>
-                                <li><a href="javascript:;" onclick="return false;">Otro</a></li>
-                            </ul>
-                        </div>
+                        <br />
+                        <select name="ddlTamano" id="ddlTamano" class="dropdown txbEditable" runat="server">
+                            <option disabled selected>Tamaño</option>
+                            <option>1,5 mts</option>
+                            <option>3 mts</option>
+                            <option>5 mts</option>
+                            <option>Otro</option>
+                        </select>
 
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-info dropdown-toggle" type="button" data-toggle="dropdown">
-                                Motivo
-  <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" id="ddlMotivo">
-                                <li><a href="javascript:;" onclick="return false;">Empresa</a></li>
-                                <li><a href="javascript:;" onclick="return false;">15 Años</a></li>
-                                <li><a href="javascript:;" onclick="return false;">Cumpleaños</a></li>
-                                <li><a href="javascript:;" onclick="return false;">Recibimiento</a></li>
-                                <li><a href="javascript:;" onclick="return false;">Evento</a></li>
-                                <li><a href="javascript:;" onclick="return false;">Amor</a></li>
-                                <li><a href="javascript:;" onclick="return false;">Bienvenida/Despedida</a></li>
-                                <li><a href="javascript:;" onclick="return false;">Sindicato</a></li>
-                                <li><a href="javascript:;" onclick="return false;">Nacimiento</a></li>
-                                <li><a href="javascript:;" onclick="return false;">Otro</a></li>
-                            </ul>
-                        </div>
+                        <select name="ddlMotivo" id="ddlMotivo" class="dropdown txbEditable" runat="server">
+                            <option disabled selected>Motivo</option>
+                            <option>15 Años</option>
+                            <option>Cumpleaños</option>
+                            <option>Recibimiento</option>
+                            <option>Amor</option>
+                            <option>Bienvenida/Despedida</option>
+                            <option>Nacimiento</option>
+                            <option>Evento</option>
+                            <option>Empresa</option>
+                            <option>Sindicato</option>
+                            <option>Otro</option>
+                        </select>
 
                         <div class="form-group">
                             <input class="form-control txbEditable" placeholder="Texto" type="text" tabindex="5" runat="server" required id="txbTexto">
@@ -113,16 +251,37 @@
                         </div>
                         <div class="form-group">
                             <button class="form-control btn btn-primary" clientidmode="static" name="submit" type="submit" data-submit="...Confirmando" runat="server" id="btnConfirmar" onserverclick="btnConfirmar_ServerClick">Guardar y confirmar</button>
+                            <%--onclick="ShowProgress();"--%>
                         </div>
                     </div>
-                </div>
-                <h4 id="msj_result" runat="server" style="margin: auto; visibility: hidden;"><span class="label label-success">Los datos se guardaron correctamente</span></h4>
 
+                    <div class="row">
+                        <h4 id="msj_result" runat="server" style="margin: auto; display: none;"><span class="label label-success">Los datos se guardaron correctamente</span></h4>
+                    </div>
+                    <div style="font-size: x-small;">
+                        <div class="row">
+                            <span>Última actualización del pedido:</span>
+                            <label id="lblLastUpdate" runat="server">-</label>
+                        </div>
+                        <div class="row">
+                            <%--<img src="/Content/img/Dropbox_logo.png" class="img-responsive" alt="Cartelux" style="width: 5%;" />--%>
+                            <a href="https://www.dropbox.com/sh/slk0p1ee8rbln8m/AADdSDlwtNC55NggyWg6E5oVa?dl=0">Click aquí para ver el álbum de fotos</a>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
-    <asp:HiddenField ID="hdn_ddlTipoEntrega" ClientIDMode="Static" runat="server" Value="" />
-    <asp:HiddenField ID="hdn_ddlTamano" ClientIDMode="Static" runat="server" Value="" />
-    <asp:HiddenField ID="hdn_ddlMotivo" ClientIDMode="Static" runat="server" Value="" />
+
+    <div class="loading" align="center">
+        Confirmando pedido, por favor espere.<br />
+        <br />
+        <img src="/Content/img/loader.gif" alt="Cartelux" />
+    </div>
+
+    <div id="dialog" title="Mensaje Cartelux">
+        <p style="text-align: left;"></p>
+    </div>
 
 </asp:Content>

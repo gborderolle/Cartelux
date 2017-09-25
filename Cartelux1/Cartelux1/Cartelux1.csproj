@@ -221,7 +221,15 @@
     <Content Include="Content\bootstrap\js\tether.min.js" />
     <Content Include="Content\css\formulario.css" />
     <Content Include="Content\css\generador.css" />
+    <Content Include="Content\css\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\css\jquery-ui.css" />
     <Content Include="Content\css\jquery-ui.min.css" />
+    <Content Include="Content\css\jquery-ui.structure.css" />
     <Content Include="Content\css\jquery-ui.structure.min.css" />
     <Content Include="Content\css\jquery-ui.theme.min.css" />
     <Content Include="Content\css\jquery.qtip.min.css" />
@@ -232,15 +240,15 @@
     <Content Include="Content\img\Background.jpg" />
     <Content Include="Content\img\Cartelux-bolas-ico2.ico" />
     <Content Include="Content\img\Cartelux1.ico" />
-    <Content Include="Content\img\CX-Banner-form - Copy.png" />
     <Content Include="Content\img\CX-Banner-form.jpg" />
-    <Content Include="Content\img\CX-Banner-form.png" />
     <Content Include="Content\img\CX-Banner-form1.png" />
+    <Content Include="Content\img\Dropbox_logo.png" />
+    <Content Include="Content\img\loader.gif" />
     <Content Include="Content\js\clipboard.min.js" />
     <Content Include="Content\js\formulario.js" />
     <Content Include="Content\js\generador.js" />
-    <Content Include="Content\js\jquery-3.2.1.min.js" />
-    <Content Include="Content\js\jquery-ui.min.js" />
+    <Content Include="Content\js\jquery-ui.js" />
+    <Content Include="Content\js\jquery.js" />
     <Content Include="Content\js\jquery.qtip.min.js" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -255,6 +263,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CarteluxModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Global_Objects\Messages.js" />
     <Content Include="Models\CarteluxModel.edmx.diagram">
       <DependentUpon>CarteluxModel.edmx</DependentUpon>
     </Content>
@@ -316,10 +325,6 @@
     <Content Include="NOTAS.txt" />
     <Content Include="Formulario.aspx" />
     <Content Include="GeneradorLink.aspx" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -354,7 +359,6 @@
     <Content Include="Bundle.config" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Site.Mobile.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

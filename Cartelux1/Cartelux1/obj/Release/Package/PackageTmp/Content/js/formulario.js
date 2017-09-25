@@ -1,7 +1,8 @@
 ﻿$(document).ready(function () {
     var ID = getUrlParameter('ID');
     if (ID != null && ID.length > 0) {
-
+        //load_events();
+        //load_ddls();
     } else {
         $("#btnEdit").hide();
     }
@@ -32,6 +33,7 @@ function setFieldsReadOnly(value)
 {
     $(".txbEditable").attr("readonly", value);
     $("#btnConfirmar").disabled = value;
+    $(".dropdown").attr("disabled", value);
 
     if(value)
     {
@@ -42,3 +44,13 @@ function setFieldsReadOnly(value)
     }
 }
 
+function confirmacionPedido() {
+    $("#dialog p").text(hashMessages["ConfirmacionPedido"]);
+    $("#dialog").dialog({
+        buttons: {
+            "Confirmar": function () {
+                $(this).dialog("close");
+            }
+        }
+    });
+}

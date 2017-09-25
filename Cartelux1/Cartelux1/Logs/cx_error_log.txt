@@ -19,3 +19,8 @@
 9/18/2017 1:44:40 AM: [ln:142] Formulario: SaveData() - Excepcion. Convirtiendo int. ERROR: .
 9/18/2017 1:45:06 AM: [ln:142] Formulario: SaveData() - Excepcion. Convirtiendo int. ERROR: .
 9/18/2017 1:46:58 AM: [ln:142] Formulario: SaveData() - Excepcion. Convirtiendo int. ERROR: .
+21-Sep-17 11:47:44: [ln:206] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
+9/25/2017 3:36:10 AM: [ln:239] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
+9/25/2017 3:36:25 AM: [ln:239] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
+9/25/2017 3:39:12 AM: [ln:239] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
+9/25/2017 3:47:04 AM: [ln:56] Formulario: GetURLParam_Decrypted() - Excepcion. Desencriptando ID del parámetro URL. ERROR: The input data is not a complete block..

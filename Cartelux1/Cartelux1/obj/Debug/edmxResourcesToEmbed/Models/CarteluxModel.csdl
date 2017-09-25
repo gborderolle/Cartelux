@@ -18,11 +18,12 @@
     <Property Name="Texto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Comentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Barrio" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Barrio" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="Fecha" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="Detalles" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Motivo_cod" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="Entrega_cod" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="Tamano" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Motivo_cod" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Entrega_cod" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Tamano" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="LastUpdate" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>

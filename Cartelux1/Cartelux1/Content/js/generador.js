@@ -1,30 +1,4 @@
 ﻿
-$(document).ready(function () {
-    //new Clipboard('#btnCopy1');
-});
-
-
-//setTimeout(setQTip, 2000)
-
-//function setQTip() {
-//    $("#btnGenerar").qtip();
-//}
-
-//document.addEventListener('copy', function (e) {
-//    e.clipboardData.setData('text/plain', 'foo');
-//    e.preventDefault(); // default behaviour is to copy any selected text
-//});
-
-//$("#btnGenerar").tooltip({
-//    disabled: true,
-//    close: function (event, ui) { $(this).tooltip('disable'); }
-//});
-
-
-//$("#txbLink").on('click', function () {
-//    $(this).select();
-//});
-
 function generarLink() {
 
     // Ajax call parameters
@@ -42,24 +16,8 @@ function generarLink() {
             if (resultado) {
                 var link = resultado;
                 if (link !== null) {
-                    //copy to clipboard 
-                    //window.clipboardData.setData('Text', link);
-
-                    //var hdnID_generado = $("#hdnID_generado");
-                    //if (hdnID_generado !== null) {
-                    //    hdnID_generado.val(link);
-
-                    //    //copyToClipboard(hdnID_generado);
-                    //    //alert(link);
-                    //}
-
-                    // set and show tooltip
-                    //$("#btnGenerar").tooltip('enable').tooltip('open');
-
                     $("#btnGenerar").attr("title", link);
                     $("#txbLink").val(link);
-                    //$("#btnCopy1").attr("data-clipboard-text", link);
-                    //$("#btnGenerar").qtip("enable");
                 }
             } else {
                 alert("Error interno generando LINK.");
@@ -122,13 +80,3 @@ function copyToClipboard(elem) {
     return succeed;
 }
 
-//function copyToClipboard(elementId) {
-//    var aux = document.createElement("input");
-//    aux.setAttribute("value", document.getElementById(elementId).innerHTML);
-//    document.body.appendChild(aux);
-//    aux.select();
-//    document.execCommand("copy");
-
-//    document.body.removeChild(aux);
-
-//}

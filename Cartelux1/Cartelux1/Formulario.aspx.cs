@@ -1,12 +1,9 @@
 ﻿using Cartelux1.Global_Objects;
 using Cartelux1.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Cartelux1
 {
@@ -25,6 +22,10 @@ namespace Cartelux1
                 {
                     SetFieldsReadOnly(true);
                 }
+            }
+            else
+            {
+
             }
         }
 
@@ -80,15 +81,31 @@ namespace Cartelux1
 
                         // Entrega
                         txbDireccion.Value = form.Direccion;
-                        txbBarrio.Value = form.Barrio;
+                        if (!string.IsNullOrWhiteSpace(form.Barrio))
+                        {
+                            ddlLugarEntrega.DataBind(); // get the data into the list you can set it
+                            ddlLugarEntrega.Items.FindByValue(form.Barrio).Selected = true;
+                        }
                         txbFecha.Value = form.Fecha;
-                        hdn_ddlTipoEntrega.Value = form.Entrega_cod;
-
+                        if (!string.IsNullOrWhiteSpace(form.Entrega_cod))
+                        {
+                            ddlTipoEntrega.DataBind(); // get the data into the list you can set it
+                            ddlTipoEntrega.Items.FindByValue(form.Entrega_cod).Selected = true;
+                        }
                         // Cartel
                         txbTexto.Value = form.Texto;
                         txbDetalles.Value = form.Detalles;
-                        hdn_ddlTamano.Value = form.Tamano;
-                        hdn_ddlMotivo.Value = form.Motivo_cod;
+                        if (!string.IsNullOrWhiteSpace(form.Tamano))
+                        {
+                            ddlTamano.DataBind(); // get the data into the list you can set it
+                            ddlTamano.Items.FindByValue(form.Tamano).Selected = true;
+                        }
+                        if (!string.IsNullOrWhiteSpace(form.Motivo_cod))
+                        {
+                            ddlMotivo.DataBind(); // get the data into the list you can set it
+                            ddlMotivo.Items.FindByValue(form.Motivo_cod).Selected = true;
+                        }
+                        lblLastUpdate.InnerText = " " + form.LastUpdate.ToString();
 
                         SetFieldsReadOnly(true);
                     }
@@ -111,7 +128,6 @@ namespace Cartelux1
 
                 // Entrega
                 txbDireccion.Attributes.Add("readonly", "readonly");
-                txbBarrio.Attributes.Add("readonly", "readonly");
                 txbFecha.Attributes.Add("readonly", "readonly");
 
                 // Cartel
@@ -129,7 +145,6 @@ namespace Cartelux1
 
                 // Entrega
                 txbDireccion.Attributes.Add("readonly", "false");
-                txbBarrio.Attributes.Add("readonly", "false");
                 txbFecha.Attributes.Add("readonly", "false");
 
                 // Cartel
@@ -163,7 +178,7 @@ namespace Cartelux1
                 {
                     formularios form = (formularios)context.formularios.FirstOrDefault(v => v.Formulario_ID.Equals(form_ID_str));
                     form = form != null ? form : new formularios();
-                    form.Datetime = DateTime.Now;
+                    form.LastUpdate = DateTime.Now;
 
                     form.Prospecto_ID = 0;
                     form.Codigo = 0;
@@ -175,21 +190,39 @@ namespace Cartelux1
 
                     // Entrega
                     form.Direccion = txbDireccion.Value;
-                    form.Barrio = txbBarrio.Value;
                     form.Fecha = txbFecha.Value;
-                    form.Entrega_cod = hdn_ddlTipoEntrega.Value;
+                    if (ddlLugarEntrega.SelectedIndex > 0)
+                    {
+                        //form.Barrio = Request.Form["ddlLugarEntrega"];
+                        form.Barrio = ddlLugarEntrega.SelectedIndex == 0 ? "-" : ddlLugarEntrega.Items[ddlLugarEntrega.SelectedIndex].Text;
+
+                    }
+                    if (ddlTipoEntrega.SelectedIndex > 0)
+                    {
+                        //form.Entrega_cod = Request.Form["ddlTipoEntrega"];
+                        form.Entrega_cod = ddlTipoEntrega.SelectedIndex == 0 ? "-" : ddlTipoEntrega.Items[ddlTipoEntrega.SelectedIndex].Text;
+                    }
 
                     // Cartel
                     form.Texto = txbTexto.Value;
                     form.Detalles = txbDetalles.Value;
-                    form.Tamano = hdn_ddlTamano.Value;
-                    form.Motivo_cod = hdn_ddlMotivo.Value;
+                    if (ddlTamano.SelectedIndex > 0)
+                    {
+                        //form.Tamano = Request.Form["ddlTamano"];
+                        form.Tamano = ddlTamano.SelectedIndex == 0 ? "-" : ddlTamano.Items[ddlTamano.SelectedIndex].Text;
+                    }
+                    if (ddlMotivo.SelectedIndex > 0)
+                    {
+                        //form.Motivo_cod = Request.Form["ddlMotivo"];
+                        form.Motivo_cod = ddlMotivo.SelectedIndex == 0 ? "-" : ddlMotivo.Items[ddlMotivo.SelectedIndex].Text;
+                    }
 
                     if (string.IsNullOrWhiteSpace(form.Formulario_ID))
                     {
                         form.Formulario_ID = form_ID_str;
                         context.formularios.Add(form);
                         context.Entry(form).State = EntityState.Added;
+                        form.Datetime = DateTime.Now;
                     }
                     else
                     {
@@ -199,7 +232,7 @@ namespace Cartelux1
                     try
                     {
                         context.SaveChanges();
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>alert('¡Gracias por elegir Cartelux! \nNos comunicaremos a la brevedad.'); </script>", false);
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>confirmacionPedido(); </script>", false);
                     }
                     catch (Exception e)
                     {

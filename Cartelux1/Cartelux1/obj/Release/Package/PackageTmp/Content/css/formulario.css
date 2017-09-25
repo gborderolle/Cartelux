@@ -12,3 +12,19 @@ h1, h2, h3, h4{
 button {
     cursor: pointer;
 }
+
+.row-short{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/*.build {
+        font-size: x-small;
+    }
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    .build {
+        font-size: small;
+    }
+}*/

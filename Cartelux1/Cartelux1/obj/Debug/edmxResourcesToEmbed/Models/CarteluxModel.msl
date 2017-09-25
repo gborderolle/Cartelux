@@ -4,6 +4,7 @@
     <EntitySetMapping Name="formularios">
       <EntityTypeMapping TypeName="carteluxdbModel.formularios">
         <MappingFragment StoreEntitySet="formularios">
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
           <ScalarProperty Name="Tamano" ColumnName="Tamano" />
           <ScalarProperty Name="Entrega_cod" ColumnName="Entrega_cod" />
           <ScalarProperty Name="Motivo_cod" ColumnName="Motivo_cod" />

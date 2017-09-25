@@ -31,6 +31,15 @@ namespace Cartelux1 {
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txbTel;
         
         /// <summary>
+        /// ddlTipoEntrega control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect ddlTipoEntrega;
+        
+        /// <summary>
         /// txbDireccion control.
         /// </summary>
         /// <remarks>
@@ -40,13 +49,13 @@ namespace Cartelux1 {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txbDireccion;
         
         /// <summary>
-        /// txbBarrio control.
+        /// ddlLugarEntrega control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txbBarrio;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect ddlLugarEntrega;
         
         /// <summary>
         /// txbFecha control.
@@ -56,6 +65,24 @@ namespace Cartelux1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txbFecha;
+        
+        /// <summary>
+        /// ddlTamano control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect ddlTamano;
+        
+        /// <summary>
+        /// ddlMotivo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect ddlMotivo;
         
         /// <summary>
         /// txbTexto control.
@@ -94,30 +121,12 @@ namespace Cartelux1 {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl msj_result;
         
         /// <summary>
-        /// hdn_ddlTipoEntrega control.
+        /// lblLastUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdn_ddlTipoEntrega;
-        
-        /// <summary>
-        /// hdn_ddlTamano control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdn_ddlTamano;
-        
-        /// <summary>
-        /// hdn_ddlMotivo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdn_ddlMotivo;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblLastUpdate;
     }
 }

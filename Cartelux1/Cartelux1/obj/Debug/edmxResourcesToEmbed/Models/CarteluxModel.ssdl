@@ -15,12 +15,13 @@
     <Property Name="Texto" Type="varchar" MaxLength="100" />
     <Property Name="Comentarios" Type="varchar" MaxLength="100" />
     <Property Name="Direccion" Type="varchar" MaxLength="50" />
-    <Property Name="Barrio" Type="varchar" MaxLength="20" />
+    <Property Name="Barrio" Type="varchar" MaxLength="30" />
     <Property Name="Fecha" Type="varchar" MaxLength="20" />
     <Property Name="Detalles" Type="varchar" MaxLength="50" />
-    <Property Name="Motivo_cod" Type="varchar" MaxLength="10" />
-    <Property Name="Entrega_cod" Type="varchar" MaxLength="10" />
-    <Property Name="Tamano" Type="varchar" MaxLength="10" />
+    <Property Name="Motivo_cod" Type="varchar" MaxLength="30" />
+    <Property Name="Entrega_cod" Type="varchar" MaxLength="30" />
+    <Property Name="Tamano" Type="varchar" MaxLength="30" />
+    <Property Name="LastUpdate" Type="datetime" />
   </EntityType>
   <EntityContainer Name="carteluxdbModelStoreContainer">
     <EntitySet Name="formularios" EntityType="Self.formularios" Schema="dbo" store:Type="Tables" />

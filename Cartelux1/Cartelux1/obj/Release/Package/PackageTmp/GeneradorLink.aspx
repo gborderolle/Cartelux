@@ -6,12 +6,17 @@
 
     <!-- PAGE CSS -->
     <link rel="stylesheet" href="/Content/css/generador.css" />
-    <link rel="stylesheet" href="/Content/css/jquery.qtip.min.css" />
 
     <!-- PAGE JS -->
     <script type="text/javascript" src="/Content/js/generador.js"></script>
-    <script type="text/javascript" src="/Content/js/jquery.qtip.min.js"></script>
     <script type="text/javascript" src="/Content/js/clipboard.min.js"></script>
+
+    <style type="text/css">
+        .center {
+            margin: 0;
+            display: block;
+        }
+    </style>
 
 </asp:Content>
 
@@ -19,17 +24,16 @@
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%--<img src="/Content/img/CX-Banner-form.png" alt="Cartelux" class="img-responsive" style="width: 100%;" />--%>
     <div class="box box-default" style="margin: 20px;">
-        <div class="box-header with-border dark in div-form col-sm-12 col-md-4">
+        <div class="box-header with-border dark in div-form col-sm-12 col-md-4" style="text-align: -webkit-center;">
 
-            <div class="row" style="margin: 0; display: block;">
+            <div class="row center">
                 <div style="text-align: center;">
                     <h2 id="lbl_h2" style="color: #ea7209;">Generar y copiar LINK del nuevo pedido</h2>
                 </div>
             </div>
             <br />
-            <div class="row">
+            <div class="row center">
                 <div class="col-sm-12 col-md-10" style="margin: 0; display: block;">
                     <div class="login-container sub-form panel panel-default">
 
@@ -42,9 +46,11 @@
                 </div>
             </div>
             <hr />
-            <div class="row" style="display: inline;">
-                <input class="form-control text-to-copy" id="txbLink" onclick="this.select();" value="?" readonly/>
-                <button class="form-control btn-primary js-copy-btn btn-sm" id="btnCopy" onclick="return false;">Copiar </button>
+            <div class="row center">
+                <div class="col-sm-12 col-md-10">
+                    <input class="form-control text-to-copy" id="txbLink" onclick="this.select();" value="?" readonly />
+                    <button class="form-control btn-primary js-copy-btn btn-sm" id="btnCopy" onclick="return false;">Copiar</button>
+                </div>
             </div>
             <br />
             <br />

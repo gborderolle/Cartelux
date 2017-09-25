@@ -31,5 +31,6 @@ namespace Cartelux1.Models
         public string Motivo_cod { get; set; }
         public string Entrega_cod { get; set; }
         public string Tamano { get; set; }
+        public Nullable<System.DateTime> LastUpdate { get; set; }
     }
 }

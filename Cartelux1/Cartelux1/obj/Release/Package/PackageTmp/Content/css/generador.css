@@ -15,12 +15,13 @@ h1, h2, h3, h4{
 
 #txbLink {
     cursor: default;
-    width: 70% !important;
-    float: left !important;
+    /*width: 70% !important;
+    float: left !important;*/
     font-size: smaller !important;
 }
 
 #btnCopy {
-    width: 20% !important;
-    float: right !important;
+    margin-top: 10px;
+    /*width: 20% !important;
+    float: right !important;*/
 }
