@@ -10,7 +10,7 @@
 namespace Cartelux1 {
     
     
-    public partial class GeneradorLink {
+    public partial class GeneradorURL {
         
         /// <summary>
         /// btnGenerar control.

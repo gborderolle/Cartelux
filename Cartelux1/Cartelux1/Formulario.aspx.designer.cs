@@ -13,15 +13,6 @@ namespace Cartelux1 {
     public partial class Formulario {
         
         /// <summary>
-        /// txbNombre control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txbNombre;
-        
-        /// <summary>
         /// txbTel control.
         /// </summary>
         /// <remarks>
@@ -31,40 +22,13 @@ namespace Cartelux1 {
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txbTel;
         
         /// <summary>
-        /// ddlTipoEntrega control.
+        /// txbNombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect ddlTipoEntrega;
-        
-        /// <summary>
-        /// txbDireccion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txbDireccion;
-        
-        /// <summary>
-        /// ddlLugarEntrega control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect ddlLugarEntrega;
-        
-        /// <summary>
-        /// txbFecha control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txbFecha;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txbNombre;
         
         /// <summary>
         /// ddlTamano control.
@@ -85,13 +49,13 @@ namespace Cartelux1 {
         protected global::System.Web.UI.HtmlControls.HtmlSelect ddlMotivo;
         
         /// <summary>
-        /// txbTexto control.
+        /// txbTexto1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txbTexto;
+        protected global::System.Web.UI.WebControls.TextBox txbTexto1;
         
         /// <summary>
         /// txbDetalles control.
@@ -101,6 +65,51 @@ namespace Cartelux1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txbDetalles;
+        
+        /// <summary>
+        /// ddlTipoEntrega control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect ddlTipoEntrega;
+        
+        /// <summary>
+        /// txbDireccion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txbDireccion;
+        
+        /// <summary>
+        /// txbCiudad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txbCiudad;
+        
+        /// <summary>
+        /// ddlLugarEntrega control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect ddlLugarEntrega;
+        
+        /// <summary>
+        /// txbFecha control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txbFecha;
         
         /// <summary>
         /// btnConfirmar control.

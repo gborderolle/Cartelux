@@ -1,29 +1,89 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="carteluxdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="carteluxdbEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="formularios" EntityType="carteluxdbModel.formularios" />
+    <EntitySet Name="entregas_lugar" EntityType="carteluxdbModel.entregas_lugar" />
+    <EntitySet Name="entregas_tipo" EntityType="carteluxdbModel.entregas_tipo" />
+    <EntitySet Name="tematicas" EntityType="carteluxdbModel.tematicas" />
+    <EntitySet Name="tamanos" EntityType="carteluxdbModel.tamanos" />
+    <EntitySet Name="carteles" EntityType="carteluxdbModel.carteles" />
+    <EntitySet Name="clientes" EntityType="carteluxdbModel.clientes" />
+    <EntitySet Name="pedidos" EntityType="carteluxdbModel.pedidos" />
   </EntityContainer>
-  <EntityType Name="formularios">
+  <EntityType Name="entregas_lugar">
     <Key>
-      <PropertyRef Name="Formulario_ID" />
+      <PropertyRef Name="Entrega_Lugar_ID" />
     </Key>
-    <Property Name="Formulario_ID" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="Prospecto_ID" Type="Int32" Nullable="false" />
-    <Property Name="Codigo" Type="Int32" Nullable="false" />
-    <Property Name="Datetime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Entrega_Lugar_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="entregas_tipo">
+    <Key>
+      <PropertyRef Name="Entrega_Tipo_ID" />
+    </Key>
+    <Property Name="Entrega_Tipo_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tematicas">
+    <Key>
+      <PropertyRef Name="Tematica_ID" />
+    </Key>
+    <Property Name="Tematica_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tamanos">
+    <Key>
+      <PropertyRef Name="Tamano_ID" />
+    </Key>
+    <Property Name="Tamano_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="carteles">
+    <Key>
+      <PropertyRef Name="Cartel_ID" />
+    </Key>
+    <Property Name="Cartel_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Pedido_ID" Type="Int32" Nullable="false" />
+    <Property Name="Tamano_ID" Type="Int32" Nullable="false" />
+    <Property Name="Tematica_ID" Type="Int32" Nullable="false" />
+    <Property Name="Entregas_Tipo_ID" Type="Int32" Nullable="false" />
+    <Property Name="Entregas_Lugar_ID" Type="Int32" Nullable="false" />
+    <Property Name="Texto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Colocacion_direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Colocacion_barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Colocacion_fecha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Detalles" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CiudadInterior" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastUpdate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="clientes">
+    <Key>
+      <PropertyRef Name="Cliente_ID" />
+    </Key>
+    <Property Name="Cliente_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Telefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Nombre_completo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Edad" Type="Int32" />
-    <Property Name="Telefono" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="Motivo_ID" Type="Int32" Nullable="false" />
-    <Property Name="Texto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Comentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Barrio" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="Fecha" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="Detalles" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Motivo_cod" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="Entrega_cod" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="Tamano" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+    <Property Name="Bario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Comentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastUpdate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="pedidos">
+    <Key>
+      <PropertyRef Name="Pedido_ID" />
+    </Key>
+    <Property Name="Pedido_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Serie" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Cliente_ID" Type="Int32" Nullable="false" />
+    <Property Name="URL_completa" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Comentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastUpdate" Type="DateTime" Nullable="false" Precision="3" />
   </EntityType>
 </Schema>

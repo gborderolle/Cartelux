@@ -1,23 +1,59 @@
-﻿
-function generarLink() {
+﻿function generarURL() {
 
     // Ajax call parameters
-    console.log("Ajax call: GeneradorLink.aspx/GenerarLink. Params:");
+    console.log("Ajax call 1: GeneradorURL.aspx/GenerarURL. Params:");
 
     // Check existen mercaderías
     $.ajax({
         type: "POST",
-        url: "GeneradorLink.aspx/GenerarLink",
+        url: "GeneradorURL.aspx/GenerarURL",
         data: '{dummy: "dummy_text"}',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
             var resultado = response.d;
-            if (resultado) {
-                var link = resultado;
-                if (link !== null) {
-                    $("#btnGenerar").attr("title", link);
-                    $("#txbLink").val(link);
+            if (resultado !== null && resultado.length > 0) {
+
+                var resultado_array = resultado.split("|");
+                var link = resultado_array[0];
+                var isLocal = resultado_array[1];
+
+                if ((link !== null && link.length > 0) && (isLocal !== null && isLocal.length > 0)) {
+                    console.log("Es ambiente local: " + isLocal);
+
+                    // Si es ambiente de producción acortar URL
+                    if (isLocal != 1) {
+                        // Google URL Shortener
+                        //API Key (Cartelux project) = AIzaSyB70_7sF6wk7YFEXhoUWRHp_VhK8vd3QOQ
+                        console.log("Ajax call 2: Google URL Shortener. Params: longUrl=" + link);
+                        console.log("Ajax call 2: API Key (Cartelux project). Params: key=AIzaSyB70_7sF6wk7YFEXhoUWRHp_VhK8vd3QOQ.");
+
+                        $.ajax({
+                            type: "POST",
+                            url: "https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyB70_7sF6wk7YFEXhoUWRHp_VhK8vd3QOQ",
+                            data: '{longUrl: "' + link + '"}',
+                            contentType: "application/json",
+                            dataType: "json",
+                            success: function (response) {
+
+                                $("#btnGenerar").attr("title", response.id);
+                                $("#txbLink").val(response.id);
+
+                            }, // end success
+                            failure: function (response) {
+                                alert("Error interno generando LINK.");
+
+                                $("#btnGenerar").attr("title", link);
+                                $("#txbLink").val(link);
+                            }
+                        }); // Ajax
+
+                    } else {
+                        // Ambiente local
+                        $("#btnGenerar").attr("title", link);
+                        $("#txbLink").val(link);
+                    }
+                    $("#btnCopy").text("Copiar");
                 }
             } else {
                 alert("Error interno generando LINK.");
@@ -79,4 +115,3 @@ function copyToClipboard(elem) {
     }
     return succeed;
 }
-

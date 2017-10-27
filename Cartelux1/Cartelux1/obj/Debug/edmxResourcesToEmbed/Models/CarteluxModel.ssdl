@@ -1,29 +1,89 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="carteluxdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="formularios">
+  <EntityType Name="carteles">
     <Key>
-      <PropertyRef Name="Formulario_ID" />
+      <PropertyRef Name="Cartel_ID" />
     </Key>
-    <Property Name="Formulario_ID" Type="varchar" MaxLength="30" Nullable="false" />
-    <Property Name="Prospecto_ID" Type="int" Nullable="false" />
-    <Property Name="Codigo" Type="int" Nullable="false" />
-    <Property Name="Datetime" Type="datetime" Nullable="false" />
+    <Property Name="Cartel_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Pedido_ID" Type="int" Nullable="false" />
+    <Property Name="Tamano_ID" Type="int" Nullable="false" />
+    <Property Name="Tematica_ID" Type="int" Nullable="false" />
+    <Property Name="Entregas_Tipo_ID" Type="int" Nullable="false" />
+    <Property Name="Entregas_Lugar_ID" Type="int" Nullable="false" />
+    <Property Name="Texto" Type="varchar" MaxLength="100" />
+    <Property Name="Colocacion_direccion" Type="varchar" MaxLength="50" />
+    <Property Name="Colocacion_barrio" Type="varchar" MaxLength="50" />
+    <Property Name="Colocacion_fecha" Type="varchar" MaxLength="50" />
+    <Property Name="Detalles" Type="varchar" MaxLength="50" />
+    <Property Name="CiudadInterior" Type="varchar" MaxLength="50" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="LastUpdate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="clientes">
+    <Key>
+      <PropertyRef Name="Cliente_ID" />
+    </Key>
+    <Property Name="Cliente_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Telefono" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Nombre_completo" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Edad" Type="int" />
-    <Property Name="Telefono" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="Motivo_ID" Type="int" Nullable="false" />
-    <Property Name="Texto" Type="varchar" MaxLength="100" />
-    <Property Name="Comentarios" Type="varchar" MaxLength="100" />
     <Property Name="Direccion" Type="varchar" MaxLength="50" />
-    <Property Name="Barrio" Type="varchar" MaxLength="30" />
-    <Property Name="Fecha" Type="varchar" MaxLength="20" />
-    <Property Name="Detalles" Type="varchar" MaxLength="50" />
-    <Property Name="Motivo_cod" Type="varchar" MaxLength="30" />
-    <Property Name="Entrega_cod" Type="varchar" MaxLength="30" />
-    <Property Name="Tamano" Type="varchar" MaxLength="30" />
-    <Property Name="LastUpdate" Type="datetime" />
+    <Property Name="Bario" Type="varchar" MaxLength="50" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="100" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="LastUpdate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="entregas_lugar">
+    <Key>
+      <PropertyRef Name="Entrega_Lugar_ID" />
+    </Key>
+    <Property Name="Entrega_Lugar_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="entregas_tipo">
+    <Key>
+      <PropertyRef Name="Entrega_Tipo_ID" />
+    </Key>
+    <Property Name="Entrega_Tipo_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="pedidos">
+    <Key>
+      <PropertyRef Name="Pedido_ID" />
+    </Key>
+    <Property Name="Pedido_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Serie" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Cliente_ID" Type="int" Nullable="false" />
+    <Property Name="URL_completa" Type="varchar" MaxLength="100" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="100" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="LastUpdate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tamanos">
+    <Key>
+      <PropertyRef Name="Tamano_ID" />
+    </Key>
+    <Property Name="Tamano_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tematicas">
+    <Key>
+      <PropertyRef Name="Tematica_ID" />
+    </Key>
+    <Property Name="Tematica_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityContainer Name="carteluxdbModelStoreContainer">
-    <EntitySet Name="formularios" EntityType="Self.formularios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="carteles" EntityType="Self.carteles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="entregas_lugar" EntityType="Self.entregas_lugar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="entregas_tipo" EntityType="Self.entregas_tipo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pedidos" EntityType="Self.pedidos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tamanos" EntityType="Self.tamanos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tematicas" EntityType="Self.tematicas" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

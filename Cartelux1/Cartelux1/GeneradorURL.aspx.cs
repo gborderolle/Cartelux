@@ -2,11 +2,12 @@
 using System;
 using System.Configuration;
 using System.Globalization;
+using System.Web;
 using System.Web.Services;
 
 namespace Cartelux1
 {
-    public partial class GeneradorLink : System.Web.UI.Page
+    public partial class GeneradorURL : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,10 +21,10 @@ namespace Cartelux1
         /// <param name="dummy"></param>
         /// <returns></returns>
         [WebMethod]
-        public static string GenerarLink(string dummy)
+        public static string GenerarURL(string dummy)
         {
             string resultado = string.Empty;
-            string url = "http://cartelux.uy/Pages/Formulario?ID=";
+            string url = "http://cartelux.uy?ID=";
             if (ConfigurationManager.AppSettings != null)
             {
                 url = ConfigurationManager.AppSettings["URL_formulario"].ToString();
@@ -33,14 +34,8 @@ namespace Cartelux1
             {
                 DateTime date = DateTime.Now;
                 resultado += date.ToString("yyyy-MM-dd-hh-mm-ss", CultureInfo.InvariantCulture).Replace("-", "");
-                resultado += "x";
                 Random ran = new Random();
-                int number = 0;
-                for (int i = 0; i < 3; i++)
-                {
-                    number = ran.Next(0, 9);
-                    resultado += number.ToString();
-                }
+                resultado += ran.Next(0, 9).ToString();
                 
                 string resultado_parcial = Utilities.Encrypt(resultado);
                 if (!string.IsNullOrWhiteSpace(resultado_parcial))
@@ -48,6 +43,9 @@ namespace Cartelux1
                     resultado = resultado_parcial;
                 }
                 resultado = url + resultado;
+
+                int isLocal = HttpContext.Current.Request.IsLocal ? 1 : 0;
+                resultado += "|" + isLocal;
             }
             return resultado;
         }        

@@ -1,27 +1,87 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="carteluxdbModelStoreContainer" CdmEntityContainer="carteluxdbEntities">
-    <EntitySetMapping Name="formularios">
-      <EntityTypeMapping TypeName="carteluxdbModel.formularios">
-        <MappingFragment StoreEntitySet="formularios">
+    <EntitySetMapping Name="entregas_lugar">
+      <EntityTypeMapping TypeName="carteluxdbModel.entregas_lugar">
+        <MappingFragment StoreEntitySet="entregas_lugar">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Entrega_Lugar_ID" ColumnName="Entrega_Lugar_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="entregas_tipo">
+      <EntityTypeMapping TypeName="carteluxdbModel.entregas_tipo">
+        <MappingFragment StoreEntitySet="entregas_tipo">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Entrega_Tipo_ID" ColumnName="Entrega_Tipo_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tematicas">
+      <EntityTypeMapping TypeName="carteluxdbModel.tematicas">
+        <MappingFragment StoreEntitySet="tematicas">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Tematica_ID" ColumnName="Tematica_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tamanos">
+      <EntityTypeMapping TypeName="carteluxdbModel.tamanos">
+        <MappingFragment StoreEntitySet="tamanos">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Tamano_ID" ColumnName="Tamano_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="carteles">
+      <EntityTypeMapping TypeName="carteluxdbModel.carteles">
+        <MappingFragment StoreEntitySet="carteles">
           <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-          <ScalarProperty Name="Tamano" ColumnName="Tamano" />
-          <ScalarProperty Name="Entrega_cod" ColumnName="Entrega_cod" />
-          <ScalarProperty Name="Motivo_cod" ColumnName="Motivo_cod" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="CiudadInterior" ColumnName="CiudadInterior" />
           <ScalarProperty Name="Detalles" ColumnName="Detalles" />
-          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-          <ScalarProperty Name="Barrio" ColumnName="Barrio" />
-          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-          <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+          <ScalarProperty Name="Colocacion_fecha" ColumnName="Colocacion_fecha" />
+          <ScalarProperty Name="Colocacion_barrio" ColumnName="Colocacion_barrio" />
+          <ScalarProperty Name="Colocacion_direccion" ColumnName="Colocacion_direccion" />
           <ScalarProperty Name="Texto" ColumnName="Texto" />
-          <ScalarProperty Name="Motivo_ID" ColumnName="Motivo_ID" />
-          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Entregas_Lugar_ID" ColumnName="Entregas_Lugar_ID" />
+          <ScalarProperty Name="Entregas_Tipo_ID" ColumnName="Entregas_Tipo_ID" />
+          <ScalarProperty Name="Tematica_ID" ColumnName="Tematica_ID" />
+          <ScalarProperty Name="Tamano_ID" ColumnName="Tamano_ID" />
+          <ScalarProperty Name="Pedido_ID" ColumnName="Pedido_ID" />
+          <ScalarProperty Name="Cartel_ID" ColumnName="Cartel_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clientes">
+      <EntityTypeMapping TypeName="carteluxdbModel.clientes">
+        <MappingFragment StoreEntitySet="clientes">
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+          <ScalarProperty Name="Bario" ColumnName="Bario" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
           <ScalarProperty Name="Edad" ColumnName="Edad" />
           <ScalarProperty Name="Nombre_completo" ColumnName="Nombre_completo" />
-          <ScalarProperty Name="Datetime" ColumnName="Datetime" />
-          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-          <ScalarProperty Name="Prospecto_ID" ColumnName="Prospecto_ID" />
-          <ScalarProperty Name="Formulario_ID" ColumnName="Formulario_ID" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Cliente_ID" ColumnName="Cliente_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pedidos">
+      <EntityTypeMapping TypeName="carteluxdbModel.pedidos">
+        <MappingFragment StoreEntitySet="pedidos">
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+          <ScalarProperty Name="URL_completa" ColumnName="URL_completa" />
+          <ScalarProperty Name="Cliente_ID" ColumnName="Cliente_ID" />
+          <ScalarProperty Name="Serie" ColumnName="Serie" />
+          <ScalarProperty Name="Pedido_ID" ColumnName="Pedido_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -1,15 +1,11 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Formulario.aspx.cs" Inherits="Cartelux1.Formulario" Title="Cartelux Publicidad" %>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
-
     <!-- STYLES EXTENSION -->
-
     <!-- PAGE CSS -->
     <link rel="stylesheet" href="/Content/css/formulario.css" />
-
     <!-- PAGE JS -->
     <script type="text/javascript" src="/Content/js/formulario.js"></script>
-
     <script type="text/javascript">
         $(function () {
             $(".dropdown").selectmenu();
@@ -29,7 +25,6 @@
         }
 
     </script>
-
     <style type="text/css">
         .ui-dialog-titlebar {
             background-color: rgba(255, 119, 0, 0.78);
@@ -72,55 +67,83 @@
             background-color: White;
             z-index: 999;
         }
+
+        .ctrl-required {
+            border-color: red;
+        }
+
     </style>
-
 </asp:Content>
-
-<asp:Content ID="Content2" ContentPlaceHolderID="SubbodyContent" runat="server">
-</asp:Content>
-
+<asp:Content ID="Content2" ContentPlaceHolderID="SubbodyContent" runat="server"></asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <img src="/Content/img/CX-Banner-form.jpg" alt="Cartelux" class="img-responsive" style="width: 100%;" />
     <div class="box box-default" style="margin: 20px;">
         <div class="box-header with-border dark in div-form col-sm-12 col-md-6">
-
             <div class="row" style="margin: auto; display: block; text-align: center;">
-                <h2 style="color: #ea7209;">Ingrese los datos de su pedido <a href="#" id="btnEdit" class="pull-right btn-xs " onclick="editFields()" style="position: absolute; right: 0; margin-right: 20px;">
+                <h2 style="color: #ea7209;">Ingrese los datos de su pedido <a href="#" id="btnEdit" class="pull-right btn " onclick="editFields()" style="position: absolute; right: 0; margin-right: 20px;">
                     <i class="fa fa-pencil"></i>
-                </a></h2>
+                </a>
+                </h2>
             </div>
-
             <br />
             <div class="row" style="margin: auto;">
                 <div class="col-sm-12 col-md-6" style="margin: auto;">
                     <div class="login-container sub-form panel panel-default">
-
-                        <label class="label-default">Contacto</label>
+                        <label class="label-default">Cliente</label>
                         <div class="form-group">
-                            <input class="form-control txbEditable" placeholder="Su nombre completo" type="text" tabindex="1" required autofocus runat="server" id="txbNombre">
+                            <input class="form-control ctrl-required" placeholder="Teléfono de contacto" type="tel" tabindex="1" required runat="server" id="txbTel" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" autofocus>
                         </div>
                         <div class="form-group">
-                            <input class="form-control txbEditable" placeholder="Teléfono de contacto" type="tel" tabindex="2" required runat="server" id="txbTel">
+                            <input class="form-control txbEditable ctrl-required" placeholder="Su nombre completo" type="text" tabindex="2" required runat="server" id="txbNombre" clientidmode="static">
                         </div>
                         <hr />
-                        <label class="label-default">Entrega (si aplica)</label>
+                        <label class="label-default">Cartel</label>
                         <br />
-
-                        <select name="ddlTipoEntrega" id="ddlTipoEntrega" class="dropdown txbEditable" runat="server">
-                            <option disabled selected>Tipo de entrega</option>
-                            <option>Colocación</option>
-                            <option>Envío a domicilio</option>
-                            <option>Envío al interior</option>
-                            <option>Retiro en taller</option>
+                        <select name="ddlTamano" id="ddlTamano" class="dropdown txbEditable" runat="server" clientidmode="static">
+                            <option disabled selected>Tamaño</option>
+                            <option>1,5 mts</option>
+                            <option>3 mts</option>
+                            <option>5 mts</option>
+                            <option>Otro</option>
                         </select>
-
+                        <select name="ddlMotivo" id="ddlMotivo" class="dropdown txbEditable" runat="server" clientidmode="static">
+                            <option disabled selected>Temática</option>
+                            <option>15 Años</option>
+                            <option>Cumpleaños</option>
+                            <option>Recibimiento</option>
+                            <option>Romántico</option>
+                            <option>Bienvenida/Despedida</option>
+                            <option>Nacimiento</option>
+                            <option>Evento</option>
+                            <option>Empresa</option>
+                            <option>Sindicato</option>
+                            <option>Otro</option>
+                        </select>
                         <div class="form-group">
-                            <input class="form-control txbEditable" placeholder="Dirección de colocación" type="text" tabindex="4" runat="server" id="txbDireccion">
+                            <asp:TextBox runat="server" ID="txbTexto1" TextMode="multiline" CssClass="form-control txbEditable ctrl-required" placeholder="Texto del cartel" TabIndex="3" required="required"></asp:TextBox>
                         </div>
-
-                        <select name="ddlLugarEntrega" id="ddlLugarEntrega" class="dropdown txbEditable" runat="server">
+                        <div class="form-group">
+                            <input class="form-control txbEditable" placeholder="Sugerencias de diseño" type="text" tabindex="4" runat="server" id="txbDetalles" clientidmode="static">
+                        </div>
+                        <hr />
+                        <label class="label-default">Entrega/Colocación (Área metropolitana)</label>
+                        <br />
+                        <select name="ddlTipoEntrega" id="ddlTipoEntrega" class="dropdown txbEditable" runat="server" clientidmode="static">
+                            <option disabled selected>Tipo de entrega</option>
+                            <option id="colocacion">Colocación</option>
+                            <option id="envio">Envío a domicilio</option>
+                            <option id="interior">Envío al interior</option>
+                            <option id="taller">Retiro en taller</option>
+                        </select>
+                        <div class="form-group">
+                            <input class="form-control txbEditable" placeholder="Dirección de colocación" type="text" tabindex="5" runat="server" id="txbDireccion" clientidmode="static">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control txbEditable" placeholder="Localidad de envío (Interior)" type="text" tabindex="6" runat="server" id="txbCiudad" clientidmode="static">
+                        </div>
+                        <select name="ddlLugarEntrega" id="ddlLugarEntrega" class="dropdown txbEditable" runat="server" clientidmode="static">
                             <option disabled selected>Lugar de colocación / entrega</option>
-                            <option disabled style="font-weight:bold">MONTEVIDEO</option>
+                            <option disabled style="font-weight: bold">MONTEVIDEO</option>
                             <option value="Aguada">Aguada</option>
                             <option value="Aires puros">Aires puros</option>
                             <option value="Arroyo seco">Arroyo seco</option>
@@ -180,7 +203,7 @@
                             <option value="Villa del cerro">Villa del cerro</option>
                             <option value="Villa dolores">Villa dolores</option>
                             <option value="Villa española">Villa española</option>
-                            <option disabled style="font-weight:bold">CANELONES</option>
+                            <option disabled style="font-weight: bold">CANELONES</option>
                             <option value="Atlántida">Atlántida</option>
                             <option value="Barros blancos">Barros blancos</option>
                             <option value="Canelones">Canelones</option>
@@ -204,57 +227,22 @@
                             <option value="Soca">Soca</option>
                             <option value="Tala">Tala</option>
                             <option value="Toledo">Toledo</option>
-                            <option disabled style="font-weight:bold">SAN JOSÉ</option>
+                            <option disabled style="font-weight: bold">SAN JOSÉ</option>
                             <option value="Ciudad del plata">Ciudad del plata</option>
                             <option value="Elcida paullier">Elcida paullier</option>
                             <option value="Libertad">Libertad</option>
                             <option value="San josé">San josé</option>
-                            <option disabled style="font-weight:bold">OTRO</option>
+                            <option disabled style="font-weight: bold">OTRO</option>
                             <option value="Otro">Otro</option>
                         </select>
-
                         <div class="form-group">
-                            <input class="form-control txbEditable" placeholder="Día de colocación" type="text" tabindex="4" runat="server" id="txbFecha">
-                        </div>
-
-                        <hr />
-                        <label class="label-default">Cartel</label>
-
-                        <br />
-                        <select name="ddlTamano" id="ddlTamano" class="dropdown txbEditable" runat="server">
-                            <option disabled selected>Tamaño</option>
-                            <option>1,5 mts</option>
-                            <option>3 mts</option>
-                            <option>5 mts</option>
-                            <option>Otro</option>
-                        </select>
-
-                        <select name="ddlMotivo" id="ddlMotivo" class="dropdown txbEditable" runat="server">
-                            <option disabled selected>Motivo</option>
-                            <option>15 Años</option>
-                            <option>Cumpleaños</option>
-                            <option>Recibimiento</option>
-                            <option>Amor</option>
-                            <option>Bienvenida/Despedida</option>
-                            <option>Nacimiento</option>
-                            <option>Evento</option>
-                            <option>Empresa</option>
-                            <option>Sindicato</option>
-                            <option>Otro</option>
-                        </select>
-
-                        <div class="form-group">
-                            <input class="form-control txbEditable" placeholder="Texto" type="text" tabindex="5" runat="server" required id="txbTexto">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control txbEditable" placeholder="Estilo de diseño" type="text" tabindex="5" runat="server" id="txbDetalles">
-                        </div>
+                            <input class="form-control txbEditable" placeholder="Día de colocación o envío sugerido" type="text" tabindex="7" runat="server" id="txbFecha" clientidmode="static">
+                        </div>                        
                         <div class="form-group">
                             <button class="form-control btn btn-primary" clientidmode="static" name="submit" type="submit" data-submit="...Confirmando" runat="server" id="btnConfirmar" onserverclick="btnConfirmar_ServerClick">Guardar y confirmar</button>
                             <%--onclick="ShowProgress();"--%>
                         </div>
                     </div>
-
                     <div class="row">
                         <h4 id="msj_result" runat="server" style="margin: auto; display: none;"><span class="label label-success">Los datos se guardaron correctamente</span></h4>
                     </div>
@@ -268,20 +256,16 @@
                             <a href="https://www.dropbox.com/sh/slk0p1ee8rbln8m/AADdSDlwtNC55NggyWg6E5oVa?dl=0">Click aquí para ver el álbum de fotos</a>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-
     <div class="loading" align="center">
         Confirmando pedido, por favor espere.<br />
         <br />
         <img src="/Content/img/loader.gif" alt="Cartelux" />
     </div>
-
     <div id="dialog" title="Mensaje Cartelux">
         <p style="text-align: left;"></p>
     </div>
-
 </asp:Content>

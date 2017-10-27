@@ -1,4 +1,4 @@
 ﻿
 var hashMessages = {};
 
-hashMessages["ConfirmacionPedido"] = "Su pedido fue confirmado. ¡Gracias por elegir a Cartelux!";
+hashMessages["ConfirmacionPedido"] = "Su pedido fue confirmado, por favor notifíquelo a su vendedor. ¡Gracias por elegir Cartelux! ʘ‿ʘ";

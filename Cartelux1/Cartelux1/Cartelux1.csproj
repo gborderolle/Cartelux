@@ -324,7 +324,7 @@
     </Content>
     <Content Include="NOTAS.txt" />
     <Content Include="Formulario.aspx" />
-    <Content Include="GeneradorLink.aspx" />
+    <Content Include="GeneradorURL.aspx" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -503,6 +503,9 @@
     </Compile>
     <Compile Include="Global_Objects\Logs.cs" />
     <Compile Include="Global_Objects\Utilities.cs" />
+    <Compile Include="Models\carteles.cs">
+      <DependentUpon>CarteluxModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CarteluxModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -518,7 +521,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CarteluxModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\formularios.cs">
+    <Compile Include="Models\clientes.cs">
+      <DependentUpon>CarteluxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\entregas_lugar.cs">
+      <DependentUpon>CarteluxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\entregas_tipo.cs">
       <DependentUpon>CarteluxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -529,12 +538,21 @@
     <Compile Include="Formulario.aspx.designer.cs">
       <DependentUpon>Formulario.aspx</DependentUpon>
     </Compile>
-    <Compile Include="GeneradorLink.aspx.cs">
-      <DependentUpon>GeneradorLink.aspx</DependentUpon>
+    <Compile Include="GeneradorURL.aspx.cs">
+      <DependentUpon>GeneradorURL.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="GeneradorLink.aspx.designer.cs">
-      <DependentUpon>GeneradorLink.aspx</DependentUpon>
+    <Compile Include="GeneradorURL.aspx.designer.cs">
+      <DependentUpon>GeneradorURL.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pedidos.cs">
+      <DependentUpon>CarteluxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tamanos.cs">
+      <DependentUpon>CarteluxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tematicas.cs">
+      <DependentUpon>CarteluxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

@@ -25,6 +25,12 @@ namespace Cartelux1.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<formularios> formularios { get; set; }
+        public virtual DbSet<entregas_lugar> entregas_lugar { get; set; }
+        public virtual DbSet<entregas_tipo> entregas_tipo { get; set; }
+        public virtual DbSet<tematicas> tematicas { get; set; }
+        public virtual DbSet<tamanos> tamanos { get; set; }
+        public virtual DbSet<carteles> carteles { get; set; }
+        public virtual DbSet<clientes> clientes { get; set; }
+        public virtual DbSet<pedidos> pedidos { get; set; }
     }
 }
