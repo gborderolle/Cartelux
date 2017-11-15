@@ -1,69 +1,107 @@
-﻿function generarURL() {
+﻿wpp_url = "";
+texto = "Por favor, ingresá los datos del pedido en el siguiente formulario, muchas gracias."
 
-    // Ajax call parameters
-    console.log("Ajax call 1: GeneradorURL.aspx/GenerarURL. Params:");
+function generarURL() {
 
-    // Check existen mercaderías
-    $.ajax({
-        type: "POST",
-        url: "GeneradorURL.aspx/GenerarURL",
-        data: '{dummy: "dummy_text"}',
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (response) {
-            var resultado = response.d;
-            if (resultado !== null && resultado.length > 0) {
+    var txbContactPhone = $("#txbContactPhone").val();
+    if (txbContactPhone !== null && txbContactPhone.length > 0) {
 
-                var resultado_array = resultado.split("|");
-                var link = resultado_array[0];
-                var isLocal = resultado_array[1];
+        // Si el número empieza con 0 lo borra
+        var first = txbContactPhone.charAt(0);
+        if (first === "0") {
+            txbContactPhone = txbContactPhone.substring(1);
+        }
 
-                if ((link !== null && link.length > 0) && (isLocal !== null && isLocal.length > 0)) {
-                    console.log("Es ambiente local: " + isLocal);
+        // Ajax call parameters
+        console.log("Ajax call 1: GeneradorURL.aspx/GenerarURL. Params:");
 
-                    // Si es ambiente de producción acortar URL
-                    if (isLocal != 1) {
-                        // Google URL Shortener
-                        //API Key (Cartelux project) = AIzaSyB70_7sF6wk7YFEXhoUWRHp_VhK8vd3QOQ
-                        console.log("Ajax call 2: Google URL Shortener. Params: longUrl=" + link);
-                        console.log("Ajax call 2: API Key (Cartelux project). Params: key=AIzaSyB70_7sF6wk7YFEXhoUWRHp_VhK8vd3QOQ.");
+        // Check existen mercaderías
+        $.ajax({
+            type: "POST",
+            url: "GeneradorURL.aspx/GenerarURL",
+            data: '{dummy: "dummy_text"}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                var resultado = response.d;
+                if (resultado !== null && resultado.length > 0) {
 
-                        $.ajax({
-                            type: "POST",
-                            url: "https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyB70_7sF6wk7YFEXhoUWRHp_VhK8vd3QOQ",
-                            data: '{longUrl: "' + link + '"}',
-                            contentType: "application/json",
-                            dataType: "json",
-                            success: function (response) {
+                    var resultado_array = resultado.split("|");
+                    var form_url = resultado_array[0];
+                    var isLocal = resultado_array[1];
 
-                                $("#btnGenerar").attr("title", response.id);
-                                $("#txbLink").val(response.id);
+                    // https://api.whatsapp.com/send?phone=59891373622
+                    wpp_url = "https://api.whatsapp.com/send?phone=598" + txbContactPhone + "&text=" + texto;
 
-                            }, // end success
-                            failure: function (response) {
-                                alert("Error interno generando LINK.");
+                    //if ((form_url !== null && form_url.length > 0) && (isLocal !== null && isLocal.length > 0)) {
+                    if ((wpp_url !== null && wpp_url.length > 0) && (isLocal !== null && isLocal.length > 0)) {
+                        console.log("Es ambiente local: " + isLocal);
 
-                                $("#btnGenerar").attr("title", link);
-                                $("#txbLink").val(link);
-                            }
-                        }); // Ajax
+                        // Si es ambiente de producción acortar URL
+                        if (isLocal != 1) {
+                            // Google URL Shortener
+                            //API Key (Cartelux project) = AIzaSyB70_7sF6wk7YFEXhoUWRHp_VhK8vd3QOQ
+                            //console.log("Ajax call 2: Google URL Shortener. Params: longUrl=" + wpp_url);
+                            console.log("Ajax call 2: Google URL Shortener. Params: longUrl=" + form_url);
+                            console.log("Ajax call 2: API Key (Cartelux project). Params: key=AIzaSyB70_7sF6wk7YFEXhoUWRHp_VhK8vd3QOQ.");
 
-                    } else {
-                        // Ambiente local
-                        $("#btnGenerar").attr("title", link);
-                        $("#txbLink").val(link);
+                            $.ajax({
+                                type: "POST",
+                                url: "https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyB70_7sF6wk7YFEXhoUWRHp_VhK8vd3QOQ",
+                                data: '{longUrl: "' + form_url + '"}',
+                                //data: '{longUrl: "' + wpp_url + '"}',
+                                contentType: "application/json",
+                                dataType: "json",
+                                success: function (response) {
+
+                                    $("#btnGenerar").attr("title", response.id);
+                                    $("#txbLink").val(response.id);
+
+                                    wpp_url = response.id;
+
+                                    }, // end success
+                                failure: function (response) {
+                                    alert("Error interno generando LINK.");
+
+                                    $("#btnGenerar").attr("title", form_url);
+                                    //$("#btnGenerar").attr("title", wpp_url);
+                                    $("#txbLink").val(form_url);
+                                    //$("#txbLink").val(wpp_url);
+                                }
+                            }); // Ajax
+
+                        } else {
+                            // Ambiente local
+                            $("#btnGenerar").attr("title", form_url);
+                            //$("#btnGenerar").attr("title", wpp_url);
+                            $("#txbLink").val(form_url);
+                            //$("#txbLink").val(wpp_url);
+                        }
+                        // En todos los casos
+
+                        wpp_url = "https://api.whatsapp.com/send?phone=598" + txbContactPhone + "&text=" + texto;
+
+                        //window.location = wpp_url;
+                        //window.open(wpp_url, '_blank');
                     }
-                    $("#btnCopy").text("Copiar");
+                } else {
+                    alert("Error interno generando LINK.");
                 }
-            } else {
+
+            }, // end success
+            failure: function (response) {
                 alert("Error interno generando LINK.");
             }
+        }); // Ajax
+    }else{
+        alert("Ingresar el número del cliente.");
+    }
+}
 
-        }, // end success
-        failure: function (response) {
-            alert("Error interno generando LINK.");
-        }
-    }); // Ajax
+function enviarWPP() {
+    if (wpp_url !== null && wpp_url.length > 0) {
+        window.location = wpp_url;
+    }
 }
 
 function copyToClipboard(elem) {

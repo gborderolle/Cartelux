@@ -76,7 +76,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/16/2013 20:06:22</publishTime>
     </File>
     <File Include="bin/Cartelux1.dll">
-      <publishTime>10/27/2017 03:14:20</publishTime>
+      <publishTime>11/15/2017 05:34:23</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>03/02/2015 10:32:26</publishTime>
@@ -277,19 +277,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/14/2016 11:01:10</publishTime>
     </File>
     <File Include="Content/bootstrap/fonts/glyphicons-halflings-regular.eot">
-      <publishTime>06/29/2016 06:19:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/bootstrap/fonts/glyphicons-halflings-regular.svg">
-      <publishTime>06/29/2016 06:19:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/bootstrap/fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>06/29/2016 06:19:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/bootstrap/fonts/glyphicons-halflings-regular.woff">
-      <publishTime>06/29/2016 06:19:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/bootstrap/fonts/glyphicons-halflings-regular.woff2">
-      <publishTime>06/29/2016 06:19:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/bootstrap/js/bootstrap.js">
       <publishTime>01/06/2017 16:42:52</publishTime>
@@ -304,7 +304,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/25/2017 03:24:19</publishTime>
     </File>
     <File Include="Content/css/generador.css">
-      <publishTime>09/24/2017 03:58:06</publishTime>
+      <publishTime>11/15/2017 03:39:22</publishTime>
     </File>
     <File Include="Content/css/images/ui-icons_444444_256x240.png">
       <publishTime>09/24/2017 05:09:08</publishTime>
@@ -487,7 +487,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/05/2017 01:23:22</publishTime>
     </File>
     <File Include="Content/js/generador.js">
-      <publishTime>10/26/2017 21:31:35</publishTime>
+      <publishTime>11/15/2017 05:32:38</publishTime>
     </File>
     <File Include="Content/js/jquery-3.2.1.min.js">
       <publishTime>09/11/2017 02:01:23</publishTime>
@@ -526,13 +526,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/11/2017 00:59:32</publishTime>
     </File>
     <File Include="Formulario.aspx">
-      <publishTime>10/27/2017 02:12:02</publishTime>
+      <publishTime>11/15/2017 03:37:31</publishTime>
     </File>
     <File Include="GeneradorLink.aspx">
       <publishTime>10/26/2017 01:56:49</publishTime>
     </File>
     <File Include="GeneradorURL.aspx">
-      <publishTime>10/26/2017 21:29:40</publishTime>
+      <publishTime>11/15/2017 05:27:06</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>09/11/2017 00:59:15</publishTime>

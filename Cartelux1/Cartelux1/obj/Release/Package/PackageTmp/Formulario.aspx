@@ -72,6 +72,10 @@
             border-color: red;
         }
 
+        .multitext {
+            height: 100px;
+        }
+
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="SubbodyContent" runat="server"></asp:Content>
@@ -87,9 +91,9 @@
             </div>
             <br />
             <div class="row" style="margin: auto;">
-                <div class="col-sm-12 col-md-6" style="margin: auto;">
+                <div class="col-sm-12 col-md-8" style="margin: auto;">
                     <div class="login-container sub-form panel panel-default">
-                        <label class="label-default">Cliente</label>
+                        <label class="label-default">1) Cliente</label>
                         <div class="form-group">
                             <input class="form-control ctrl-required" placeholder="Teléfono de contacto" type="tel" tabindex="1" required runat="server" id="txbTel" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" autofocus>
                         </div>
@@ -97,7 +101,7 @@
                             <input class="form-control txbEditable ctrl-required" placeholder="Su nombre completo" type="text" tabindex="2" required runat="server" id="txbNombre" clientidmode="static">
                         </div>
                         <hr />
-                        <label class="label-default">Cartel</label>
+                        <label class="label-default">2) Cartel</label>
                         <br />
                         <select name="ddlTamano" id="ddlTamano" class="dropdown txbEditable" runat="server" clientidmode="static">
                             <option disabled selected>Tamaño</option>
@@ -120,13 +124,13 @@
                             <option>Otro</option>
                         </select>
                         <div class="form-group">
-                            <asp:TextBox runat="server" ID="txbTexto1" TextMode="multiline" CssClass="form-control txbEditable ctrl-required" placeholder="Texto del cartel" TabIndex="3" required="required"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txbTexto1" TextMode="multiline" CssClass="form-control txbEditable ctrl-required multitext" placeholder="Texto del cartel" TabIndex="3" required="required"></asp:TextBox>
                         </div>
                         <div class="form-group">
                             <input class="form-control txbEditable" placeholder="Sugerencias de diseño" type="text" tabindex="4" runat="server" id="txbDetalles" clientidmode="static">
                         </div>
                         <hr />
-                        <label class="label-default">Entrega/Colocación (Área metropolitana)</label>
+                        <label class="label-default">3) Entrega o Colocación (área metrop.)</label>
                         <br />
                         <select name="ddlTipoEntrega" id="ddlTipoEntrega" class="dropdown txbEditable" runat="server" clientidmode="static">
                             <option disabled selected>Tipo de entrega</option>
@@ -253,7 +257,7 @@
                         </div>
                         <div class="row">
                             <%--<img src="/Content/img/Dropbox_logo.png" class="img-responsive" alt="Cartelux" style="width: 5%;" />--%>
-                            <a href="https://www.dropbox.com/sh/slk0p1ee8rbln8m/AADdSDlwtNC55NggyWg6E5oVa?dl=0">Click aquí para ver el álbum de fotos</a>
+                            <a href="https://goo.gl/wk49L6" title="" target="_blank">Click aquí para ver el álbum de fotos</a>
                         </div>
                     </div>
                 </div>
