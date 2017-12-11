@@ -26,6 +26,9 @@
 
     </script>
     <style type="text/css">
+                body {
+            background-color: #f2e0cf;
+        }
         .ui-dialog-titlebar {
             background-color: rgba(255, 119, 0, 0.78);
         }
@@ -95,7 +98,8 @@
                     <div class="login-container sub-form panel panel-default">
                         <label class="label-default">1) Ingrese sus datos </label>
                         <div class="form-group">
-                            <input class="form-control ctrl-required" placeholder="Teléfono de contacto" type="tel" tabindex="1" required runat="server" id="txbTel" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" autofocus>
+                            Teléfono de contacto
+                            <input class="form-control ctrl-required" type="number" tabindex="1" required runat="server" id="txbTel" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" autofocus>
                         </div>
                         <div class="form-group">
                             <input class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="2" required runat="server" id="txbNombre" clientidmode="static">
