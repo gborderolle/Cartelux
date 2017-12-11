@@ -8,6 +8,9 @@
     <script type="text/javascript" src="/Content/js/generador.js"></script>
     <script type="text/javascript" src="/Content/js/clipboard.min.js"></script>
     <style type="text/css">
+        body {
+            background-color: #f2e0cf;
+        }
         .center {
             margin: 0;
             display: block;
@@ -32,7 +35,8 @@
                 <div class="col-sm-12 col-md-10" style="margin: 0; display: block;">
                     <div class="login-container sub-form panel panel-default">
                         <div class="form-group">
-                            <input class="form-control" id="txbContactPhone" placeholder="Número del cliente [091373622]" maxlength="9"/>
+                            Número del cliente
+                            <input class="form-control" id="txbContactPhone" placeholder="091373622" maxlength="9"/>
                             <br />
                             <input class="form-control btn-primary" type="button" tabindex="1" runat="server" id="btnGenerar" clientidmode="static" value="Generar URL" title="Click para generar una URL con ID único" onclick="generarURL();">
                         </div>

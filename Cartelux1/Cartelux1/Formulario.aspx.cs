@@ -112,7 +112,7 @@ namespace Cartelux1
                             foreach (carteles cartel in lista_carteles)
                             {
                                 txbTexto1.Text = cartel.Texto;
-                                txbDetalles.Value = cartel.Detalles;
+                                //txbDetalles.Value = cartel.Detalles;
                                 txbDireccion.Value = cartel.Colocacion_direccion;
                                 txbCiudad.Value = cartel.CiudadInterior;
                                 txbFecha.Value = cartel.Colocacion_fecha;
@@ -124,8 +124,8 @@ namespace Cartelux1
                                 }
                                 if (cartel.Tematica_ID > 0)
                                 {
-                                    ddlMotivo.DataBind();
-                                    ddlMotivo.SelectedIndex = cartel.Tematica_ID;
+                                    //ddlMotivo.DataBind();
+                                    //ddlMotivo.SelectedIndex = cartel.Tematica_ID;
                                 }
                                 if (cartel.Entregas_Tipo_ID > 0)
                                 {
@@ -134,8 +134,8 @@ namespace Cartelux1
                                 }
                                 if (cartel.Entregas_Lugar_ID > 0)
                                 {
-                                    ddlLugarEntrega.DataBind();
-                                    ddlLugarEntrega.SelectedIndex = cartel.Entregas_Lugar_ID;
+                                    //ddlLugarEntrega.DataBind();
+                                    //ddlLugarEntrega.SelectedIndex = cartel.Entregas_Lugar_ID;
                                 }
                             }
                         }
@@ -174,7 +174,7 @@ namespace Cartelux1
 
                 // Cartel
                 txbTexto1.Attributes.Add("readonly", "readonly");
-                txbDetalles.Attributes.Add("readonly", "readonly");
+                //txbDetalles.Attributes.Add("readonly", "readonly");
 
                 msj_result.Visible = true;
                 btnConfirmar.Disabled = true;
@@ -192,7 +192,7 @@ namespace Cartelux1
 
                 // Cartel
                 txbTexto1.Attributes.Add("readonly", "false");
-                txbDetalles.Attributes.Add("readonly", "false");
+                //txbDetalles.Attributes.Add("readonly", "false");
 
                 btnConfirmar.Disabled = false;
             }
@@ -278,7 +278,7 @@ namespace Cartelux1
                 carteles cartel = new carteles();
                 cartel.Cartel_ID = 0;
                 cartel.Texto = txbTexto1.Text;
-                cartel.Detalles = txbDetalles.Value;
+                //cartel.Detalles = txbDetalles.Value;
                 cartel.Colocacion_fecha = txbFecha.Value;
                 cartel.Colocacion_direccion = txbDireccion.Value;
                 cartel.CiudadInterior = txbCiudad.Value;
@@ -290,16 +290,18 @@ namespace Cartelux1
                 }
 
                 // Temática
-                if (ddlMotivo.SelectedIndex > 0)
-                {
-                    cartel.Tematica_ID = ddlMotivo.SelectedIndex;
-                }
+                //if (ddlMotivo.SelectedIndex > 0)
+                //{
+                //    cartel.Tematica_ID = ddlMotivo.SelectedIndex;
+                //}
+                cartel.Tematica_ID = 0;
 
                 // Entrega lugar
-                if (ddlLugarEntrega.SelectedIndex > 0)
-                {
-                    cartel.Entregas_Lugar_ID = ddlLugarEntrega.SelectedIndex;
-                }
+                //if (ddlLugarEntrega.SelectedIndex > 0)
+                //{
+                //    cartel.Entregas_Lugar_ID = ddlLugarEntrega.SelectedIndex;
+                //}
+                cartel.Entregas_Lugar_ID = 0;
 
                 // Entrega tipo
                 if (ddlTipoEntrega.SelectedIndex > 0)

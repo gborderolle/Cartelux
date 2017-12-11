@@ -57,8 +57,6 @@ function generarURL() {
                                     $("#btnGenerar").attr("title", response.id);
                                     $("#txbLink").val(response.id);
 
-                                    wpp_url = response.id;
-
                                     }, // end success
                                 failure: function (response) {
                                     alert("Error interno generando LINK.");

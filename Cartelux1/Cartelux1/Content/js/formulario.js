@@ -36,25 +36,25 @@ function loadEvents() {
             switch (value) {
                 case "ui-id-2": { // Colocación
                     readonlyControl(false, "txbDireccion");
-                    readonlyControl(false, "ddlLugarEntrega");
+                    //readonlyControl(false, "ddlLugarEntrega");
                     readonlyControl(true, "txbCiudad");
                     break;
                 }
                 case "ui-id-3": { // Envío
                     readonlyControl(false, "txbDireccion");
-                    readonlyControl(false, "ddlLugarEntrega");
+                    //readonlyControl(false, "ddlLugarEntrega");
                     readonlyControl(true, "txbCiudad");
                     break;
                 }
                 case "ui-id-4": { // Interior
                     readonlyControl(true, "txbDireccion");
-                    readonlyControl(true, "ddlLugarEntrega");
+                    //readonlyControl(true, "ddlLugarEntrega");
                     readonlyControl(false, "txbCiudad");
                     break;
                 }
                 case "ui-id-5": { // Taller
                     readonlyControl(true, "txbDireccion");
-                    readonlyControl(true, "ddlLugarEntrega");
+                    //readonlyControl(true, "ddlLugarEntrega");
                     readonlyControl(true, "txbCiudad");
                     break;
                 }
@@ -69,25 +69,25 @@ function loadPreviousState() {
         switch (selectedIndex) {
             case 1: { // Colocación
                 readonlyControl(false, "txbDireccion");
-                readonlyControl(false, "ddlLugarEntrega");
+                //readonlyControl(false, "ddlLugarEntrega");
                 readonlyControl(true, "txbCiudad");
                 break;
             }
             case 2: { // Envío
                 readonlyControl(false, "txbDireccion");
-                readonlyControl(false, "ddlLugarEntrega");
+                //readonlyControl(false, "ddlLugarEntrega");
                 readonlyControl(true, "txbCiudad");
                 break;
             }
             case 3: { // Interior
                 readonlyControl(true, "txbDireccion");
-                readonlyControl(true, "ddlLugarEntrega");
+                //readonlyControl(true, "ddlLugarEntrega");
                 readonlyControl(false, "txbCiudad");
                 break;
             }
             case 4: { // Taller
                 readonlyControl(true, "txbDireccion");
-                readonlyControl(true, "ddlLugarEntrega");
+                //readonlyControl(true, "ddlLugarEntrega");
                 readonlyControl(true, "txbCiudad");
                 break;
             }

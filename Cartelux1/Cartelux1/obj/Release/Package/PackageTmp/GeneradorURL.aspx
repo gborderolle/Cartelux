@@ -53,7 +53,7 @@
             <div class="row center">
                 <div class="col-sm-12 col-md-10">
                     <input class="form-control text-to-copy" id="txbLink" onclick="this.select();" value="?" readonly />
-                    <button class="form-control btn-warning js-copy-btn" id="btnCopy" onclick="enviarWPP()">Copiar y enviar por WhatsApp</button>
+                    <button type="button" class="form-control btn-warning js-copy-btn" id="btnCopy" onclick="enviarWPP()">Copiar y enviar por WhatsApp</button>
                     <%--<input class="form-control btn-warning js-copy-btn" type="button" tabindex="2" id="btnCopy" value="Copiar y enviar por WhatsApp" title="Click para enviar por WhatsApp" onclick="enviarWPP();">--%>
                 </div>
             </div>
