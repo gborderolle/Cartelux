@@ -261,7 +261,7 @@
                         </div>
                         <div class="row" style="margin-left:0; margin-right:0;">
                             <%--<img src="/Content/img/Dropbox_logo.png" class="img-responsive" alt="Cartelux" style="width: 5%;" />--%>
-                            <a href="https://goo.gl/wk49L6" title="" target="_blank">Click aquí para ver el álbum de fotos</a>
+                            <a href="https://goo.gl/as2weV" title="" target="_blank">Click aquí para ver el álbum de fotos</a>
                         </div>
                     </div>
                 </div>
