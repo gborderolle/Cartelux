@@ -15,13 +15,12 @@ namespace Cartelux1.Models
     public partial class clientes
     {
         public int Cliente_ID { get; set; }
+        public Nullable<int> Departamento_ID { get; set; }
         public string Telefono { get; set; }
-        public string Nombre_completo { get; set; }
-        public Nullable<int> Edad { get; set; }
-        public string Direccion { get; set; }
-        public string Bario { get; set; }
+        public string Nombre { get; set; }
+        public string Barrio { get; set; }
         public string Comentarios { get; set; }
-        public System.DateTime DateCreated { get; set; }
-        public System.DateTime LastUpdate { get; set; }
+        public System.DateTime Fecha_creado { get; set; }
+        public System.DateTime Fecha_update { get; set; }
     }
 }

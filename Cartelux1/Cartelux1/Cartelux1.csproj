@@ -263,6 +263,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CarteluxModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Formulario2.aspx" />
     <Content Include="Global_Objects\Messages.js" />
     <Content Include="Models\CarteluxModel.edmx.diagram">
       <DependentUpon>CarteluxModel.edmx</DependentUpon>
@@ -498,14 +499,18 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Formulario2.aspx.cs">
+      <DependentUpon>Formulario2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formulario2.aspx.designer.cs">
+      <DependentUpon>Formulario2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Global_Objects\Logs.cs" />
     <Compile Include="Global_Objects\Utilities.cs" />
-    <Compile Include="Models\carteles.cs">
-      <DependentUpon>CarteluxModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CarteluxModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -524,10 +529,7 @@
     <Compile Include="Models\clientes.cs">
       <DependentUpon>CarteluxModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\entregas_lugar.cs">
-      <DependentUpon>CarteluxModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\entregas_tipo.cs">
+    <Compile Include="Models\formularios.cs">
       <DependentUpon>CarteluxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -545,13 +547,34 @@
     <Compile Include="GeneradorURL.aspx.designer.cs">
       <DependentUpon>GeneradorURL.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\lista_departamentos.cs">
+      <DependentUpon>CarteluxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lista_entregas_tipos.cs">
+      <DependentUpon>CarteluxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lista_pedido_materiales.cs">
+      <DependentUpon>CarteluxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lista_pedido_tamanos.cs">
+      <DependentUpon>CarteluxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lista_pedido_tematicas.cs">
+      <DependentUpon>CarteluxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lista_pedido_tipos.cs">
+      <DependentUpon>CarteluxModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pedidos.cs">
       <DependentUpon>CarteluxModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tamanos.cs">
+    <Compile Include="Models\pedido_disenos.cs">
       <DependentUpon>CarteluxModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tematicas.cs">
+    <Compile Include="Models\pedido_entregas.cs">
+      <DependentUpon>CarteluxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>CarteluxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

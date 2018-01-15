@@ -5,268 +5,604 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="carteluxdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="carteles">
-          <Key>
-            <PropertyRef Name="Cartel_ID" />
-          </Key>
-          <Property Name="Cartel_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Pedido_ID" Type="int" Nullable="false" />
-          <Property Name="Tamano_ID" Type="int" Nullable="false" />
-          <Property Name="Tematica_ID" Type="int" Nullable="false" />
-          <Property Name="Entregas_Tipo_ID" Type="int" Nullable="false" />
-          <Property Name="Entregas_Lugar_ID" Type="int" Nullable="false" />
-          <Property Name="Texto" Type="varchar" MaxLength="100" />
-          <Property Name="Colocacion_direccion" Type="varchar" MaxLength="50" />
-          <Property Name="Colocacion_barrio" Type="varchar" MaxLength="50" />
-          <Property Name="Colocacion_fecha" Type="varchar" MaxLength="50" />
-          <Property Name="Detalles" Type="varchar" MaxLength="50" />
-          <Property Name="CiudadInterior" Type="varchar" MaxLength="50" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="LastUpdate" Type="datetime" Nullable="false" />
-        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'carteluxdb1.dbo.clientes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="clientes">
           <Key>
             <PropertyRef Name="Cliente_ID" />
+            <PropertyRef Name="Telefono" />
+            <PropertyRef Name="Fecha_creado" />
+            <PropertyRef Name="Fecha_update" />
           </Key>
           <Property Name="Cliente_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Departamento_ID" Type="int" />
           <Property Name="Telefono" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Nombre_completo" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Edad" Type="int" />
-          <Property Name="Direccion" Type="varchar" MaxLength="50" />
-          <Property Name="Bario" Type="varchar" MaxLength="50" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Barrio" Type="varchar" MaxLength="50" />
           <Property Name="Comentarios" Type="varchar" MaxLength="100" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="LastUpdate" Type="datetime" Nullable="false" />
+          <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
+          <Property Name="Fecha_update" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="entregas_lugar">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'carteluxdb1.dbo.formularios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="formularios">
           <Key>
-            <PropertyRef Name="Entrega_Lugar_ID" />
+            <PropertyRef Name="Formulario_ID" />
+            <PropertyRef Name="Cliente_ID" />
+            <PropertyRef Name="Serie" />
+            <PropertyRef Name="URL_short" />
+            <PropertyRef Name="URL_completa" />
+            <PropertyRef Name="Fecha_creado" />
+            <PropertyRef Name="Fecha_update" />
           </Key>
-          <Property Name="Entrega_Lugar_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Formulario_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cliente_ID" Type="int" Nullable="false" />
+          <Property Name="Serie" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="URL_short" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="URL_completa" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Monto" Type="int" />
+          <Property Name="Comentarios" Type="varchar" MaxLength="100" />
+          <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
+          <Property Name="Fecha_update" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'carteluxdb1.dbo.lista_departamentos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="lista_departamentos">
+          <Key>
+            <PropertyRef Name="Departamento_ID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Departamento_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="3" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="entregas_tipo">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'carteluxdb1.dbo.lista_entregas_tipos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="lista_entregas_tipos">
           <Key>
             <PropertyRef Name="Entrega_Tipo_ID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Codigo" />
           </Key>
           <Property Name="Entrega_Tipo_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="3" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'carteluxdb1.dbo.lista_pedido_materiales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="lista_pedido_materiales">
+          <Key>
+            <PropertyRef Name="Pedido_Material_ID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Pedido_Material_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'carteluxdb1.dbo.lista_pedido_tamanos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="lista_pedido_tamanos">
+          <Key>
+            <PropertyRef Name="Pedido_Tamano_ID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Pedido_Tamano_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'carteluxdb1.dbo.lista_pedido_tematicas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="lista_pedido_tematicas">
+          <Key>
+            <PropertyRef Name="Pedido_Tematica_ID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Pedido_Tematica_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'carteluxdb1.dbo.lista_pedido_tipos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="lista_pedido_tipos">
+          <Key>
+            <PropertyRef Name="Pedido_Tipo_ID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Pedido_Tipo_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'carteluxdb1.dbo.pedido_disenos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="pedido_disenos">
+          <Key>
+            <PropertyRef Name="Pedido_Diseno_ID" />
+          </Key>
+          <Property Name="Pedido_Diseno_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo_guia" Type="int" />
+          <Property Name="Texto" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'carteluxdb1.dbo.pedido_entregas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="pedido_entregas">
+          <Key>
+            <PropertyRef Name="Pedido_Entrega_ID" />
+            <PropertyRef Name="Entrega_Tipo_ID" />
+          </Key>
+          <Property Name="Pedido_Entrega_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Entrega_Tipo_ID" Type="int" Nullable="false" />
+          <Property Name="Departamento_Tipo_ID" Type="int" />
+          <Property Name="Direccion" Type="varchar" MaxLength="100" />
+          <Property Name="Indicaciones" Type="varchar" MaxLength="100" />
+          <Property Name="Barrio" Type="varchar" MaxLength="50" />
+          <Property Name="Ciudad" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_entrega" Type="varchar" MaxLength="50" />
+          <Property Name="Comentarios" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'carteluxdb1.dbo.pedidos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="pedidos">
           <Key>
             <PropertyRef Name="Pedido_ID" />
+            <PropertyRef Name="Formulario_ID" />
+            <PropertyRef Name="Pedido_Tipo_ID" />
+            <PropertyRef Name="Pedido_Material_ID" />
+            <PropertyRef Name="Pedido_Tamano_ID" />
+            <PropertyRef Name="Pedido_Tematica_ID" />
+            <PropertyRef Name="Pedido_Diseno_ID" />
+            <PropertyRef Name="Pedido_Entrega_ID" />
           </Key>
           <Property Name="Pedido_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Serie" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="Cliente_ID" Type="int" Nullable="false" />
-          <Property Name="URL_completa" Type="varchar" MaxLength="100" />
-          <Property Name="Comentarios" Type="varchar" MaxLength="100" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="LastUpdate" Type="datetime" Nullable="false" />
+          <Property Name="Formulario_ID" Type="int" Nullable="false" />
+          <Property Name="Pedido_Tipo_ID" Type="int" Nullable="false" />
+          <Property Name="Pedido_Material_ID" Type="int" Nullable="false" />
+          <Property Name="Pedido_Tamano_ID" Type="int" Nullable="false" />
+          <Property Name="Pedido_Tematica_ID" Type="int" Nullable="false" />
+          <Property Name="Pedido_Diseno_ID" Type="int" Nullable="false" />
+          <Property Name="Pedido_Entrega_ID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="tamanos">
+        <EntityType Name="sysdiagrams">
           <Key>
-            <PropertyRef Name="Tamano_ID" />
+            <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="Tamano_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="tematicas">
-          <Key>
-            <PropertyRef Name="Tematica_ID" />
-          </Key>
-          <Property Name="Tematica_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityContainer Name="carteluxdbModelStoreContainer">
-          <EntitySet Name="carteles" EntityType="Self.carteles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="entregas_lugar" EntityType="Self.entregas_lugar" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="entregas_tipo" EntityType="Self.entregas_tipo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="pedidos" EntityType="Self.pedidos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tamanos" EntityType="Self.tamanos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tematicas" EntityType="Self.tematicas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="clientes" EntityType="Self.clientes" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [clientes].[Cliente_ID] AS [Cliente_ID], 
+    [clientes].[Departamento_ID] AS [Departamento_ID], 
+    [clientes].[Telefono] AS [Telefono], 
+    [clientes].[Nombre] AS [Nombre], 
+    [clientes].[Barrio] AS [Barrio], 
+    [clientes].[Comentarios] AS [Comentarios], 
+    [clientes].[Fecha_creado] AS [Fecha_creado], 
+    [clientes].[Fecha_update] AS [Fecha_update]
+    FROM [dbo].[clientes] AS [clientes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="formularios" EntityType="Self.formularios" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [formularios].[Formulario_ID] AS [Formulario_ID], 
+    [formularios].[Cliente_ID] AS [Cliente_ID], 
+    [formularios].[Serie] AS [Serie], 
+    [formularios].[URL_short] AS [URL_short], 
+    [formularios].[URL_completa] AS [URL_completa], 
+    [formularios].[Monto] AS [Monto], 
+    [formularios].[Comentarios] AS [Comentarios], 
+    [formularios].[Fecha_creado] AS [Fecha_creado], 
+    [formularios].[Fecha_update] AS [Fecha_update]
+    FROM [dbo].[formularios] AS [formularios]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="lista_departamentos" EntityType="Self.lista_departamentos" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [lista_departamentos].[Departamento_ID] AS [Departamento_ID], 
+    [lista_departamentos].[Nombre] AS [Nombre], 
+    [lista_departamentos].[Codigo] AS [Codigo], 
+    [lista_departamentos].[Descripcion] AS [Descripcion]
+    FROM [dbo].[lista_departamentos] AS [lista_departamentos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="lista_entregas_tipos" EntityType="Self.lista_entregas_tipos" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [lista_entregas_tipos].[Entrega_Tipo_ID] AS [Entrega_Tipo_ID], 
+    [lista_entregas_tipos].[Nombre] AS [Nombre], 
+    [lista_entregas_tipos].[Codigo] AS [Codigo], 
+    [lista_entregas_tipos].[Descripcion] AS [Descripcion]
+    FROM [dbo].[lista_entregas_tipos] AS [lista_entregas_tipos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="lista_pedido_materiales" EntityType="Self.lista_pedido_materiales" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [lista_pedido_materiales].[Pedido_Material_ID] AS [Pedido_Material_ID], 
+    [lista_pedido_materiales].[Nombre] AS [Nombre], 
+    [lista_pedido_materiales].[Codigo] AS [Codigo], 
+    [lista_pedido_materiales].[Descripcion] AS [Descripcion]
+    FROM [dbo].[lista_pedido_materiales] AS [lista_pedido_materiales]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="lista_pedido_tamanos" EntityType="Self.lista_pedido_tamanos" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [lista_pedido_tamanos].[Pedido_Tamano_ID] AS [Pedido_Tamano_ID], 
+    [lista_pedido_tamanos].[Nombre] AS [Nombre], 
+    [lista_pedido_tamanos].[Codigo] AS [Codigo], 
+    [lista_pedido_tamanos].[Descripcion] AS [Descripcion]
+    FROM [dbo].[lista_pedido_tamanos] AS [lista_pedido_tamanos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="lista_pedido_tematicas" EntityType="Self.lista_pedido_tematicas" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [lista_pedido_tematicas].[Pedido_Tematica_ID] AS [Pedido_Tematica_ID], 
+    [lista_pedido_tematicas].[Nombre] AS [Nombre], 
+    [lista_pedido_tematicas].[Codigo] AS [Codigo], 
+    [lista_pedido_tematicas].[Descripcion] AS [Descripcion]
+    FROM [dbo].[lista_pedido_tematicas] AS [lista_pedido_tematicas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="lista_pedido_tipos" EntityType="Self.lista_pedido_tipos" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [lista_pedido_tipos].[Pedido_Tipo_ID] AS [Pedido_Tipo_ID], 
+    [lista_pedido_tipos].[Nombre] AS [Nombre], 
+    [lista_pedido_tipos].[Codigo] AS [Codigo], 
+    [lista_pedido_tipos].[Descripcion] AS [Descripcion]
+    FROM [dbo].[lista_pedido_tipos] AS [lista_pedido_tipos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="pedido_disenos" EntityType="Self.pedido_disenos" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [pedido_disenos].[Pedido_Diseno_ID] AS [Pedido_Diseno_ID], 
+    [pedido_disenos].[Codigo_guia] AS [Codigo_guia], 
+    [pedido_disenos].[Texto] AS [Texto]
+    FROM [dbo].[pedido_disenos] AS [pedido_disenos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="pedido_entregas" EntityType="Self.pedido_entregas" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [pedido_entregas].[Pedido_Entrega_ID] AS [Pedido_Entrega_ID], 
+    [pedido_entregas].[Entrega_Tipo_ID] AS [Entrega_Tipo_ID], 
+    [pedido_entregas].[Departamento_Tipo_ID] AS [Departamento_Tipo_ID], 
+    [pedido_entregas].[Direccion] AS [Direccion], 
+    [pedido_entregas].[Indicaciones] AS [Indicaciones], 
+    [pedido_entregas].[Barrio] AS [Barrio], 
+    [pedido_entregas].[Ciudad] AS [Ciudad], 
+    [pedido_entregas].[Fecha_entrega] AS [Fecha_entrega], 
+    [pedido_entregas].[Comentarios] AS [Comentarios]
+    FROM [dbo].[pedido_entregas] AS [pedido_entregas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="pedidos" EntityType="Self.pedidos" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [pedidos].[Pedido_ID] AS [Pedido_ID], 
+    [pedidos].[Formulario_ID] AS [Formulario_ID], 
+    [pedidos].[Pedido_Tipo_ID] AS [Pedido_Tipo_ID], 
+    [pedidos].[Pedido_Material_ID] AS [Pedido_Material_ID], 
+    [pedidos].[Pedido_Tamano_ID] AS [Pedido_Tamano_ID], 
+    [pedidos].[Pedido_Tematica_ID] AS [Pedido_Tematica_ID], 
+    [pedidos].[Pedido_Diseno_ID] AS [Pedido_Diseno_ID], 
+    [pedidos].[Pedido_Entrega_ID] AS [Pedido_Entrega_ID]
+    FROM [dbo].[pedidos] AS [pedidos]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="carteluxdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="carteluxdbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="entregas_lugar" EntityType="carteluxdbModel.entregas_lugar" />
-          <EntitySet Name="entregas_tipo" EntityType="carteluxdbModel.entregas_tipo" />
-          <EntitySet Name="tematicas" EntityType="carteluxdbModel.tematicas" />
-          <EntitySet Name="tamanos" EntityType="carteluxdbModel.tamanos" />
-          <EntitySet Name="carteles" EntityType="carteluxdbModel.carteles" />
+          <EntitySet Name="sysdiagrams" EntityType="carteluxdbModel.sysdiagrams" />
           <EntitySet Name="clientes" EntityType="carteluxdbModel.clientes" />
+          <EntitySet Name="formularios" EntityType="carteluxdbModel.formularios" />
+          <EntitySet Name="lista_departamentos" EntityType="carteluxdbModel.lista_departamentos" />
+          <EntitySet Name="lista_entregas_tipos" EntityType="carteluxdbModel.lista_entregas_tipos" />
+          <EntitySet Name="lista_pedido_materiales" EntityType="carteluxdbModel.lista_pedido_materiales" />
+          <EntitySet Name="lista_pedido_tamanos" EntityType="carteluxdbModel.lista_pedido_tamanos" />
+          <EntitySet Name="lista_pedido_tematicas" EntityType="carteluxdbModel.lista_pedido_tematicas" />
+          <EntitySet Name="lista_pedido_tipos" EntityType="carteluxdbModel.lista_pedido_tipos" />
+          <EntitySet Name="pedido_disenos" EntityType="carteluxdbModel.pedido_disenos" />
+          <EntitySet Name="pedido_entregas" EntityType="carteluxdbModel.pedido_entregas" />
           <EntitySet Name="pedidos" EntityType="carteluxdbModel.pedidos" />
         </EntityContainer>
-        <EntityType Name="entregas_lugar">
+        <EntityType Name="sysdiagrams">
           <Key>
-            <PropertyRef Name="Entrega_Lugar_ID" />
+            <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="Entrega_Lugar_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="entregas_tipo">
-          <Key>
-            <PropertyRef Name="Entrega_Tipo_ID" />
-          </Key>
-          <Property Name="Entrega_Tipo_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="tematicas">
-          <Key>
-            <PropertyRef Name="Tematica_ID" />
-          </Key>
-          <Property Name="Tematica_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="tamanos">
-          <Key>
-            <PropertyRef Name="Tamano_ID" />
-          </Key>
-          <Property Name="Tamano_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="carteles">
-          <Key>
-            <PropertyRef Name="Cartel_ID" />
-          </Key>
-          <Property Name="Cartel_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Pedido_ID" Type="Int32" Nullable="false" />
-          <Property Name="Tamano_ID" Type="Int32" Nullable="false" />
-          <Property Name="Tematica_ID" Type="Int32" Nullable="false" />
-          <Property Name="Entregas_Tipo_ID" Type="Int32" Nullable="false" />
-          <Property Name="Entregas_Lugar_ID" Type="Int32" Nullable="false" />
-          <Property Name="Texto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Colocacion_direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Colocacion_barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Colocacion_fecha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Detalles" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CiudadInterior" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastUpdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="clientes">
           <Key>
             <PropertyRef Name="Cliente_ID" />
+            <PropertyRef Name="Telefono" />
+            <PropertyRef Name="Fecha_creado" />
+            <PropertyRef Name="Fecha_update" />
           </Key>
           <Property Name="Cliente_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Departamento_ID" Type="Int32" />
           <Property Name="Telefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Nombre_completo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Edad" Type="Int32" />
-          <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Bario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Comentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastUpdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha_creado" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha_update" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="formularios">
+          <Key>
+            <PropertyRef Name="Formulario_ID" />
+            <PropertyRef Name="Cliente_ID" />
+            <PropertyRef Name="Serie" />
+            <PropertyRef Name="URL_short" />
+            <PropertyRef Name="URL_completa" />
+            <PropertyRef Name="Fecha_creado" />
+            <PropertyRef Name="Fecha_update" />
+          </Key>
+          <Property Name="Formulario_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cliente_ID" Type="Int32" Nullable="false" />
+          <Property Name="Serie" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="URL_short" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="URL_completa" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Monto" Type="Int32" />
+          <Property Name="Comentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_creado" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha_update" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="lista_departamentos">
+          <Key>
+            <PropertyRef Name="Departamento_ID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Departamento_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="lista_entregas_tipos">
+          <Key>
+            <PropertyRef Name="Entrega_Tipo_ID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Entrega_Tipo_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="lista_pedido_materiales">
+          <Key>
+            <PropertyRef Name="Pedido_Material_ID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Pedido_Material_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="lista_pedido_tamanos">
+          <Key>
+            <PropertyRef Name="Pedido_Tamano_ID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Pedido_Tamano_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="lista_pedido_tematicas">
+          <Key>
+            <PropertyRef Name="Pedido_Tematica_ID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Pedido_Tematica_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="lista_pedido_tipos">
+          <Key>
+            <PropertyRef Name="Pedido_Tipo_ID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Pedido_Tipo_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="pedido_disenos">
+          <Key>
+            <PropertyRef Name="Pedido_Diseno_ID" />
+          </Key>
+          <Property Name="Pedido_Diseno_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo_guia" Type="Int32" />
+          <Property Name="Texto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="pedido_entregas">
+          <Key>
+            <PropertyRef Name="Pedido_Entrega_ID" />
+            <PropertyRef Name="Entrega_Tipo_ID" />
+          </Key>
+          <Property Name="Pedido_Entrega_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Entrega_Tipo_ID" Type="Int32" Nullable="false" />
+          <Property Name="Departamento_Tipo_ID" Type="Int32" />
+          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Indicaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_entrega" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="pedidos">
           <Key>
             <PropertyRef Name="Pedido_ID" />
+            <PropertyRef Name="Formulario_ID" />
+            <PropertyRef Name="Pedido_Tipo_ID" />
+            <PropertyRef Name="Pedido_Material_ID" />
+            <PropertyRef Name="Pedido_Tamano_ID" />
+            <PropertyRef Name="Pedido_Tematica_ID" />
+            <PropertyRef Name="Pedido_Diseno_ID" />
+            <PropertyRef Name="Pedido_Entrega_ID" />
           </Key>
           <Property Name="Pedido_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Serie" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Cliente_ID" Type="Int32" Nullable="false" />
-          <Property Name="URL_completa" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Comentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastUpdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Formulario_ID" Type="Int32" Nullable="false" />
+          <Property Name="Pedido_Tipo_ID" Type="Int32" Nullable="false" />
+          <Property Name="Pedido_Material_ID" Type="Int32" Nullable="false" />
+          <Property Name="Pedido_Tamano_ID" Type="Int32" Nullable="false" />
+          <Property Name="Pedido_Tematica_ID" Type="Int32" Nullable="false" />
+          <Property Name="Pedido_Diseno_ID" Type="Int32" Nullable="false" />
+          <Property Name="Pedido_Entrega_ID" Type="Int32" Nullable="false" />
         </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="carteluxdbModelStoreContainer" CdmEntityContainer="carteluxdbEntities">
-          <EntitySetMapping Name="entregas_lugar">
-            <EntityTypeMapping TypeName="carteluxdbModel.entregas_lugar">
-              <MappingFragment StoreEntitySet="entregas_lugar">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Entrega_Lugar_ID" ColumnName="Entrega_Lugar_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="entregas_tipo">
-            <EntityTypeMapping TypeName="carteluxdbModel.entregas_tipo">
-              <MappingFragment StoreEntitySet="entregas_tipo">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Entrega_Tipo_ID" ColumnName="Entrega_Tipo_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tematicas">
-            <EntityTypeMapping TypeName="carteluxdbModel.tematicas">
-              <MappingFragment StoreEntitySet="tematicas">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Tematica_ID" ColumnName="Tematica_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tamanos">
-            <EntityTypeMapping TypeName="carteluxdbModel.tamanos">
-              <MappingFragment StoreEntitySet="tamanos">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Tamano_ID" ColumnName="Tamano_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="carteles">
-            <EntityTypeMapping TypeName="carteluxdbModel.carteles">
-              <MappingFragment StoreEntitySet="carteles">
-                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="CiudadInterior" ColumnName="CiudadInterior" />
-                <ScalarProperty Name="Detalles" ColumnName="Detalles" />
-                <ScalarProperty Name="Colocacion_fecha" ColumnName="Colocacion_fecha" />
-                <ScalarProperty Name="Colocacion_barrio" ColumnName="Colocacion_barrio" />
-                <ScalarProperty Name="Colocacion_direccion" ColumnName="Colocacion_direccion" />
-                <ScalarProperty Name="Texto" ColumnName="Texto" />
-                <ScalarProperty Name="Entregas_Lugar_ID" ColumnName="Entregas_Lugar_ID" />
-                <ScalarProperty Name="Entregas_Tipo_ID" ColumnName="Entregas_Tipo_ID" />
-                <ScalarProperty Name="Tematica_ID" ColumnName="Tematica_ID" />
-                <ScalarProperty Name="Tamano_ID" ColumnName="Tamano_ID" />
-                <ScalarProperty Name="Pedido_ID" ColumnName="Pedido_ID" />
-                <ScalarProperty Name="Cartel_ID" ColumnName="Cartel_ID" />
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="carteluxdbModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="clientes">
             <EntityTypeMapping TypeName="carteluxdbModel.clientes">
               <MappingFragment StoreEntitySet="clientes">
-                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Fecha_update" ColumnName="Fecha_update" />
+                <ScalarProperty Name="Fecha_creado" ColumnName="Fecha_creado" />
                 <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
-                <ScalarProperty Name="Bario" ColumnName="Bario" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="Edad" ColumnName="Edad" />
-                <ScalarProperty Name="Nombre_completo" ColumnName="Nombre_completo" />
+                <ScalarProperty Name="Barrio" ColumnName="Barrio" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Departamento_ID" ColumnName="Departamento_ID" />
                 <ScalarProperty Name="Cliente_ID" ColumnName="Cliente_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="formularios">
+            <EntityTypeMapping TypeName="carteluxdbModel.formularios">
+              <MappingFragment StoreEntitySet="formularios">
+                <ScalarProperty Name="Fecha_update" ColumnName="Fecha_update" />
+                <ScalarProperty Name="Fecha_creado" ColumnName="Fecha_creado" />
+                <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="URL_completa" ColumnName="URL_completa" />
+                <ScalarProperty Name="URL_short" ColumnName="URL_short" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="Cliente_ID" ColumnName="Cliente_ID" />
+                <ScalarProperty Name="Formulario_ID" ColumnName="Formulario_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lista_departamentos">
+            <EntityTypeMapping TypeName="carteluxdbModel.lista_departamentos">
+              <MappingFragment StoreEntitySet="lista_departamentos">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Departamento_ID" ColumnName="Departamento_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lista_entregas_tipos">
+            <EntityTypeMapping TypeName="carteluxdbModel.lista_entregas_tipos">
+              <MappingFragment StoreEntitySet="lista_entregas_tipos">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Entrega_Tipo_ID" ColumnName="Entrega_Tipo_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lista_pedido_materiales">
+            <EntityTypeMapping TypeName="carteluxdbModel.lista_pedido_materiales">
+              <MappingFragment StoreEntitySet="lista_pedido_materiales">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Pedido_Material_ID" ColumnName="Pedido_Material_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lista_pedido_tamanos">
+            <EntityTypeMapping TypeName="carteluxdbModel.lista_pedido_tamanos">
+              <MappingFragment StoreEntitySet="lista_pedido_tamanos">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Pedido_Tamano_ID" ColumnName="Pedido_Tamano_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lista_pedido_tematicas">
+            <EntityTypeMapping TypeName="carteluxdbModel.lista_pedido_tematicas">
+              <MappingFragment StoreEntitySet="lista_pedido_tematicas">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Pedido_Tematica_ID" ColumnName="Pedido_Tematica_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lista_pedido_tipos">
+            <EntityTypeMapping TypeName="carteluxdbModel.lista_pedido_tipos">
+              <MappingFragment StoreEntitySet="lista_pedido_tipos">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Pedido_Tipo_ID" ColumnName="Pedido_Tipo_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pedido_disenos">
+            <EntityTypeMapping TypeName="carteluxdbModel.pedido_disenos">
+              <MappingFragment StoreEntitySet="pedido_disenos">
+                <ScalarProperty Name="Texto" ColumnName="Texto" />
+                <ScalarProperty Name="Codigo_guia" ColumnName="Codigo_guia" />
+                <ScalarProperty Name="Pedido_Diseno_ID" ColumnName="Pedido_Diseno_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pedido_entregas">
+            <EntityTypeMapping TypeName="carteluxdbModel.pedido_entregas">
+              <MappingFragment StoreEntitySet="pedido_entregas">
+                <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+                <ScalarProperty Name="Fecha_entrega" ColumnName="Fecha_entrega" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Barrio" ColumnName="Barrio" />
+                <ScalarProperty Name="Indicaciones" ColumnName="Indicaciones" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Departamento_Tipo_ID" ColumnName="Departamento_Tipo_ID" />
+                <ScalarProperty Name="Entrega_Tipo_ID" ColumnName="Entrega_Tipo_ID" />
+                <ScalarProperty Name="Pedido_Entrega_ID" ColumnName="Pedido_Entrega_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="pedidos">
             <EntityTypeMapping TypeName="carteluxdbModel.pedidos">
               <MappingFragment StoreEntitySet="pedidos">
-                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
-                <ScalarProperty Name="URL_completa" ColumnName="URL_completa" />
-                <ScalarProperty Name="Cliente_ID" ColumnName="Cliente_ID" />
-                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="Pedido_Entrega_ID" ColumnName="Pedido_Entrega_ID" />
+                <ScalarProperty Name="Pedido_Diseno_ID" ColumnName="Pedido_Diseno_ID" />
+                <ScalarProperty Name="Pedido_Tematica_ID" ColumnName="Pedido_Tematica_ID" />
+                <ScalarProperty Name="Pedido_Tamano_ID" ColumnName="Pedido_Tamano_ID" />
+                <ScalarProperty Name="Pedido_Material_ID" ColumnName="Pedido_Material_ID" />
+                <ScalarProperty Name="Pedido_Tipo_ID" ColumnName="Pedido_Tipo_ID" />
+                <ScalarProperty Name="Formulario_ID" ColumnName="Formulario_ID" />
                 <ScalarProperty Name="Pedido_ID" ColumnName="Pedido_ID" />
               </MappingFragment>
             </EntityTypeMapping>

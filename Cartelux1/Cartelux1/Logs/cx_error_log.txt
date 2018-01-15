@@ -57,3 +57,5 @@
 10/27/2017 3:07:25 AM: [ln:269] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
 10/27/2017 3:08:29 AM: [ln:269] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
 10/27/2017 3:09:55 AM: [ln:269] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
+1/14/2018 9:20:06 PM: [ln:79] Formulario: GetURLParam_Decrypted() - Excepcion. Desencriptando ID del parámetro URL. ERROR: Invalid length for a Base-64 char array or string..
+1/14/2018 9:21:58 PM: [ln:79] Formulario: GetURLParam_Decrypted() - Excepcion. Desencriptando ID del parámetro URL. ERROR: Invalid length for a Base-64 char array or string..

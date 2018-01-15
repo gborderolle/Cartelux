@@ -17,9 +17,10 @@ namespace Cartelux1
             if (!Page.IsPostBack)
             {
                 string serie_str = GetURLParam_Decrypted("ID");
-                if (!string.IsNullOrWhiteSpace(serie_str))
+                string tel_str = GetURLParam("TEL");
+                if (!string.IsNullOrWhiteSpace(serie_str) && !string.IsNullOrWhiteSpace(tel_str))
                 {
-                    BindData(serie_str);
+                    BindData(serie_str, tel_str);
                 }
                 else
                 {
@@ -82,7 +83,24 @@ namespace Cartelux1
             return result;
         }
 
-        protected void BindData(string serie_str)
+        private string GetURLParam(string param_request)
+        {
+            string result = string.Empty;
+            if (!string.IsNullOrWhiteSpace(param_request))
+            {
+                // Logger variables
+                System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
+                System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+                string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+                string methodName = stackFrame.GetMethod().Name;
+
+                result = Request.QueryString[param_request];
+            }
+            return result;
+        }
+
+
+        protected void BindData(string serie_str, string tel_str)
         {
             // Logger variables
             System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
@@ -90,60 +108,92 @@ namespace Cartelux1
             string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
             string methodName = stackFrame.GetMethod().Name;
 
-            if (!string.IsNullOrWhiteSpace(serie_str))
+            if (!string.IsNullOrWhiteSpace(serie_str) && !string.IsNullOrWhiteSpace(tel_str))
             {
                 using (carteluxdbEntities context = new carteluxdbEntities())
                 {
-                    pedidos pedido = (pedidos)context.pedidos.FirstOrDefault(v => v.Serie.Equals(serie_str));
-                    if (pedido != null)
+                    formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Serie.Equals(serie_str));
+                    if (_formulario != null)
                     {
                         // Cliente
-                        clientes cliente = Get_Client(context, pedido.Cliente_ID);
-                        if (cliente != null)
+                        clientes _cliente = Get_Client(context, _formulario.Cliente_ID);
+                        if (_cliente != null)
                         {
-                            txbNombre.Value = cliente.Nombre_completo;
-                            txbTel.Value = cliente.Telefono;
-                        }
+                            txbNombre.Value = _cliente.Nombre;
+                            txbTel.Value = _cliente.Telefono;
+                        }                        
 
-                        // Cartel
-                        List<carteles> lista_carteles = (List<carteles>)context.carteles.Where(v => v.Pedido_ID == pedido.Pedido_ID).ToList();
-                        if (lista_carteles != null && lista_carteles.Count > 0)
+                        // Pedidos
+                        List<pedidos> lista_pedidos = (List<pedidos>)context.pedidos.Where(v => v.Formulario_ID == _formulario.Formulario_ID).ToList();
+                        if (lista_pedidos != null && lista_pedidos.Count > 0)
                         {
-                            foreach (carteles cartel in lista_carteles)
+                            foreach (pedidos _pedido in lista_pedidos)
                             {
-                                txbTexto1.Text = cartel.Texto;
-                                //txbDetalles.Value = cartel.Detalles;
-                                txbDireccion.Value = cartel.Colocacion_direccion;
-                                txbCiudad.Value = cartel.CiudadInterior;
-                                txbFecha.Value = cartel.Colocacion_fecha;
-
-                                if (cartel.Tamano_ID > 0)
+                                // GET Diseño
+                                pedido_disenos _pedido_diseno = (pedido_disenos)context.pedido_disenos.FirstOrDefault(v => v.Pedido_Diseno_ID.Equals(_pedido.Pedido_Diseno_ID));
+                                if (_pedido_diseno != null)
                                 {
-                                    ddlTamano.DataBind();
-                                    ddlTamano.SelectedIndex = cartel.Tamano_ID;
+                                    txbTexto1.Text = _pedido_diseno.Texto;
                                 }
-                                if (cartel.Tematica_ID > 0)
+
+                                // GET Entrega
+                                pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(v => v.Pedido_Entrega_ID.Equals(_pedido.Pedido_Entrega_ID));
+                                if (_pedido_entrega != null)
+                                {
+                                    txbDireccion.Value = _pedido_entrega.Direccion;
+                                    txbFecha.Value = _pedido_entrega.Fecha_entrega;
+                                    txbCiudad.Value = _pedido_entrega.Ciudad;
+
+                                    if (_pedido_entrega.Entrega_Tipo_ID > 0)
+                                    {
+                                        ddlTipoEntrega.DataBind();
+                                        ddlTipoEntrega.SelectedIndex = _pedido_entrega.Entrega_Tipo_ID;
+                                    }
+                                }
+
+                                #region Tipo
+                                if (_pedido.Pedido_Tipo_ID > 0)
                                 {
                                     //ddlMotivo.DataBind();
                                     //ddlMotivo.SelectedIndex = cartel.Tematica_ID;
                                 }
-                                if (cartel.Entregas_Tipo_ID > 0)
+                                #endregion
+
+                                #region Material = Pintado / Impreso
+                                if (_pedido.Pedido_Material_ID > 0)
                                 {
-                                    ddlTipoEntrega.DataBind();
-                                    ddlTipoEntrega.SelectedIndex = cartel.Entregas_Tipo_ID;
+                                    //ddlMotivo.DataBind();
+                                    //ddlMotivo.SelectedIndex = cartel.Tematica_ID;
                                 }
-                                if (cartel.Entregas_Lugar_ID > 0)
+                                #endregion
+
+                                #region Tamaño
+                                if (_pedido.Pedido_Tamano_ID > 0)
                                 {
-                                    //ddlLugarEntrega.DataBind();
-                                    //ddlLugarEntrega.SelectedIndex = cartel.Entregas_Lugar_ID;
+                                    ddlTamano.DataBind();
+                                    ddlTamano.SelectedIndex = _pedido.Pedido_Tamano_ID;
                                 }
+                                #endregion
+
+                                #region Temática
+                                if (_pedido.Pedido_Tematica_ID > 0)
+                                {
+                                    //ddlMotivo.DataBind();
+                                    //ddlMotivo.SelectedIndex = cartel.Tematica_ID;
+                                }
+                                #endregion
+
                             }
                         }
 
                         // Última actualización del pedido
-                        lblLastUpdate.InnerText = " " + pedido.LastUpdate.ToString();
+                        lblLastUpdate.InnerText = " " + _formulario.Fecha_update.ToString();
 
                         SetFieldsReadOnly(true);
+                    }
+                    else
+                    {
+                        txbTel.Value = tel_str;
                     }
                 }
             }
@@ -210,35 +260,36 @@ namespace Cartelux1
             {
                 using (carteluxdbEntities context = new carteluxdbEntities())
                 {
-                    pedidos pedido = (pedidos)context.pedidos.FirstOrDefault(v => v.Serie.Equals(serie_str));
-                    pedido = pedido != null ? pedido : new pedidos();
-                    pedido.LastUpdate = DateTime.Now;
+                    formularios formulario = (formularios)context.formularios.FirstOrDefault(v => v.Serie.Equals(serie_str));
+                    formulario = formulario != null ? formulario : new formularios();
+                    formulario.Fecha_update = DateTime.Now;
 
                     // Cliente
-                    pedido.Cliente_ID = Guardar_Cliente(context);                                    
+                    formulario.Cliente_ID = NEW_Cliente(context);
 
                     // Nuevo
-                    if (string.IsNullOrWhiteSpace(pedido.Serie))
+                    if (string.IsNullOrWhiteSpace(formulario.Serie))
                     {
                         string url_complete = HttpContext.Current.Request.Url.AbsoluteUri;
                         if (!string.IsNullOrWhiteSpace(url_complete))
                         {
-                            pedido.URL_completa = url_complete;
+                            formulario.URL_completa = url_complete;
+                            formulario.URL_short = url_complete; //
                         }
 
-                        pedido.Pedido_ID = 0;
-                        pedido.Serie = serie_str;
-                        pedido.DateCreated = DateTime.Now;
-                        context.pedidos.Add(pedido);
+                        formulario.Formulario_ID = 0;
+                        formulario.Serie = serie_str;
+                        formulario.Fecha_creado = DateTime.Now;
+                        context.formularios.Add(formulario);
                     }
 
                     Guardar_Contexto(context);
 
-                    // Cartel
-                    int pedido_ID = Get_NextPedidoID(context);
-                    if (pedido_ID > 0)
+                    // Pedidos
+                    int formulario_ID = Get_NextFormularioID(context);
+                    if (formulario_ID > 0)
                     {
-                        Guardar_Cartel(context, pedido_ID);
+                        NEW_Pedido(context, formulario_ID);
                     }
 
                     Guardar_Contexto(context);
@@ -271,53 +322,74 @@ namespace Cartelux1
             }
         }
 
-        private void Guardar_Cartel(carteluxdbEntities context, int pedido_ID)
+        private void NEW_Pedido(carteluxdbEntities context, int formulario_ID)
         {
-            if (pedido_ID > 0)
+            if (formulario_ID > 0)
             {
-                carteles cartel = new carteles();
-                cartel.Cartel_ID = 0;
-                cartel.Texto = txbTexto1.Text;
-                //cartel.Detalles = txbDetalles.Value;
-                cartel.Colocacion_fecha = txbFecha.Value;
-                cartel.Colocacion_direccion = txbDireccion.Value;
-                cartel.CiudadInterior = txbCiudad.Value;
+                pedidos _pedido = new pedidos();
+                _pedido.Pedido_ID = 0;
 
-                // Tamaño
-                if (ddlTamano.SelectedIndex > 0)
-                {
-                    cartel.Tamano_ID = ddlTamano.SelectedIndex;
-                }
-
-                // Temática
-                //if (ddlMotivo.SelectedIndex > 0)
+                #region Tipo
+                //if (ddlTamano.SelectedIndex > 0)
                 //{
-                //    cartel.Tematica_ID = ddlMotivo.SelectedIndex;
+                //    pedido.Pedido_Tipo_ID = ddlTamano.SelectedIndex;
                 //}
-                cartel.Tematica_ID = 0;
+                #endregion
 
-                // Entrega lugar
-                //if (ddlLugarEntrega.SelectedIndex > 0)
+                #region Material = Pintado / Impreso
+                //if (ddlTamano.SelectedIndex > 0)
                 //{
-                //    cartel.Entregas_Lugar_ID = ddlLugarEntrega.SelectedIndex;
+                //    pedido.Pedido_Material_ID = ddlTamano.SelectedIndex;
                 //}
-                cartel.Entregas_Lugar_ID = 0;
+                #endregion
 
-                // Entrega tipo
+                #region Tamaño
+                //if (ddlTamano.SelectedIndex > 0)
+                //{
+                //    //pedido.Pedido_Tematica_ID = ddlTamano.SelectedIndex;
+                //}
+                #endregion
+
+                #region Temática
+                //if (ddlTamano.SelectedIndex > 0)
+                //{
+                //    pedido.Pedido_Tamano_ID = ddlTamano.SelectedIndex;
+                //}
+                #endregion
+
+
+                #region NEW Diseño
+                pedido_disenos _pedido_diseno = new pedido_disenos();
+                _pedido_diseno.Pedido_Diseno_ID = 0;
+
+                _pedido_diseno.Texto = txbTexto1.Text;
+
+                context.pedido_disenos.Add(_pedido_diseno);
+                #endregion
+
+                #region NEW Entrega
+                pedido_entregas _pedido_entrega = new pedido_entregas();
+                _pedido_entrega.Pedido_Entrega_ID = 0;
+
                 if (ddlTipoEntrega.SelectedIndex > 0)
                 {
-                    cartel.Entregas_Tipo_ID = ddlTipoEntrega.SelectedIndex;
+                    _pedido_entrega.Entrega_Tipo_ID = ddlTipoEntrega.SelectedIndex;
                 }
 
-                cartel.DateCreated = DateTime.Now;
-                cartel.LastUpdate = DateTime.Now;
-                cartel.Pedido_ID = pedido_ID;
+                _pedido_entrega.Direccion = txbDireccion.Value;
+                _pedido_entrega.Fecha_entrega = txbFecha.Value;
 
-                context.carteles.Add(cartel);
+
+                context.pedido_entregas.Add(_pedido_entrega);
+                #endregion
+
+                _pedido.Formulario_ID = formulario_ID;
+
+                context.pedidos.Add(_pedido);
             }
         }
 
-        private int Guardar_Cliente(carteluxdbEntities context)
+        private int NEW_Cliente(carteluxdbEntities context)
         {
             int ret_ID = 0;
             string client_tel = txbTel.Value;
@@ -326,23 +398,23 @@ namespace Cartelux1
             {
                 clientes cliente = (clientes)context.clientes.FirstOrDefault(v => v.Telefono.Equals(client_tel));
                 cliente = cliente != null ? cliente : new clientes();
-                cliente.LastUpdate = DateTime.Now;
+                cliente.Fecha_update = DateTime.Now;
                 ret_ID = cliente.Cliente_ID;
 
-                if (string.IsNullOrWhiteSpace(cliente.Nombre_completo))
+                if (string.IsNullOrWhiteSpace(cliente.Nombre))
                 {
                     // Cliente nuevo 
                     cliente.Cliente_ID = 0;
-                    cliente.Nombre_completo = string.Empty;
+                    cliente.Nombre = string.Empty;
                     cliente.Telefono = client_tel;
-                    cliente.DateCreated = DateTime.Now;
+                    cliente.Fecha_creado = DateTime.Now;
 
                     context.clientes.Add(cliente);
                     Guardar_Contexto(context);
 
                     ret_ID = Get_NextClientID(context);
                 }
-                cliente.Nombre_completo = client_name;
+                cliente.Nombre = client_name;
             }
             return ret_ID;
         }
@@ -358,7 +430,7 @@ namespace Cartelux1
             return id;
         }
 
-        private int Get_NextPedidoID(carteluxdbEntities context)
+        private int Get_NextFormularioID(carteluxdbEntities context)
         {
             int id = 1;
             pedidos pedido = (pedidos)context.pedidos.OrderByDescending(p => p.Pedido_ID).FirstOrDefault();

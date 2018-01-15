@@ -36,7 +36,7 @@
                     <div class="login-container sub-form panel panel-default">
                         <div class="form-group">
                             Número del cliente - 091373622
-                            <input type="number" class="form-control" id="txbContactPhone"/>
+                            <input type="number" class="form-control" id="txbContactPhone" autofocus/>
                             <br />
                             <input class="form-control btn-primary" type="button" tabindex="1" runat="server" id="btnGenerar" clientidmode="static" value="Generar URL" title="Click para generar una URL con ID único" onclick="generarURL();">
                         </div>
@@ -44,7 +44,8 @@
                 </div>
             </div>
 
-            <%--         <div class="row center">
+            <%--         
+        <div class="row center">
             <div class="col-sm-12 col-md-10" style="margin: 0; display: block;">
                <div class="login-container sub-form panel panel-default">
                   <div class="form-group">
@@ -57,7 +58,7 @@
             <div class="row center">
                 <div class="col-sm-12 col-md-10">
                     <input class="form-control text-to-copy" id="txbLink" onclick="this.select();" value="?" readonly />
-                    <button type="button" class="form-control btn-warning js-copy-btn" id="btnCopy" onclick="enviarWPP()">Copiar y enviar por WhatsApp</button>
+                    <button type="button" class="form-control btn-warning js-copy-btn btn-lg" id="btnCopy" onclick="enviarWPP()">Copiar y enviar por WhatsApp</button>
                     <%--<input class="form-control btn-warning js-copy-btn" type="button" tabindex="2" id="btnCopy" value="Copiar y enviar por WhatsApp" title="Click para enviar por WhatsApp" onclick="enviarWPP();">--%>
                 </div>
             </div>
@@ -131,111 +132,117 @@
                 var iPad = false;
                 var oldSafari = false;
                 var navAgent = window.navigator.userAgent;
-                if (
-                  (/^((?!chrome).)*safari/i).test(navAgent)
-                    // ^ Fancy safari detection thanks to: https://stackoverflow.com/a/23522755
-                  &&
-                  !(/^((?!chrome).)*[0-9][0-9](\.[0-9][0-9]?)?\ssafari/i).test(
-                    navAgent)
-                    // ^ Even fancier Safari < 10 detection thanks to regex.  :^)
-                ) {
-                    oldSafari = true;
-                }
-                // We need to test for older Safari and the device,
-                // because of quirky awesomeness.
-                if (navAgent.match(/iPhone|iPod/i)) {
-                    iPhoneORiPod = true;
-                } else if (navAgent.match(/iPad/i)) {
-                    iPad = true;
-                }
-                var cheval = function (btn, text) {
-                    var copyBtn = document.querySelector(btn);
 
-                    var setCopyBtnText = function (textToSet) {
-                        copyBtn.textContent = textToSet;
-                    };
-                    if (iPhoneORiPod || iPad) {
-                        if (oldSafari) {
-                            setCopyBtnText("Select text");
-                        }
+                // CHEQUEO
+                var txbLink = $("#txbLink").val();
+                if (txbLink !== null && txbLink.length > 0 && txbLink !== "?") {
+
+                    if (
+                      (/^((?!chrome).)*safari/i).test(navAgent)
+                        // ^ Fancy safari detection thanks to: https://stackoverflow.com/a/23522755
+                      &&
+                      !(/^((?!chrome).)*[0-9][0-9](\.[0-9][0-9]?)?\ssafari/i).test(
+                        navAgent)
+                        // ^ Even fancier Safari < 10 detection thanks to regex.  :^)
+                    ) {
+                        oldSafari = true;
                     }
-                    if (copyBtn) {
-                        copyBtn.addEventListener('click', function () {
-                            var oldPosX = window.scrollX;
-                            var oldPosY = window.scrollY;
-                            // Clone the text-to-copy node so that we can
-                            // create a hidden textarea, with its text value.
-                            // Thanks to @LeaVerou for the idea.
-                            var originalCopyItem = document.querySelector(text);
-                            var dollyTheSheep = originalCopyItem.cloneNode(true);
-                            var copyItem = document.createElement('textarea');
-                            copyItem.style.opacity = 0;
-                            copyItem.style.position = "absolute";
-                            // If .value is undefined, .textContent will
-                            // get assigned to the textarea we made.
-                            copyItem.value = dollyTheSheep.value || dollyTheSheep
-                              .textContent;
-                            document.body.appendChild(copyItem);
-                            if (copyItem) {
-                                // Select the text:
-                                copyItem.focus();
-                                copyItem.selectionStart = 0;
-                                // For some reason the 'copyItem' does not get
-                                // the correct length, so we use the OG.
-                                //copyItem.selectionEnd = originalCopyItem.textContent.length;
-                                copyItem.selectionEnd = 999999999;
-                                try {
-                                    // Now that we've selected the text, execute the copy command:
-                                    document.execCommand('copy');
-                                    if (oldSafari) {
-                                        if (iPhoneORiPod) {
-                                            setCopyBtnText("Now tap 'Copy'");
-                                        } else if (iPad) {
-                                            // The iPad doesn't have the 'Copy' box pop up,
-                                            // you have to tap the text first.
-                                            setCopyBtnText(
-                                              "Now tap the text, then 'Copy'");
-                                        } else {
-                                            // Just old!
-                                            setCopyBtnText("Press Command + C to copy");
-                                        }
-                                    } else {
-                                        setCopyBtnText("¡Listo!");
-                                    }
-                                } catch (ignore) {
-                                    setCopyBtnText("Please copy manually");
-                                }
-                                originalCopyItem.focus();
-                                // Restore the user's original position to avoid
-                                // 'jumping' when they click a copy button.
-                                window.scrollTo(oldPosX, oldPosY);
-                                originalCopyItem.selectionStart = 0;
-                                originalCopyItem.selectionEnd = originalCopyItem.textContent
-                                  .length;
-                                copyItem.remove();
-                            } else {
-                                throwErr(
-                                  "You don't have an element with the class: '" +
-                                  textClassName +
-                                  "'. Please check the cheval README."
-                                );
+                    // We need to test for older Safari and the device,
+                    // because of quirky awesomeness.
+                    if (navAgent.match(/iPhone|iPod/i)) {
+                        iPhoneORiPod = true;
+                    } else if (navAgent.match(/iPad/i)) {
+                        iPad = true;
+                    }
+                    var cheval = function (btn, text) {
+                        var copyBtn = document.querySelector(btn);
+
+                        var setCopyBtnText = function (textToSet) {
+                            copyBtn.textContent = textToSet;
+                        };
+                        if (iPhoneORiPod || iPad) {
+                            if (oldSafari) {
+                                setCopyBtnText("Select text");
                             }
-                        });
-                    } else {
-                        throwErr(
-                          "You don't have a <button> with the class: '" +
-                          buttonClassName + "'. Please check the cheval README."
-                        );
-                    }
-                };
+                        }
+                        if (copyBtn) {
+                            copyBtn.addEventListener('click', function () {
+                                var oldPosX = window.scrollX;
+                                var oldPosY = window.scrollY;
+                                // Clone the text-to-copy node so that we can
+                                // create a hidden textarea, with its text value.
+                                // Thanks to @LeaVerou for the idea.
+                                var originalCopyItem = document.querySelector(text);
+                                var dollyTheSheep = originalCopyItem.cloneNode(true);
+                                var copyItem = document.createElement('textarea');
+                                copyItem.style.opacity = 0;
+                                copyItem.style.position = "absolute";
+                                // If .value is undefined, .textContent will
+                                // get assigned to the textarea we made.
+                                copyItem.value = dollyTheSheep.value || dollyTheSheep
+                                  .textContent;
+                                document.body.appendChild(copyItem);
+                                if (copyItem) {
+                                    // Select the text:
+                                    copyItem.focus();
+                                    copyItem.selectionStart = 0;
+                                    // For some reason the 'copyItem' does not get
+                                    // the correct length, so we use the OG.
+                                    //copyItem.selectionEnd = originalCopyItem.textContent.length;
+                                    copyItem.selectionEnd = 999999999;
+                                    try {
+                                        // Now that we've selected the text, execute the copy command:
+                                        document.execCommand('copy');
+                                        if (oldSafari) {
+                                            if (iPhoneORiPod) {
+                                                setCopyBtnText("Now tap 'Copy'");
+                                            } else if (iPad) {
+                                                // The iPad doesn't have the 'Copy' box pop up,
+                                                // you have to tap the text first.
+                                                setCopyBtnText(
+                                                  "Now tap the text, then 'Copy'");
+                                            } else {
+                                                // Just old!
+                                                setCopyBtnText("Press Command + C to copy");
+                                            }
+                                        } else {
+                                            setCopyBtnText("¡Listo!");
+                                        }
+                                    } catch (ignore) {
+                                        setCopyBtnText("Please copy manually");
+                                    }
+                                    originalCopyItem.focus();
+                                    // Restore the user's original position to avoid
+                                    // 'jumping' when they click a copy button.
+                                    window.scrollTo(oldPosX, oldPosY);
+                                    originalCopyItem.selectionStart = 0;
+                                    originalCopyItem.selectionEnd = originalCopyItem.textContent
+                                      .length;
+                                    copyItem.remove();
+                                } else {
+                                    throwErr(
+                                      "You don't have an element with the class: '" +
+                                      textClassName +
+                                      "'. Please check the cheval README."
+                                    );
+                                }
+                            });
+                        } else {
+                            throwErr(
+                              "You don't have a <button> with the class: '" +
+                              buttonClassName + "'. Please check the cheval README."
+                            );
+                        }
+                    };
 
-                // Loop through all sets of elements and buttons:
-                matches.map(function (i) {
-                    cheval('.' + buttonClassName + i, '.' + textClassName + i);
-                });
+                    // Loop through all sets of elements and buttons:
+                    matches.map(function (i) {
+                        cheval('.' + buttonClassName + i, '.' + textClassName + i);
+                    });
+
+                } // CHEQUEO
 
             });
-
         }());
         //]]>
 

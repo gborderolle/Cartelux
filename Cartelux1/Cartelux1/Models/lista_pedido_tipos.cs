@@ -12,10 +12,11 @@ namespace Cartelux1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tamanos
+    public partial class lista_pedido_tipos
     {
-        public int Tamano_ID { get; set; }
+        public int Pedido_Tipo_ID { get; set; }
         public string Nombre { get; set; }
+        public string Codigo { get; set; }
         public string Descripcion { get; set; }
     }
 }
