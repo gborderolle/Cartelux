@@ -1,13 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="carteluxdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'carteluxdb1.dbo.clientes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="clientes">
     <Key>
       <PropertyRef Name="Cliente_ID" />
-      <PropertyRef Name="Telefono" />
-      <PropertyRef Name="Fecha_creado" />
-      <PropertyRef Name="Fecha_update" />
     </Key>
     <Property Name="Cliente_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Departamento_ID" Type="int" />
@@ -18,108 +13,74 @@ warning 6002: The table/view 'carteluxdb1.dbo.clientes' does not have a primary 
     <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
     <Property Name="Fecha_update" Type="datetime" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'carteluxdb1.dbo.formularios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="formularios">
     <Key>
       <PropertyRef Name="Formulario_ID" />
-      <PropertyRef Name="Cliente_ID" />
-      <PropertyRef Name="Serie" />
-      <PropertyRef Name="URL_short" />
-      <PropertyRef Name="URL_completa" />
-      <PropertyRef Name="Fecha_creado" />
-      <PropertyRef Name="Fecha_update" />
     </Key>
     <Property Name="Formulario_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Cliente_ID" Type="int" Nullable="false" />
-    <Property Name="Serie" Type="varchar" MaxLength="30" Nullable="false" />
-    <Property Name="URL_short" Type="varchar" MaxLength="30" Nullable="false" />
-    <Property Name="URL_completa" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Serie" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="URL_short" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="URL_completa" Type="varchar" MaxLength="120" Nullable="false" />
     <Property Name="Monto" Type="int" />
     <Property Name="Comentarios" Type="varchar" MaxLength="100" />
     <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
     <Property Name="Fecha_update" Type="datetime" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'carteluxdb1.dbo.lista_departamentos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="lista_departamentos">
     <Key>
       <PropertyRef Name="Departamento_ID" />
-      <PropertyRef Name="Nombre" />
-      <PropertyRef Name="Codigo" />
     </Key>
     <Property Name="Departamento_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Codigo" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="100" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'carteluxdb1.dbo.lista_entregas_tipos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="lista_entregas_tipos">
     <Key>
       <PropertyRef Name="Entrega_Tipo_ID" />
-      <PropertyRef Name="Nombre" />
-      <PropertyRef Name="Codigo" />
     </Key>
     <Property Name="Entrega_Tipo_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Codigo" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="100" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'carteluxdb1.dbo.lista_pedido_materiales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="lista_pedido_materiales">
     <Key>
       <PropertyRef Name="Pedido_Material_ID" />
-      <PropertyRef Name="Nombre" />
-      <PropertyRef Name="Codigo" />
     </Key>
     <Property Name="Pedido_Material_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Codigo" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="100" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'carteluxdb1.dbo.lista_pedido_tamanos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="lista_pedido_tamanos">
     <Key>
       <PropertyRef Name="Pedido_Tamano_ID" />
-      <PropertyRef Name="Nombre" />
-      <PropertyRef Name="Codigo" />
     </Key>
     <Property Name="Pedido_Tamano_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Codigo" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="100" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'carteluxdb1.dbo.lista_pedido_tematicas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="lista_pedido_tematicas">
     <Key>
       <PropertyRef Name="Pedido_Tematica_ID" />
-      <PropertyRef Name="Nombre" />
-      <PropertyRef Name="Codigo" />
     </Key>
     <Property Name="Pedido_Tematica_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Codigo" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="100" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'carteluxdb1.dbo.lista_pedido_tipos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="lista_pedido_tipos">
     <Key>
       <PropertyRef Name="Pedido_Tipo_ID" />
-      <PropertyRef Name="Nombre" />
-      <PropertyRef Name="Codigo" />
     </Key>
     <Property Name="Pedido_Tipo_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Codigo" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="100" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'carteluxdb1.dbo.pedido_disenos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="pedido_disenos">
     <Key>
       <PropertyRef Name="Pedido_Diseno_ID" />
@@ -127,13 +88,13 @@ warning 6002: The table/view 'carteluxdb1.dbo.pedido_disenos' does not have a pr
     <Property Name="Pedido_Diseno_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Codigo_guia" Type="int" />
     <Property Name="Texto" Type="varchar" MaxLength="100" />
+    <Property Name="Boceto_nombre" Type="varchar" MaxLength="30" />
+    <Property Name="Boceto_extension" Type="varchar" MaxLength="10" />
+    <Property Name="Boceto_PATH" Type="varchar" MaxLength="100" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'carteluxdb1.dbo.pedido_entregas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="pedido_entregas">
     <Key>
       <PropertyRef Name="Pedido_Entrega_ID" />
-      <PropertyRef Name="Entrega_Tipo_ID" />
     </Key>
     <Property Name="Pedido_Entrega_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Entrega_Tipo_ID" Type="int" Nullable="false" />
@@ -145,18 +106,9 @@ warning 6002: The table/view 'carteluxdb1.dbo.pedido_entregas' does not have a p
     <Property Name="Fecha_entrega" Type="varchar" MaxLength="50" />
     <Property Name="Comentarios" Type="varchar" MaxLength="200" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'carteluxdb1.dbo.pedidos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="pedidos">
     <Key>
       <PropertyRef Name="Pedido_ID" />
-      <PropertyRef Name="Formulario_ID" />
-      <PropertyRef Name="Pedido_Tipo_ID" />
-      <PropertyRef Name="Pedido_Material_ID" />
-      <PropertyRef Name="Pedido_Tamano_ID" />
-      <PropertyRef Name="Pedido_Tematica_ID" />
-      <PropertyRef Name="Pedido_Diseno_ID" />
-      <PropertyRef Name="Pedido_Entrega_ID" />
     </Key>
     <Property Name="Pedido_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Formulario_ID" Type="int" Nullable="false" />
@@ -166,6 +118,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.pedidos' does not have a primary k
     <Property Name="Pedido_Tematica_ID" Type="int" Nullable="false" />
     <Property Name="Pedido_Diseno_ID" Type="int" Nullable="false" />
     <Property Name="Pedido_Entrega_ID" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -178,111 +131,17 @@ warning 6002: The table/view 'carteluxdb1.dbo.pedidos' does not have a primary k
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityContainer Name="carteluxdbModelStoreContainer">
+    <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="formularios" EntityType="Self.formularios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_departamentos" EntityType="Self.lista_departamentos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_entregas_tipos" EntityType="Self.lista_entregas_tipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_pedido_materiales" EntityType="Self.lista_pedido_materiales" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_pedido_tamanos" EntityType="Self.lista_pedido_tamanos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_pedido_tematicas" EntityType="Self.lista_pedido_tematicas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_pedido_tipos" EntityType="Self.lista_pedido_tipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pedido_disenos" EntityType="Self.pedido_disenos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pedido_entregas" EntityType="Self.pedido_entregas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pedidos" EntityType="Self.pedidos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="clientes" EntityType="Self.clientes" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [clientes].[Cliente_ID] AS [Cliente_ID], 
-    [clientes].[Departamento_ID] AS [Departamento_ID], 
-    [clientes].[Telefono] AS [Telefono], 
-    [clientes].[Nombre] AS [Nombre], 
-    [clientes].[Barrio] AS [Barrio], 
-    [clientes].[Comentarios] AS [Comentarios], 
-    [clientes].[Fecha_creado] AS [Fecha_creado], 
-    [clientes].[Fecha_update] AS [Fecha_update]
-    FROM [dbo].[clientes] AS [clientes]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="formularios" EntityType="Self.formularios" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [formularios].[Formulario_ID] AS [Formulario_ID], 
-    [formularios].[Cliente_ID] AS [Cliente_ID], 
-    [formularios].[Serie] AS [Serie], 
-    [formularios].[URL_short] AS [URL_short], 
-    [formularios].[URL_completa] AS [URL_completa], 
-    [formularios].[Monto] AS [Monto], 
-    [formularios].[Comentarios] AS [Comentarios], 
-    [formularios].[Fecha_creado] AS [Fecha_creado], 
-    [formularios].[Fecha_update] AS [Fecha_update]
-    FROM [dbo].[formularios] AS [formularios]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="lista_departamentos" EntityType="Self.lista_departamentos" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [lista_departamentos].[Departamento_ID] AS [Departamento_ID], 
-    [lista_departamentos].[Nombre] AS [Nombre], 
-    [lista_departamentos].[Codigo] AS [Codigo], 
-    [lista_departamentos].[Descripcion] AS [Descripcion]
-    FROM [dbo].[lista_departamentos] AS [lista_departamentos]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="lista_entregas_tipos" EntityType="Self.lista_entregas_tipos" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [lista_entregas_tipos].[Entrega_Tipo_ID] AS [Entrega_Tipo_ID], 
-    [lista_entregas_tipos].[Nombre] AS [Nombre], 
-    [lista_entregas_tipos].[Codigo] AS [Codigo], 
-    [lista_entregas_tipos].[Descripcion] AS [Descripcion]
-    FROM [dbo].[lista_entregas_tipos] AS [lista_entregas_tipos]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="lista_pedido_materiales" EntityType="Self.lista_pedido_materiales" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [lista_pedido_materiales].[Pedido_Material_ID] AS [Pedido_Material_ID], 
-    [lista_pedido_materiales].[Nombre] AS [Nombre], 
-    [lista_pedido_materiales].[Codigo] AS [Codigo], 
-    [lista_pedido_materiales].[Descripcion] AS [Descripcion]
-    FROM [dbo].[lista_pedido_materiales] AS [lista_pedido_materiales]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="lista_pedido_tamanos" EntityType="Self.lista_pedido_tamanos" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [lista_pedido_tamanos].[Pedido_Tamano_ID] AS [Pedido_Tamano_ID], 
-    [lista_pedido_tamanos].[Nombre] AS [Nombre], 
-    [lista_pedido_tamanos].[Codigo] AS [Codigo], 
-    [lista_pedido_tamanos].[Descripcion] AS [Descripcion]
-    FROM [dbo].[lista_pedido_tamanos] AS [lista_pedido_tamanos]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="lista_pedido_tematicas" EntityType="Self.lista_pedido_tematicas" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [lista_pedido_tematicas].[Pedido_Tematica_ID] AS [Pedido_Tematica_ID], 
-    [lista_pedido_tematicas].[Nombre] AS [Nombre], 
-    [lista_pedido_tematicas].[Codigo] AS [Codigo], 
-    [lista_pedido_tematicas].[Descripcion] AS [Descripcion]
-    FROM [dbo].[lista_pedido_tematicas] AS [lista_pedido_tematicas]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="lista_pedido_tipos" EntityType="Self.lista_pedido_tipos" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [lista_pedido_tipos].[Pedido_Tipo_ID] AS [Pedido_Tipo_ID], 
-    [lista_pedido_tipos].[Nombre] AS [Nombre], 
-    [lista_pedido_tipos].[Codigo] AS [Codigo], 
-    [lista_pedido_tipos].[Descripcion] AS [Descripcion]
-    FROM [dbo].[lista_pedido_tipos] AS [lista_pedido_tipos]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="pedido_disenos" EntityType="Self.pedido_disenos" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [pedido_disenos].[Pedido_Diseno_ID] AS [Pedido_Diseno_ID], 
-    [pedido_disenos].[Codigo_guia] AS [Codigo_guia], 
-    [pedido_disenos].[Texto] AS [Texto]
-    FROM [dbo].[pedido_disenos] AS [pedido_disenos]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="pedido_entregas" EntityType="Self.pedido_entregas" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [pedido_entregas].[Pedido_Entrega_ID] AS [Pedido_Entrega_ID], 
-    [pedido_entregas].[Entrega_Tipo_ID] AS [Entrega_Tipo_ID], 
-    [pedido_entregas].[Departamento_Tipo_ID] AS [Departamento_Tipo_ID], 
-    [pedido_entregas].[Direccion] AS [Direccion], 
-    [pedido_entregas].[Indicaciones] AS [Indicaciones], 
-    [pedido_entregas].[Barrio] AS [Barrio], 
-    [pedido_entregas].[Ciudad] AS [Ciudad], 
-    [pedido_entregas].[Fecha_entrega] AS [Fecha_entrega], 
-    [pedido_entregas].[Comentarios] AS [Comentarios]
-    FROM [dbo].[pedido_entregas] AS [pedido_entregas]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="pedidos" EntityType="Self.pedidos" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [pedidos].[Pedido_ID] AS [Pedido_ID], 
-    [pedidos].[Formulario_ID] AS [Formulario_ID], 
-    [pedidos].[Pedido_Tipo_ID] AS [Pedido_Tipo_ID], 
-    [pedidos].[Pedido_Material_ID] AS [Pedido_Material_ID], 
-    [pedidos].[Pedido_Tamano_ID] AS [Pedido_Tamano_ID], 
-    [pedidos].[Pedido_Tematica_ID] AS [Pedido_Tematica_ID], 
-    [pedidos].[Pedido_Diseno_ID] AS [Pedido_Diseno_ID], 
-    [pedidos].[Pedido_Entrega_ID] AS [Pedido_Entrega_ID]
-    FROM [dbo].[pedidos] AS [pedidos]</DefiningQuery>
-    </EntitySet>
   </EntityContainer>
 </Schema>

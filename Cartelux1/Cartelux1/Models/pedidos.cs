@@ -22,5 +22,6 @@ namespace Cartelux1.Models
         public int Pedido_Tematica_ID { get; set; }
         public int Pedido_Diseno_ID { get; set; }
         public int Pedido_Entrega_ID { get; set; }
+        public int Cantidad { get; set; }
     }
 }

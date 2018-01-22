@@ -1,5 +1,5 @@
 ﻿wpp_url = "";
-texto = "Por favor, ingresá los datos del pedido en el siguiente formulario, muchas gracias."
+texto = "Por favor: ingrese los datos del pedido en el siguiente formulario, muchas gracias."
 
 function generarURL() {
 
@@ -14,12 +14,13 @@ function generarURL() {
 
         // Ajax call parameters
         console.log("Ajax call 1: GeneradorURL.aspx/GenerarURL. Params:");
+        console.log("Params: txbContactPhone - " + txbContactPhone);
 
         // Check existen mercaderías
         $.ajax({
             type: "POST",
             url: "GeneradorURL.aspx/GenerarURL",
-            data: '{dummy: "dummy_text"}',
+            data: '{txbContactPhone: "' + txbContactPhone + '"}',
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
@@ -97,8 +98,13 @@ function generarURL() {
 }
 
 function enviarWPP() {
-    if (wpp_url !== null && wpp_url.length > 0) {
-        window.location = wpp_url;
+    var txbLink = $("#txbLink").val();
+    if (txbLink !== null && txbLink.length > 0 && txbLink !== "?") {
+        if (wpp_url !== null && wpp_url.length > 0) {
+            window.location = wpp_url;
+        }
+    } else {
+        alert("Haz click en Generar URL para continuar");
     }
 }
 

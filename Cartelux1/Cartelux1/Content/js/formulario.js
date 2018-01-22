@@ -1,9 +1,14 @@
 ﻿$(document).ready(function () {
     var ID = getUrlParameter('ID');
-    if (ID !== null && ID.length > 0) {
+    if (ID !== null && ID !== undefined && ID.length > 0) {
         //loadPreviousState();
     } else {
         $("#btnEdit").hide();
+    }
+
+    _TEL = getUrlParameter('TEL');
+    if (_TEL !== null && _TEL !== undefined && _TEL.length > 0) {
+        $("#txbCX_tel").val(_TEL);
     }
 
     setTimeout(function(){
@@ -11,6 +16,9 @@
             loadEvents();
         });
     }, 500);
+
+    TAB_COUNT = $("#hdnPedidoCantidad").val();
+    $("#lblTabCount").text(TAB_COUNT);
 
 }); // END On Ready
 

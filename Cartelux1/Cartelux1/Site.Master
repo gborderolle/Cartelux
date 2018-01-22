@@ -14,6 +14,10 @@
 
     <script type="text/javascript" src="/Content/js/jquery.js"></script>
 
+    <!-- ONLINE -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
     <script type="text/javascript" src="/Scripts/WebForms/WebForms.js"></script>
     <script type="text/javascript" src="/Scripts/WebForms/WebUIValidation.js"></script>
     <script type="text/javascript" src="/Scripts/WebForms/MenuStandards.js"></script>
@@ -33,14 +37,21 @@
     <!-- JS -->
     <script type="text/javascript" src="/Content/js/jquery-ui.js"></script>
     <script type="text/javascript" src="/Content/bootstrap/js/tether.min.js"></script>
-    <script type="text/javascript" src="/Content/bootstrap/js/bootstrap.min.js"></script>
+    <%--<script type="text/javascript" src="/Content/bootstrap/js/bootstrap.min.js"></script>--%>
     <script src="/Global_Objects/Messages.js"></script>
 
     <!-- STYLES -->
+
+    <!-- ONLINE -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
     <link rel="stylesheet" href="/Content/css/jquery-ui.css" />
     <link rel="stylesheet" href="/Content/css/jquery-ui.structure.css" />
     <link rel="stylesheet" href="/Content/css/jquery-ui.theme.min.css" />
-    <link rel="stylesheet" href="/Content/bootstrap/css/bootstrap.css" />
+    <%--<link rel="stylesheet" href="/Content/bootstrap/css/bootstrap.css" />--%>
     <link rel="stylesheet" href="/Content/bootstrap/css/tether.min.css" />
     <link rel="stylesheet" href="/Content/bootstrap/css/tether-theme-arrows.min.css" />
     <link rel="stylesheet" href="/Content/bootstrap/css/tether-theme-arrows-dark.min.css" />
@@ -49,9 +60,10 @@
 
     <style type="text/css">
         .container-full {
-            margin: 0 auto;
-            width: 90%;
             background-color: #f2e0cf;
+            margin: 0 auto;
+            display: block;
+            width: 100%;
         }
     </style>
 
@@ -87,15 +99,21 @@
         <asp:ContentPlaceHolder ID="SubbodyContent" runat="server">
         </asp:ContentPlaceHolder>
 
-        <div class="container-full body-content">
+        <div class="container-full body-content" style="  text-align: center;
+">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-            <hr />
-            <footer style="font-size: small;">
-                <p>&copy; <%: DateTime.Now.Year %> - Cartelux - Build: <%=Build_date%></p>
-                <p>Cartelux Publicidad. Todos los derechos reservados, marca, empresa y software registrados, 2017.</p>
-            </footer>
         </div>
+
+
     </form>
+
+    <hr />
+    <footer class="footer" style="font-size: small;">
+        <div class="container">
+            <p>&copy; <%: DateTime.Now.Year %> - Cartelux - Build: <%=Build_date%></p>
+            <p>Cartelux Publicidad. Todos los derechos reservados, marca, empresa y software registrados, 2017.</p>
+        </div>
+    </footer>
 </body>
 </html>

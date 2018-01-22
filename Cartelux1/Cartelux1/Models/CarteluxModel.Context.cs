@@ -25,7 +25,6 @@ namespace Cartelux1.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<clientes> clientes { get; set; }
         public virtual DbSet<formularios> formularios { get; set; }
         public virtual DbSet<lista_departamentos> lista_departamentos { get; set; }
@@ -37,5 +36,6 @@ namespace Cartelux1.Models
         public virtual DbSet<pedido_disenos> pedido_disenos { get; set; }
         public virtual DbSet<pedido_entregas> pedido_entregas { get; set; }
         public virtual DbSet<pedidos> pedidos { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

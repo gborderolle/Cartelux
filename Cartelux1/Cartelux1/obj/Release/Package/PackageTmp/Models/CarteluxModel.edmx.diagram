@@ -5,13 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d57d89d9a52047a6980c19ff24e3ac71" Name="Diagram1">
-        <EntityTypeShape EntityType="carteluxdbModel.entregas_lugar" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="carteluxdbModel.entregas_tipo" Width="1.5" PointX="5.75" PointY="3.75" />
-        <EntityTypeShape EntityType="carteluxdbModel.tematicas" Width="1.5" PointX="3.75" PointY="6.75" />
-        <EntityTypeShape EntityType="carteluxdbModel.tamanos" Width="1.5" PointX="8.375" PointY="0.75" />
-        <EntityTypeShape EntityType="carteluxdbModel.carteles" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="carteluxdbModel.clientes" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="carteluxdbModel.pedidos" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="carteluxdbModel.clientes" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="carteluxdbModel.formularios" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="carteluxdbModel.lista_departamentos" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="carteluxdbModel.lista_entregas_tipos" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="carteluxdbModel.lista_pedido_materiales" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="carteluxdbModel.lista_pedido_tamanos" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="carteluxdbModel.lista_pedido_tematicas" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="carteluxdbModel.lista_pedido_tipos" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="carteluxdbModel.pedido_disenos" Width="1.5" PointX="4.75" PointY="6.75" />
+        <EntityTypeShape EntityType="carteluxdbModel.pedido_entregas" Width="1.5" PointX="6.75" PointY="6.75" />
+        <EntityTypeShape EntityType="carteluxdbModel.pedidos" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="carteluxdbModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

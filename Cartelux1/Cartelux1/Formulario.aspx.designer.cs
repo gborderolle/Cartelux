@@ -49,6 +49,15 @@ namespace Cartelux1 {
         protected global::System.Web.UI.WebControls.TextBox txbTexto1;
         
         /// <summary>
+        /// MyFileUpload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload MyFileUpload;
+        
+        /// <summary>
         /// ddlTipoEntrega control.
         /// </summary>
         /// <remarks>
@@ -110,5 +119,23 @@ namespace Cartelux1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblLastUpdate;
+        
+        /// <summary>
+        /// txbCX_dir control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txbCX_dir;
+        
+        /// <summary>
+        /// hdnPedidoCantidad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnPedidoCantidad;
     }
 }

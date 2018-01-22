@@ -2,8 +2,12 @@
 using Cartelux1.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 
@@ -46,7 +50,6 @@ namespace Cartelux1
                 SaveData(form_ID_str);
             }
         }
-
 
         #endregion
 
@@ -99,7 +102,6 @@ namespace Cartelux1
             return result;
         }
 
-
         protected void BindData(string serie_str, string tel_str)
         {
             // Logger variables
@@ -121,7 +123,7 @@ namespace Cartelux1
                         {
                             txbNombre.Value = _cliente.Nombre;
                             txbTel.Value = _cliente.Telefono;
-                        }                        
+                        }
 
                         // Pedidos
                         List<pedidos> lista_pedidos = (List<pedidos>)context.pedidos.Where(v => v.Formulario_ID == _formulario.Formulario_ID).ToList();
@@ -129,6 +131,8 @@ namespace Cartelux1
                         {
                             foreach (pedidos _pedido in lista_pedidos)
                             {
+                                hdnPedidoCantidad.Value = _pedido.Cantidad.ToString();
+
                                 // GET Diseño
                                 pedido_disenos _pedido_diseno = (pedido_disenos)context.pedido_disenos.FirstOrDefault(v => v.Pedido_Diseno_ID.Equals(_pedido.Pedido_Diseno_ID));
                                 if (_pedido_diseno != null)
@@ -140,6 +144,7 @@ namespace Cartelux1
                                 pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(v => v.Pedido_Entrega_ID.Equals(_pedido.Pedido_Entrega_ID));
                                 if (_pedido_entrega != null)
                                 {
+                                    txbCX_dir.Value = _pedido_entrega.Direccion;
                                     txbDireccion.Value = _pedido_entrega.Direccion;
                                     txbFecha.Value = _pedido_entrega.Fecha_entrega;
                                     txbCiudad.Value = _pedido_entrega.Ciudad;
@@ -260,39 +265,119 @@ namespace Cartelux1
             {
                 using (carteluxdbEntities context = new carteluxdbEntities())
                 {
-                    formularios formulario = (formularios)context.formularios.FirstOrDefault(v => v.Serie.Equals(serie_str));
-                    formulario = formulario != null ? formulario : new formularios();
-                    formulario.Fecha_update = DateTime.Now;
+                    formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Serie.Equals(serie_str));
+                    _formulario = _formulario != null ? _formulario : new formularios();
+                    _formulario.Fecha_update = DateTime.Now;
 
                     // Cliente
-                    formulario.Cliente_ID = NEW_Cliente(context);
+                    _formulario.Cliente_ID = NEW_Cliente(context);
 
                     // Nuevo
-                    if (string.IsNullOrWhiteSpace(formulario.Serie))
+                    if (string.IsNullOrWhiteSpace(_formulario.Serie))
                     {
                         string url_complete = HttpContext.Current.Request.Url.AbsoluteUri;
                         if (!string.IsNullOrWhiteSpace(url_complete))
                         {
-                            formulario.URL_completa = url_complete;
-                            formulario.URL_short = url_complete; //
+                            _formulario.URL_completa = url_complete;
+                            _formulario.URL_short = url_complete; //
                         }
 
-                        formulario.Formulario_ID = 0;
-                        formulario.Serie = serie_str;
-                        formulario.Fecha_creado = DateTime.Now;
-                        context.formularios.Add(formulario);
+                        _formulario.Formulario_ID = 0;
+                        _formulario.Serie = serie_str;
+                        _formulario.Fecha_creado = DateTime.Now;
+                        context.formularios.Add(_formulario);
+
+                        Guardar_Contexto(context);
+
+                        // Pedidos
+                        int formulario_ID = Get_NextFormularioID(context);
+                        if (formulario_ID > 0)
+                        {
+                            NEW_Pedido(context, formulario_ID);
+                        }
                     }
-
-                    Guardar_Contexto(context);
-
-                    // Pedidos
-                    int formulario_ID = Get_NextFormularioID(context);
-                    if (formulario_ID > 0)
+                    else
                     {
-                        NEW_Pedido(context, formulario_ID);
+                        // Pedido ya existe
+                        // ISSUE a resolver cuando efectivamente los Formularios tengan muchos Pedidos
+                        pedidos _pedido = (pedidos)context.pedidos.FirstOrDefault(v => v.Formulario_ID.Equals(_formulario.Formulario_ID));
+                        if (_pedido != null)
+                        {
+                            // Update cantidad de Pedidos
+                            int cantidad = _pedido.Cantidad;
+                            if (!string.IsNullOrWhiteSpace(hdnPedidoCantidad.Value))
+                            {
+                                if (!int.TryParse(hdnPedidoCantidad.Value, out cantidad))
+                                {
+                                    cantidad = _pedido.Cantidad;
+                                    Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, hdnPedidoCantidad.Value);
+                                }
+                            }
+                            _pedido.Cantidad = cantidad;
+
+                            // Updates
+
+                            #region Tipo
+                            //if (ddlTamano.SelectedIndex > 0)
+                            //{
+                            //    pedido.Pedido_Tipo_ID = ddlTamano.SelectedIndex;
+                            //}
+                            #endregion
+
+                            #region Material = Pintado / Impreso
+                            //if (ddlTamano.SelectedIndex > 0)
+                            //{
+                            //    pedido.Pedido_Material_ID = ddlTamano.SelectedIndex;
+                            //}
+                            #endregion
+
+                            #region Tamaño
+                            //if (ddlTamano.SelectedIndex > 0)
+                            //{
+                            //    //pedido.Pedido_Tematica_ID = ddlTamano.SelectedIndex;
+                            //}
+                            #endregion
+
+                            #region Temática
+                            //if (ddlTamano.SelectedIndex > 0)
+                            //{
+                            //    pedido.Pedido_Tamano_ID = ddlTamano.SelectedIndex;
+                            //}
+                            #endregion
+
+                            #region UPDATE Diseño
+                            pedido_disenos _pedido_diseno = (pedido_disenos)context.pedido_disenos.FirstOrDefault(v => v.Pedido_Diseno_ID.Equals(_pedido.Pedido_Diseno_ID));
+                            if (_pedido_diseno != null)
+                            {
+                                _pedido_diseno.Texto = txbTexto1.Text;
+                            }
+                            #endregion
+
+                            #region UPDATE Diseño
+                            pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(v => v.Pedido_Entrega_ID.Equals(_pedido.Pedido_Entrega_ID));
+                            if (_pedido_entrega != null)
+                            {
+                                _pedido_entrega.Direccion = txbDireccion.Value;
+                                _pedido_entrega.Fecha_entrega = txbFecha.Value;
+
+                                if (ddlTipoEntrega.SelectedIndex > 0)
+                                {
+                                    _pedido_entrega.Entrega_Tipo_ID = ddlTipoEntrega.SelectedIndex;
+                                }
+                            }
+                            #endregion
+                        }
+
                     }
 
                     Guardar_Contexto(context);
+
+                    // Subir archivo si hay
+                    if (MyFileUpload.PostedFile != null && !string.IsNullOrWhiteSpace(MyFileUpload.PostedFile.FileName))
+                    {
+                        //UploadFile(serie_str);
+                        FTPUpload(serie_str);
+                    }
                 }
             }
             else
@@ -326,14 +411,32 @@ namespace Cartelux1
         {
             if (formulario_ID > 0)
             {
+                // Logger variables
+                System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
+                System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+                string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+                string methodName = stackFrame.GetMethod().Name;
+
                 pedidos _pedido = new pedidos();
                 _pedido.Pedido_ID = 0;
+
+                int cantidad = 1;
+                if (!string.IsNullOrWhiteSpace(hdnPedidoCantidad.Value))
+                {
+                    if (!int.TryParse(hdnPedidoCantidad.Value, out cantidad))
+                    {
+                        cantidad = 1;
+                        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, hdnPedidoCantidad.Value);
+                    }
+                }
+                _pedido.Cantidad = cantidad;
 
                 #region Tipo
                 //if (ddlTamano.SelectedIndex > 0)
                 //{
                 //    pedido.Pedido_Tipo_ID = ddlTamano.SelectedIndex;
                 //}
+                _pedido.Pedido_Tipo_ID = 0;
                 #endregion
 
                 #region Material = Pintado / Impreso
@@ -341,6 +444,7 @@ namespace Cartelux1
                 //{
                 //    pedido.Pedido_Material_ID = ddlTamano.SelectedIndex;
                 //}
+                _pedido.Pedido_Material_ID = 0;
                 #endregion
 
                 #region Tamaño
@@ -348,6 +452,7 @@ namespace Cartelux1
                 //{
                 //    //pedido.Pedido_Tematica_ID = ddlTamano.SelectedIndex;
                 //}
+                _pedido.Pedido_Tamano_ID = 0;
                 #endregion
 
                 #region Temática
@@ -355,8 +460,8 @@ namespace Cartelux1
                 //{
                 //    pedido.Pedido_Tamano_ID = ddlTamano.SelectedIndex;
                 //}
+                _pedido.Pedido_Tematica_ID = 0;
                 #endregion
-
 
                 #region NEW Diseño
                 pedido_disenos _pedido_diseno = new pedido_disenos();
@@ -365,12 +470,19 @@ namespace Cartelux1
                 _pedido_diseno.Texto = txbTexto1.Text;
 
                 context.pedido_disenos.Add(_pedido_diseno);
+                Guardar_Contexto(context);
+                int pedido_diseno_ID = Get_NextPedido_DisenoID(context);
+                if (pedido_diseno_ID > 0)
+                {
+                    _pedido.Pedido_Diseno_ID = pedido_diseno_ID;
+                }
                 #endregion
 
                 #region NEW Entrega
                 pedido_entregas _pedido_entrega = new pedido_entregas();
                 _pedido_entrega.Pedido_Entrega_ID = 0;
 
+                _pedido_entrega.Entrega_Tipo_ID = 0;
                 if (ddlTipoEntrega.SelectedIndex > 0)
                 {
                     _pedido_entrega.Entrega_Tipo_ID = ddlTipoEntrega.SelectedIndex;
@@ -379,14 +491,41 @@ namespace Cartelux1
                 _pedido_entrega.Direccion = txbDireccion.Value;
                 _pedido_entrega.Fecha_entrega = txbFecha.Value;
 
-
                 context.pedido_entregas.Add(_pedido_entrega);
+                Guardar_Contexto(context);
+                int pedido_entrega_ID = Get_NextPedido_EntregaID(context);
+                if (pedido_entrega_ID > 0)
+                {
+                    _pedido.Pedido_Entrega_ID = pedido_entrega_ID;
+                }
                 #endregion
 
                 _pedido.Formulario_ID = formulario_ID;
 
                 context.pedidos.Add(_pedido);
             }
+        }
+
+        private int Get_NextPedido_EntregaID(carteluxdbEntities context)
+        {
+            int id = 1;
+            pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.OrderByDescending(p => p.Pedido_Entrega_ID).FirstOrDefault();
+            if (_pedido_entrega != null)
+            {
+                id = _pedido_entrega.Pedido_Entrega_ID;
+            }
+            return id;
+        }
+
+        private int Get_NextPedido_DisenoID(carteluxdbEntities context)
+        {
+            int id = 1;
+            pedido_disenos _pedido_diseno = (pedido_disenos)context.pedido_disenos.OrderByDescending(p => p.Pedido_Diseno_ID).FirstOrDefault();
+            if (_pedido_diseno != null)
+            {
+                id = _pedido_diseno.Pedido_Diseno_ID;
+            }
+            return id;
         }
 
         private int NEW_Cliente(carteluxdbEntities context)
@@ -405,7 +544,7 @@ namespace Cartelux1
                 {
                     // Cliente nuevo 
                     cliente.Cliente_ID = 0;
-                    cliente.Nombre = string.Empty;
+                    cliente.Nombre = client_name;
                     cliente.Telefono = client_tel;
                     cliente.Fecha_creado = DateTime.Now;
 
@@ -433,12 +572,259 @@ namespace Cartelux1
         private int Get_NextFormularioID(carteluxdbEntities context)
         {
             int id = 1;
-            pedidos pedido = (pedidos)context.pedidos.OrderByDescending(p => p.Pedido_ID).FirstOrDefault();
-            if (pedido != null)
+            formularios _formulario = (formularios)context.formularios.OrderByDescending(p => p.Formulario_ID).FirstOrDefault();
+            if (_formulario != null)
             {
-                id = pedido.Pedido_ID;
+                id = _formulario.Formulario_ID;
             }
             return id;
+        }
+
+        private void UploadFile(string serie_str)
+        {
+            if (!string.IsNullOrWhiteSpace(serie_str))
+            {
+                System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+                string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+                string methodName = stackFrame.GetMethod().Name;
+
+                // Source: http://stackoverflow.com/questions/1998452/accessing-input-type-file-at-server-side-in-asp-net
+
+                /* ******** Get file extension ******** */
+                string fileName = MyFileUpload.PostedFile.FileName;
+                string file_extension = string.Empty;
+
+                if (!string.IsNullOrWhiteSpace(fileName))
+                {
+                    file_extension = fileName.Substring(fileName.LastIndexOf('.'));
+                }
+
+                /* ******** Global variables ******** */
+                string repoFilename = "", fullLocalPath = "", relativeLocalPath = "";
+
+                using (carteluxdbEntities context = new carteluxdbEntities())
+                {
+                    formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Serie.Equals(serie_str));
+                    if (_formulario != null)
+                    {
+                        // Pedidos
+                        List<pedidos> lista_pedidos = (List<pedidos>)context.pedidos.Where(v => v.Formulario_ID == _formulario.Formulario_ID).ToList();
+                        if (lista_pedidos != null && lista_pedidos.Count > 0)
+                        {
+                            foreach (pedidos _pedido in lista_pedidos)
+                            {
+                                int ID = _pedido.Pedido_ID;
+
+                                // GET Diseño
+                                pedido_disenos _pedido_diseno = (pedido_disenos)context.pedido_disenos.FirstOrDefault(v => v.Pedido_Diseno_ID.Equals(_pedido.Pedido_Diseno_ID));
+                                if (_pedido_diseno != null)
+                                {
+                                    if (MyFileUpload != null && MyFileUpload.PostedFile != null && !string.IsNullOrWhiteSpace(MyFileUpload.PostedFile.FileName))
+                                    {
+                                        /* ******** Configuration variables ******** */
+
+                                        string original_filePath = MyFileUpload.PostedFile.FileName;
+
+                                        // Repository path
+                                        string localRepoPath = string.Empty;
+
+                                        int isLocal = HttpContext.Current.Request.IsLocal ? 1 : 0;
+                                        if (isLocal == 1)
+                                        {
+                                            if (ConfigurationManager.AppSettings != null)
+                                            {
+                                                localRepoPath = ConfigurationManager.AppSettings["LocalRepoPath"].ToString();
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (ConfigurationManager.AppSettings != null)
+                                            {
+                                                localRepoPath = ConfigurationManager.AppSettings["ServerRepoPath"].ToString();
+                                            }
+                                        }
+
+                                        repoFilename = ID + file_extension;
+
+                                        // Repository relative path
+                                        relativeLocalPath = DateTime.Now.Year.ToString("D4") + "\\" + DateTime.Now.Month.ToString("D2") + "\\";
+
+                                        fullLocalPath = localRepoPath + relativeLocalPath; // REAL
+                                    }
+
+                                    /* ******** Save in DB ******** */
+
+                                    string real_fileName = string.Empty;
+                                    if (!string.IsNullOrWhiteSpace(fileName))
+                                    {
+                                        real_fileName = Path.GetFileName(fileName);
+                                    }
+
+                                    if (!string.IsNullOrWhiteSpace(real_fileName)
+                                        && !string.IsNullOrWhiteSpace(relativeLocalPath) && !string.IsNullOrWhiteSpace(repoFilename)
+                                        && !string.IsNullOrWhiteSpace(fullLocalPath) && MyFileUpload != null && MyFileUpload.PostedFile != null)
+                                    {
+                                        try
+                                        {
+                                            /*************** Finally save the file in server ***************/
+
+                                            // Check if directory exists, if not creates it
+                                            if (!Directory.Exists(Path.GetDirectoryName(fullLocalPath)))
+                                            {
+                                                Directory.CreateDirectory(Path.GetDirectoryName(fullLocalPath));
+                                            }
+
+                                            MyFileUpload.PostedFile.SaveAs(fullLocalPath + repoFilename);
+
+                                            /*************** END ***************/
+
+                                            /*************** Save in DB ***************/
+
+                                            string bd_path = relativeLocalPath.Replace("\\", "/") + repoFilename;
+                                            _pedido_diseno.Boceto_nombre = repoFilename;
+                                            _pedido_diseno.Boceto_extension = file_extension;
+                                            _pedido_diseno.Boceto_PATH = fullLocalPath; //bd_path ?
+                                            Guardar_Contexto(context);
+
+                                            /*************** END ***************/
+                                        }
+                                        catch (Exception e)
+                                        {
+                                            Logs.AddErrorLog("Excepcion. Copiando archivo al server y guardando en BD. ERROR:", className, methodName, e.Message);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        protected void FTPUpload(string serie_str)
+        {
+            if (!string.IsNullOrWhiteSpace(serie_str))
+            {
+                // https://www.aspsnippets.com/Articles/Uploading-Files-to-FTP-Server-programmatically-in-ASPNet-using-C-and-VBNet.aspx
+
+                System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+                string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+                string methodName = stackFrame.GetMethod().Name;
+
+                //FTP Server URL.
+                string ftp = "ftp.site4now.net";
+                if (ConfigurationManager.AppSettings != null)
+                {
+                    ftp = ConfigurationManager.AppSettings["FTP_Server"].ToString();
+                }
+
+                //FTP Folder name. Leave blank if you want to upload to root folder.
+                string ftpFolder = "Resources/Bocetos/";
+                if (ConfigurationManager.AppSettings != null)
+                {
+                    ftpFolder = ConfigurationManager.AppSettings["FTP_Path"].ToString();
+                }
+
+                //FTP User. 
+                string ftpUser = "madelux-001";
+                if (ConfigurationManager.AppSettings != null)
+                {
+                    ftpUser = ConfigurationManager.AppSettings["FTP_User"].ToString();
+                }
+
+                //FTP Password. 
+                string ftpPassword = "madelux1234";
+                if (ConfigurationManager.AppSettings != null)
+                {
+                    ftpPassword = ConfigurationManager.AppSettings["FTP_Password"].ToString();
+                }
+
+                byte[] fileBytes = null;
+
+                //Read the FileName and convert it to Byte array.
+                string fileName = MyFileUpload.PostedFile.FileName;
+                string file_extension = string.Empty;
+                if (!string.IsNullOrWhiteSpace(fileName))
+                {
+                    file_extension = fileName.Substring(fileName.LastIndexOf('.'));
+                }
+
+                if (!string.IsNullOrWhiteSpace(file_extension))
+                {
+                    using (carteluxdbEntities context = new carteluxdbEntities())
+                    {
+                        formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Serie.Equals(serie_str));
+                        if (_formulario != null)
+                        {
+                            // Pedidos
+                            List<pedidos> lista_pedidos = (List<pedidos>)context.pedidos.Where(v => v.Formulario_ID == _formulario.Formulario_ID).ToList();
+                            if (lista_pedidos != null && lista_pedidos.Count > 0)
+                            {
+                                foreach (pedidos _pedido in lista_pedidos)
+                                {
+                                    int ID = _pedido.Pedido_ID;
+
+                                    // GET Diseño
+                                    pedido_disenos _pedido_diseno = (pedido_disenos)context.pedido_disenos.FirstOrDefault(v => v.Pedido_Diseno_ID.Equals(_pedido.Pedido_Diseno_ID));
+                                    if (_pedido_diseno != null)
+                                    {
+                                        string repoFilename = ID + file_extension;
+
+                                        // Repository relative path
+                                        string relativePath = DateTime.Now.Year.ToString("D4") + "\\" + DateTime.Now.Month.ToString("D2") + "\\";
+
+                                        #region Upload file FTP
+                                        using (StreamReader fileStream = new StreamReader(MyFileUpload.PostedFile.InputStream))
+                                        {
+                                            fileBytes = Encoding.UTF8.GetBytes(fileStream.ReadToEnd());
+                                            fileStream.Close();
+                                        }
+
+                                        try
+                                        {
+                                            //Create FTP Request.
+                                            //FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftp + ftpFolder + relativePath + repoFilename);
+                                            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftp + ftpFolder + repoFilename);
+                                            request.Method = WebRequestMethods.Ftp.UploadFile;
+
+                                            //Enter FTP Server credentials.
+                                            request.Credentials = new NetworkCredential(ftpUser, ftpPassword);
+                                            request.ContentLength = fileBytes.Length;
+                                            request.UsePassive = true;
+                                            request.UseBinary = true;
+                                            request.ServicePoint.ConnectionLimit = fileBytes.Length;
+                                            request.EnableSsl = false;
+
+                                            using (Stream requestStream = request.GetRequestStream())
+                                            {
+                                                requestStream.Write(fileBytes, 0, fileBytes.Length);
+                                                requestStream.Close();
+                                            }
+
+                                            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+
+                                            //lblMessage.Text += fileName + " uploaded.<br />";
+                                            response.Close();
+
+                                            // Save in DB
+                                            _pedido_diseno.Boceto_nombre = repoFilename;
+                                            _pedido_diseno.Boceto_extension = file_extension;
+                                            _pedido_diseno.Boceto_PATH = ftpFolder + relativePath + repoFilename; //bd_path ?
+                                            Guardar_Contexto(context);
+                                        }
+                                        catch (Exception e)
+                                        {
+                                            Logs.AddErrorLog("Excepcion. Cargando archivo de boceto por FTP. ERROR:", className, methodName, e.Message);
+                                        }
+
+                                        #endregion
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         #endregion

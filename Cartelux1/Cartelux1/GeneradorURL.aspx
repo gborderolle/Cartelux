@@ -12,15 +12,17 @@
             background-color: #f2e0cf;
         }
         .center {
-            margin: 0;
             display: block;
+            margin: auto;
+            width: 100%;
         }
+
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="SubbodyContent" runat="server"></asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="box box-default" style="margin: 20px;">
-        <div class="box-header with-border dark in div-form col-sm-12 col-md-4" style="text-align: -webkit-center;">
+    <div class="col-sm-12 col-md-12" style="display: inline-block;">
+        <div class="box-header with-border dark in div-form" style="display: inline-block;">
             <div class="row center">
                 <div style="text-align: center;">
                     <h2 id="lbl_h2" style="color: #ea7209;">Generar y copiar URL del nuevo pedido
@@ -32,33 +34,22 @@
             </div>
             <br />
             <div class="row center">
-                <div class="col-sm-12 col-md-10" style="margin: 0; display: block;">
-                    <div class="login-container sub-form panel panel-default">
+                <div class="col-sm-12 col-md-10 center">
+                    <div class="login-container sub-form">
                         <div class="form-group">
                             Número del cliente - 091373622
                             <input type="number" class="form-control" id="txbContactPhone" autofocus/>
                             <br />
-                            <input class="form-control btn-primary" type="button" tabindex="1" runat="server" id="btnGenerar" clientidmode="static" value="Generar URL" title="Click para generar una URL con ID único" onclick="generarURL();">
+                            <input class="form-control btn-primary btn-lg" style="height: auto;" type="button" tabindex="1" runat="server" id="btnGenerar" clientidmode="static" value="Generar URL" title="Click para generar una URL con ID único" onclick="generarURL();" />
                         </div>
                     </div>
                 </div>
             </div>
 
-            <%--         
-        <div class="row center">
-            <div class="col-sm-12 col-md-10" style="margin: 0; display: block;">
-               <div class="login-container sub-form panel panel-default">
-                  <div class="form-group">
-                     <input class="form-control btn-warning" type="button" tabindex="1" runat="server" id="btnGenerar" clientidmode="static" value="Generar" title="Click para generar una URL con ID único" onclick="generarURL();">
-                  </div>
-               </div>
-            </div>
-         </div>--%>
-            <hr />
             <div class="row center">
-                <div class="col-sm-12 col-md-10">
+                <div class="col-sm-12 col-md-10 center">
                     <input class="form-control text-to-copy" id="txbLink" onclick="this.select();" value="?" readonly />
-                    <button type="button" class="form-control btn-warning js-copy-btn btn-lg" id="btnCopy" onclick="enviarWPP()">Copiar y enviar por WhatsApp</button>
+                    <button type="button" class="form-control btn-warning js-copy-btn btn-lg" style="height: auto;" id="btnCopy" onclick="enviarWPP()">Copiar y enviar por WhatsApp</button>
                     <%--<input class="form-control btn-warning js-copy-btn" type="button" tabindex="2" id="btnCopy" value="Copiar y enviar por WhatsApp" title="Click para enviar por WhatsApp" onclick="enviarWPP();">--%>
                 </div>
             </div>
@@ -69,28 +60,6 @@
     </div>
     <script type="text/javascript">
         //<![CDATA[
-
-        /*! cheval v1.0.2 by ryanpcmcquen */
-        // Ryan P.C. McQuen | Everett, WA | ryan.q@linux.com
-        //
-        // This program is free software: you can redistribute it and/or modify
-        // it under the terms of the GNU General Public License as published by
-        // the Free Software Foundation; either version 2 of the License, or
-        // (at your option) any later version, with the following exception:
-        // the text of the GPL license may be omitted.
-        //
-        // This program is distributed in the hope that it will be useful, but
-        // without any warranty; without even the implied warranty of
-        // merchantability or fitness for a particular purpose. Compiling,
-        // interpreting, executing or merely reading the text of the program
-        // may result in lapses of consciousness and/or very being, up to and
-        // including the end of all existence and the Universe as we know it.
-        // See the GNU General Public License for more details.
-        //
-        // You may have received a copy of the GNU General Public License along
-        // with this program (most likely, a file named COPYING).  If not, see
-        // <https://www.gnu.org/licenses/>.
-        /*global window*/
         /*jslint browser:true, white:true, single:true*/
         (function () {
             'use strict';
