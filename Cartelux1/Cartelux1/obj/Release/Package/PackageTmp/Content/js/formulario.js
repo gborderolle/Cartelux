@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+﻿$(document).ready(function() {
     var ID = getUrlParameter('ID');
     if (ID !== null && ID !== undefined && ID.length > 0) {
         //loadPreviousState();
@@ -11,8 +11,8 @@
         $("#txbCX_tel").val(_TEL);
     }
 
-    setTimeout(function(){
-        $("#ddlTipoEntrega-button").on("click", function () {
+    setTimeout(function() {
+        $("#ddlTipoEntrega-button").on("click", function() {
             loadEvents();
         });
     }, 500);
@@ -38,34 +38,38 @@ var getUrlParameter = function getUrlParameter(sParam) {
 };
 
 function loadEvents() {
-    $("#ddlTipoEntrega-menu li.ui-menu-item div").on("click", function () {
+    $("#ddlTipoEntrega-menu li.ui-menu-item div").on("click", function() {
         var value = $(this).attr("id");
-        if(value !== null && value.length > 0){
+        if (value !== null && value.length > 0) {
             switch (value) {
-                case "ui-id-2": { // Colocación
-                    readonlyControl(false, "txbDireccion");
-                    //readonlyControl(false, "ddlLugarEntrega");
-                    readonlyControl(true, "txbCiudad");
-                    break;
-                }
-                case "ui-id-3": { // Envío
-                    readonlyControl(false, "txbDireccion");
-                    //readonlyControl(false, "ddlLugarEntrega");
-                    readonlyControl(true, "txbCiudad");
-                    break;
-                }
-                case "ui-id-4": { // Interior
-                    readonlyControl(true, "txbDireccion");
-                    //readonlyControl(true, "ddlLugarEntrega");
-                    readonlyControl(false, "txbCiudad");
-                    break;
-                }
-                case "ui-id-5": { // Taller
-                    readonlyControl(true, "txbDireccion");
-                    //readonlyControl(true, "ddlLugarEntrega");
-                    readonlyControl(true, "txbCiudad");
-                    break;
-                }
+                case "ui-id-2":
+                    { // Colocación
+                        readonlyControl(false, "txbDireccion");
+                        //readonlyControl(false, "ddlLugarEntrega");
+                        readonlyControl(true, "txbCiudad");
+                        break;
+                    }
+                case "ui-id-3":
+                    { // Envío
+                        readonlyControl(false, "txbDireccion");
+                        //readonlyControl(false, "ddlLugarEntrega");
+                        readonlyControl(true, "txbCiudad");
+                        break;
+                    }
+                case "ui-id-4":
+                    { // Interior
+                        readonlyControl(true, "txbDireccion");
+                        //readonlyControl(true, "ddlLugarEntrega");
+                        readonlyControl(false, "txbCiudad");
+                        break;
+                    }
+                case "ui-id-5":
+                    { // Taller
+                        readonlyControl(true, "txbDireccion");
+                        //readonlyControl(true, "ddlLugarEntrega");
+                        readonlyControl(true, "txbCiudad");
+                        break;
+                    }
             }
         }
     });
@@ -75,30 +79,34 @@ function loadPreviousState() {
     var selectedIndex = $("#ddlTipoEntrega option:selected").index()
     if (selectedIndex !== null && selectedIndex > 0) {
         switch (selectedIndex) {
-            case 1: { // Colocación
-                readonlyControl(false, "txbDireccion");
-                //readonlyControl(false, "ddlLugarEntrega");
-                readonlyControl(true, "txbCiudad");
-                break;
-            }
-            case 2: { // Envío
-                readonlyControl(false, "txbDireccion");
-                //readonlyControl(false, "ddlLugarEntrega");
-                readonlyControl(true, "txbCiudad");
-                break;
-            }
-            case 3: { // Interior
-                readonlyControl(true, "txbDireccion");
-                //readonlyControl(true, "ddlLugarEntrega");
-                readonlyControl(false, "txbCiudad");
-                break;
-            }
-            case 4: { // Taller
-                readonlyControl(true, "txbDireccion");
-                //readonlyControl(true, "ddlLugarEntrega");
-                readonlyControl(true, "txbCiudad");
-                break;
-            }
+            case 1:
+                { // Colocación
+                    readonlyControl(false, "txbDireccion");
+                    //readonlyControl(false, "ddlLugarEntrega");
+                    readonlyControl(true, "txbCiudad");
+                    break;
+                }
+            case 2:
+                { // Envío
+                    readonlyControl(false, "txbDireccion");
+                    //readonlyControl(false, "ddlLugarEntrega");
+                    readonlyControl(true, "txbCiudad");
+                    break;
+                }
+            case 3:
+                { // Interior
+                    readonlyControl(true, "txbDireccion");
+                    //readonlyControl(true, "ddlLugarEntrega");
+                    readonlyControl(false, "txbCiudad");
+                    break;
+                }
+            case 4:
+                { // Taller
+                    readonlyControl(true, "txbDireccion");
+                    //readonlyControl(true, "ddlLugarEntrega");
+                    readonlyControl(true, "txbCiudad");
+                    break;
+                }
         }
     }
 }
@@ -140,22 +148,18 @@ function readonlyControl(doEnable, idControl) {
 //    });
 //}
 
-function editFields()
-{
+function editFields() {
     setFieldsReadOnly(false);
 }
 
-function setFieldsReadOnly(value)
-{
+function setFieldsReadOnly(value) {
     $(".txbEditable").attr("readonly", value);
     $("#btnConfirmar").disabled = value;
     $(".dropdown").attr("disabled", value);
 
-    if(value)
-    {
+    if (value) {
         $("#btnConfirmar").addAttr("disabled");
-    } else
-        {
+    } else {
         $("#btnConfirmar").removeAttr("disabled");
     }
 }
@@ -164,9 +168,52 @@ function confirmacionPedido() {
     $("#dialog p").text(hashMessages["ConfirmacionPedido"]);
     $("#dialog").dialog({
         buttons: {
-            "Cerrar": function () {
+            "Cerrar": function() {
                 $(this).dialog("close");
             }
         }
     });
+}
+
+/* JS Goolge Maps API - Search location with map */
+// Source: https://www.youtube.com/watch?v=2n_r0NDekgc
+// https://www.youtube.com/watch?v=Zxf1mnP5zcw&t=1061s
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+/* -----         Loads the map once the page is loaded   ------- */
+
+function initialize() {
+    var map = new google.maps.Map(document.getElementById("map-canvas"), {
+        center: {
+            lat: 30.2655498,
+            lng: -97.7452663
+        },
+        zoom: 12
+    });
+
+    var marker = new google.maps.Marker({
+        position: {
+            lat: 30.2655498,
+            lng: -97.7452663
+        },
+        map: map,
+        draggable: true
+    });
+
+
+    var searchBox = new google.maps.places.SearchBox(document.getElementById('mapSearch'));
+
+    google.maps.event.addDomListener(searchBox, 'places_changed', function () {
+        var places = searchBox.getPlaces();
+        var bounds = new google.maps.LatLngBounds();
+        var i, place;
+
+        for (i = 0; place = places[i]; i++) {
+            bounds.extend(place.geometry.location);
+            marker.setPosition(place.geometry.location);
+        }
+        map.fitBounds(bounds);
+        map.setZoom(15);
+    })
 }

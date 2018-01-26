@@ -23,5 +23,8 @@ namespace Cartelux1.Models
         public string Ciudad { get; set; }
         public string Fecha_entrega { get; set; }
         public string Comentarios { get; set; }
+        public string Google_maps_URL { get; set; }
+        public string Coordenadas_Y { get; set; }
+        public string Coordenadas_X { get; set; }
     }
 }

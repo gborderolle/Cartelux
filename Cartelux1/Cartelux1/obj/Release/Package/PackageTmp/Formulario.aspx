@@ -62,9 +62,9 @@
             background-color: #f2e0cf;
         }
 
-        hr{
-            margin-top:10px;
-            margin-bottom:10px;
+        hr {
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
 
         ._label {
@@ -133,7 +133,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="SubbodyContent" runat="server"></asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="col-sm-12 col-md-12" style="display: grid; padding: 0;">
+    <div class="col-sm-12 col-md-12" style="padding: 0;">
         <div class="box-header with-border dark in div-form col-sm-12 col-md-4" style="display: inline-block;">
             <div class="row" style="margin: auto; display: block; text-align: center; margin-bottom: 0;">
                 <h2 style="color: #ea7209;"><a href="#" id="btnEdit" class="pull-left btn " onclick="editFields()" style="position: absolute; left: 0; margin-left: 20px;">
@@ -170,7 +170,7 @@
                                         <div class="login-container sub-form">
                                             <label class="_label">1) Ingrese sus datos</label>
                                             <div class="form-group">
-                                            <input class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" required runat="server" id="txbTel" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
+                                                <input class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" required runat="server" id="txbTel" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
                                             </div>
                                             <div class="form-group">
                                                 <input class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" required runat="server" id="txbNombre" clientidmode="static" autofocus />
@@ -192,7 +192,7 @@
 
                                             <div class="form-group">
                                                 <p style="font-size: small;">Si lo desea cargue un bosquejo hecho a mano del diseño deseado aquí</p>
-                                            <%--<input id="MyFileUpload" type="file" runat="server" class="file" style="width: 85%; margin: auto; margin-top: 8px; height: 24px;" accept=".jpg,.jepg,.png,.pdf"/>--%>
+                                                <%--<input id="MyFileUpload" type="file" runat="server" class="file" style="width: 85%; margin: auto; margin-top: 8px; height: 24px;" accept=".jpg,.jepg,.png,.pdf"/>--%>
                                                 <asp:FileUpload ID="MyFileUpload" runat="server" accept="image/*" />
 
                                             </div>
@@ -222,6 +222,24 @@
                                                 <button class="form-control btn btn-danger" clientidmode="static" name="Submit" type="submit" data-submit="...Confirmando" runat="server" id="btnConfirmar" onserverclick="btnConfirmar_ServerClick">GUARDAR</button>
                                                 <%--onclick="ShowProgress();"--%>
                                             </div>
+
+                                            <div class="form-group">
+
+                                                <style>
+                                                    #map-canvas {
+                                                        width: 400px;
+                                                        height: 400px;
+                                                    }
+                                                </style>
+
+                                                <input type="text" id="mapSearch" size="50"/>
+                                                <div id="map-canvas"></div>
+
+                                                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5b9fHo2L4fPpJZhRehtJGUjdXfgPkbUE&libraries=places"></script>
+
+                                            </div>
+
+
                                         </div>
                                         <div class="row">
                                             <h4 id="msj_result" runat="server" style="margin: auto; display: none;"><span class="label label-success">Los datos se guardaron correctamente</span></h4>
@@ -288,5 +306,8 @@
             <div id="dialog" title="Mensaje Cartelux">
                 <p style="text-align: left;"></p>
             </div>
-            <asp:HiddenField ID="hdnPedidoCantidad" runat="server" ClientIDMode="Static" Value="1" />
+        </div>
+    </div>
+
+    <asp:HiddenField ID="hdnPedidoCantidad" runat="server" ClientIDMode="Static" Value="1" />
 </asp:Content>

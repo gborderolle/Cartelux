@@ -104,12 +104,15 @@
           <Property Name="Pedido_Entrega_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Entrega_Tipo_ID" Type="int" Nullable="false" />
           <Property Name="Departamento_Tipo_ID" Type="int" />
-          <Property Name="Direccion" Type="varchar" MaxLength="100" />
+          <Property Name="Direccion" Type="varchar" MaxLength="300" />
           <Property Name="Indicaciones" Type="varchar" MaxLength="100" />
           <Property Name="Barrio" Type="varchar" MaxLength="50" />
           <Property Name="Ciudad" Type="varchar" MaxLength="50" />
           <Property Name="Fecha_entrega" Type="varchar" MaxLength="50" />
           <Property Name="Comentarios" Type="varchar" MaxLength="200" />
+          <Property Name="Google_maps_URL" Type="varchar" MaxLength="300" />
+          <Property Name="Coordenadas_Y" Type="varchar" MaxLength="200" />
+          <Property Name="Coordenadas_X" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="pedidos">
           <Key>
@@ -163,9 +166,9 @@
           <EntitySet Name="lista_pedido_tematicas" EntityType="carteluxdbModel.lista_pedido_tematicas" />
           <EntitySet Name="lista_pedido_tipos" EntityType="carteluxdbModel.lista_pedido_tipos" />
           <EntitySet Name="pedido_disenos" EntityType="carteluxdbModel.pedido_disenos" />
-          <EntitySet Name="pedido_entregas" EntityType="carteluxdbModel.pedido_entregas" />
           <EntitySet Name="pedidos" EntityType="carteluxdbModel.pedidos" />
           <EntitySet Name="sysdiagrams" EntityType="carteluxdbModel.sysdiagrams" />
+          <EntitySet Name="pedido_entregas" EntityType="carteluxdbModel.pedido_entregas" />
         </EntityContainer>
         <EntityType Name="clientes">
           <Key>
@@ -259,20 +262,6 @@
           <Property Name="Boceto_extension" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Boceto_PATH" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="pedido_entregas">
-          <Key>
-            <PropertyRef Name="Pedido_Entrega_ID" />
-          </Key>
-          <Property Name="Pedido_Entrega_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Entrega_Tipo_ID" Type="Int32" Nullable="false" />
-          <Property Name="Departamento_Tipo_ID" Type="Int32" />
-          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Indicaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_entrega" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="pedidos">
           <Key>
             <PropertyRef Name="Pedido_ID" />
@@ -296,6 +285,23 @@
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="pedido_entregas">
+          <Key>
+            <PropertyRef Name="Pedido_Entrega_ID" />
+          </Key>
+          <Property Name="Pedido_Entrega_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Entrega_Tipo_ID" Type="Int32" Nullable="false" />
+          <Property Name="Departamento_Tipo_ID" Type="Int32" />
+          <Property Name="Direccion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Indicaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_entrega" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Google_maps_URL" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Coordenadas_Y" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Coordenadas_X" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -404,21 +410,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="pedido_entregas">
-            <EntityTypeMapping TypeName="carteluxdbModel.pedido_entregas">
-              <MappingFragment StoreEntitySet="pedido_entregas">
-                <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
-                <ScalarProperty Name="Fecha_entrega" ColumnName="Fecha_entrega" />
-                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
-                <ScalarProperty Name="Barrio" ColumnName="Barrio" />
-                <ScalarProperty Name="Indicaciones" ColumnName="Indicaciones" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="Departamento_Tipo_ID" ColumnName="Departamento_Tipo_ID" />
-                <ScalarProperty Name="Entrega_Tipo_ID" ColumnName="Entrega_Tipo_ID" />
-                <ScalarProperty Name="Pedido_Entrega_ID" ColumnName="Pedido_Entrega_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="pedidos">
             <EntityTypeMapping TypeName="carteluxdbModel.pedidos">
               <MappingFragment StoreEntitySet="pedidos">
@@ -442,6 +433,24 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pedido_entregas">
+            <EntityTypeMapping TypeName="carteluxdbModel.pedido_entregas">
+              <MappingFragment StoreEntitySet="pedido_entregas">
+                <ScalarProperty Name="Coordenadas_X" ColumnName="Coordenadas_X" />
+                <ScalarProperty Name="Coordenadas_Y" ColumnName="Coordenadas_Y" />
+                <ScalarProperty Name="Google_maps_URL" ColumnName="Google_maps_URL" />
+                <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+                <ScalarProperty Name="Fecha_entrega" ColumnName="Fecha_entrega" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Barrio" ColumnName="Barrio" />
+                <ScalarProperty Name="Indicaciones" ColumnName="Indicaciones" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Departamento_Tipo_ID" ColumnName="Departamento_Tipo_ID" />
+                <ScalarProperty Name="Entrega_Tipo_ID" ColumnName="Entrega_Tipo_ID" />
+                <ScalarProperty Name="Pedido_Entrega_ID" ColumnName="Pedido_Entrega_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

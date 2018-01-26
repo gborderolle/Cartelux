@@ -77,3 +77,10 @@ C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\Micros
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\obj\Release\Cartelux1.csprojResolveAssemblyReference.cache
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\obj\Release\Cartelux1.dll
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\obj\Release\Cartelux1.pdb
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\MegaApiClient.dll
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\System.Net.Http.dll
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\System.Security.Cryptography.Algorithms.dll
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\System.Security.Cryptography.Encoding.dll
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\System.Security.Cryptography.Primitives.dll
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\System.Security.Cryptography.X509Certificates.dll
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\MegaApiClient.xml

@@ -10,9 +10,9 @@
     <EntitySet Name="lista_pedido_tematicas" EntityType="carteluxdbModel.lista_pedido_tematicas" />
     <EntitySet Name="lista_pedido_tipos" EntityType="carteluxdbModel.lista_pedido_tipos" />
     <EntitySet Name="pedido_disenos" EntityType="carteluxdbModel.pedido_disenos" />
-    <EntitySet Name="pedido_entregas" EntityType="carteluxdbModel.pedido_entregas" />
     <EntitySet Name="pedidos" EntityType="carteluxdbModel.pedidos" />
     <EntitySet Name="sysdiagrams" EntityType="carteluxdbModel.sysdiagrams" />
+    <EntitySet Name="pedido_entregas" EntityType="carteluxdbModel.pedido_entregas" />
   </EntityContainer>
   <EntityType Name="clientes">
     <Key>
@@ -106,20 +106,6 @@
     <Property Name="Boceto_extension" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="Boceto_PATH" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="pedido_entregas">
-    <Key>
-      <PropertyRef Name="Pedido_Entrega_ID" />
-    </Key>
-    <Property Name="Pedido_Entrega_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Entrega_Tipo_ID" Type="Int32" Nullable="false" />
-    <Property Name="Departamento_Tipo_ID" Type="Int32" />
-    <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Indicaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Fecha_entrega" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="pedidos">
     <Key>
       <PropertyRef Name="Pedido_ID" />
@@ -143,5 +129,22 @@
     <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="version" Type="Int32" />
     <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="pedido_entregas">
+    <Key>
+      <PropertyRef Name="Pedido_Entrega_ID" />
+    </Key>
+    <Property Name="Pedido_Entrega_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Entrega_Tipo_ID" Type="Int32" Nullable="false" />
+    <Property Name="Departamento_Tipo_ID" Type="Int32" />
+    <Property Name="Direccion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="Indicaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha_entrega" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Google_maps_URL" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="Coordenadas_Y" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Coordenadas_X" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

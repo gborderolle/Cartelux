@@ -130,6 +130,33 @@ namespace Cartelux1 {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txbCX_dir;
         
         /// <summary>
+        /// hdnCurrentLocationURL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnCurrentLocationURL;
+        
+        /// <summary>
+        /// hdnCurrentLAT control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnCurrentLAT;
+        
+        /// <summary>
+        /// hdnCurrentLNG control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnCurrentLNG;
+        
+        /// <summary>
         /// hdnPedidoCantidad control.
         /// </summary>
         /// <remarks>

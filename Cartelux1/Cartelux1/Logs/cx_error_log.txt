@@ -1,112 +1,35 @@
-10/26/2017 7:29:49 PM: [ln:251] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-10/26/2017 7:44:47 PM: [ln:251] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-10/26/2017 7:44:53 PM: [ln:251] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-10/26/2017 7:46:30 PM: [ln:251] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-10/26/2017 7:46:33 PM: [ln:251] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-10/26/2017 7:55:09 PM: [ln:248] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-10/26/2017 7:55:33 PM: [ln:248] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-10/26/2017 7:59:32 PM: [ln:248] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-10/26/2017 8:00:28 PM: [ln:249] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-10/26/2017 8:04:20 PM: [ln:249] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-10/26/2017 9:35:32 PM: [ln:307] Formulario: Save_Client() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-10/26/2017 9:35:32 PM: [ln:260] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-10/26/2017 9:37:06 PM: [ln:307] Formulario: Save_Client() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-10/26/2017 9:37:06 PM: [ln:260] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-10/26/2017 9:40:55 PM: [ln:322] Formulario: Save_Client() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-10/26/2017 9:40:55 PM: [ln:271] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-10/26/2017 9:48:34 PM: [ln:322] Formulario: Save_Client() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
-10/26/2017 9:48:34 PM: [ln:271] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
-10/26/2017 11:35:12 PM: [ln:314] Formulario: Save_Client() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:35:17 PM: [ln:314] Formulario: Save_Client() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:38:22 PM: [ln:322] Formulario: Save_Client() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:39:04 PM: [ln:322] Formulario: Save_Client() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:39:04 PM: [ln:271] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:39:11 PM: [ln:322] Formulario: Save_Client() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:39:11 PM: [ln:271] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:39:15 PM: [ln:322] Formulario: Save_Client() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:39:15 PM: [ln:271] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:39:19 PM: [ln:322] Formulario: Save_Client() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:39:19 PM: [ln:271] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:41:11 PM: [ln:310] Formulario: Save_Client() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:41:11 PM: [ln:266] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:41:39 PM: [ln:310] Formulario: Save_Client() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:41:39 PM: [ln:266] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:41:41 PM: [ln:310] Formulario: Save_Client() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:41:41 PM: [ln:266] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:46:10 PM: [ln:310] Formulario: Save_Client() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:46:10 PM: [ln:266] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:46:15 PM: [ln:310] Formulario: Save_Client() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:46:15 PM: [ln:266] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:46:20 PM: [ln:310] Formulario: Save_Client() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:46:20 PM: [ln:266] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:46:34 PM: [ln:310] Formulario: Save_Client() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:46:34 PM: [ln:266] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:48:32 PM: [ln:310] Formulario: Save_Client() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:48:32 PM: [ln:266] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:49:19 PM: [ln:266] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:49:27 PM: [ln:266] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:49:41 PM: [ln:266] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/26/2017 11:51:53 PM: [ln:266] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: The property 'Pedido_ID' is part of the object's key information and cannot be modified. .
-10/27/2017 2:13:18 AM: [ln:249] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
-10/27/2017 2:19:32 AM: [ln:249] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
-10/27/2017 2:21:52 AM: [ln:249] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
-10/27/2017 2:29:58 AM: [ln:249] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
-10/27/2017 2:30:16 AM: [ln:249] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
-10/27/2017 2:33:59 AM: [ln:249] Formulario: SaveData() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
-10/27/2017 3:01:31 AM: [ln:269] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-10/27/2017 3:07:25 AM: [ln:269] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-10/27/2017 3:08:29 AM: [ln:269] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-10/27/2017 3:09:55 AM: [ln:269] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/14/2018 9:20:06 PM: [ln:79] Formulario: GetURLParam_Decrypted() - Excepcion. Desencriptando ID del parámetro URL. ERROR: Invalid length for a Base-64 char array or string..
-1/14/2018 9:21:58 PM: [ln:79] Formulario: GetURLParam_Decrypted() - Excepcion. Desencriptando ID del parámetro URL. ERROR: Invalid length for a Base-64 char array or string..
-1/21/2018 10:59:41 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Unable to update the EntitySet 'clientes' because it has a DefiningQuery and no <InsertFunction> element exists in the <ModificationFunctionMapping> element to support the current operation..
-1/21/2018 10:59:41 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 10:59:41 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:00:18 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Unable to update the EntitySet 'clientes' because it has a DefiningQuery and no <InsertFunction> element exists in the <ModificationFunctionMapping> element to support the current operation..
-1/21/2018 11:00:50 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:00:57 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:02:18 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Unable to update the EntitySet 'clientes' because it has a DefiningQuery and no <InsertFunction> element exists in the <ModificationFunctionMapping> element to support the current operation..
-1/21/2018 11:05:11 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:06:02 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:15:43 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Unable to update the EntitySet 'clientes' because it has a DefiningQuery and no <InsertFunction> element exists in the <ModificationFunctionMapping> element to support the current operation..
-1/21/2018 11:15:43 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:15:43 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:15:50 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Unable to update the EntitySet 'clientes' because it has a DefiningQuery and no <InsertFunction> element exists in the <ModificationFunctionMapping> element to support the current operation..
-1/21/2018 11:15:50 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:15:50 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:16:05 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Unable to update the EntitySet 'clientes' because it has a DefiningQuery and no <InsertFunction> element exists in the <ModificationFunctionMapping> element to support the current operation..
-1/21/2018 11:16:05 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:16:05 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:16:12 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Unable to update the EntitySet 'clientes' because it has a DefiningQuery and no <InsertFunction> element exists in the <ModificationFunctionMapping> element to support the current operation..
-1/21/2018 11:16:12 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:16:12 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:16:25 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Unable to update the EntitySet 'clientes' because it has a DefiningQuery and no <InsertFunction> element exists in the <ModificationFunctionMapping> element to support the current operation..
-1/21/2018 11:16:25 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:16:25 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:16:47 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Unable to update the EntitySet 'clientes' because it has a DefiningQuery and no <InsertFunction> element exists in the <ModificationFunctionMapping> element to support the current operation..
-1/21/2018 11:18:09 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Unable to update the EntitySet 'clientes' because it has a DefiningQuery and no <InsertFunction> element exists in the <ModificationFunctionMapping> element to support the current operation..
-1/21/2018 11:18:09 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:18:09 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:18:51 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Unable to update the EntitySet 'clientes' because it has a DefiningQuery and no <InsertFunction> element exists in the <ModificationFunctionMapping> element to support the current operation..
-1/21/2018 11:18:51 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:18:51 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:19:08 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Unable to update the EntitySet 'clientes' because it has a DefiningQuery and no <InsertFunction> element exists in the <ModificationFunctionMapping> element to support the current operation..
-1/21/2018 11:19:08 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:19:08 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:21:04 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Unable to update the EntitySet 'clientes' because it has a DefiningQuery and no <InsertFunction> element exists in the <ModificationFunctionMapping> element to support the current operation..
-1/21/2018 11:21:04 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:21:04 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:23:08 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:23:08 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:25:45 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/21/2018 11:27:00 PM: [ln:318] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/22/2018 12:25:12 AM: [ln:340] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/22/2018 12:25:12 AM: [ln:340] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/22/2018 12:27:45 AM: [ln:340] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/22/2018 12:28:12 AM: [ln:340] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/22/2018 2:32:45 AM: [ln:679] Formulario: UploadFile() - Excepcion. Copiando archivo al server y guardando en BD. ERROR: Access to the path 'Resources\Bocetos\2018\01' is denied..
-1/22/2018 2:32:45 AM: [ln:679] Formulario: UploadFile() - Excepcion. Copiando archivo al server y guardando en BD. ERROR: Access to the path 'Resources\Bocetos\2018\01' is denied..
-1/22/2018 2:38:52 AM: [ln:679] Formulario: UploadFile() - Excepcion. Copiando archivo al server y guardando en BD. ERROR: Access to the path 'Resources\Bocetos\2018\01' is denied..
-1/22/2018 2:41:22 AM: [ln:402] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/22/2018 2:42:12 AM: [ln:402] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
-1/22/2018 2:42:44 AM: [ln:402] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
+1/22/2018 11:49:30 PM: [ln:822] Formulario: FTPUpload() - Excepcion. Cargando archivo de boceto por FTP. ERROR: Specified argument was out of the range of valid values.
+Parameter name: value.
+1/22/2018 11:49:30 PM: [ln:823] Formulario: FTPUpload() - Excepcion. URL: ftp://ftp.site4now.net:21/Cartelux/cxpedidos/Resources/Bocetos/potty.png.
+1/23/2018 12:52:45 PM: [ln:951] Formulario: FTPUpload_2() - Excepcion. Cargando archivo de boceto por FTP. ERROR: mammanostra-delivery-premium.jpg.
+1/23/2018 12:52:45 PM: [ln:952] Formulario: FTPUpload_2() - Excepcion. URL: .
+1/23/2018 12:52:52 PM: [ln:951] Formulario: FTPUpload_2() - Excepcion. Cargando archivo de boceto por FTP. ERROR: mammanostra-delivery-premium.jpg.
+1/23/2018 12:52:52 PM: [ln:952] Formulario: FTPUpload_2() - Excepcion. URL: .
+1/23/2018 12:55:30 PM: [ln:951] Formulario: FTPUpload_2() - Excepcion. Cargando archivo de boceto por FTP. ERROR: CX-web1.png.
+1/23/2018 12:55:30 PM: [ln:952] Formulario: FTPUpload_2() - Excepcion. URL: .
+1/23/2018 12:55:37 PM: [ln:951] Formulario: FTPUpload_2() - Excepcion. Cargando archivo de boceto por FTP. ERROR: CX-web1.png.
+1/23/2018 12:55:37 PM: [ln:952] Formulario: FTPUpload_2() - Excepcion. URL: .
+1/23/2018 1:37:24 PM: [ln:952] Formulario: FTPUpload_2() - Excepcion. Cargando archivo de boceto por FTP. ERROR: mammanostra-delivery-premium.jpg.
+1/23/2018 1:37:25 PM: [ln:953] Formulario: FTPUpload_2() - Excepcion. URL: .
+1/23/2018 1:40:34 PM: [ln:952] Formulario: FTPUpload_2() - Excepcion. Cargando archivo de boceto por FTP. ERROR: mammanostra-delivery-premium.jpg.
+1/23/2018 1:40:34 PM: [ln:953] Formulario: FTPUpload_2() - Excepcion. URL: .
+1/24/2018 4:31:11 AM: [ln:1143] Formulario: UploadMegaAPI() - Excepcion. Copiando archivo al server y guardando en BD. ERROR: Sequence contains more than one matching element.
+1/24/2018 4:31:11 AM: [ln:1144] Formulario: UploadMegaAPI() - Excepcion. URL: TRABAJOS/.
+1/24/2018 4:31:18 AM: [ln:1143] Formulario: UploadMegaAPI() - Excepcion. Copiando archivo al server y guardando en BD. ERROR: Sequence contains more than one matching element.
+1/24/2018 4:31:18 AM: [ln:1144] Formulario: UploadMegaAPI() - Excepcion. URL: TRABAJOS/.
+1/24/2018 4:34:16 AM: [ln:1143] Formulario: UploadMegaAPI() - Excepcion. Copiando archivo al server y guardando en BD. ERROR: Sequence contains more than one matching element.
+1/24/2018 4:35:07 AM: [ln:1144] Formulario: UploadMegaAPI() - Excepcion. URL: TRABAJOS/.
+1/24/2018 4:35:15 AM: [ln:1143] Formulario: UploadMegaAPI() - Excepcion. Copiando archivo al server y guardando en BD. ERROR: Sequence contains more than one matching element.
+1/24/2018 4:35:15 AM: [ln:1144] Formulario: UploadMegaAPI() - Excepcion. URL: TRABAJOS/.
+1/24/2018 4:37:01 AM: [ln:1143] Formulario: UploadMegaAPI() - Excepcion. Copiando archivo al server y guardando en BD. ERROR: Sequence contains more than one matching element.
+1/24/2018 4:37:01 AM: [ln:1144] Formulario: UploadMegaAPI() - Excepcion. URL: TRABAJOS/.
+1/24/2018 4:37:08 AM: [ln:1143] Formulario: UploadMegaAPI() - Excepcion. Copiando archivo al server y guardando en BD. ERROR: Sequence contains more than one matching element.
+1/24/2018 4:37:08 AM: [ln:1144] Formulario: UploadMegaAPI() - Excepcion. URL: TRABAJOS/.
+1/25/2018 12:26:13 AM: [ln:1136] Formulario: UploadMegaAPI() - Excepcion. Copiando archivo al server y guardando en BD. ERROR: One or more errors occurred..
+1/25/2018 12:26:13 AM: [ln:1137] Formulario: UploadMegaAPI() - Excepcion. URL: .
+1/25/2018 12:26:28 AM: [ln:1136] Formulario: UploadMegaAPI() - Excepcion. Copiando archivo al server y guardando en BD. ERROR: Sequence contains more than one matching element.
+1/25/2018 12:26:28 AM: [ln:1137] Formulario: UploadMegaAPI() - Excepcion. URL: TRABAJOS/.
+1/25/2018 12:29:02 AM: [ln:1136] Formulario: UploadMegaAPI() - Excepcion. Copiando archivo al server y guardando en BD. ERROR: Sequence contains more than one matching element.
+1/25/2018 12:29:02 AM: [ln:1137] Formulario: UploadMegaAPI() - Excepcion. URL: TRABAJOS/.
+1/25/2018 12:29:12 AM: [ln:1136] Formulario: UploadMegaAPI() - Excepcion. Copiando archivo al server y guardando en BD. ERROR: Sequence contains more than one matching element.
+1/25/2018 12:29:12 AM: [ln:1137] Formulario: UploadMegaAPI() - Excepcion. URL: TRABAJOS/.

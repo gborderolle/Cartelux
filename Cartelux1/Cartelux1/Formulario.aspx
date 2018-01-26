@@ -8,13 +8,25 @@
 
     <!-- PAGE JS -->
     <script type="text/javascript" src="/Content/js/formulario.js"></script>
+
     <script type="text/javascript">
 
         TAB_COUNT = 1;
 
         $(function () {
             $(".dropdown").selectmenu();
+
+            google.maps.event.addDomListener(window, 'load', initialize);
+
         });
+
+        function clientGoogleMaps() {
+            var maps_url = _current_completeURL;
+            if (maps_url != null && maps_url.length > 0) {
+                //document.location = maps_url;
+                window.open(maps_url, '_blank');
+            }
+        }
 
         function clientWhatsApp() {
             var tel = _TEL;
@@ -25,7 +37,9 @@
                 if (first === "0") {
                     tel = tel.substring(1);
                 }
-                document.location = "https://api.whatsapp.com/send?phone=598" + tel;
+                var url = "https://api.whatsapp.com/send?phone=598" + tel;
+                //document.location = url
+                window.open(url, '_blank');
             }
         }
 
@@ -62,9 +76,9 @@
             background-color: #f2e0cf;
         }
 
-        hr{
-            margin-top:10px;
-            margin-bottom:10px;
+        hr {
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
 
         ._label {
@@ -133,19 +147,22 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="SubbodyContent" runat="server"></asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="col-sm-12 col-md-12" style="display: grid; padding: 0;">
+    <div class="col-sm-12 col-md-12" style="padding: 0;">
         <div class="box-header with-border dark in div-form col-sm-12 col-md-4" style="display: inline-block;">
             <div class="row" style="margin: auto; display: block; text-align: center; margin-bottom: 0;">
                 <h2 style="color: #ea7209;"><a href="#" id="btnEdit" class="pull-left btn " onclick="editFields()" style="position: absolute; left: 0; margin-left: 20px;">
                     <i class="fa fa-pencil fa-2x"></i>
                 </a>Datos de su pedido 
                 </h2>
-                <div style="position: absolute; right: 0;">
-                    Carteles iguales:
-                    <label class="_label" id="lblTabCount">1</label>
+                <div style="position: absolute; right: 0; margin-right: 15px;">
+                    <div class="row-special">
+                        <p style="font-weight:bold; margin:0; float:left;">Repetir iguales:</p>
+                        <label class="_label" id="lblTabCount" style="margin:0;font-size: xx-large;float:right;">1</label>
                     <br />
                     <a class="btn btn-sm btn-info" onclick="addCartel();">+</a>
                     <a class="btn btn-sm btn-info" onclick="removeCartel();">-</a>
+                    </div>
+                    
                 </div>
             </div>
             <br />
@@ -170,7 +187,7 @@
                                         <div class="login-container sub-form">
                                             <label class="_label">1) Ingrese sus datos</label>
                                             <div class="form-group">
-                                            <input class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" required runat="server" id="txbTel" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
+                                                <input class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" required runat="server" id="txbTel" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
                                             </div>
                                             <div class="form-group">
                                                 <input class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" required runat="server" id="txbNombre" clientidmode="static" autofocus />
@@ -192,7 +209,7 @@
 
                                             <div class="form-group">
                                                 <p style="font-size: small;">Si lo desea cargue un bosquejo hecho a mano del diseño deseado aquí</p>
-                                            <%--<input id="MyFileUpload" type="file" runat="server" class="file" style="width: 85%; margin: auto; margin-top: 8px; height: 24px;" accept=".jpg,.jepg,.png,.pdf"/>--%>
+                                                <%--<input id="MyFileUpload" type="file" runat="server" class="file" style="width: 85%; margin: auto; margin-top: 8px; height: 24px;" accept=".jpg,.jepg,.png,.pdf"/>--%>
                                                 <asp:FileUpload ID="MyFileUpload" runat="server" accept="image/*" />
 
                                             </div>
@@ -219,9 +236,28 @@
                                                 <input class="form-control txbEditable" placeholder="Día de colocación o envío sugerido" type="text" tabindex="7" runat="server" id="txbFecha" clientidmode="static" />
                                             </div>
                                             <div class="form-group">
-                                                <button class="form-control btn btn-danger" clientidmode="static" name="Submit" type="submit" data-submit="...Confirmando" runat="server" id="btnConfirmar" onserverclick="btnConfirmar_ServerClick">GUARDAR</button>
+                                                <button class="form-control btn btn-danger" clientidmode="static" name="Submit" type="submit" data-submit="...Confirmando" runat="server" id="btnConfirmar" onserverclick="btnConfirmar_ServerClick" style="background-image:none; background-color:#ea7209;height: 40px;">GUARDAR</button>
                                                 <%--onclick="ShowProgress();"--%>
                                             </div>
+
+                                            <div class="form-group">
+
+                                                <style>
+                                                    #map-canvas {
+                                                        width: 400px;
+                                                        height: 400px;
+                                                    }
+                                                </style>
+
+                                            <div class="form-group">
+                                                <input type="text" id="mapSearch" style="width: 100%;" />
+                                                <div id="map-canvas" style="margin: auto; width: 100%;"></div>
+                                                <p style="font-size:small; color:red;">Asegúrese que la ubicación en el mapa sea la correcta por favor</p>
+                                            </div>
+
+                                            </div>
+
+
                                         </div>
                                         <div class="row">
                                             <h4 id="msj_result" runat="server" style="margin: auto; display: none;"><span class="label label-success">Los datos se guardaron correctamente</span></h4>
@@ -263,6 +299,13 @@
                                                     <input class="form-control" type="text" tabindex="5" runat="server" id="txbCX_dir" clientidmode="static" readonly="true" />
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                Google Maps
+                                                <input class="form-control pull-left" id="txbCX_URL" readonly="true" style="width: 90%;" />
+                                                    <a href="#" class="pull-right btn" onclick="clientGoogleMaps()">
+                                                        <i class="fa fa-map-marker fa-2x"></i>
+                                                    </a>
+                                            </div>
 
 
                                         </div>
@@ -288,5 +331,13 @@
             <div id="dialog" title="Mensaje Cartelux">
                 <p style="text-align: left;"></p>
             </div>
-            <asp:HiddenField ID="hdnPedidoCantidad" runat="server" ClientIDMode="Static" Value="1" />
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADf3pOam_5HnhHHawjWJtcGcn7pv39AGA&libraries=places"></script>
+
+    <asp:HiddenField ID="hdnCurrentLocationURL" runat="server" ClientIDMode="Static" Value="0" />
+    <asp:HiddenField ID="hdnCurrentLAT" runat="server" ClientIDMode="Static" Value="0" />
+    <asp:HiddenField ID="hdnCurrentLNG" runat="server" ClientIDMode="Static" Value="0" />
+    <asp:HiddenField ID="hdnPedidoCantidad" runat="server" ClientIDMode="Static" Value="1" />
 </asp:Content>
