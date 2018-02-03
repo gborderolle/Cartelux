@@ -8,13 +8,24 @@
 
     <!-- PAGE JS -->
     <script type="text/javascript" src="/Content/js/formulario.js"></script>
+
     <script type="text/javascript">
 
         TAB_COUNT = 1;
 
         $(function () {
             $(".dropdown").selectmenu();
+            $("#txbFecha").datepicker();
+            google.maps.event.addDomListener(window, 'load', initialize);
         });
+
+        function clientGoogleMaps() {
+            var maps_url = _current_completeURL;
+            if (maps_url != null && maps_url.length > 0) {
+                //document.location = maps_url;
+                window.open(maps_url, '_blank');
+            }
+        }
 
         function clientWhatsApp() {
             var tel = _TEL;
@@ -25,7 +36,9 @@
                 if (first === "0") {
                     tel = tel.substring(1);
                 }
-                document.location = "https://api.whatsapp.com/send?phone=598" + tel;
+                var url = "https://api.whatsapp.com/send?phone=598" + tel;
+                //document.location = url
+                window.open(url, '_blank');
             }
         }
 
@@ -65,6 +78,10 @@
         hr {
             margin-top: 10px;
             margin-bottom: 10px;
+        }
+
+        .control-short {
+            width: 90%;
         }
 
         ._label {
@@ -140,12 +157,15 @@
                     <i class="fa fa-pencil fa-2x"></i>
                 </a>Datos de su pedido 
                 </h2>
-                <div style="position: absolute; right: 0;">
-                    Carteles iguales:
-                    <label class="_label" id="lblTabCount">1</label>
-                    <br />
-                    <a class="btn btn-sm btn-info" onclick="addCartel();">+</a>
-                    <a class="btn btn-sm btn-info" onclick="removeCartel();">-</a>
+                <div style="position: absolute; right: 0; margin-right: 15px;">
+                    <div class="row-special">
+                        <p style="font-weight: bold; margin: 0; float: left;">Repetir iguales:</p>
+                        <label class="_label" id="lblTabCount" style="margin: 0; font-size: xx-large; float: right;">1</label>
+                        <br />
+                        <a class="btn btn-sm btn-info" onclick="addCartel();">+</a>
+                        <a class="btn btn-sm btn-info" onclick="removeCartel();">-</a>
+                    </div>
+
                 </div>
             </div>
             <br />
@@ -178,7 +198,7 @@
                                             <hr />
                                             <label class="_label">2) Datos del cartel</label>
                                             <br />
-                                            <select name="ddlTamano" id="ddlTamano" class="dropdown txbEditable" runat="server" clientidmode="static">
+                                            <select name="ddlTamano" id="ddlTamano" class="dropdown txbEditable ctrl-required" runat="server" clientidmode="static">
                                                 <option disabled selected>Tamaño</option>
                                                 <option>1,5 mts</option>
                                                 <option>3 mts</option>
@@ -187,21 +207,17 @@
                                             </select>
 
                                             <div class="form-group">
-                                                <asp:TextBox runat="server" ID="txbTexto1" TextMode="multiline" CssClass="form-control txbEditable ctrl-required multitext" placeholder="Texto del cartel" TabIndex="3" required="required"></asp:TextBox>
-                                            </div>
-
-                                            <div class="form-group">
                                                 <p style="font-size: small;">Si lo desea cargue un bosquejo hecho a mano del diseño deseado aquí</p>
-                                                <%--<input id="MyFileUpload" type="file" runat="server" class="file" style="width: 85%; margin: auto; margin-top: 8px; height: 24px;" accept=".jpg,.jepg,.png,.pdf"/>--%>
                                                 <asp:FileUpload ID="MyFileUpload" runat="server" accept="image/*" />
-
                                             </div>
-
+                                            <div class="form-group">
+                                                <asp:TextBox runat="server" ID="txbTexto1" TextMode="multiline" CssClass="form-control txbEditable multitext" placeholder="Indicaciones del diseño" TabIndex="3"></asp:TextBox>
+                                            </div>
 
                                             <hr />
                                             <label class="_label">3) Datos de la entrega</label>
                                             <br />
-                                            <select name="ddlTipoEntrega" id="ddlTipoEntrega" class="dropdown txbEditable" runat="server" clientidmode="static">
+                                            <select name="ddlTipoEntrega" id="ddlTipoEntrega" class="dropdown txbEditable ctrl-required" runat="server" clientidmode="static">
                                                 <option disabled selected>Tipo de entrega</option>
                                                 <option id="colocacion">Colocación</option>
                                                 <option id="envio">Envío a domicilio</option>
@@ -209,20 +225,15 @@
                                                 <option id="taller">Retiro en taller</option>
                                             </select>
                                             <div class="form-group">
-                                                <input class="form-control txbEditable" placeholder="Dirección de colocación" type="text" tabindex="5" runat="server" id="txbDireccion" clientidmode="static" />
+                                                <input class="form-control txbEditable ctrl-required" placeholder="Ciudad de envío" type="text" tabindex="6" runat="server" id="txbCiudad" clientidmode="static" />
                                             </div>
                                             <div class="form-group">
-                                                <input class="form-control txbEditable" placeholder="Localidad de envío (Interior)" type="text" tabindex="6" runat="server" id="txbCiudad" clientidmode="static" />
-                                            </div>
-
-                                            <div class="form-group">
-                                                <input class="form-control txbEditable" placeholder="Día de colocación o envío sugerido" type="text" tabindex="7" runat="server" id="txbFecha" clientidmode="static" />
+                                                <%--<input class="form-control txbEditable" placeholder="Día de colocación o envío sugerido" type="text" tabindex="7" runat="server" id="txbFecha" clientidmode="static" />--%>
+                                                <input type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" id="txbFecha" tabindex="7" runat="server" clientidmode="static" />
                                             </div>
                                             <div class="form-group">
-                                                <button class="form-control btn btn-danger" clientidmode="static" name="Submit" type="submit" data-submit="...Confirmando" runat="server" id="btnConfirmar" onserverclick="btnConfirmar_ServerClick">GUARDAR</button>
-                                                <%--onclick="ShowProgress();"--%>
+                                                <input class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" tabindex="5" runat="server" id="txbDireccion" clientidmode="static" />
                                             </div>
-
                                             <div class="form-group">
 
                                                 <style>
@@ -232,13 +243,17 @@
                                                     }
                                                 </style>
 
-                                                <input type="text" id="mapSearch" size="50"/>
-                                                <div id="map-canvas"></div>
-
-                                                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5b9fHo2L4fPpJZhRehtJGUjdXfgPkbUE&libraries=places"></script>
+                                                <div class="form-group">
+                                                    <input type="text" id="mapSearch" class="form-control ctrl-required" placeholder="Dirección de entrega" />
+                                                    <div id="map-canvas" style="margin: auto; width: 100%;"></div>
+                                                    <p id="mapSearch_msg" style="font-size: small; color: red;">Asegúrese que la ubicación en el mapa sea la correcta por favor</p>
+                                                </div>
 
                                             </div>
 
+                                            <div class="form-group">
+                                                <button class="form-control btn btn-danger" clientidmode="static" name="Submit" type="submit" data-submit="...Confirmando" runat="server" id="btnConfirmar" onserverclick="btnConfirmar_ServerClick" style="background-image: none; background-color: #ea7209; height: 40px;">GUARDAR</button>
+                                            </div>
 
                                         </div>
                                         <div class="row">
@@ -269,9 +284,18 @@
                                             <div class="form-group">
                                                 Teléfono
                                                 <div class="row-special" style="display: flex;">
-                                                    <input class="form-control" id="txbCX_tel" readonly="true" style="width: 90%;" />
-                                                    <a href="#" class="pull-right btn" onclick="clientWhatsApp()">
+                                                    <input class="form-control" id="txbCX_tel" readonly="true" style="width: 90%; display: inline-block; margin-right: 10px;" />
+                                                    <a href="#" class="btn" style="padding: 5px; display: inline-block;" onclick="clientWhatsApp()">
                                                         <i class="fa fa-whatsapp fa-2x"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                Google Maps
+                                                <div class="row-special" style="display: flex;">
+                                                    <input class="form-control" id="txbCX_URL" readonly="true" style="width: 90%; display: inline-block; margin-right: 10px;" />
+                                                    <a href="#" class="btn" style="padding: 5px; display: inline-block;" onclick="clientGoogleMaps()">
+                                                        <i class="fa fa-map-marker fa-2x"></i>
                                                     </a>
                                                 </div>
                                             </div>
@@ -281,7 +305,6 @@
                                                     <input class="form-control" type="text" tabindex="5" runat="server" id="txbCX_dir" clientidmode="static" readonly="true" />
                                                 </div>
                                             </div>
-
 
                                         </div>
                                     </div>
@@ -309,5 +332,10 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADf3pOam_5HnhHHawjWJtcGcn7pv39AGA&libraries=places"></script>
+
+    <asp:HiddenField ID="hdnCurrentLocationURL" runat="server" ClientIDMode="Static" Value="0" />
+    <asp:HiddenField ID="hdnCurrentLAT" runat="server" ClientIDMode="Static" Value="0" />
+    <asp:HiddenField ID="hdnCurrentLNG" runat="server" ClientIDMode="Static" Value="0" />
     <asp:HiddenField ID="hdnPedidoCantidad" runat="server" ClientIDMode="Static" Value="1" />
 </asp:Content>

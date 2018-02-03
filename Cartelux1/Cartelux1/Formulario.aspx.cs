@@ -153,6 +153,7 @@ namespace Cartelux1
 
                                     hdnCurrentLAT.Value = _pedido_entrega.Coordenadas_X;
                                     hdnCurrentLNG.Value = _pedido_entrega.Coordenadas_Y;
+                                    hdnCurrentLocationURL.Value = _pedido_entrega.Google_maps_URL;
 
                                     if (_pedido_entrega.Entrega_Tipo_ID > 0)
                                     {

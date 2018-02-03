@@ -76,7 +76,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/16/2013 20:06:22</publishTime>
     </File>
     <File Include="bin/Cartelux1.dll">
-      <publishTime>01/25/2018 01:44:47</publishTime>
+      <publishTime>01/29/2018 20:10:53</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>03/02/2015 10:32:26</publishTime>
@@ -502,7 +502,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/30/2017 12:30:30</publishTime>
     </File>
     <File Include="Content/js/formulario.js">
-      <publishTime>01/25/2018 01:53:52</publishTime>
+      <publishTime>01/29/2018 19:51:37</publishTime>
     </File>
     <File Include="Content/js/generador.js">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -544,7 +544,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/11/2017 00:59:32</publishTime>
     </File>
     <File Include="Formulario.aspx">
-      <publishTime>01/25/2018 01:57:22</publishTime>
+      <publishTime>01/29/2018 20:10:21</publishTime>
     </File>
     <File Include="Formulario2.aspx">
       <publishTime>01/14/2018 17:54:48</publishTime>
@@ -562,7 +562,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/05/2017 01:27:21</publishTime>
     </File>
     <File Include="Models/CarteluxModel.edmx.diagram">
-      <publishTime>01/22/2018 02:08:44</publishTime>
+      <publishTime>01/26/2018 02:13:56</publishTime>
     </File>
     <File Include="NOTAS.txt">
       <publishTime>09/15/2017 22:38:03</publishTime>
@@ -679,7 +679,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/11/2017 00:59:40</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/25/2018 01:44:50</publishTime>
+      <publishTime>01/29/2018 20:10:55</publishTime>
     </File>
   </ItemGroup>
 </Project>

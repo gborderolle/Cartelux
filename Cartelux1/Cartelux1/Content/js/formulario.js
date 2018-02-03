@@ -1,4 +1,6 @@
-﻿$(document).ready(function() {
+﻿texto = "Hola, soy de Cartelux. ¡Un gusto!"
+
+$(document).ready(function () {
     var ID = getUrlParameter('ID');
     if (ID !== null && ID !== undefined && ID.length > 0) {
         //loadPreviousState();
@@ -23,9 +25,9 @@
     var hdnCurrentLAT = $("#hdnCurrentLAT").val();
     var hdnCurrentLNG = $("#hdnCurrentLNG").val();
     var hdnCurrentLocationURL = $("#hdnCurrentLocationURL").val();
-    if (hdnCurrentLAT !== null && hdnCurrentLAT !== undefined && hdnCurrentLAT.length > 0 && hdnCurrentLAT.length > "0" &&
-        hdnCurrentLNG !== null && hdnCurrentLNG !== undefined && hdnCurrentLNG.length > 0 && hdnCurrentLNG.length > "0" &&
-        hdnCurrentLocationURL !== null && hdnCurrentLocationURL !== undefined && hdnCurrentLNG.length > 0 && hdnCurrentLocationURL.length > "0") {
+    if (hdnCurrentLAT !== null && hdnCurrentLAT !== undefined && hdnCurrentLAT.length > 0 && hdnCurrentLAT !== "0" &&
+        hdnCurrentLNG !== null && hdnCurrentLNG !== undefined && hdnCurrentLNG.length > 0 && hdnCurrentLNG !== "0" &&
+        hdnCurrentLocationURL !== null && hdnCurrentLocationURL !== undefined && hdnCurrentLNG.length > 0 && hdnCurrentLocationURL !== "0") {
 
         _current_lat = hdnCurrentLAT;
         _current_lng = hdnCurrentLNG;
@@ -38,6 +40,12 @@
         _current_lng = -56.2050191;
         _current_completeURL = "";
     }
+
+    // Hide all controls
+    hideAllControls();
+
+    // Load enabled controls
+    loadPreviousState();
 
 }); // END On Ready
 
@@ -58,35 +66,66 @@ var getUrlParameter = function getUrlParameter(sParam) {
 
 function loadEvents() {
     $("#ddlTipoEntrega-menu li.ui-menu-item div").on("click", function() {
+
         var value = $(this).attr("id");
         if (value !== null && value.length > 0) {
+
+            // Hide all controls
+            hideAllControls();
+
             switch (value) {
                 case "ui-id-2":
                     { // Colocación
-                        readonlyControl(false, "txbDireccion");
-                        //readonlyControl(false, "ddlLugarEntrega");
-                        readonlyControl(true, "txbCiudad");
+
+                        // Show 
+                        showControl("txbDireccion", true);
+                        showControl("mapSearch", true);
+                        showControl("mapSearch_msg", true);
+                        showControl("map-canvas", true);
+
+                        // Hide
+                        showControl("txbCiudad", false);
+
                         break;
                     }
                 case "ui-id-3":
                     { // Envío
-                        readonlyControl(false, "txbDireccion");
-                        //readonlyControl(false, "ddlLugarEntrega");
-                        readonlyControl(true, "txbCiudad");
+
+                        // Show 
+                        showControl("txbDireccion", true);
+                        showControl("mapSearch", true);
+                        showControl("mapSearch_msg", true);
+                        showControl("map-canvas", true);
+
+                        // Hide
+                        showControl("txbCiudad", false);
+
                         break;
                     }
                 case "ui-id-4":
                     { // Interior
-                        readonlyControl(true, "txbDireccion");
-                        //readonlyControl(true, "ddlLugarEntrega");
-                        readonlyControl(false, "txbCiudad");
+
+                        // Show 
+                        showControl("txbCiudad", true);
+                        
+                        // Hide
+                        showControl("txbDireccion", false);
+                        showControl("mapSearch", false);
+                        showControl("mapSearch_msg", false);
+                        showControl("map-canvas", false);
+
                         break;
                     }
                 case "ui-id-5":
                     { // Taller
-                        readonlyControl(true, "txbDireccion");
-                        //readonlyControl(true, "ddlLugarEntrega");
-                        readonlyControl(true, "txbCiudad");
+
+                        // Hide
+                        showControl("txbCiudad", false);
+                        showControl("txbDireccion", false);
+                        showControl("mapSearch", false);
+                        showControl("mapSearch_msg", false);
+                        showControl("map-canvas", false);
+
                         break;
                     }
             }
@@ -95,35 +134,62 @@ function loadEvents() {
 }
 
 function loadPreviousState() {
-    var selectedIndex = $("#ddlTipoEntrega option:selected").index()
+    var selectedIndex = $("#ddlTipoEntrega option:selected").index();
     if (selectedIndex !== null && selectedIndex > 0) {
+
         switch (selectedIndex) {
             case 1:
                 { // Colocación
-                    readonlyControl(false, "txbDireccion");
-                    //readonlyControl(false, "ddlLugarEntrega");
-                    readonlyControl(true, "txbCiudad");
+
+                    // Show 
+                    showControl("txbDireccion", true);
+                    showControl("mapSearch", true);
+                    showControl("mapSearch_msg", true);
+                    showControl("map-canvas", true);
+
+                    // Hide
+                    showControl("txbCiudad", false);
+
                     break;
                 }
             case 2:
                 { // Envío
-                    readonlyControl(false, "txbDireccion");
-                    //readonlyControl(false, "ddlLugarEntrega");
-                    readonlyControl(true, "txbCiudad");
+
+                    // Show 
+                    showControl("txbDireccion", true);
+                    showControl("mapSearch", true);
+                    showControl("mapSearch_msg", false);
+                    showControl("map-canvas", true);
+
+                    // Hide
+                    showControl("txbCiudad", false);
+
                     break;
                 }
             case 3:
                 { // Interior
-                    readonlyControl(true, "txbDireccion");
-                    //readonlyControl(true, "ddlLugarEntrega");
-                    readonlyControl(false, "txbCiudad");
+
+                    // Show 
+                    showControl("txbCiudad", true);
+
+                    // Hide
+                    showControl("txbDireccion", false);
+                    showControl("mapSearch", false);
+                    showControl("mapSearch_msg", false);
+                    showControl("map-canvas", false);
+
                     break;
                 }
             case 4:
                 { // Taller
-                    readonlyControl(true, "txbDireccion");
-                    //readonlyControl(true, "ddlLugarEntrega");
-                    readonlyControl(true, "txbCiudad");
+
+                    // Hide
+                    showControl("txbCiudad", false);
+                    showControl("txbDireccion", false);
+                    showControl("mapSearch", false);
+                    showControl("mapSearch_msg", false);
+                    showControl("map-canvas", false);
+
                     break;
                 }
         }
@@ -134,38 +200,22 @@ function readonlyControl(doEnable, idControl) {
     $("#" + idControl).attr("readonly", doEnable);
 }
 
-function readonlyControl(doEnable, idControl) {
-    $("#" + idControl).attr("readonly", doEnable);
+function showControl(idControl, doShow) {
+    if (doShow) {
+        $("#" + idControl).show();
+    }
+    else {
+        $("#" + idControl).hide();
+    }
 }
 
-//function loadEvents() {
-//    //$("#ddlTipoEntrega").change(function () {
-//    //    var selectedValue = parseInt(jQuery(this).val());
-//    //    alert(selectedValue);
-
-//        ////Depend on Value i.e. 0 or 1 respective function gets called. 
-//        //switch (selectedValue) {
-//        //    case 0:
-//        //        handlerFunctionA();
-//        //        break;
-//        //    case 1:
-//        //        handlerFunctionB();
-//        //        break;
-//        //        //etc... 
-//        //    default:
-//        //        alert("catch default");
-//        //        break;
-//    //}
-
-//    $("#ddlTipoEntrega").on("change", function () {
-
-//        //// to get the value and id of selected option
-//        //var str = $('option:selected', this).attr('id');
-//        //var value = $('option:selected', this).attr('value');
-//        //alert(str);
-
-//    });
-//}
+function hideAllControls() {
+    showControl("txbCiudad", false);
+    showControl("txbDireccion", false);
+    showControl("mapSearch", false);
+    showControl("mapSearch_msg", false);
+    showControl("map-canvas", false);
+}
 
 function editFields() {
     setFieldsReadOnly(false);
@@ -193,6 +243,9 @@ function confirmacionPedido() {
         }
     });
 }
+
+
+
 
 /* JS Goolge Maps API - Search location with map */
 // Source: https://www.youtube.com/watch?v=2n_r0NDekgc
