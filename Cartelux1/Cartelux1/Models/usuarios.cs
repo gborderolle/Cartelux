@@ -12,12 +12,12 @@ namespace Cartelux1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class usuarios
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int Usuario_ID { get; set; }
+        public string Usuario { get; set; }
+        public string Clave { get; set; }
+        public int Rol_usuario_ID { get; set; }
+        public bool EsAdmin { get; set; }
     }
 }

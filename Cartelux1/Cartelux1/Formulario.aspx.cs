@@ -114,7 +114,7 @@ namespace Cartelux1
 
             if (!string.IsNullOrWhiteSpace(serie_str) && !string.IsNullOrWhiteSpace(tel_str))
             {
-                using (carteluxdbEntities context = new carteluxdbEntities())
+                using (CarteluxDB context = new CarteluxDB())
                 {
                     formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Serie.Equals(serie_str));
                     if (_formulario != null)
@@ -215,7 +215,7 @@ namespace Cartelux1
             }
         }
 
-        private clientes Get_Client(carteluxdbEntities context, int id)
+        private clientes Get_Client(CarteluxDB context, int id)
         {
             return (clientes)context.clientes.FirstOrDefault(v => v.Cliente_ID.Equals(id));
         }
@@ -269,7 +269,7 @@ namespace Cartelux1
 
             if (!string.IsNullOrWhiteSpace(serie_str) && !string.IsNullOrWhiteSpace(tel_str))
             {
-                using (carteluxdbEntities context = new carteluxdbEntities())
+                using (CarteluxDB context = new CarteluxDB())
                 {
                     formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Serie.Equals(serie_str));
                     _formulario = _formulario != null ? _formulario : new formularios();
@@ -399,7 +399,7 @@ namespace Cartelux1
             }
         }
 
-        private void Guardar_Contexto(carteluxdbEntities context)
+        private void Guardar_Contexto(CarteluxDB context)
         {
             // Logger variables
             System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
@@ -419,7 +419,7 @@ namespace Cartelux1
             }
         }
 
-        private void NEW_Pedido(carteluxdbEntities context, int formulario_ID)
+        private void NEW_Pedido(CarteluxDB context, int formulario_ID)
         {
             if (formulario_ID > 0)
             {
@@ -526,7 +526,7 @@ namespace Cartelux1
             }
         }
 
-        private int Get_NextPedido_EntregaID(carteluxdbEntities context)
+        private int Get_NextPedido_EntregaID(CarteluxDB context)
         {
             int id = 1;
             pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.OrderByDescending(p => p.Pedido_Entrega_ID).FirstOrDefault();
@@ -537,7 +537,7 @@ namespace Cartelux1
             return id;
         }
 
-        private int Get_NextPedido_DisenoID(carteluxdbEntities context)
+        private int Get_NextPedido_DisenoID(CarteluxDB context)
         {
             int id = 1;
             pedido_disenos _pedido_diseno = (pedido_disenos)context.pedido_disenos.OrderByDescending(p => p.Pedido_Diseno_ID).FirstOrDefault();
@@ -548,7 +548,7 @@ namespace Cartelux1
             return id;
         }
 
-        private int NEW_Cliente(carteluxdbEntities context)
+        private int NEW_Cliente(CarteluxDB context)
         {
             int ret_ID = 0;
             string client_tel = txbTel.Value;
@@ -578,7 +578,7 @@ namespace Cartelux1
             return ret_ID;
         }
 
-        private int Get_NextClientID(carteluxdbEntities context)
+        private int Get_NextClientID(CarteluxDB context)
         {
             int id = 1;
             clientes cliente = (clientes)context.clientes.OrderByDescending(p => p.Cliente_ID).FirstOrDefault();
@@ -589,7 +589,7 @@ namespace Cartelux1
             return id;
         }
 
-        private int Get_NextFormularioID(carteluxdbEntities context)
+        private int Get_NextFormularioID(CarteluxDB context)
         {
             int id = 1;
             formularios _formulario = (formularios)context.formularios.OrderByDescending(p => p.Formulario_ID).FirstOrDefault();
@@ -622,7 +622,7 @@ namespace Cartelux1
                 /* ******** Global variables ******** */
                 string repoFilename = "", fullLocalPath = "", relativeLocalPath = "";
 
-                using (carteluxdbEntities context = new carteluxdbEntities())
+                using (CarteluxDB context = new CarteluxDB())
                 {
                     formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Serie.Equals(serie_str));
                     if (_formulario != null)
@@ -771,7 +771,7 @@ namespace Cartelux1
 
                 if (!string.IsNullOrWhiteSpace(file_extension))
                 {
-                    using (carteluxdbEntities context = new carteluxdbEntities())
+                    using (CarteluxDB context = new CarteluxDB())
                     {
                         formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Serie.Equals(serie_str));
                         if (_formulario != null)
@@ -898,7 +898,7 @@ namespace Cartelux1
 
                 if (!string.IsNullOrWhiteSpace(file_extension))
                 {
-                    using (carteluxdbEntities context = new carteluxdbEntities())
+                    using (CarteluxDB context = new CarteluxDB())
                     {
                         formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Serie.Equals(serie_str));
                         if (_formulario != null)
@@ -1034,7 +1034,7 @@ namespace Cartelux1
 
             /* ******** Global variables ******** */
 
-            using (carteluxdbEntities context = new carteluxdbEntities())
+            using (CarteluxDB context = new CarteluxDB())
             {
                 formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Serie.Equals(serie_str));
                 if (_formulario != null)

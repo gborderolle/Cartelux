@@ -13,10 +13,10 @@ namespace Cartelux1.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class carteluxdbEntities : DbContext
+    public partial class CarteluxDB : DbContext
     {
-        public carteluxdbEntities()
-            : base("name=carteluxdbEntities")
+        public CarteluxDB()
+            : base("name=CarteluxDB")
         {
         }
     
@@ -34,8 +34,8 @@ namespace Cartelux1.Models
         public virtual DbSet<lista_pedido_tematicas> lista_pedido_tematicas { get; set; }
         public virtual DbSet<lista_pedido_tipos> lista_pedido_tipos { get; set; }
         public virtual DbSet<pedido_disenos> pedido_disenos { get; set; }
-        public virtual DbSet<pedidos> pedidos { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<pedido_entregas> pedido_entregas { get; set; }
+        public virtual DbSet<pedidos> pedidos { get; set; }
+        public virtual DbSet<usuarios> usuarios { get; set; }
     }
 }

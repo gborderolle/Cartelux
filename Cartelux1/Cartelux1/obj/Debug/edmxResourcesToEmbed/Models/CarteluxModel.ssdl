@@ -27,15 +27,6 @@
     <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
     <Property Name="Fecha_update" Type="datetime" Nullable="false" />
   </EntityType>
-  <EntityType Name="lista_departamentos">
-    <Key>
-      <PropertyRef Name="Departamento_ID" />
-    </Key>
-    <Property Name="Departamento_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Codigo" Type="varchar" MaxLength="3" Nullable="false" />
-    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
-  </EntityType>
   <EntityType Name="lista_entregas_tipos">
     <Key>
       <PropertyRef Name="Entrega_Tipo_ID" />
@@ -44,70 +35,6 @@
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Codigo" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="100" />
-  </EntityType>
-  <EntityType Name="lista_pedido_materiales">
-    <Key>
-      <PropertyRef Name="Pedido_Material_ID" />
-    </Key>
-    <Property Name="Pedido_Material_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Codigo" Type="varchar" MaxLength="3" Nullable="false" />
-    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
-  </EntityType>
-  <EntityType Name="lista_pedido_tamanos">
-    <Key>
-      <PropertyRef Name="Pedido_Tamano_ID" />
-    </Key>
-    <Property Name="Pedido_Tamano_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Codigo" Type="varchar" MaxLength="3" Nullable="false" />
-    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
-  </EntityType>
-  <EntityType Name="lista_pedido_tematicas">
-    <Key>
-      <PropertyRef Name="Pedido_Tematica_ID" />
-    </Key>
-    <Property Name="Pedido_Tematica_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Codigo" Type="varchar" MaxLength="3" Nullable="false" />
-    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
-  </EntityType>
-  <EntityType Name="lista_pedido_tipos">
-    <Key>
-      <PropertyRef Name="Pedido_Tipo_ID" />
-    </Key>
-    <Property Name="Pedido_Tipo_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Codigo" Type="varchar" MaxLength="3" Nullable="false" />
-    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
-  </EntityType>
-  <EntityType Name="pedido_disenos">
-    <Key>
-      <PropertyRef Name="Pedido_Diseno_ID" />
-    </Key>
-    <Property Name="Pedido_Diseno_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Codigo_guia" Type="int" />
-    <Property Name="Texto" Type="varchar" MaxLength="100" />
-    <Property Name="Boceto_nombre" Type="varchar" MaxLength="30" />
-    <Property Name="Boceto_extension" Type="varchar" MaxLength="10" />
-    <Property Name="Boceto_PATH" Type="varchar" MaxLength="100" />
-  </EntityType>
-  <EntityType Name="pedido_entregas">
-    <Key>
-      <PropertyRef Name="Pedido_Entrega_ID" />
-    </Key>
-    <Property Name="Pedido_Entrega_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Entrega_Tipo_ID" Type="int" Nullable="false" />
-    <Property Name="Departamento_Tipo_ID" Type="int" />
-    <Property Name="Direccion" Type="varchar" MaxLength="300" />
-    <Property Name="Indicaciones" Type="varchar" MaxLength="100" />
-    <Property Name="Barrio" Type="varchar" MaxLength="50" />
-    <Property Name="Ciudad" Type="varchar" MaxLength="50" />
-    <Property Name="Fecha_entrega" Type="varchar" MaxLength="50" />
-    <Property Name="Comentarios" Type="varchar" MaxLength="200" />
-    <Property Name="Google_maps_URL" Type="varchar" MaxLength="300" />
-    <Property Name="Coordenadas_Y" Type="varchar" MaxLength="200" />
-    <Property Name="Coordenadas_X" Type="varchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="pedidos">
     <Key>
@@ -123,28 +50,21 @@
     <Property Name="Pedido_Entrega_ID" Type="int" Nullable="false" />
     <Property Name="Cantidad" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
+  <EntityType Name="usuarios">
     <Key>
-      <PropertyRef Name="diagram_id" />
+      <PropertyRef Name="Usuario_ID" />
     </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
+    <Property Name="Usuario_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Usuario" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Clave" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Rol_usuario_ID" Type="int" Nullable="false" />
+    <Property Name="EsAdmin" Type="bit" Nullable="false" />
   </EntityType>
   <EntityContainer Name="carteluxdbModelStoreContainer">
     <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="formularios" EntityType="Self.formularios" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="lista_departamentos" EntityType="Self.lista_departamentos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_entregas_tipos" EntityType="Self.lista_entregas_tipos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="lista_pedido_materiales" EntityType="Self.lista_pedido_materiales" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="lista_pedido_tamanos" EntityType="Self.lista_pedido_tamanos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="lista_pedido_tematicas" EntityType="Self.lista_pedido_tematicas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="lista_pedido_tipos" EntityType="Self.lista_pedido_tipos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="pedido_disenos" EntityType="Self.pedido_disenos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="pedido_entregas" EntityType="Self.pedido_entregas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="pedidos" EntityType="Self.pedidos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

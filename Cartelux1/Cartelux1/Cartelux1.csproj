@@ -33,6 +33,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -208,7 +209,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="About.aspx" />
+    <Content Include="Acceso.aspx" />
     <Content Include="Account\AddPhoneNumber.aspx" />
     <Content Include="Account\Confirm.aspx" />
     <Content Include="Account\Forgot.aspx" />
@@ -226,7 +227,6 @@
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="Cartelux-bolas-ico2.ico" />
     <Content Include="Cartelux1.ico" />
-    <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap\css\bootstrap-grid.css" />
@@ -257,6 +257,8 @@
     <Content Include="Content\css\jquery-ui.structure.min.css" />
     <Content Include="Content\css\jquery-ui.theme.min.css" />
     <Content Include="Content\css\jquery.qtip.min.css" />
+    <Content Include="Content\css\login-styles.css" />
+    <Content Include="Content\css\login.css" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -264,6 +266,7 @@
     <Content Include="Content\img\Background.jpg" />
     <Content Include="Content\img\Cartelux-bolas-ico2.ico" />
     <Content Include="Content\img\Cartelux1.ico" />
+    <Content Include="Content\img\CX-2.png" />
     <Content Include="Content\img\CX-Banner-form.jpg" />
     <Content Include="Content\img\CX-Banner-form1.png" />
     <Content Include="Content\img\Dropbox_logo.png" />
@@ -274,7 +277,9 @@
     <Content Include="Content\js\jquery-ui.js" />
     <Content Include="Content\js\jquery.js" />
     <Content Include="Content\js\jquery.qtip.min.js" />
+    <Content Include="Content\js\login.js" />
     <Content Include="Content\Site.css" />
+    <Content Include="Dashboard.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -283,13 +288,16 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\CarteluxModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CarteluxModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <Content Include="Global_Objects\Messages.js" />
-    <Content Include="Models\CarteluxModel.edmx.diagram">
-      <DependentUpon>CarteluxModel.edmx</DependentUpon>
+    <Content Include="Models\CarteluxDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CarteluxDB.edmx</DependentUpon>
+      <LastGenOutput>CarteluxDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\CarteluxDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CarteluxDB.edmx</DependentUpon>
+      <LastGenOutput>CarteluxDB.cs</LastGenOutput>
     </Content>
     <Content Include="Content\bootstrap\css\bootstrap-grid.css.map" />
     <Content Include="Content\bootstrap\css\bootstrap-grid.min.css.map" />
@@ -334,18 +342,15 @@
     <Content Include="Content\font-awesome\scss\_screen-reader.scss" />
     <Content Include="Content\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\font-awesome\scss\_variables.scss" />
+    <EntityDeploy Include="Models\CarteluxDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CarteluxDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\CarteluxDB.edmx.diagram">
+      <DependentUpon>CarteluxDB.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\File System.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Models\CarteluxModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CarteluxModel.edmx</DependentUpon>
-      <LastGenOutput>CarteluxModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\CarteluxModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CarteluxModel.edmx</DependentUpon>
-      <LastGenOutput>CarteluxModel.cs</LastGenOutput>
-    </Content>
     <Content Include="NOTAS.txt" />
     <Content Include="Formulario.aspx" />
     <Content Include="GeneradorURL.aspx" />
@@ -374,11 +379,9 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
-    <Content Include="Test1.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -395,6 +398,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Acceso.aspx.cs">
+      <DependentUpon>Acceso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Acceso.aspx.designer.cs">
+      <DependentUpon>Acceso.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Account\AddPhoneNumber.aspx.cs">
       <DependentUpon>AddPhoneNumber.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -501,55 +511,41 @@
       <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="About.aspx.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="About.aspx.designer.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Contact.aspx.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
+    <Compile Include="Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Contact.aspx.designer.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Global_Objects\Logs.cs" />
     <Compile Include="Global_Objects\Utilities.cs" />
-    <Compile Include="Models\CarteluxModel.Context.cs">
+    <Compile Include="Models\CarteluxDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CarteluxModel.Context.tt</DependentUpon>
+      <DependentUpon>CarteluxDB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CarteluxModel.cs">
+    <Compile Include="Models\CarteluxDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CarteluxModel.tt</DependentUpon>
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CarteluxModel.Designer.cs">
+    <Compile Include="Models\CarteluxDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CarteluxModel.edmx</DependentUpon>
+      <DependentUpon>CarteluxDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\clientes.cs">
-      <DependentUpon>CarteluxModel.tt</DependentUpon>
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\formularios.cs">
-      <DependentUpon>CarteluxModel.tt</DependentUpon>
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Formulario.aspx.cs">
@@ -567,34 +563,34 @@
       <DependentUpon>GeneradorURL.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\lista_departamentos.cs">
-      <DependentUpon>CarteluxModel.tt</DependentUpon>
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\lista_entregas_tipos.cs">
-      <DependentUpon>CarteluxModel.tt</DependentUpon>
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\lista_pedido_materiales.cs">
-      <DependentUpon>CarteluxModel.tt</DependentUpon>
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\lista_pedido_tamanos.cs">
-      <DependentUpon>CarteluxModel.tt</DependentUpon>
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\lista_pedido_tematicas.cs">
-      <DependentUpon>CarteluxModel.tt</DependentUpon>
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\lista_pedido_tipos.cs">
-      <DependentUpon>CarteluxModel.tt</DependentUpon>
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pedidos.cs">
-      <DependentUpon>CarteluxModel.tt</DependentUpon>
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pedido_disenos.cs">
-      <DependentUpon>CarteluxModel.tt</DependentUpon>
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pedido_entregas.cs">
-      <DependentUpon>CarteluxModel.tt</DependentUpon>
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>CarteluxModel.tt</DependentUpon>
+    <Compile Include="Models\usuarios.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
@@ -612,13 +608,6 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="Test1.aspx.cs">
-      <DependentUpon>Test1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Test1.aspx.designer.cs">
-      <DependentUpon>Test1.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

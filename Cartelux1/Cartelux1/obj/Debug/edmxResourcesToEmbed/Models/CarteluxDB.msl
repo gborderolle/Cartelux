@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="carteluxdb1ModelStoreContainer" CdmEntityContainer="CarteluxDB">
+    <EntitySetMapping Name="clientes">
+      <EntityTypeMapping TypeName="carteluxdb1Model.clientes">
+        <MappingFragment StoreEntitySet="clientes">
+          <ScalarProperty Name="Cliente_ID" ColumnName="Cliente_ID" />
+          <ScalarProperty Name="Departamento_ID" ColumnName="Departamento_ID" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Barrio" ColumnName="Barrio" />
+          <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+          <ScalarProperty Name="Fecha_creado" ColumnName="Fecha_creado" />
+          <ScalarProperty Name="Fecha_update" ColumnName="Fecha_update" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="formularios">
+      <EntityTypeMapping TypeName="carteluxdb1Model.formularios">
+        <MappingFragment StoreEntitySet="formularios">
+          <ScalarProperty Name="Formulario_ID" ColumnName="Formulario_ID" />
+          <ScalarProperty Name="Cliente_ID" ColumnName="Cliente_ID" />
+          <ScalarProperty Name="Serie" ColumnName="Serie" />
+          <ScalarProperty Name="URL_short" ColumnName="URL_short" />
+          <ScalarProperty Name="URL_completa" ColumnName="URL_completa" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+          <ScalarProperty Name="Fecha_creado" ColumnName="Fecha_creado" />
+          <ScalarProperty Name="Fecha_update" ColumnName="Fecha_update" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lista_departamentos">
+      <EntityTypeMapping TypeName="carteluxdb1Model.lista_departamentos">
+        <MappingFragment StoreEntitySet="lista_departamentos">
+          <ScalarProperty Name="Departamento_ID" ColumnName="Departamento_ID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lista_entregas_tipos">
+      <EntityTypeMapping TypeName="carteluxdb1Model.lista_entregas_tipos">
+        <MappingFragment StoreEntitySet="lista_entregas_tipos">
+          <ScalarProperty Name="Entrega_Tipo_ID" ColumnName="Entrega_Tipo_ID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lista_pedido_materiales">
+      <EntityTypeMapping TypeName="carteluxdb1Model.lista_pedido_materiales">
+        <MappingFragment StoreEntitySet="lista_pedido_materiales">
+          <ScalarProperty Name="Pedido_Material_ID" ColumnName="Pedido_Material_ID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lista_pedido_tamanos">
+      <EntityTypeMapping TypeName="carteluxdb1Model.lista_pedido_tamanos">
+        <MappingFragment StoreEntitySet="lista_pedido_tamanos">
+          <ScalarProperty Name="Pedido_Tamano_ID" ColumnName="Pedido_Tamano_ID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lista_pedido_tematicas">
+      <EntityTypeMapping TypeName="carteluxdb1Model.lista_pedido_tematicas">
+        <MappingFragment StoreEntitySet="lista_pedido_tematicas">
+          <ScalarProperty Name="Pedido_Tematica_ID" ColumnName="Pedido_Tematica_ID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lista_pedido_tipos">
+      <EntityTypeMapping TypeName="carteluxdb1Model.lista_pedido_tipos">
+        <MappingFragment StoreEntitySet="lista_pedido_tipos">
+          <ScalarProperty Name="Pedido_Tipo_ID" ColumnName="Pedido_Tipo_ID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pedido_disenos">
+      <EntityTypeMapping TypeName="carteluxdb1Model.pedido_disenos">
+        <MappingFragment StoreEntitySet="pedido_disenos">
+          <ScalarProperty Name="Pedido_Diseno_ID" ColumnName="Pedido_Diseno_ID" />
+          <ScalarProperty Name="Codigo_guia" ColumnName="Codigo_guia" />
+          <ScalarProperty Name="Texto" ColumnName="Texto" />
+          <ScalarProperty Name="Boceto_nombre" ColumnName="Boceto_nombre" />
+          <ScalarProperty Name="Boceto_extension" ColumnName="Boceto_extension" />
+          <ScalarProperty Name="Boceto_PATH" ColumnName="Boceto_PATH" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pedido_entregas">
+      <EntityTypeMapping TypeName="carteluxdb1Model.pedido_entregas">
+        <MappingFragment StoreEntitySet="pedido_entregas">
+          <ScalarProperty Name="Pedido_Entrega_ID" ColumnName="Pedido_Entrega_ID" />
+          <ScalarProperty Name="Entrega_Tipo_ID" ColumnName="Entrega_Tipo_ID" />
+          <ScalarProperty Name="Departamento_Tipo_ID" ColumnName="Departamento_Tipo_ID" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Indicaciones" ColumnName="Indicaciones" />
+          <ScalarProperty Name="Barrio" ColumnName="Barrio" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+          <ScalarProperty Name="Fecha_entrega" ColumnName="Fecha_entrega" />
+          <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+          <ScalarProperty Name="Google_maps_URL" ColumnName="Google_maps_URL" />
+          <ScalarProperty Name="Coordenadas_Y" ColumnName="Coordenadas_Y" />
+          <ScalarProperty Name="Coordenadas_X" ColumnName="Coordenadas_X" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pedidos">
+      <EntityTypeMapping TypeName="carteluxdb1Model.pedidos">
+        <MappingFragment StoreEntitySet="pedidos">
+          <ScalarProperty Name="Pedido_ID" ColumnName="Pedido_ID" />
+          <ScalarProperty Name="Formulario_ID" ColumnName="Formulario_ID" />
+          <ScalarProperty Name="Pedido_Tipo_ID" ColumnName="Pedido_Tipo_ID" />
+          <ScalarProperty Name="Pedido_Material_ID" ColumnName="Pedido_Material_ID" />
+          <ScalarProperty Name="Pedido_Tamano_ID" ColumnName="Pedido_Tamano_ID" />
+          <ScalarProperty Name="Pedido_Tematica_ID" ColumnName="Pedido_Tematica_ID" />
+          <ScalarProperty Name="Pedido_Diseno_ID" ColumnName="Pedido_Diseno_ID" />
+          <ScalarProperty Name="Pedido_Entrega_ID" ColumnName="Pedido_Entrega_ID" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuarios">
+      <EntityTypeMapping TypeName="carteluxdb1Model.usuarios">
+        <MappingFragment StoreEntitySet="usuarios">
+          <ScalarProperty Name="Usuario_ID" ColumnName="Usuario_ID" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Clave" ColumnName="Clave" />
+          <ScalarProperty Name="Rol_usuario_ID" ColumnName="Rol_usuario_ID" />
+          <ScalarProperty Name="EsAdmin" ColumnName="EsAdmin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
