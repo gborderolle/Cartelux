@@ -21,10 +21,11 @@ namespace Cartelux1.Models
         public string Indicaciones { get; set; }
         public string Barrio { get; set; }
         public string Ciudad { get; set; }
-        public string Fecha_entrega { get; set; }
-        public string Comentarios { get; set; }
         public string Google_maps_URL { get; set; }
         public string Coordenadas_Y { get; set; }
         public string Coordenadas_X { get; set; }
+        public Nullable<System.DateTime> Fecha_entrega { get; set; }
+        public bool Tiene_fecha_entrega { get; set; }
+        public string Comentarios { get; set; }
     }
 }

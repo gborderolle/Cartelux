@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -148,7 +149,8 @@ namespace Cartelux1
                                 {
                                     txbCX_dir.Value = _pedido_entrega.Direccion;
                                     txbDireccion.Value = _pedido_entrega.Direccion;
-                                    txbFecha.Value = _pedido_entrega.Fecha_entrega;
+                                    txbFecha.Value = _pedido_entrega.Fecha_entrega.ToString();
+
                                     txbCiudad.Value = _pedido_entrega.Ciudad;
 
                                     hdnCurrentLAT.Value = _pedido_entrega.Coordenadas_X;
@@ -364,7 +366,8 @@ namespace Cartelux1
                             if (_pedido_entrega != null)
                             {
                                 _pedido_entrega.Direccion = txbDireccion.Value;
-                                _pedido_entrega.Fecha_entrega = txbFecha.Value;
+
+                                _pedido_entrega.Fecha_entrega = GetDatetimeFormated(txbFecha.Value);
 
                                 if (ddlTipoEntrega.SelectedIndex > 0)
                                 {
@@ -397,6 +400,26 @@ namespace Cartelux1
                 Logs.AddErrorLog("Error. FormID no válido. ERROR:", className, methodName, serie_str);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>alert('Error interno. \nComunícate con el equipo de Cartelux por favor.'); </script>", false);
             }
+        }
+
+        private DateTime GetDatetimeFormated(string fecha_str)
+        {
+            // Logger variables
+            System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
+            System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+            string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+            string methodName = stackFrame.GetMethod().Name;
+
+            DateTime date = DateTime.MinValue;
+            if (!string.IsNullOrWhiteSpace(fecha_str))
+            {
+                if (!DateTime.TryParseExact(fecha_str, GlobalVariables.ShortDateTime_format, CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out date))
+                {
+                    date = DateTime.MinValue;
+                    Logs.AddErrorLog("Excepcion. Convirtiendo datetime. ERROR:", className, methodName, fecha_str);
+                }
+            }
+            return date;
         }
 
         private void Guardar_Contexto(CarteluxDB context)
@@ -501,7 +524,7 @@ namespace Cartelux1
                 }
 
                 _pedido_entrega.Direccion = txbDireccion.Value;
-                _pedido_entrega.Fecha_entrega = txbFecha.Value;
+                _pedido_entrega.Fecha_entrega = GetDatetimeFormated(txbFecha.Value);
 
                 // Save current LAT and LNG
                 if (!string.IsNullOrWhiteSpace(hdnCurrentLAT.Value) && !string.IsNullOrWhiteSpace(hdnCurrentLNG.Value) && !string.IsNullOrWhiteSpace(hdnCurrentLocationURL.Value))

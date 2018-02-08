@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="carteluxdb1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="carteluxdb1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="clientes">
           <Key>
             <PropertyRef Name="Cliente_ID" />
@@ -108,11 +108,12 @@
           <Property Name="Indicaciones" Type="varchar" MaxLength="100" />
           <Property Name="Barrio" Type="varchar" MaxLength="50" />
           <Property Name="Ciudad" Type="varchar" MaxLength="50" />
-          <Property Name="Fecha_entrega" Type="varchar" MaxLength="50" />
-          <Property Name="Comentarios" Type="varchar" MaxLength="200" />
           <Property Name="Google_maps_URL" Type="varchar" MaxLength="300" />
           <Property Name="Coordenadas_Y" Type="varchar" MaxLength="200" />
           <Property Name="Coordenadas_X" Type="varchar" MaxLength="200" />
+          <Property Name="Fecha_entrega" Type="datetime" />
+          <Property Name="Tiene_fecha_entrega" Type="bit" Nullable="false" />
+          <Property Name="Comentarios" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="pedidos">
           <Key>
@@ -127,6 +128,16 @@
           <Property Name="Pedido_Diseno_ID" Type="int" Nullable="false" />
           <Property Name="Pedido_Entrega_ID" Type="int" Nullable="false" />
           <Property Name="Cantidad" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="usuarios">
           <Key>
@@ -150,10 +161,10 @@
           <EntitySet Name="pedido_disenos" EntityType="Self.pedido_disenos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pedido_entregas" EntityType="Self.pedido_entregas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pedidos" EntityType="Self.pedidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="carteluxdb1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -249,23 +260,6 @@
           <Property Name="Boceto_extension" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Boceto_PATH" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="pedido_entregas">
-          <Key>
-            <PropertyRef Name="Pedido_Entrega_ID" />
-          </Key>
-          <Property Name="Pedido_Entrega_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Entrega_Tipo_ID" Type="Int32" Nullable="false" />
-          <Property Name="Departamento_Tipo_ID" Type="Int32" />
-          <Property Name="Direccion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="Indicaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_entrega" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Google_maps_URL" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="Coordenadas_Y" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Coordenadas_X" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="pedidos">
           <Key>
             <PropertyRef Name="Pedido_ID" />
@@ -300,10 +294,39 @@
           <EntitySet Name="lista_pedido_tematicas" EntityType="Self.lista_pedido_tematicas" />
           <EntitySet Name="lista_pedido_tipos" EntityType="Self.lista_pedido_tipos" />
           <EntitySet Name="pedido_disenos" EntityType="Self.pedido_disenos" />
-          <EntitySet Name="pedido_entregas" EntityType="Self.pedido_entregas" />
           <EntitySet Name="pedidos" EntityType="Self.pedidos" />
           <EntitySet Name="usuarios" EntityType="Self.usuarios" />
+          <EntitySet Name="pedido_entregas" EntityType="carteluxdb1Model.pedido_entregas" />
+          <EntitySet Name="sysdiagrams" EntityType="carteluxdb1Model.sysdiagrams" />
         </EntityContainer>
+        <EntityType Name="pedido_entregas">
+          <Key>
+            <PropertyRef Name="Pedido_Entrega_ID" />
+          </Key>
+          <Property Name="Pedido_Entrega_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Entrega_Tipo_ID" Type="Int32" Nullable="false" />
+          <Property Name="Departamento_Tipo_ID" Type="Int32" />
+          <Property Name="Direccion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Indicaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Google_maps_URL" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Coordenadas_Y" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Coordenadas_X" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_entrega" Type="DateTime" Precision="3" />
+          <Property Name="Tiene_fecha_entrega" Type="Boolean" Nullable="false" />
+          <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -411,24 +434,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="pedido_entregas">
-            <EntityTypeMapping TypeName="carteluxdb1Model.pedido_entregas">
-              <MappingFragment StoreEntitySet="pedido_entregas">
-                <ScalarProperty Name="Pedido_Entrega_ID" ColumnName="Pedido_Entrega_ID" />
-                <ScalarProperty Name="Entrega_Tipo_ID" ColumnName="Entrega_Tipo_ID" />
-                <ScalarProperty Name="Departamento_Tipo_ID" ColumnName="Departamento_Tipo_ID" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="Indicaciones" ColumnName="Indicaciones" />
-                <ScalarProperty Name="Barrio" ColumnName="Barrio" />
-                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
-                <ScalarProperty Name="Fecha_entrega" ColumnName="Fecha_entrega" />
-                <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
-                <ScalarProperty Name="Google_maps_URL" ColumnName="Google_maps_URL" />
-                <ScalarProperty Name="Coordenadas_Y" ColumnName="Coordenadas_Y" />
-                <ScalarProperty Name="Coordenadas_X" ColumnName="Coordenadas_X" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="pedidos">
             <EntityTypeMapping TypeName="carteluxdb1Model.pedidos">
               <MappingFragment StoreEntitySet="pedidos">
@@ -452,6 +457,36 @@
                 <ScalarProperty Name="Clave" ColumnName="Clave" />
                 <ScalarProperty Name="Rol_usuario_ID" ColumnName="Rol_usuario_ID" />
                 <ScalarProperty Name="EsAdmin" ColumnName="EsAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pedido_entregas">
+            <EntityTypeMapping TypeName="carteluxdb1Model.pedido_entregas">
+              <MappingFragment StoreEntitySet="pedido_entregas">
+                <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+                <ScalarProperty Name="Tiene_fecha_entrega" ColumnName="Tiene_fecha_entrega" />
+                <ScalarProperty Name="Fecha_entrega" ColumnName="Fecha_entrega" />
+                <ScalarProperty Name="Coordenadas_X" ColumnName="Coordenadas_X" />
+                <ScalarProperty Name="Coordenadas_Y" ColumnName="Coordenadas_Y" />
+                <ScalarProperty Name="Google_maps_URL" ColumnName="Google_maps_URL" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Barrio" ColumnName="Barrio" />
+                <ScalarProperty Name="Indicaciones" ColumnName="Indicaciones" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Departamento_Tipo_ID" ColumnName="Departamento_Tipo_ID" />
+                <ScalarProperty Name="Entrega_Tipo_ID" ColumnName="Entrega_Tipo_ID" />
+                <ScalarProperty Name="Pedido_Entrega_ID" ColumnName="Pedido_Entrega_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="carteluxdb1Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,4 +1,8 @@
-﻿#btnSearch{
+﻿.btn-table{
+    width: 100%;
+}
+
+#btnSearch{
     color: black;
 }
 

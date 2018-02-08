@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
+using System.IO;
+using System.Reflection;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Microsoft.AspNet.Identity;
-using System.Reflection;
-using System.IO;
 
 namespace Cartelux1
 {
-    public partial class SiteMaster : MasterPage
+    public partial class SiteExternal : System.Web.UI.MasterPage
     {
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
@@ -71,17 +71,7 @@ namespace Cartelux1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserID"] != null && Session["UserName"] != null)
-            {
-                if (!IsPostBack)
-                {
-                    build_date = GetLinkerTime(Assembly.GetExecutingAssembly()).ToString();
-                }
-            }
-            else
-            {
-                Response.Redirect("/Acceso.aspx");
-            }
+            build_date = GetLinkerTime(Assembly.GetExecutingAssembly()).ToString();
         }
 
         public static DateTime GetLinkerTime(Assembly assembly, TimeZoneInfo target = null)

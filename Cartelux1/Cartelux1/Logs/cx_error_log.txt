@@ -33,3 +33,9 @@ Parameter name: value.
 1/25/2018 12:29:02 AM: [ln:1137] Formulario: UploadMegaAPI() - Excepcion. URL: TRABAJOS/.
 1/25/2018 12:29:12 AM: [ln:1136] Formulario: UploadMegaAPI() - Excepcion. Copiando archivo al server y guardando en BD. ERROR: Sequence contains more than one matching element.
 1/25/2018 12:29:12 AM: [ln:1137] Formulario: UploadMegaAPI() - Excepcion. URL: TRABAJOS/.
+2/8/2018 12:32:14 AM: [ln:74] Acceso: Perform_login() - Excepcion. Haciendo login. ERROR: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server).
+2/8/2018 12:33:22 AM: [ln:74] Acceso: Perform_login() - Excepcion. Haciendo login. ERROR: An error occurred while executing the command definition. See the inner exception for details..
+2/8/2018 12:33:29 AM: [ln:74] Acceso: Perform_login() - Excepcion. Haciendo login. ERROR: An error occurred while executing the command definition. See the inner exception for details..
+2/8/2018 12:33:52 AM: [ln:74] Acceso: Perform_login() - Excepcion. Haciendo login. ERROR: An error occurred while executing the command definition. See the inner exception for details..
+2/8/2018 12:33:58 AM: [ln:74] Acceso: Perform_login() - Excepcion. Haciendo login. ERROR: An error occurred while executing the command definition. See the inner exception for details..
+2/8/2018 12:35:13 AM: [ln:74] Acceso: Perform_login() - Excepcion. Haciendo login. ERROR: An error occurred while executing the command definition. See the inner exception for details..

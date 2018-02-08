@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Reflection;
 
 namespace Cartelux1
 {
-    public partial class Site_Mobile : System.Web.UI.MasterPage
+    public partial class SiteExternal_Mobile : System.Web.UI.MasterPage
     {
         private string build_date;
         public string Build_date { get { return build_date; } }

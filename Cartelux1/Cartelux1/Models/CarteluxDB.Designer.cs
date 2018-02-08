@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Gonzalo\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\Models\CarteluxDB.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\Models\CarteluxDB.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

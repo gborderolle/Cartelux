@@ -243,6 +243,10 @@
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\bootstrap\js\tether.min.js" />
+    <Content Include="Content\css\chosen-sprite%402x.png" />
+    <Content Include="Content\css\chosen-sprite.png" />
+    <Content Include="Content\css\chosen.css" />
+    <Content Include="Content\css\dashboard.css" />
     <Content Include="Content\css\formulario.css" />
     <Content Include="Content\css\generador.css" />
     <Content Include="Content\css\images\ui-icons_444444_256x240.png" />
@@ -256,9 +260,12 @@
     <Content Include="Content\css\jquery-ui.structure.css" />
     <Content Include="Content\css\jquery-ui.structure.min.css" />
     <Content Include="Content\css\jquery-ui.theme.min.css" />
+    <Content Include="Content\css\jquery.modal.css" />
     <Content Include="Content\css\jquery.qtip.min.css" />
     <Content Include="Content\css\login-styles.css" />
     <Content Include="Content\css\login.css" />
+    <Content Include="Content\css\Modal_styles.css" />
+    <Content Include="Content\css\MonthPicker.css" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -271,13 +278,20 @@
     <Content Include="Content\img\CX-Banner-form1.png" />
     <Content Include="Content\img\Dropbox_logo.png" />
     <Content Include="Content\img\loader.gif" />
+    <Content Include="Content\js\auxiliar_functions.js" />
+    <Content Include="Content\js\chosen.jquery.js" />
     <Content Include="Content\js\clipboard.min.js" />
+    <Content Include="Content\js\dashboard.js" />
     <Content Include="Content\js\formulario.js" />
     <Content Include="Content\js\generador.js" />
     <Content Include="Content\js\jquery-ui.js" />
     <Content Include="Content\js\jquery.js" />
+    <Content Include="Content\js\jquery.modal.js" />
     <Content Include="Content\js\jquery.qtip.min.js" />
+    <Content Include="Content\js\jquery.quicksearch.js" />
+    <Content Include="Content\js\jquery.tablesorter.js" />
     <Content Include="Content\js\login.js" />
+    <Content Include="Content\js\MonthPicker.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Dashboard.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -390,6 +404,8 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Site.Mobile.Master" />
+    <Content Include="SiteExternal.Master" />
+    <Content Include="SiteExternal.Mobile.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -524,6 +540,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Global_Objects\GlobalVariables.cs" />
     <Compile Include="Global_Objects\Logs.cs" />
     <Compile Include="Global_Objects\Utilities.cs" />
     <Compile Include="Models\CarteluxDB.Context.cs">
@@ -589,6 +606,9 @@
     <Compile Include="Models\pedido_entregas.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\usuarios.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
@@ -606,6 +626,20 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SiteExternal.Master.cs">
+      <DependentUpon>SiteExternal.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SiteExternal.Master.designer.cs">
+      <DependentUpon>SiteExternal.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SiteExternal.Mobile.Master.cs">
+      <DependentUpon>SiteExternal.Mobile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SiteExternal.Mobile.Master.designer.cs">
+      <DependentUpon>SiteExternal.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
