@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Web;
 using System.Web.Routing;
 using Microsoft.AspNet.FriendlyUrls.Resolvers;
 
 namespace Cartelux1
 {
-    public partial class ViewSwitcher : System.Web.UI.UserControl
+    public partial class ViewSwitcherExternal : System.Web.UI.UserControl
     {
         protected string CurrentView { get; private set; }
 
@@ -23,7 +23,7 @@ namespace Cartelux1
             AlternateView = isMobile ? "Desktop" : "Mobile";
 
             // Create switch URL from the route, e.g. ~/__FriendlyUrls_SwitchView/Mobile?ReturnUrl=/Page
-            var switchViewRouteName = "AspNet.FriendlyUrls.SwitchView";
+            var switchViewRouteName = "AspNet.FriendlyUrls.SwitchViewExternal";
             var switchViewRoute = RouteTable.Routes[switchViewRouteName];
             if (switchViewRoute == null)
             {

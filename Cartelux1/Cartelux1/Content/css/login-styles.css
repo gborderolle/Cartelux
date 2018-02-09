@@ -57,7 +57,7 @@ footer > p{
  .loginTitleContainer {
      height: 80px;
      width: 440px;
-     background-image: url(../images/login-title.png);
+     background-image: url(/Content/img/CX-web1.png);
      background-repeat: no-repeat;
      background-position: 0px 0px;
      /* Center */

@@ -9,8 +9,16 @@
     <link rel="stylesheet" href="/Content/css/jquery-ui.css" />
 
     <style type="text/css">
-      
+        #collapse1 {
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 8px 0 #979494, 0 15px 20px rgba(0, 0, 0, .35);
+            -moz-box-shadow: 0 8px 0 #979494, 0 15px 20px rgba(0, 0, 0, .35);
+            box-shadow: 0 8px 0 #979494, 0 15px 20px rgba(0, 0, 0, .35);
+        }
     </style>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="SubbodyContent" runat="server">
 
@@ -23,15 +31,18 @@
 
     <div class="generalContainer">
 
-        <div class="loginFormContainer col-md-4 col-sm-10 col-xs-12" style="margin: auto; float: inherit;">
-            <a data-toggle="collapse" href="#collapse1">Acceder</a>
-            <div id="collapse1" class="panel-collapse collapse">
+        <div class="loginFormContainer col-md-3 col-sm-10 col-xs-12" style="margin: auto; float: inherit; background-color: #e4652e;">
+            <a data-toggle="collapse" href="#collapse1">
+                <div class="loginTitleContainer" style="background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+            </a>
+            <hr style="margin-top:10px; margin-bottom:10px;" />
+            <div id="collapse1" class="panel-collapse collapse" style="background-color: #dddddd !important; padding: 8px;">
                 <div class="loginFormElements">
 
                     <div class="loginTitleArea unselectable">
-                        <img class="loginTitleImage pull-left img-responsive img-circle" src="/Content/img/Cartelux1.ico" />
+                        <img class="loginTitleImage pull-left" src="/Content/img/login.png" />
                         <div class="loginTitleBread">Cartelux Administrativo</div>
-                        <div class="loginTitleText">Sistema de autenticación</div>
+                        <div class="loginTitleText" style="color: #585656">Sistema de autenticación</div>
                     </div>
 
                     <div class="loginFormContent" style="margin-bottom: 0;">

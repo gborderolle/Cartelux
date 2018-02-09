@@ -1,6 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteExternal.Mobile.master.cs" Inherits="Cartelux1.SiteExternal_Mobile" %>
 
-<%@ Register Src="~/ViewSwitcher.ascx" TagPrefix="friendlyUrls" TagName="ViewSwitcher" %>
+<%@ Register Src="~/ViewSwitcherExternal.ascx" TagPrefix="friendlyUrls" TagName="ViewSwitcherExternal" %>
 
 <!DOCTYPE html>
 
@@ -91,7 +91,7 @@
     </asp:ContentPlaceHolder>
 
 </head>
-<body>
+<body style="margin: 0; position: relative; width: fit-content;">
     <form runat="server">
          <asp:ScriptManager runat="server">
             <Scripts>

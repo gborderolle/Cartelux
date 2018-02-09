@@ -397,6 +397,7 @@
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
+    <Content Include="ViewSwitcherExternal.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -648,6 +649,13 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewSwitcherExternal.ascx.cs">
+      <DependentUpon>ViewSwitcherExternal.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewSwitcherExternal.ascx.designer.cs">
+      <DependentUpon>ViewSwitcherExternal.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

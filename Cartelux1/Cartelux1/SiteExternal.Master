@@ -68,7 +68,7 @@
 
     <style type="text/css">
         .container-full {
-            background-color: #f2e0cf;
+            background-color: #444444;
             margin: 0 auto;
             display: block;
             width: 100%;
@@ -98,7 +98,7 @@
     </form>
 
     <hr />
-    <footer class="footer" style="font-size: small;">
+    <footer class="footer" style="font-size: small; color:whitesmoke;">
         <div class="container">
             <p>&copy; <%: DateTime.Now.Year %> - Cartelux - Build: <%=Build_date%></p>
             <p>Cartelux Publicidad. Todos los derechos reservados, marca, empresa y software registrados, 2017.</p>
