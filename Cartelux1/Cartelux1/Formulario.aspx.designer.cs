@@ -31,13 +31,13 @@ namespace Cartelux1 {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txbNombre;
         
         /// <summary>
-        /// ddlTamano control.
+        /// ddlTamano1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect ddlTamano;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTamano1;
         
         /// <summary>
         /// MyFileUpload control.
@@ -58,13 +58,13 @@ namespace Cartelux1 {
         protected global::System.Web.UI.WebControls.TextBox txbTexto1;
         
         /// <summary>
-        /// ddlTipoEntrega control.
+        /// ddlTipoEntrega1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect ddlTipoEntrega;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoEntrega1;
         
         /// <summary>
         /// txbCiudad control.

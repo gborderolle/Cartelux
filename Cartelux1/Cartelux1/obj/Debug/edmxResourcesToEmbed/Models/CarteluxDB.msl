@@ -158,5 +158,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="confi_formularios_anos">
+      <EntityTypeMapping TypeName="carteluxdb1Model.confi_formularios_anos">
+        <MappingFragment StoreEntitySet="confi_formularios_anos">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Confi_formularios_ano_ID" ColumnName="Confi_formularios_ano_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

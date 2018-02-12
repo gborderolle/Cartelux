@@ -14,6 +14,17 @@
     <!-- Bootstrap table -->
     <link rel="stylesheet" href="/Content/css/bootstrap-table.css" />
 
+    <style type="text/css">
+        #ddl_year {
+            margin: auto;
+            width: 50%;
+        }
+
+            #ddl_year > .dropdown-menu {
+                position: relative !important;
+            }
+    </style>
+
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="SubbodyContent" runat="server">
@@ -23,6 +34,7 @@
     <script type="text/javascript" src="/Content/js/jquery.modal.js"></script>
     <script type="text/javascript" src="/Content/js/jquery.tablesorter.js"></script>
     <script type="text/javascript" src="/Content/js/chosen.jquery.js"></script>
+    <script type="text/javascript" src="/Content/js/moment.js"></script>
     <%--<script type="text/javascript" src="/Content/js/MonthPicker.js"></script>--%>
 
     <!-- Bootstrap table -->
@@ -54,15 +66,17 @@
                         </div>
                     </div>
 
-                    <asp:Label ID="gridClientes_lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
+                    <asp:DropDownList ID="ddl_year" runat="server" ClientIDMode="Static" CssClass="form-control dropdown"/>
 
                     <%--SOURCE: http://bootstrap-table.wenzhixin.net.cn/getting-started/--%>
                     <%--SOURCE: http://issues.wenzhixin.net.cn/bootstrap-table/--%>
-                    <table id="gridMonth" data-search="true" data-toggle="table">
+                    <table id="gridMonth" data-toggle="table">
+                        <%--data-search="true" --%>
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Seleccionar el mes</th>
+                                <th>Seleccionar mes
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -140,6 +154,15 @@
                             </tr>
                         </tbody>
                     </table>
+
+
+
+                    <%-- <asp:GridView ID="gridMonths" runat="server" ClientIDMode="Static" HorizontalAlign="Left" AutoGenerateColumns="false" CssClass="table table-hover table-striped" AllowPaging="false"
+                        OnRowCommand="gridMonths_RowCommand"
+                        OnSelectedIndexChanged="gridMonths_OnSelectedIndexChanged">
+                        <RowStyle HorizontalAlign="Left" />
+
+                    </asp:GridView>--%>
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-9 pull-right">
@@ -163,7 +186,7 @@
                                         <div class="row">
                                             <div class="col-sm-12 col-md-4 pull-left">
                                                 <h2>
-                                                    <label id="lblMonth">[MES]</label></h2>
+                                                    <label id="lblMonth" class="pull-left">[MES]</label></h2>
                                             </div>
 
                                             <%-- <div class="col-sm-12 col-md-6 pull-right">
@@ -177,56 +200,90 @@
                                         <div class="row">
                                             <div class="col-sm-12 col-md-6 pull-left">
                                                 <div class="input-group" style="padding: 5px;">
-                                                    <asp:Button ID="btnSearch_saldos" runat="server" Text="Filtrar" CssClass="btn btn-sm btn-info btnUpdate btn-sm pull-right"
+                                                    <asp:Button ID="btnSearch_saldos" runat="server" Text="Filtrar" CssClass="btn btn-sm btn-info btnUpdate pull-right"
                                                         OnClick="btnSearch_Click_saldos" UseSubmitBehavior="false" ClientIDMode="Static" CausesValidation="false" OnClientClick="Javascript:GetMonthFilter()" />
                                                     <input id="txbMonthpicker" type="text" class="month-year-input" style="margin-right: 10px;">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-6 pull-right">
+                                                <div class="input-group pull-right" style="padding: 5px;">
+                                                    <div class="form-check">
+                                                        <input id="chbSoloVigentes" class="form-check-input" type="checkbox" onclick="filtrar_soloVigentes()">
+                                                        <label class="form-check-label" for="chbSoloVigentes">
+                                                            Todo el mes
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <asp:Label ID="gridFormularios_lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
-                                        <asp:GridView ID="gridFormularios" runat="server" ClientIDMode="Static" HorizontalAlign="Center"
-                                            AutoGenerateColumns="false" CssClass="table table-hover table-striped" AllowPaging="false" PageSize="30"
+                                        <asp:GridView ID="gridFormularios" runat="server" ClientIDMode="Static" HorizontalAlign="Center" AutoGenerateColumns="false" CssClass="table table-hover table-striped" AllowPaging="false"
                                             DataKeyNames="Formulario_ID"
                                             OnRowDataBound="gridFormularios_RowDataBound"
                                             OnRowCommand="gridFormularios_RowCommand">
 
                                             <Columns>
-                                                <asp:BoundField DataField="Cliente_ID" HeaderText="ID" HtmlEncode="false" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" />
+                                                <%--<asp:BoundField DataField="Cliente_ID" HeaderText="ID" HtmlEncode="false" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" />--%>
                                                 <asp:BoundField DataField="Formulario_ID" HeaderText="Formulario_ID" HtmlEncode="false" ItemStyle-CssClass="hiddencol hiddencol_real" HeaderStyle-CssClass="hiddencol hiddencol_real" />
-                                                
-                                                <asp:BoundField DataField="Serie" HeaderText="Serie" HtmlEncode="False" />
-                                                <asp:BoundField DataField="URL_short" HeaderText="URL" HtmlEncode="False" />
-                                                <asp:BoundField DataField="Monto" DataFormatString="{0:C2}" HeaderText="Monto" HtmlEncode="False" />
-                                                <asp:BoundField DataField="Comentarios" HeaderText="Comentarios" HtmlEncode="False" />
-                                                <asp:TemplateField HeaderText="Fecha ingresado">
+                                                <asp:BoundField DataField="URL_short" HeaderText="URL_short" HtmlEncode="False" ItemStyle-CssClass="hiddencol hiddencol_real" HeaderStyle-CssClass="hiddencol hiddencol_real" />
+
+                                                <asp:TemplateField HeaderText="Teléfono">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblFechaCreado" runat="server" CommandName="View" Text='<%# Eval("Fecha_creado", "{0:dd-MM-yyyy}") %>' />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                
-                                                <%--<asp:TemplateField HeaderText="Fecha de pago">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="lblFechaPago" runat="server" CommandName="View" Text='<%# Eval("Fecha_pago", "{0:dd-MM-yyyy}") %>' />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Forma de pago">
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton ID="lblForma" runat="server" CommandName="View" Text='<%# Eval("Forma_de_pago_ID") %>' />
+                                                        <asp:Label ID="lblTelefono" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:BoundField DataField="Importe_viaje" DataFormatString="{0:C2}" HeaderText="Importe viaje" HtmlEncode="False" />
-                                                <asp:BoundField DataField="Monto" DataFormatString="{0:C2}" HeaderText="Pago" HtmlEncode="False" />
-                                                <asp:BoundField DataField="Comentarios" HeaderText="Comentarios" HtmlEncode="False" />--%>
-
-                                                <asp:TemplateField HeaderText="Acciones" ControlStyle-CssClass="btn btn-info btn-xs">
+                                                 <asp:TemplateField HeaderText="Nombre">
                                                     <ItemTemplate>
-                                                        <a id="btnModificar" role="button" onclick='<%# "ModificarPago_1(" +Eval("Formulario_ID") + " );" %>' class="btn btn-info btn-xs glyphicon glyphicon-pencil"></a>
-                                                        <a id="btnBorrar" role="button" onclick='<%# "BorrarPago(" +Eval("Formulario_ID") + " );" %>' class="btn btn-danger btn-xs glyphicon glyphicon-remove"></a>
+                                                        <asp:Label ID="lblNombre" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
+                                                 <asp:TemplateField HeaderText="Fecha de Entrega">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblFechaEntrega" runat="server" CommandName="View" Text='<%# Eval("Fecha_creado", "{0:dd-MM-yyyy}") %>' />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                 <asp:TemplateField HeaderText="Tipo de Entrega">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblTipoEntrega" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                 <asp:TemplateField HeaderText="Tamaño">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblTamano" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Tipo cartel">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblTipo" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Material">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblMaterial" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Zona">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblZona" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:BoundField DataField="URL_short" HeaderText="URL Formulario" HtmlEncode="False" />
+
+                                                <asp:TemplateField HeaderText="Ir al Form" ControlStyle-CssClass="btn btn-info btn-xs">
+                                                    <ItemTemplate>
+                                                        <a id="btnURL" role="button" href='<%# Eval("URL_short") %>' class="btn btn-info btn-xs glyphicon glyphicon-share-alt" title="" target="_blank"></a>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
                                             </Columns>
                                         </asp:GridView>
                                         <asp:Label ID="lblgridFormulariosCount" runat="server" ClientIDMode="Static" Text="Resultados: 0" CssClass="lblResultados label label-info"></asp:Label>
@@ -245,7 +302,6 @@
                         </div>
 
                         <div id="tabsFormularios_2">
-
 
                             <div style="overflow: auto;">
 
@@ -297,6 +353,7 @@
 
     <asp:HiddenField ID="hdn_FormularioID" runat="server" ClientIDMode="Static" />
     <asp:HiddenField ID="hdn_monthSelected" runat="server" ClientIDMode="Static" />
+    <asp:HiddenField ID="hdn_yearSelected" runat="server" ClientIDMode="Static" />
 
 
 </asp:Content>

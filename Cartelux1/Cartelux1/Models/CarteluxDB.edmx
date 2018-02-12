@@ -18,6 +18,16 @@
           <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
           <Property Name="Fecha_update" Type="datetime" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="confi_formularios_anos">
+          <Key>
+            <PropertyRef Name="Confi_formularios_ano_ID" />
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Confi_formularios_ano_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="formularios">
           <Key>
             <PropertyRef Name="Formulario_ID" />
@@ -163,6 +173,12 @@
           <EntitySet Name="pedidos" EntityType="Self.pedidos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="confi_formularios_anos" EntityType="Self.confi_formularios_anos" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [confi_formularios_anos].[Confi_formularios_ano_ID] AS [Confi_formularios_ano_ID], 
+    [confi_formularios_anos].[Nombre] AS [Nombre]
+    FROM [dbo].[confi_formularios_anos] AS [confi_formularios_anos]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -298,6 +314,7 @@
           <EntitySet Name="usuarios" EntityType="Self.usuarios" />
           <EntitySet Name="pedido_entregas" EntityType="carteluxdb1Model.pedido_entregas" />
           <EntitySet Name="sysdiagrams" EntityType="carteluxdb1Model.sysdiagrams" />
+          <EntitySet Name="confi_formularios_anos" EntityType="carteluxdb1Model.confi_formularios_anos" />
         </EntityContainer>
         <EntityType Name="pedido_entregas">
           <Key>
@@ -326,6 +343,14 @@
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="confi_formularios_anos">
+          <Key>
+            <PropertyRef Name="Confi_formularios_ano_ID" />
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Confi_formularios_ano_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -487,6 +512,14 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="confi_formularios_anos">
+            <EntityTypeMapping TypeName="carteluxdb1Model.confi_formularios_anos">
+              <MappingFragment StoreEntitySet="confi_formularios_anos">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Confi_formularios_ano_ID" ColumnName="Confi_formularios_ano_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

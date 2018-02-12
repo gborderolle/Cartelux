@@ -38,5 +38,6 @@ namespace Cartelux1.Models
         public virtual DbSet<usuarios> usuarios { get; set; }
         public virtual DbSet<pedido_entregas> pedido_entregas { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<confi_formularios_anos> confi_formularios_anos { get; set; }
     }
 }

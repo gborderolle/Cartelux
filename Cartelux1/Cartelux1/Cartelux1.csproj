@@ -243,6 +243,7 @@
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\bootstrap\js\tether.min.js" />
+    <Content Include="Content\css\bootstrap-table.css" />
     <Content Include="Content\css\chosen-sprite%402x.png" />
     <Content Include="Content\css\chosen-sprite.png" />
     <Content Include="Content\css\chosen.css" />
@@ -279,6 +280,8 @@
     <Content Include="Content\img\Dropbox_logo.png" />
     <Content Include="Content\img\loader.gif" />
     <Content Include="Content\js\auxiliar_functions.js" />
+    <Content Include="Content\js\bootstrap-table-es-ES.js" />
+    <Content Include="Content\js\bootstrap-table.js" />
     <Content Include="Content\js\chosen.jquery.js" />
     <Content Include="Content\js\clipboard.min.js" />
     <Content Include="Content\js\dashboard.js" />
@@ -291,6 +294,7 @@
     <Content Include="Content\js\jquery.quicksearch.js" />
     <Content Include="Content\js\jquery.tablesorter.js" />
     <Content Include="Content\js\login.js" />
+    <Content Include="Content\js\moment.js" />
     <Content Include="Content\js\MonthPicker.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Dashboard.aspx" />
@@ -544,6 +548,7 @@
     <Compile Include="Global_Objects\GlobalVariables.cs" />
     <Compile Include="Global_Objects\Logs.cs" />
     <Compile Include="Global_Objects\Utilities.cs" />
+    <Compile Include="Helpers\Extras.cs" />
     <Compile Include="Models\CarteluxDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -560,6 +565,9 @@
       <DependentUpon>CarteluxDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\clientes.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\confi_formularios_anos.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\formularios.cs">

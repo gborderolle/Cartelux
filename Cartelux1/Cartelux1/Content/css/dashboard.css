@@ -1,4 +1,8 @@
-﻿.btn-table{
+﻿#ddl_year{
+    float: right;
+}
+
+.btn-table{
     width: 100%;
 }
 

@@ -4,14 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Services;
-using System.IO;
-using System.Text;
+using Cartelux1.Helpers;
 
 namespace Cartelux1
 {
@@ -23,7 +20,9 @@ namespace Cartelux1
         {
             if (!IsPostBack)
             {
-                Bind_GridFormularios();
+                //Bind_GridMonths();
+                Bind_DataConfig();
+                Bind_GridFormularios(); // Pasar mes actual
             }
 
             gridFormularios.UseAccessibleHeader = true;
@@ -84,6 +83,76 @@ namespace Cartelux1
             }
         }
 
+        //protected void gridMonths_RowCommand(object sender, GridViewCommandEventArgs e)
+        //{
+        //    if (e.CommandArgument != null)
+        //    {
+        //        if (!string.IsNullOrWhiteSpace(e.CommandArgument.ToString()) && !string.IsNullOrWhiteSpace(e.CommandName))
+        //        {
+        //        }
+        //    }
+        //}
+
+        //protected void gridMonths_OnSelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    // Source: http://www.codeproject.com/Tips/622720/Fire-GridView-SelectedIndexChanged-Event-without-S
+
+        //    // Logger variables
+        //    System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
+        //    System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+        //    string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+        //    string methodName = stackFrame.GetMethod().Name;
+
+        //    foreach (GridViewRow row in gridFormularios.Rows)
+        //    {
+        //        if (row.RowIndex == gridFormularios.SelectedIndex)
+        //        {
+        //            string Formulario_ID_str = gridFormularios.SelectedRow.Cells[0].Text;
+        //            if (!string.IsNullOrWhiteSpace(Formulario_ID_str))
+        //            {
+        //                int Formulario_ID = 0;
+        //                if (!int.TryParse(Formulario_ID_str, out Formulario_ID))
+        //                {
+        //                    Formulario_ID = 0;
+        //                    Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, Formulario_ID_str);
+        //                }
+
+        //                if (Formulario_ID > 0)
+        //                {
+        //                    using (CarteluxDB context = new CarteluxDB())
+        //                    {
+        //                        formularios _formulario = (formularios)context.formularios.FirstOrDefault(c => c.Formulario_ID == Formulario_ID);
+        //                        if (_formulario != null)
+        //                        {
+        //                            //lblClientName_1.Text = lblClientName_2.Text = _formulario.Nombre;
+
+        //                            //BindGridViajes(cliente_ID);
+
+        //                            // Filtrar por fechas del mes corriente por defecto
+        //                            ScriptManager.RegisterStartupScript(this, this.GetType(), "gridFormularios_OnSelectedIndexChanged", "<script type='text/javascript'></script>", false);
+
+        //                            hdn_FormularioID.Value = Formulario_ID_str;
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //            row.BackColor = ColorTranslator.FromHtml("#A1DCF2");
+        //            foreach (TableCell cell in row.Cells)
+        //            {
+        //                cell.BackColor = ColorTranslator.FromHtml("#A1DCF2");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            row.BackColor = ColorTranslator.FromHtml("#FFFFFF");
+        //            foreach (TableCell cell in row.Cells)
+        //            {
+        //                cell.BackColor = ColorTranslator.FromHtml("#FFFFFF");
+        //            }
+        //        }
+        //    }
+        //}
+
         protected void gridFormularios_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandArgument != null)
@@ -96,32 +165,110 @@ namespace Cartelux1
 
         protected void gridFormularios_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            #region Buttons
-
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-
-            }
-
-            #endregion Buttons
 
             #region Labels
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
 
-            }
+                using (CarteluxDB context = new CarteluxDB())
+                {
+                    formularios _formulario = (formularios)(e.Row.DataItem);
+                    if (_formulario != null)
+                    {
+                        clientes _cliente = (clientes)context.clientes.FirstOrDefault(c => c.Cliente_ID == _formulario.Cliente_ID);
+                        pedidos _pedido = (pedidos)context.pedidos.FirstOrDefault(c => c.Formulario_ID == _formulario.Cliente_ID);
+                        if (_cliente != null && _pedido != null)
+                        {
 
-            #endregion Labels
+                            Label lbl1 = e.Row.FindControl("lblTelefono") as Label;
+                            if (lbl1 != null)
+                            {
+                                lbl1.Text = _cliente.Telefono;
+                            }
 
-            if (e.Row.RowType == DataControlRowType.Header)
-            {
-                e.Row.TableSection = TableRowSection.TableHeader;
-            }
+                            lbl1 = e.Row.FindControl("lblNombre") as Label;
+                            if (lbl1 != null)
+                            {
+                                lbl1.Text = _cliente.Nombre;
+                            }
 
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(gridFormularios, "Select$" + e.Row.RowIndex);
+                            lbl1 = e.Row.FindControl("lblFechaEntrega") as Label;
+                            if (lbl1 != null)
+                            {
+                                pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(c => c.Pedido_Entrega_ID == _pedido.Pedido_Entrega_ID);
+                                if (_pedido_entrega != null)
+                                {
+                                    lbl1.Text = _pedido_entrega.Fecha_entrega.ToString();
+                                }
+                            }
+
+                            // ???
+                            lbl1 = e.Row.FindControl("lblTipoEntrega") as Label;
+                            if (lbl1 != null)
+                            {
+                                lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Entrega_Tipo_ID == _pedido.Pedido_Tipo_ID);
+                                if (_lista_entregas_tipo != null)
+                                {
+                                    lbl1.Text = _lista_entregas_tipo.Nombre;
+                                }
+                            }
+
+                            lbl1 = e.Row.FindControl("lblTamano") as Label;
+                            if (lbl1 != null)
+                            {
+                                lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _pedido.Pedido_Tamano_ID);
+                                if (_lista_pedido_tamano != null)
+                                {
+                                    lbl1.Text = _lista_pedido_tamano.Nombre;
+                                }
+                            }
+
+                            lbl1 = e.Row.FindControl("lblTipo") as Label;
+                            if (lbl1 != null)
+                            {
+                                lista_pedido_tipos _lista_pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(c => c.Pedido_Tipo_ID == _pedido.Pedido_Tipo_ID);
+                                if (_lista_pedido_tipo != null)
+                                {
+                                    lbl1.Text = _lista_pedido_tipo.Nombre;
+                                }
+                            }
+
+                            lbl1 = e.Row.FindControl("lblMaterial") as Label;
+                            if (lbl1 != null)
+                            {
+                                lista_pedido_materiales _lista_pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(c => c.Pedido_Material_ID == _pedido.Pedido_Material_ID);
+                                if (_lista_pedido_material != null)
+                                {
+                                    lbl1.Text = _lista_pedido_material.Nombre;
+                                }
+                            }
+
+                            lbl1 = e.Row.FindControl("lblZona") as Label;
+                            if (lbl1 != null)
+                            {
+                                pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(c => c.Pedido_Entrega_ID == _pedido.Pedido_Entrega_ID);
+                                if (_pedido_entrega != null)
+                                {
+                                    lbl1.Text = _pedido_entrega.Barrio;
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+
+                #endregion Labels
+
+                if (e.Row.RowType == DataControlRowType.Header)
+                {
+                    e.Row.TableSection = TableRowSection.TableHeader;
+                }
+
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+                    e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(gridFormularios, "Select$" + e.Row.RowIndex);
+                }
             }
         }
 
@@ -190,7 +337,48 @@ namespace Cartelux1
 
         #region Methods
 
-        private void Bind_GridFormularios(string year = "", string month = "")
+        private void Bind_DataConfig()
+        {
+            // Logger variables
+            System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
+            System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+            string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+            string methodName = stackFrame.GetMethod().Name;
+
+            using (CarteluxDB context = new CarteluxDB())
+            {
+                // DDL Years
+                DataTable dt1 = new DataTable();
+                dt1 = Extras.ToDataTable(context.confi_formularios_anos.OrderBy(e => e.Nombre).ToList());
+                ddl_year.DataSource = dt1;
+                ddl_year.DataTextField = "Nombre";
+                ddl_year.DataValueField = "Confi_formularios_ano_ID";
+                ddl_year.DataBind();
+                ddl_year.Items.Insert(0, new ListItem("Elegir", "0"));
+            }
+        }
+
+        private void Bind_GridMonths()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[2] { new DataColumn("#", typeof(int)), new DataColumn("Month", typeof(string)) });
+            dt.Rows.Add(1, "Enero");
+            dt.Rows.Add(2, "Febrero");
+            dt.Rows.Add(3, "Marzo");
+            dt.Rows.Add(4, "Abril");
+            dt.Rows.Add(5, "Mayo");
+            dt.Rows.Add(6, "Junio");
+            dt.Rows.Add(7, "Julio");
+            dt.Rows.Add(8, "Agosto");
+            dt.Rows.Add(9, "Septiembre");
+            dt.Rows.Add(10, "Octubre");
+            dt.Rows.Add(11, "Noviembre");
+            dt.Rows.Add(12, "Diciembre");
+            //gridMonths.DataSource = dt;
+            //gridMonths.DataBind();
+        }
+
+        private void Bind_GridFormularios(string year = "", string month = "", bool solo_vigentes = true)
         {
             // Logger variables
             System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
@@ -225,11 +413,17 @@ namespace Cartelux1
                 }
 
                 current_year = year_int;
-                current_month= month_int;
+                current_month = month_int;
             }
 
             using (CarteluxDB context = new CarteluxDB())
             {
+                int day_value = 1;
+                if (solo_vigentes)
+                {
+                    day_value = DateTime.Now.Day;
+                }
+
                 DateTime date1 = new DateTime(current_year, current_month, 1);
                 int last_day = DateTime.DaysInMonth(current_year, current_month);
                 DateTime date2 = new DateTime(current_year, current_month, last_day);
@@ -271,83 +465,10 @@ namespace Cartelux1
                 }
 
                 #endregion
-
-
-                //var elements = context.formularios.Where(v => v. == formulario_ID).OrderBy(e => e.Fecha_creado).ToList();
-
-                /*
-                // Filtro por fechas
-                if (!string.IsNullOrWhiteSpace(month) && !string.IsNullOrWhiteSpace(year))
-                {
-                    int month_int = 0;
-                    if (!int.TryParse(month, out month_int))
-                    {
-                        month_int = 0;
-                        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, month);
-                    }
-                    int year_int = 0;
-                    if (!int.TryParse(year, out year_int))
-                    {
-                        year_int = 0;
-                        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, year);
-                    }
-                    if (month_int > 0 && year_int > 0)
-                    {
-                        // Obtiene pagos del mes corriente
-                        elements = GetPagosByMonth(context, cliente_ID, month_int, year_int);
-
-                        // Obtiene pagos del mes anterior - Saldo Inicial
-                        decimal saldo_anterior = 0;
-                        var elements_anterior = GetPagosByMonth(context, cliente_ID, --month_int, year_int);
-                        if (elements_anterior.Count() > 0)
-                        {
-                            decimal total_importe = elements_anterior.Sum(x => x.Importe_viaje);
-                            decimal total_pagos = elements_anterior.Sum(x => x.Monto);
-                            saldo_anterior = total_importe - total_pagos;
-                        }
-
-                        hdn_SaldoAnterior.Value = saldo_anterior.ToString();
-                        lblSaldo_inicial.Text = String.Format("{0:n}", saldo_anterior);
-                    }
-
-                    if (elements.Count() > 0)
-                    {
-                        gridPagos.DataSource = elements;
-                        gridPagos.DataBind();
-
-                        gridPagos.UseAccessibleHeader = true;
-                        gridPagos.HeaderRow.TableSection = TableRowSection.TableHeader;
-
-                        lblGridPagosCount.Text = "# " + elements.Count();
-                    }
-                    else
-                    {
-                        var obj = new List<fletero_pagos>();
-                        obj.Add(new fletero_pagos());
-
-                        // Bind the DataTable which contain a blank row to the GridView
-                        gridPagos.DataSource = obj;
-                        gridPagos.DataBind();
-                        int columnsCount = gridPagos.Columns.Count;
-                        gridPagos.Rows[0].Cells.Clear();// clear all the cells in the row
-                        gridPagos.Rows[0].Cells.Add(new TableCell()); //add a new blank cell
-                        gridPagos.Rows[0].Cells[0].ColumnSpan = columnsCount; //set the column span to the new added cell
-
-                        //You can set the styles here
-                        gridPagos.Rows[0].Cells[0].HorizontalAlign = HorizontalAlign.Center;
-                        gridPagos.Rows[0].Cells[0].ForeColor = System.Drawing.Color.Red;
-                        gridPagos.Rows[0].Cells[0].Font.Bold = true;
-
-                        //set No Results found to the new added cell
-                        gridPagos.Rows[0].Cells[0].Text = "No hay registros";
-                    }
-                }
-        */
-
             }
         }
 
-        private List<formularios> GetFormularios_ByMonth(CarteluxDB context, DateTime date1, DateTime date2)
+        public static List<formularios> GetFormularios_ByMonth(CarteluxDB context, DateTime date1, DateTime date2)
         {
             List<formularios> formularios_elements = new List<formularios>();
             if (context != null)
@@ -379,10 +500,11 @@ namespace Cartelux1
         #region WebMethods
 
         [WebMethod]
-        public static string SelectMonth(string month_value)
+        public static _GridFormularios[] GetData_BindGridFormularios(string year_value, string month_value, bool soloVigentes_value)
         {
-            string ID_result = "0";
-            if (!string.IsNullOrWhiteSpace(month_value))
+            List<_GridFormularios> _GridFormularios_list = new List<_GridFormularios>();
+
+            if (!string.IsNullOrWhiteSpace(year_value) && !string.IsNullOrWhiteSpace(month_value))
             {
                 // Logger variables
                 System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
@@ -390,18 +512,108 @@ namespace Cartelux1
                 string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
                 string methodName = stackFrame.GetMethod().Name;
 
-                int month_value_int = 0;
-                if (!int.TryParse(month_value, out month_value_int))
+                int year_int = 0;
+                if (!int.TryParse(year_value, out year_int))
                 {
-                    month_value_int = 0;
+                    year_int = 0;
+                    Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, year_value);
+                }
+
+                int month_int = 0;
+                if (!int.TryParse(month_value, out month_int))
+                {
+                    month_int = 0;
                     Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, month_value);
                 }
 
-                if (month_value_int > 0)
+                // Source: https://www.codeproject.com/Tips/775585/Bind-Gridview-using-AJAX
+                if (year_int > 0 && month_int > 0)
                 {
+                    using (CarteluxDB context = new CarteluxDB())
+                    {
+                        int day_value = 1;
+                        if (soloVigentes_value)
+                        {
+                            day_value = DateTime.Now.Day;
+                        }
+
+                        DateTime date1 = new DateTime(year_int, month_int, day_value);
+                        int last_day = DateTime.DaysInMonth(year_int, month_int);
+                        DateTime date2 = new DateTime(year_int, month_int, last_day);
+
+                        _GridFormularios _GridFormulario1 = new Cartelux1.Dashboard._GridFormularios();
+
+                        List<formularios> formularios_elements = GetFormularios_ByMonth(context, date1, date2);
+                        foreach (formularios _formulario in formularios_elements)
+                        {
+                            if (_formulario != null)
+                            {
+                                _GridFormulario1.Formulario_ID = _formulario.Formulario_ID.ToString();
+                                _GridFormulario1.URL_short = _formulario.URL_short;
+
+                                clientes _cliente = (clientes)context.clientes.FirstOrDefault(c => c.Cliente_ID == _formulario.Cliente_ID);
+                                pedidos _pedido = (pedidos)context.pedidos.FirstOrDefault(c => c.Formulario_ID == _formulario.Formulario_ID);
+                                if (_cliente != null && _pedido != null)
+                                {
+                                    _GridFormulario1.lblTelefono = _cliente.Telefono;
+                                    _GridFormulario1.lblNombre = _cliente.Nombre;
+
+                                    pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(c => c.Pedido_Entrega_ID == _pedido.Pedido_Entrega_ID);
+                                    if (_pedido_entrega != null)
+                                    {
+                                        _GridFormulario1.lblFechaEntrega = _pedido_entrega.Fecha_entrega.ToString();
+                                    }
+
+                                    lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Entrega_Tipo_ID == _pedido.Pedido_Tipo_ID);
+                                    if (_lista_entregas_tipo != null)
+                                    {
+                                        _GridFormulario1.lblTipoEntrega = _lista_entregas_tipo.Nombre;
+                                    }
+
+                                    lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _pedido.Pedido_Tamano_ID);
+                                    if (_lista_pedido_tamano != null)
+                                    {
+                                        _GridFormulario1.lblTamano = _lista_pedido_tamano.Nombre;
+                                    }
+
+                                    lista_pedido_tipos _lista_pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(c => c.Pedido_Tipo_ID == _pedido.Pedido_Tipo_ID);
+                                    if (_lista_pedido_tipo != null)
+                                    {
+                                        _GridFormulario1.lblTipo = _lista_pedido_tipo.Nombre;
+                                    }
+
+                                    lista_pedido_materiales _lista_pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(c => c.Pedido_Material_ID == _pedido.Pedido_Material_ID);
+                                    if (_lista_pedido_material != null)
+                                    {
+                                        _GridFormulario1.lblMaterial = _lista_pedido_material.Nombre;
+                                    }
+
+                                    if (_pedido_entrega != null)
+                                    {
+                                        _GridFormulario1.lblZona = _pedido_entrega.Barrio;
+                                    }
+                                }
+                                _GridFormularios_list.Add(_GridFormulario1);
+                            }
+                        } // foreach
+                    }
                 }
             }
-            return ID_result;
+            return _GridFormularios_list.ToArray();
+        }
+
+        public class _GridFormularios
+        {
+            public string lblTelefono { get; set; }
+            public string lblNombre { get; set; }
+            public string lblFechaEntrega { get; set; }
+            public string lblTipoEntrega { get; set; }
+            public string lblTamano { get; set; }
+            public string lblTipo { get; set; }
+            public string lblMaterial { get; set; }
+            public string lblZona { get; set; }
+            public string Formulario_ID { get; set; }
+            public string URL_short { get; set; }
         }
 
         #endregion

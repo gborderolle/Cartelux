@@ -3,7 +3,7 @@ var PAGO_ID_SELECTED;
 var CLIENTE_ID_SELECTED;
 
 $(document).ready(function () {
-    //initVariables();
+    initVariables();
     bindEvents();
 
     // Seleccionar primer cliente
@@ -18,30 +18,69 @@ Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function (evt, args
     bindEvents();
 });
 
-function month_selectMonth(month_value) {
+function month_selectMonth(month_value, soloVigentes_value) {
     if (month_value !== null && month_value > 0) {
         
         month_setMonthName(month_value);
 
-        var hdn_monthSelected = $("#hdn_monthSelected");
-        if (hdn_monthSelected !== null && hdn_monthSelected.val() !== null && hdn_monthSelected != null) {
-            hdn_monthSelected.val(month_value);
+        var year_value = 2018; // DUMMY
+        var hdn_yearSelected = $("#hdn_yearSelected");
+        if (hdn_yearSelected !== null) {
+            year_value = hdn_yearSelected.val();
         }
 
-
+        // Source: https://www.codeproject.com/Tips/775585/Bind-Gridview-using-AJAX
         // Ajax call parameters
-        console.log("Ajax call: Dashboard.aspx/SelectMonth. Params:");
+        console.log("Ajax call: Dashboard.aspx/GetData_BindGridFormularios. Params:");
+        console.log("year_value, type: " + type(year_value) + ", value: " + year_value);
         console.log("month_value, type: " + type(month_value) + ", value: " + month_value);
-
-        // Check existen mercaderías
+        console.log("soloVigentes_value, type: " + type(soloVigentes_value) + ", value: " + soloVigentes_value);
+        
         $.ajax({
             type: "POST",
-            url: "Dashboard.aspx/SelectMonth",
-            data: '{month_value: "' + month_value + '"}',
-            contentType: "application/json; charset=utf-8",
+            url: "Dashboard.aspx/GetData_BindGridFormularios",
+            contentType: "application/json;charset=utf-8",
+            data: '{year_value: "' + year_value + '",month_value: "' + month_value + '",soloVigentes_value: "' + soloVigentes_value + '"}',
             dataType: "json",
             success: function (response) {
-                var resultado = response.d;
+
+                $("#gridFormularios").empty();
+
+                if (response.d.length > 0) {
+                    $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL_short</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>Fecha de Entrega</th> <th scope='col'>Tipo de Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>Tipo cartel</th> <th scope='col'>Material</th> <th scope='col'>Zona</th> <th scope='col'>URL_short</th> <th scope='col'>Ir al Form</th> <th scope='col'>Ir a WhatsApp</th></tr></thead>");
+                    for (var i = 0; i < response.d.length; i++) {
+                        var goToURL = "<a id='btnURL' role='button' href='" + response.d[i].URL_short + "' class='btn btn-info glyphicon glyphicon-share-alt' title='' target='_blank'></a>";
+
+                        var tel = response.d[i].lblTelefono;
+                        // Si el número empieza con 0 lo borra
+                        var first = tel.charAt(0);
+                        if (first === "0") {
+                            tel = tel.substring(1);
+                        }
+
+                        var url = "https://api.whatsapp.com/send?phone=598" + tel;
+                        url += "&text=" + hashMessages["Msj_inicioCliente"];
+
+                        var goToWPP = "<a id='btnURL' role='button' href='" + url + "' class='btn btn-info btn-xs fa fa-whatsapp fa-2x' title='' target='_blank'></a>";
+                        var date = moment(response.d[i].lblFechaEntrega, "MM-DD-YYYY").format("DD-MM-YYYY");
+
+                        $("#gridFormularios").append("<tr><td class='hiddencol hiddencol_real'>" +
+                        response.d[i].Formulario_ID + "</td> <td class='hiddencol hiddencol_real'>" +
+                        response.d[i].URL_short + "</td> <td>" +
+                        response.d[i].lblTelefono + "</td> <td>" +
+                        response.d[i].lblNombre + "</td> <td>" +
+                        date + "</td> <td>" +
+                        response.d[i].lblTipoEntrega + "</td> <td>" +
+                        response.d[i].lblTamano + "</td> <td>" +
+                        response.d[i].lblTipo + "</td> <td>" +
+                        response.d[i].lblMaterial + "</td> <td>" +
+                        response.d[i].lblZona + "</td><td>" +
+                        response.d[i].URL_short + "</td><td>" +
+                        goToURL + "</td><td>" +
+                        goToWPP + "</td></tr>");
+                    }
+                }
+
 
             }, // end success
             failure: function (response) {
@@ -136,20 +175,35 @@ function setupMonthPicker() {
     var n = d.getMonth() + 1;
     var y = d.getFullYear();
 
-    $('#add_txbFecha').datepicker("setDate", new Date(d.getFullYear(), $("#hdn_txbMonthpicker").val() - 1, d.getDate()));
+    $('#add_txbFecha').datepicker("setDate", new Date(d.getFullYear(), $("#hdn_monthSelected").val() - 1, d.getDate()));
 }
 
 function initVariables() {
+    $("#ddl_year").prop('selectedIndex', 1);
+    var year_value = $('#ddl_year :selected').text();
+
+    var hdn_yearSelected = $("#hdn_yearSelected");
+    if (hdn_yearSelected !== null) {
+        hdn_yearSelected.val(year_value);
+    }
+
+    // Click first Month
+    setTimeout(clickCurrentMonth, 50);
+}
+
+function clickCurrentMonth() {
     var d = new Date();
     var m = d.getMonth() + 1;
-    $("#hdn_txbMonthpicker").val(m);
+    if (m <= 12 && $("#tr-id-" + m + " td")[1] !== null) {
+        $("#tr-id-" + m + " td")[1].click();
+    }
 }
 
 function loadDDLEvents() {
     $(".add_ddlFormas").val('').prop('disabled', true).trigger("liszt:updated");
 
     $("#editModal_rad_cliente").on('change', function () {
-        if ($('input[name=edit_rad_cliente]:checked').val() == "pago") {
+        if ($('input[name=edit_rad_cliente]:checked').val() === "pago") {
             $(".edit_ddlFormas").val('').prop('disabled', false).trigger("liszt:updated");
         } else {
             $(".edit_ddlFormas").val('').prop('disabled', true).trigger("liszt:updated");
@@ -192,14 +246,29 @@ function month_onClickEvent() {
     $("#gridMonth td").click(function () {
         var month_value = $(this).data('value');
         if (month_value !== null && month_value > 0) {
-            month_selectMonth(month_value)
+            var hdn_monthSelected = $("#hdn_monthSelected");
+            if (hdn_monthSelected !== null && chbSoloVigentes !== null) {
+                hdn_monthSelected.val(month_value);
+                month_selectMonth(month_value, true)
+            }
         }
     });
+}
+
+function filtrar_soloVigentes() {
+    var chbSoloVigentes = $("#chbSoloVigentes");
+    var hdn_monthSelected = $("#hdn_monthSelected");
+    if (hdn_monthSelected !== null && hdn_monthSelected.val() !== null && chbSoloVigentes !== null) {
+        var soloVigentes_value = chbSoloVigentes.is(":checked")
+        var month_value = hdn_monthSelected.val();
+        month_selectMonth(month_value, soloVigentes_value);
+    }
 }
 
 
 function bindEvents() {
     $("#tabsPedidos").tabs();
+    $("#tabsFormularios").tabs();
 
     month_onClickEvent();
 
@@ -259,11 +328,11 @@ function GetMonthFilter() {
 
         txbYearpicker = d.getYear();
     }
-    var hdn_txbMonthpicker = $("#hdn_txbMonthpicker");
-    if (hdn_txbMonthpicker !== null && hdn_txbMonthpicker.val() !== null && txbMonthpicker !== null) {
+    var hdn_monthSelected = $("#hdn_monthSelected");
+    if (hdn_monthSelected !== null && hdn_monthSelected.val() !== null && txbMonthpicker !== null) {
 
         var value = txbMonthpicker + "|" + txbYearpicker;
-        hdn_txbMonthpicker.val(value);
+        hdn_monthSelected.val(value);
     }
 }
 

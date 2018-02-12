@@ -1,9 +1,11 @@
 ﻿using Cartelux1.Global_Objects;
+using Cartelux1.Helpers;
 using Cartelux1.Models;
 using CG.Web.MegaApiClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.Entity;
 using System.Globalization;
 using System.IO;
@@ -12,6 +14,7 @@ using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Cartelux1
 {
@@ -22,6 +25,8 @@ namespace Cartelux1
         {
             if (!Page.IsPostBack)
             {
+                Bind_DataConfig();
+
                 string serie_str = GetURLParam_Decrypted("ID");
                 string tel_str = GetURLParam("TEL");
                 if (!string.IsNullOrWhiteSpace(serie_str) && !string.IsNullOrWhiteSpace(tel_str))
@@ -57,6 +62,36 @@ namespace Cartelux1
         #endregion
 
         #region General Methods 
+
+        private void Bind_DataConfig()
+        {
+            // Logger variables
+            System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
+            System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+            string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+            string methodName = stackFrame.GetMethod().Name;
+
+            using (CarteluxDB context = new CarteluxDB())
+            {
+                // DDL Sizes
+                DataTable dt1 = new DataTable();
+                dt1 = Extras.ToDataTable(context.lista_pedido_tamanos.OrderBy(e => e.Nombre).ToList());
+                ddlTamano1.DataSource = dt1;
+                ddlTamano1.DataTextField = "Nombre";
+                ddlTamano1.DataValueField = "Codigo";
+                ddlTamano1.DataBind();
+                ddlTamano1.Items.Insert(0, new ListItem("Tamaño", "0"));
+
+                // DDL Deliveries
+                dt1 = new DataTable();
+                dt1 = Extras.ToDataTable(context.lista_entregas_tipos.OrderBy(e => e.Nombre).ToList());
+                ddlTipoEntrega1.DataSource = dt1;
+                ddlTipoEntrega1.DataTextField = "Nombre";
+                ddlTipoEntrega1.DataValueField = "Codigo";
+                ddlTipoEntrega1.DataBind();
+                ddlTipoEntrega1.Items.Insert(0, new ListItem("Tipo de entrega", "0"));
+            }
+        }
 
         private string GetURLParam_Decrypted(string param_request)
         {
@@ -159,8 +194,11 @@ namespace Cartelux1
 
                                     if (_pedido_entrega.Entrega_Tipo_ID > 0)
                                     {
-                                        ddlTipoEntrega.DataBind();
-                                        ddlTipoEntrega.SelectedIndex = _pedido_entrega.Entrega_Tipo_ID;
+                                        lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(v => v.Codigo.Equals(_pedido_entrega.Entrega_Tipo_ID));
+                                        if (_lista_entregas_tipo != null)
+                                        {
+                                            ddlTipoEntrega1.SelectedValue = _lista_entregas_tipo.Codigo.ToString();
+                                        }
                                     }
                                 }
 
@@ -183,8 +221,11 @@ namespace Cartelux1
                                 #region Tamaño
                                 if (_pedido.Pedido_Tamano_ID > 0)
                                 {
-                                    ddlTamano.DataBind();
-                                    ddlTamano.SelectedIndex = _pedido.Pedido_Tamano_ID;
+                                    lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(v => v.Codigo.Equals(_pedido.Pedido_Tamano_ID));
+                                    if (_lista_pedido_tamano != null)
+                                    {
+                                        ddlTamano1.SelectedValue = _lista_pedido_tamano.Codigo.ToString();
+                                    }
                                 }
                                 #endregion
 
@@ -339,11 +380,17 @@ namespace Cartelux1
                             //}
                             #endregion
 
-                            #region Tamaño
-                            //if (ddlTamano.SelectedIndex > 0)
-                            //{
-                            //    //pedido.Pedido_Tematica_ID = ddlTamano.SelectedIndex;
-                            //}
+                            #region UPDATE Tamaño
+                            if (ddlTamano1.SelectedIndex > 0)
+                            {
+                                int selected = 1;
+                                if (!int.TryParse(ddlTamano1.SelectedValue, out selected))
+                                {
+                                    selected = 1;
+                                    Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTamano1.SelectedValue);
+                                }
+                                _pedido.Pedido_Tamano_ID = selected;
+                            }
                             #endregion
 
                             #region Temática
@@ -369,9 +416,15 @@ namespace Cartelux1
 
                                 _pedido_entrega.Fecha_entrega = GetDatetimeFormated(txbFecha.Value);
 
-                                if (ddlTipoEntrega.SelectedIndex > 0)
+                                if (ddlTipoEntrega1.SelectedIndex > 0)
                                 {
-                                    _pedido_entrega.Entrega_Tipo_ID = ddlTipoEntrega.SelectedIndex;
+                                    int selected = 1;
+                                    if (!int.TryParse(ddlTipoEntrega1.SelectedValue, out selected))
+                                    {
+                                        selected = 1;
+                                        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTipoEntrega1.SelectedValue);
+                                    }
+                                    _pedido_entrega.Entrega_Tipo_ID = selected;
                                 }
 
                                 // Save current LAT and LNG
@@ -413,7 +466,7 @@ namespace Cartelux1
             DateTime date = DateTime.MinValue;
             if (!string.IsNullOrWhiteSpace(fecha_str))
             {
-                if (!DateTime.TryParseExact(fecha_str, GlobalVariables.ShortDateTime_format, CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out date))
+                if (!DateTime.TryParseExact(fecha_str, GlobalVariables.ShortDateTime_format4, CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out date))
                 {
                     date = DateTime.MinValue;
                     Logs.AddErrorLog("Excepcion. Convirtiendo datetime. ERROR:", className, methodName, fecha_str);
@@ -483,11 +536,17 @@ namespace Cartelux1
                 #endregion
 
                 #region Tamaño
-                //if (ddlTamano.SelectedIndex > 0)
-                //{
-                //    //pedido.Pedido_Tematica_ID = ddlTamano.SelectedIndex;
-                //}
                 _pedido.Pedido_Tamano_ID = 0;
+                if (ddlTamano1.SelectedIndex > 0)
+                {
+                    int selected = 1;
+                    if (!int.TryParse(ddlTamano1.SelectedValue, out selected))
+                    {
+                        selected = 1;
+                        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTamano1.SelectedValue);
+                    }
+                    _pedido.Pedido_Tamano_ID = selected;
+                }
                 #endregion
 
                 #region Temática
@@ -506,6 +565,7 @@ namespace Cartelux1
 
                 context.pedido_disenos.Add(_pedido_diseno);
                 Guardar_Contexto(context);
+
                 int pedido_diseno_ID = Get_NextPedido_DisenoID(context);
                 if (pedido_diseno_ID > 0)
                 {
@@ -518,9 +578,15 @@ namespace Cartelux1
                 _pedido_entrega.Pedido_Entrega_ID = 0;
 
                 _pedido_entrega.Entrega_Tipo_ID = 0;
-                if (ddlTipoEntrega.SelectedIndex > 0)
+                if (ddlTipoEntrega1.SelectedIndex > 0)
                 {
-                    _pedido_entrega.Entrega_Tipo_ID = ddlTipoEntrega.SelectedIndex;
+                    int selected = 1;
+                    if (!int.TryParse(ddlTipoEntrega1.SelectedValue, out selected))
+                    {
+                        selected = 1;
+                        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTipoEntrega1.SelectedValue);
+                    }
+                    _pedido_entrega.Entrega_Tipo_ID = selected;
                 }
 
                 _pedido_entrega.Direccion = txbDireccion.Value;
@@ -829,7 +895,7 @@ namespace Cartelux1
                                         {
                                             //url = ftpFolder + relativePath + repoFilename; 
                                             //url = ftp + ftpFolder + repoFilename; 
-                                            url = ftp + ftpFolder + fileName1; 
+                                            url = ftp + ftpFolder + fileName1;
 
                                             //Create FTP Request.
                                             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
@@ -1043,7 +1109,6 @@ namespace Cartelux1
             }
 
             #endregion
-
 
             /* ******** Get file extension ******** */
             string fileName = MyFileUpload.PostedFile.FileName;

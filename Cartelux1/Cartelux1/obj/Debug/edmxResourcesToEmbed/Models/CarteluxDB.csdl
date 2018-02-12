@@ -130,6 +130,7 @@
     <EntitySet Name="usuarios" EntityType="Self.usuarios" />
     <EntitySet Name="pedido_entregas" EntityType="carteluxdb1Model.pedido_entregas" />
     <EntitySet Name="sysdiagrams" EntityType="carteluxdb1Model.sysdiagrams" />
+    <EntitySet Name="confi_formularios_anos" EntityType="carteluxdb1Model.confi_formularios_anos" />
   </EntityContainer>
   <EntityType Name="pedido_entregas">
     <Key>
@@ -158,5 +159,13 @@
     <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="version" Type="Int32" />
     <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="confi_formularios_anos">
+    <Key>
+      <PropertyRef Name="Confi_formularios_ano_ID" />
+      <PropertyRef Name="Nombre" />
+    </Key>
+    <Property Name="Confi_formularios_ano_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>
