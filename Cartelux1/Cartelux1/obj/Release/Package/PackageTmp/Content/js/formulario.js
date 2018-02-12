@@ -1,4 +1,4 @@
-﻿$(document).ready(function() {
+﻿$(document).ready(function () {
     var ID = getUrlParameter('ID');
     if (ID !== null && ID !== undefined && ID.length > 0) {
         //loadPreviousState();
@@ -11,10 +11,11 @@
         $("#txbCX_tel").val(_TEL);
     }
 
-    setTimeout(function() {
-        $("#ddlTipoEntrega-button").on("click", function() {
-            loadEvents();
-        });
+    setTimeout(function () {
+        loadEvents();
+
+        // Load enabled controls
+        loadPreviousState();
     }, 500);
 
     TAB_COUNT = $("#hdnPedidoCantidad").val();
@@ -42,9 +43,6 @@
     // Hide all controls
     hideAllControls();
 
-    // Load enabled controls
-    loadPreviousState();
-
 }); // END On Ready
 
 var getUrlParameter = function getUrlParameter(sParam) {
@@ -63,16 +61,91 @@ var getUrlParameter = function getUrlParameter(sParam) {
 };
 
 function loadEvents() {
-    $("#ddlTipoEntrega-menu li.ui-menu-item div").on("click", function() {
+    $("#ddlTipoEntrega1-menu").on("click", function () {
 
-        var value = $(this).attr("id");
-        if (value !== null && value.length > 0) {
+        var controls = $(".ui-selectmenu-text");
+        if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] != null) {
+            var text = $(".ui-selectmenu-text")[1].innerText;
+            var value = $("#ddlTipoEntrega1 option").filter(function () {
+                return this.text == text;
+            }).attr('selected', true).val();
+            if (value !== null && value !== undefined && value.length > 0) {
 
-            // Hide all controls
-            hideAllControls();
+                // Hide all controls
+                hideAllControls();
+
+                switch (value) {
+                    case "1":
+                        { // Colocación
+
+                            // Show 
+                            showControl("txbDireccion", true);
+                            showControl("mapSearch", true);
+                            showControl("mapSearch_msg", true);
+                            showControl("map-canvas", true);
+
+                            // Hide
+                            showControl("txbCiudad", false);
+
+                            break;
+                        }
+                    case "2":
+                        { // Envío
+
+                            // Show 
+                            showControl("txbDireccion", true);
+                            showControl("mapSearch", true);
+                            showControl("mapSearch_msg", true);
+                            showControl("map-canvas", true);
+
+                            // Hide
+                            showControl("txbCiudad", false);
+
+                            break;
+                        }
+                    case "3":
+                        { // Interior
+
+                            // Show 
+                            showControl("txbCiudad", true);
+
+                            // Hide
+                            showControl("txbDireccion", false);
+                            showControl("mapSearch", false);
+                            showControl("mapSearch_msg", false);
+                            showControl("map-canvas", false);
+
+                            break;
+                        }
+                    case "4":
+                        { // Taller
+
+                            // Hide
+                            showControl("txbCiudad", false);
+                            showControl("txbDireccion", false);
+                            showControl("mapSearch", false);
+                            showControl("mapSearch_msg", false);
+                            showControl("map-canvas", false);
+
+                            break;
+                        }
+                }
+            }
+        }
+    });
+}
+
+function loadPreviousState() {
+    var controls = $(".ui-selectmenu-text");
+    if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] != null) {
+        var text = $(".ui-selectmenu-text")[1].innerText;
+        var value = $("#ddlTipoEntrega1 option").filter(function () {
+            return this.text == text;
+        }).attr('selected', true).val();
+        if (value !== null && value !== undefined && value.length > 0) {
 
             switch (value) {
-                case "ui-id-2":
+                case 1:
                     { // Colocación
 
                         // Show 
@@ -86,13 +159,13 @@ function loadEvents() {
 
                         break;
                     }
-                case "ui-id-3":
+                case 2:
                     { // Envío
 
                         // Show 
                         showControl("txbDireccion", true);
                         showControl("mapSearch", true);
-                        showControl("mapSearch_msg", true);
+                        showControl("mapSearch_msg", false);
                         showControl("map-canvas", true);
 
                         // Hide
@@ -100,12 +173,12 @@ function loadEvents() {
 
                         break;
                     }
-                case "ui-id-4":
+                case 3:
                     { // Interior
 
                         // Show 
                         showControl("txbCiudad", true);
-                        
+
                         // Hide
                         showControl("txbDireccion", false);
                         showControl("mapSearch", false);
@@ -114,7 +187,7 @@ function loadEvents() {
 
                         break;
                     }
-                case "ui-id-5":
+                case 4:
                     { // Taller
 
                         // Hide
@@ -127,69 +200,6 @@ function loadEvents() {
                         break;
                     }
             }
-        }
-    });
-}
-
-function loadPreviousState() {
-    var selectedIndex = $("#ddlTipoEntrega option:selected").index();
-    if (selectedIndex !== null && selectedIndex > 0) {
-
-        switch (selectedIndex) {
-            case 1:
-                { // Colocación
-
-                    // Show 
-                    showControl("txbDireccion", true);
-                    showControl("mapSearch", true);
-                    showControl("mapSearch_msg", true);
-                    showControl("map-canvas", true);
-
-                    // Hide
-                    showControl("txbCiudad", false);
-
-                    break;
-                }
-            case 2:
-                { // Envío
-
-                    // Show 
-                    showControl("txbDireccion", true);
-                    showControl("mapSearch", true);
-                    showControl("mapSearch_msg", false);
-                    showControl("map-canvas", true);
-
-                    // Hide
-                    showControl("txbCiudad", false);
-
-                    break;
-                }
-            case 3:
-                { // Interior
-
-                    // Show 
-                    showControl("txbCiudad", true);
-
-                    // Hide
-                    showControl("txbDireccion", false);
-                    showControl("mapSearch", false);
-                    showControl("mapSearch_msg", false);
-                    showControl("map-canvas", false);
-
-                    break;
-                }
-            case 4:
-                { // Taller
-
-                    // Hide
-                    showControl("txbCiudad", false);
-                    showControl("txbDireccion", false);
-                    showControl("mapSearch", false);
-                    showControl("mapSearch_msg", false);
-                    showControl("map-canvas", false);
-
-                    break;
-                }
         }
     }
 }

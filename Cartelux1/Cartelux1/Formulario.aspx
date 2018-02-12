@@ -201,15 +201,9 @@
                                             <label class="_label">2) Datos del cartel</label>
                                             <br />
 
-                                            <asp:DropDownList ID="ddlTamano1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />
+                                            <asp:DropDownList ID="ddlTipoCartel" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />
 
-                                            <%--<select name="ddlTamano" id="ddlTamano" class="dropdown txbEditable ctrl-required" runat="server" clientidmode="static">
-                                                <option disabled selected>Tamaño</option>
-                                                <option>1,5 mts</option>
-                                                <option>3 mts</option>
-                                                <option>5 mts</option>
-                                                <option>Otro</option>
-                                            </select>--%>
+                                            <asp:DropDownList ID="ddlTamano1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />
 
                                             <div class="form-group">
                                                 <p style="font-size: small;">Si lo desea cargue un bosquejo hecho a mano del diseño deseado aquí</p>
@@ -236,7 +230,6 @@
                                                 <input class="form-control txbEditable ctrl-required" placeholder="Ciudad de envío" type="text" tabindex="6" runat="server" id="txbCiudad" clientidmode="static" />
                                             </div>
                                             <div class="form-group">
-                                                <%--<input class="form-control txbEditable" placeholder="Día de colocación o envío sugerido" type="text" tabindex="7" runat="server" id="txbFecha" clientidmode="static" />--%>
                                                 <input type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" id="txbFecha" tabindex="7" runat="server" clientidmode="static" />
                                             </div>
                                             <div class="form-group">

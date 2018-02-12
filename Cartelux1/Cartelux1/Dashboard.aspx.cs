@@ -165,12 +165,10 @@ namespace Cartelux1
 
         protected void gridFormularios_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-
             #region Labels
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-
                 using (CarteluxDB context = new CarteluxDB())
                 {
                     formularios _formulario = (formularios)(e.Row.DataItem);
@@ -203,21 +201,24 @@ namespace Cartelux1
                                 }
                             }
 
-                            // ???
                             lbl1 = e.Row.FindControl("lblTipoEntrega") as Label;
                             if (lbl1 != null)
                             {
-                                lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Entrega_Tipo_ID == _pedido.Pedido_Tipo_ID);
-                                if (_lista_entregas_tipo != null)
+                                pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(c => c.Pedido_Entrega_ID == _pedido.Pedido_Entrega_ID);
+                                if (_pedido_entrega != null)
                                 {
-                                    lbl1.Text = _lista_entregas_tipo.Nombre;
+                                    lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Codigo == _pedido_entrega.Pedido_Entrega_ID);
+                                    if (_lista_entregas_tipo != null)
+                                    {
+                                        lbl1.Text = _lista_entregas_tipo.Nombre;
+                                    }
                                 }
                             }
 
                             lbl1 = e.Row.FindControl("lblTamano") as Label;
                             if (lbl1 != null)
                             {
-                                lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _pedido.Pedido_Tamano_ID);
+                                lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Tamano_ID);
                                 if (_lista_pedido_tamano != null)
                                 {
                                     lbl1.Text = _lista_pedido_tamano.Nombre;
@@ -227,7 +228,7 @@ namespace Cartelux1
                             lbl1 = e.Row.FindControl("lblTipo") as Label;
                             if (lbl1 != null)
                             {
-                                lista_pedido_tipos _lista_pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(c => c.Pedido_Tipo_ID == _pedido.Pedido_Tipo_ID);
+                                lista_pedido_tipos _lista_pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Tipo_ID);
                                 if (_lista_pedido_tipo != null)
                                 {
                                     lbl1.Text = _lista_pedido_tipo.Nombre;
@@ -237,7 +238,7 @@ namespace Cartelux1
                             lbl1 = e.Row.FindControl("lblMaterial") as Label;
                             if (lbl1 != null)
                             {
-                                lista_pedido_materiales _lista_pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(c => c.Pedido_Material_ID == _pedido.Pedido_Material_ID);
+                                lista_pedido_materiales _lista_pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Material_ID);
                                 if (_lista_pedido_material != null)
                                 {
                                     lbl1.Text = _lista_pedido_material.Nombre;
@@ -253,7 +254,7 @@ namespace Cartelux1
                                     lbl1.Text = _pedido_entrega.Barrio;
                                 }
                             }
-                            
+
                         }
                     }
                 }
@@ -541,13 +542,13 @@ namespace Cartelux1
                         int last_day = DateTime.DaysInMonth(year_int, month_int);
                         DateTime date2 = new DateTime(year_int, month_int, last_day);
 
-                        _GridFormularios _GridFormulario1 = new Cartelux1.Dashboard._GridFormularios();
 
                         List<formularios> formularios_elements = GetFormularios_ByMonth(context, date1, date2);
                         foreach (formularios _formulario in formularios_elements)
                         {
                             if (_formulario != null)
                             {
+                                _GridFormularios _GridFormulario1 = new Cartelux1.Dashboard._GridFormularios();
                                 _GridFormulario1.Formulario_ID = _formulario.Formulario_ID.ToString();
                                 _GridFormulario1.URL_short = _formulario.URL_short;
 
@@ -564,25 +565,25 @@ namespace Cartelux1
                                         _GridFormulario1.lblFechaEntrega = _pedido_entrega.Fecha_entrega.ToString();
                                     }
 
-                                    lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Entrega_Tipo_ID == _pedido.Pedido_Tipo_ID);
+                                    lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Tipo_ID);
                                     if (_lista_entregas_tipo != null)
                                     {
                                         _GridFormulario1.lblTipoEntrega = _lista_entregas_tipo.Nombre;
                                     }
 
-                                    lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _pedido.Pedido_Tamano_ID);
+                                    lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Tamano_ID);
                                     if (_lista_pedido_tamano != null)
                                     {
                                         _GridFormulario1.lblTamano = _lista_pedido_tamano.Nombre;
                                     }
 
-                                    lista_pedido_tipos _lista_pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(c => c.Pedido_Tipo_ID == _pedido.Pedido_Tipo_ID);
+                                    lista_pedido_tipos _lista_pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Tipo_ID);
                                     if (_lista_pedido_tipo != null)
                                     {
                                         _GridFormulario1.lblTipo = _lista_pedido_tipo.Nombre;
                                     }
 
-                                    lista_pedido_materiales _lista_pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(c => c.Pedido_Material_ID == _pedido.Pedido_Material_ID);
+                                    lista_pedido_materiales _lista_pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Material_ID);
                                     if (_lista_pedido_material != null)
                                     {
                                         _GridFormulario1.lblMaterial = _lista_pedido_material.Nombre;

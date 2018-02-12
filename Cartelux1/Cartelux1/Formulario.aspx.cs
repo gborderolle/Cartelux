@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.Entity;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -73,8 +72,17 @@ namespace Cartelux1
 
             using (CarteluxDB context = new CarteluxDB())
             {
-                // DDL Sizes
+                // DDL Types
                 DataTable dt1 = new DataTable();
+                dt1 = Extras.ToDataTable(context.lista_pedido_tipos.OrderBy(e => e.Nombre).ToList());
+                ddlTipoCartel.DataSource = dt1;
+                ddlTipoCartel.DataTextField = "Nombre";
+                ddlTipoCartel.DataValueField = "Codigo";
+                ddlTipoCartel.DataBind();
+                ddlTipoCartel.Items.Insert(0, new ListItem("Tipo de producto", "0"));
+
+                // DDL Sizes
+                dt1 = new DataTable();
                 dt1 = Extras.ToDataTable(context.lista_pedido_tamanos.OrderBy(e => e.Nombre).ToList());
                 ddlTamano1.DataSource = dt1;
                 ddlTamano1.DataTextField = "Nombre";
@@ -184,7 +192,9 @@ namespace Cartelux1
                                 {
                                     txbCX_dir.Value = _pedido_entrega.Direccion;
                                     txbDireccion.Value = _pedido_entrega.Direccion;
-                                    txbFecha.Value = _pedido_entrega.Fecha_entrega.ToString();
+
+                                    string sqlFormattedDate = _pedido_entrega.Fecha_entrega.HasValue ? _pedido_entrega.Fecha_entrega.Value.ToString(GlobalVariables.ShortDateTime_format3) : "null";
+                                    txbFecha.Value = sqlFormattedDate;
 
                                     txbCiudad.Value = _pedido_entrega.Ciudad;
 
@@ -205,8 +215,11 @@ namespace Cartelux1
                                 #region Tipo
                                 if (_pedido.Pedido_Tipo_ID > 0)
                                 {
-                                    //ddlMotivo.DataBind();
-                                    //ddlMotivo.SelectedIndex = cartel.Tematica_ID;
+                                    lista_pedido_tipos _lista_pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(v => v.Codigo.Equals(_pedido.Pedido_Tipo_ID));
+                                    if (_lista_pedido_tipo != null)
+                                    {
+                                        ddlTipoCartel.SelectedValue = _lista_pedido_tipo.Codigo.ToString();
+                                    }
                                 }
                                 #endregion
 
@@ -366,11 +379,17 @@ namespace Cartelux1
 
                             // Updates
 
-                            #region Tipo
-                            //if (ddlTamano.SelectedIndex > 0)
-                            //{
-                            //    pedido.Pedido_Tipo_ID = ddlTamano.SelectedIndex;
-                            //}
+                            #region Tipo = Pasacalle / Roll up / etc
+                            if (ddlTipoCartel.SelectedIndex > 0)
+                            {
+                                int selected = 1;
+                                if (!int.TryParse(ddlTipoCartel.SelectedValue, out selected))
+                                {
+                                    selected = 1;
+                                    Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTipoCartel.SelectedValue);
+                                }
+                                _pedido.Pedido_Tipo_ID = selected;
+                            }
                             #endregion
 
                             #region Material = Pintado / Impreso
@@ -519,12 +538,18 @@ namespace Cartelux1
                 }
                 _pedido.Cantidad = cantidad;
 
-                #region Tipo
-                //if (ddlTamano.SelectedIndex > 0)
-                //{
-                //    pedido.Pedido_Tipo_ID = ddlTamano.SelectedIndex;
-                //}
+                #region Tipo cartel = Pasacalle / Roll up
                 _pedido.Pedido_Tipo_ID = 0;
+                if (ddlTipoCartel.SelectedIndex > 0)
+                {
+                    int selected = 1;
+                    if (!int.TryParse(ddlTipoCartel.SelectedValue, out selected))
+                    {
+                        selected = 1;
+                        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTipoCartel.SelectedValue);
+                    }
+                    _pedido.Pedido_Tipo_ID = selected;
+                }
                 #endregion
 
                 #region Material = Pintado / Impreso

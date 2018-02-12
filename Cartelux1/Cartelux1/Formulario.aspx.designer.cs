@@ -31,6 +31,15 @@ namespace Cartelux1 {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txbNombre;
         
         /// <summary>
+        /// ddlTipoCartel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoCartel;
+        
+        /// <summary>
         /// ddlTamano1 control.
         /// </summary>
         /// <remarks>

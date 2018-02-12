@@ -9,7 +9,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Cartelux Publicidad</title>
+    <title> Cartelux Publicidad | <%: Page.Title %> </title>
+    
+    <meta name="description" content="Cartelux Publicidad | Formulario de pedidos" />
+    <meta property="og:title" content="Cartelux Publicidad | Formulario de pedidos" />
+    <meta property="og:description" content="Cartelux Publicidad | Formulario de pedidos" />
+    <meta property="og:image" content="//cartelux.uy/img/cx-logo.png" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="es_ES" />
+    <%--<meta property="og:url" content="https://www.example.com/webpage/" />--%>
 
     <link rel="icon" href="Content/img/Cartelux-bolas-ico2.ico" />
     <webopt:BundleReference runat="server" Path="~/Content/css" />
@@ -84,33 +92,41 @@
 
 </head>
 <body>
-
     <form runat="server">
-        <asp:ScriptManager runat="server">
+         <asp:ScriptManager runat="server">
             <Scripts>
-                <%--<asp:ScriptReference Name="bootstrap" />--%>
-
-                <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
-                <%--Framework Scripts--%>
-                <%--<asp:ScriptReference Name="MsAjaxBundle" />--%>
-                <%--<asp:ScriptReference Name="jquery" />--%>
-                <%--<asp:ScriptReference Name="bootstrap" />--%>
-                <%--<asp:ScriptReference Name="respond" />
-                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
-                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
-                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
-                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
-                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
-                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
-                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
-                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
-                <asp:ScriptReference Name="WebFormsBundle" />--%>
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-
         <asp:ContentPlaceHolder ID="SubbodyContent" runat="server">
         </asp:ContentPlaceHolder>
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container" style="max-width: 100%;">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" runat="server" href="#">Cartelux Publicidad</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" href="/Dashboard">Dashboard</a></li>
+                    </ul>
+                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a id="lblUsername" href="#" class="usernameInfo">-</a></li>
+                                <li><a id="lblDatetime" href="#">-</a></li>
+                                <li><a runat="server" href="~/Acceso">Salir</a></li>
+                            </ul>
+                        </AnonymousTemplate>
+                    </asp:LoginView>
+                </div>
+            </div>
+        </div>
 
         <div class="container-full body-content" style="text-align: center;">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
@@ -126,7 +142,5 @@
             <p>Cartelux Publicidad. Todos los derechos reservados, marca, empresa y software registrados, 2017.</p>
         </div>
     </footer>
-    </div>
-    </form>
 </body>
 </html>

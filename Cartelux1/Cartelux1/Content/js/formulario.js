@@ -63,84 +63,86 @@ var getUrlParameter = function getUrlParameter(sParam) {
 function loadEvents() {
     $("#ddlTipoEntrega1-menu").on("click", function () {
 
-        var text = $(".ui-selectmenu-text")[1].innerText;
-        var value = $("#ddlTipoEntrega1 option").filter(function () {
-            return this.text == text;
-        }).attr('selected', true).val();
-        if (value !== null && value.length > 0) {
+        var controls = $(".ui-selectmenu-text");
+        if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] != null) {
+            var text = $(".ui-selectmenu-text")[1].innerText;
+            var value = $("#ddlTipoEntrega1 option").filter(function () {
+                return this.text == text;
+            }).attr('selected', true).val();
+            if (value !== null && value !== undefined && value.length > 0) {
 
-            // Hide all controls
-            hideAllControls();
+                // Hide all controls
+                hideAllControls();
 
-            switch (value) {
-                case "1":
-                    { // Colocación
+                switch (value) {
+                    case "1":
+                        { // Colocación
 
-                        // Show 
-                        showControl("txbDireccion", true);
-                        showControl("mapSearch", true);
-                        showControl("mapSearch_msg", true);
-                        showControl("map-canvas", true);
+                            // Show 
+                            showControl("txbDireccion", true);
+                            showControl("mapSearch", true);
+                            showControl("mapSearch_msg", true);
+                            showControl("map-canvas", true);
 
-                        // Hide
-                        showControl("txbCiudad", false);
+                            // Hide
+                            showControl("txbCiudad", false);
 
-                        break;
-                    }
-                case "2":
-                    { // Envío
+                            break;
+                        }
+                    case "2":
+                        { // Envío
 
-                        // Show 
-                        showControl("txbDireccion", true);
-                        showControl("mapSearch", true);
-                        showControl("mapSearch_msg", true);
-                        showControl("map-canvas", true);
+                            // Show 
+                            showControl("txbDireccion", true);
+                            showControl("mapSearch", true);
+                            showControl("mapSearch_msg", true);
+                            showControl("map-canvas", true);
 
-                        // Hide
-                        showControl("txbCiudad", false);
+                            // Hide
+                            showControl("txbCiudad", false);
 
-                        break;
-                    }
-                case "3":
-                    { // Interior
+                            break;
+                        }
+                    case "3":
+                        { // Interior
 
-                        // Show 
-                        showControl("txbCiudad", true);
+                            // Show 
+                            showControl("txbCiudad", true);
 
-                        // Hide
-                        showControl("txbDireccion", false);
-                        showControl("mapSearch", false);
-                        showControl("mapSearch_msg", false);
-                        showControl("map-canvas", false);
+                            // Hide
+                            showControl("txbDireccion", false);
+                            showControl("mapSearch", false);
+                            showControl("mapSearch_msg", false);
+                            showControl("map-canvas", false);
 
-                        break;
-                    }
-                case "4":
-                    { // Taller
+                            break;
+                        }
+                    case "4":
+                        { // Taller
 
-                        // Hide
-                        showControl("txbCiudad", false);
-                        showControl("txbDireccion", false);
-                        showControl("mapSearch", false);
-                        showControl("mapSearch_msg", false);
-                        showControl("map-canvas", false);
+                            // Hide
+                            showControl("txbCiudad", false);
+                            showControl("txbDireccion", false);
+                            showControl("mapSearch", false);
+                            showControl("mapSearch_msg", false);
+                            showControl("map-canvas", false);
 
-                        break;
-                    }
+                            break;
+                        }
+                }
             }
         }
     });
 }
 
 function loadPreviousState() {
-
     var controls = $(".ui-selectmenu-text");
-    if (controls !== null && controls.length > 0 && controls[1] != null) {
+    if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] != null) {
         var text = $(".ui-selectmenu-text")[1].innerText;
         var value = $("#ddlTipoEntrega1 option").filter(function () {
             return this.text == text;
         }).attr('selected', true).val();
-        if (value !== null && value.length > 0) {
+        if (value !== null && value !== undefined && value.length > 0) {
 
             switch (value) {
                 case 1:

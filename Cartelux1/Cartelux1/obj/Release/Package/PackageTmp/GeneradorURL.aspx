@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="GeneradorURL.aspx.cs" Inherits="Cartelux1.GeneradorURL" Title="Generador URL" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/SiteExternal.Master" AutoEventWireup="true" CodeBehind="GeneradorURL.aspx.cs" Inherits="Cartelux1.GeneradorURL" Title="Generador URL" %>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
     <!-- STYLES EXTENSION -->

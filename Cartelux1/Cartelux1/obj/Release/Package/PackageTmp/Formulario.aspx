@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Formulario.aspx.cs" Inherits="Cartelux1.Formulario" Title="Cartelux Publicidad" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/SiteExternal.Master" AutoEventWireup="true" CodeBehind="Formulario.aspx.cs" Inherits="Cartelux1.Formulario" Title="Cartelux Publicidad" %>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
     <!-- STYLES EXTENSION -->
@@ -27,6 +27,7 @@
             }
         }
 
+        // WhatsApp
         function clientWhatsApp() {
             var tel = _TEL;
             if (tel != null && tel.length > 0) {
@@ -37,7 +38,8 @@
                     tel = tel.substring(1);
                 }
                 var url = "https://api.whatsapp.com/send?phone=598" + tel;
-                //document.location = url
+                url += "&text=" + hashMessages["Msj_inicioCliente"];
+
                 window.open(url, '_blank');
             }
         }
@@ -159,11 +161,11 @@
                 </h2>
                 <div style="position: absolute; right: 0; margin-right: 15px;">
                     <div class="row-special">
-                        <p style="font-weight: bold; margin: 0; float: left;">Repetir iguales:</p>
+                        <p style="margin: 0; float: left;">Repetir iguales:</p>
                         <label class="_label" id="lblTabCount" style="margin: 0; font-size: xx-large; float: right;">1</label>
                         <br />
-                        <a class="btn btn-sm btn-info" onclick="addCartel();">+</a>
                         <a class="btn btn-sm btn-info" onclick="removeCartel();">-</a>
+                        <a class="btn btn-sm btn-info" onclick="addCartel();">+</a>
                     </div>
 
                 </div>
@@ -198,13 +200,10 @@
                                             <hr />
                                             <label class="_label">2) Datos del cartel</label>
                                             <br />
-                                            <select name="ddlTamano" id="ddlTamano" class="dropdown txbEditable ctrl-required" runat="server" clientidmode="static">
-                                                <option disabled selected>Tamaño</option>
-                                                <option>1,5 mts</option>
-                                                <option>3 mts</option>
-                                                <option>5 mts</option>
-                                                <option>Otro</option>
-                                            </select>
+
+                                            <asp:DropDownList ID="ddlTipoCartel" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />
+
+                                            <asp:DropDownList ID="ddlTamano1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />
 
                                             <div class="form-group">
                                                 <p style="font-size: small;">Si lo desea cargue un bosquejo hecho a mano del diseño deseado aquí</p>
@@ -217,18 +216,20 @@
                                             <hr />
                                             <label class="_label">3) Datos de la entrega</label>
                                             <br />
-                                            <select name="ddlTipoEntrega" id="ddlTipoEntrega" class="dropdown txbEditable ctrl-required" runat="server" clientidmode="static">
+
+                                            <asp:DropDownList ID="ddlTipoEntrega1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required"></asp:DropDownList> 
+
+                                            <%--<select name="ddlTipoEntrega" id="ddlTipoEntrega" class="dropdown txbEditable ctrl-required" runat="server" clientidmode="static">
                                                 <option disabled selected>Tipo de entrega</option>
                                                 <option id="colocacion">Colocación</option>
                                                 <option id="envio">Envío a domicilio</option>
                                                 <option id="interior">Envío al interior</option>
                                                 <option id="taller">Retiro en taller</option>
-                                            </select>
+                                            </select>--%>
                                             <div class="form-group">
                                                 <input class="form-control txbEditable ctrl-required" placeholder="Ciudad de envío" type="text" tabindex="6" runat="server" id="txbCiudad" clientidmode="static" />
                                             </div>
                                             <div class="form-group">
-                                                <%--<input class="form-control txbEditable" placeholder="Día de colocación o envío sugerido" type="text" tabindex="7" runat="server" id="txbFecha" clientidmode="static" />--%>
                                                 <input type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" id="txbFecha" tabindex="7" runat="server" clientidmode="static" />
                                             </div>
                                             <div class="form-group">

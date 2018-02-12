@@ -1,0 +1,119 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteExternal.Mobile.master.cs" Inherits="Cartelux1.SiteExternal_Mobile" %>
+
+<%@ Register Src="~/ViewSwitcherExternal.ascx" TagPrefix="friendlyUrls" TagName="ViewSwitcherExternal" %>
+
+<!DOCTYPE html>
+
+<html xml:lang="es-Es" xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title> Cartelux Publicidad | <%: Page.Title %> </title>
+    
+    <meta name="description" content="Cartelux Publicidad | Formulario de pedidos" />
+    <meta property="og:title" content="Cartelux Publicidad | Formulario de pedidos" />
+    <meta property="og:description" content="Cartelux Publicidad | Formulario de pedidos" />
+    <meta property="og:image" content="//cartelux.uy/img/cx-logo.png" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="es_ES" />
+    <%--<meta property="og:url" content="https://www.example.com/webpage/" />--%>
+
+    <link rel="icon" href="Content/img/Cartelux-bolas-ico2.ico" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+
+    <script type="text/javascript" src="/Content/js/jquery.js"></script>
+
+    <!-- ONLINE -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="/Scripts/WebForms/WebForms.js"></script>
+    <script type="text/javascript" src="/Scripts/WebForms/WebUIValidation.js"></script>
+    <script type="text/javascript" src="/Scripts/WebForms/MenuStandards.js"></script>
+    <script type="text/javascript" src="/Scripts/WebForms/Focus.js"></script>
+    <script type="text/javascript" src="/Scripts/WebForms/GridView.js"></script>
+    <script type="text/javascript" src="/Scripts/WebForms/DetailsView.js"></script>
+    <script type="text/javascript" src="/Scripts/WebForms/TreeView.js"></script>
+    <script type="text/javascript" src="/Scripts/WebForms/WebParts.js"></script>
+
+    <script type="text/javascript" src="/Scripts/WebForms/MsAjax/MicrosoftAjax.js"></script>
+    <script type="text/javascript" src="/Scripts/WebForms/MsAjax/MicrosoftAjaxApplicationServices.js"></script>
+    <script type="text/javascript" src="/Scripts/WebForms/MsAjax/MicrosoftAjaxTimer.js"></script>
+    <script type="text/javascript" src="/Scripts/WebForms/MsAjax/MicrosoftAjaxWebForms.js"></script>
+
+    <script type="text/javascript" src="/Scripts/modernizr.js"></script>
+
+    <!-- JS -->
+    <script type="text/javascript" src="/Content/js/jquery-ui.js"></script>
+    <script type="text/javascript" src="/Content/bootstrap/js/tether.min.js"></script>
+    <%--<script type="text/javascript" src="/Content/bootstrap/js/bootstrap.min.js"></script>--%>
+    <script src="/Global_Objects/Messages.js"></script>
+
+    <!-- STYLES -->
+
+    <!-- ONLINE -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/Content/css/jquery-ui.css" />
+    <link rel="stylesheet" href="/Content/css/jquery-ui.structure.css" />
+    <link rel="stylesheet" href="/Content/css/jquery-ui.theme.min.css" />
+    <%--<link rel="stylesheet" href="/Content/bootstrap/css/bootstrap.css" />--%>
+    <link rel="stylesheet" href="/Content/bootstrap/css/tether.min.css" />
+    <link rel="stylesheet" href="/Content/bootstrap/css/tether-theme-arrows.min.css" />
+    <link rel="stylesheet" href="/Content/bootstrap/css/tether-theme-arrows-dark.min.css" />
+    <link rel="stylesheet" href="/Content/bootstrap/css/tether-theme-basic.min.css" />
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css" />
+
+    <style type="text/css">
+        .container-full {
+            background-color: #f2e0cf;
+            margin: 0 auto;
+            display: block;
+            width: 100%;
+        }
+
+        .form-group > input, .form-group > textarea {
+            height: 40px;
+            font-size: large;
+        }
+
+        .form-group > button {
+            height: 50px;
+            font-size: larger;
+        }
+    </style>
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+
+</head>
+<body style="margin: 0; position: relative; width: fit-content;">
+    <form runat="server">
+         <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+        <asp:ContentPlaceHolder ID="SubbodyContent" runat="server">
+        </asp:ContentPlaceHolder>
+
+        <div class="container-full body-content" style="text-align: center;">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+    </form>
+
+    <hr />
+    <footer class="footer" style="font-size: small;">
+        <div class="container">
+            <p>&copy; <%: DateTime.Now.Year %> - Cartelux - Build: <%=Build_date%></p>
+            <p>Cartelux Publicidad. Todos los derechos reservados, marca, empresa y software registrados, 2017.</p>
+        </div>
+    </footer>
+</body>
+</html>

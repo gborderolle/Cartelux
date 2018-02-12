@@ -16,7 +16,7 @@ namespace Cartelux1.Models
     {
         public int Pedido_Tipo_ID { get; set; }
         public string Nombre { get; set; }
-        public string Codigo { get; set; }
+        public int Codigo { get; set; }
         public string Descripcion { get; set; }
     }
 }
