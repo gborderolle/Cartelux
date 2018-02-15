@@ -20,14 +20,13 @@ namespace Cartelux1
         {
             if (!IsPostBack)
             {
-                //Bind_GridMonths();
                 Bind_DataConfig();
-                Bind_GridFormularios(); // Pasar mes actual
+                Bind_GridFormularios(); 
             }
 
             gridFormularios.UseAccessibleHeader = true;
             gridFormularios.HeaderRow.TableSection = TableRowSection.TableHeader;
-
+            gridFormularios.FooterRow.TableSection = TableRowSection.TableFooter;
             //ScriptManager.GetCurrent(Page).RegisterPostBackControl(btnExport);
         }
 
@@ -82,76 +81,6 @@ namespace Cartelux1
                 }
             }
         }
-
-        //protected void gridMonths_RowCommand(object sender, GridViewCommandEventArgs e)
-        //{
-        //    if (e.CommandArgument != null)
-        //    {
-        //        if (!string.IsNullOrWhiteSpace(e.CommandArgument.ToString()) && !string.IsNullOrWhiteSpace(e.CommandName))
-        //        {
-        //        }
-        //    }
-        //}
-
-        //protected void gridMonths_OnSelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    // Source: http://www.codeproject.com/Tips/622720/Fire-GridView-SelectedIndexChanged-Event-without-S
-
-        //    // Logger variables
-        //    System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
-        //    System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
-        //    string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
-        //    string methodName = stackFrame.GetMethod().Name;
-
-        //    foreach (GridViewRow row in gridFormularios.Rows)
-        //    {
-        //        if (row.RowIndex == gridFormularios.SelectedIndex)
-        //        {
-        //            string Formulario_ID_str = gridFormularios.SelectedRow.Cells[0].Text;
-        //            if (!string.IsNullOrWhiteSpace(Formulario_ID_str))
-        //            {
-        //                int Formulario_ID = 0;
-        //                if (!int.TryParse(Formulario_ID_str, out Formulario_ID))
-        //                {
-        //                    Formulario_ID = 0;
-        //                    Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, Formulario_ID_str);
-        //                }
-
-        //                if (Formulario_ID > 0)
-        //                {
-        //                    using (CarteluxDB context = new CarteluxDB())
-        //                    {
-        //                        formularios _formulario = (formularios)context.formularios.FirstOrDefault(c => c.Formulario_ID == Formulario_ID);
-        //                        if (_formulario != null)
-        //                        {
-        //                            //lblClientName_1.Text = lblClientName_2.Text = _formulario.Nombre;
-
-        //                            //BindGridViajes(cliente_ID);
-
-        //                            // Filtrar por fechas del mes corriente por defecto
-        //                            ScriptManager.RegisterStartupScript(this, this.GetType(), "gridFormularios_OnSelectedIndexChanged", "<script type='text/javascript'></script>", false);
-
-        //                            hdn_FormularioID.Value = Formulario_ID_str;
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //            row.BackColor = ColorTranslator.FromHtml("#A1DCF2");
-        //            foreach (TableCell cell in row.Cells)
-        //            {
-        //                cell.BackColor = ColorTranslator.FromHtml("#A1DCF2");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            row.BackColor = ColorTranslator.FromHtml("#FFFFFF");
-        //            foreach (TableCell cell in row.Cells)
-        //            {
-        //                cell.BackColor = ColorTranslator.FromHtml("#FFFFFF");
-        //            }
-        //        }
-        //    }
-        //}
 
         protected void gridFormularios_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -359,26 +288,6 @@ namespace Cartelux1
             }
         }
 
-        private void Bind_GridMonths()
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.AddRange(new DataColumn[2] { new DataColumn("#", typeof(int)), new DataColumn("Month", typeof(string)) });
-            dt.Rows.Add(1, "Enero");
-            dt.Rows.Add(2, "Febrero");
-            dt.Rows.Add(3, "Marzo");
-            dt.Rows.Add(4, "Abril");
-            dt.Rows.Add(5, "Mayo");
-            dt.Rows.Add(6, "Junio");
-            dt.Rows.Add(7, "Julio");
-            dt.Rows.Add(8, "Agosto");
-            dt.Rows.Add(9, "Septiembre");
-            dt.Rows.Add(10, "Octubre");
-            dt.Rows.Add(11, "Noviembre");
-            dt.Rows.Add(12, "Diciembre");
-            //gridMonths.DataSource = dt;
-            //gridMonths.DataBind();
-        }
-
         private void Bind_GridFormularios(string year = "", string month = "", bool solo_vigentes = true)
         {
             // Logger variables
@@ -504,7 +413,6 @@ namespace Cartelux1
         public static _GridFormularios[] GetData_BindGridFormularios(string year_value, string month_value, bool soloVigentes_value)
         {
             List<_GridFormularios> _GridFormularios_list = new List<_GridFormularios>();
-
             if (!string.IsNullOrWhiteSpace(year_value) && !string.IsNullOrWhiteSpace(month_value))
             {
                 // Logger variables

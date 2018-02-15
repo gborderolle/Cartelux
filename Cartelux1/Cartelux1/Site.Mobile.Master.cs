@@ -11,9 +11,16 @@ namespace Cartelux1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["UserID"] != null && Session["UserName"] != null)
             {
-                build_date = GetLinkerTime(Assembly.GetExecutingAssembly()).ToString();
+                if (!IsPostBack)
+                {
+                    build_date = GetLinkerTime(Assembly.GetExecutingAssembly()).ToString();
+                }
+            }
+            else
+            {
+                Response.Redirect("/Acceso.aspx");
             }
         }
 

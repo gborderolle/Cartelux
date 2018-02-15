@@ -1,86 +1,157 @@
 ﻿/**** Local variables ****/
 var PAGO_ID_SELECTED;
 var CLIENTE_ID_SELECTED;
+var IS_MOBILE;
 
 $(document).ready(function () {
+    checkMobile();
     initVariables();
     bindEvents();
+    bindDelayEvents();
 });
 
 // attach the event binding function to every partial update
 Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function (evt, args) {
     bindEvents();
+    bindDelayEvents();
 });
 
+function DoubleScroll(element) {
+    var scrollbar = document.createElement('div');
+    scrollbar.appendChild(document.createElement('div'));
+    scrollbar.style.overflow = 'auto';
+    scrollbar.style.overflowY = 'hidden';
+    scrollbar.style.width = 'auto';
+    scrollbar.firstChild.style.width = element.scrollWidth + 'px';
+    scrollbar.firstChild.style.paddingTop = '1px';
+    scrollbar.firstChild.appendChild(document.createTextNode('\xA0'));
+    scrollbar.onscroll = function () {
+        element.scrollLeft = scrollbar.scrollLeft;
+    };
+    element.onscroll = function () {
+        scrollbar.scrollLeft = element.scrollLeft;
+    };
+    element.parentNode.insertBefore(scrollbar, element);
+}
+
+window.onload = function () {
+    DoubleScroll(document.getElementById('div_gridFormularios'));
+}
+
+function checkMobile() {
+    var mobile = (/iphone|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
+    IS_MOBILE = false;
+    if (mobile) {
+        IS_MOBILE = true;
+    }
+}
+
+function initVariables() {
+    $("#ddl_year").prop('selectedIndex', 1);
+    var year_value = $('#ddl_year :selected').text();
+
+    if (IS_MOBILE) {
+        $("#aCollapse_left_panel").show();
+        $("#aCollapse_left_panel").click();
+    }
+
+    // Click first Month
+    setTimeout(clickCurrentMonth, 50);
+}
+
+function bindEvents() {
+    $("#tabsFormularios").tabs();
+    month_onClickEvent();
+}
+
+function bindDelayEvents() {
+    setTimeout(function () {
+        if ($("#gridFormularios tbody tr").length > 0) {
+            $("#gridFormularios").tablesorter();
+        }
+    }, 100);
+}
+
+function month_clearSelected() {
+    $(".btn-table").removeClass("btn-success");
+    $(".btn-table").removeClass("btn-primary");
+    $(".btn-table").addClass("btn-primary");
+}
+
+function month_paintSelected(month_index) {
+    $(".btn-table").filter("td[data-value='" + month_index + "']").toggleClass("btn-success");
+}
+
 function month_selectMonth(month_value, soloVigentes_value) {
-    if (month_value !== null && month_value > 0) {
+    if (month_value !== null && month_value !== undefined && month_value > 0 && soloVigentes_value !== null && soloVigentes_value !== undefined) {
         
         month_setMonthName(month_value);
+        month_clearSelected()
+        month_paintSelected(month_value);
 
         var year_value = 2018; // DUMMY
-        var hdn_yearSelected = $("#hdn_yearSelected");
-        if (hdn_yearSelected !== null) {
-            year_value = hdn_yearSelected.val();
-        }
+        var ddl_year = $("#ddl_year option:selected");
+        if (ddl_year !== null && ddl_year !== undefined && ddl_year.text() !== null && ddl_year.text() !== undefined) {
+            year_value = ddl_year.text();
 
-        // Source: https://www.codeproject.com/Tips/775585/Bind-Gridview-using-AJAX
-        // Ajax call parameters
-        console.log("Ajax call: Dashboard.aspx/GetData_BindGridFormularios. Params:");
-        console.log("year_value, type: " + type(year_value) + ", value: " + year_value);
-        console.log("month_value, type: " + type(month_value) + ", value: " + month_value);
-        console.log("soloVigentes_value, type: " + type(soloVigentes_value) + ", value: " + soloVigentes_value);
-        
-        $.ajax({
-            type: "POST",
-            url: "Dashboard.aspx/GetData_BindGridFormularios",
-            contentType: "application/json;charset=utf-8",
-            data: '{year_value: "' + year_value + '",month_value: "' + month_value + '",soloVigentes_value: "' + soloVigentes_value + '"}',
-            dataType: "json",
-            success: function (response) {
+            // Source: https://www.codeproject.com/Tips/775585/Bind-Gridview-using-AJAX
+            // Ajax call parameters
+            console.log("Ajax call: Dashboard.aspx/GetData_BindGridFormularios. Params:");
+            console.log("year_value, type: " + type(year_value) + ", value: " + year_value);
+            console.log("month_value, type: " + type(month_value) + ", value: " + month_value);
+            console.log("soloVigentes_value, type: " + type(soloVigentes_value) + ", value: " + soloVigentes_value);
 
-                $("#gridFormularios").empty();
+            $.ajax({
+                type: "POST",
+                url: "Dashboard.aspx/GetData_BindGridFormularios",
+                contentType: "application/json;charset=utf-8",
+                data: '{year_value: "' + year_value + '",month_value: "' + month_value + '",soloVigentes_value: "' + soloVigentes_value + '"}',
+                dataType: "json",
+                success: function (response) {
 
-                if (response.d.length > 0) {
-                    $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL_short</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>Fecha de Entrega</th> <th scope='col'>Tipo de Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>Tipo cartel</th> <th scope='col'>Material</th> <th scope='col'>Zona</th> <th scope='col'>URL_short</th> <th scope='col'>Ir al Form</th> <th scope='col'>Ir a WhatsApp</th></tr></thead>");
-                    for (var i = 0; i < response.d.length; i++) {
-                        var goToURL = "<a id='btnURL' role='button' href='" + response.d[i].URL_short + "' class='btn btn-info glyphicon glyphicon-share-alt' title='' target='_blank'></a>";
+                    $("#gridFormularios").empty();
 
-                        var tel = response.d[i].lblTelefono;
-                        // Si el número empieza con 0 lo borra
-                        var first = tel.charAt(0);
-                        if (first === "0") {
-                            tel = tel.substring(1);
+                    if (response.d.length > 0) {
+                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>Fecha de Entrega</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>Tipo de Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>Tipo cartel</th> <th scope='col'>Material</th> <th scope='col'>Zona</th> <th scope='col'>URL_short</th> <th scope='col'>Ir al Form</th> <th scope='col'>Ir a WhatsApp</th></tr></thead>");
+                        for (var i = 0; i < response.d.length; i++) {
+                            var goToURL = "<a id='btnURL' role='button' href='" + response.d[i].URL_short + "' class='btn btn-info glyphicon glyphicon-share-alt' title='' target='_blank'></a>";
+
+                            var tel = response.d[i].lblTelefono;
+                            // Si el número empieza con 0 lo borra
+                            var first = tel.charAt(0);
+                            if (first === "0") {
+                                tel = tel.substring(1);
+                            }
+
+                            var url = "https://api.whatsapp.com/send?phone=598" + tel;
+                            url += "&text=" + hashMessages["Msj_inicioCliente"];
+
+                            var goToWPP = "<a id='btnURL' role='button' href='" + url + "' class='btn btn-info btn-xs fa fa-whatsapp fa-2x' title='' target='_blank'></a>";
+                            var date = moment(response.d[i].lblFechaEntrega, "MM-DD-YYYY").format("DD-MM-YYYY");
+
+                            $("#gridFormularios").append("<tbody><tr><td class='hiddencol hiddencol_real'>" +
+                            response.d[i].Formulario_ID + "</td> <td class='hiddencol hiddencol_real'>" +
+                            response.d[i].URL_short + "</td> <td class='td-very_short'>" +
+                            date + "</td> <td class='td-very_short'>" +
+                            response.d[i].lblTelefono + "</td> <td class='td-very_short'>" +
+                            response.d[i].lblNombre + "</td> <td class='td-very_short'>" +
+                            response.d[i].lblTipoEntrega + "</td> <td class='td-very_short'>" +
+                            response.d[i].lblTamano + "</td> <td class='td-very_short'>" +
+                            response.d[i].lblTipo + "</td> <td class='td-very_short'>" +
+                            response.d[i].lblMaterial + "</td> <td class='td-very_short'>" +
+                            response.d[i].lblZona + "</td><td class='td-short'>" +
+                            response.d[i].URL_short + "</td><td class='td-very_short'>" +
+                            goToURL + "</td><td class='td-very_short'>" +
+                            goToWPP + "</td></tr></tbody>");
                         }
-
-                        var url = "https://api.whatsapp.com/send?phone=598" + tel;
-                        url += "&text=" + hashMessages["Msj_inicioCliente"];
-
-                        var goToWPP = "<a id='btnURL' role='button' href='" + url + "' class='btn btn-info btn-xs fa fa-whatsapp fa-2x' title='' target='_blank'></a>";
-                        var date = moment(response.d[i].lblFechaEntrega, "MM-DD-YYYY").format("DD-MM-YYYY");
-
-                        $("#gridFormularios").append("<tr><td class='hiddencol hiddencol_real'>" +
-                        response.d[i].Formulario_ID + "</td> <td class='hiddencol hiddencol_real'>" +
-                        response.d[i].URL_short + "</td> <td>" +
-                        response.d[i].lblTelefono + "</td> <td>" +
-                        response.d[i].lblNombre + "</td> <td>" +
-                        date + "</td> <td>" +
-                        response.d[i].lblTipoEntrega + "</td> <td>" +
-                        response.d[i].lblTamano + "</td> <td>" +
-                        response.d[i].lblTipo + "</td> <td>" +
-                        response.d[i].lblMaterial + "</td> <td>" +
-                        response.d[i].lblZona + "</td><td>" +
-                        response.d[i].URL_short + "</td><td>" +
-                        goToURL + "</td><td>" +
-                        goToWPP + "</td></tr>");
                     }
+
+
+                }, // end success
+                failure: function (response) {
                 }
-
-
-            }, // end success
-            failure: function (response) {
-            }
-        }); // Ajax
-
+            }); // Ajax
+        }
     }
 }
 
@@ -171,19 +242,6 @@ function setupMonthPicker() {
     $('#add_txbFecha').datepicker("setDate", new Date(d.getFullYear(), $("#hdn_monthSelected").val() - 1, d.getDate()));
 }
 
-function initVariables() {
-    $("#ddl_year").prop('selectedIndex', 1);
-    var year_value = $('#ddl_year :selected').text();
-
-    var hdn_yearSelected = $("#hdn_yearSelected");
-    if (hdn_yearSelected !== null) {
-        hdn_yearSelected.val(year_value);
-    }
-
-    // Click first Month
-    setTimeout(clickCurrentMonth, 50);
-}
-
 function clickCurrentMonth() {
     var d = new Date();
     var m = d.getMonth() + 1;
@@ -211,7 +269,12 @@ function month_onClickEvent() {
             var hdn_monthSelected = $("#hdn_monthSelected");
             if (hdn_monthSelected !== null && chbSoloVigentes !== null) {
                 hdn_monthSelected.val(month_value);
-                month_selectMonth(month_value, true)
+
+                var month_value_int = month_value;
+                if (type(month_value) === "string") {
+                    month_value_int = TryParseInt(month_value, 0);
+                }
+                month_selectMonth(month_value_int, true)
             }
         }
     });
@@ -223,16 +286,13 @@ function filtrar_soloVigentes() {
     if (hdn_monthSelected !== null && hdn_monthSelected.val() !== null && chbSoloVigentes !== null) {
         var soloVigentes_value = chbSoloVigentes.is(":checked")
         var month_value = hdn_monthSelected.val();
-        month_selectMonth(month_value, soloVigentes_value);
+
+        var month_value_int = month_value;
+        if (type(month_value) === "string") {
+            month_value_int = TryParseInt(month_value, 0);
+        }
+        month_selectMonth(month_value_int, !soloVigentes_value)
     }
-}
-
-
-function bindEvents() {
-    $("#tabsPedidos").tabs();
-    $("#tabsFormularios").tabs();
-
-    month_onClickEvent();
 }
 
 function GetMonthFilter() {

@@ -23,6 +23,36 @@
             #ddl_year > .dropdown-menu {
                 position: relative !important;
             }
+
+        .row-short {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .headerSortUp {
+            background-position: top;
+            background-repeat: no-repeat;
+            background-image: url(../images/icons/sort_up.gif);
+            background-color: #e9e7d7;
+        }
+
+        .headerSortDown {
+            background-position: top;
+            background-repeat: no-repeat;
+            background-image: url(../images/icons/sort_down.gif);
+            background-color: #e9e7d7;
+        }
+
+        .td-short {
+            max-width: 120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .td-very_short {
+            max-width: 80px;
+        }
     </style>
 
 </asp:Content>
@@ -35,7 +65,6 @@
     <script type="text/javascript" src="/Content/js/jquery.tablesorter.js"></script>
     <script type="text/javascript" src="/Content/js/chosen.jquery.js"></script>
     <script type="text/javascript" src="/Content/js/moment.js"></script>
-    <%--<script type="text/javascript" src="/Content/js/MonthPicker.js"></script>--%>
 
     <!-- Bootstrap table -->
     <script type="text/javascript" src="/Content/js/bootstrap-table.js"></script>
@@ -59,14 +88,17 @@
             </div>
 
             <div class="row panel panel-default" style="margin-top: 10px; padding-top: 10px;">
-
-                <div class="col-xs-12 col-sm-12 col-md-3 pull-left">
+                <a id="aCollapse_left_panel" data-toggle="collapse" href="#left_panel" style="display: none;">Seleccionar mes</a>
+                <div id="left_panel" class="col-xs-12 col-sm-12 col-md-3 pull-left panel-collapse collapse in">
                     <div class="row" style="margin-bottom: 10px;">
                         <div class="col-xs-12 col-sm-12 col-md-7 pull-right">
                         </div>
                     </div>
 
-                    <asp:DropDownList ID="ddl_year" runat="server" ClientIDMode="Static" CssClass="form-control dropdown"/>
+                    <div class="input-group row-short" style="padding: 5px; width: -webkit-fill-available;">
+                        <label class="pull-left" style="padding: 6px; margin-left: 10px;">Seleccionar año</label>
+                        <asp:DropDownList ID="ddl_year" runat="server" ClientIDMode="Static" CssClass="form-control dropdown" />
+                    </div>
 
                     <%--SOURCE: http://bootstrap-table.wenzhixin.net.cn/getting-started/--%>
                     <%--SOURCE: http://issues.wenzhixin.net.cn/bootstrap-table/--%>
@@ -144,7 +176,7 @@
                                 <td id="td-id-11" class="td-class-11">
                                     <h4>11</h4>
                                 </td>
-                                <td class="btn btn-primary btn-lg btn-table" data-value="1">Noviembre</td>
+                                <td class="btn btn-primary btn-lg btn-table" data-value="11">Noviembre</td>
                             </tr>
                             <tr id="tr-id-12" class="tr-class-12">
                                 <td id="td-id-12" class="td-class-12">
@@ -155,14 +187,6 @@
                         </tbody>
                     </table>
 
-
-
-                    <%-- <asp:GridView ID="gridMonths" runat="server" ClientIDMode="Static" HorizontalAlign="Left" AutoGenerateColumns="false" CssClass="table table-hover table-striped" AllowPaging="false"
-                        OnRowCommand="gridMonths_RowCommand"
-                        OnSelectedIndexChanged="gridMonths_OnSelectedIndexChanged">
-                        <RowStyle HorizontalAlign="Left" />
-
-                    </asp:GridView>--%>
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-9 pull-right">
@@ -175,44 +199,42 @@
 
                         <!-- Tab Viajes BEGIN -->
                         <div id="tabsFormularios_1">
+                            <asp:UpdatePanel ID="upFormularios" runat="server">
+                                <ContentTemplate>
 
-                            <div style="overflow: auto;">
+                                    <asp:HiddenField ID="hdn_clientID" runat="server" ClientIDMode="Static" />
 
-                                <asp:UpdatePanel ID="upFormularios" runat="server">
-                                    <ContentTemplate>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-4 pull-left">
+                                            <h2>
+                                                <label id="lblMonth" class="pull-left">[MES]</label></h2>
+                                        </div>
+                                    </div>
 
-                                        <asp:HiddenField ID="hdn_clientID" runat="server" ClientIDMode="Static" />
-
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-4 pull-left">
-                                                <h2>
-                                                    <label id="lblMonth" class="pull-left">[MES]</label></h2>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6 pull-left">
+                                            <div class="input-group" style="padding: 5px;">
+                                                <asp:Button ID="btnSearch_saldos" runat="server" Text="Filtrar" CssClass="btn btn-sm btn-info btnUpdate pull-right"
+                                                    OnClick="btnSearch_Click_saldos" UseSubmitBehavior="false" ClientIDMode="Static" CausesValidation="false" OnClientClick="Javascript:GetMonthFilter()" />
+                                                <input id="txbMonthpicker" type="text" class="month-year-input" style="margin-right: 10px;">
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-6 pull-left">
-                                                <div class="input-group" style="padding: 5px;">
-                                                    <asp:Button ID="btnSearch_saldos" runat="server" Text="Filtrar" CssClass="btn btn-sm btn-info btnUpdate pull-right"
-                                                        OnClick="btnSearch_Click_saldos" UseSubmitBehavior="false" ClientIDMode="Static" CausesValidation="false" OnClientClick="Javascript:GetMonthFilter()" />
-                                                    <input id="txbMonthpicker" type="text" class="month-year-input" style="margin-right: 10px;">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-12 col-md-6 pull-right">
-                                                <div class="input-group pull-right" style="padding: 5px;">
-                                                    <div class="form-check">
-                                                        <input id="chbSoloVigentes" class="form-check-input" type="checkbox" onclick="filtrar_soloVigentes()">
-                                                        <label class="form-check-label" for="chbSoloVigentes">
-                                                            Todo el mes
-                                                        </label>
-                                                    </div>
+                                        <div class="col-sm-12 col-md-6 pull-right">
+                                            <div class="input-group pull-right" style="padding: 5px;">
+                                                <div class="form-check">
+                                                    <input id="chbSoloVigentes" class="form-check-input" type="checkbox" onclick="filtrar_soloVigentes()">
+                                                    <label class="form-check-label" for="chbSoloVigentes">
+                                                        Todo el mes
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <asp:Label ID="gridFormularios_lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
-                                        <asp:GridView ID="gridFormularios" runat="server" ClientIDMode="Static" HorizontalAlign="Center" AutoGenerateColumns="false" CssClass="table table-hover table-striped" AllowPaging="false"
+                                    <asp:Label ID="gridFormularios_lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
+                                    <div id="div_gridFormularios" style="overflow: auto;">
+                                        <asp:GridView ID="gridFormularios" runat="server" ClientIDMode="Static" HorizontalAlign="Center" AutoGenerateColumns="false" CssClass="table table-hover table-striped" AllowPaging="false" AllowSorting="true"
                                             DataKeyNames="Formulario_ID"
                                             OnRowDataBound="gridFormularios_RowDataBound"
                                             OnRowCommand="gridFormularios_RowCommand">
@@ -222,31 +244,31 @@
                                                 <asp:BoundField DataField="Formulario_ID" HeaderText="Formulario_ID" HtmlEncode="false" ItemStyle-CssClass="hiddencol hiddencol_real" HeaderStyle-CssClass="hiddencol hiddencol_real" />
                                                 <asp:BoundField DataField="URL_short" HeaderText="URL_short" HtmlEncode="False" ItemStyle-CssClass="hiddencol hiddencol_real" HeaderStyle-CssClass="hiddencol hiddencol_real" />
 
+                                                <asp:TemplateField HeaderText="Fecha de Entrega">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblFechaEntrega" runat="server" CommandName="View" Text='<%# Eval("Fecha_creado", "{0:dd-MM-yyyy}") %>' />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
                                                 <asp:TemplateField HeaderText="Teléfono">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblTelefono" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                 <asp:TemplateField HeaderText="Nombre">
+                                                <asp:TemplateField HeaderText="Nombre">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblNombre" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                 <asp:TemplateField HeaderText="Fecha de Entrega">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="lblFechaEntrega" runat="server" CommandName="View" Text='<%# Eval("Fecha_creado", "{0:dd-MM-yyyy}") %>' />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-
-                                                 <asp:TemplateField HeaderText="Tipo de Entrega">
+                                                <asp:TemplateField HeaderText="Tipo de Entrega">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblTipoEntrega" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                 <asp:TemplateField HeaderText="Tamaño">
+                                                <asp:TemplateField HeaderText="Tamaño">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblTamano" runat="server" CommandName="View" />
                                                     </ItemTemplate>
@@ -270,7 +292,7 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:BoundField DataField="URL_short" HeaderText="URL Formulario" HtmlEncode="False" />
+                                                <asp:BoundField DataField="URL_short" HeaderText="URL Form" HtmlEncode="False" />
 
                                                 <asp:TemplateField HeaderText="Ir al Form" ControlStyle-CssClass="btn btn-info btn-xs">
                                                     <ItemTemplate>
@@ -279,19 +301,17 @@
                                                 </asp:TemplateField>
                                             </Columns>
                                         </asp:GridView>
-                                        <asp:Label ID="lblgridFormulariosCount" runat="server" ClientIDMode="Static" Text="Resultados: 0" CssClass="lblResultados label label-info"></asp:Label>
+                                    </div>
+                                    <asp:Label ID="lblgridFormulariosCount" runat="server" ClientIDMode="Static" Text="Resultados: 0" CssClass="lblResultados label label-info"></asp:Label>
 
-                                        <hr style="margin-top: 5px; margin-bottom: 5px;" />
-                                        <div class="row" style="margin: 0;">
-                                            <div class="col-md-12 pull-left" style="padding: 10px;">
-                                            </div>
+                                    <hr style="margin-top: 5px; margin-bottom: 5px;" />
+                                    <div class="row" style="margin: 0;">
+                                        <div class="col-md-12 pull-left" style="padding: 10px;">
                                         </div>
+                                    </div>
 
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-
-                            </div>
-
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </div>
 
                         <div id="tabsFormularios_2">
@@ -303,7 +323,7 @@
 
                                         <div class="row" style="margin-bottom: 10px;">
                                             <div class="col-sm-12 col-md-8 pull-left">
-                                                <h2>Datos de los viajes</h2>
+                                                <h2>Calendario de pedidos</h2>
                                             </div>
 
                                             <div class="col-sm-12 col-md-4 pull-right">
@@ -346,7 +366,5 @@
 
     <asp:HiddenField ID="hdn_FormularioID" runat="server" ClientIDMode="Static" />
     <asp:HiddenField ID="hdn_monthSelected" runat="server" ClientIDMode="Static" />
-    <asp:HiddenField ID="hdn_yearSelected" runat="server" ClientIDMode="Static" />
-
 
 </asp:Content>

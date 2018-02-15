@@ -79,7 +79,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/16/2013 20:06:22</publishTime>
     </File>
     <File Include="bin/Cartelux1.dll">
-      <publishTime>02/12/2018 07:16:59</publishTime>
+      <publishTime>02/13/2018 17:59:37</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>03/02/2015 10:32:26</publishTime>
@@ -298,19 +298,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/14/2016 11:01:10</publishTime>
     </File>
     <File Include="Content/bootstrap/fonts/glyphicons-halflings-regular.eot">
-      <publishTime>06/29/2016 06:19:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/bootstrap/fonts/glyphicons-halflings-regular.svg">
-      <publishTime>06/29/2016 06:19:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/bootstrap/fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>06/29/2016 06:19:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/bootstrap/fonts/glyphicons-halflings-regular.woff">
-      <publishTime>06/29/2016 06:19:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/bootstrap/fonts/glyphicons-halflings-regular.woff2">
-      <publishTime>06/29/2016 06:19:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/bootstrap/js/bootstrap.js">
       <publishTime>01/06/2017 16:42:52</publishTime>
@@ -342,6 +342,78 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/css/generador.css">
       <publishTime>11/15/2017 03:39:22</publishTime>
     </File>
+    <File Include="Content/css/images/black-asc.gif">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/black-desc.gif">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/black-unsorted.gif">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/bootstrap-black-unsorted.png">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/bootstrap-white-unsorted.png">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/dragtable-handle.png">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/dragtable-handle.svg">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/dropbox-asc-hovered.png">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/dropbox-asc.png">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/dropbox-desc-hovered.png">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/dropbox-desc.png">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/green-asc.gif">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/green-desc.gif">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/green-header.gif">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/green-unsorted.gif">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/ice-asc.gif">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/ice-desc.gif">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/ice-unsorted.gif">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/metro-black-asc.png">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/metro-black-desc.png">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/metro-loading.gif">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/metro-unsorted.png">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/metro-white-asc.png">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/metro-white-desc.png">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
     <File Include="Content/css/images/ui-icons_444444_256x240.png">
       <publishTime>09/24/2017 05:09:08</publishTime>
     </File>
@@ -359,6 +431,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/css/images/ui-icons_ffffff_256x240.png">
       <publishTime>09/24/2017 05:09:08</publishTime>
+    </File>
+    <File Include="Content/css/images/white-asc.gif">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/white-desc.gif">
+      <publishTime>02/05/2018 11:49:36</publishTime>
+    </File>
+    <File Include="Content/css/images/white-unsorted.gif">
+      <publishTime>02/05/2018 11:49:36</publishTime>
     </File>
     <File Include="Content/css/jquery-ui.css">
       <publishTime>09/14/2016 17:34:06</publishTime>
@@ -528,11 +609,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/img/CX-Banner-form1.png">
       <publishTime>09/13/2017 03:24:35</publishTime>
     </File>
+    <File Include="Content/img/CX-web1.png">
+      <publishTime>11/12/2017 14:28:20</publishTime>
+    </File>
     <File Include="Content/img/Dropbox_logo.png">
       <publishTime>09/21/2017 04:01:05</publishTime>
     </File>
     <File Include="Content/img/loader.gif">
       <publishTime>08/10/2012 21:40:34</publishTime>
+    </File>
+    <File Include="Content/img/login.png">
+      <publishTime>02/09/2018 15:07:55</publishTime>
     </File>
     <File Include="Content/js/auxiliar_functions.js">
       <publishTime>02/07/2018 23:59:29</publishTime>
@@ -550,13 +637,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/30/2017 12:30:30</publishTime>
     </File>
     <File Include="Content/js/dashboard.js">
-      <publishTime>02/12/2018 07:00:13</publishTime>
+      <publishTime>02/13/2018 17:52:30</publishTime>
     </File>
     <File Include="Content/js/formulario.js">
       <publishTime>02/12/2018 06:51:22</publishTime>
     </File>
     <File Include="Content/js/generador.js">
-      <publishTime>01/14/2018 21:16:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/js/jquery-3.2.1.min.js">
       <publishTime>09/11/2017 02:01:23</publishTime>
@@ -580,7 +667,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/07/2018 23:59:29</publishTime>
     </File>
     <File Include="Content/js/jquery.tablesorter.js">
-      <publishTime>02/07/2018 23:59:29</publishTime>
+      <publishTime>05/02/2018 11:49:36</publishTime>
     </File>
     <File Include="Content/js/login.js">
       <publishTime>02/07/2018 23:59:29</publishTime>
@@ -595,7 +682,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/11/2017 00:59:45</publishTime>
     </File>
     <File Include="Dashboard.aspx">
-      <publishTime>02/12/2018 06:58:32</publishTime>
+      <publishTime>02/13/2018 17:51:03</publishTime>
     </File>
     <File Include="Default.aspx">
       <publishTime>09/11/2017 00:59:15</publishTime>
@@ -651,22 +738,64 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Pages/GeneradorLink.aspx">
       <publishTime>09/14/2017 07:26:45</publishTime>
     </File>
+    <File Include="Scripts/ai.0.15.0-build58334.js">
+      <publishTime>08/19/2016 18:17:50</publishTime>
+    </File>
+    <File Include="Scripts/ai.0.15.0-build58334.min.js">
+      <publishTime>08/19/2016 18:17:50</publishTime>
+    </File>
     <File Include="Scripts/bootstrap.js">
+      <publishTime>08/19/2016 18:17:35</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js+">
       <publishTime>09/11/2017 00:59:32</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
+      <publishTime>08/19/2016 18:17:35</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js+">
       <publishTime>09/11/2017 00:59:32</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.js">
+      <publishTime>08/19/2016 18:17:34</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.js+">
       <publishTime>09/11/2017 00:59:29</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.min.js">
+      <publishTime>08/19/2016 18:17:34</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.js+">
       <publishTime>09/11/2017 00:59:29</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.min.map">
+      <publishTime>08/19/2016 18:17:34</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.map+">
       <publishTime>09/11/2017 00:59:29</publishTime>
     </File>
+    <File Include="Scripts/jquery-3.1.1.min.js">
+      <publishTime>10/26/2016 18:26:11</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.2.1.js">
+      <publishTime>09/24/2017 02:07:29</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>08/24/2016 22:42:14</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>08/24/2016 22:42:14</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>08/24/2016 22:42:15</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>08/24/2016 22:42:15</publishTime>
+    </File>
     <File Include="Scripts/modernizr-2.6.2.js">
+      <publishTime>09/11/2017 00:59:31</publishTime>
+    </File>
+    <File Include="Scripts/modernizr.js">
       <publishTime>09/11/2017 00:59:31</publishTime>
     </File>
     <File Include="Scripts/respond.js">
@@ -739,7 +868,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/11/2017 00:59:37</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>02/12/2018 03:49:34</publishTime>
+      <publishTime>02/12/2018 07:45:46</publishTime>
     </File>
     <File Include="Site.Master">
       <publishTime>02/09/2018 16:18:43</publishTime>
@@ -763,7 +892,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/09/2018 16:32:22</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/12/2018 07:17:00</publishTime>
+      <publishTime>02/13/2018 17:01:31</publishTime>
     </File>
   </ItemGroup>
 </Project>
