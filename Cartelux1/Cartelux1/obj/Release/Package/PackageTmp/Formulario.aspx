@@ -161,12 +161,18 @@
                 </h2>
                 <div class="loginTitleContainer"></div>
             </div>
+            <div class="form-check" style="position: absolute; right: 10px;">
+                <input id="chbRepetidos" class="form-check-input" type="checkbox" onclick="checkbox_repetidos()">
+                <label class="form-check-label" for="chbRepetidos">
+                    Repetidos
+                </label>
+            </div>
             <br />
 
             <div id="tabPedidos">
 
                 <div style="position: relative; right: 0; margin-right: 15px; float: right;">
-                    <div class="row-special">
+                    <div class="row-special unselectable" id="repetidos_group" style="display:none;">
                         <p style="margin: 0; float: left;">Repetir iguales:</p>
                         <label class="_label" id="lblTabCount" style="margin: 0; font-size: xx-large; float: right;">1</label>
                         <br>
@@ -192,45 +198,47 @@
                                 <div class="row" style="margin: auto; display: inline-flex; width: 100%;">
                                     <div class="col-sm-12 col-md-10" style="margin: auto; padding: 0;">
                                         <div class="login-container sub-form">
-                                            <label class="_label">1) Ingrese sus datos</label>
-                                            <div class="form-group">
+                                            <label class="_label unselectable">1) Ingrese sus datos</label>
+                                            <div class="form-group unselectable">
                                                 <input class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" required runat="server" id="txbTel" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group unselectable">
                                                 <input class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" required runat="server" id="txbNombre" clientidmode="static" autofocus />
                                             </div>
                                             <hr />
-                                            <label class="_label">2) Datos del cartel</label>
+                                            <label class="_label unselectable">2) Datos del cartel</label>
                                             <br />
 
-                                            <asp:DropDownList ID="ddlTipoCartel" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />
+                                            <%--<asp:DropDownList ID="ddlTipoCartel" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />--%>
 
                                             <asp:DropDownList ID="ddlTamano1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />
 
-                                            <div class="form-group">
+                                            <div class="form-group unselectable">
                                                 <p style="font-size: small;">Si lo desea cargue un bosquejo hecho a mano del diseño deseado aquí</p>
                                                 <asp:FileUpload ID="MyFileUpload" runat="server" accept="image/*" />
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group unselectable">
                                                 <asp:TextBox runat="server" ID="txbTexto1" TextMode="multiline" CssClass="form-control txbEditable multitext" placeholder="Indicaciones del diseño" TabIndex="3"></asp:TextBox>
                                             </div>
 
                                             <hr />
-                                            <label class="_label">3) Datos de la entrega</label>
+                                            <label class="_label unselectable">3) Datos de la entrega</label>
                                             <br />
 
                                             <asp:DropDownList ID="ddlTipoEntrega1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required"></asp:DropDownList>
 
-                                            <div class="form-group">
+                                            <div class="form-group unselectable">
                                                 <input class="form-control txbEditable ctrl-required" placeholder="Ciudad de envío" type="text" tabindex="6" runat="server" id="txbCiudad" clientidmode="static" />
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group unselectable">
+                                                Fecha de entrega
                                                 <input type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" id="txbFecha" tabindex="7" runat="server" clientidmode="static" />
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" id="dir_group">
+                                                Dirección 1
                                                 <input class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" tabindex="5" runat="server" id="txbDireccion" clientidmode="static" />
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group unselectable">
 
                                                 <style>
                                                     #map-canvas {
@@ -239,7 +247,8 @@
                                                     }
                                                 </style>
 
-                                                <div class="form-group">
+                                                <div class="form-group" id="map_group">
+                                                    Dirección 2 (mapa)
                                                     <input type="text" id="mapSearch" class="form-control ctrl-required" placeholder="Dirección de entrega" />
                                                     <div id="map-canvas" style="margin: auto; width: 100%;"></div>
                                                     <p id="mapSearch_msg" style="font-size: small; color: red;">Asegúrese que la ubicación en el mapa sea la correcta por favor</p>
@@ -247,7 +256,7 @@
 
                                             </div>
 
-                                            <div class="form-group">
+                                            <div class="form-group unselectable">
                                                 <button class="form-control btn btn-danger" clientidmode="static" name="Submit" type="submit" data-submit="...Confirmando" runat="server" id="btnConfirmar" onserverclick="btnConfirmar_ServerClick" style="background-image: none; background-color: #ea7209; height: 40px;">GUARDAR</button>
                                             </div>
 
@@ -256,7 +265,7 @@
                                             <h4 id="msj_result" runat="server" style="margin: auto; display: none;"><span class="label label-success">Los datos se guardaron correctamente</span></h4>
                                         </div>
                                         <hr />
-                                        <div style="font-size: small">
+                                        <div style="font-size: small" class="unselectable">
                                             <div class="row" style="margin-left: 0; margin-right: 0;">
                                                 <span>Última actualización del pedido:</span>
                                                 <label id="lblLastUpdate" runat="server">-</label>
@@ -276,8 +285,8 @@
                                 <div class="row" style="margin: auto; display: inline-flex; width: 100%;">
                                     <div class="col-sm-12 col-md-10" style="margin: auto; padding: 0;">
                                         <div class="login-container sub-form">
-                                            <label class="_label">Contacto cliente</label>
-                                            <div class="form-group">
+                                            <label class="_label unselectable">Contacto cliente</label>
+                                            <div class="form-group unselectable">
                                                 Teléfono
                                                 <div class="row-special" style="display: flex;">
                                                     <input class="form-control" id="txbCX_tel" readonly="true" style="width: 90%; display: inline-block; margin-right: 10px;" />
@@ -286,7 +295,7 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group unselectable">
                                                 Google Maps
                                                 <div class="row-special" style="display: flex;">
                                                     <input class="form-control" id="txbCX_URL" readonly="true" style="width: 90%; display: inline-block; margin-right: 10px;" />
@@ -295,7 +304,7 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group unselectable">
                                                 Dirección
                                                 <div class="row-special" style="display: flex;">
                                                     <input class="form-control" type="text" tabindex="5" runat="server" id="txbCX_dir" clientidmode="static" readonly="true" />

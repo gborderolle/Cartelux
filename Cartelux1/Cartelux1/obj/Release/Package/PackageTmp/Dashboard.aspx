@@ -116,7 +116,7 @@
                     </div>
 
                     <div class="input-group row-short" style="padding: 5px; width: -webkit-fill-available;">
-                        <label class="pull-left" style="padding: 6px; margin-left: 10px;">Seleccionar año</label>
+                        <label class="pull-left unselectable" style="padding: 6px; margin-left: 10px;">Año</label>
                         <asp:DropDownList ID="ddl_year" runat="server" ClientIDMode="Static" CssClass="form-control dropdown" />
                     </div>
 
@@ -190,13 +190,13 @@
                                     <div class="row">
                                         <div class="col-sm-12 col-md-4 pull-left">
                                             <h2 style="margin-top:0;">
-                                                <label id="lblMonth" class="pull-left">[MES]</label></h2>
+                                                <label id="lblMonth" class="pull-left unselectable">[MES]</label></h2>
                                         </div>
                                         <div class="col-sm-12 col-md-6 pull-right">
                                             <div class="input-group pull-right" style="padding: 5px;">
                                                 <div class="form-check">
                                                     <input id="chbSoloVigentes" class="form-check-input" type="checkbox" onclick="filtrar_soloVigentes()">
-                                                    <label class="form-check-label" for="chbSoloVigentes">
+                                                    <label class="form-check-label unselectable" for="chbSoloVigentes">
                                                         Todo el mes
                                                     </label>
                                                 </div>

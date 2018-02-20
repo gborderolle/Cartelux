@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using Cartelux1.Models;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Web;
 
 namespace Cartelux1.Global_Objects
 {
@@ -40,6 +38,36 @@ namespace Cartelux1.Global_Objects
             }
             catch (Exception) { }
         }
+
+        public static void AddUserLog(string message, string object_ID, string userID_str, string username)
+        {
+            // Logger variables
+            System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
+            System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+            string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+            string methodName = stackFrame.GetMethod().Name;
+
+            using (CarteluxDB context = new CarteluxDB())
+            {
+                //log new_log = new log();
+                //new_log.Fecha = DateTime.Now;
+                //new_log.Usuario = username;
+                //new_log.Descripcion = message;
+                //new_log.Dato = object_ID;
+
+                //int userID = 0;
+                //if (!int.TryParse(userID_str, out userID))
+                //{
+                //    userID = 0;
+                //    AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, userID_str);
+                //}
+
+                //new_log.Usuario_ID = userID;
+                //context.logs.Add(new_log);
+                //context.SaveChanges();
+            }
+        }
+
 
     }
 }

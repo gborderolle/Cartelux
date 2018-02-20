@@ -71,3 +71,5 @@ Parameter name: value.
 2/12/2018 7:13:45 AM: [ln:513] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
 2/12/2018 7:13:52 AM: [ln:492] Formulario: GetDatetimeFormated() - Excepcion. Convirtiendo datetime. ERROR: 2/13/2018 12:00:00 AM.
 2/12/2018 7:13:53 AM: [ln:513] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+20/02/2018 6:36:51: [ln:513] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+20/02/2018 6:36:52: [ln:513] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..

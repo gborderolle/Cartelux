@@ -82,9 +82,8 @@ function loadEvents() {
                         { // Colocación
 
                             // Show 
-                            showControl("txbDireccion", true);
-                            showControl("mapSearch", true);
-                            showControl("mapSearch_msg", true);
+                            showControl("dir_group", true);
+                            showControl("map_group", true);
                             showControl("map-canvas", true);
 
                             // Hide
@@ -96,9 +95,8 @@ function loadEvents() {
                         { // Envío
 
                             // Show 
-                            showControl("txbDireccion", true);
-                            showControl("mapSearch", true);
-                            showControl("mapSearch_msg", true);
+                            showControl("dir_group", true);
+                            showControl("map_group", true);
                             showControl("map-canvas", true);
 
                             // Hide
@@ -113,9 +111,8 @@ function loadEvents() {
                             showControl("txbCiudad", true);
 
                             // Hide
-                            showControl("txbDireccion", false);
-                            showControl("mapSearch", false);
-                            showControl("mapSearch_msg", false);
+                            showControl("dir_group", false);
+                            showControl("map_group", false);
                             showControl("map-canvas", false);
 
                             break;
@@ -125,9 +122,8 @@ function loadEvents() {
 
                             // Hide
                             showControl("txbCiudad", false);
-                            showControl("txbDireccion", false);
-                            showControl("mapSearch", false);
-                            showControl("mapSearch_msg", false);
+                            showControl("dir_group", false);
+                            showControl("map_group", false);
                             showControl("map-canvas", false);
 
                             break;
@@ -152,9 +148,8 @@ function loadPreviousState() {
                     { // Colocación
 
                         // Show 
-                        showControl("txbDireccion", true);
-                        showControl("mapSearch", true);
-                        showControl("mapSearch_msg", true);
+                        showControl("dir_group", true);
+                        showControl("map_group", true);
                         showControl("map-canvas", true);
 
                         // Hide
@@ -166,9 +161,8 @@ function loadPreviousState() {
                     { // Envío
 
                         // Show 
-                        showControl("txbDireccion", true);
-                        showControl("mapSearch", true);
-                        showControl("mapSearch_msg", false);
+                        showControl("dir_group", true);
+                        showControl("map_group", true);
                         showControl("map-canvas", true);
 
                         // Hide
@@ -183,9 +177,8 @@ function loadPreviousState() {
                         showControl("txbCiudad", true);
 
                         // Hide
-                        showControl("txbDireccion", false);
-                        showControl("mapSearch", false);
-                        showControl("mapSearch_msg", false);
+                        showControl("dir_group", false);
+                        showControl("map_group", false);
                         showControl("map-canvas", false);
 
                         break;
@@ -195,9 +188,8 @@ function loadPreviousState() {
 
                         // Hide
                         showControl("txbCiudad", false);
-                        showControl("txbDireccion", false);
-                        showControl("mapSearch", false);
-                        showControl("mapSearch_msg", false);
+                        showControl("dir_group", false);
+                        showControl("map_group", false);
                         showControl("map-canvas", false);
 
                         break;
@@ -211,6 +203,18 @@ function readonlyControl(doEnable, idControl) {
     $("#" + idControl).attr("readonly", doEnable);
 }
 
+function checkbox_repetidos() {
+    var chbRepetidos = $("#chbRepetidos");
+    if (chbRepetidos !== null) {
+        var chbRepetidos_value = chbRepetidos.is(":checked");
+        if (chbRepetidos_value) {
+            $("#repetidos_group").show();
+        } else {
+            $("#repetidos_group").hide();
+        }
+    }
+}
+
 function showControl(idControl, doShow) {
     if (doShow) {
         $("#" + idControl).show();
@@ -222,9 +226,8 @@ function showControl(idControl, doShow) {
 
 function hideAllControls() {
     showControl("txbCiudad", false);
-    showControl("txbDireccion", false);
-    showControl("mapSearch", false);
-    showControl("mapSearch_msg", false);
+    showControl("dir_group", false);
+    showControl("map_group", false);
     showControl("map-canvas", false);
 }
 

@@ -1,14 +1,7 @@
 ﻿using Cartelux1.Global_Objects;
 using Cartelux1.Models;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data.Entity;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Web;
 using System.Web.UI;
 
 namespace Cartelux1
@@ -61,6 +54,18 @@ namespace Cartelux1
                         {
                             Session["UserID"] = _usuario.Usuario_ID;
                             Session["UserName"] = username;
+
+                            #region Guardar log
+                            try
+                            {
+                                string userID1 = _usuario.Usuario_ID.ToString();
+                                //Global_Objects.Logs.AddUserLog("Acceso al sistema", obj.GetType().Name + ": " + obj.GetType().Name + ": " + obj.Viaje_ID, userID1, username);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logs.AddErrorLog("Excepcion. Guardando log. ERROR:", className, methodName, ex.Message);
+                            }
+                            #endregion
 
                             Response.Redirect("Dashboard", false);
                         }

@@ -47,11 +47,11 @@
 
                 <div class="loginFormContent" style="margin-bottom: 0;">
 
-                    <div class="form-group">
+                    <div class="form-group unselectable">
                         Usuario:
                 <input type="text" id="txbUser1" runat="server" placeholder="Usuario" class="txbUser form-control" style="padding: 25px; max-width: initial;" />
                     </div>
-                    <div class="form-group">
+                    <div class="form-group unselectable">
                         Contraseña:
                 <input type="password" id="txbPassword1" runat="server" placeholder="Contraseña" class="txbPassword form-control" style="padding: 25px; max-width: initial;" />
                     </div>

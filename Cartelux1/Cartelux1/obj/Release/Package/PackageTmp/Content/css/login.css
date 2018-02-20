@@ -1,5 +1,14 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 body{
     background-color: #2d3032;
 }
