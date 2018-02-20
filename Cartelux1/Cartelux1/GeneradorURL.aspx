@@ -7,16 +7,18 @@
     <!-- PAGE JS -->
     <script type="text/javascript" src="/Content/js/generador.js"></script>
     <script type="text/javascript" src="/Content/js/clipboard.min.js"></script>
+    <script type="text/javascript" src="/Content/js/clipboard-action.js"></script>
+    <%--<script type="text/javascript" src="/Content/js/clipboard.js"></script>--%>
     <style type="text/css">
         body {
             background-color: #f2e0cf;
         }
+
         .center {
             display: block;
             margin: auto;
             width: 100%;
         }
-
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="SubbodyContent" runat="server"></asp:Content>
@@ -25,7 +27,7 @@
         <div class="box-header with-border dark in div-form" style="display: inline-block;">
             <div class="row center">
                 <div style="text-align: center;">
-                    <h2 id="lbl_h2" style="color: #ea7209;">Generar y copiar URL del nuevo pedido
+                    <h2 id="lbl_h2" style="color: #ea7209;">URL | Nuevo pedido
                   <a href="#" id="btnRefresh" class="pull-right btn" onclick="location.reload();" style="position: absolute; right: 0; margin-right: 20px;">
                       <i class="fa fa-refresh"></i>
                   </a>
@@ -38,7 +40,7 @@
                     <div class="login-container sub-form">
                         <div class="form-group">
                             Número del cliente - 091373622
-                            <input type="number" class="form-control" id="txbContactPhone" autofocus/>
+                            <input type="number" class="form-control" id="txbContactPhone" autofocus />
                             <br />
                             <input class="form-control btn-primary btn-lg" style="height: auto;" type="button" tabindex="1" runat="server" id="btnGenerar" clientidmode="static" value="Generar URL" title="Click para generar una URL con ID único" onclick="generarURL();" />
                         </div>
@@ -48,7 +50,14 @@
 
             <div class="row center">
                 <div class="col-sm-12 col-md-10 center">
-                    <input class="form-control text-to-copy" id="txbLink" onclick="this.select();" value="?" readonly />
+                    <input class="form-control text-to-copy pull-left" id="txbLink" onclick="this.select();" value="?" style="width: 85%;" readonly />
+                    <%--<button onclick="CopyTextAUX()"></button>--%>
+
+                    <%--SOURCE: https://clipboardjs.com/--%>
+                    <a id="aBtnCopy" href="#" class="btn btn-lg pull-right" data-clipboard-action="copy" data-clipboard-target="input#txbLink" style="padding:8px;">
+                        <i class="glyphicon glyphicon-copy"></i>
+                    </a>
+
                     <button type="button" class="form-control btn-warning js-copy-btn btn-lg" style="height: auto;" id="btnCopy" onclick="enviarWPP()">Copiar y enviar por WhatsApp</button>
                     <%--<input class="form-control btn-warning js-copy-btn" type="button" tabindex="2" id="btnCopy" value="Copiar y enviar por WhatsApp" title="Click para enviar por WhatsApp" onclick="enviarWPP();">--%>
                 </div>
@@ -59,10 +68,28 @@
         </div>
     </div>
     <script type="text/javascript">
+
+        var clipboard = new Clipboard('#aBtnCopy');
+        clipboard.on('success', function (e) {
+            console.log(e);
+        });
+        clipboard.on('error', function (e) {
+            console.log(e);
+        });
+
+
         //<![CDATA[
         /*jslint browser:true, white:true, single:true*/
         (function () {
             'use strict';
+
+            doMagic();
+
+        }());
+        //]]>
+
+        function doMagic() {
+
 
             var textClassName = 'text-to-copy';
             var buttonClassName = 'js-copy-btn';
@@ -72,6 +99,7 @@
             };
 
             window.addEventListener('DOMContentLoaded', function () {
+
                 var texts = Array.prototype.slice.call(document.querySelectorAll(
                   '[class*=' + textClassName + ']'));
                 var buttons = Array.prototype.slice.call(document.querySelectorAll(
@@ -212,8 +240,7 @@
                 } // CHEQUEO
 
             });
-        }());
-        //]]>
+        }
 
     </script>
     <script>

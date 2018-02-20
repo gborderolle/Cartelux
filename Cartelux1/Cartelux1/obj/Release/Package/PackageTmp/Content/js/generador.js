@@ -1,6 +1,17 @@
 ﻿wpp_url = "";
 texto = "Por favor: ingrese los datos del pedido en el siguiente formulario, muchas gracias."
 
+function CopyTextAUX() {
+    /* Get the text field */
+    var copyText = document.getElementById("txbLink");
+
+    /* Select the text field */
+    copyText.select();
+
+    /* Copy the text inside the text field */
+    document.execCommand("Copy");
+}
+
 function generarURL() {
 
     var txbContactPhone = $("#txbContactPhone").val();
@@ -101,11 +112,176 @@ function enviarWPP() {
     var txbLink = $("#txbLink").val();
     if (txbLink !== null && txbLink.length > 0 && txbLink !== "?") {
         if (wpp_url !== null && wpp_url.length > 0) {
-            window.location = wpp_url;
+            //window.location = wpp_url;
+            //window.open(wpp_url, '_blank');
+
+
+            //location.reload();
+
+            //doMagic_fire();
+
+            doMagic2();
+            window.open(wpp_url, '_blank');
         }
     } else {
         alert("Haz click en Generar URL para continuar");
     }
+}
+
+function doMagic_fire() {
+    var DOMContentLoaded_event = document.createEvent("Event");
+    DOMContentLoaded_event.initEvent("DOMContentLoaded", true, true);
+    window.document.dispatchEvent(DOMContentLoaded_event);
+}
+
+function doMagic2() {
+
+    var textClassName = 'text-to-copy';
+    var buttonClassName = 'js-copy-btn';
+    var sets = {};
+    var regexBuilder = function (prefix) {
+        return new RegExp(prefix + '\\S*');
+    };
+
+    var texts = Array.prototype.slice.call(document.querySelectorAll(
+      '[class*=' + textClassName + ']'));
+    var buttons = Array.prototype.slice.call(document.querySelectorAll(
+      '[class*=' + buttonClassName + ']'));
+
+    var classNameFinder = function (arr, regex, namePrefix) {
+        return arr.map(function (item) {
+            return (item.className.match(regex)) ? item.className
+              .match(regex)[0].replace(namePrefix, '') : false;
+        }).sort();
+    };
+
+    sets.texts = classNameFinder(
+      texts, regexBuilder(textClassName), textClassName);
+
+    sets.buttons = classNameFinder(
+      buttons, regexBuilder(buttonClassName), buttonClassName);
+
+    var matches = sets.texts.map(function (ignore, index) {
+        return sets.texts[index].match(sets.buttons[index]);
+    });
+
+    var throwErr = function (err) {
+        throw new Error(err);
+    };
+    var iPhoneORiPod = false;
+    var iPad = false;
+    var oldSafari = false;
+    var navAgent = window.navigator.userAgent;
+
+    // CHEQUEO
+    var txbLink = $("#txbLink").val();
+    if (txbLink !== null && txbLink.length > 0 && txbLink !== "?") {
+
+        if (
+          (/^((?!chrome).)*safari/i).test(navAgent)
+            // ^ Fancy safari detection thanks to: https://stackoverflow.com/a/23522755
+          &&
+          !(/^((?!chrome).)*[0-9][0-9](\.[0-9][0-9]?)?\ssafari/i).test(
+            navAgent)
+            // ^ Even fancier Safari < 10 detection thanks to regex.  :^)
+        ) {
+            oldSafari = true;
+        }
+        // We need to test for older Safari and the device,
+        // because of quirky awesomeness.
+        if (navAgent.match(/iPhone|iPod/i)) {
+            iPhoneORiPod = true;
+        } else if (navAgent.match(/iPad/i)) {
+            iPad = true;
+        }
+        var cheval = function (btn, text) {
+            var copyBtn = document.querySelector(btn);
+
+            var setCopyBtnText = function (textToSet) {
+                copyBtn.textContent = textToSet;
+            };
+            if (iPhoneORiPod || iPad) {
+                if (oldSafari) {
+                    setCopyBtnText("Select text");
+                }
+            }
+            if (copyBtn) {
+                copyBtn.addEventListener('click', function () {
+                    var oldPosX = window.scrollX;
+                    var oldPosY = window.scrollY;
+                    // Clone the text-to-copy node so that we can
+                    // create a hidden textarea, with its text value.
+                    // Thanks to @LeaVerou for the idea.
+                    var originalCopyItem = document.querySelector(text);
+                    var dollyTheSheep = originalCopyItem.cloneNode(true);
+                    var copyItem = document.createElement('textarea');
+                    copyItem.style.opacity = 0;
+                    copyItem.style.position = "absolute";
+                    // If .value is undefined, .textContent will
+                    // get assigned to the textarea we made.
+                    copyItem.value = dollyTheSheep.value || dollyTheSheep
+                      .textContent;
+                    document.body.appendChild(copyItem);
+                    if (copyItem) {
+                        // Select the text:
+                        copyItem.focus();
+                        copyItem.selectionStart = 0;
+                        // For some reason the 'copyItem' does not get
+                        // the correct length, so we use the OG.
+                        //copyItem.selectionEnd = originalCopyItem.textContent.length;
+                        copyItem.selectionEnd = 999999999;
+                        try {
+                            // Now that we've selected the text, execute the copy command:
+                            document.execCommand('copy');
+                            if (oldSafari) {
+                                if (iPhoneORiPod) {
+                                    setCopyBtnText("Now tap 'Copy'");
+                                } else if (iPad) {
+                                    // The iPad doesn't have the 'Copy' box pop up,
+                                    // you have to tap the text first.
+                                    setCopyBtnText(
+                                      "Now tap the text, then 'Copy'");
+                                } else {
+                                    // Just old!
+                                    setCopyBtnText("Press Command + C to copy");
+                                }
+                            } else {
+                                setCopyBtnText("¡Listo!");
+                            }
+                        } catch (ignore) {
+                            setCopyBtnText("Please copy manually");
+                        }
+                        originalCopyItem.focus();
+                        // Restore the user's original position to avoid
+                        // 'jumping' when they click a copy button.
+                        window.scrollTo(oldPosX, oldPosY);
+                        originalCopyItem.selectionStart = 0;
+                        originalCopyItem.selectionEnd = originalCopyItem.textContent
+                          .length;
+                        copyItem.remove();
+                    } else {
+                        throwErr(
+                          "You don't have an element with the class: '" +
+                          textClassName +
+                          "'. Please check the cheval README."
+                        );
+                    }
+                });
+            } else {
+                throwErr(
+                  "You don't have a <button> with the class: '" +
+                  buttonClassName + "'. Please check the cheval README."
+                );
+            }
+        };
+
+        // Loop through all sets of elements and buttons:
+        matches.map(function (i) {
+            cheval('.' + buttonClassName + i, '.' + textClassName + i);
+        });
+
+    } // CHEQUEO
+
 }
 
 function copyToClipboard(elem) {

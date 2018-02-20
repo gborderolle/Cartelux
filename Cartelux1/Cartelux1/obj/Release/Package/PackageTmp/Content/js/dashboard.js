@@ -61,13 +61,16 @@ function initVariables() {
 
 function bindEvents() {
     $("#tabsFormularios").tabs();
+    $("#gridFormularios").filterTable();
+    // SOURCE: https://github.com/sunnywalker/jQuery.FilterTable
+
     month_onClickEvent();
 }
 
 function bindDelayEvents() {
     setTimeout(function () {
         if ($("#gridFormularios tbody tr").length > 0) {
-            $("#gridFormularios").tablesorter();
+            //$("#gridFormularios").tablesorter();
         }
     }, 100);
 }
@@ -112,7 +115,7 @@ function month_selectMonth(month_value, soloVigentes_value) {
                     $("#gridFormularios").empty();
 
                     if (response.d.length > 0) {
-                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>Fecha de Entrega</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>Tipo de Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>Tipo cartel</th> <th scope='col'>Material</th> <th scope='col'>Zona</th> <th scope='col'>URL_short</th> <th scope='col'>Ir al Form</th> <th scope='col'>Ir a WhatsApp</th></tr></thead>");
+                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha de Entrega</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>Tipo de Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>Tipo cartel</th> <th scope='col'>Material</th> <th scope='col'>Zona</th> <th scope='col'>URL_short</th> <th scope='col'>Ir al Form</th> <th scope='col'>Ir a WhatsApp</th></tr></thead><tbody>");
                         for (var i = 0; i < response.d.length; i++) {
                             var goToURL = "<a id='btnURL' role='button' href='" + response.d[i].URL_short + "' class='btn btn-info glyphicon glyphicon-share-alt' title='' target='_blank'></a>";
 
@@ -127,25 +130,26 @@ function month_selectMonth(month_value, soloVigentes_value) {
                             url += "&text=" + hashMessages["Msj_inicioCliente"];
 
                             var goToWPP = "<a id='btnURL' role='button' href='" + url + "' class='btn btn-info btn-xs fa fa-whatsapp fa-2x' title='' target='_blank'></a>";
-                            var date = moment(response.d[i].lblFechaEntrega, "MM-DD-YYYY").format("DD-MM-YYYY");
+                            var date = moment(response.d[i].lblFechaEntrega, "DD-MM-YYYY").format("DD-MM-YYYY");
 
-                            $("#gridFormularios").append("<tbody><tr><td class='hiddencol hiddencol_real'>" +
-                            response.d[i].Formulario_ID + "</td> <td class='hiddencol hiddencol_real'>" +
-                            response.d[i].URL_short + "</td> <td class='td-very_short'>" +
-                            date + "</td> <td class='td-very_short'>" +
-                            response.d[i].lblTelefono + "</td> <td class='td-very_short'>" +
-                            response.d[i].lblNombre + "</td> <td class='td-very_short'>" +
-                            response.d[i].lblTipoEntrega + "</td> <td class='td-very_short'>" +
-                            response.d[i].lblTamano + "</td> <td class='td-very_short'>" +
-                            response.d[i].lblTipo + "</td> <td class='td-very_short'>" +
-                            response.d[i].lblMaterial + "</td> <td class='td-very_short'>" +
-                            response.d[i].lblZona + "</td><td class='td-short'>" +
-                            response.d[i].URL_short + "</td><td class='td-very_short'>" +
+                            $("#gridFormularios").append("<tr><td class='hiddencol hiddencol_real'>" +
+                            check_nullValues(response.d[i].Formulario_ID) + "</td> <td class='hiddencol hiddencol_real'>" +
+                            check_nullValues(response.d[i].URL_short) + "</td> <td class='td-very_short'>" +
+                            check_nullValues(response.d[i].lblNumber) + "</td> <td class='td-very_short'>" +
+                            check_nullValues(date) + "</td> <td class='td-very_short'>" +
+                            check_nullValues(response.d[i].lblTelefono) + "</td> <td class='td-very_short'>" +
+                            check_nullValues(response.d[i].lblNombre) + "</td> <td class='td-very_short'>" +
+                            check_nullValues(response.d[i].lblTipoEntrega) + "</td> <td class='td-very_short'>" +
+                            check_nullValues(response.d[i].lblTamano) + "</td> <td class='td-very_short'>" +
+                            check_nullValues(response.d[i].lblTipo) + "</td> <td class='td-very_short'>" +
+                            check_nullValues(response.d[i].lblMaterial) + "</td> <td class='td-very_short'>" +
+                            check_nullValues(response.d[i].lblZona) + "</td><td class='td-short'>" +
+                            check_nullValues(response.d[i].URL_short) + "</td><td class='td-very_short'>" +
                             goToURL + "</td><td class='td-very_short'>" +
-                            goToWPP + "</td></tr></tbody>");
-                        }
+                            goToWPP + "</td></tr>");
+                        } // for
+                        $("#gridFormularios").append("</tbody>");
                     }
-
 
                 }, // end success
                 failure: function (response) {
@@ -153,6 +157,14 @@ function month_selectMonth(month_value, soloVigentes_value) {
             }); // Ajax
         }
     }
+}
+
+function check_nullValues(value) {
+    var value_return = value;
+    if (value === null || value === undefined) {
+        value_return = "";
+    }
+    return value_return;
 }
 
 function month_setMonthName(month_value) {
@@ -245,8 +257,8 @@ function setupMonthPicker() {
 function clickCurrentMonth() {
     var d = new Date();
     var m = d.getMonth() + 1;
-    if (m <= 12 && $("#tr-id-" + m + " td")[1] !== null) {
-        $("#tr-id-" + m + " td")[1].click();
+    if (m <= 12 && $("#tr-id-" + m + " td")[0] !== null) {
+        $("#tr-id-" + m + " td")[0].click();
     }
 }
 
@@ -274,7 +286,13 @@ function month_onClickEvent() {
                 if (type(month_value) === "string") {
                     month_value_int = TryParseInt(month_value, 0);
                 }
-                month_selectMonth(month_value_int, true)
+                $("#chbSoloVigentes").prop('checked', false);
+                month_selectMonth(month_value_int, true);
+
+                if (IS_MOBILE) {
+                    $("#aCollapse_left_panel").show();
+                    $("#aCollapse_left_panel").click();
+                }
             }
         }
     });

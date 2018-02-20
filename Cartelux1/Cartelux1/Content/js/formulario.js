@@ -63,12 +63,15 @@ var getUrlParameter = function getUrlParameter(sParam) {
 function loadEvents() {
     $("#ddlTipoEntrega1-menu").on("click", function () {
 
-        var controls = $(".ui-selectmenu-text");
-        if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] != null) {
-            var text = $(".ui-selectmenu-text")[1].innerText;
+        var controls = $("#ddlTipoEntrega1-button span");
+        if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
+            var text = controls[1].innerText;
             var value = $("#ddlTipoEntrega1 option").filter(function () {
                 return this.text == text;
             }).attr('selected', true).val();
+
+            //$("#ddlTipoEntrega1-button span")[1]
+
             if (value !== null && value !== undefined && value.length > 0) {
 
                 // Hide all controls

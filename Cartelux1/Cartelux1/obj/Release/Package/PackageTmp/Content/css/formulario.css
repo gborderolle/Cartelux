@@ -1,4 +1,14 @@
-﻿.div-form {
+﻿ .loginTitleContainer {
+     background-size: contain; 
+     background-repeat: no-repeat; 
+     background-position: center;
+     height: 80px;
+     width: 440px;
+     background-image: url(/Content/img/CX-web2.png);
+     margin: 0 auto;
+ }
+
+.div-form {
     margin: auto;
     border: 4px solid #F70;
     padding: 10px;

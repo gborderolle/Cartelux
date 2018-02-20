@@ -305,6 +305,7 @@
     <Content Include="Content\img\CX-Banner-form.jpg" />
     <Content Include="Content\img\CX-Banner-form1.png" />
     <Content Include="Content\img\CX-web1.png" />
+    <Content Include="Content\img\CX-web2.png" />
     <Content Include="Content\img\Dropbox_logo.png" />
     <Content Include="Content\img\loader.gif" />
     <Content Include="Content\img\login.png" />
@@ -312,11 +313,14 @@
     <Content Include="Content\js\bootstrap-table-es-ES.js" />
     <Content Include="Content\js\bootstrap-table.js" />
     <Content Include="Content\js\chosen.jquery.js" />
+    <Content Include="Content\js\clipboard-action.js" />
+    <Content Include="Content\js\clipboard.js" />
     <Content Include="Content\js\clipboard.min.js" />
     <Content Include="Content\js\dashboard.js" />
     <Content Include="Content\js\formulario.js" />
     <Content Include="Content\js\generador.js" />
     <Content Include="Content\js\jquery-ui.js" />
+    <Content Include="Content\js\jquery.filtertable.min.js" />
     <Content Include="Content\js\jquery.js" />
     <Content Include="Content\js\jquery.modal.js" />
     <Content Include="Content\js\jquery.qtip.min.js" />

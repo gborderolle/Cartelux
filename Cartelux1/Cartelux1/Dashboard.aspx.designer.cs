@@ -40,15 +40,6 @@ namespace Cartelux1 {
         protected global::System.Web.UI.WebControls.HiddenField hdn_clientID;
         
         /// <summary>
-        /// btnSearch_saldos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearch_saldos;
-        
-        /// <summary>
         /// gridFormularios_lblMessage control.
         /// </summary>
         /// <remarks>

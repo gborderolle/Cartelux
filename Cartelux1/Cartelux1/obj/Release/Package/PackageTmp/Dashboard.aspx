@@ -15,6 +15,25 @@
     <link rel="stylesheet" href="/Content/css/bootstrap-table.css" />
 
     <style type="text/css">
+        .filter-table .quick {
+            margin-left: 0.5em;
+            font-size: 0.8em;
+            text-decoration: none;
+        }
+
+        .fitler-table .quick:hover {
+            text-decoration: underline;
+        }
+
+        td.alt {
+            background-color: #ffc;
+            background-color: rgba(255, 255, 0, 0.2);
+        }
+
+        .td-style {
+            margin-top: 7px;
+        }
+
         #ddl_year {
             margin: auto;
             width: 50%;
@@ -65,6 +84,7 @@
     <script type="text/javascript" src="/Content/js/jquery.tablesorter.js"></script>
     <script type="text/javascript" src="/Content/js/chosen.jquery.js"></script>
     <script type="text/javascript" src="/Content/js/moment.js"></script>
+    <script type="text/javascript" src="/Content/js/jquery.filtertable.min.js"></script>
 
     <!-- Bootstrap table -->
     <script type="text/javascript" src="/Content/js/bootstrap-table.js"></script>
@@ -89,7 +109,7 @@
 
             <div class="row panel panel-default" style="margin-top: 10px; padding-top: 10px;">
                 <a id="aCollapse_left_panel" data-toggle="collapse" href="#left_panel" style="display: none;">Seleccionar mes</a>
-                <div id="left_panel" class="col-xs-12 col-sm-12 col-md-3 pull-left panel-collapse collapse in">
+                <div id="left_panel" class="col-xs-12 col-sm-12 col-md-2 pull-left panel-collapse collapse in">
                     <div class="row" style="margin-bottom: 10px;">
                         <div class="col-xs-12 col-sm-12 col-md-7 pull-right">
                         </div>
@@ -106,90 +126,53 @@
                         <%--data-search="true" --%>
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Seleccionar mes
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr id="tr-id-1" class="tr-class-1">
-                                <td id="td-id-1" class="td-class-1">
-                                    <h4>1</h4>
-                                </td>
-                                <td class="btn btn-primary btn-lg btn-table" data-value="1">Enero</td>
+                                <td class="td-style btn btn-primary btn-lg btn-table td-class-1" data-value="1">Enero</td>
                             </tr>
                             <tr id="tr-id-2" class="tr-class-2">
-                                <td id="td-id-2" class="td-class-2">
-                                    <h4>2</h4>
-                                </td>
-                                <td class="btn btn-primary btn-lg btn-table" data-value="2">Febrero</td>
+                                <td class="td-style btn btn-primary btn-lg btn-table td-class-2" data-value="2">Febrero</td>
                             </tr>
                             <tr id="tr-id-3" class="tr-class-3">
-                                <td id="td-id-3" class="td-class-3">
-                                    <h4>3</h4>
-                                </td>
-                                <td class="btn btn-primary btn-lg btn-table" data-value="3">Marzo</td>
+                                <td class="td-style btn btn-primary btn-lg btn-table td-class-3" data-value="3">Marzo</td>
                             </tr>
                             <tr id="tr-id-4" class="tr-class-4">
-                                <td id="td-id-4" class="td-class-4">
-                                    <h4>4</h4>
-                                </td>
-                                <td class="btn btn-primary btn-lg btn-table" data-value="4">Abril</td>
+                                <td class="td-style btn btn-primary btn-lg btn-table td-class-4" data-value="4">Abril</td>
                             </tr>
                             <tr id="tr-id-5" class="tr-class-5">
-                                <td id="td-id-5" class="td-class-5">
-                                    <h4>5</h4>
-                                </td>
-                                <td class="btn btn-primary btn-lg btn-table" data-value="5">Mayo</td>
+                                <td class="td-style btn btn-primary btn-lg btn-table td-class-5" data-value="5">Mayo</td>
                             </tr>
                             <tr id="tr-id-6" class="tr-class-6">
-                                <td id="td-id-6" class="td-class-6">
-                                    <h4>6</h4>
-                                </td>
-                                <td class="btn btn-primary btn-lg btn-table" data-value="6">Junio</td>
+                                <td class="td-style btn btn-primary btn-lg btn-table td-class-6" data-value="6">Junio</td>
                             </tr>
                             <tr id="tr-id-7" class="tr-class-7">
-                                <td id="td-id-7" class="td-class-7">
-                                    <h4>7</h4>
-                                </td>
-                                <td class="btn btn-primary btn-lg btn-table" data-value="7">Julio</td>
+                                <td class="td-style btn btn-primary btn-lg btn-table td-class-7" data-value="7">Julio</td>
                             </tr>
                             <tr id="tr-id-8" class="tr-class-8">
-                                <td id="td-id-8" class="td-class-8">
-                                    <h4>8</h4>
-                                </td>
-                                <td class="btn btn-primary btn-lg btn-table" data-value="8">Agosto</td>
+                                <td class="td-style btn btn-primary btn-lg btn-table td-class-8" data-value="8">Agosto</td>
                             </tr>
                             <tr id="tr-id-9" class="tr-class-9">
-                                <td id="td-id-9" class="td-class-9">
-                                    <h4>9</h4>
-                                </td>
-                                <td class="btn btn-primary btn-lg btn-table" data-value="9">Septiembre</td>
+                                <td class="td-style btn btn-primary btn-lg btn-table td-class-9" data-value="9">Septiembre</td>
                             </tr>
                             <tr id="tr-id-10" class="tr-class-10">
-                                <td id="td-id-10" class="td-class-10">
-                                    <h4>10</h4>
-                                </td>
-                                <td class="btn btn-primary btn-lg btn-table" data-value="10">Octubre</td>
+                                <td class="td-style btn btn-primary btn-lg btn-table td-class-10" data-value="10">Octubre</td>
                             </tr>
                             <tr id="tr-id-11" class="tr-class-11">
-                                <td id="td-id-11" class="td-class-11">
-                                    <h4>11</h4>
-                                </td>
-                                <td class="btn btn-primary btn-lg btn-table" data-value="11">Noviembre</td>
+                                <td class="td-style btn btn-primary btn-lg btn-table td-class-11" data-value="11">Noviembre</td>
                             </tr>
                             <tr id="tr-id-12" class="tr-class-12">
-                                <td id="td-id-12" class="td-class-12">
-                                    <h4>12</h4>
-                                </td>
-                                <td class="btn btn-primary btn-lg btn-table" data-value="12">Diciembre</td>
+                                <td class="td-style btn btn-primary btn-lg btn-table td-class-12" data-value="12">Diciembre</td>
                             </tr>
                         </tbody>
                     </table>
 
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-9 pull-right">
+                <div class="col-xs-12 col-sm-12 col-md-10 pull-right">
 
                     <div id="tabsFormularios">
                         <ul>
@@ -206,20 +189,9 @@
 
                                     <div class="row">
                                         <div class="col-sm-12 col-md-4 pull-left">
-                                            <h2>
+                                            <h2 style="margin-top:0;">
                                                 <label id="lblMonth" class="pull-left">[MES]</label></h2>
                                         </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6 pull-left">
-                                            <div class="input-group" style="padding: 5px;">
-                                                <asp:Button ID="btnSearch_saldos" runat="server" Text="Filtrar" CssClass="btn btn-sm btn-info btnUpdate pull-right"
-                                                    OnClick="btnSearch_Click_saldos" UseSubmitBehavior="false" ClientIDMode="Static" CausesValidation="false" OnClientClick="Javascript:GetMonthFilter()" />
-                                                <input id="txbMonthpicker" type="text" class="month-year-input" style="margin-right: 10px;">
-                                            </div>
-                                        </div>
-
                                         <div class="col-sm-12 col-md-6 pull-right">
                                             <div class="input-group pull-right" style="padding: 5px;">
                                                 <div class="form-check">
@@ -232,9 +204,21 @@
                                         </div>
                                     </div>
 
+                                    <div class="row">
+                                        <%--<div class="col-sm-12 col-md-6 pull-left">
+                                            <div class="input-group" style="padding: 5px;">
+                                                <asp:Button ID="btnSearch_saldos" runat="server" Text="Filtrar" CssClass="btn btn-sm btn-info btnUpdate pull-right"
+                                                    OnClick="btnSearch_Click_saldos" UseSubmitBehavior="false" ClientIDMode="Static" CausesValidation="false" OnClientClick="Javascript:GetMonthFilter()" />
+                                                <input id="txbMonthpicker" type="text" class="month-year-input" style="margin-right: 10px;">
+                                            </div>
+                                        </div>--%>
+
+                                        
+                                    </div>
+
                                     <asp:Label ID="gridFormularios_lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
                                     <div id="div_gridFormularios" style="overflow: auto;">
-                                        <asp:GridView ID="gridFormularios" runat="server" ClientIDMode="Static" HorizontalAlign="Center" AutoGenerateColumns="false" CssClass="table table-hover table-striped" AllowPaging="false" AllowSorting="true"
+                                        <asp:GridView ID="gridFormularios" runat="server" ClientIDMode="Static" HorizontalAlign="Center" AutoGenerateColumns="false" CssClass="table table-hover table-striped" AllowPaging="false" AllowSorting="false"
                                             DataKeyNames="Formulario_ID"
                                             OnRowDataBound="gridFormularios_RowDataBound"
                                             OnRowCommand="gridFormularios_RowCommand">
@@ -243,6 +227,12 @@
                                                 <%--<asp:BoundField DataField="Cliente_ID" HeaderText="ID" HtmlEncode="false" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" />--%>
                                                 <asp:BoundField DataField="Formulario_ID" HeaderText="Formulario_ID" HtmlEncode="false" ItemStyle-CssClass="hiddencol hiddencol_real" HeaderStyle-CssClass="hiddencol hiddencol_real" />
                                                 <asp:BoundField DataField="URL_short" HeaderText="URL_short" HtmlEncode="False" ItemStyle-CssClass="hiddencol hiddencol_real" HeaderStyle-CssClass="hiddencol hiddencol_real" />
+
+                                                 <asp:TemplateField HeaderText="#">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblNumber" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="Fecha de Entrega">
                                                     <ItemTemplate>

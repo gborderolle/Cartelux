@@ -21,7 +21,7 @@ namespace Cartelux1
             if (!IsPostBack)
             {
                 Bind_DataConfig();
-                Bind_GridFormularios(); 
+                Bind_GridFormularios();
             }
 
             gridFormularios.UseAccessibleHeader = true;
@@ -107,17 +107,10 @@ namespace Cartelux1
                         pedidos _pedido = (pedidos)context.pedidos.FirstOrDefault(c => c.Formulario_ID == _formulario.Cliente_ID);
                         if (_cliente != null && _pedido != null)
                         {
-
-                            Label lbl1 = e.Row.FindControl("lblTelefono") as Label;
+                            Label lbl1 = e.Row.FindControl("lblNumber") as Label;
                             if (lbl1 != null)
                             {
-                                lbl1.Text = _cliente.Telefono;
-                            }
-
-                            lbl1 = e.Row.FindControl("lblNombre") as Label;
-                            if (lbl1 != null)
-                            {
-                                lbl1.Text = _cliente.Nombre;
+                                lbl1.Text = e.Row.RowIndex.ToString();
                             }
 
                             lbl1 = e.Row.FindControl("lblFechaEntrega") as Label;
@@ -126,9 +119,36 @@ namespace Cartelux1
                                 pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(c => c.Pedido_Entrega_ID == _pedido.Pedido_Entrega_ID);
                                 if (_pedido_entrega != null)
                                 {
-                                    lbl1.Text = _pedido_entrega.Fecha_entrega.ToString();
+                                    string nombre = _pedido_entrega.Fecha_entrega.Value.ToString(GlobalVariables.ShortDateTime_format1);
+                                    if (_pedido_entrega.Fecha_entrega == DateTime.MinValue)
+                                    {
+                                        nombre = string.Empty;
+                                    }
+                                    lbl1.Text = nombre;
                                 }
                             }
+
+                            lbl1 = e.Row.FindControl("lblTelefono") as Label;
+                            if (lbl1 != null)
+                            {
+                                string nombre = string.Empty;
+                                if (!string.IsNullOrWhiteSpace(_cliente.Telefono))
+                                {
+                                    nombre = _cliente.Telefono;
+                                }
+                                lbl1.Text = nombre;
+                            }
+
+                            lbl1 = e.Row.FindControl("lblNombre") as Label;
+                            if (lbl1 != null)
+                            {
+                                string nombre = string.Empty;
+                                if (!string.IsNullOrWhiteSpace(_cliente.Nombre))
+                                {
+                                    nombre = _cliente.Nombre;
+                                }
+                                lbl1.Text = nombre;
+                            }                            
 
                             lbl1 = e.Row.FindControl("lblTipoEntrega") as Label;
                             if (lbl1 != null)
@@ -139,7 +159,12 @@ namespace Cartelux1
                                     lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Codigo == _pedido_entrega.Pedido_Entrega_ID);
                                     if (_lista_entregas_tipo != null)
                                     {
-                                        lbl1.Text = _lista_entregas_tipo.Nombre;
+                                        string nombre = string.Empty;
+                                        if (!string.IsNullOrWhiteSpace(_lista_entregas_tipo.Nombre))
+                                        {
+                                            nombre = _lista_entregas_tipo.Nombre;
+                                        }
+                                        lbl1.Text = nombre;
                                     }
                                 }
                             }
@@ -150,7 +175,12 @@ namespace Cartelux1
                                 lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Tamano_ID);
                                 if (_lista_pedido_tamano != null)
                                 {
-                                    lbl1.Text = _lista_pedido_tamano.Nombre;
+                                    string nombre = string.Empty;
+                                    if (!string.IsNullOrWhiteSpace(_lista_pedido_tamano.Nombre))
+                                    {
+                                        nombre = _lista_pedido_tamano.Nombre;
+                                    }
+                                    lbl1.Text = nombre;
                                 }
                             }
 
@@ -160,7 +190,12 @@ namespace Cartelux1
                                 lista_pedido_tipos _lista_pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Tipo_ID);
                                 if (_lista_pedido_tipo != null)
                                 {
-                                    lbl1.Text = _lista_pedido_tipo.Nombre;
+                                    string nombre = string.Empty;
+                                    if (!string.IsNullOrWhiteSpace(_lista_pedido_tipo.Nombre))
+                                    {
+                                        nombre = _lista_pedido_tipo.Nombre;
+                                    }
+                                    lbl1.Text = nombre;
                                 }
                             }
 
@@ -180,7 +215,12 @@ namespace Cartelux1
                                 pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(c => c.Pedido_Entrega_ID == _pedido.Pedido_Entrega_ID);
                                 if (_pedido_entrega != null)
                                 {
-                                    lbl1.Text = _pedido_entrega.Barrio;
+                                    string nombre = string.Empty;
+                                    if (!string.IsNullOrWhiteSpace(_pedido_entrega.Barrio))
+                                    {
+                                        nombre = _pedido_entrega.Barrio;
+                                    }
+                                    lbl1.Text = nombre;
                                 }
                             }
 
@@ -328,13 +368,19 @@ namespace Cartelux1
 
             using (CarteluxDB context = new CarteluxDB())
             {
+                // If is future month
+                DateTime date1 = new DateTime(current_year, current_month, 1);
+                if(date1 > DateTime.Now)
+                {
+                    solo_vigentes = false;
+                }
+
                 int day_value = 1;
                 if (solo_vigentes)
                 {
                     day_value = DateTime.Now.Day;
                 }
 
-                DateTime date1 = new DateTime(current_year, current_month, 1);
                 int last_day = DateTime.DaysInMonth(current_year, current_month);
                 DateTime date2 = new DateTime(current_year, current_month, last_day);
 
@@ -450,7 +496,7 @@ namespace Cartelux1
                         int last_day = DateTime.DaysInMonth(year_int, month_int);
                         DateTime date2 = new DateTime(year_int, month_int, last_day);
 
-
+                        int number = 1;
                         List<formularios> formularios_elements = GetFormularios_ByMonth(context, date1, date2);
                         foreach (formularios _formulario in formularios_elements)
                         {
@@ -466,11 +512,12 @@ namespace Cartelux1
                                 {
                                     _GridFormulario1.lblTelefono = _cliente.Telefono;
                                     _GridFormulario1.lblNombre = _cliente.Nombre;
+                                    _GridFormulario1.lblNumber = number.ToString();
 
                                     pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(c => c.Pedido_Entrega_ID == _pedido.Pedido_Entrega_ID);
                                     if (_pedido_entrega != null)
                                     {
-                                        _GridFormulario1.lblFechaEntrega = _pedido_entrega.Fecha_entrega.ToString();
+                                        _GridFormulario1.lblFechaEntrega = _pedido_entrega.Fecha_entrega.Value.ToString(GlobalVariables.ShortDateTime_format1);
                                     }
 
                                     lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Tipo_ID);
@@ -504,6 +551,7 @@ namespace Cartelux1
                                 }
                                 _GridFormularios_list.Add(_GridFormulario1);
                             }
+                            number++;
                         } // foreach
                     }
                 }
@@ -513,6 +561,7 @@ namespace Cartelux1
 
         public class _GridFormularios
         {
+            public string lblNumber { get; set; }
             public string lblTelefono { get; set; }
             public string lblNombre { get; set; }
             public string lblFechaEntrega { get; set; }

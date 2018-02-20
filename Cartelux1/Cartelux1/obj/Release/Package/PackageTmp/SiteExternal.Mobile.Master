@@ -109,7 +109,7 @@
     </form>
 
     <hr />
-    <footer class="footer" style="font-size: small;">
+    <footer class="footer" style="font-size: small; color:black;">
         <div class="container">
             <p>&copy; <%: DateTime.Now.Year %> - Cartelux - Build: <%=Build_date%></p>
             <p>Cartelux Publicidad. Todos los derechos reservados, marca, empresa y software registrados, 2017.</p>

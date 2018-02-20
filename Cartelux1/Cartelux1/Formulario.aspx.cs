@@ -193,7 +193,7 @@ namespace Cartelux1
                                     txbCX_dir.Value = _pedido_entrega.Direccion;
                                     txbDireccion.Value = _pedido_entrega.Direccion;
 
-                                    string sqlFormattedDate = _pedido_entrega.Fecha_entrega.HasValue ? _pedido_entrega.Fecha_entrega.Value.ToString(GlobalVariables.ShortDateTime_format3) : "null";
+                                    string sqlFormattedDate = _pedido_entrega.Fecha_entrega.HasValue ? _pedido_entrega.Fecha_entrega.Value.ToString(GlobalVariables.ShortDateTime_format1) : "null";
                                     txbFecha.Value = sqlFormattedDate;
 
                                     txbCiudad.Value = _pedido_entrega.Ciudad;
@@ -463,7 +463,7 @@ namespace Cartelux1
 
                     if (MyFileUpload.PostedFile != null && !string.IsNullOrWhiteSpace(MyFileUpload.PostedFile.FileName))
                     {
-                        UploadMegaAPI(serie_str, tel_str);
+                        UploadMegaAPI(_formulario, tel_str);
                     }
                 }
             }
@@ -485,7 +485,7 @@ namespace Cartelux1
             DateTime date = DateTime.MinValue;
             if (!string.IsNullOrWhiteSpace(fecha_str))
             {
-                if (!DateTime.TryParseExact(fecha_str, GlobalVariables.ShortDateTime_format4, CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out date))
+                if (!DateTime.TryParseExact(fecha_str, GlobalVariables.ShortDateTime_format1, CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out date))
                 {
                     date = DateTime.MinValue;
                     Logs.AddErrorLog("Excepcion. Convirtiendo datetime. ERROR:", className, methodName, fecha_str);
@@ -1094,177 +1094,173 @@ namespace Cartelux1
             }
         }
 
-        private void UploadMegaAPI(string serie_str, string tel_str)
+        private void UploadMegaAPI(formularios _formulario, string tel_str)
         {
-            System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
-            string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
-            string methodName = stackFrame.GetMethod().Name;
-
-            // Source: https://github.com/gpailler/MegaApiClient
-            // Source: https://codigoscript.com/2015/05/07/c-utilizar-api-mega-para-subir-archivos-a-la-nube/
-
-            #region Get_Params
-
-            //MEGA User. 
-            string MEGA_User = "madelux-001";
-            if (ConfigurationManager.AppSettings != null)
+            if (_formulario != null)
             {
-                MEGA_User = ConfigurationManager.AppSettings["MEGA_User"].ToString();
-            }
+                System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+                string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+                string methodName = stackFrame.GetMethod().Name;
 
-            //MEGA Password. 
-            string MEGA_Password = "madelux1234";
-            if (ConfigurationManager.AppSettings != null)
-            {
-                MEGA_Password = ConfigurationManager.AppSettings["MEGA_Password"].ToString();
-            }
+                // Source: https://github.com/gpailler/MegaApiClient
+                // Source: https://codigoscript.com/2015/05/07/c-utilizar-api-mega-para-subir-archivos-a-la-nube/
 
-            //MEGA Path 1. 
-            string MEGA_Path1 = "TRABAJOS";
-            if (ConfigurationManager.AppSettings != null)
-            {
-                MEGA_Path1 = ConfigurationManager.AppSettings["MEGA_Path1"].ToString();
-            }
+                #region Get_Params
 
-            //MEGA Path 2. 
-            string MEGA_Path2 = "BOSQUEJOS";
-            if (ConfigurationManager.AppSettings != null)
-            {
-                MEGA_Path2 = ConfigurationManager.AppSettings["MEGA_Path2"].ToString();
-            }
+                //MEGA User. 
+                string MEGA_User = "ventas@cartelux.uy";
+                if (ConfigurationManager.AppSettings != null)
+                {
+                    MEGA_User = ConfigurationManager.AppSettings["MEGA_User"].ToString();
+                }
 
-            #endregion
+                //MEGA Password. 
+                string MEGA_Password = "cartelux1234";
+                if (ConfigurationManager.AppSettings != null)
+                {
+                    MEGA_Password = ConfigurationManager.AppSettings["MEGA_Password"].ToString();
+                }
 
-            /* ******** Get file extension ******** */
-            string fileName = MyFileUpload.PostedFile.FileName;
-            string file_extension = string.Empty;
-            string complete_URL = string.Empty;
+                //MEGA Path 1. 
+                string MEGA_Path1 = "TRABAJOS";
+                if (ConfigurationManager.AppSettings != null)
+                {
+                    MEGA_Path1 = ConfigurationManager.AppSettings["MEGA_Path1"].ToString();
+                }
 
-            if (!string.IsNullOrWhiteSpace(fileName))
-            {
-                file_extension = fileName.Substring(fileName.LastIndexOf('.'));
-            }
+                //MEGA Path 2. 
+                string MEGA_Path2 = "BOSQUEJOS";
+                if (ConfigurationManager.AppSettings != null)
+                {
+                    MEGA_Path2 = ConfigurationManager.AppSettings["MEGA_Path2"].ToString();
+                }
 
-            /* ******** Global variables ******** */
+                #endregion
 
-            using (CarteluxDB context = new CarteluxDB())
-            {
-                formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Serie.Equals(serie_str));
-                if (_formulario != null)
+                /* ******** Get file extension ******** */
+                string fileName = MyFileUpload.PostedFile.FileName;
+                string file_extension = string.Empty;
+                string complete_URL = string.Empty;
+
+                if (!string.IsNullOrWhiteSpace(fileName))
+                {
+                    file_extension = fileName.Substring(fileName.LastIndexOf('.'));
+                }
+
+                /* ******** Global variables ******** */
+
+                using (CarteluxDB context = new CarteluxDB())
                 {
                     // Pedidos
-                    List<pedidos> lista_pedidos = (List<pedidos>)context.pedidos.Where(v => v.Formulario_ID == _formulario.Formulario_ID).ToList();
-                    if (lista_pedidos != null && lista_pedidos.Count > 0)
+                    pedidos _pedido = (pedidos)context.pedidos.FirstOrDefault(v => v.Formulario_ID == _formulario.Formulario_ID);
+                    if (_pedido != null) // CHECK THIS ***********************
                     {
-                        foreach (pedidos _pedido in lista_pedidos)
+                        int ID = _pedido.Pedido_ID;
+
+                        // GET Diseño
+                        pedido_disenos _pedido_diseno = (pedido_disenos)context.pedido_disenos.FirstOrDefault(v => v.Pedido_Diseno_ID.Equals(_pedido.Pedido_Diseno_ID));
+                        if (_pedido_diseno != null)
                         {
-                            int ID = _pedido.Pedido_ID;
-
-                            // GET Diseño
-                            pedido_disenos _pedido_diseno = (pedido_disenos)context.pedido_disenos.FirstOrDefault(v => v.Pedido_Diseno_ID.Equals(_pedido.Pedido_Diseno_ID));
-                            if (_pedido_diseno != null)
+                            if (MyFileUpload != null && MyFileUpload.PostedFile != null && !string.IsNullOrWhiteSpace(MyFileUpload.PostedFile.FileName))
                             {
-                                if (MyFileUpload != null && MyFileUpload.PostedFile != null && !string.IsNullOrWhiteSpace(MyFileUpload.PostedFile.FileName))
+                                try
                                 {
-                                    try
+                                    // Instancia de un cliente para conectar con mega.
+                                    MegaApiClient cliente = new MegaApiClient();
+                                    // Inicio de sesión con el cliente, pasando el correo y la contraseña de la cuenta mega a la que se sube el archivo.
+                                    cliente.Login(MEGA_User, MEGA_Password);
+
+                                    // Obtenemos los nodos (directorios/archivos) de la cuenta dentro de una variable.
+                                    var nodos = cliente.GetNodes();
+
+                                    // Comprobar si existe algún nodo (directorio) que se llame "Facturas" (en mi caso quiero subir el archivo a dicha carpeta).
+
+                                    // Crear dos nodos.
+                                    INode root;
+                                    INode carpeta;
+
+                                    string folder = string.Empty;
+
+                                    #region Carpeta TRABAJOS
+                                    folder = MEGA_Path1;
+                                    complete_URL = folder + "/";
+                                    bool existe = cliente.GetNodes().Any(n => n.Name == folder);
+
+                                    // Si el directorio facturas existe, se obtiene. Si no existe, se crea.
+                                    if (existe == true)
                                     {
-                                        // Instancia de un cliente para conectar con mega.
-                                        MegaApiClient cliente = new MegaApiClient();
-                                        // Inicio de sesión con el cliente, pasando el correo y la contraseña de la cuenta mega a la que se sube el archivo.
-                                        cliente.Login(MEGA_User, MEGA_Password);
-
-                                        // Obtenemos los nodos (directorios/archivos) de la cuenta dentro de una variable.
-                                        var nodos = cliente.GetNodes();
-
-                                        // Comprobar si existe algún nodo (directorio) que se llame "Facturas" (en mi caso quiero subir el archivo a dicha carpeta).
-
-                                        // Crear dos nodos.
-                                        INode root;
-                                        INode carpeta;
-
-                                        string folder = string.Empty;
-
-                                        #region Carpeta TRABAJOS
-                                        folder = MEGA_Path1;
-                                        complete_URL = folder + "/";
-                                        bool existe = cliente.GetNodes().Any(n => n.Name == folder);
-
-                                        // Si el directorio facturas existe, se obtiene. Si no existe, se crea.
-                                        if (existe == true)
-                                        {
-                                            // Obtenemos el directorio.
-                                            carpeta = nodos.FirstOrDefault(n => n.Name == folder);
-                                        }
-                                        else
-                                        {
-                                            // Obtenemos el nodo raíz.
-                                            root = nodos.Single(n => n.Type == NodeType.Root);
-                                            carpeta = cliente.CreateFolder(folder, root);
-                                        }
-                                        #endregion
-
-                                        #region Carpeta Mes-Año 01-2018
-
-                                        string year = DateTime.Now.Month.ToString("D2") + "-" + DateTime.Now.Year.ToString("D4");
-
-                                        folder = year;
-                                        complete_URL += folder + "/";
-                                        existe = cliente.GetNodes(carpeta).Any(n => n.Name == folder);
-
-                                        // Si el directorio facturas existe, se obtiene. Si no existe, se crea.
-                                        if (existe == true)
-                                        {
-                                            // Obtenemos el directorio.
-                                            carpeta = nodos.FirstOrDefault(n => n.Name == folder);
-                                        }
-                                        else
-                                        {
-                                            // Obtenemos el nodo raíz.
-                                            carpeta = cliente.CreateFolder(folder, carpeta);
-                                        }
-                                        #endregion
-
-                                        #region Carpeta Bocetos
-                                        folder = MEGA_Path2;
-                                        complete_URL += folder + "/";
-                                        existe = cliente.GetNodes(carpeta).Any(n => n.Name == folder);
-
-                                        // Si el directorio facturas existe, se obtiene. Si no existe, se crea.
-                                        if (existe == true)
-                                        {
-                                            // Obtenemos el directorio.
-                                            carpeta = nodos.FirstOrDefault(n => n.Name == folder);
-                                        }
-                                        else
-                                        {
-                                            // Obtenemos el nodo raíz.
-                                            carpeta = cliente.CreateFolder(folder, carpeta);
-                                        }
-                                        #endregion
-
-                                        //string fileName1 = Path.GetFileName(MyFileUpload.FileName);
-                                        string fileName1 = tel_str + file_extension;
-
-                                        using (Stream stream = MyFileUpload.PostedFile.InputStream)
-                                        {
-                                            cliente.Upload(stream, fileName1, carpeta);
-                                            cliente.Logout();
-                                        }
-
-                                        #region Save in DB
-
-                                        _pedido_diseno.Boceto_nombre = fileName1;
-                                        _pedido_diseno.Boceto_extension = file_extension;
-                                        _pedido_diseno.Boceto_PATH = complete_URL;
-                                        Guardar_Contexto(context);
-
-                                        #endregion
+                                        // Obtenemos el directorio.
+                                        carpeta = nodos.FirstOrDefault(n => n.Name == folder);
                                     }
-                                    catch (Exception e)
+                                    else
                                     {
-                                        Logs.AddErrorLog("Excepcion. Copiando archivo al server y guardando en BD. ERROR:", className, methodName, e.Message);
-                                        Logs.AddErrorLog("Excepcion. URL:", className, methodName, complete_URL);
+                                        // Obtenemos el nodo raíz.
+                                        root = nodos.Single(n => n.Type == NodeType.Root);
+                                        carpeta = cliente.CreateFolder(folder, root);
                                     }
+                                    #endregion
+
+                                    #region Carpeta Mes-Año 01-2018
+
+                                    string year = DateTime.Now.Month.ToString("D2") + "-" + DateTime.Now.Year.ToString("D4");
+
+                                    folder = year;
+                                    complete_URL += folder + "/";
+                                    existe = cliente.GetNodes(carpeta).Any(n => n.Name == folder);
+
+                                    // Si el directorio facturas existe, se obtiene. Si no existe, se crea.
+                                    if (existe == true)
+                                    {
+                                        // Obtenemos el directorio.
+                                        carpeta = nodos.FirstOrDefault(n => n.Name == folder);
+                                    }
+                                    else
+                                    {
+                                        // Obtenemos el nodo raíz.
+                                        carpeta = cliente.CreateFolder(folder, carpeta);
+                                    }
+                                    #endregion
+
+                                    #region Carpeta Bocetos
+                                    folder = MEGA_Path2;
+                                    complete_URL += folder + "/";
+                                    existe = cliente.GetNodes(carpeta).Any(n => n.Name == folder);
+
+                                    // Si el directorio facturas existe, se obtiene. Si no existe, se crea.
+                                    if (existe == true)
+                                    {
+                                        // Obtenemos el directorio.
+                                        carpeta = nodos.FirstOrDefault(n => n.Name == folder);
+                                    }
+                                    else
+                                    {
+                                        // Obtenemos el nodo raíz.
+                                        carpeta = cliente.CreateFolder(folder, carpeta);
+                                    }
+                                    #endregion
+
+                                    //string fileName1 = Path.GetFileName(MyFileUpload.FileName);
+                                    string fileName1 = tel_str + file_extension;
+
+                                    using (Stream stream = MyFileUpload.PostedFile.InputStream)
+                                    {
+                                        cliente.Upload(stream, fileName1, carpeta);
+                                        cliente.Logout();
+                                    }
+
+                                    #region Save in DB
+
+                                    _pedido_diseno.Boceto_nombre = fileName1;
+                                    _pedido_diseno.Boceto_extension = file_extension;
+                                    _pedido_diseno.Boceto_PATH = complete_URL;
+                                    Guardar_Contexto(context);
+
+                                    #endregion
+                                }
+                                catch (Exception e)
+                                {
+                                    Logs.AddErrorLog("Excepcion. Copiando archivo al server y guardando en BD. ERROR:", className, methodName, e.Message);
+                                    Logs.AddErrorLog("Excepcion. URL:", className, methodName, complete_URL);
                                 }
                             }
                         }

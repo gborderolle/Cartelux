@@ -15,7 +15,7 @@
 
         $(function () {
             $(".dropdown").selectmenu();
-            $("#txbFecha").datepicker();
+            $("#txbFecha").datepicker({ dateFormat: 'dd-mm-yy' });
             google.maps.event.addDomListener(window, 'load', initialize);
         });
 
@@ -155,24 +155,26 @@
     <div class="col-sm-12 col-md-12" style="padding: 0;">
         <div class="box-header with-border dark in div-form col-sm-12 col-md-4" style="display: inline-block;">
             <div class="row" style="margin: auto; display: block; text-align: center; margin-bottom: 0;">
-                <h2 style="color: #ea7209;"><a href="#" id="btnEdit" class="pull-left btn " onclick="editFields()" style="position: absolute; left: 0; margin-left: 20px;">
+                <h2 class="pull-left" style="color: #ea7209;"><a href="#" id="btnEdit" class="pull-left btn " onclick="editFields()" style="position: absolute; left: 0; margin-left: 20px;">
                     <i class="fa fa-pencil fa-2x"></i>
-                </a>Datos de su pedido 
+                </a>
                 </h2>
-                <div style="position: absolute; right: 0; margin-right: 15px;">
-                    <div class="row-special">
-                        <p style="margin: 0; float: left;">Repetir iguales:</p>
-                        <label class="_label" id="lblTabCount" style="margin: 0; font-size: xx-large; float: right;">1</label>
-                        <br />
-                        <a class="btn btn-sm btn-info" onclick="removeCartel();">-</a>
-                        <a class="btn btn-sm btn-info" onclick="addCartel();">+</a>
-                    </div>
-
-                </div>
+                <div class="loginTitleContainer"></div>
             </div>
             <br />
 
             <div id="tabPedidos">
+
+                <div style="position: relative; right: 0; margin-right: 15px; float: right;">
+                    <div class="row-special">
+                        <p style="margin: 0; float: left;">Repetir iguales:</p>
+                        <label class="_label" id="lblTabCount" style="margin: 0; font-size: xx-large; float: right;">1</label>
+                        <br>
+                        <a class="btn btn-sm btn-info" onclick="removeCartel();">-</a>
+                        <a class="btn btn-sm btn-info" onclick="addCartel();">+</a>
+                    </div>
+                </div>
+
 
                 <div class="panel with-nav-tabs panel-danger">
                     <div class="panel-heading" style="padding-bottom: 0;">
@@ -217,15 +219,8 @@
                                             <label class="_label">3) Datos de la entrega</label>
                                             <br />
 
-                                            <asp:DropDownList ID="ddlTipoEntrega1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required"></asp:DropDownList> 
+                                            <asp:DropDownList ID="ddlTipoEntrega1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required"></asp:DropDownList>
 
-                                            <%--<select name="ddlTipoEntrega" id="ddlTipoEntrega" class="dropdown txbEditable ctrl-required" runat="server" clientidmode="static">
-                                                <option disabled selected>Tipo de entrega</option>
-                                                <option id="colocacion">Colocación</option>
-                                                <option id="envio">Envío a domicilio</option>
-                                                <option id="interior">Envío al interior</option>
-                                                <option id="taller">Retiro en taller</option>
-                                            </select>--%>
                                             <div class="form-group">
                                                 <input class="form-control txbEditable ctrl-required" placeholder="Ciudad de envío" type="text" tabindex="6" runat="server" id="txbCiudad" clientidmode="static" />
                                             </div>
