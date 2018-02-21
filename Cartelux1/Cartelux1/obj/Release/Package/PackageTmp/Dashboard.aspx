@@ -189,7 +189,7 @@
 
                                     <div class="row">
                                         <div class="col-sm-12 col-md-4 pull-left">
-                                            <h2 style="margin-top:0;">
+                                            <h2 style="margin-top: 0;">
                                                 <label id="lblMonth" class="pull-left unselectable">[MES]</label></h2>
                                         </div>
                                         <div class="col-sm-12 col-md-6 pull-right">
@@ -212,8 +212,6 @@
                                                 <input id="txbMonthpicker" type="text" class="month-year-input" style="margin-right: 10px;">
                                             </div>
                                         </div>--%>
-
-                                        
                                     </div>
 
                                     <asp:Label ID="gridFormularios_lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
@@ -228,7 +226,7 @@
                                                 <asp:BoundField DataField="Formulario_ID" HeaderText="Formulario_ID" HtmlEncode="false" ItemStyle-CssClass="hiddencol hiddencol_real" HeaderStyle-CssClass="hiddencol hiddencol_real" />
                                                 <asp:BoundField DataField="URL_short" HeaderText="URL_short" HtmlEncode="False" ItemStyle-CssClass="hiddencol hiddencol_real" HeaderStyle-CssClass="hiddencol hiddencol_real" />
 
-                                                 <asp:TemplateField HeaderText="#">
+                                                <asp:TemplateField HeaderText="#">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblNumber" runat="server" CommandName="View" />
                                                     </ItemTemplate>

@@ -369,8 +369,7 @@ namespace Cartelux1
             using (CarteluxDB context = new CarteluxDB())
             {
                 // If is future month
-                DateTime date1 = new DateTime(current_year, current_month, 1);
-                if(date1 > DateTime.Now)
+                if(current_year >= DateTime.Now.Year && current_month > DateTime.Now.Month)
                 {
                     solo_vigentes = false;
                 }
@@ -381,6 +380,7 @@ namespace Cartelux1
                     day_value = DateTime.Now.Day;
                 }
 
+                DateTime date1 = new DateTime(current_year, current_month, 1);
                 int last_day = DateTime.DaysInMonth(current_year, current_month);
                 DateTime date2 = new DateTime(current_year, current_month, last_day);
 
@@ -486,6 +486,12 @@ namespace Cartelux1
                 {
                     using (CarteluxDB context = new CarteluxDB())
                     {
+                        // If is future month
+                        if (year_int >= DateTime.Now.Year && month_int > DateTime.Now.Month)
+                        {
+                            soloVigentes_value = false;
+                        }
+
                         int day_value = 1;
                         if (soloVigentes_value)
                         {

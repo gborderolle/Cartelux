@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="/Content/css/jquery.modal.css" />
     <link rel="stylesheet" href="/Content/css/chosen.css" />
     <link rel="stylesheet" href="/Content/css/MonthPicker.css" />
+    <link rel="stylesheet" href="/Content/css/glDatePicker.darkneon.css" />
+    <link rel="stylesheet" href="/Content/css/glDatePicker.default.css" />
+    <link rel="stylesheet" href="/Content/css/glDatePicker.flatwhite.css" />
 
     <!-- PAGE CSS -->
     <link rel="stylesheet" href="/Content/css/dashboard.css" />
@@ -85,6 +88,7 @@
     <script type="text/javascript" src="/Content/js/chosen.jquery.js"></script>
     <script type="text/javascript" src="/Content/js/moment.js"></script>
     <script type="text/javascript" src="/Content/js/jquery.filtertable.min.js"></script>
+    <script type="text/javascript" src="/Content/js/glDatePicker.min.js"></script>
 
     <!-- Bootstrap table -->
     <script type="text/javascript" src="/Content/js/bootstrap-table.js"></script>
@@ -189,7 +193,7 @@
 
                                     <div class="row">
                                         <div class="col-sm-12 col-md-4 pull-left">
-                                            <h2 style="margin-top:0;">
+                                            <h2 style="margin-top: 0;">
                                                 <label id="lblMonth" class="pull-left unselectable">[MES]</label></h2>
                                         </div>
                                         <div class="col-sm-12 col-md-6 pull-right">
@@ -212,8 +216,6 @@
                                                 <input id="txbMonthpicker" type="text" class="month-year-input" style="margin-right: 10px;">
                                             </div>
                                         </div>--%>
-
-                                        
                                     </div>
 
                                     <asp:Label ID="gridFormularios_lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
@@ -228,7 +230,7 @@
                                                 <asp:BoundField DataField="Formulario_ID" HeaderText="Formulario_ID" HtmlEncode="false" ItemStyle-CssClass="hiddencol hiddencol_real" HeaderStyle-CssClass="hiddencol hiddencol_real" />
                                                 <asp:BoundField DataField="URL_short" HeaderText="URL_short" HtmlEncode="False" ItemStyle-CssClass="hiddencol hiddencol_real" HeaderStyle-CssClass="hiddencol hiddencol_real" />
 
-                                                 <asp:TemplateField HeaderText="#">
+                                                <asp:TemplateField HeaderText="#">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblNumber" runat="server" CommandName="View" />
                                                     </ItemTemplate>
@@ -330,9 +332,13 @@
                                             </div>
                                         </div>
 
-                                        <asp:Label ID="gridViajeslblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
+                                        <%--SOURCE: http://glad.github.io/glDatePicker/#examples--%>
+                                        <input type="text" id="mydate" />
 
-                                        <asp:Label ID="lblGridViajesCount" runat="server" ClientIDMode="Static" Text="# 0" CssClass="lblResultados label label-info"></asp:Label>
+                                        <input type="text" id="example3" gldp-id="gldp-9183641266" class="">
+                                        <div gldp-el="gldp-9183641266"></div>
+
+
 
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
