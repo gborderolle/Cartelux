@@ -232,7 +232,7 @@ function hideAllControls() {
 }
 
 function editFields() {
-    setFieldsReadOnly(false);
+    //setFieldsReadOnly(false);
 }
 
 function setFieldsReadOnly(value) {
@@ -248,17 +248,72 @@ function setFieldsReadOnly(value) {
 }
 
 function confirmacionPedido() {
-    $("#dialog p").text(hashMessages["ConfirmacionPedido"]);
+    showMessage(hashMessages["ConfirmacionPedido"]);
+}
+
+function showMessage(value) {
+    $("#dialog p").text(value);
     $("#dialog").dialog({
         buttons: {
-            "Cerrar": function() {
+            "Cerrar": function () {
                 $(this).dialog("close");
             }
         }
     });
 }
 
+function pre_confirm() {
+    check_fields();
+}
 
+function check_fields() {
+
+    var ok = true;
+
+    var txbNombre = $("#txbNombre");
+    var txbFecha = $("#txbFecha");
+
+    var ddlTipoEntrega1 = 0;
+    var controls = $("#ddlTipoEntrega1-button span");
+    if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
+        var text = controls[1].innerText;
+        var value = $("#ddlTipoEntrega1 option").filter(function () {
+            return this.text == text;
+        }).attr('selected', true).val();
+        if (value !== null && value !== undefined && value.length > 0) {
+            ddlTipoEntrega1 = value;
+        }
+    }
+
+    if (ddlTipoEntrega1 === 0) {
+        ok = false;
+    }
+    if ((txbNombre === null || txbNombre === undefined || txbNombre.length === 0)
+        || (txbFecha === null || txbFecha === undefined || txbFecha.length === 0)) {
+        ok = false;
+    }
+
+    // Colocación o envío a domicilio
+    if (ddlTipoEntrega1 === 1 && ddlTipoEntrega1 === 2) {
+        var txbDireccion = $("#txbDireccion");
+        var mapSearch = $("#mapSearch");
+        if ((txbDireccion === null || txbDireccion === undefined || txbDireccion.length === 0)
+        || (mapSearch === null || mapSearch === undefined || mapSearch.length === 0)) {
+            ok = false;
+        }
+    }
+
+    // Envío al interior
+    if (ddlTipoEntrega1 === 3) {
+        var txbCiudad = $("#txbCiudad");
+        if (txbCiudad === null || txbCiudad === undefined || txbCiudad.length === 0){
+            ok = false;
+        }
+    }
+
+    showMessage(hashMessages["FaltanDatos"]);
+    return ok;
+}
 
 
 /* JS Goolge Maps API - Search location with map */

@@ -82,6 +82,12 @@
             margin-bottom: 10px;
         }
 
+        .btnConfirm {
+            background-image: none;
+            background-color: #ea7209;
+            height: 40px;
+        }
+
         .control-short {
             width: 90%;
         }
@@ -155,10 +161,10 @@
     <div class="col-sm-12 col-md-12" style="padding: 0;">
         <div class="box-header with-border dark in div-form col-sm-12 col-md-4" style="display: inline-block;">
             <div class="row" style="margin: auto; display: block; text-align: center; margin-bottom: 0;">
-                <h2 class="pull-left" style="color: #ea7209;"><a href="#" id="btnEdit" class="pull-left btn " onclick="editFields()" style="position: absolute; left: 0; margin-left: 20px;">
+                <%--<h2 class="pull-left" style="color: #ea7209;"><a href="#" id="btnEdit" class="pull-left btn " onclick="editFields()" style="position: absolute; left: 0; margin-left: 20px;">
                     <i class="fa fa-pencil fa-2x"></i>
                 </a>
-                </h2>
+                </h2>--%>
                 <div class="loginTitleContainer"></div>
             </div>
             <div class="form-check" style="position: absolute; right: 10px;">
@@ -172,7 +178,7 @@
             <div id="tabPedidos">
 
                 <div style="position: relative; right: 0; margin-right: 15px; float: right;">
-                    <div class="row-special unselectable" id="repetidos_group" style="display:none;">
+                    <div class="row-special unselectable" id="repetidos_group" style="display: none;">
                         <p style="margin: 0; float: left;">Repetir iguales:</p>
                         <label class="_label" id="lblTabCount" style="margin: 0; font-size: xx-large; float: right;">1</label>
                         <br>
@@ -218,7 +224,7 @@
                                                 <asp:FileUpload ID="MyFileUpload" runat="server" accept="image/*" />
                                             </div>
                                             <div class="form-group unselectable">
-                                                <asp:TextBox runat="server" ID="txbTexto1" TextMode="multiline" CssClass="form-control txbEditable multitext" placeholder="Indicaciones del diseño" TabIndex="3"></asp:TextBox>
+                                                <asp:TextBox runat="server" ID="txbTexto1" TextMode="multiline" CssClass="form-control txbEditable multitext" placeholder="Indicaciones del diseño (opcional)" TabIndex="3"></asp:TextBox>
                                             </div>
 
                                             <hr />
@@ -257,7 +263,7 @@
                                             </div>
 
                                             <div class="form-group unselectable">
-                                                <button class="form-control btn btn-danger" clientidmode="static" name="Submit" type="submit" data-submit="...Confirmando" runat="server" id="btnConfirmar" onserverclick="btnConfirmar_ServerClick" style="background-image: none; background-color: #ea7209; height: 40px;">GUARDAR</button>
+                                                <button class="form-control btn btn-danger btnConfirm" clientidmode="static" name="Submit" type="submit" data-submit="...Confirmando" runat="server" id="btnConfirmar" onserverclick="btnConfirmar_ServerClick" onclick="return pre_confirm();">GUARDAR</button>
                                             </div>
 
                                         </div>

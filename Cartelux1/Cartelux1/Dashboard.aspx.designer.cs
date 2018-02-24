@@ -67,13 +67,13 @@ namespace Cartelux1 {
         protected global::System.Web.UI.WebControls.Label lblgridFormulariosCount;
         
         /// <summary>
-        /// upViajes control.
+        /// upCalendario control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upViajes;
+        protected global::System.Web.UI.UpdatePanel upCalendario;
         
         /// <summary>
         /// hdn_FormularioID control.

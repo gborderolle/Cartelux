@@ -8,6 +8,9 @@ $(document).ready(function () {
     initVariables();
     bindEvents();
     bindDelayEvents();
+
+    drawCalendar();
+
 });
 
 // attach the event binding function to every partial update
@@ -15,6 +18,25 @@ Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function (evt, args
     bindEvents();
     bindDelayEvents();
 });
+
+function drawCalendar() {
+    ical = new Web2Cal('calendarContainer', {
+        loadEvents: function () { ical.render(new Array()); },
+        onNewEvent: onNewEvent
+    });
+    ical.build();
+}
+
+function onNewEvent(obj, groups, allday) {
+    Web2Cal.defaultPlugins.onNewEvent(obj, groups, allday);
+}
+
+/**
+ * Onclick of Close in AddEvent Box.
+ */
+function rzCloseAddEvent() {
+    ical.closeAddEvent();
+}
 
 function DoubleScroll(element) {
     var scrollbar = document.createElement('div');

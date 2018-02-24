@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="/Content/css/glDatePicker.default.css" />
     <link rel="stylesheet" href="/Content/css/glDatePicker.flatwhite.css" />
 
+    <link rel="stylesheet" href="/Content/css/optionalStyling.css" />
+    <link rel="stylesheet" href="/Content/css/web2cal.css" />
+
     <!-- PAGE CSS -->
     <link rel="stylesheet" href="/Content/css/dashboard.css" />
     <link rel="stylesheet" href="/Content/css/Modal_styles.css" />
@@ -89,6 +92,11 @@
     <script type="text/javascript" src="/Content/js/moment.js"></script>
     <script type="text/javascript" src="/Content/js/jquery.filtertable.min.js"></script>
     <script type="text/javascript" src="/Content/js/glDatePicker.min.js"></script>
+
+
+    <script type="text/javascript" src="/Content/js/Web2Cal-Basic-2.0-min.js"></script>
+    <script type="text/javascript" src="/Content/js/web2cal.support.js"></script>
+    <script type="text/javascript" src="/Content/js/web2cal.default.template.js"></script>
 
     <!-- Bootstrap table -->
     <script type="text/javascript" src="/Content/js/bootstrap-table.js"></script>
@@ -308,9 +316,9 @@
 
                         <div id="tabsFormularios_2">
 
-                            <div style="overflow: auto;">
+                            <div style="overflow: auto; height: -webkit-fill-available;">
 
-                                <asp:UpdatePanel ID="upViajes" runat="server">
+                                <asp:UpdatePanel ID="upCalendario" runat="server">
                                     <ContentTemplate>
 
                                         <div class="row" style="margin-bottom: 10px;">
@@ -332,12 +340,15 @@
                                             </div>
                                         </div>
 
-                                        <%--SOURCE: http://glad.github.io/glDatePicker/#examples--%>
-                                        <input type="text" id="mydate" />
+                                        <%--SOURCE: http://glad.github.io/glDatePicker/#examples --%>
+                                        <%-- <input type="text" id="mydate" />
 
                                         <input type="text" id="example3" gldp-id="gldp-9183641266" class="">
-                                        <div gldp-el="gldp-9183641266"></div>
+                                        <div gldp-el="gldp-9183641266"></div>--%>
 
+                                        <%--SOURCE: https://www.web2cal.com/ --%>
+                                        <div id="calendarContainer">
+                                        </div>
 
 
                                     </ContentTemplate>

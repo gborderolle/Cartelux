@@ -34,7 +34,7 @@ namespace Cartelux1
                 }
                 else
                 {
-                    SetFieldsReadOnly(true);
+                    //SetFieldsReadOnly(true);
                 }
             }
             else
@@ -45,7 +45,7 @@ namespace Cartelux1
 
         protected void btnEdit_Click(object sender, EventArgs e)
         {
-            SetFieldsReadOnly(false);
+            //SetFieldsReadOnly(false);
         }
 
         protected void btnConfirmar_ServerClick(object sender, EventArgs e)
@@ -256,7 +256,7 @@ namespace Cartelux1
                         // Última actualización del pedido
                         lblLastUpdate.InnerText = " " + _formulario.Fecha_update.ToString();
 
-                        SetFieldsReadOnly(true);
+                        //SetFieldsReadOnly(true);
                     }
                     else
                     {
