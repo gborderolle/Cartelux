@@ -12,6 +12,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -112,21 +113,10 @@ namespace Cartelux1
                 string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
                 string methodName = stackFrame.GetMethod().Name;
 
-                string serie_str = Request.QueryString[param_request];
-                if (!string.IsNullOrWhiteSpace(serie_str))
+                string param_request_str = Request.QueryString[param_request];
+                if (!string.IsNullOrWhiteSpace(param_request_str))
                 {
-                    try
-                    {
-                        serie_str = Utilities.Decrypt(serie_str);
-                        if (!string.IsNullOrWhiteSpace(serie_str))
-                        {
-                            result = serie_str;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Logs.AddErrorLog("Excepcion. Desencriptando ID del parámetro URL. ERROR:", className, methodName, ex.Message);
-                    }
+                    result = GetQueryStringDecrypt(param_request_str);
                 }
             }
             return result;
@@ -1273,6 +1263,211 @@ namespace Cartelux1
         #endregion
 
         #region Static Methods 
+
+        private static string GetQueryStringDecrypt(string serie_str)
+        {
+            string result = string.Empty;
+            if (!string.IsNullOrWhiteSpace(serie_str))
+            {
+                // Logger variables
+                System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
+                System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+                string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+                string methodName = stackFrame.GetMethod().Name;
+
+                try
+                {
+                    serie_str = Utilities.Decrypt(serie_str);
+                    if (!string.IsNullOrWhiteSpace(serie_str))
+                    {
+                        result = serie_str;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logs.AddErrorLog("Excepcion. Desencriptando ID del parámetro URL. ERROR:", className, methodName, ex.Message);
+                }
+            }
+            return result;
+        }
+
+
+        [WebMethod]
+        public static bool SaveForm(string form_ID_param, string tel_param)
+        {
+            bool ret = false;
+            if (!string.IsNullOrWhiteSpace(form_ID_param) && !string.IsNullOrWhiteSpace(tel_param))
+            {
+                string form_ID_str = GetQueryStringDecrypt(form_ID_param);
+                string tel_str = GetQueryStringDecrypt(tel_param);
+                if (!string.IsNullOrWhiteSpace(form_ID_str) && !string.IsNullOrWhiteSpace(tel_str))
+                {
+                    SaveData_static(form_ID_str, tel_str);
+                }
+                ret = true;
+            }
+            return ret;
+        }
+
+        private static void SaveData_static(string serie_str, string tel_str)
+        {
+            // Logger variables
+            System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
+            System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+            string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+            string methodName = stackFrame.GetMethod().Name;
+
+            if (!string.IsNullOrWhiteSpace(serie_str) && !string.IsNullOrWhiteSpace(tel_str))
+            {
+                using (CarteluxDB context = new CarteluxDB())
+                {
+                    formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Serie.Equals(serie_str));
+                    _formulario = _formulario != null ? _formulario : new formularios();
+                    _formulario.Fecha_update = DateTime.Now;
+
+                    // Cliente
+                    //_formulario.Cliente_ID = NEW_Cliente(context); // FIX
+
+                    // Nuevo formulario
+                    if (string.IsNullOrWhiteSpace(_formulario.Serie))
+                    {
+                        string url_complete = HttpContext.Current.Request.Url.AbsoluteUri;
+                        if (!string.IsNullOrWhiteSpace(url_complete))
+                        {
+                            _formulario.URL_completa = url_complete;
+                            _formulario.URL_short = url_complete; //
+                        }
+
+                        _formulario.Formulario_ID = 0;
+                        _formulario.Serie = serie_str;
+                        _formulario.Fecha_creado = DateTime.Now;
+                        context.formularios.Add(_formulario);
+
+                        //Guardar_Contexto(context); // FIX
+
+                        // Nuevo pedido
+                        //int formulario_ID = Get_NextFormularioID(context); // FIX
+                        //if (formulario_ID > 0)
+                        //{
+                        //    NEW_Pedido(context, formulario_ID);
+                        //}
+                    }
+                    else
+                    {
+                        // Pedido ya existe
+                        // ISSUE a resolver cuando efectivamente los Formularios tengan muchos Pedidos
+                        pedidos _pedido = (pedidos)context.pedidos.FirstOrDefault(v => v.Formulario_ID.Equals(_formulario.Formulario_ID));
+                        if (_pedido != null)
+                        {
+                            // Update cantidad de Pedidos
+                            int cantidad = _pedido.Cantidad;
+                            //if (!string.IsNullOrWhiteSpace(hdnPedidoCantidad.Value)) // FIX
+                            //{
+                            //    if (!int.TryParse(hdnPedidoCantidad.Value, out cantidad))
+                            //    {
+                            //        cantidad = _pedido.Cantidad;
+                            //        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, hdnPedidoCantidad.Value);
+                            //    }
+                            //}
+                            _pedido.Cantidad = cantidad;
+
+                            // Updates
+
+                            #region Tipo = Pasacalle / Roll up / etc
+                            //if (ddlTipoCartel.SelectedIndex > 0)
+                            //{
+                            //    int selected = 1;
+                            //    if (!int.TryParse(ddlTipoCartel.SelectedValue, out selected))
+                            //    {
+                            //        selected = 1;
+                            //        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTipoCartel.SelectedValue);
+                            //    }
+                            //    _pedido.Pedido_Tipo_ID = selected;
+                            //}
+                            _pedido.Pedido_Tipo_ID = 1;
+                            #endregion
+
+                            #region Material = Pintado / Impreso
+                            //if (ddlTamano.SelectedIndex > 0)
+                            //{
+                            //    pedido.Pedido_Material_ID = ddlTamano.SelectedIndex;
+                            //}
+                            #endregion
+
+                            #region UPDATE Tamaño
+                            //if (ddlTamano1.SelectedIndex > 0) // FIX
+                            //{
+                            //    int selected = 1;
+                            //    if (!int.TryParse(ddlTamano1.SelectedValue, out selected))
+                            //    {
+                            //        selected = 1;
+                            //        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTamano1.SelectedValue);
+                            //    }
+                            //    _pedido.Pedido_Tamano_ID = selected;
+                            //}
+                            #endregion
+
+                            #region Temática
+                            //if (ddlTamano.SelectedIndex > 0)
+                            //{
+                            //    pedido.Pedido_Tamano_ID = ddlTamano.SelectedIndex;
+                            //}
+                            #endregion
+
+                            #region UPDATE Diseño
+                            pedido_disenos _pedido_diseno = (pedido_disenos)context.pedido_disenos.FirstOrDefault(v => v.Pedido_Diseno_ID.Equals(_pedido.Pedido_Diseno_ID));
+                            if (_pedido_diseno != null)
+                            {
+                                //_pedido_diseno.Texto = txbTexto1.Text; // FIX
+                            }
+                            #endregion
+
+                            #region UPDATE Entrega
+                            pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(v => v.Pedido_Entrega_ID.Equals(_pedido.Pedido_Entrega_ID));
+                            if (_pedido_entrega != null)
+                            {
+                                //_pedido_entrega.Direccion = txbDireccion.Value; // FIX
+
+                                //_pedido_entrega.Fecha_entrega = GetDatetimeFormated(txbFecha.Value);
+
+                                //if (ddlTipoEntrega1.SelectedIndex > 0)
+                                //{
+                                //    int selected = 1;
+                                //    if (!int.TryParse(ddlTipoEntrega1.SelectedValue, out selected))
+                                //    {
+                                //        selected = 1;
+                                //        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTipoEntrega1.SelectedValue);
+                                //    }
+                                //    _pedido_entrega.Entrega_Tipo_ID = selected;
+                                //}
+
+                                // Save current LAT and LNG
+                                //if (!string.IsNullOrWhiteSpace(hdnCurrentLAT.Value) && !string.IsNullOrWhiteSpace(hdnCurrentLNG.Value) && !string.IsNullOrWhiteSpace(hdnCurrentLocationURL.Value))
+                                //{
+                                //    _pedido_entrega.Coordenadas_X = hdnCurrentLAT.Value;
+                                //    _pedido_entrega.Coordenadas_Y = hdnCurrentLNG.Value;
+                                //    _pedido_entrega.Google_maps_URL = hdnCurrentLocationURL.Value;
+                                //}
+                            }
+                            #endregion
+                        }
+
+                    }
+
+                    // Guardar_Contexto(context); // FIX
+
+                    //if (MyFileUpload.PostedFile != null && !string.IsNullOrWhiteSpace(MyFileUpload.PostedFile.FileName)) // FIX
+                    //{
+                    //    UploadMegaAPI(_formulario, tel_str);
+                    //}
+                }
+            }
+            else
+            {
+                Logs.AddErrorLog("Error. FormID no válido. ERROR:", className, methodName, serie_str);
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>alert('Error interno. \nComunícate con el equipo de Cartelux por favor.'); </script>", false); // FIX
+            }
+        }
 
         #endregion
 

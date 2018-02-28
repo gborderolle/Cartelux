@@ -453,7 +453,7 @@ namespace Cartelux1
 
         #endregion
 
-        #region WebMethods
+        #region Static Methods
 
         [WebMethod]
         public static _GridFormularios[] GetData_BindGridFormularios(string year_value, string month_value, bool soloVigentes_value)
