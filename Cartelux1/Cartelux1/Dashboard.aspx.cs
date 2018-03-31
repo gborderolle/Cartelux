@@ -156,7 +156,7 @@ namespace Cartelux1
                                 pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(c => c.Pedido_Entrega_ID == _pedido.Pedido_Entrega_ID);
                                 if (_pedido_entrega != null)
                                 {
-                                    lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Codigo == _pedido_entrega.Pedido_Entrega_ID);
+                                    lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Codigo == _pedido_entrega.Entrega_Tipo_ID);
                                     if (_lista_entregas_tipo != null)
                                     {
                                         string nombre = string.Empty;
@@ -524,12 +524,12 @@ namespace Cartelux1
                                     if (_pedido_entrega != null)
                                     {
                                         _GridFormulario1.lblFechaEntrega = _pedido_entrega.Fecha_entrega.Value.ToString(GlobalVariables.ShortDateTime_format1);
-                                    }
 
-                                    lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Tipo_ID);
-                                    if (_lista_entregas_tipo != null)
-                                    {
-                                        _GridFormulario1.lblTipoEntrega = _lista_entregas_tipo.Nombre;
+                                        lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Codigo == _pedido_entrega.Entrega_Tipo_ID);
+                                        if (_lista_entregas_tipo != null)
+                                        {
+                                            _GridFormulario1.lblTipoEntrega = _lista_entregas_tipo.Nombre;
+                                        }
                                     }
 
                                     lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Tamano_ID);

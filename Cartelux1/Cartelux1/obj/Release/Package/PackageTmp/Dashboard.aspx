@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="/Content/css/jquery.modal.css" />
     <link rel="stylesheet" href="/Content/css/chosen.css" />
     <link rel="stylesheet" href="/Content/css/MonthPicker.css" />
+    <link rel="stylesheet" href="/Content/css/glDatePicker.darkneon.css" />
+    <link rel="stylesheet" href="/Content/css/glDatePicker.default.css" />
+    <link rel="stylesheet" href="/Content/css/glDatePicker.flatwhite.css" />
+
+    <link rel="stylesheet" href="/Content/css/optionalStyling.css" />
+    <link rel="stylesheet" href="/Content/css/web2cal.css" />
 
     <!-- PAGE CSS -->
     <link rel="stylesheet" href="/Content/css/dashboard.css" />
@@ -85,6 +91,12 @@
     <script type="text/javascript" src="/Content/js/chosen.jquery.js"></script>
     <script type="text/javascript" src="/Content/js/moment.js"></script>
     <script type="text/javascript" src="/Content/js/jquery.filtertable.min.js"></script>
+    <script type="text/javascript" src="/Content/js/glDatePicker.min.js"></script>
+
+
+    <script type="text/javascript" src="/Content/js/Web2Cal-Basic-2.0-min.js"></script>
+    <script type="text/javascript" src="/Content/js/web2cal.support.js"></script>
+    <script type="text/javascript" src="/Content/js/web2cal.default.template.js"></script>
 
     <!-- Bootstrap table -->
     <script type="text/javascript" src="/Content/js/bootstrap-table.js"></script>
@@ -304,9 +316,9 @@
 
                         <div id="tabsFormularios_2">
 
-                            <div style="overflow: auto;">
+                            <div style="overflow: auto; height: -webkit-fill-available;">
 
-                                <asp:UpdatePanel ID="upViajes" runat="server">
+                                <asp:UpdatePanel ID="upCalendario" runat="server">
                                     <ContentTemplate>
 
                                         <div class="row" style="margin-bottom: 10px;">
@@ -328,9 +340,16 @@
                                             </div>
                                         </div>
 
-                                        <asp:Label ID="gridViajeslblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
+                                        <%--SOURCE: http://glad.github.io/glDatePicker/#examples --%>
+                                        <%-- <input type="text" id="mydate" />
 
-                                        <asp:Label ID="lblGridViajesCount" runat="server" ClientIDMode="Static" Text="# 0" CssClass="lblResultados label label-info"></asp:Label>
+                                        <input type="text" id="example3" gldp-id="gldp-9183641266" class="">
+                                        <div gldp-el="gldp-9183641266"></div>--%>
+
+                                        <%--SOURCE: https://www.web2cal.com/ --%>
+                                        <div id="calendarContainer">
+                                        </div>
+
 
                                     </ContentTemplate>
                                 </asp:UpdatePanel>

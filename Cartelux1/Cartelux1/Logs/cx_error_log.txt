@@ -78,3 +78,7 @@ Parameter name: value.
 2/23/2018 5:33:19 PM: [ln:128] Formulario: GetURLParam_Decrypted() - Excepcion. Desencriptando ID del parámetro URL. ERROR: Padding is invalid and cannot be removed..
 2/23/2018 6:31:15 PM: [ln:513] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
 2/23/2018 6:31:15 PM: [ln:513] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+3/31/2018 5:41:44 PM: [ln:503] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+3/31/2018 5:41:44 PM: [ln:503] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+3/31/2018 6:10:55 PM: [ln:504] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+3/31/2018 6:10:55 PM: [ln:504] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..

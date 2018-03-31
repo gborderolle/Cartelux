@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/Content/css/jquery-ui.css" />
 
     <!-- PAGE JS -->
+    <script type="text/javascript" src="/Content/js/auxiliar_functions.js"></script>
     <script type="text/javascript" src="/Content/js/formulario.js"></script>
 
     <script type="text/javascript">
@@ -82,19 +83,37 @@
             margin-bottom: 10px;
         }
 
-        .btnConfirm {
+        .ddlBorder {
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        .btnConfirm1 {
             background-image: none;
             background-color: #ea7209;
             height: 40px;
+            font-size: larger;
+        }
+
+        .btnConfirm2 {
+            background-image: none;
+            background-color: #34aa57;
+            height: 40px;
+            font-size: larger;
         }
 
         .control-short {
             width: 90%;
         }
 
-        ._label {
+        ._label1 {
             font-size: x-large;
             color: #ea7209;
+        }
+
+        ._label2 {
+            font-size: x-large;
+            color: #419641;
         }
 
         .row-special {
@@ -147,6 +166,10 @@
             border-color: red;
         }
 
+        .ctrl-required_correct {
+            border-color: #34aa57;
+        }
+
         .multitext {
             height: 100px;
         }
@@ -159,7 +182,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="SubbodyContent" runat="server"></asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="col-sm-12 col-md-12" style="padding: 0;">
-        <div class="box-header with-border dark in div-form col-sm-12 col-md-4" style="display: inline-block;">
+        <div class="box-header with-border dark in div-form1 col-sm-12 col-md-4" style="display: inline-block;">
             <div class="row" style="margin: auto; display: block; text-align: center; margin-bottom: 0;">
                 <%--<h2 class="pull-left" style="color: #ea7209;"><a href="#" id="btnEdit" class="pull-left btn " onclick="editFields()" style="position: absolute; left: 0; margin-left: 20px;">
                     <i class="fa fa-pencil fa-2x"></i>
@@ -179,8 +202,8 @@
 
                 <div style="position: relative; right: 0; margin-right: 15px; float: right;">
                     <div class="row-special unselectable" id="repetidos_group" style="display: none;">
-                        <p style="margin: 0; float: left;">Repetir iguales:</p>
-                        <label class="_label" id="lblTabCount" style="margin: 0; font-size: xx-large; float: right;">1</label>
+                        <p style="margin: 0; float: left;">Cantidad iguales:</p>
+                        <label class="_label11" id="lblTabCount" style="margin: 0; font-size: xx-large; float: right;">1</label>
                         <br>
                         <a class="btn btn-sm btn-info" onclick="removeCartel();">-</a>
                         <a class="btn btn-sm btn-info" onclick="addCartel();">+</a>
@@ -202,9 +225,10 @@
                             <div class="tab-pane fade in active" id="tabsPedidos_1">
 
                                 <div class="row" style="margin: auto; display: inline-flex; width: 100%;">
+
                                     <div class="col-sm-12 col-md-10" style="margin: auto; padding: 0;">
                                         <div class="login-container sub-form">
-                                            <label class="_label unselectable">1) Ingrese sus datos</label>
+                                            <label class="_label1 unselectable">1) Ingrese sus datos</label>
                                             <div class="form-group unselectable">
                                                 <input class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" required runat="server" id="txbTel" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
                                             </div>
@@ -212,7 +236,7 @@
                                                 <input class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" required runat="server" id="txbNombre" clientidmode="static" autofocus />
                                             </div>
                                             <hr />
-                                            <label class="_label unselectable">2) Datos del cartel</label>
+                                            <label class="_label1 unselectable">2) Datos del cartel</label>
                                             <br />
 
                                             <%--<asp:DropDownList ID="ddlTipoCartel" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />--%>
@@ -228,10 +252,10 @@
                                             </div>
 
                                             <hr />
-                                            <label class="_label unselectable">3) Datos de la entrega</label>
+                                            <label class="_label1 unselectable">3) Datos de la entrega</label>
                                             <br />
 
-                                            <asp:DropDownList ID="ddlTipoEntrega1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required"></asp:DropDownList>
+                                            <asp:DropDownList ID="ddlTipoEntrega1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required ddlBorder"></asp:DropDownList>
 
                                             <div class="form-group unselectable">
                                                 <input class="form-control txbEditable ctrl-required" placeholder="Ciudad de envío" type="text" tabindex="6" runat="server" id="txbCiudad" clientidmode="static" />
@@ -241,7 +265,7 @@
                                                 <input type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" id="txbFecha" tabindex="7" runat="server" clientidmode="static" />
                                             </div>
                                             <div class="form-group" id="dir_group">
-                                                Dirección 1
+                                                Dirección escrita
                                                 <input class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" tabindex="5" runat="server" id="txbDireccion" clientidmode="static" />
                                             </div>
                                             <div class="form-group unselectable">
@@ -254,7 +278,7 @@
                                                 </style>
 
                                                 <div class="form-group" id="map_group">
-                                                    Dirección 2 (mapa)
+                                                    Dirección en el Mapa
                                                     <input type="text" id="mapSearch" class="form-control ctrl-required" placeholder="Dirección de entrega" />
                                                     <div id="map-canvas" style="margin: auto; width: 100%;"></div>
                                                     <p id="mapSearch_msg" style="font-size: small; color: red;">Asegúrese que la ubicación en el mapa sea la correcta por favor</p>
@@ -263,7 +287,9 @@
                                             </div>
 
                                             <div class="form-group unselectable">
-                                                <button class="form-control btn btn-danger btnConfirm" clientidmode="static" name="Submit" type="submit" data-submit="...Confirmando" runat="server" id="btnConfirmar" onserverclick="btnConfirmar_ServerClick" onclick="return pre_confirm();">GUARDAR</button>
+                                                <%--<button class="form-control btn btn-danger btnConfirm" type="button" runat="server" id="btnConfirmar" onserverclick="btnConfirmar_ServerClick" onclick="return pre_confirm();">GUARDAR</button>--%>
+                                                <%--onserverclick="btnConfirmar_ServerClick"--%>
+                                                <asp:Button runat="server" CssClass="form-control btn btn-danger btnConfirm1" ID="btnConfirmar1" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm();" ClientIDMode="Static" Text="GUARDAR" />
                                             </div>
 
                                         </div>
@@ -282,6 +308,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
 
                             </div>
@@ -291,7 +318,7 @@
                                 <div class="row" style="margin: auto; display: inline-flex; width: 100%;">
                                     <div class="col-sm-12 col-md-10" style="margin: auto; padding: 0;">
                                         <div class="login-container sub-form">
-                                            <label class="_label unselectable">Contacto cliente</label>
+                                            <label class="_label1 unselectable">Contacto cliente</label>
                                             <div class="form-group unselectable">
                                                 Teléfono
                                                 <div class="row-special" style="display: flex;">

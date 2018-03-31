@@ -13,10 +13,11 @@
 
     setTimeout(function () {
         loadEvents();
+        style_controls(false);
 
         // Load enabled controls
         loadPreviousState();
-    }, 500);
+    }, 300);
 
     TAB_COUNT = $("#hdnPedidoCantidad").val();
     $("#lblTabCount").text(TAB_COUNT);
@@ -59,6 +60,20 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
+
+function style_controls(correct) {
+    var combos = $("select.ctrl-required").next("[role='combobox']");
+    if (combos !== null && combos !== undefined && combos.length > 0) {
+        if (correct) {
+            combos.css("border-color", "#34aa57");
+        } else {
+            combos.css("border-color", "red");
+        }
+
+        combos.css("height", "50px");
+        combos.css("font-size", "larger");
+    }
+}
 
 function loadEvents() {
     $("#ddlTipoEntrega1-menu").on("click", function () {
@@ -232,33 +247,158 @@ function hideAllControls() {
 }
 
 function editFields() {
-    setFieldsReadOnly(false);
+    //setFieldsReadOnly(false);
 }
 
 function setFieldsReadOnly(value) {
     $(".txbEditable").attr("readonly", value);
-    $("#btnConfirmar").disabled = value;
+    $("#btnConfirmar1").disabled = value;
     $(".dropdown").attr("disabled", value);
 
     if (value) {
-        $("#btnConfirmar").addAttr("disabled");
+        $("#btnConfirmar1").addAttr("disabled");
     } else {
-        $("#btnConfirmar").removeAttr("disabled");
+        $("#btnConfirmar1").removeAttr("disabled");
     }
 }
 
 function confirmacionPedido() {
-    $("#dialog p").text(hashMessages["ConfirmacionPedido"]);
+    showMessage(hashMessages["ConfirmacionPedido"]);
+}
+
+function showMessage(value) {
+    $("#dialog p").text(value);
     $("#dialog").dialog({
         buttons: {
-            "Cerrar": function() {
+            "Cerrar": function () {
                 $(this).dialog("close");
             }
         }
     });
 }
 
+function apply_savedStyle() {
+    var btnConfirmar1 = $("#btnConfirmar1");
+    if (btnConfirmar1 !== null && btnConfirmar1 !== undefined && btnConfirmar1.length > 0) {
+        btnConfirmar1.val("CORRECTO");
+        btnConfirmar1.removeClass("btn-danger");
+        btnConfirmar1.removeClass("btnConfirm1");
+        btnConfirmar1.addClass("btn-success");
+        btnConfirmar1.addClass("btnConfirm2");
+    }
 
+    var labels = $("._label1");
+    if (labels !== null && labels !== undefined && labels.length > 0) {
+        labels.removeClass("_label1");
+        labels.addClass("_label2");
+    }
+
+    var form = $(".div-form1");
+    if (form !== null && form !== undefined && form.length > 0) {
+        form.removeClass("div-form2");
+        form.addClass("div-form2");
+    }
+
+
+    setTimeout(function () {
+        style_controls(true);
+
+        var controls = $(".ctrl-required");
+        if (controls !== null && controls !== undefined && controls.length > 0) {
+            controls.removeClass("ctrl-required");
+            controls.addClass("ctrl-required_correct");
+        }
+
+    }, 300);
+}
+
+function pre_confirm() {
+    var _check_logic = check_logic();
+    var _check_emptyFields = check_emptyFields();
+
+    var ok = true;
+    if (!_check_logic || !_check_emptyFields) {
+        showMessage(hashMessages["FaltanDatos"]);
+        ok = false;
+    }
+    return ok;
+}
+
+function check_logic() {
+    var ok = true;
+
+    var ddlTamano1 = 0;
+    var controls = $("#ddlTamano1-button span");
+    if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
+        var text = controls[1].innerText;
+        var value = $("#ddlTamano1 option").filter(function () {
+            return this.text == text;
+        }).attr('selected', true).val();
+        if (value !== null && value !== undefined && value.length > 0) {
+            // Parse int
+            var ddlTamano1 = value;
+            if (type(value) === "string") {
+                ddlTamano1 = TryParseInt(value, 0);
+            }
+        }
+    }
+    if (ddlTamano1 === 0) {
+        ok = false;
+    }
+
+    var ddlTipoEntrega1 = 0;
+    controls = $("#ddlTipoEntrega1-button span");
+    if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
+        var text = controls[1].innerText;
+        var value = $("#ddlTipoEntrega1 option").filter(function () {
+            return this.text == text;
+        }).attr('selected', true).val();
+        if (value !== null && value !== undefined && value.length > 0) {
+            // Parse int
+            var ddlTipoEntrega1 = value;
+            if (type(value) === "string") {
+                ddlTipoEntrega1 = TryParseInt(value, 0);
+            }
+        }
+    }
+    if (ddlTipoEntrega1 === 0) {
+        ok = false;
+    }
+
+    // Colocación o envío a domicilio
+    if (ddlTipoEntrega1 === 1 && ddlTipoEntrega1 === 2) {
+        var txbDireccion = $("#txbDireccion").val();
+        var mapSearch = $("#mapSearch").val();
+        if ((txbDireccion === null || txbDireccion === undefined || txbDireccion.length === 0)
+        || (mapSearch === null || mapSearch === undefined || mapSearch.length === 0)) {
+            ok = false;
+        }
+    }
+
+    // Envío al interior
+    if (ddlTipoEntrega1 === 3) {
+        var txbCiudad = $("#txbCiudad").val();
+        if (txbCiudad === null || txbCiudad === undefined || txbCiudad.length === 0){
+            ok = false;
+        }
+    }
+    return ok;
+}
+
+function check_emptyFields() {
+    var ok = true;
+
+    var txbNombre = $("#txbNombre").val();
+    var txbTel = $("#txbTel").val();
+    var txbFecha = $("#txbFecha").val();
+
+    if ((txbNombre === null || txbNombre === undefined || txbNombre.length === 0)
+       || (txbTel === null || txbTel === undefined || txbTel.length === 0)
+       || (txbFecha === null || txbFecha === undefined || txbFecha.length === 0)) {
+        ok = false;
+    }
+    return ok;
+}
 
 
 /* JS Goolge Maps API - Search location with map */

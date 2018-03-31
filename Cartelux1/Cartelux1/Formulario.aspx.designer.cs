@@ -94,13 +94,13 @@ namespace Cartelux1 {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txbDireccion;
         
         /// <summary>
-        /// btnConfirmar control.
+        /// btnConfirmar1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnConfirmar;
+        protected global::System.Web.UI.WebControls.Button btnConfirmar1;
         
         /// <summary>
         /// msj_result control.

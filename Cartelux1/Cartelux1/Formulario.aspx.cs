@@ -284,7 +284,7 @@ namespace Cartelux1
                 //txbDetalles.Attributes.Add("readonly", "readonly");
 
                 msj_result.Visible = true;
-                btnConfirmar.Disabled = true;
+                btnConfirmar1.Enabled = false;
             }
             else
             {
@@ -301,7 +301,8 @@ namespace Cartelux1
                 txbTexto1.Attributes.Add("readonly", "false");
                 //txbDetalles.Attributes.Add("readonly", "false");
 
-                btnConfirmar.Disabled = false;
+                //btnConfirmar.Disabled = false;
+                btnConfirmar1.Enabled = true;
             }
         }
 
@@ -313,6 +314,7 @@ namespace Cartelux1
             string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
             string methodName = stackFrame.GetMethod().Name;
 
+            bool save_ok = true;
             if (!string.IsNullOrWhiteSpace(serie_str) && !string.IsNullOrWhiteSpace(tel_str))
             {
                 using (CarteluxDB context = new CarteluxDB())
@@ -339,7 +341,7 @@ namespace Cartelux1
                         _formulario.Fecha_creado = DateTime.Now;
                         context.formularios.Add(_formulario);
 
-                        Guardar_Contexto(context);
+                        save_ok = Guardar_Contexto(context);
 
                         // Nuevo pedido
                         int formulario_ID = Get_NextFormularioID(context);
@@ -450,11 +452,22 @@ namespace Cartelux1
 
                     }
 
-                    Guardar_Contexto(context);
-
-                    if (MyFileUpload.PostedFile != null && !string.IsNullOrWhiteSpace(MyFileUpload.PostedFile.FileName))
+                    save_ok = Guardar_Contexto(context);
+                    if (save_ok)
                     {
-                        UploadMegaAPI(_formulario, tel_str);
+                        if (MyFileUpload.PostedFile != null && !string.IsNullOrWhiteSpace(MyFileUpload.PostedFile.FileName))
+                        {
+                            save_ok = UploadMegaAPI(_formulario, tel_str);
+                        }
+                    }
+
+                    if (save_ok)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>confirmacionPedido(); apply_savedStyle(); </script>", false);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>alert('Error interno. \nComunícate con el equipo de Cartelux por favor.'); </script>", false);
                     }
                 }
             }
@@ -485,7 +498,7 @@ namespace Cartelux1
             return date;
         }
 
-        private void Guardar_Contexto(CarteluxDB context)
+        private bool Guardar_Contexto(CarteluxDB context)
         {
             // Logger variables
             System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
@@ -493,16 +506,17 @@ namespace Cartelux1
             string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
             string methodName = stackFrame.GetMethod().Name;
 
+            bool save_ok = true;
             try
             {
                 context.SaveChanges();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>confirmacionPedido(); </script>", false);
             }
             catch (Exception e)
             {
                 Logs.AddErrorLog("Excepcion. Guardando en la base de datos. ERROR:", className, methodName, e.Message);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>alert('Error interno. \nComunícate con el equipo de Cartelux por favor.'); </script>", false);
+                save_ok = false;
             }
+            return save_ok;
         }
 
         private void NEW_Pedido(CarteluxDB context, int formulario_ID)
@@ -1085,8 +1099,9 @@ namespace Cartelux1
             }
         }
 
-        private void UploadMegaAPI(formularios _formulario, string tel_str)
+        private bool UploadMegaAPI(formularios _formulario, string tel_str)
         {
+            bool uploadMega_ok = true;
             if (_formulario != null)
             {
                 System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
@@ -1244,7 +1259,7 @@ namespace Cartelux1
                                     _pedido_diseno.Boceto_nombre = fileName1;
                                     _pedido_diseno.Boceto_extension = file_extension;
                                     _pedido_diseno.Boceto_PATH = complete_URL;
-                                    Guardar_Contexto(context);
+                                    uploadMega_ok = Guardar_Contexto(context);
 
                                     #endregion
                                 }
@@ -1252,12 +1267,15 @@ namespace Cartelux1
                                 {
                                     Logs.AddErrorLog("Excepcion. Copiando archivo al server y guardando en BD. ERROR:", className, methodName, e.Message);
                                     Logs.AddErrorLog("Excepcion. URL:", className, methodName, complete_URL);
+                                    uploadMega_ok = false;
                                 }
+
                             }
                         }
                     }
                 }
             }
+            return uploadMega_ok;
         }
 
         #endregion

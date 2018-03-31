@@ -8,6 +8,9 @@ $(document).ready(function () {
     initVariables();
     bindEvents();
     bindDelayEvents();
+
+    drawCalendar();
+
 });
 
 // attach the event binding function to every partial update
@@ -15,6 +18,25 @@ Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function (evt, args
     bindEvents();
     bindDelayEvents();
 });
+
+function drawCalendar() {
+    ical = new Web2Cal('calendarContainer', {
+        loadEvents: function () { ical.render(new Array()); },
+        onNewEvent: onNewEvent
+    });
+    ical.build();
+}
+
+function onNewEvent(obj, groups, allday) {
+    Web2Cal.defaultPlugins.onNewEvent(obj, groups, allday);
+}
+
+/**
+ * Onclick of Close in AddEvent Box.
+ */
+function rzCloseAddEvent() {
+    ical.closeAddEvent();
+}
 
 function DoubleScroll(element) {
     var scrollbar = document.createElement('div');
@@ -65,6 +87,37 @@ function bindEvents() {
     // SOURCE: https://github.com/sunnywalker/jQuery.FilterTable
 
     month_onClickEvent();
+    load_calendar();
+}
+
+function load_calendar() {
+    $('#example3').glDatePicker(
+{
+    showAlways: true,
+    cssName: 'darkneon',
+    selectedDate: new Date(2013, 0, 5),
+    specialDates: [
+        {
+            date: new Date(2013, 0, 8),
+            data: { message: 'Meeting every day 8 of the month' },
+            repeatMonth: true
+        },
+        {
+            date: new Date(0, 0, 1),
+            data: { message: 'Happy New Year!' },
+            repeatYear: true
+        },
+    ],
+    onClick: function (target, cell, date, data) {
+        target.val(date.getFullYear() + ' - ' +
+                    date.getMonth() + ' - ' +
+                    date.getDate());
+
+        if (data != null) {
+            alert(data.message + '\n' + date);
+        }
+    }
+});
 }
 
 function bindDelayEvents() {
