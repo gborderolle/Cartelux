@@ -1,4 +1,5 @@
 ﻿wpp_url = "";
+formulario_url = "";
 texto = "Por favor: ingrese los datos del pedido en el siguiente formulario, muchas gracias."
 
 $(document).ready(function () {
@@ -72,6 +73,8 @@ function generarURL() {
 
                                     $("#btnGenerar").attr("title", response.id);
                                     $("#txbLink").val(response.id);
+
+                                    formulario_url = response.id;
 
                                     }, // end success
                                 failure: function (response) {
@@ -386,4 +389,13 @@ function get_refresh() {
     }); // Ajax
 
     } 
+}
+
+function btn_goForm() {
+    var txbLink = $("#txbLink").val();
+    if (txbLink !== null && txbLink.length > 0 && txbLink !== "?") {
+        window.open(txbLink, '_blank');
+    } else {
+        alert("El formulario no ha sido generado aún.");
+    }
 }

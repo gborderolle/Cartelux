@@ -27,12 +27,15 @@
         <div class="box-header with-border dark in div-form" style="display: inline-block;">
             <div class="row center">
                 <div style="text-align: center;">
-                    <button class="btn pull-left" onclick="btn_refresh(); return false;" style="margin-left:5px; padding:3px;"> <img src="Content/img/reload.png" class="img-fluid" style="width:20px;"/></button>
+                    <button class="btn pull-left" onclick="btn_refresh(); return false;" style="margin-left: 5px; padding: 3px;">
+                        <img src="Content/img/reload.png" class="img-fluid" style="width: 20px;" /></button>
                     <h2 id="lbl_h2" style="color: #ea7209;">Nuevo pedido
-                    <div class="pull-right" style="margin-right:5px;"> <img id="img_formStatus" src="Content/img/cancel.png" class="img-fluid" style="width:20px;"/> </div>
-                  <a href="#" id="btnRefresh" class="pull-right btn" onclick="location.reload();" style="position: absolute; right: 0; margin-right: 20px; display:none;">
-                      <i class="fa fa-refresh"></i>
-                  </a>
+                    <div class="pull-right" style="margin-right: 5px;">
+                        <img id="img_formStatus" src="Content/img/cancel.png" class="img-fluid" style="width: 20px;" />
+                    </div>
+                        <a href="#" id="btnRefresh" class="pull-right btn" onclick="location.reload();" style="position: absolute; right: 0; margin-right: 20px; display: none;">
+                            <i class="fa fa-refresh"></i>
+                        </a>
                     </h2>
                 </div>
             </div>
@@ -42,7 +45,10 @@
                     <div class="login-container sub-form">
                         <div class="form-group">
                             Número del cliente - 091373622
-                            <input type="number" class="form-control" id="txbContactPhone" autofocus />
+                            <input type="number" class="form-control pull-left" id="txbContactPhone" style="font-size: 16px; width: 85%;" autofocus />
+                            <a id="aGoForm" href="#" class="btn btn-lg pull-right" style="padding: 10px;" onclick="btn_goForm();">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </a>
                             <br />
                             <input class="form-control btn-primary btn-lg" style="height: auto;" type="button" tabindex="1" runat="server" id="btnGenerar" clientidmode="static" value="Generar URL" title="Click para generar una URL con ID único" onclick="generarURL();" />
                         </div>
@@ -56,7 +62,7 @@
                     <%--<button onclick="CopyTextAUX()"></button>--%>
 
                     <%--SOURCE: https://clipboardjs.com/--%>
-                    <a id="aBtnCopy" href="#" class="btn btn-lg pull-right" data-clipboard-action="copy" data-clipboard-target="input#txbLink" style="padding:8px;">
+                    <a id="aBtnCopy" href="#" class="btn btn-lg pull-right" data-clipboard-action="copy" data-clipboard-target="input#txbLink" style="padding: 10px;">
                         <i class="glyphicon glyphicon-copy"></i>
                     </a>
 

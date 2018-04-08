@@ -77,8 +77,7 @@ function initVariables() {
         $("#aCollapse_left_panel").click();
     }
 
-    // Click first Month
-    setTimeout(clickCurrentMonth, 50);
+    setTimeout(trigger_events, 50);
 }
 
 function bindEvents() {
@@ -307,11 +306,28 @@ function setupMonthPicker() {
     $('#add_txbFecha').datepicker("setDate", new Date(d.getFullYear(), $("#hdn_monthSelected").val() - 1, d.getDate()));
 }
 
+function trigger_events() {
+    // Click first Month
+    clickCurrentMonth();
+
+    // Styles to filter
+    styles_filter();
+}
+
 function clickCurrentMonth() {
     var d = new Date();
     var m = d.getMonth() + 1;
     if (m <= 12 && $("#tr-id-" + m + " td")[0] !== null) {
         $("#tr-id-" + m + " td")[0].click();
+    }
+}
+
+function styles_filter() {
+    var filter_table = $(".filter-table");
+    if (filter_table !== null && filter_table !== undefined) {
+        filter_table.find("input").addClass("form-control");
+        filter_table.attr("placeholder", "Filtrar por campo");
+        filter_table.text("");
     }
 }
 
