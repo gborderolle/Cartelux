@@ -27,8 +27,10 @@
         <div class="box-header with-border dark in div-form" style="display: inline-block;">
             <div class="row center">
                 <div style="text-align: center;">
-                    <h2 id="lbl_h2" style="color: #ea7209;">URL | Nuevo pedido
-                  <a href="#" id="btnRefresh" class="pull-right btn" onclick="location.reload();" style="position: absolute; right: 0; margin-right: 20px;">
+                    <button class="btn pull-left" onclick="btn_refresh(); return false;" style="margin-left:5px; padding:3px;"> <img src="Content/img/reload.png" class="img-fluid" style="width:20px;"/></button>
+                    <h2 id="lbl_h2" style="color: #ea7209;">Nuevo pedido
+                    <div class="pull-right" style="margin-right:5px;"> <img id="img_formStatus" src="Content/img/cancel.png" class="img-fluid" style="width:20px;"/> </div>
+                  <a href="#" id="btnRefresh" class="pull-right btn" onclick="location.reload();" style="position: absolute; right: 0; margin-right: 20px; display:none;">
                       <i class="fa fa-refresh"></i>
                   </a>
                     </h2>

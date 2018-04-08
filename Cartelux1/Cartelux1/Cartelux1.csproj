@@ -300,8 +300,10 @@
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\font-awesome\HELP-US-OUT.txt" />
     <Content Include="Content\img\Background.jpg" />
+    <Content Include="Content\img\cancel.png" />
     <Content Include="Content\img\Cartelux-bolas-ico2.ico" />
     <Content Include="Content\img\Cartelux1.ico" />
+    <Content Include="Content\img\checked.png" />
     <Content Include="Content\img\CX-2.png" />
     <Content Include="Content\img\CX-Banner-form.jpg" />
     <Content Include="Content\img\CX-Banner-form1.png" />
@@ -310,6 +312,7 @@
     <Content Include="Content\img\Dropbox_logo.png" />
     <Content Include="Content\img\loader.gif" />
     <Content Include="Content\img\login.png" />
+    <Content Include="Content\img\reload.png" />
     <Content Include="Content\js\auxiliar_functions.js" />
     <Content Include="Content\js\bootstrap-table-es-ES.js" />
     <Content Include="Content\js\bootstrap-table.js" />

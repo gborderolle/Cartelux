@@ -1,6 +1,10 @@
 ﻿wpp_url = "";
 texto = "Por favor: ingrese los datos del pedido en el siguiente formulario, muchas gracias."
 
+$(document).ready(function () {
+    setInterval(get_refresh, 2000);
+});
+
 function CopyTextAUX() {
     /* Get the text field */
     var copyText = document.getElementById("txbLink");
@@ -332,4 +336,54 @@ function copyToClipboard(elem) {
         target.textContent = "";
     }
     return succeed;
+}
+
+function btn_refresh() {
+    var txbContactPhone = $("#txbContactPhone").val();
+    if (txbContactPhone !== null && txbContactPhone.length > 0) {
+        get_refresh();
+    } else {
+        alert("Debe generar la URL antes.");
+    }
+}
+
+function get_refresh() {
+
+    var txbContactPhone = $("#txbContactPhone").val();
+    if (txbContactPhone !== null && txbContactPhone.length > 0) {
+
+    // Ajax call parameters
+    console.log("Ajax call 1: GeneradorURL.aspx/CheckFormStatus_1. Params:");
+    console.log("Params: txbContactPhone - " + txbContactPhone);
+
+    // Check existen mercaderías
+    $.ajax({
+        type: "POST",
+        url: "GeneradorURL.aspx/CheckFormStatus_1",
+        data: '{txbContactPhone: "' + txbContactPhone + '"}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            var resultado = response.d;
+            if (resultado !== null) {
+
+                var img_formStatus = $("#img_formStatus");
+                if (img_formStatus !== null && img_formStatus !== undefined && img_formStatus.length > 0) {
+                    if (resultado) {
+                        img_formStatus.attr("src", "Content/img/checked.png");
+                    } else {
+                        img_formStatus.attr("src", "Content/img/cancel.png");
+                    }
+                }
+            } else {
+                alert("Error interno.");
+            }
+
+        }, // end success
+        failure: function (response) {
+            alert("Error interno generando LINK.");
+        }
+    }); // Ajax
+
+    } 
 }
