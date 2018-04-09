@@ -85,6 +85,33 @@ namespace Cartelux1 {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txbFecha;
         
         /// <summary>
+        /// txbDireccion_calle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txbDireccion_calle;
+        
+        /// <summary>
+        /// txbDireccion_numero control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txbDireccion_numero;
+        
+        /// <summary>
+        /// txbDireccion_apto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txbDireccion_apto;
+        
+        /// <summary>
         /// txbDireccion control.
         /// </summary>
         /// <remarks>
