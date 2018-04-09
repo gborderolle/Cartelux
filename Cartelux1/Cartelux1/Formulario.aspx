@@ -2,13 +2,10 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
     <!-- STYLES EXTENSION -->
-    <!-- PAGE CSS -->
-    <link rel="stylesheet" href="/Content/css/formulario.css" />
     <link rel="stylesheet" href="/Content/css/jquery-ui.css" />
 
-    <!-- PAGE JS -->
-    <script type="text/javascript" src="/Content/js/auxiliar_functions.js"></script>
-    <script type="text/javascript" src="/Content/js/formulario.js"></script>
+    <!-- PAGE CSS -->
+    <link rel="stylesheet" href="/Content/css/pages/formulario.css" />
 
     <script type="text/javascript">
 
@@ -179,7 +176,13 @@
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="SubbodyContent" runat="server"></asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="SubbodyContent" runat="server">
+
+    <!-- PAGE JS -->
+    <script type="text/javascript" src="/Content/js/pages/auxiliar_functions.js"></script>
+    <script type="text/javascript" src="/Content/js/pages/formulario.js"></script>
+
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="col-sm-12 col-md-12" style="padding: 0;">
         <div class="box-header with-border dark in div-form1 col-sm-12 col-md-4" style="display: inline-block;">
@@ -190,7 +193,7 @@
                 </h2>--%>
                 <div class="loginTitleContainer"></div>
             </div>
-            <div class="form-check" style="position: absolute; right: 10px;">
+            <div class="form-check" style="position: absolute; right: 10px; display: none;">
                 <input id="chbRepetidos" class="form-check-input" type="checkbox" onclick="checkbox_repetidos()">
                 <label class="form-check-label" for="chbRepetidos">
                     Repetidos
@@ -216,7 +219,7 @@
 
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#tabsPedidos_1" id="aTabsPedidos_1" data-toggle="tab">Pedido</a></li>
-                            <li class=""><a href="#tabsPedidos_2" id="aTabsPedidos_2" data-toggle="tab">Cartelux</a></li>
+                            <li class="" style="display: none;"><a href="#tabsPedidos_2" id="aTabsPedidos_2" data-toggle="tab">Cartelux</a></li>
                         </ul>
 
                     </div>
@@ -243,10 +246,19 @@
 
                                             <asp:DropDownList ID="ddlTamano1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />
 
-                                            <div class="form-group unselectable">
-                                                <p style="font-size: small;">Si lo desea cargue un bosquejo hecho a mano del diseño deseado aquí</p>
-                                                <asp:FileUpload ID="MyFileUpload" runat="server" accept="image/*" />
+
+
+                                            <a id="aCollapse_bosquejo" data-toggle="collapse" href="#div_bosquejo">¿Cargar bosquejo?</a>
+                                            <div id="div_bosquejo" class="col-xs-12 col-sm-12 col-md-12 panel-collapse collapse in">
+
+                                                <div class="form-group unselectable">
+                                                    <p style="font-size: small;">Si lo desea cargue un bosquejo hecho a mano del diseño deseado aquí</p>
+                                                    <asp:FileUpload ID="MyFileUpload" runat="server" accept="image/*" />
+                                                </div>
+
                                             </div>
+
+
                                             <div class="form-group unselectable">
                                                 <asp:TextBox runat="server" ID="txbTexto1" TextMode="multiline" CssClass="form-control txbEditable multitext" placeholder="Indicaciones del diseño (opcional)" TabIndex="3"></asp:TextBox>
                                             </div>
@@ -264,11 +276,20 @@
                                                 Fecha de entrega
                                                 <input type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" id="txbFecha" tabindex="7" runat="server" clientidmode="static" />
                                             </div>
-                                            <div class="form-group" id="dir_group">
+                                            <div class="form-group" id="dir_group1">
+                                                Calle
+                                                <input class="form-control txbEditable ctrl-required" placeholder="Dirección calle" type="text" tabindex="5" runat="server" id="txbDireccion_calle" clientidmode="static" />
+                                            </div>
+                                            <div class="form-group" id="dir_group2">
+                                                Número y Apto
+                                                <input class="form-control txbEditable ctrl-required pull-left" placeholder="Número" type="text" tabindex="5" runat="server" id="txbDireccion_numero" clientidmode="static" style="width: 40%;" />
+                                                <input class="form-control txbEditable ctrl-required pull-right" placeholder="Apto" type="text" tabindex="5" runat="server" id="txbDireccion_apto" clientidmode="static" style="width: 40%;" />
+                                            </div>
+                                            <div class="form-group" id="dir_group" style="display: none;">
                                                 Dirección escrita
                                                 <input class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" tabindex="5" runat="server" id="txbDireccion" clientidmode="static" />
                                             </div>
-                                            <div class="form-group unselectable">
+                                            <div class="form-group unselectable" style="display: none;">
 
                                                 <style>
                                                     #map-canvas {

@@ -2,13 +2,10 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
     <!-- STYLES EXTENSION -->
+
     <!-- PAGE CSS -->
-    <link rel="stylesheet" href="/Content/css/generador.css" />
-    <!-- PAGE JS -->
-    <script type="text/javascript" src="/Content/js/generador.js"></script>
-    <script type="text/javascript" src="/Content/js/clipboard.min.js"></script>
-    <script type="text/javascript" src="/Content/js/clipboard-action.js"></script>
-    <%--<script type="text/javascript" src="/Content/js/clipboard.js"></script>--%>
+    <link rel="stylesheet" href="/Content/css/pages/generador.css" />
+
     <style type="text/css">
         body {
             background-color: #f2e0cf;
@@ -21,7 +18,16 @@
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="SubbodyContent" runat="server"></asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="SubbodyContent" runat="server">
+
+    <!-- PAGE SCRIPTS -->
+    <script type="text/javascript" src="/Content/js/clipboard.min.js"></script>
+    <script type="text/javascript" src="/Content/js/clipboard-action.js"></script>
+
+    <!-- PAGE JS -->
+    <script type="text/javascript" src="/Content/js/pages/generador.js"></script>
+
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="col-sm-12 col-md-12" style="display: inline-block;">
         <div class="box-header with-border dark in div-form" style="display: inline-block;">
@@ -66,8 +72,8 @@
                     </a>
 
                     <button type="button" class="form-control btn-warning js-copy-btn btn-lg" style="height: auto;" id="btnCopy" onclick="enviarWPP()">Copiar y enviar por WhatsApp</button>
-                
-                    <a href="Dashboard" title="" target="_blank" class="pull-left" style="margin-top:10px;">Ir al Dashboard</a>
+
+                    <a href="Dashboard" title="" target="_blank" class="pull-left" style="margin-top: 10px;">Ir al Dashboard</a>
                 </div>
             </div>
             <br />
