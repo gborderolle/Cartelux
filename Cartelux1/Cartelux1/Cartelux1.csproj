@@ -244,6 +244,8 @@
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\bootstrap\js\tether.min.js" />
+    <Content Include="Content\css\bic_calendar.css" />
+    <Content Include="Content\css\bootstrap-combined.min.css" />
     <Content Include="Content\css\bootstrap-table.css" />
     <Content Include="Content\css\chosen-sprite%402x.png" />
     <Content Include="Content\css\chosen-sprite.png" />
@@ -251,6 +253,9 @@
     <Content Include="Content\css\dashboard.css" />
     <Content Include="Content\css\formulario.css" />
     <Content Include="Content\css\generador.css" />
+    <Content Include="Content\css\glDatePicker.darkneon.css" />
+    <Content Include="Content\css\glDatePicker.default.css" />
+    <Content Include="Content\css\glDatePicker.flatwhite.css" />
     <Content Include="Content\css\images\black-asc.gif" />
     <Content Include="Content\css\images\black-desc.gif" />
     <Content Include="Content\css\images\black-unsorted.gif" />
@@ -295,6 +300,8 @@
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\Modal_styles.css" />
     <Content Include="Content\css\MonthPicker.css" />
+    <Content Include="Content\css\optionalStyling.css" />
+    <Content Include="Content\css\responsive-grid.css" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -310,10 +317,12 @@
     <Content Include="Content\img\CX-web1.png" />
     <Content Include="Content\img\CX-web2.png" />
     <Content Include="Content\img\Dropbox_logo.png" />
+    <Content Include="Content\img\glyphicons-halflings.png" />
     <Content Include="Content\img\loader.gif" />
     <Content Include="Content\img\login.png" />
     <Content Include="Content\img\reload.png" />
     <Content Include="Content\js\auxiliar_functions.js" />
+    <Content Include="Content\js\bic_calendar.js" />
     <Content Include="Content\js\bootstrap-table-es-ES.js" />
     <Content Include="Content\js\bootstrap-table.js" />
     <Content Include="Content\js\chosen.jquery.js" />
@@ -323,6 +332,7 @@
     <Content Include="Content\js\dashboard.js" />
     <Content Include="Content\js\formulario.js" />
     <Content Include="Content\js\generador.js" />
+    <Content Include="Content\js\glDatePicker.min.js" />
     <Content Include="Content\js\jquery-ui.js" />
     <Content Include="Content\js\jquery.filtertable.min.js" />
     <Content Include="Content\js\jquery.js" />

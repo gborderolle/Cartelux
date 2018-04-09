@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="/Content/css/glDatePicker.flatwhite.css" />
 
     <link rel="stylesheet" href="/Content/css/optionalStyling.css" />
-    <link rel="stylesheet" href="/Content/css/web2cal.css" />
+    <%--<link rel="stylesheet" href="/Content/css/bootstrap-combined.min.css" />--%>
+    <link rel="stylesheet" href="/Content/css/bic_calendar.css" />
 
     <!-- PAGE CSS -->
     <link rel="stylesheet" href="/Content/css/dashboard.css" />
@@ -94,10 +95,7 @@
     <script type="text/javascript" src="/Content/js/jquery.filtertable.min.js"></script>
     <script type="text/javascript" src="/Content/js/glDatePicker.min.js"></script>
 
-
-    <script type="text/javascript" src="/Content/js/Web2Cal-Basic-2.0-min.js"></script>
-    <script type="text/javascript" src="/Content/js/web2cal.support.js"></script>
-    <script type="text/javascript" src="/Content/js/web2cal.default.template.js"></script>
+    <script type="text/javascript" src="/Content/js/bic_calendar.js"></script>
 
     <!-- Bootstrap table -->
     <script type="text/javascript" src="/Content/js/bootstrap-table.js"></script>
@@ -295,7 +293,7 @@
 
                                                 <asp:TemplateField HeaderText="¿Bosquejo?">
                                                     <ItemTemplate>
-                                                        <asp:CheckBox id="chbTieneBosquejo" runat="server" Checked="false" />
+                                                        <asp:CheckBox ID="chbTieneBosquejo" runat="server" Checked="false" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
@@ -357,9 +355,10 @@
                                         <input type="text" id="example3" gldp-id="gldp-9183641266" class="">
                                         <div gldp-el="gldp-9183641266"></div>--%>
 
-                                        <%--SOURCE: https://www.web2cal.com/ --%>
-                                        <div id="calendarContainer">
-                                        </div>
+                                        <%--<div id="calendarContainer">
+                                        </div>--%>
+
+                                        <div id="calendar"></div>
 
 
                                     </ContentTemplate>
