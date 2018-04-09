@@ -44,6 +44,8 @@
     // Hide all controls
     hideAllControls();
 
+    $("#aCollapse_bosquejo").click();
+
 }); // END On Ready
 
 var getUrlParameter = function getUrlParameter(sParam) {
@@ -82,7 +84,7 @@ function loadEvents() {
         if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
             var text = controls[1].innerText;
             var value = $("#ddlTipoEntrega1 option").filter(function () {
-                return this.text == text;
+                return this.text === text;
             }).attr('selected', true).val();
 
             //$("#ddlTipoEntrega1-button span")[1]
@@ -151,10 +153,10 @@ function loadEvents() {
 
 function loadPreviousState() {
     var controls = $(".ui-selectmenu-text");
-    if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] != null) {
+    if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null) {
         var text = $(".ui-selectmenu-text")[1].innerText;
         var value = $("#ddlTipoEntrega1 option").filter(function () {
-            return this.text == text;
+            return this.text === text;
         }).attr('selected', true).val();
         if (value !== null && value !== undefined && value.length > 0) {
 
@@ -332,11 +334,11 @@ function check_logic() {
     if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
         var text = controls[1].innerText;
         var value = $("#ddlTamano1 option").filter(function () {
-            return this.text == text;
+            return this.text === text;
         }).attr('selected', true).val();
         if (value !== null && value !== undefined && value.length > 0) {
             // Parse int
-            var ddlTamano1 = value;
+            ddlTamano1 = value;
             if (type(value) === "string") {
                 ddlTamano1 = TryParseInt(value, 0);
             }
@@ -349,13 +351,13 @@ function check_logic() {
     var ddlTipoEntrega1 = 0;
     controls = $("#ddlTipoEntrega1-button span");
     if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
-        var text = controls[1].innerText;
-        var value = $("#ddlTipoEntrega1 option").filter(function () {
-            return this.text == text;
+        text = controls[1].innerText;
+        value = $("#ddlTipoEntrega1 option").filter(function () {
+            return this.text === text;
         }).attr('selected', true).val();
         if (value !== null && value !== undefined && value.length > 0) {
             // Parse int
-            var ddlTipoEntrega1 = value;
+            ddlTipoEntrega1 = value;
             if (type(value) === "string") {
                 ddlTipoEntrega1 = TryParseInt(value, 0);
             }
@@ -366,11 +368,13 @@ function check_logic() {
     }
 
     // Colocación o envío a domicilio
-    if (ddlTipoEntrega1 === 1 && ddlTipoEntrega1 === 2) {
-        var txbDireccion = $("#txbDireccion").val();
-        var mapSearch = $("#mapSearch").val();
-        if ((txbDireccion === null || txbDireccion === undefined || txbDireccion.length === 0)
-        || (mapSearch === null || mapSearch === undefined || mapSearch.length === 0)) {
+    if (ddlTipoEntrega1 === 1 || ddlTipoEntrega1 === 2) {
+        var txbDireccion_calle = $("#txbDireccion_calle").val();
+        var txbDireccion_numero = $("#txbDireccion_numero").val();
+        var txbDireccion_apto = $("#txbDireccion_apto").val();
+        //var mapSearch = $("#mapSearch").val();
+        if ((txbDireccion_calle === null || txbDireccion_calle === undefined || txbDireccion_calle.length === 0)
+        || (txbDireccion_numero === null || txbDireccion_numero === undefined || txbDireccion_numero.length === 0)) {
             ok = false;
         }
     }
@@ -480,4 +484,10 @@ function initialize() {
             $("#hdnCurrentLocationURL").val(url_complete);
         }
     })
+}
+
+function showControl_withDelay(value1, value2) {
+    setTimeout(function () {
+        showControl(value1, value2);
+    }, 300);
 }

@@ -109,7 +109,9 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <Property Name="Pedido_Entrega_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Entrega_Tipo_ID" Type="int" Nullable="false" />
     <Property Name="Departamento_Tipo_ID" Type="int" />
-    <Property Name="Direccion" Type="varchar" MaxLength="300" />
+    <Property Name="Direccion_calle" Type="varchar" MaxLength="300" />
+    <Property Name="Direccion_numero" Type="varchar" MaxLength="300" />
+    <Property Name="Direccion_apto" Type="varchar" MaxLength="300" />
     <Property Name="Indicaciones" Type="varchar" MaxLength="100" />
     <Property Name="Barrio" Type="varchar" MaxLength="50" />
     <Property Name="Ciudad" Type="varchar" MaxLength="50" />
@@ -119,6 +121,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <Property Name="Fecha_entrega" Type="datetime" />
     <Property Name="Tiene_fecha_entrega" Type="bit" Nullable="false" />
     <Property Name="Comentarios" Type="varchar" MaxLength="200" />
+    <Property Name="Direccion_esquina" Type="varchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="pedidos">
     <Key>

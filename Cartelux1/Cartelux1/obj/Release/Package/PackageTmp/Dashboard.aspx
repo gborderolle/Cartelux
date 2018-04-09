@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/Content/css/bic_calendar.css" />
 
     <!-- PAGE CSS -->
-    <link rel="stylesheet" href="/Content/css/dashboard.css" />
+    <link rel="stylesheet" href="/Content/css/pages/dashboard.css" />
     <link rel="stylesheet" href="/Content/css/Modal_styles.css" />
     <%--<link rel="stylesheet" href="/Content/css/responsive-grid.css" />--%>
 
@@ -102,8 +102,8 @@
     <script type="text/javascript" src="/Content/js/bootstrap-table-es-ES.js"></script>
 
     <!-- PAGE JS -->
-    <script type="text/javascript" src="/Content/js/auxiliar_functions.js"></script>
-    <script type="text/javascript" src="/Content/js/dashboard.js"></script>
+    <script type="text/javascript" src="/Content/js/pages/auxiliar_functions.js"></script>
+    <script type="text/javascript" src="/Content/js/pages/dashboard.js"></script>
 
 </asp:Content>
 

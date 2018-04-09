@@ -68,25 +68,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="pedido_entregas">
-      <EntityTypeMapping TypeName="carteluxdb1Model.pedido_entregas">
-        <MappingFragment StoreEntitySet="pedido_entregas">
-          <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
-          <ScalarProperty Name="Tiene_fecha_entrega" ColumnName="Tiene_fecha_entrega" />
-          <ScalarProperty Name="Fecha_entrega" ColumnName="Fecha_entrega" />
-          <ScalarProperty Name="Coordenadas_X" ColumnName="Coordenadas_X" />
-          <ScalarProperty Name="Coordenadas_Y" ColumnName="Coordenadas_Y" />
-          <ScalarProperty Name="Google_maps_URL" ColumnName="Google_maps_URL" />
-          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
-          <ScalarProperty Name="Barrio" ColumnName="Barrio" />
-          <ScalarProperty Name="Indicaciones" ColumnName="Indicaciones" />
-          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-          <ScalarProperty Name="Departamento_Tipo_ID" ColumnName="Departamento_Tipo_ID" />
-          <ScalarProperty Name="Entrega_Tipo_ID" ColumnName="Entrega_Tipo_ID" />
-          <ScalarProperty Name="Pedido_Entrega_ID" ColumnName="Pedido_Entrega_ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
       <EntityTypeMapping TypeName="carteluxdb1Model.sysdiagrams">
         <MappingFragment StoreEntitySet="sysdiagrams">
@@ -163,6 +144,28 @@
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Pedido_Tipo_ID" ColumnName="Pedido_Tipo_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pedido_entregas">
+      <EntityTypeMapping TypeName="carteluxdb1Model.pedido_entregas">
+        <MappingFragment StoreEntitySet="pedido_entregas">
+          <ScalarProperty Name="Direccion_esquina" ColumnName="Direccion_esquina" />
+          <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+          <ScalarProperty Name="Tiene_fecha_entrega" ColumnName="Tiene_fecha_entrega" />
+          <ScalarProperty Name="Fecha_entrega" ColumnName="Fecha_entrega" />
+          <ScalarProperty Name="Coordenadas_X" ColumnName="Coordenadas_X" />
+          <ScalarProperty Name="Coordenadas_Y" ColumnName="Coordenadas_Y" />
+          <ScalarProperty Name="Google_maps_URL" ColumnName="Google_maps_URL" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+          <ScalarProperty Name="Barrio" ColumnName="Barrio" />
+          <ScalarProperty Name="Indicaciones" ColumnName="Indicaciones" />
+          <ScalarProperty Name="Direccion_apto" ColumnName="Direccion_apto" />
+          <ScalarProperty Name="Direccion_numero" ColumnName="Direccion_numero" />
+          <ScalarProperty Name="Direccion_calle" ColumnName="Direccion_calle" />
+          <ScalarProperty Name="Departamento_Tipo_ID" ColumnName="Departamento_Tipo_ID" />
+          <ScalarProperty Name="Entrega_Tipo_ID" ColumnName="Entrega_Tipo_ID" />
+          <ScalarProperty Name="Pedido_Entrega_ID" ColumnName="Pedido_Entrega_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

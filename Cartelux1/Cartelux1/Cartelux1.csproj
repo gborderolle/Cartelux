@@ -250,9 +250,6 @@
     <Content Include="Content\css\chosen-sprite%402x.png" />
     <Content Include="Content\css\chosen-sprite.png" />
     <Content Include="Content\css\chosen.css" />
-    <Content Include="Content\css\dashboard.css" />
-    <Content Include="Content\css\formulario.css" />
-    <Content Include="Content\css\generador.css" />
     <Content Include="Content\css\glDatePicker.darkneon.css" />
     <Content Include="Content\css\glDatePicker.default.css" />
     <Content Include="Content\css\glDatePicker.flatwhite.css" />
@@ -296,8 +293,6 @@
     <Content Include="Content\css\jquery-ui.theme.min.css" />
     <Content Include="Content\css\jquery.modal.css" />
     <Content Include="Content\css\jquery.qtip.min.css" />
-    <Content Include="Content\css\login-styles.css" />
-    <Content Include="Content\css\login.css" />
     <Content Include="Content\css\Modal_styles.css" />
     <Content Include="Content\css\MonthPicker.css" />
     <Content Include="Content\css\optionalStyling.css" />
