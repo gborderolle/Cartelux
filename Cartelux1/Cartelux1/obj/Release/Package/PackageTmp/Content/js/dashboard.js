@@ -1,16 +1,14 @@
 ﻿/**** Local variables ****/
-var PAGO_ID_SELECTED;
-var CLIENTE_ID_SELECTED;
 var IS_MOBILE;
+var EVENTS_LIST = [];
+var MONTH_SELECTED;
+var YEAR_SELECTED;
 
 $(document).ready(function () {
     checkMobile();
     initVariables();
     bindEvents();
-    bindDelayEvents();
-
-    drawCalendar();
-
+    bindDelayEvents();   
 });
 
 // attach the event binding function to every partial update
@@ -19,16 +17,34 @@ Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function (evt, args
     bindDelayEvents();
 });
 
-function drawCalendar() {
-    ical = new Web2Cal('calendarContainer', {
-        loadEvents: function () { ical.render(new Array()); },
-        onNewEvent: onNewEvent
-    });
-    ical.build();
-}
+// SOURCE: https://www.jqueryscript.net/time-clock/Simple-jQuery-Calendar-Schedule-Plugin-For-Bootstrap-Bic-Calendar.html
+function loadCalendar() {
+    mesos = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    dias = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 
-function onNewEvent(obj, groups, allday) {
-    Web2Cal.defaultPlugins.onNewEvent(obj, groups, allday);
+    $('#calendar').empty();
+    var day = 1 + "";
+    var month = MONTH_SELECTED + "";
+    var year = YEAR_SELECTED;
+    var date_comlete = day + "/" + month + "/" + year;
+
+    $('#calendar').bic_calendar({
+        // the date to display, as a string in dd/MM/YYYY format, or as a Date object
+        date: moment(date_comlete, "DD/MM/YYYY").format("DD/MM/YYYY"),
+
+        events: EVENTS_LIST,
+        enableSelect: true,
+        dayNames: dias,
+        monthNames: mesos,
+        showDays: true,
+        displayMonthController: true,
+        displayYearController: true,                                
+        //set ajax call
+        reqAjax: {
+            type: 'get',
+            url: 'http://bic.cat/bic_calendar/index.php'
+        }
+    });
 }
 
 /**
@@ -57,7 +73,7 @@ function DoubleScroll(element) {
 }
 
 window.onload = function () {
-    DoubleScroll(document.getElementById('div_gridFormularios'));
+    //DoubleScroll(document.getElementById('div_gridFormularios'));
 }
 
 function checkMobile() {
@@ -86,7 +102,7 @@ function bindEvents() {
     // SOURCE: https://github.com/sunnywalker/jQuery.FilterTable
 
     month_onClickEvent();
-    load_calendar();
+    //load_calendar();
 }
 
 function load_calendar() {
@@ -148,6 +164,7 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value) {
         var ddl_year = $("#ddl_year option:selected");
         if (ddl_year !== null && ddl_year !== undefined && ddl_year.text() !== null && ddl_year.text() !== undefined) {
             year_value = ddl_year.text();
+            YEAR_SELECTED = year_value;
 
             // Source: https://www.codeproject.com/Tips/775585/Bind-Gridview-using-AJAX
             // Ajax call parameters
@@ -168,7 +185,7 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value) {
                     $("#gridFormularios").empty();
 
                     if (response.d.length > 0) {
-                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha de Entrega</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>Tipo de Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>Tipo cartel</th> <th scope='col'>Impreso / Pintado</th> <th scope='col'>Zona</th> <th scope='col'>¿Bosquejo?</th> <th scope='col'>Ir a GMaps</th> <th scope='col'>Ir al Form</th> <th scope='col'>Ir a WhatsApp</th></tr></thead><tbody>");
+                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>T/Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>T/Cartel</th> <th scope='col'>Impr/Pint</th> <th scope='col'>Zona</th> <th scope='col'>¿Bosquejo?</th> <th scope='col'>GMaps</th> <th scope='col'>Form</th> <th scope='col'>WhatsApp</th></tr></thead><tbody>");
                         for (var i = 0; i < response.d.length; i++) {
                             var goToURL = "<a id='btnURL' role='button' href='" + response.d[i].URL_short + "' class='btn btn-warning glyphicon fa fa-wpforms' title='' target='_blank'></a>";
 
@@ -204,9 +221,15 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value) {
                             goToGMaps + "</td><td class='td-very_short'>" +
                             goToURL + "</td><td class='td-very_short'>" +
                             goToWPP + "</td></tr>");
+
+                            create_calendar_events(response.d[i]);
+
                         } // for
                         $("#gridFormularios").append("</tbody>");
                     }
+
+                    // Load calendario completo
+                    loadCalendar();
 
                 }, // end success
                 failure: function (response) {
@@ -215,6 +238,38 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value) {
         }
     }
 }
+
+function create_calendar_events(values) {
+    var color = "blue"; // Envío a domicilio
+    switch (values) {
+        case "Colocación": {
+            color = "red";
+        }
+        case "Retiro en el taller": {
+            color = "green";
+        }
+        case "Envío al interior": {
+            color = "gray";
+        }
+    }
+
+    var object = {
+        date: check_nullValues(moment(values.lblFechaEntrega, "DD-MM-YYYY").format("D/M/YYYY")),
+        title: check_nullValues(values.lblTipoEntrega),
+        color: color,
+        //link: check_nullValues(values.URL_short),
+        //linkTarget: '_blank',
+        content: 'Nombre: ' + check_nullValues(values.lblNombre) + ' <br> Tel: ' + check_nullValues(values.lblNumber),
+        displayMonthController: true,
+        displayYearController: true,
+        nMonths: 6
+    }
+    EVENTS_LIST.push(object);
+}
+
+function check_zeros(value) {
+    return value.replace(/0/g, "");
+} 
 
 function convertBool(value) {
     var ret = "No";
@@ -368,6 +423,8 @@ function month_onClickEvent() {
                 if (type(month_value) === "string") {
                     month_value_int = TryParseInt(month_value, 0);
                 }
+                MONTH_SELECTED = month_value_int;
+
                 $("#chbSoloVigentes").prop('checked', false);
                 $("#chbSoloJuanchy").prop('checked', false);
                 month_selectMonth(month_value_int, true, false);
