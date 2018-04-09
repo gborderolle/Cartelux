@@ -30,7 +30,6 @@ namespace Cartelux1.Models
         public virtual DbSet<pedido_disenos> pedido_disenos { get; set; }
         public virtual DbSet<pedidos> pedidos { get; set; }
         public virtual DbSet<usuarios> usuarios { get; set; }
-        public virtual DbSet<pedido_entregas> pedido_entregas { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<confi_formularios_anos> confi_formularios_anos { get; set; }
         public virtual DbSet<lista_departamentos> lista_departamentos { get; set; }
@@ -39,5 +38,6 @@ namespace Cartelux1.Models
         public virtual DbSet<lista_pedido_tamanos> lista_pedido_tamanos { get; set; }
         public virtual DbSet<lista_pedido_tematicas> lista_pedido_tematicas { get; set; }
         public virtual DbSet<lista_pedido_tipos> lista_pedido_tipos { get; set; }
+        public virtual DbSet<pedido_entregas> pedido_entregas { get; set; }
     }
 }

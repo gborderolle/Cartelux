@@ -114,7 +114,9 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Pedido_Entrega_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Entrega_Tipo_ID" Type="int" Nullable="false" />
           <Property Name="Departamento_Tipo_ID" Type="int" />
-          <Property Name="Direccion" Type="varchar" MaxLength="300" />
+          <Property Name="Direccion_calle" Type="varchar" MaxLength="300" />
+          <Property Name="Direccion_numero" Type="varchar" MaxLength="300" />
+          <Property Name="Direccion_apto" Type="varchar" MaxLength="300" />
           <Property Name="Indicaciones" Type="varchar" MaxLength="100" />
           <Property Name="Barrio" Type="varchar" MaxLength="50" />
           <Property Name="Ciudad" Type="varchar" MaxLength="50" />
@@ -124,6 +126,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Fecha_entrega" Type="datetime" />
           <Property Name="Tiene_fecha_entrega" Type="bit" Nullable="false" />
           <Property Name="Comentarios" Type="varchar" MaxLength="200" />
+          <Property Name="Direccion_esquina" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="pedidos">
           <Key>
@@ -252,7 +255,6 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <EntitySet Name="pedido_disenos" EntityType="Self.pedido_disenos" />
           <EntitySet Name="pedidos" EntityType="Self.pedidos" />
           <EntitySet Name="usuarios" EntityType="Self.usuarios" />
-          <EntitySet Name="pedido_entregas" EntityType="carteluxdb1Model.pedido_entregas" />
           <EntitySet Name="sysdiagrams" EntityType="carteluxdb1Model.sysdiagrams" />
           <EntitySet Name="confi_formularios_anos" EntityType="carteluxdb1Model.confi_formularios_anos" />
           <EntitySet Name="lista_departamentos" EntityType="carteluxdb1Model.lista_departamentos" />
@@ -261,25 +263,8 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <EntitySet Name="lista_pedido_tamanos" EntityType="carteluxdb1Model.lista_pedido_tamanos" />
           <EntitySet Name="lista_pedido_tematicas" EntityType="carteluxdb1Model.lista_pedido_tematicas" />
           <EntitySet Name="lista_pedido_tipos" EntityType="carteluxdb1Model.lista_pedido_tipos" />
+          <EntitySet Name="pedido_entregas" EntityType="carteluxdb1Model.pedido_entregas" />
         </EntityContainer>
-        <EntityType Name="pedido_entregas">
-          <Key>
-            <PropertyRef Name="Pedido_Entrega_ID" />
-          </Key>
-          <Property Name="Pedido_Entrega_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Entrega_Tipo_ID" Type="Int32" Nullable="false" />
-          <Property Name="Departamento_Tipo_ID" Type="Int32" />
-          <Property Name="Direccion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="Indicaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Google_maps_URL" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="Coordenadas_Y" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Coordenadas_X" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_entrega" Type="DateTime" Precision="3" />
-          <Property Name="Tiene_fecha_entrega" Type="Boolean" Nullable="false" />
-          <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -352,6 +337,27 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Codigo" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="pedido_entregas">
+          <Key>
+            <PropertyRef Name="Pedido_Entrega_ID" />
+          </Key>
+          <Property Name="Pedido_Entrega_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Entrega_Tipo_ID" Type="Int32" Nullable="false" />
+          <Property Name="Departamento_Tipo_ID" Type="Int32" />
+          <Property Name="Direccion_calle" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion_numero" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion_apto" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Indicaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Google_maps_URL" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Coordenadas_Y" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Coordenadas_X" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_entrega" Type="DateTime" Precision="3" />
+          <Property Name="Tiene_fecha_entrega" Type="Boolean" Nullable="false" />
+          <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion_esquina" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -422,25 +428,6 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
                 <ScalarProperty Name="Clave" ColumnName="Clave" />
                 <ScalarProperty Name="Rol_usuario_ID" ColumnName="Rol_usuario_ID" />
                 <ScalarProperty Name="EsAdmin" ColumnName="EsAdmin" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="pedido_entregas">
-            <EntityTypeMapping TypeName="carteluxdb1Model.pedido_entregas">
-              <MappingFragment StoreEntitySet="pedido_entregas">
-                <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
-                <ScalarProperty Name="Tiene_fecha_entrega" ColumnName="Tiene_fecha_entrega" />
-                <ScalarProperty Name="Fecha_entrega" ColumnName="Fecha_entrega" />
-                <ScalarProperty Name="Coordenadas_X" ColumnName="Coordenadas_X" />
-                <ScalarProperty Name="Coordenadas_Y" ColumnName="Coordenadas_Y" />
-                <ScalarProperty Name="Google_maps_URL" ColumnName="Google_maps_URL" />
-                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
-                <ScalarProperty Name="Barrio" ColumnName="Barrio" />
-                <ScalarProperty Name="Indicaciones" ColumnName="Indicaciones" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="Departamento_Tipo_ID" ColumnName="Departamento_Tipo_ID" />
-                <ScalarProperty Name="Entrega_Tipo_ID" ColumnName="Entrega_Tipo_ID" />
-                <ScalarProperty Name="Pedido_Entrega_ID" ColumnName="Pedido_Entrega_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -520,6 +507,28 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Pedido_Tipo_ID" ColumnName="Pedido_Tipo_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pedido_entregas">
+            <EntityTypeMapping TypeName="carteluxdb1Model.pedido_entregas">
+              <MappingFragment StoreEntitySet="pedido_entregas">
+                <ScalarProperty Name="Direccion_esquina" ColumnName="Direccion_esquina" />
+                <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+                <ScalarProperty Name="Tiene_fecha_entrega" ColumnName="Tiene_fecha_entrega" />
+                <ScalarProperty Name="Fecha_entrega" ColumnName="Fecha_entrega" />
+                <ScalarProperty Name="Coordenadas_X" ColumnName="Coordenadas_X" />
+                <ScalarProperty Name="Coordenadas_Y" ColumnName="Coordenadas_Y" />
+                <ScalarProperty Name="Google_maps_URL" ColumnName="Google_maps_URL" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Barrio" ColumnName="Barrio" />
+                <ScalarProperty Name="Indicaciones" ColumnName="Indicaciones" />
+                <ScalarProperty Name="Direccion_apto" ColumnName="Direccion_apto" />
+                <ScalarProperty Name="Direccion_numero" ColumnName="Direccion_numero" />
+                <ScalarProperty Name="Direccion_calle" ColumnName="Direccion_calle" />
+                <ScalarProperty Name="Departamento_Tipo_ID" ColumnName="Departamento_Tipo_ID" />
+                <ScalarProperty Name="Entrega_Tipo_ID" ColumnName="Entrega_Tipo_ID" />
+                <ScalarProperty Name="Pedido_Entrega_ID" ColumnName="Pedido_Entrega_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

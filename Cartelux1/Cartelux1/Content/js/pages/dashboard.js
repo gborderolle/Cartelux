@@ -244,12 +244,15 @@ function create_calendar_events(values) {
     switch (values) {
         case "Colocación": {
             color = "red";
+            break;
         }
         case "Retiro en el taller": {
             color = "green";
+            break;
         }
         case "Envío al interior": {
             color = "gray";
+            break;
         }
     }
 

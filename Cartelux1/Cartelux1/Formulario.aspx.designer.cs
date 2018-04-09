@@ -100,7 +100,7 @@ namespace Cartelux1 {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txbDireccion_numero;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txbDireccion_numero;
         
         /// <summary>
         /// txbDireccion_apto control.
@@ -110,6 +110,15 @@ namespace Cartelux1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txbDireccion_apto;
+        
+        /// <summary>
+        /// txbDireccion_esquina control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txbDireccion_esquina;
         
         /// <summary>
         /// txbDireccion control.

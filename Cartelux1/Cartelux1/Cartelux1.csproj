@@ -301,6 +301,11 @@
     <Content Include="Content\css\Modal_styles.css" />
     <Content Include="Content\css\MonthPicker.css" />
     <Content Include="Content\css\optionalStyling.css" />
+    <Content Include="Content\css\pages\dashboard.css" />
+    <Content Include="Content\css\pages\formulario.css" />
+    <Content Include="Content\css\pages\generador.css" />
+    <Content Include="Content\css\pages\login-styles.css" />
+    <Content Include="Content\css\pages\login.css" />
     <Content Include="Content\css\responsive-grid.css" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
@@ -321,7 +326,6 @@
     <Content Include="Content\img\loader.gif" />
     <Content Include="Content\img\login.png" />
     <Content Include="Content\img\reload.png" />
-    <Content Include="Content\js\auxiliar_functions.js" />
     <Content Include="Content\js\bic_calendar.js" />
     <Content Include="Content\js\bootstrap-table-es-ES.js" />
     <Content Include="Content\js\bootstrap-table.js" />
@@ -329,9 +333,6 @@
     <Content Include="Content\js\clipboard-action.js" />
     <Content Include="Content\js\clipboard.js" />
     <Content Include="Content\js\clipboard.min.js" />
-    <Content Include="Content\js\dashboard.js" />
-    <Content Include="Content\js\formulario.js" />
-    <Content Include="Content\js\generador.js" />
     <Content Include="Content\js\glDatePicker.min.js" />
     <Content Include="Content\js\jquery-ui.js" />
     <Content Include="Content\js\jquery.filtertable.min.js" />
@@ -340,9 +341,13 @@
     <Content Include="Content\js\jquery.qtip.min.js" />
     <Content Include="Content\js\jquery.quicksearch.js" />
     <Content Include="Content\js\jquery.tablesorter.js" />
-    <Content Include="Content\js\login.js" />
     <Content Include="Content\js\moment.js" />
     <Content Include="Content\js\MonthPicker.js" />
+    <Content Include="Content\js\pages\auxiliar_functions.js" />
+    <Content Include="Content\js\pages\dashboard.js" />
+    <Content Include="Content\js\pages\formulario.js" />
+    <Content Include="Content\js\pages\generador.js" />
+    <Content Include="Content\js\pages\login.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Dashboard.aspx" />
     <Content Include="ErrorPage.aspx" />

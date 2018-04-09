@@ -246,19 +246,17 @@
 
                                             <asp:DropDownList ID="ddlTamano1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />
 
-
-
-                                            <a id="aCollapse_bosquejo" data-toggle="collapse" href="#div_bosquejo">¿Cargar bosquejo?</a>
-                                            <div id="div_bosquejo" class="col-xs-12 col-sm-12 col-md-12 panel-collapse collapse in">
-
+                                            <a id="aCollapse_bosquejo" data-toggle="collapse" href="#div_bosquejo" class="collapsed">Click acá para cargar un Bosquejo</a>
+                                            <div id="div_bosquejo" class="col-xs-12 col-sm-12 col-md-12 panel-collapse collapse in" aria-expanded="false">
                                                 <div class="form-group unselectable">
                                                     <p style="font-size: small;">Si lo desea cargue un bosquejo hecho a mano del diseño deseado aquí</p>
                                                     <asp:FileUpload ID="MyFileUpload" runat="server" accept="image/*" />
                                                 </div>
-
+                                                <hr />
                                             </div>
 
-
+                                            <br />
+                                            <br />
                                             <div class="form-group unselectable">
                                                 <asp:TextBox runat="server" ID="txbTexto1" TextMode="multiline" CssClass="form-control txbEditable multitext" placeholder="Indicaciones del diseño (opcional)" TabIndex="3"></asp:TextBox>
                                             </div>
@@ -273,22 +271,26 @@
                                                 <input class="form-control txbEditable ctrl-required" placeholder="Ciudad de envío" type="text" tabindex="6" runat="server" id="txbCiudad" clientidmode="static" />
                                             </div>
                                             <div class="form-group unselectable">
-                                                Fecha de entrega
                                                 <input type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" id="txbFecha" tabindex="7" runat="server" clientidmode="static" />
                                             </div>
-                                            <div class="form-group" id="dir_group1">
-                                                Calle
-                                                <input class="form-control txbEditable ctrl-required" placeholder="Dirección calle" type="text" tabindex="5" runat="server" id="txbDireccion_calle" clientidmode="static" />
-                                            </div>
-                                            <div class="form-group" id="dir_group2">
-                                                Número y Apto
-                                                <input class="form-control txbEditable ctrl-required pull-left" placeholder="Número" type="text" tabindex="5" runat="server" id="txbDireccion_numero" clientidmode="static" style="width: 40%;" />
-                                                <input class="form-control txbEditable ctrl-required pull-right" placeholder="Apto" type="text" tabindex="5" runat="server" id="txbDireccion_apto" clientidmode="static" style="width: 40%;" />
-                                            </div>
+                                            <hr />
+
                                             <div class="form-group" id="dir_group" style="display: none;">
+                                                <input class="form-control txbEditable ctrl-required" placeholder="Dirección calle" type="text" tabindex="5" runat="server" id="txbDireccion_calle" clientidmode="static" />
+                                                <br />
+                                                <div class="form-group row" style="margin-left: 0; margin-right: 0;">
+                                                    <input class="form-control txbEditable ctrl-required pull-left" placeholder="Número de puerta" type="number" tabindex="5" runat="server" id="txbDireccion_numero" clientidmode="static" style="width: 30%;" />
+                                                    <input class="form-control txbEditable pull-left" placeholder="Apto" type="text" tabindex="5" runat="server" id="txbDireccion_apto" clientidmode="static" style="width: 30%; margin-left: 20px;" />
+                                                    <input class="form-control txbEditable pull-right" placeholder="Esquina" type="text" tabindex="5" runat="server" id="txbDireccion_esquina" clientidmode="static" style="width: 30%;" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group" id="dir_groupX" style="display: none;">
                                                 Dirección escrita
                                                 <input class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" tabindex="5" runat="server" id="txbDireccion" clientidmode="static" />
+                                            <hr />
                                             </div>
+
                                             <div class="form-group unselectable" style="display: none;">
 
                                                 <style>
@@ -307,6 +309,7 @@
 
                                             </div>
 
+                                            <br />
                                             <div class="form-group unselectable">
                                                 <%--<button class="form-control btn btn-danger btnConfirm" type="button" runat="server" id="btnConfirmar" onserverclick="btnConfirmar_ServerClick" onclick="return pre_confirm();">GUARDAR</button>--%>
                                                 <%--onserverclick="btnConfirmar_ServerClick"--%>

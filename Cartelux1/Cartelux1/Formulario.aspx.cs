@@ -180,17 +180,23 @@ namespace Cartelux1
                                 pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(v => v.Pedido_Entrega_ID.Equals(_pedido.Pedido_Entrega_ID));
                                 if (_pedido_entrega != null)
                                 {
-                                    txbCX_dir.Value = _pedido_entrega.Direccion;
-                                    txbDireccion.Value = _pedido_entrega.Direccion;
+                                    txbCX_dir.Value = _pedido_entrega.Direccion_calle;
+
+                                    txbDireccion_calle.Value = _pedido_entrega.Direccion_calle;
+                                    txbDireccion_numero.Value = _pedido_entrega.Direccion_numero;
+                                    txbDireccion_apto.Value = _pedido_entrega.Direccion_apto;
+                                    txbDireccion_esquina.Value = _pedido_entrega.Direccion_esquina;
 
                                     string sqlFormattedDate = _pedido_entrega.Fecha_entrega.HasValue ? _pedido_entrega.Fecha_entrega.Value.ToString(GlobalVariables.ShortDateTime_format1) : "null";
                                     txbFecha.Value = sqlFormattedDate;
 
                                     txbCiudad.Value = _pedido_entrega.Ciudad;
 
+                                    /*
                                     hdnCurrentLAT.Value = _pedido_entrega.Coordenadas_X;
                                     hdnCurrentLNG.Value = _pedido_entrega.Coordenadas_Y;
                                     hdnCurrentLocationURL.Value = _pedido_entrega.Google_maps_URL;
+                                    */
 
                                     if (_pedido_entrega.Entrega_Tipo_ID > 0)
                                     {
@@ -198,6 +204,15 @@ namespace Cartelux1
                                         if (_lista_entregas_tipo != null)
                                         {
                                             ddlTipoEntrega1.SelectedValue = _lista_entregas_tipo.Codigo.ToString();
+                                            int codigo = _lista_entregas_tipo.Codigo;
+                                            if (codigo == 1 || codigo == 2)
+                                            {
+                                                ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>showControl_withDelay('dir_group', true);</script>", false);
+                                            }
+                                            if (codigo == 4)
+                                            {
+                                                ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>showControl_withDelay('txbCiudad', true);</script>", false);
+                                            }
                                         }
                                     }
                                 }
@@ -275,7 +290,10 @@ namespace Cartelux1
                 txbTel.Attributes.Add("readonly", "readonly");
 
                 // Entrega
-                txbDireccion.Attributes.Add("readonly", "readonly");
+                txbDireccion_calle.Attributes.Add("readonly", "readonly");
+                txbDireccion_numero.Attributes.Add("readonly", "readonly");
+                txbDireccion_apto.Attributes.Add("readonly", "readonly");
+                txbDireccion_esquina.Attributes.Add("readonly", "readonly");
                 txbCiudad.Attributes.Add("readonly", "readonly");
                 txbFecha.Attributes.Add("readonly", "readonly");
 
@@ -293,7 +311,10 @@ namespace Cartelux1
                 txbTel.Attributes.Add("readonly", "false");
 
                 // Entrega
-                txbDireccion.Attributes.Add("readonly", "false");
+                txbDireccion_calle.Attributes.Add("readonly", "false");
+                txbDireccion_numero.Attributes.Add("readonly", "false");
+                txbDireccion_apto.Attributes.Add("readonly", "false");
+                txbDireccion_esquina.Attributes.Add("readonly", "false");
                 txbCiudad.Attributes.Add("readonly", "false");
                 txbFecha.Attributes.Add("readonly", "false");
 
@@ -424,7 +445,10 @@ namespace Cartelux1
                             pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(v => v.Pedido_Entrega_ID.Equals(_pedido.Pedido_Entrega_ID));
                             if (_pedido_entrega != null)
                             {
-                                _pedido_entrega.Direccion = txbDireccion.Value;
+                                _pedido_entrega.Direccion_calle = txbDireccion_calle.Value;
+                                _pedido_entrega.Direccion_numero = txbDireccion_numero.Value;
+                                _pedido_entrega.Direccion_apto = txbDireccion_apto.Value;
+                                _pedido_entrega.Direccion_esquina = txbDireccion_esquina.Value;
 
                                 _pedido_entrega.Fecha_entrega = GetDatetimeFormated(txbFecha.Value);
 
@@ -439,6 +463,13 @@ namespace Cartelux1
                                     _pedido_entrega.Entrega_Tipo_ID = selected;
                                 }
 
+                                string gmaps_url = Get_GMaps_URL();
+                                if (!string.IsNullOrWhiteSpace(gmaps_url))
+                                {
+                                    _pedido_entrega.Google_maps_URL = gmaps_url;
+                                }
+
+                                /*
                                 // Save current LAT and LNG
                                 if (!string.IsNullOrWhiteSpace(hdnCurrentLAT.Value) && !string.IsNullOrWhiteSpace(hdnCurrentLNG.Value) && !string.IsNullOrWhiteSpace(hdnCurrentLocationURL.Value))
                                 {
@@ -446,6 +477,7 @@ namespace Cartelux1
                                     _pedido_entrega.Coordenadas_Y = hdnCurrentLNG.Value;
                                     _pedido_entrega.Google_maps_URL = hdnCurrentLocationURL.Value;
                                 }
+                                */
                             }
                             #endregion
                         }
@@ -476,6 +508,17 @@ namespace Cartelux1
                 Logs.AddErrorLog("Error. FormID no válido. ERROR:", className, methodName, serie_str);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>alert('Error interno. \nComunícate con el equipo de Cartelux por favor.'); </script>", false);
             }
+        }
+
+        private string Get_GMaps_URL()
+        {
+            string gmaps_url = "https://www.google.com/maps/search/?api=1&query=";
+            if (ConfigurationManager.AppSettings != null)
+            {
+                gmaps_url = ConfigurationManager.AppSettings["GMap_URL"].ToString();
+            }
+            gmaps_url += txbDireccion_calle.Value + " " + txbDireccion_numero.Value;
+            return gmaps_url;
         }
 
         private DateTime GetDatetimeFormated(string fecha_str)
@@ -619,9 +662,20 @@ namespace Cartelux1
                     _pedido_entrega.Entrega_Tipo_ID = selected;
                 }
 
-                _pedido_entrega.Direccion = txbDireccion.Value;
+                _pedido_entrega.Direccion_calle = txbDireccion_calle.Value;
+                _pedido_entrega.Direccion_numero = txbDireccion_numero.Value;
+                _pedido_entrega.Direccion_apto = txbDireccion_apto.Value;
+                _pedido_entrega.Direccion_esquina = txbDireccion_esquina.Value;
+
                 _pedido_entrega.Fecha_entrega = GetDatetimeFormated(txbFecha.Value);
 
+                string gmaps_url = Get_GMaps_URL();
+                if (!string.IsNullOrWhiteSpace(gmaps_url))
+                {
+                    _pedido_entrega.Google_maps_URL = gmaps_url;
+                }
+
+                /*
                 // Save current LAT and LNG
                 if (!string.IsNullOrWhiteSpace(hdnCurrentLAT.Value) && !string.IsNullOrWhiteSpace(hdnCurrentLNG.Value) && !string.IsNullOrWhiteSpace(hdnCurrentLocationURL.Value))
                 {
@@ -629,6 +683,7 @@ namespace Cartelux1
                     _pedido_entrega.Coordenadas_Y = hdnCurrentLNG.Value;
                     _pedido_entrega.Google_maps_URL = hdnCurrentLocationURL.Value;
                 }
+                */
 
                 context.pedido_entregas.Add(_pedido_entrega);
                 Guardar_Contexto(context);

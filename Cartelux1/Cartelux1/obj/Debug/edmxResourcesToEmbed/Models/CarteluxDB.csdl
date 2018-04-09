@@ -68,7 +68,6 @@
     <EntitySet Name="pedido_disenos" EntityType="Self.pedido_disenos" />
     <EntitySet Name="pedidos" EntityType="Self.pedidos" />
     <EntitySet Name="usuarios" EntityType="Self.usuarios" />
-    <EntitySet Name="pedido_entregas" EntityType="carteluxdb1Model.pedido_entregas" />
     <EntitySet Name="sysdiagrams" EntityType="carteluxdb1Model.sysdiagrams" />
     <EntitySet Name="confi_formularios_anos" EntityType="carteluxdb1Model.confi_formularios_anos" />
     <EntitySet Name="lista_departamentos" EntityType="carteluxdb1Model.lista_departamentos" />
@@ -77,25 +76,8 @@
     <EntitySet Name="lista_pedido_tamanos" EntityType="carteluxdb1Model.lista_pedido_tamanos" />
     <EntitySet Name="lista_pedido_tematicas" EntityType="carteluxdb1Model.lista_pedido_tematicas" />
     <EntitySet Name="lista_pedido_tipos" EntityType="carteluxdb1Model.lista_pedido_tipos" />
+    <EntitySet Name="pedido_entregas" EntityType="carteluxdb1Model.pedido_entregas" />
   </EntityContainer>
-  <EntityType Name="pedido_entregas">
-    <Key>
-      <PropertyRef Name="Pedido_Entrega_ID" />
-    </Key>
-    <Property Name="Pedido_Entrega_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Entrega_Tipo_ID" Type="Int32" Nullable="false" />
-    <Property Name="Departamento_Tipo_ID" Type="Int32" />
-    <Property Name="Direccion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-    <Property Name="Indicaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Google_maps_URL" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-    <Property Name="Coordenadas_Y" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="Coordenadas_X" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="Fecha_entrega" Type="DateTime" Precision="3" />
-    <Property Name="Tiene_fecha_entrega" Type="Boolean" Nullable="false" />
-    <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
       <PropertyRef Name="diagram_id" />
@@ -167,5 +149,26 @@
     <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Codigo" Type="Int32" Nullable="false" />
     <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="pedido_entregas">
+    <Key>
+      <PropertyRef Name="Pedido_Entrega_ID" />
+    </Key>
+    <Property Name="Pedido_Entrega_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Entrega_Tipo_ID" Type="Int32" Nullable="false" />
+    <Property Name="Departamento_Tipo_ID" Type="Int32" />
+    <Property Name="Direccion_calle" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="Direccion_numero" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="Direccion_apto" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="Indicaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Google_maps_URL" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="Coordenadas_Y" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Coordenadas_X" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha_entrega" Type="DateTime" Precision="3" />
+    <Property Name="Tiene_fecha_entrega" Type="Boolean" Nullable="false" />
+    <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Direccion_esquina" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

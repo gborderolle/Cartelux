@@ -17,7 +17,9 @@ namespace Cartelux1.Models
         public int Pedido_Entrega_ID { get; set; }
         public int Entrega_Tipo_ID { get; set; }
         public Nullable<int> Departamento_Tipo_ID { get; set; }
-        public string Direccion { get; set; }
+        public string Direccion_calle { get; set; }
+        public string Direccion_numero { get; set; }
+        public string Direccion_apto { get; set; }
         public string Indicaciones { get; set; }
         public string Barrio { get; set; }
         public string Ciudad { get; set; }
@@ -27,5 +29,6 @@ namespace Cartelux1.Models
         public Nullable<System.DateTime> Fecha_entrega { get; set; }
         public bool Tiene_fecha_entrega { get; set; }
         public string Comentarios { get; set; }
+        public string Direccion_esquina { get; set; }
     }
 }
