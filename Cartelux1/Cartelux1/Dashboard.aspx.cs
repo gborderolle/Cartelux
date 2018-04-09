@@ -148,7 +148,7 @@ namespace Cartelux1
                                     nombre = _cliente.Nombre;
                                 }
                                 lbl1.Text = nombre;
-                            }                            
+                            }
 
                             lbl1 = e.Row.FindControl("lblTipoEntrega") as Label;
                             if (lbl1 != null)
@@ -221,6 +221,22 @@ namespace Cartelux1
                                         nombre = _pedido_entrega.Barrio;
                                     }
                                     lbl1.Text = nombre;
+                                }
+                            }
+
+                            LinkButton btnGMaps = e.Row.FindControl("btnGMaps") as LinkButton;
+                            if (btnGMaps != null)
+                            {
+                                btnGMaps.Text = string.Empty;
+                                pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(c => c.Pedido_Entrega_ID == _pedido.Pedido_Entrega_ID);
+                                if (_pedido_entrega != null)
+                                {
+                                    string value = "#";
+                                    if (!string.IsNullOrWhiteSpace(_pedido_entrega.Google_maps_URL) && _pedido_entrega.Google_maps_URL != "0")
+                                    {
+                                        value = _pedido_entrega.Google_maps_URL;
+                                    }
+                                    btnGMaps.Text = value;
                                 }
                             }
 
@@ -369,7 +385,7 @@ namespace Cartelux1
             using (CarteluxDB context = new CarteluxDB())
             {
                 // If is future month
-                if(current_year >= DateTime.Now.Year && current_month > DateTime.Now.Month)
+                if (current_year >= DateTime.Now.Year && current_month > DateTime.Now.Month)
                 {
                     solo_vigentes = false;
                 }
@@ -456,7 +472,7 @@ namespace Cartelux1
         #region Static Methods
 
         [WebMethod]
-        public static _GridFormularios[] GetData_BindGridFormularios(string year_value, string month_value, bool soloVigentes_value)
+        public static _GridFormularios[] GetData_BindGridFormularios(string year_value, string month_value, bool soloVigentes_value, bool soloJuanchy_value)
         {
             List<_GridFormularios> _GridFormularios_list = new List<_GridFormularios>();
             if (!string.IsNullOrWhiteSpace(year_value) && !string.IsNullOrWhiteSpace(month_value))
@@ -524,13 +540,32 @@ namespace Cartelux1
                                     if (_pedido_entrega != null)
                                     {
                                         _GridFormulario1.lblFechaEntrega = _pedido_entrega.Fecha_entrega.Value.ToString(GlobalVariables.ShortDateTime_format1);
+                                        _GridFormulario1.lblZona = _pedido_entrega.Barrio;
+
+                                        string value = "#";
+                                        if (!string.IsNullOrWhiteSpace(_pedido_entrega.Google_maps_URL) && _pedido_entrega.Google_maps_URL != "0")
+                                        {
+                                            value = _pedido_entrega.Google_maps_URL;
+                                        }
+                                        _GridFormulario1.URL_gmaps = value;
 
                                         lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Codigo == _pedido_entrega.Entrega_Tipo_ID);
                                         if (_lista_entregas_tipo != null)
                                         {
                                             _GridFormulario1.lblTipoEntrega = _lista_entregas_tipo.Nombre;
+
+                                            if (soloJuanchy_value && (_lista_entregas_tipo.Codigo != 1 && _lista_entregas_tipo.Codigo != 2))
+                                            {
+                                                continue;
+                                            }
                                         }
-                                    }
+                                    } // End pedido entrega
+
+                                    pedido_disenos _pedido_diseno = (pedido_disenos)context.pedido_disenos.FirstOrDefault(c => c.Pedido_Diseno_ID == _pedido.Pedido_Diseno_ID);
+                                    if (_pedido_diseno != null)
+                                    {
+                                        _GridFormulario1.chbTieneBosquejo = string.IsNullOrWhiteSpace(_pedido_diseno.Boceto_nombre) ? false : true;
+                                    } // End pedido diseño
 
                                     lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Tamano_ID);
                                     if (_lista_pedido_tamano != null)
@@ -550,10 +585,6 @@ namespace Cartelux1
                                         _GridFormulario1.lblMaterial = _lista_pedido_material.Nombre;
                                     }
 
-                                    if (_pedido_entrega != null)
-                                    {
-                                        _GridFormulario1.lblZona = _pedido_entrega.Barrio;
-                                    }
                                 }
                                 _GridFormularios_list.Add(_GridFormulario1);
                             }
@@ -578,6 +609,8 @@ namespace Cartelux1
             public string lblZona { get; set; }
             public string Formulario_ID { get; set; }
             public string URL_short { get; set; }
+            public string URL_gmaps { get; set; }
+            public bool chbTieneBosquejo { get; set; }
         }
 
         #endregion

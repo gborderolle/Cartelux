@@ -73,6 +73,9 @@
             display: block;
             width: 100%;
         }
+        .navbar-brand, .navbar-nav > li > a{
+            color: whitesmoke !important;
+        }
     </style>
 
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
@@ -90,7 +93,7 @@
         <asp:ContentPlaceHolder ID="SubbodyContent" runat="server">
         </asp:ContentPlaceHolder>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-inverse navbar-fixed-top" style="background-image: linear-gradient(to bottom,#ef753f 0,#dc561b 100%); border-color:#dc561b;">
             <div class="container" style="max-width: 100%;">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">

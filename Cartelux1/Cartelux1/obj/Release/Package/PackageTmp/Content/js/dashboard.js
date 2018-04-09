@@ -128,17 +128,17 @@ function bindDelayEvents() {
 }
 
 function month_clearSelected() {
-    $(".btn-table").removeClass("btn-success");
-    $(".btn-table").removeClass("btn-primary");
-    $(".btn-table").addClass("btn-primary");
+    $(".btn-table").removeClass("btn-warning");
+    $(".btn-table").removeClass("btn-info");
+    $(".btn-table").addClass("btn-info");
 }
 
 function month_paintSelected(month_index) {
-    $(".btn-table").filter("td[data-value='" + month_index + "']").toggleClass("btn-success");
+    $(".btn-table").filter("td[data-value='" + month_index + "']").toggleClass("btn-warning");
 }
 
-function month_selectMonth(month_value, soloVigentes_value) {
-    if (month_value !== null && month_value !== undefined && month_value > 0 && soloVigentes_value !== null && soloVigentes_value !== undefined) {
+function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value) {
+    if (month_value !== null && month_value !== undefined && month_value > 0 && soloVigentes_value !== null && soloVigentes_value !== undefined && soloJuanchy_value !== null && soloJuanchy_value !== undefined) {
         
         month_setMonthName(month_value);
         month_clearSelected()
@@ -155,21 +155,24 @@ function month_selectMonth(month_value, soloVigentes_value) {
             console.log("year_value, type: " + type(year_value) + ", value: " + year_value);
             console.log("month_value, type: " + type(month_value) + ", value: " + month_value);
             console.log("soloVigentes_value, type: " + type(soloVigentes_value) + ", value: " + soloVigentes_value);
+            console.log("soloJuanchy_value, type: " + type(soloJuanchy_value) + ", value: " + soloJuanchy_value);
 
             $.ajax({
                 type: "POST",
                 url: "Dashboard.aspx/GetData_BindGridFormularios",
                 contentType: "application/json;charset=utf-8",
-                data: '{year_value: "' + year_value + '",month_value: "' + month_value + '",soloVigentes_value: "' + soloVigentes_value + '"}',
+                data: '{year_value: "' + year_value + '",month_value: "' + month_value + '",soloVigentes_value: "' + soloVigentes_value + '",soloJuanchy_value: "' + soloJuanchy_value + '"}',
                 dataType: "json",
                 success: function (response) {
 
                     $("#gridFormularios").empty();
 
                     if (response.d.length > 0) {
-                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha de Entrega</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>Tipo de Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>Tipo cartel</th> <th scope='col'>Material</th> <th scope='col'>Zona</th> <th scope='col'>URL_short</th> <th scope='col'>Ir al Form</th> <th scope='col'>Ir a WhatsApp</th></tr></thead><tbody>");
+                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha de Entrega</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>Tipo de Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>Tipo cartel</th> <th scope='col'>Impreso / Pintado</th> <th scope='col'>Zona</th> <th scope='col'>¿Bosquejo?</th> <th scope='col'>Ir a GMaps</th> <th scope='col'>Ir al Form</th> <th scope='col'>Ir a WhatsApp</th></tr></thead><tbody>");
                         for (var i = 0; i < response.d.length; i++) {
-                            var goToURL = "<a id='btnURL' role='button' href='" + response.d[i].URL_short + "' class='btn btn-info glyphicon glyphicon-share-alt' title='' target='_blank'></a>";
+                            var goToURL = "<a id='btnURL' role='button' href='" + response.d[i].URL_short + "' class='btn btn-warning glyphicon fa fa-wpforms' title='' target='_blank'></a>";
+
+                            var goToGMaps = "<a id='btnGMaps' role='button' href='" + response.d[i].URL_gmaps + "' class='btn btn-warning fa fa-map' title='' target='_blank'></a>";
 
                             var tel = response.d[i].lblTelefono;
                             // Si el número empieza con 0 lo borra
@@ -179,9 +182,9 @@ function month_selectMonth(month_value, soloVigentes_value) {
                             }
 
                             var url = "https://api.whatsapp.com/send?phone=598" + tel;
-                            url += "&text=" + hashMessages["Msj_inicioCliente"];
+                            //url += "&text=" + hashMessages["Msj_inicioCliente"];
 
-                            var goToWPP = "<a id='btnURL' role='button' href='" + url + "' class='btn btn-info btn-xs fa fa-whatsapp fa-2x' title='' target='_blank'></a>";
+                            var goToWPP = "<a id='btnURL' role='button' href='" + url + "' class='btn btn-warning btn-xs fa fa-whatsapp fa-2x' title='' target='_blank'></a>";
                             var date = moment(response.d[i].lblFechaEntrega, "DD-MM-YYYY").format("DD-MM-YYYY");
 
                             $("#gridFormularios").append("<tr><td class='hiddencol hiddencol_real'>" +
@@ -196,7 +199,9 @@ function month_selectMonth(month_value, soloVigentes_value) {
                             check_nullValues(response.d[i].lblTipo) + "</td> <td class='td-very_short'>" +
                             check_nullValues(response.d[i].lblMaterial) + "</td> <td class='td-very_short'>" +
                             check_nullValues(response.d[i].lblZona) + "</td><td class='td-short'>" +
-                            check_nullValues(response.d[i].URL_short) + "</td><td class='td-very_short'>" +
+                            check_nullValues(convertBool(response.d[i].chbTieneBosquejo)) + "</td><td class='td-short'>" +
+                            //check_nullValues(response.d[i].URL_short) + "</td><td class='td-very_short'>" +
+                            goToGMaps + "</td><td class='td-very_short'>" +
                             goToURL + "</td><td class='td-very_short'>" +
                             goToWPP + "</td></tr>");
                         } // for
@@ -209,6 +214,14 @@ function month_selectMonth(month_value, soloVigentes_value) {
             }); // Ajax
         }
     }
+}
+
+function convertBool(value) {
+    var ret = "No";
+    if (value) {
+        ret = "Si";
+    }
+    return ret;
 }
 
 function check_nullValues(value) {
@@ -356,7 +369,8 @@ function month_onClickEvent() {
                     month_value_int = TryParseInt(month_value, 0);
                 }
                 $("#chbSoloVigentes").prop('checked', false);
-                month_selectMonth(month_value_int, true);
+                $("#chbSoloJuanchy").prop('checked', false);
+                month_selectMonth(month_value_int, true, false);
 
                 if (IS_MOBILE) {
                     $("#aCollapse_left_panel").show();
@@ -379,6 +393,23 @@ function filtrar_soloVigentes() {
             month_value_int = TryParseInt(month_value, 0);
         }
         month_selectMonth(month_value_int, !soloVigentes_value)
+    }
+}
+
+function filtrar() {
+    var chbSoloJuanchy = $("#chbSoloJuanchy");
+    var chbSoloVigentes = $("#chbSoloVigentes");
+    var hdn_monthSelected = $("#hdn_monthSelected");
+    if (hdn_monthSelected !== null && hdn_monthSelected.val() !== null && chbSoloJuanchy !== null && chbSoloVigentes !== null) {
+        var soloJuanchy_value = chbSoloJuanchy.is(":checked")
+        var soloVigentes_value = chbSoloVigentes.is(":checked")
+        var month_value = hdn_monthSelected.val();
+
+        var month_value_int = month_value;
+        if (type(month_value) === "string") {
+            month_value_int = TryParseInt(month_value, 0);
+        }
+        month_selectMonth(month_value_int, !soloVigentes_value, soloJuanchy_value)
     }
 }
 

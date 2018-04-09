@@ -59,7 +59,6 @@
             <div class="row center">
                 <div class="col-sm-12 col-md-10 center">
                     <input class="form-control text-to-copy pull-left" id="txbLink" onclick="this.select();" value="?" style="width: 85%;" readonly />
-                    <%--<button onclick="CopyTextAUX()"></button>--%>
 
                     <%--SOURCE: https://clipboardjs.com/--%>
                     <a id="aBtnCopy" href="#" class="btn btn-lg pull-right" data-clipboard-action="copy" data-clipboard-target="input#txbLink" style="padding: 10px;">
@@ -67,7 +66,8 @@
                     </a>
 
                     <button type="button" class="form-control btn-warning js-copy-btn btn-lg" style="height: auto;" id="btnCopy" onclick="enviarWPP()">Copiar y enviar por WhatsApp</button>
-                    <%--<input class="form-control btn-warning js-copy-btn" type="button" tabindex="2" id="btnCopy" value="Copiar y enviar por WhatsApp" title="Click para enviar por WhatsApp" onclick="enviarWPP();">--%>
+                
+                    <a href="Dashboard" title="" target="_blank" class="pull-left" style="margin-top:10px;">Ir al Dashboard</a>
                 </div>
             </div>
             <br />

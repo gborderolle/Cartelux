@@ -135,49 +135,42 @@
                     <%--SOURCE: http://bootstrap-table.wenzhixin.net.cn/getting-started/--%>
                     <%--SOURCE: http://issues.wenzhixin.net.cn/bootstrap-table/--%>
                     <table id="gridMonth" data-toggle="table">
-                        <%--data-search="true" --%>
-                        <thead>
-                            <tr>
-                                <th>Seleccionar mes
-                                </th>
-                            </tr>
-                        </thead>
                         <tbody>
                             <tr id="tr-id-1" class="tr-class-1">
-                                <td class="td-style btn btn-primary btn-lg btn-table td-class-1" data-value="1">Enero</td>
+                                <td class="td-style btn btn-info btn-md btn-table td-class-1" data-value="1">Enero</td>
                             </tr>
                             <tr id="tr-id-2" class="tr-class-2">
-                                <td class="td-style btn btn-primary btn-lg btn-table td-class-2" data-value="2">Febrero</td>
+                                <td class="td-style btn btn-info btn-md btn-table td-class-2" data-value="2">Febrero</td>
                             </tr>
                             <tr id="tr-id-3" class="tr-class-3">
-                                <td class="td-style btn btn-primary btn-lg btn-table td-class-3" data-value="3">Marzo</td>
+                                <td class="td-style btn btn-info btn-md btn-table td-class-3" data-value="3">Marzo</td>
                             </tr>
                             <tr id="tr-id-4" class="tr-class-4">
-                                <td class="td-style btn btn-primary btn-lg btn-table td-class-4" data-value="4">Abril</td>
+                                <td class="td-style btn btn-info btn-md btn-table td-class-4" data-value="4">Abril</td>
                             </tr>
                             <tr id="tr-id-5" class="tr-class-5">
-                                <td class="td-style btn btn-primary btn-lg btn-table td-class-5" data-value="5">Mayo</td>
+                                <td class="td-style btn btn-info btn-md btn-table td-class-5" data-value="5">Mayo</td>
                             </tr>
                             <tr id="tr-id-6" class="tr-class-6">
-                                <td class="td-style btn btn-primary btn-lg btn-table td-class-6" data-value="6">Junio</td>
+                                <td class="td-style btn btn-info btn-md btn-table td-class-6" data-value="6">Junio</td>
                             </tr>
                             <tr id="tr-id-7" class="tr-class-7">
-                                <td class="td-style btn btn-primary btn-lg btn-table td-class-7" data-value="7">Julio</td>
+                                <td class="td-style btn btn-info btn-md btn-table td-class-7" data-value="7">Julio</td>
                             </tr>
                             <tr id="tr-id-8" class="tr-class-8">
-                                <td class="td-style btn btn-primary btn-lg btn-table td-class-8" data-value="8">Agosto</td>
+                                <td class="td-style btn btn-info btn-md btn-table td-class-8" data-value="8">Agosto</td>
                             </tr>
                             <tr id="tr-id-9" class="tr-class-9">
-                                <td class="td-style btn btn-primary btn-lg btn-table td-class-9" data-value="9">Septiembre</td>
+                                <td class="td-style btn btn-info btn-md btn-table td-class-9" data-value="9">Septiembre</td>
                             </tr>
                             <tr id="tr-id-10" class="tr-class-10">
-                                <td class="td-style btn btn-primary btn-lg btn-table td-class-10" data-value="10">Octubre</td>
+                                <td class="td-style btn btn-info btn-md btn-table td-class-10" data-value="10">Octubre</td>
                             </tr>
                             <tr id="tr-id-11" class="tr-class-11">
-                                <td class="td-style btn btn-primary btn-lg btn-table td-class-11" data-value="11">Noviembre</td>
+                                <td class="td-style btn btn-info btn-md btn-table td-class-11" data-value="11">Noviembre</td>
                             </tr>
                             <tr id="tr-id-12" class="tr-class-12">
-                                <td class="td-style btn btn-primary btn-lg btn-table td-class-12" data-value="12">Diciembre</td>
+                                <td class="td-style btn btn-info btn-md btn-table td-class-12" data-value="12">Diciembre</td>
                             </tr>
                         </tbody>
                     </table>
@@ -207,7 +200,14 @@
                                         <div class="col-sm-12 col-md-6 pull-right">
                                             <div class="input-group pull-right" style="padding: 5px;">
                                                 <div class="form-check">
-                                                    <input id="chbSoloVigentes" class="form-check-input" type="checkbox" onclick="filtrar_soloVigentes()">
+                                                    <input id="chbSoloJuanchy" class="form-check-input" type="checkbox" onclick="filtrar()">
+                                                    <label class="form-check-label unselectable" for="chbSoloJuanchy">
+                                                        Filtro Juanchy
+                                                    </label>
+                                                </div>
+
+                                                <div class="form-check">
+                                                    <input id="chbSoloVigentes" class="form-check-input" type="checkbox" onclick="filtrar()">
                                                     <label class="form-check-label unselectable" for="chbSoloVigentes">
                                                         Todo el mes
                                                     </label>
@@ -280,7 +280,7 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Material">
+                                                <asp:TemplateField HeaderText="Impreso / Pintado">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblMaterial" runat="server" CommandName="View" />
                                                     </ItemTemplate>
@@ -292,11 +292,21 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:BoundField DataField="URL_short" HeaderText="URL Form" HtmlEncode="False" />
-
-                                                <asp:TemplateField HeaderText="Ir al Form" ControlStyle-CssClass="btn btn-info btn-xs">
+                                                <asp:TemplateField HeaderText="¿Bosquejo?">
                                                     <ItemTemplate>
-                                                        <a id="btnURL" role="button" href='<%# Eval("URL_short") %>' class="btn btn-info btn-xs glyphicon glyphicon-share-alt" title="" target="_blank"></a>
+                                                        <asp:CheckBox id="chbTieneBosquejo" runat="server" Checked="false" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Ir a GMaps" ControlStyle-CssClass="btn btn-warning btn-xs">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="btnGMaps" runat="server" CommandName="View" CssClass="btn btn-warning btn-xs fa fa-map" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Ir al Form" ControlStyle-CssClass="btn btn-warning btn-xs">
+                                                    <ItemTemplate>
+                                                        <a id="btnURL" role="button" href='<%# Eval("URL_short") %>' class="btn btn-warning btn-xs fa fa-wpforms" title="" target="_blank"></a>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>

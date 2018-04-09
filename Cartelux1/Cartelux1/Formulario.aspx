@@ -226,7 +226,7 @@
 
                                 <div class="row" style="margin: auto; display: inline-flex; width: 100%;">
 
-                                    <div class="col-sm-12 col-md-10" style="margin: auto; padding: 0;">
+                                    <div class="col-sm-12 col-md-12" style="margin: auto; padding: 0;">
                                         <div class="login-container sub-form">
                                             <label class="_label1 unselectable">1) Ingrese sus datos</label>
                                             <div class="form-group unselectable">
@@ -316,14 +316,14 @@
                             <div class="tab-pane fade in" id="tabsPedidos_2">
 
                                 <div class="row" style="margin: auto; display: inline-flex; width: 100%;">
-                                    <div class="col-sm-12 col-md-10" style="margin: auto; padding: 0;">
+                                    <div class="col-sm-12 col-md-12" style="margin: auto; padding: 0;">
                                         <div class="login-container sub-form">
                                             <label class="_label1 unselectable">Contacto cliente</label>
                                             <div class="form-group unselectable">
                                                 Teléfono
                                                 <div class="row-special" style="display: flex;">
                                                     <input class="form-control" id="txbCX_tel" readonly="true" style="width: 90%; display: inline-block; margin-right: 10px;" />
-                                                    <a href="#" class="btn" style="padding: 5px; display: inline-block;" onclick="clientWhatsApp()">
+                                                    <a href="#" class="btn btn-warning" style="display: inline-block;" onclick="clientWhatsApp()">
                                                         <i class="fa fa-whatsapp fa-2x"></i>
                                                     </a>
                                                 </div>
@@ -332,8 +332,8 @@
                                                 Google Maps
                                                 <div class="row-special" style="display: flex;">
                                                     <input class="form-control" id="txbCX_URL" readonly="true" style="width: 90%; display: inline-block; margin-right: 10px;" />
-                                                    <a href="#" class="btn" style="padding: 5px; display: inline-block;" onclick="clientGoogleMaps()">
-                                                        <i class="fa fa-map-marker fa-2x"></i>
+                                                    <a href="#" class="btn btn-warning" style="display: inline-block;" onclick="clientGoogleMaps()">
+                                                        <i class="fa fa-map fa-2x"></i>
                                                     </a>
                                                 </div>
                                             </div>
