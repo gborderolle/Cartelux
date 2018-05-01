@@ -383,7 +383,7 @@ function check_logic() {
     // Envío al interior
     if (ddlTipoEntrega1 === 3) {
         var txbCiudad = $("#txbCiudad").val();
-        if (txbCiudad === null || txbCiudad === undefined || txbCiudad.length === 0){
+        if (txbCiudad === null || txbCiudad === undefined || txbCiudad.length === 0) {
             ok = false;
         }
     }

@@ -1,11 +1,11 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/SiteExternal.Master" AutoEventWireup="true" CodeBehind="Formulario.aspx.cs" Inherits="Cartelux1.Formulario" Title="Cartelux Publicidad" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/SiteExternal.Master" AutoEventWireup="true" CodeBehind="GeneradorP.aspx.cs" Inherits="Cartelux1.GeneradorP" Title="Generador Pedidos" %>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
     <!-- STYLES EXTENSION -->
     <link rel="stylesheet" href="/Content/css/jquery-ui.css" />
 
     <!-- PAGE CSS -->
-    <link rel="stylesheet" href="/Content/css/pages/formulario.css" />
+    <link rel="stylesheet" href="/Content/css/pages/generadorP.css" />
 
     <script type="text/javascript">
 
@@ -95,8 +95,24 @@
         .btnConfirm2 {
             background-image: none;
             background-color: #34aa57;
+            height: 30px;
+            font-size: larger;
+        }
+
+        .btnLimpiar {
+            background-color: #ea8481; 
+            background-image: none;
+            height: 30px;
+            font-size: larger;
+            width: 45%;
+        }
+
+        .btnNuevo {
+            background-color: #77cc77; 
+            background-image: none;
             height: 40px;
             font-size: larger;
+            width: 45%;
         }
 
         .control-short {
@@ -180,7 +196,7 @@
 
     <!-- PAGE JS -->
     <script type="text/javascript" src="/Content/js/pages/auxiliar_functions.js"></script>
-    <script type="text/javascript" src="/Content/js/pages/formulario.js"></script>
+    <script type="text/javascript" src="/Content/js/pages/generadorP.js"></script>
 
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
@@ -231,7 +247,7 @@
 
                                     <div class="col-sm-12 col-md-12" style="margin: auto; padding: 0;">
                                         <div class="login-container sub-form">
-                                            <label class="_label1 unselectable">1) Ingrese sus datos</label>
+                                            <label class="_label1 unselectable">1) Contacto</label>
                                             <div class="form-group unselectable">
                                                 <input class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" required runat="server" id="txbTel" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
                                             </div>
@@ -239,7 +255,7 @@
                                                 <input class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" required runat="server" id="txbNombre" clientidmode="static" autofocus />
                                             </div>
                                             <hr />
-                                            <label class="_label1 unselectable">2) Datos del cartel</label>
+                                            <label class="_label1 unselectable">2) Cartel</label>
                                             <br />
 
                                             <%--<asp:DropDownList ID="ddlTipoCartel" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />--%>
@@ -262,7 +278,7 @@
                                             </div>
 
                                             <hr />
-                                            <label class="_label1 unselectable">3) Datos de la entrega</label>
+                                            <label class="_label1 unselectable">3) Entrega</label>
                                             <br />
 
                                             <asp:DropDownList ID="ddlTipoEntrega1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required ddlBorder"></asp:DropDownList>
@@ -315,6 +331,12 @@
                                                 <%--<button class="form-control btn btn-danger btnConfirm" type="button" runat="server" id="btnConfirmar" onserverclick="btnConfirmar_ServerClick" onclick="return pre_confirm();">GUARDAR</button>--%>
                                                 <%--onserverclick="btnConfirmar_ServerClick"--%>
                                                 <asp:Button runat="server" CssClass="form-control btn btn-danger btnConfirm1" ID="btnConfirmar1" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm();" ClientIDMode="Static" Text="GUARDAR" />
+                                            </div>
+                                            <div class="form-group unselectable">
+                                                <%--<button class="form-control btn btn-danger btnConfirm" type="button" runat="server" id="btnConfirmar" onserverclick="btnConfirmar_ServerClick" onclick="return pre_confirm();">GUARDAR</button>--%>
+                                                <%--onserverclick="btnConfirmar_ServerClick"--%>
+                                                <asp:Button runat="server" CssClass="form-control btn btn-primary btnLimpiar pull-left" ID="btnLimpiar" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm();" ClientIDMode="Static" Text="LIMPIAR" />
+                                                <asp:Button runat="server" CssClass="form-control btn btn-primary btnNuevo pull-right" ID="btnNuevo" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm();" ClientIDMode="Static" Text="NUEVO" />
                                             </div>
 
                                         </div>

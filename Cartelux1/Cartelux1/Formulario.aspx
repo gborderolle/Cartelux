@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/SiteExternal.Master" AutoEventWireup="true" CodeBehind="Formulario.aspx.cs" Inherits="Cartelux1.Formulario" Title="Cartelux Publicidad" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/SiteExternal.Master" AutoEventWireup="true" CodeBehind="Formulario.aspx.cs" Inherits="Cartelux1.Formulario" Title="Formulario" %>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
     <!-- STYLES EXTENSION -->
@@ -276,19 +276,20 @@
                                             <hr />
 
                                             <div class="form-group" id="dir_group" style="display: none;">
-                                                <input class="form-control txbEditable ctrl-required" placeholder="Dirección calle" type="text" tabindex="5" runat="server" id="txbDireccion_calle" clientidmode="static" />
-                                                <br />
                                                 <div class="form-group row" style="margin-left: 0; margin-right: 0;">
-                                                    <input class="form-control txbEditable ctrl-required pull-left" placeholder="Número de puerta" type="number" tabindex="5" runat="server" id="txbDireccion_numero" clientidmode="static" style="width: 30%;" />
-                                                    <input class="form-control txbEditable pull-left" placeholder="Apto" type="text" tabindex="5" runat="server" id="txbDireccion_apto" clientidmode="static" style="width: 30%; margin-left: 20px;" />
-                                                    <input class="form-control txbEditable pull-right" placeholder="Esquina" type="text" tabindex="5" runat="server" id="txbDireccion_esquina" clientidmode="static" style="width: 30%;" />
+                                                    <input class="form-control txbEditable ctrl-required pull-left" placeholder="Calle" type="text" tabindex="5" runat="server" id="txbDireccion_calle" clientidmode="static" style="width: 45%;" />
+                                                    <input class="form-control txbEditable pull-right" placeholder="Número de puerta" type="number" tabindex="5" runat="server" id="txbDireccion_numero" clientidmode="static" style="width: 45%;" />
+                                                </div>
+                                                <div class="form-group row" style="margin-left: 0; margin-right: 0;">
+                                                    <input class="form-control txbEditable pull-left" placeholder="Apto" type="text" tabindex="5" runat="server" id="txbDireccion_apto" clientidmode="static" style="width: 45%;" />
+                                                    <input class="form-control txbEditable pull-right" placeholder="Esquina" type="text" tabindex="5" runat="server" id="txbDireccion_esquina" clientidmode="static" style="width: 45%;" />
                                                 </div>
                                             </div>
 
                                             <div class="form-group" id="dir_groupX" style="display: none;">
                                                 Dirección escrita
                                                 <input class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" tabindex="5" runat="server" id="txbDireccion" clientidmode="static" />
-                                            <hr />
+                                                <hr />
                                             </div>
 
                                             <div class="form-group unselectable" style="display: none;">
