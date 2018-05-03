@@ -170,3 +170,11 @@ C:\Users\Gonzalo\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\Microsoft.Owi
 C:\Users\Gonzalo\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\obj\Release\Cartelux1.csprojResolveAssemblyReference.cache
 C:\Users\Gonzalo\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\obj\Release\Cartelux1.dll
 C:\Users\Gonzalo\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\obj\Release\Cartelux1.pdb
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\BouncyCastle.Crypto.dll
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\Box.V2.dll
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\Microsoft.IdentityModel.Logging.dll
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\Microsoft.IdentityModel.Logging.xml
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\System.IdentityModel.Tokens.Jwt.xml

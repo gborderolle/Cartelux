@@ -373,9 +373,9 @@ function check_logic() {
         var txbDireccion_numero = $("#txbDireccion_numero").val();
         var txbDireccion_esquina = $("#txbDireccion_esquina").val();
         //var mapSearch = $("#mapSearch").val();
-        if ((txbDireccion_calle === null || txbDireccion_calle === undefined || txbDireccion_calle.length === 0)
-        || (txbDireccion_numero === null || txbDireccion_numero === undefined || txbDireccion_numero.length === 0)
-            || (txbDireccion_esquina === null || txbDireccion_esquina === undefined || txbDireccion_esquina.length === 0)) {
+        if ((txbDireccion_calle === null || txbDireccion_calle === undefined || txbDireccion_calle.length === 0)){
+        //|| (txbDireccion_numero === null || txbDireccion_numero === undefined || txbDireccion_numero.length === 0)
+            //|| (txbDireccion_esquina === null || txbDireccion_esquina === undefined || txbDireccion_esquina.length === 0)) {
             ok = false;
         }
     }

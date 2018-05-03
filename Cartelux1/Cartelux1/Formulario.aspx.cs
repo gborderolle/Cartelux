@@ -174,6 +174,7 @@ namespace Cartelux1
                                 if (_pedido_diseno != null)
                                 {
                                     txbTexto1.Text = _pedido_diseno.Texto;
+                                    chbBosquejo.Checked = string.IsNullOrWhiteSpace(_pedido_diseno.Boceto_nombre) ? false : true;
                                 }
 
                                 // GET Entrega
@@ -205,11 +206,17 @@ namespace Cartelux1
                                         {
                                             ddlTipoEntrega1.SelectedValue = _lista_entregas_tipo.Codigo.ToString();
                                             int codigo = _lista_entregas_tipo.Codigo;
-                                            if (codigo == 1 || codigo == 2)
+                                            /*
+                                             * Codigo = 1: Colocación
+                                             * Codigo = 2: Envío a domicilio
+                                             * Codigo = 3: Envío al interior
+                                             * Codigo = 4: Retiro en el taller
+                                             * */
+                                            if (codigo == 1 || codigo == 2) 
                                             {
                                                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>showControl_withDelay('dir_group', true);</script>", false);
                                             }
-                                            if (codigo == 4)
+                                            else if (codigo == 3)
                                             {
                                                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>showControl_withDelay('txbCiudad', true);</script>", false);
                                             }
@@ -445,22 +452,35 @@ namespace Cartelux1
                             pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(v => v.Pedido_Entrega_ID.Equals(_pedido.Pedido_Entrega_ID));
                             if (_pedido_entrega != null)
                             {
-                                _pedido_entrega.Direccion_calle = txbDireccion_calle.Value;
-                                _pedido_entrega.Direccion_numero = txbDireccion_numero.Value;
-                                _pedido_entrega.Direccion_apto = txbDireccion_apto.Value;
-                                _pedido_entrega.Direccion_esquina = txbDireccion_esquina.Value;
-
                                 _pedido_entrega.Fecha_entrega = GetDatetimeFormated(txbFecha.Value);
 
                                 if (ddlTipoEntrega1.SelectedIndex > 0)
                                 {
-                                    int selected = 1;
-                                    if (!int.TryParse(ddlTipoEntrega1.SelectedValue, out selected))
+                                    int codigo = 1;
+                                    if (!int.TryParse(ddlTipoEntrega1.SelectedValue, out codigo))
                                     {
-                                        selected = 1;
+                                        codigo = 1;
                                         Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTipoEntrega1.SelectedValue);
                                     }
-                                    _pedido_entrega.Entrega_Tipo_ID = selected;
+                                    _pedido_entrega.Entrega_Tipo_ID = codigo;
+
+                                    /*
+                                     * Codigo = 1: Colocación
+                                     * Codigo = 2: Envío a domicilio
+                                     * Codigo = 3: Envío al interior
+                                     * Codigo = 4: Retiro en el taller
+                                     * */
+                                    if (codigo == 1 || codigo == 2)
+                                    {
+                                        _pedido_entrega.Direccion_calle = txbDireccion_calle.Value;
+                                        _pedido_entrega.Direccion_numero = txbDireccion_numero.Value;
+                                        _pedido_entrega.Direccion_apto = txbDireccion_apto.Value;
+                                        _pedido_entrega.Direccion_esquina = txbDireccion_esquina.Value;
+                                    }
+                                    else if (codigo == 3)
+                                    {
+                                        _pedido_entrega.Ciudad = txbCiudad.Value;
+                                    }
                                 }
 
                                 string gmaps_url = Get_GMaps_URL();
@@ -650,24 +670,37 @@ namespace Cartelux1
                 pedido_entregas _pedido_entrega = new pedido_entregas();
                 _pedido_entrega.Pedido_Entrega_ID = 0;
 
+                _pedido_entrega.Fecha_entrega = GetDatetimeFormated(txbFecha.Value);
+
                 _pedido_entrega.Entrega_Tipo_ID = 0;
                 if (ddlTipoEntrega1.SelectedIndex > 0)
                 {
-                    int selected = 1;
-                    if (!int.TryParse(ddlTipoEntrega1.SelectedValue, out selected))
+                    int codigo = 1;
+                    if (!int.TryParse(ddlTipoEntrega1.SelectedValue, out codigo))
                     {
-                        selected = 1;
+                        codigo = 1;
                         Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTipoEntrega1.SelectedValue);
                     }
-                    _pedido_entrega.Entrega_Tipo_ID = selected;
+                    _pedido_entrega.Entrega_Tipo_ID = codigo;
+
+                    /*
+                    * Codigo = 1: Colocación
+                    * Codigo = 2: Envío a domicilio
+                    * Codigo = 3: Envío al interior
+                    * Codigo = 4: Retiro en el taller
+                    * */
+                    if (codigo == 1 || codigo == 2)
+                    {
+                        _pedido_entrega.Direccion_calle = txbDireccion_calle.Value;
+                        _pedido_entrega.Direccion_numero = txbDireccion_numero.Value;
+                        _pedido_entrega.Direccion_apto = txbDireccion_apto.Value;
+                        _pedido_entrega.Direccion_esquina = txbDireccion_esquina.Value;
+                    }
+                    else if (codigo == 3)
+                    {
+                        _pedido_entrega.Ciudad = txbCiudad.Value;
+                    }
                 }
-
-                _pedido_entrega.Direccion_calle = txbDireccion_calle.Value;
-                _pedido_entrega.Direccion_numero = txbDireccion_numero.Value;
-                _pedido_entrega.Direccion_apto = txbDireccion_apto.Value;
-                _pedido_entrega.Direccion_esquina = txbDireccion_esquina.Value;
-
-                _pedido_entrega.Fecha_entrega = GetDatetimeFormated(txbFecha.Value);
 
                 string gmaps_url = Get_GMaps_URL();
                 if (!string.IsNullOrWhiteSpace(gmaps_url))
@@ -1333,7 +1366,188 @@ namespace Cartelux1
             return uploadMega_ok;
         }
 
-        #endregion
+        private bool UploadBOXAPI(formularios _formulario, string tel_str)
+        {
+            bool uploadBOX_ok = true;
+            if (_formulario != null)
+            {
+                System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+                string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+                string methodName = stackFrame.GetMethod().Name;
+
+                // Source: https://github.com/box/box-windows-sdk-v2
+
+                #region Get_Params
+
+                //BOX User. 
+                string BOX_User = "gborderolle2@gmail.com";
+                if (ConfigurationManager.AppSettings != null)
+                {
+                    BOX_User = ConfigurationManager.AppSettings["BOX_User"].ToString();
+                }
+
+                //BOX Password. 
+                string BOX_Password = "154060gb";
+                if (ConfigurationManager.AppSettings != null)
+                {
+                    BOX_Password = ConfigurationManager.AppSettings["BOX_Password"].ToString();
+                }
+
+                //BOX Path 1. 
+                string BOX_Path1 = "Cartelux";
+                if (ConfigurationManager.AppSettings != null)
+                {
+                    BOX_Path1 = ConfigurationManager.AppSettings["BOX_Path1"].ToString();
+                }
+
+                //BOX Path 2. 
+                string BOX_Path2 = "Workspace";
+                if (ConfigurationManager.AppSettings != null)
+                {
+                    BOX_Path2 = ConfigurationManager.AppSettings["BOX_Path2"].ToString();
+                }
+
+                #endregion
+
+                /* ******** Get file extension ******** */
+                string fileName = MyFileUpload.PostedFile.FileName;
+                string file_extension = string.Empty;
+                string complete_URL = string.Empty;
+
+                if (!string.IsNullOrWhiteSpace(fileName))
+                {
+                    file_extension = fileName.Substring(fileName.LastIndexOf('.'));
+                }
+
+                /* ******** Global variables ******** */
+
+                using (CarteluxDB context = new CarteluxDB())
+                {
+                    // Pedidos
+                    pedidos _pedido = (pedidos)context.pedidos.FirstOrDefault(v => v.Formulario_ID == _formulario.Formulario_ID);
+                    if (_pedido != null) // CHECK THIS ***********************
+                    {
+                        int ID = _pedido.Pedido_ID;
+
+                        // GET Diseño
+                        pedido_disenos _pedido_diseno = (pedido_disenos)context.pedido_disenos.FirstOrDefault(v => v.Pedido_Diseno_ID.Equals(_pedido.Pedido_Diseno_ID));
+                        if (_pedido_diseno != null)
+                        {
+                            if (MyFileUpload != null && MyFileUpload.PostedFile != null && !string.IsNullOrWhiteSpace(MyFileUpload.PostedFile.FileName))
+                            {
+                                try
+                                {
+                                    //var boxConfig = new BoxConfig(BOX_User, BOX_Password, < Enterprise_Id >, < Private_Key >, < JWT_Private_Key_Password >, < JWT_Public_Key_Id >);
+                                    //var boxJWT = new BoxJWTAuth(boxConfig);
+
+                                    // Instancia de un cliente para conectar con mega.
+                                    MegaApiClient cliente = new MegaApiClient();
+                                    // Inicio de sesión con el cliente, pasando el correo y la contraseña de la cuenta mega a la que se sube el archivo.
+                                    cliente.Login(BOX_User, BOX_Password);
+
+                                    // Obtenemos los nodos (directorios/archivos) de la cuenta dentro de una variable.
+                                    var nodos = cliente.GetNodes();
+
+                                    // Comprobar si existe algún nodo (directorio) que se llame "Facturas" (en mi caso quiero subir el archivo a dicha carpeta).
+
+                                    // Crear dos nodos.
+                                    INode root;
+                                    INode carpeta;
+
+                                    string folder = string.Empty;
+
+                                    #region Carpeta TRABAJOS
+                                    folder = BOX_Path1;
+                                    complete_URL = folder + "/";
+                                    bool existe = cliente.GetNodes().Any(n => n.Name == folder);
+
+                                    // Si el directorio facturas existe, se obtiene. Si no existe, se crea.
+                                    if (existe == true)
+                                    {
+                                        // Obtenemos el directorio.
+                                        carpeta = nodos.FirstOrDefault(n => n.Name == folder);
+                                    }
+                                    else
+                                    {
+                                        // Obtenemos el nodo raíz.
+                                        root = nodos.Single(n => n.Type == NodeType.Root);
+                                        carpeta = cliente.CreateFolder(folder, root);
+                                    }
+                                    #endregion
+
+                                    #region Carpeta Mes-Año 01-2018
+
+                                    string year = DateTime.Now.Month.ToString("D2") + "-" + DateTime.Now.Year.ToString("D4");
+
+                                    folder = year;
+                                    complete_URL += folder + "/";
+                                    existe = cliente.GetNodes(carpeta).Any(n => n.Name == folder);
+
+                                    // Si el directorio facturas existe, se obtiene. Si no existe, se crea.
+                                    if (existe == true)
+                                    {
+                                        // Obtenemos el directorio.
+                                        carpeta = nodos.FirstOrDefault(n => n.Name == folder);
+                                    }
+                                    else
+                                    {
+                                        // Obtenemos el nodo raíz.
+                                        carpeta = cliente.CreateFolder(folder, carpeta);
+                                    }
+                                    #endregion
+
+                                    #region Carpeta Bocetos
+                                    folder = BOX_Path2;
+                                    complete_URL += folder + "/";
+                                    existe = cliente.GetNodes(carpeta).Any(n => n.Name == folder);
+
+                                    // Si el directorio facturas existe, se obtiene. Si no existe, se crea.
+                                    if (existe == true)
+                                    {
+                                        // Obtenemos el directorio.
+                                        carpeta = nodos.FirstOrDefault(n => n.Name == folder);
+                                    }
+                                    else
+                                    {
+                                        // Obtenemos el nodo raíz.
+                                        carpeta = cliente.CreateFolder(folder, carpeta);
+                                    }
+                                    #endregion
+
+                                    //string fileName1 = Path.GetFileName(MyFileUpload.FileName);
+                                    string fileName1 = tel_str + file_extension;
+
+                                    using (Stream stream = MyFileUpload.PostedFile.InputStream)
+                                    {
+                                        cliente.Upload(stream, fileName1, carpeta);
+                                        cliente.Logout();
+                                    }
+
+                                    #region Save in DB
+
+                                    _pedido_diseno.Boceto_nombre = fileName1;
+                                    _pedido_diseno.Boceto_extension = file_extension;
+                                    _pedido_diseno.Boceto_PATH = complete_URL;
+                                    uploadBOX_ok = Guardar_Contexto(context);
+
+                                    #endregion
+                                }
+                                catch (Exception e)
+                                {
+                                    Logs.AddErrorLog("Excepcion. Copiando archivo al server y guardando en BD. ERROR:", className, methodName, e.Message);
+                                    Logs.AddErrorLog("Excepcion. URL:", className, methodName, complete_URL);
+                                    uploadBOX_ok = false;
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+            return uploadBOX_ok;
+        }
+
+                #endregion
 
         #region Static Methods 
 
