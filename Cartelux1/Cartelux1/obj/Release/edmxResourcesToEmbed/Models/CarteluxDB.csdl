@@ -51,6 +51,7 @@
     <Property Name="Pedido_Diseno_ID" Type="Int32" Nullable="false" />
     <Property Name="Pedido_Entrega_ID" Type="Int32" Nullable="false" />
     <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="Pedido_Estado_ID" Type="Int32" />
   </EntityType>
   <EntityType Name="usuarios">
     <Key>
@@ -77,6 +78,7 @@
     <EntitySet Name="lista_pedido_tematicas" EntityType="carteluxdb1Model.lista_pedido_tematicas" />
     <EntitySet Name="lista_pedido_tipos" EntityType="carteluxdb1Model.lista_pedido_tipos" />
     <EntitySet Name="pedido_entregas" EntityType="carteluxdb1Model.pedido_entregas" />
+    <EntitySet Name="lista_pedido_estados" EntityType="carteluxdb1Model.lista_pedido_estados" />
   </EntityContainer>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -170,5 +172,14 @@
     <Property Name="Tiene_fecha_entrega" Type="Boolean" Nullable="false" />
     <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="Direccion_esquina" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="lista_pedido_estados">
+    <Key>
+      <PropertyRef Name="Pedido_Estado_ID" />
+    </Key>
+    <Property Name="Pedido_Estado_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Codigo" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

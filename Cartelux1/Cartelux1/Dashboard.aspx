@@ -285,6 +285,12 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
+                                                 <asp:TemplateField HeaderText="Cant">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblCantidad" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
                                                 <asp:TemplateField HeaderText="Zona">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblZona" runat="server" CommandName="View" />
@@ -306,6 +312,18 @@
                                                 <asp:TemplateField HeaderText="Form" ControlStyle-CssClass="btn btn-warning btn-xs">
                                                     <ItemTemplate>
                                                         <a id="btnURL" role="button" href='<%# Eval("URL_short") %>' class="btn btn-warning btn-xs fa fa-wpforms" title="" target="_blank"></a>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="WPP" ControlStyle-CssClass="btn btn-warning btn-xs">
+                                                    <ItemTemplate>
+                                                        <a id="btnURL" role="button" href='<%# Eval("URL_short") %>' class="btn btn-warning btn-xs fa fa-wpforms" title="" target="_blank"></a>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="OPC" ControlStyle-CssClass="btn btn-warning btn-xs">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="btnOPC" runat="server" CommandName="View" CssClass="btn btn-primary btn-xs fa fa-asterisk" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>

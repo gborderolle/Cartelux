@@ -82,7 +82,7 @@ namespace Cartelux1
                 //ddlTipoCartel.DataBind();
                 //ddlTipoCartel.Items.Insert(0, new ListItem("Tipo de producto", "0"));
 
-                // DDL Sizes
+                // DDL Tamaños
                 dt1 = new DataTable();
                 dt1 = Extras.ToDataTable(context.lista_pedido_tamanos.OrderBy(e => e.Nombre).ToList());
                 ddlTamano1.DataSource = dt1;
@@ -91,7 +91,7 @@ namespace Cartelux1
                 ddlTamano1.DataBind();
                 ddlTamano1.Items.Insert(0, new ListItem("Tamaño", "0"));
 
-                // DDL Deliveries
+                // DDL Entregas
                 dt1 = new DataTable();
                 dt1 = Extras.ToDataTable(context.lista_entregas_tipos.OrderBy(e => e.Nombre).ToList());
                 ddlTipoEntrega1.DataSource = dt1;
@@ -99,6 +99,7 @@ namespace Cartelux1
                 ddlTipoEntrega1.DataValueField = "Codigo";
                 ddlTipoEntrega1.DataBind();
                 ddlTipoEntrega1.Items.Insert(0, new ListItem("Tipo de entrega", "0"));
+
             }
         }
 

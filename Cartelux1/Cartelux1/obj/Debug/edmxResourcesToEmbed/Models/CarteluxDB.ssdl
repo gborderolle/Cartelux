@@ -55,6 +55,15 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <Property Name="Codigo" Type="int" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="100" />
   </EntityType>
+  <EntityType Name="lista_pedido_estados">
+    <Key>
+      <PropertyRef Name="Pedido_Estado_ID" />
+    </Key>
+    <Property Name="Pedido_Estado_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+  </EntityType>
   <EntityType Name="lista_pedido_materiales">
     <Key>
       <PropertyRef Name="Pedido_Material_ID" />
@@ -136,6 +145,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <Property Name="Pedido_Diseno_ID" Type="int" Nullable="false" />
     <Property Name="Pedido_Entrega_ID" Type="int" Nullable="false" />
     <Property Name="Cantidad" Type="int" Nullable="false" />
+    <Property Name="Pedido_Estado_ID" Type="int" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -162,6 +172,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <EntitySet Name="formularios" EntityType="Self.formularios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_departamentos" EntityType="Self.lista_departamentos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_entregas_tipos" EntityType="Self.lista_entregas_tipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_pedido_estados" EntityType="Self.lista_pedido_estados" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_pedido_materiales" EntityType="Self.lista_pedido_materiales" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_pedido_tamanos" EntityType="Self.lista_pedido_tamanos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_pedido_tematicas" EntityType="Self.lista_pedido_tematicas" Schema="dbo" store:Type="Tables" />

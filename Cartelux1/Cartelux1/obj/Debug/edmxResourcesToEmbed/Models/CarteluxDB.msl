@@ -45,6 +45,7 @@
     <EntitySetMapping Name="pedidos">
       <EntityTypeMapping TypeName="carteluxdb1Model.pedidos">
         <MappingFragment StoreEntitySet="pedidos">
+          <ScalarProperty Name="Pedido_Estado_ID" ColumnName="Pedido_Estado_ID" />
           <ScalarProperty Name="Pedido_ID" ColumnName="Pedido_ID" />
           <ScalarProperty Name="Formulario_ID" ColumnName="Formulario_ID" />
           <ScalarProperty Name="Pedido_Tipo_ID" ColumnName="Pedido_Tipo_ID" />
@@ -166,6 +167,16 @@
           <ScalarProperty Name="Departamento_Tipo_ID" ColumnName="Departamento_Tipo_ID" />
           <ScalarProperty Name="Entrega_Tipo_ID" ColumnName="Entrega_Tipo_ID" />
           <ScalarProperty Name="Pedido_Entrega_ID" ColumnName="Pedido_Entrega_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lista_pedido_estados">
+      <EntityTypeMapping TypeName="carteluxdb1Model.lista_pedido_estados">
+        <MappingFragment StoreEntitySet="lista_pedido_estados">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Pedido_Estado_ID" ColumnName="Pedido_Estado_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

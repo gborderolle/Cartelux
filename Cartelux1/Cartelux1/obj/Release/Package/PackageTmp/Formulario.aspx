@@ -3,6 +3,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
     <!-- STYLES EXTENSION -->
     <link rel="stylesheet" href="/Content/css/jquery-ui.css" />
+    <link rel="stylesheet" href="/Content/css/jquery.bootstrap-touchspin.css" />
 
     <!-- PAGE CSS -->
     <link rel="stylesheet" href="/Content/css/pages/formulario.css" />
@@ -15,6 +16,21 @@
             $(".dropdown").selectmenu();
             $("#txbFecha").datepicker({ dateFormat: 'dd-mm-yy' });
             google.maps.event.addDomListener(window, 'load', initialize);
+
+            // SOURCE: https://www.jqueryscript.net/demo/Touch-Friendly-jQuery-Input-Spinner-Plugin-For-Bootstrap-3-TouchSpin/
+            $("#txtRepeat").TouchSpin({
+                min: 1,
+                max: 10,
+                stepinterval: 1,
+                maxboostedstep: 10
+            });
+
+            $("#txtRepeat").on('change', function () {
+                var txtRepeat = $("#txtRepeat").val();
+                TAB_COUNT = txtRepeat;
+                $("#hdnPedidoCantidad").val(txtRepeat);
+            });
+
         });
 
         function clientGoogleMaps() {
@@ -78,6 +94,10 @@
         hr {
             margin-top: 10px;
             margin-bottom: 10px;
+        }
+
+        li {
+            font-size: x-large;
         }
 
         .ddlBorder {
@@ -182,48 +202,39 @@
     <script type="text/javascript" src="/Content/js/pages/auxiliar_functions.js"></script>
     <script type="text/javascript" src="/Content/js/pages/formulario.js"></script>
 
+    <!-- JS -->
+    <script type="text/javascript" src="/Content/js/jquery.bootstrap-touchspin.js"></script>
+
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="col-sm-12 col-md-12" style="padding: 0;">
         <div class="box-header with-border dark in div-form1 col-sm-12 col-md-4" style="display: inline-block;">
             <div class="row" style="margin: auto; display: block; text-align: center; margin-bottom: 0;">
-                <%--<h2 class="pull-left" style="color: #ea7209;"><a href="#" id="btnEdit" class="pull-left btn " onclick="editFields()" style="position: absolute; left: 0; margin-left: 20px;">
-                    <i class="fa fa-pencil fa-2x"></i>
-                </a>
-                </h2>--%>
                 <div class="loginTitleContainer"></div>
             </div>
-            <div class="form-check" style="position: absolute; right: 10px; display: none;">
-                <input id="chbRepetidos" class="form-check-input" type="checkbox" onclick="checkbox_repetidos()">
-                <label class="form-check-label" for="chbRepetidos">
-                    Repetidos
-                </label>
+            <div class="form-check pull-right" style="margin: 20px;">
             </div>
             <br />
 
             <div id="tabPedidos">
 
-                <div style="position: relative; right: 0; margin-right: 15px; float: right;">
-                    <div class="row-special unselectable" id="repetidos_group" style="display: none;">
-                        <p style="margin: 0; float: left;">Cantidad iguales:</p>
-                        <label class="_label11" id="lblTabCount" style="margin: 0; font-size: xx-large; float: right;">1</label>
-                        <br>
-                        <a class="btn btn-sm btn-info" onclick="removeCartel();">-</a>
-                        <a class="btn btn-sm btn-info" onclick="addCartel();">+</a>
-                    </div>
-                </div>
-
-
                 <div class="panel with-nav-tabs panel-danger">
-                    <div class="panel-heading" style="padding-bottom: 0;">
+                    <div class="panel-heading" style="padding-bottom: 0; display: -webkit-box;">
 
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#tabsPedidos_1" id="aTabsPedidos_1" data-toggle="tab">Pedido</a></li>
                             <li class="" style="display: none;"><a href="#tabsPedidos_2" id="aTabsPedidos_2" data-toggle="tab">Cartelux</a></li>
                         </ul>
-
+                        <input id="chbRepetidos" class="form-check-input form-control pull-right" type="checkbox" onclick="checkbox_repetidos()" style="width: 40px; position: absolute; right: 30px;">
                     </div>
-                    <div class="panel-body">
+
+                    <div style="margin: 20px;">
+                        <div class="row-special unselectable" id="repetidos_group" style="display: none;">
+                            <input id="txtRepeat" type="text" value="0" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="panel-body" style="padding-top: 0;">
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="tabsPedidos_1">
 
@@ -244,9 +255,9 @@
 
                                             <%--<asp:DropDownList ID="ddlTipoCartel" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />--%>
 
-                                            <asp:DropDownList ID="ddlTamano1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />
+                                            <asp:DropDownList ID="ddlTamano1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required form-control" />
                                             <label style="font-weight: normal;">¿Tiene bosquejo o ejemplo?</label>
-                                            <asp:CheckBox ID="chbBosquejo" runat="server" ClientIDMode="Static" CssClass="txbEditable" Enabled="false" TextAlign="Left"/>
+                                            <asp:CheckBox ID="chbBosquejo" runat="server" ClientIDMode="Static" CssClass="txbEditable" Enabled="false" TextAlign="Left" />
                                             <a id="aCollapse_bosquejo" data-toggle="collapse" href="#div_bosquejo" class="collapsed">Cargar aquí</a>
                                             <div id="div_bosquejo" class="col-xs-12 col-sm-12 col-md-12 panel-collapse collapse in" aria-expanded="false">
                                                 <div class="form-group unselectable">
@@ -313,8 +324,6 @@
 
                                             <br />
                                             <div class="form-group unselectable">
-                                                <%--<button class="form-control btn btn-danger btnConfirm" type="button" runat="server" id="btnConfirmar" onserverclick="btnConfirmar_ServerClick" onclick="return pre_confirm();">GUARDAR</button>--%>
-                                                <%--onserverclick="btnConfirmar_ServerClick"--%>
                                                 <asp:Button runat="server" CssClass="form-control btn btn-danger btnConfirm1" ID="btnConfirmar1" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm();" ClientIDMode="Static" Text="GUARDAR" />
                                             </div>
 
@@ -376,12 +385,8 @@
 
                             </div>
 
-
-
                         </div>
                     </div>
-
-
 
                 </div>
             </div>

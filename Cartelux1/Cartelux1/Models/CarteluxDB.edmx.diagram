@@ -19,6 +19,7 @@
         <EntityTypeShape EntityType="carteluxdb1Model.lista_pedido_tematicas" Width="1.5" PointX="9.75" PointY="9.75" />
         <EntityTypeShape EntityType="carteluxdb1Model.lista_pedido_tipos" Width="1.5" PointX="11.75" PointY="0.75" />
         <EntityTypeShape EntityType="carteluxdb1Model.pedido_entregas" Width="1.5" PointX="5.375" PointY="9.75" />
+        <EntityTypeShape EntityType="carteluxdb1Model.lista_pedido_estados" Width="1.5" PointX="0.75" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

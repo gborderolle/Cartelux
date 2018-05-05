@@ -128,7 +128,7 @@ function load_calendar() {
                     date.getMonth() + ' - ' +
                     date.getDate());
 
-        if (data != null) {
+        if (data !== null) {
             alert(data.message + '\n' + date);
         }
     }
@@ -185,7 +185,7 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value) {
                     $("#gridFormularios").empty();
 
                     if (response.d.length > 0) {
-                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>T/Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>T/Cartel</th> <th scope='col'>Impr/Pint</th> <th scope='col'>Zona</th> <th scope='col'>¿Bosquejo?</th> <th scope='col'>GMaps</th> <th scope='col'>Form</th> <th scope='col'>WhatsApp</th></tr></thead><tbody>");
+                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>T/Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>T/Cartel</th> <th scope='col'>Impr/Pint</th> <th scope='col'>Cant</th> <th scope='col'>Zona</th> <th scope='col'>¿Bosquejo?</th> <th scope='col'>GMaps</th> <th scope='col'>Form</th> <th scope='col'>WPP</th> <th scope='col'>OPC</th> </tr></thead><tbody>");
                         for (var i = 0; i < response.d.length; i++) {
                             var goToURL = "<a id='btnURL' role='button' href='" + response.d[i].URL_short + "' class='btn btn-warning glyphicon fa fa-wpforms' title='' target='_blank'></a>";
 
@@ -198,29 +198,56 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value) {
                                 tel = tel.substring(1);
                             }
 
+                            // Tipo de entregas:
+                            // 0: Colocación
+                            // 1: Entrega
+                            // 2: Envío al interior
+                            // 3: Retiro taller
+
+                            // Estados de pedidos:
+                            // 0: Vigente
+                            // 1: Concluído
+                            // 2: Cancelado
+                            // 3: Eliminado
+
+                            var text_color = "style='color:#333'";
+                            var estadoNro = check_nullValues(response.d[i].EstadoNro);
+                            if (estadoNro !== 0) {
+                                text_color = "style='color:red'";
+                            }
+
+                            var lblTipoCodigo = check_nullValues(response.d[i].lblTipoCodigo);
+                            if (lblTipoCodigo !== null || lblTipoCodigo !== "") {
+                                if (lblTipoCodigo === 3 || lblTipoCodigo === 4) {
+                                    goToGMaps = "<a id='btnGMaps' role='button' href='#' class='btn btn-warning fa fa-map disabled' title='' disabled='disabled' aria-disabled='true'></a>";
+                                }
+                            }
+
                             var url = "https://api.whatsapp.com/send?phone=598" + tel;
                             //url += "&text=" + hashMessages["Msj_inicioCliente"];
 
-                            var goToWPP = "<a id='btnURL' role='button' href='" + url + "' class='btn btn-warning btn-xs fa fa-whatsapp fa-2x' title='' target='_blank'></a>";
+                            var goToWPP = "<a id='btnWPP' role='button' href='" + url + "' class='btn btn-warning btn-xs fa fa-whatsapp fa-2x' title='' target='_blank'></a>";
+                            var goToOPC = "<a id='btnOPC' role='button' href='#' class='btn btn-info btn-xs fa fa-asterisk fa-2x' title=''></a>";
                             var date = moment(response.d[i].lblFechaEntrega, "DD-MM-YYYY").format("DD-MM-YYYY");
 
-                            $("#gridFormularios").append("<tr><td class='hiddencol hiddencol_real'>" +
-                            check_nullValues(response.d[i].Formulario_ID) + "</td> <td class='hiddencol hiddencol_real'>" +
-                            check_nullValues(response.d[i].URL_short) + "</td> <td class='td-very_short'>" +
-                            check_nullValues(response.d[i].lblNumber) + "</td> <td class='td-very_short'>" +
-                            check_nullValues(date) + "</td> <td class='td-very_short'>" +
-                            check_nullValues(response.d[i].lblTelefono) + "</td> <td class='td-very_short'>" +
-                            check_nullValues(response.d[i].lblNombre) + "</td> <td class='td-very_short'>" +
-                            check_nullValues(response.d[i].lblTipoEntrega) + "</td> <td class='td-very_short'>" +
-                            check_nullValues(response.d[i].lblTamano) + "</td> <td class='td-very_short'>" +
-                            check_nullValues(response.d[i].lblTipo) + "</td> <td class='td-very_short'>" +
-                            check_nullValues(response.d[i].lblMaterial) + "</td> <td class='td-very_short'>" +
-                            check_nullValues(response.d[i].lblZona) + "</td><td class='td-short'>" +
+                            $("#gridFormularios").append("<tr><td class='hiddencol hiddencol_real' " + text_color + ">" +
+                            check_nullValues(response.d[i].Formulario_ID) + "</td> <td class='hiddencol hiddencol_real' " + text_color + ">" +
+                            check_nullValues(response.d[i].URL_short) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblNumero) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(date) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblTelefono) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblNombre) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblTipoEntrega) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblTamano) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblTipo) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblMaterial) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblCantidad) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblZona) + "</td><td class='td-short' " + text_color + ">" +
                             check_nullValues(convertBool(response.d[i].chbTieneBosquejo)) + "</td><td class='td-short'>" +
-                            //check_nullValues(response.d[i].URL_short) + "</td><td class='td-very_short'>" +
                             goToGMaps + "</td><td class='td-very_short'>" +
                             goToURL + "</td><td class='td-very_short'>" +
-                            goToWPP + "</td></tr>");
+                            goToWPP + "</td><td class='td-very_short'>" +
+                            goToOPC + "</td></tr>");
 
                             create_calendar_events(response.d[i]);
 

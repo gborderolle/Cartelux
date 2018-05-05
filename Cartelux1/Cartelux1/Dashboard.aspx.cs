@@ -113,6 +113,12 @@ namespace Cartelux1
                                 lbl1.Text = e.Row.RowIndex.ToString();
                             }
 
+                            lbl1 = e.Row.FindControl("lblCantidad") as Label;
+                            if (lbl1 != null)
+                            {
+                                lbl1.Text = _pedido.Cantidad.ToString();
+                            }
+
                             lbl1 = e.Row.FindControl("lblFechaEntrega") as Label;
                             if (lbl1 != null)
                             {
@@ -502,7 +508,7 @@ namespace Cartelux1
                 {
                     using (CarteluxDB context = new CarteluxDB())
                     {
-                        // If is future month
+                        // Si es mes futuro
                         if (year_int >= DateTime.Now.Year && month_int > DateTime.Now.Month)
                         {
                             soloVigentes_value = false;
@@ -527,6 +533,15 @@ namespace Cartelux1
                                 _GridFormularios _GridFormulario1 = new Cartelux1.Dashboard._GridFormularios();
                                 _GridFormulario1.Formulario_ID = _formulario.Formulario_ID.ToString();
                                 _GridFormulario1.URL_short = _formulario.URL_short;
+                                _GridFormulario1.EstadoNro = 0;
+
+                                /*
+                                 * Estados de pedidos:
+                                 * 0: Vigente
+                                 * 1: Concluído
+                                 * 2: Cancelado
+                                 * 3: Eliminado
+                                 * */
 
                                 clientes _cliente = (clientes)context.clientes.FirstOrDefault(c => c.Cliente_ID == _formulario.Cliente_ID);
                                 pedidos _pedido = (pedidos)context.pedidos.FirstOrDefault(c => c.Formulario_ID == _formulario.Formulario_ID);
@@ -534,8 +549,9 @@ namespace Cartelux1
                                 {
                                     _GridFormulario1.lblTelefono = _cliente.Telefono;
                                     _GridFormulario1.lblNombre = _cliente.Nombre;
-                                    _GridFormulario1.lblNumber = number.ToString();
-
+                                    _GridFormulario1.lblNumero = number.ToString();
+                                    
+                                    #region Pedido Entrega ---------------------------------------------------------------------------------------------------------
                                     pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(c => c.Pedido_Entrega_ID == _pedido.Pedido_Entrega_ID);
                                     if (_pedido_entrega != null)
                                     {
@@ -549,41 +565,57 @@ namespace Cartelux1
                                         }
                                         _GridFormulario1.URL_gmaps = value;
 
+                                        if (_pedido_entrega.Fecha_entrega.Value.Month < DateTime.Now.Month || 
+                                            (_pedido_entrega.Fecha_entrega.Value.Month == DateTime.Now.Month && _pedido_entrega.Fecha_entrega.Value.Day < DateTime.Now.Day))
+                                        {
+                                            _GridFormulario1.EstadoNro = 1; // Concluídos
+                                        }
+
                                         lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Codigo == _pedido_entrega.Entrega_Tipo_ID);
                                         if (_lista_entregas_tipo != null)
                                         {
                                             _GridFormulario1.lblTipoEntrega = _lista_entregas_tipo.Nombre;
+                                            _GridFormulario1.lblTipoCodigo = _lista_entregas_tipo.Codigo.ToString();
 
                                             if (soloJuanchy_value && (_lista_entregas_tipo.Codigo != 1 && _lista_entregas_tipo.Codigo != 2))
                                             {
                                                 continue;
                                             }
                                         }
-                                    } // End pedido entrega
+                                    }
+                                    #endregion END Pedido Entrega
 
+                                    #region Pedido Diseño ---------------------------------------------------------------------------------------------------------
                                     pedido_disenos _pedido_diseno = (pedido_disenos)context.pedido_disenos.FirstOrDefault(c => c.Pedido_Diseno_ID == _pedido.Pedido_Diseno_ID);
                                     if (_pedido_diseno != null)
                                     {
                                         _GridFormulario1.chbTieneBosquejo = string.IsNullOrWhiteSpace(_pedido_diseno.Boceto_nombre) ? false : true;
-                                    } // End pedido diseño
+                                    }
+                                    #endregion END Pedido Diseño
 
+                                    #region Pedido Tamaño ---------------------------------------------------------------------------------------------------------
                                     lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Tamano_ID);
                                     if (_lista_pedido_tamano != null)
                                     {
                                         _GridFormulario1.lblTamano = _lista_pedido_tamano.Nombre;
                                     }
+                                    #endregion END Pedido Tamaño
 
+                                    #region Pedido TipoTipo ---------------------------------------------------------------------------------------------------------
                                     lista_pedido_tipos _lista_pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Tipo_ID);
                                     if (_lista_pedido_tipo != null)
                                     {
                                         _GridFormulario1.lblTipo = _lista_pedido_tipo.Nombre;
                                     }
+                                    #endregion END Pedido Tipo
 
+                                    #region Pedido Material ---------------------------------------------------------------------------------------------------------
                                     lista_pedido_materiales _lista_pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Material_ID);
                                     if (_lista_pedido_material != null)
                                     {
                                         _GridFormulario1.lblMaterial = _lista_pedido_material.Nombre;
                                     }
+                                    #endregion END Pedido Material
 
                                 }
                                 _GridFormularios_list.Add(_GridFormulario1);
@@ -598,19 +630,22 @@ namespace Cartelux1
 
         public class _GridFormularios
         {
-            public string lblNumber { get; set; }
+            public string lblNumero { get; set; }
             public string lblTelefono { get; set; }
             public string lblNombre { get; set; }
             public string lblFechaEntrega { get; set; }
             public string lblTipoEntrega { get; set; }
+            public string lblTipoCodigo { get; set; }
             public string lblTamano { get; set; }
             public string lblTipo { get; set; }
             public string lblMaterial { get; set; }
+            public int lblCantidad { get; set; }
             public string lblZona { get; set; }
             public string Formulario_ID { get; set; }
             public string URL_short { get; set; }
             public string URL_gmaps { get; set; }
             public bool chbTieneBosquejo { get; set; }
+            public int EstadoNro { get; set; }
         }
 
         #endregion

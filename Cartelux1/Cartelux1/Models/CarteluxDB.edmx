@@ -60,6 +60,15 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Codigo" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="lista_pedido_estados">
+          <Key>
+            <PropertyRef Name="Pedido_Estado_ID" />
+          </Key>
+          <Property Name="Pedido_Estado_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Codigo" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="lista_pedido_materiales">
           <Key>
             <PropertyRef Name="Pedido_Material_ID" />
@@ -141,6 +150,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Pedido_Diseno_ID" Type="int" Nullable="false" />
           <Property Name="Pedido_Entrega_ID" Type="int" Nullable="false" />
           <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Pedido_Estado_ID" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -167,6 +177,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <EntitySet Name="formularios" EntityType="Self.formularios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_departamentos" EntityType="Self.lista_departamentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_entregas_tipos" EntityType="Self.lista_entregas_tipos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lista_pedido_estados" EntityType="Self.lista_pedido_estados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_pedido_materiales" EntityType="Self.lista_pedido_materiales" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_pedido_tamanos" EntityType="Self.lista_pedido_tamanos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_pedido_tematicas" EntityType="Self.lista_pedido_tematicas" Schema="dbo" store:Type="Tables" />
@@ -238,6 +249,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Pedido_Diseno_ID" Type="Int32" Nullable="false" />
           <Property Name="Pedido_Entrega_ID" Type="Int32" Nullable="false" />
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Pedido_Estado_ID" Type="Int32" />
         </EntityType>
         <EntityType Name="usuarios">
           <Key>
@@ -264,6 +276,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <EntitySet Name="lista_pedido_tematicas" EntityType="carteluxdb1Model.lista_pedido_tematicas" />
           <EntitySet Name="lista_pedido_tipos" EntityType="carteluxdb1Model.lista_pedido_tipos" />
           <EntitySet Name="pedido_entregas" EntityType="carteluxdb1Model.pedido_entregas" />
+          <EntitySet Name="lista_pedido_estados" EntityType="carteluxdb1Model.lista_pedido_estados" />
         </EntityContainer>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -358,6 +371,15 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Direccion_esquina" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="lista_pedido_estados">
+          <Key>
+            <PropertyRef Name="Pedido_Estado_ID" />
+          </Key>
+          <Property Name="Pedido_Estado_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -408,6 +430,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <EntitySetMapping Name="pedidos">
             <EntityTypeMapping TypeName="carteluxdb1Model.pedidos">
               <MappingFragment StoreEntitySet="pedidos">
+                <ScalarProperty Name="Pedido_Estado_ID" ColumnName="Pedido_Estado_ID" />
                 <ScalarProperty Name="Pedido_ID" ColumnName="Pedido_ID" />
                 <ScalarProperty Name="Formulario_ID" ColumnName="Formulario_ID" />
                 <ScalarProperty Name="Pedido_Tipo_ID" ColumnName="Pedido_Tipo_ID" />
@@ -529,6 +552,16 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
                 <ScalarProperty Name="Departamento_Tipo_ID" ColumnName="Departamento_Tipo_ID" />
                 <ScalarProperty Name="Entrega_Tipo_ID" ColumnName="Entrega_Tipo_ID" />
                 <ScalarProperty Name="Pedido_Entrega_ID" ColumnName="Pedido_Entrega_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lista_pedido_estados">
+            <EntityTypeMapping TypeName="carteluxdb1Model.lista_pedido_estados">
+              <MappingFragment StoreEntitySet="lista_pedido_estados">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Pedido_Estado_ID" ColumnName="Pedido_Estado_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

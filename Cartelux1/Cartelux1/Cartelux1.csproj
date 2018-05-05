@@ -311,6 +311,7 @@
     <Content Include="Content\css\jquery-ui.structure.css" />
     <Content Include="Content\css\jquery-ui.structure.min.css" />
     <Content Include="Content\css\jquery-ui.theme.min.css" />
+    <Content Include="Content\css\jquery.bootstrap-touchspin.css" />
     <Content Include="Content\css\jquery.modal.css" />
     <Content Include="Content\css\jquery.qtip.min.css" />
     <Content Include="Content\css\Modal_styles.css" />
@@ -351,6 +352,7 @@
     <Content Include="Content\js\clipboard.min.js" />
     <Content Include="Content\js\glDatePicker.min.js" />
     <Content Include="Content\js\jquery-ui.js" />
+    <Content Include="Content\js\jquery.bootstrap-touchspin.js" />
     <Content Include="Content\js\jquery.filtertable.min.js" />
     <Content Include="Content\js\jquery.js" />
     <Content Include="Content\js\jquery.modal.js" />
@@ -697,6 +699,9 @@
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\lista_entregas_tipos.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lista_pedido_estados.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\lista_pedido_materiales.cs">
