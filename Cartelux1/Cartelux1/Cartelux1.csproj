@@ -323,6 +323,7 @@
     <Content Include="Content\css\pages\generadorP.css" />
     <Content Include="Content\css\pages\login-styles.css" />
     <Content Include="Content\css\pages\login.css" />
+    <Content Include="Content\css\popbox.css" />
     <Content Include="Content\css\responsive-grid.css" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
@@ -367,6 +368,7 @@
     <Content Include="Content\js\pages\generador.js" />
     <Content Include="Content\js\pages\generadorP.js" />
     <Content Include="Content\js\pages\login.js" />
+    <Content Include="Content\js\popbox.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Dashboard.aspx" />
     <Content Include="ErrorPage.aspx" />

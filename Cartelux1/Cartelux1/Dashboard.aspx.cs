@@ -541,6 +541,7 @@ namespace Cartelux1
                                  * 1: Concluído
                                  * 2: Cancelado
                                  * 3: Eliminado
+                                 * 4: Diseño OK, pronto para imprimir
                                  * */
 
                                 clientes _cliente = (clientes)context.clientes.FirstOrDefault(c => c.Cliente_ID == _formulario.Cliente_ID);
@@ -550,7 +551,13 @@ namespace Cartelux1
                                     _GridFormulario1.lblTelefono = _cliente.Telefono;
                                     _GridFormulario1.lblNombre = _cliente.Nombre;
                                     _GridFormulario1.lblNumero = number.ToString();
-                                    
+
+                                    lista_pedido_estados _pedidoEstado = (lista_pedido_estados)context.lista_pedido_estados.FirstOrDefault(c => c.Pedido_Estado_ID == _pedido.Pedido_Estado_ID);
+                                    if (_pedidoEstado != null)
+                                    {
+                                        _GridFormulario1.EstadoNro = _pedidoEstado.Codigo; 
+                                    }
+
                                     #region Pedido Entrega ---------------------------------------------------------------------------------------------------------
                                     pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(c => c.Pedido_Entrega_ID == _pedido.Pedido_Entrega_ID);
                                     if (_pedido_entrega != null)
@@ -565,7 +572,7 @@ namespace Cartelux1
                                         }
                                         _GridFormulario1.URL_gmaps = value;
 
-                                        if (_pedido_entrega.Fecha_entrega.Value.Month < DateTime.Now.Month || 
+                                        if (_pedido_entrega.Fecha_entrega.Value.Month < DateTime.Now.Month ||
                                             (_pedido_entrega.Fecha_entrega.Value.Month == DateTime.Now.Month && _pedido_entrega.Fecha_entrega.Value.Day < DateTime.Now.Day))
                                         {
                                             _GridFormulario1.EstadoNro = 1; // Concluídos
@@ -648,6 +655,50 @@ namespace Cartelux1
             public int EstadoNro { get; set; }
         }
 
+
+        [WebMethod]
+        public static bool PedidosUpdateState(int actionID, string formID)
+        {
+            bool ret = false;
+            if (!string.IsNullOrWhiteSpace(formID))
+            {
+                // Logger variables
+                System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
+                System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+                string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+                string methodName = stackFrame.GetMethod().Name;
+
+                using (CarteluxDB context = new CarteluxDB())
+                {
+                    int formID_int = 0;
+                    if (!int.TryParse(formID, out formID_int))
+                    {
+                        formID_int = 0;
+                        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, formID);
+                    }
+                    if (formID_int > 0)
+                    {
+                        pedidos _pedido = (pedidos)context.pedidos.FirstOrDefault(v => v.Formulario_ID.Equals(formID_int));
+                        if (_pedido != null)
+                        {
+                            lista_pedido_estados _pedidoEstado = (lista_pedido_estados)context.lista_pedido_estados.FirstOrDefault(v => v.Codigo.Equals(actionID));
+                            if (_pedidoEstado != null)
+                            {
+                                //Logs.AddUserLog("(%s) (%s) -- Info WebMethod. Parametros recibidos: " + tapeID.ToString() + ", " + isExtra.ToString(), className, methodName);
+                                //Logs.AddUserLog("Acceso al sistema", obj.GetType().Name + ": " + obj.GetType().Name + ": " + obj.Viaje_ID, userID1, username);
+
+                                int estadoID = _pedidoEstado.Pedido_Estado_ID;
+                                _pedido.Pedido_Estado_ID = estadoID;
+                                ret = true;
+
+                                context.SaveChanges();
+                            }
+                        }
+                    }
+                }
+            }
+            return ret;
+        }
         #endregion
     }
 }

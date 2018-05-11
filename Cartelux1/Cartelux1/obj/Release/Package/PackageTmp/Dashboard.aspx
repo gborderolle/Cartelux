@@ -9,20 +9,49 @@
     <link rel="stylesheet" href="/Content/css/glDatePicker.darkneon.css" />
     <link rel="stylesheet" href="/Content/css/glDatePicker.default.css" />
     <link rel="stylesheet" href="/Content/css/glDatePicker.flatwhite.css" />
-
     <link rel="stylesheet" href="/Content/css/optionalStyling.css" />
-    <%--<link rel="stylesheet" href="/Content/css/bootstrap-combined.min.css" />--%>
     <link rel="stylesheet" href="/Content/css/bic_calendar.css" />
+    <link rel="stylesheet" href="/Content/css/popbox.css" />
 
     <!-- PAGE CSS -->
     <link rel="stylesheet" href="/Content/css/pages/dashboard.css" />
     <link rel="stylesheet" href="/Content/css/Modal_styles.css" />
-    <%--<link rel="stylesheet" href="/Content/css/responsive-grid.css" />--%>
 
     <!-- Bootstrap table -->
     <link rel="stylesheet" href="/Content/css/bootstrap-table.css" />
 
     <style type="text/css">
+
+        .ui-dialog-titlebar {
+            background-color: rgba(255, 119, 0, 0.78);
+        }
+
+        .ui-dialog-title {
+            color: whitesmoke;
+        }
+
+        .ui-dialog-buttonset > button {
+            background-color: rgb(254, 224, 134);
+        }
+
+        .ui-selectmenu-button {
+            margin-bottom: 10px;
+            width: 100% !important;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: black;
+            z-index: 99;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+            -moz-opacity: 0.8;
+            min-height: 100%;
+            width: 100%;
+        }
+
         .filter-table .quick {
             margin-left: 0.5em;
             font-size: 0.8em;
@@ -94,8 +123,8 @@
     <script type="text/javascript" src="/Content/js/moment.js"></script>
     <script type="text/javascript" src="/Content/js/jquery.filtertable.min.js"></script>
     <script type="text/javascript" src="/Content/js/glDatePicker.min.js"></script>
-
     <script type="text/javascript" src="/Content/js/bic_calendar.js"></script>
+    <script type="text/javascript" src="/Content/js/popbox.js"></script>
 
     <!-- Bootstrap table -->
     <script type="text/javascript" src="/Content/js/bootstrap-table.js"></script>
@@ -184,7 +213,7 @@
                             <li><a href="#tabsFormularios_2" class="tabsFormularios">Calendario</a></li>
                         </ul>
 
-                        <!-- Tab Viajes BEGIN -->
+                        <!-- Tab Formularios BEGIN -->
                         <div id="tabsFormularios_1" style="padding: 6px;">
                             <asp:UpdatePanel ID="upFormularios" runat="server">
                                 <ContentTemplate>
@@ -285,7 +314,7 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                 <asp:TemplateField HeaderText="Cant">
+                                                <asp:TemplateField HeaderText="Cant">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblCantidad" runat="server" CommandName="View" />
                                                     </ItemTemplate>
@@ -395,8 +424,42 @@
     </div>
 
 
-    <div id="dialog" title="Mensaje Cartelux" style="height: 0 !important;">
+    <div id="dialog" title="Mensaje Cartelux">
         <p style="text-align: left;"></p>
+    </div>
+
+    <div id="simplePopbox" class='popbox'></div>
+    <div id="divPopbox" class='popbox-box popbox'>
+        <div class='arrow' style="left: 250px;"></div>
+        <div class='arrow-border' style="left: 250px;"></div>
+        <div class="row row-short" style="padding: 10px;">
+            <label id="lbl_options_header" class="label" style="font-size: 100%; color: rgba(68, 89, 156, 1); font-size: 16px;">Borrar elemento seleccionado</label>
+        </div>
+        <div class="form-group">
+            <div class="row row-short" style="padding: 10px;">
+
+                <div id="lbl_options_divBox" class="alert alert-warning" role="alert">
+                    <span id="lbl_options_color" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                    <span id="lbl_options_info">Está a punto de borrar el elemento, confirme su contraseña para continuar</span>
+                </div>
+                <%--<input id="lbl_options_password" type="password" class="form-control" placeholder="Contraseña" name="login-username" required="required" />--%>
+                <!--  -->
+            </div>
+            <div id="popbox_footer" class="row row-short" style="margin-right: 15px; margin-top: -7px;">
+                <button id="lbl_options_button1" type="button" class="btn btn-success btnAcciones" title="Concluído">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </button>
+                <button id="lbl_options_button2" type="button" class="btn btn-primary btnAcciones" title="Diseño OK">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </button>
+                <button id="lbl_options_button3" type="button" class="btn btn-danger btnAcciones" title="Cancelado">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </button>
+                <button id="lbl_options_button4" type="button" class="btn btn-default btnAcciones" title="Inicial">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
     </div>
 
     <asp:HiddenField ID="hdn_FormularioID" runat="server" ClientIDMode="Static" />

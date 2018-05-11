@@ -359,7 +359,6 @@ function get_refresh() {
     console.log("Ajax call 1: GeneradorURL.aspx/CheckFormStatus_1. Params:");
     console.log("Params: txbContactPhone - " + txbContactPhone);
 
-    // Check existen mercaderías
     $.ajax({
         type: "POST",
         url: "GeneradorURL.aspx/CheckFormStatus_1",

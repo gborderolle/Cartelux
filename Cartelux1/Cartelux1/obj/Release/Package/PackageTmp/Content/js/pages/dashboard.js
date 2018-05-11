@@ -205,15 +205,44 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value) {
                             // 3: Retiro taller
 
                             // Estados de pedidos:
-                            // 0: Vigente
-                            // 1: Concluído
-                            // 2: Cancelado
-                            // 3: Eliminado
+                            // 0: Vigente - gris
+                            // 1: Concluído - verde
+                            // 2: Cancelado - rojo
+                            // 3: Eliminado - rojo
+                            // 4: Diseño OK, pronto para imprimir - azul
 
-                            var text_color = "style='color:#333'";
+                            var text_color = "style='color:#333;'";
                             var estadoNro = check_nullValues(response.d[i].EstadoNro);
-                            if (estadoNro !== 0) {
-                                text_color = "style='color:red'";
+                            if (estadoNro === "") {
+                                text_color = "style='color:green;'";
+                            } else {
+                                switch (estadoNro) {
+                                    case 0:
+                                        {
+                                            text_color = "style='color:#333;'";
+                                            break;
+                                        }
+                                    case 1:
+                                        {
+                                            text_color = "style='color:green;'";
+                                            break;
+                                        }
+                                    case 2:
+                                        {
+                                            text_color = "style='color:red;'";
+                                            break;
+                                        }
+                                    case 3:
+                                        {
+                                            text_color = "style='color:red;'";
+                                            break;
+                                        }
+                                    case 4:
+                                        {
+                                            text_color = "style='color:blue;'";
+                                            break;
+                                        }
+                                }
                             }
 
                             var lblTipoCodigo = check_nullValues(response.d[i].lblTipoCodigo);
@@ -227,16 +256,24 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value) {
                             //url += "&text=" + hashMessages["Msj_inicioCliente"];
 
                             var goToWPP = "<a id='btnWPP' role='button' href='" + url + "' class='btn btn-warning btn-xs fa fa-whatsapp fa-2x' title='' target='_blank'></a>";
-                            var goToOPC = "<a id='btnOPC' role='button' href='#' class='btn btn-info btn-xs fa fa-asterisk fa-2x' title=''></a>";
+
+                            var btnOPC_id = "btnOPC_" + formID;
+                            var formID = check_nullValues(response.d[i].Formulario_ID);
+                            var nombre = check_nullValues(response.d[i].lblNombre);
+                            console.log("goToOPC values");
+                            console.log(formID);
+                            console.log(nombre);
+                            console.log(tel);
+                            var goToOPC = "<a id=\"" + btnOPC_id + "\" role='button' href='#' class='btn btn-info btn-xs fa fa-asterisk fa-2x' onclick='return showActionMenu(\"" + formID + "\", \"" + tel + "\", \"" + nombre + "\", \"" + btnOPC_id + "\")'></a>";
                             var date = moment(response.d[i].lblFechaEntrega, "DD-MM-YYYY").format("DD-MM-YYYY");
 
                             $("#gridFormularios").append("<tr><td class='hiddencol hiddencol_real' " + text_color + ">" +
-                            check_nullValues(response.d[i].Formulario_ID) + "</td> <td class='hiddencol hiddencol_real' " + text_color + ">" +
+                            formID + "</td> <td class='hiddencol hiddencol_real' " + text_color + ">" +
                             check_nullValues(response.d[i].URL_short) + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(response.d[i].lblNumero) + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(date) + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(response.d[i].lblTelefono) + "</td> <td class='td-very_short' " + text_color + ">" +
-                            check_nullValues(response.d[i].lblNombre) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            nombre + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(response.d[i].lblTipoEntrega) + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(response.d[i].lblTamano) + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(response.d[i].lblTipo) + "</td> <td class='td-very_short' " + text_color + ">" +
@@ -519,3 +556,94 @@ function GetMonthFilter() {
     }
 }
 
+function showActionMenu(formID, tel, nombre, btnID) {
+    var divPopbox = $("#divPopbox");
+    var btnID = $("#" + btnID);
+    if (divPopbox !== null && divPopbox !== undefined && btnID !== null && btnID !== undefined) {
+
+        var new_w = parseInt(divPopbox.css("width"), 10);
+        var new_h = parseInt(divPopbox.css("height"), 10);
+
+        var prom_w = (Math.abs(new_w)) / 2;
+        var prom_h = (Math.abs(new_h)) / 2;
+
+        divPopbox.offset({ top: btnID.offset().top });
+        divPopbox.offset({ left: btnID.offset().left - new_w });
+
+        //divPopbox.position(btnID.position());
+
+        $("#lbl_options_header").text("Formulario: " + nombre);
+        $("#lbl_options_info").text("Seleccione una acción");
+        $("#divPopbox").show("highlight", 700);
+
+        // Estados de pedidos:
+        // 0: Vigente - gris
+        // 1: Concluído - verde
+        // 2: Cancelado - rojo
+        // 3: Eliminado - rojo
+        // 4: Diseño OK, pronto para imprimir - azul
+
+        // Cargar acciones
+        var lbl_options_button1 = $("#lbl_options_button1");
+        var lbl_options_button2 = $("#lbl_options_button2");
+        var lbl_options_button3 = $("#lbl_options_button3");
+        var lbl_options_button4 = $("#lbl_options_button4");
+        if (lbl_options_button1 !== null && lbl_options_button1 !== undefined && 
+        lbl_options_button2 !== null && lbl_options_button2 !== undefined && 
+        lbl_options_button3 !== null && lbl_options_button3 !== undefined &&
+        lbl_options_button4 !== null && lbl_options_button4 !== undefined) {
+            var onclick_1 = "doAction(1, \"" + formID + "\")";
+            var onclick_2 = "doAction(4, \"" + formID + "\")";
+            var onclick_3 = "doAction(2, \"" + formID + "\")";
+            var onclick_4 = "doAction(0, \"" + formID + "\")";
+            lbl_options_button1.attr('onclick', onclick_1);
+            lbl_options_button2.attr('onclick', onclick_2);
+            lbl_options_button3.attr('onclick', onclick_3);
+            lbl_options_button4.attr('onclick', onclick_4);
+        }
+    }
+}
+
+function doAction(actionID, formID) {
+    
+    // Ajax call parameters
+    console.log("Ajax call 1: Dashboard.aspx/PedidosUpdateState. Params:");
+    console.log("actionID, type: " + type(actionID) + ", value: " + actionID);
+    console.log("formID, type: " + type(formID) + ", value: " + formID);
+    console.log("End Ajax call");
+
+    $.ajax({
+        type: "POST",
+        url: "Dashboard.aspx/PedidosUpdateState",
+        data: '{actionID: "' + actionID + '",formID: "' + formID + '"}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            var resultado = response.d;
+            if (resultado !== null && resultado) {
+                $(".popbox-box.popbox").hide();
+                showMessage(hashMessages["ConfirmacionCambios"]);
+                //setTimeout(location.reload(), 5000);
+                CX_Message_AutoClose();
+            } else {
+                alert("Error interno.");
+            }
+        }
+    }); // Ajax
+
+}
+
+function CX_Message_AutoClose() {
+    $("button.ui-widget").attr("onclick", "location.reload()");
+}
+
+function showMessage(value) {
+    $("#dialog p").text(value);
+    $("#dialog").dialog({
+        buttons: {
+            "Cerrar": function () {
+                $(this).dialog("close");
+            }
+        }
+    });
+}
