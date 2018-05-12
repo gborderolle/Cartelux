@@ -211,13 +211,13 @@ namespace Cartelux1 {
         protected global::System.Web.UI.WebControls.FileUpload FileUpload1_tab2;
         
         /// <summary>
-        /// TextBox1 control.
+        /// txbTexto1_tab2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox txbTexto1_tab2;
         
         /// <summary>
         /// ddlTipoEntrega1_tab2 control.
@@ -283,40 +283,40 @@ namespace Cartelux1 {
         protected global::System.Web.UI.HtmlControls.HtmlInputText Text6;
         
         /// <summary>
-        /// Text7 control.
+        /// txbDireccion_tab2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Text7;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txbDireccion_tab2;
         
         /// <summary>
-        /// Button1 control.
+        /// btnConfirmar1_tab2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button btnConfirmar1_tab2;
         
         /// <summary>
-        /// H1 control.
+        /// msj_result_tab2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl H1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl msj_result_tab2;
         
         /// <summary>
-        /// Label1 control.
+        /// lblLastUpdate_tab2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblLastUpdate_tab2;
         
         /// <summary>
         /// hdnCurrentLocationURL control.

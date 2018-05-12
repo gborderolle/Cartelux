@@ -251,7 +251,7 @@
                                                 <input class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" required runat="server" id="txbNombre" clientidmode="static" autofocus />
                                             </div>
                                             <hr />
-                                            <label class="_label1 unselectable">2) Datos del cartel</label>
+                                            <label class="_label1 unselectable">2) Datos del Pasacalle</label>
                                             <br />
 
                                             <%--<asp:DropDownList ID="ddlTipoCartel" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />--%>
@@ -301,7 +301,7 @@
 
                                             <div class="form-group" id="dir_groupX" style="display: none;">
                                                 Dirección escrita
-                                                <input class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" tabindex="5" runat="server" id="txbDireccion" clientidmode="static" />
+                                                <input id="txbDireccion" class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" tabindex="5" runat="server" clientidmode="static" />
                                                 <hr />
                                             </div>
 
@@ -325,7 +325,7 @@
 
                                             <br />
                                             <div class="form-group unselectable">
-                                                <asp:Button runat="server" CssClass="form-control btn btn-danger btnConfirm1" ID="btnConfirmar1" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm();" ClientIDMode="Static" Text="GUARDAR" />
+                                                <asp:Button ID="btnConfirmar1" runat="server" CssClass="form-control btn btn-danger btnConfirm1" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm();" ClientIDMode="Static" Text="GUARDAR" />
                                             </div>
 
                                         </div>
@@ -396,13 +396,13 @@
                                                 <input class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" required runat="server" id="Text1" clientidmode="static" autofocus />
                                             </div>
                                             <hr />
-                                            <label class="_label1 unselectable">2) Datos del cartel</label>
+                                            <label class="_label1 unselectable">2) Datos del Roll up</label>
                                             <br />
 
                                             <%--<asp:DropDownList ID="ddlTipoCartel" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />--%>
 
                                             <asp:DropDownList ID="ddlTamano1_tab2" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required form-control" />
-                                            <label style="font-weight: normal;">¿Tiene bosquejo o ejemplo?</label>
+                                            <label style="font-weight: normal;">¿Tiene el diseño?</label>
                                             <asp:CheckBox ID="CheckBox1" runat="server" ClientIDMode="Static" CssClass="txbEditable" Enabled="false" TextAlign="Left" />
                                             <a id="aCollapse_bosquejo_tab2" data-toggle="collapse" href="#div_bosquejo" class="collapsed">Cargar aquí</a>
                                             <div id="div_bosquejo_tab2" class="col-xs-12 col-sm-12 col-md-12 panel-collapse collapse in" aria-expanded="false">
@@ -416,7 +416,7 @@
                                             <br />
                                             <br />
                                             <div class="form-group unselectable" style="display:none;">
-                                                <asp:TextBox runat="server" ID="TextBox1" TextMode="multiline" CssClass="form-control txbEditable multitext" placeholder="Indicaciones del diseño (opcional)" TabIndex="3"></asp:TextBox>
+                                                <asp:TextBox runat="server" ID="txbTexto1_tab2" TextMode="multiline" CssClass="form-control txbEditable multitext" placeholder="Indicaciones del diseño (opcional)" TabIndex="3"></asp:TextBox>
                                             </div>
 
                                             <hr />
@@ -446,11 +446,11 @@
 
                                             <div class="form-group" id="dir_groupX_tab2" style="display: none;">
                                                 Dirección escrita
-                                                <input class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" tabindex="5" runat="server" id="Text7" clientidmode="static" />
+                                                <input id="txbDireccion_tab2" class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" tabindex="5" runat="server" clientidmode="static" />
                                                 <hr />
                                             </div>
 
-                                            <div class="form-group unselectable" style="display: none;">
+                                            <%--<div class="form-group unselectable" style="display: none;">
 
                                                 <style>
                                                     #map-canvas {
@@ -466,22 +466,22 @@
                                                     <p id="mapSearch_msg" style="font-size: small; color: red;">Asegúrese que la ubicación en el mapa sea la correcta por favor</p>
                                                 </div>
 
-                                            </div>
+                                            </div>--%>
 
                                             <br />
                                             <div class="form-group unselectable">
-                                                <asp:Button runat="server" CssClass="form-control btn btn-danger btnConfirm1" ID="Button1" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm();" ClientIDMode="Static" Text="GUARDAR" />
+                                                <asp:Button ID="btnConfirmar1_tab2" runat="server" CssClass="form-control btn btn-danger btnConfirm1" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm();" ClientIDMode="Static" Text="GUARDAR" />
                                             </div>
 
                                         </div>
                                         <div class="row">
-                                            <h4 id="H1" runat="server" style="margin: auto; display: none;"><span class="label label-success">Los datos se guardaron correctamente</span></h4>
+                                            <h4 id="msj_result_tab2" runat="server" style="margin: auto; display: none;"><span class="label label-success">Los datos se guardaron correctamente</span></h4>
                                         </div>
                                         <hr />
                                         <div style="font-size: small" class="unselectable">
                                             <div class="row" style="margin-left: 0; margin-right: 0;">
                                                 <span>Última actualización del pedido:</span>
-                                                <label id="Label1" runat="server">-</label>
+                                                <label id="lblLastUpdate_tab2" runat="server">-</label>
                                             </div>
                                             <div class="row" style="margin-left: 0; margin-right: 0;">
                                                 <%--<img src="/Content/img/Dropbox_logo.png" class="img-responsive" alt="Cartelux" style="width: 5%;" />--%>

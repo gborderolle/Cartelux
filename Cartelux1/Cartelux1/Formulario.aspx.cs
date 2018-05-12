@@ -75,12 +75,6 @@ namespace Cartelux1
             {
                 // DDL Types
                 DataTable dt1 = new DataTable();
-                //dt1 = Extras.ToDataTable(context.lista_pedido_tipos.OrderBy(e => e.Nombre).ToList());
-                //ddlTipoCartel.DataSource = dt1;
-                //ddlTipoCartel.DataTextField = "Nombre";
-                //ddlTipoCartel.DataValueField = "Codigo";
-                //ddlTipoCartel.DataBind();
-                //ddlTipoCartel.Items.Insert(0, new ListItem("Tipo de producto", "0"));
 
                 // DDL Tamaños
                 dt1 = new DataTable();
@@ -182,8 +176,6 @@ namespace Cartelux1
                                 pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(v => v.Pedido_Entrega_ID.Equals(_pedido.Pedido_Entrega_ID));
                                 if (_pedido_entrega != null)
                                 {
-                                    txbCX_dir.Value = _pedido_entrega.Direccion_calle;
-
                                     txbDireccion_calle.Value = _pedido_entrega.Direccion_calle;
                                     txbDireccion_numero.Value = _pedido_entrega.Direccion_numero;
                                     txbDireccion_apto.Value = _pedido_entrega.Direccion_apto;
