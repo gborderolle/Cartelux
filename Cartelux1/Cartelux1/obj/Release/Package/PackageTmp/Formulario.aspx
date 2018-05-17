@@ -11,11 +11,29 @@
     <script type="text/javascript">
 
         TAB_COUNT = 1;
+        IS_TAB_1 = 1;
 
         $(function () {
             $(".dropdown").selectmenu();
             $("#txbFecha").datepicker({ dateFormat: 'dd-mm-yy' });
+            $("#txbFecha_tab2").datepicker({ dateFormat: 'dd-mm-yy' });
             google.maps.event.addDomListener(window, 'load', initialize);
+
+            //$("#aTabsPedidos_1").tabs({
+            //    click: function (event, ui) {
+            //        alert("1!");
+            //        IS_TAB_1 = 1;
+            //        $("#hdnIS_TAB_PASACALLE").val("1");
+            //    }
+            //});
+
+            //$("#aTabsPedidos_2").tabs({
+            //    click: function (event, ui) {
+            //        alert("2!");
+            //        IS_TAB_1 = 0;
+            //        $("#hdnIS_TAB_PASACALLE").val("0");
+            //    }
+            //});
 
             // SOURCE: https://www.jqueryscript.net/demo/Touch-Friendly-jQuery-Input-Spinner-Plugin-For-Bootstrap-3-TouchSpin/
             $("#txtRepeat").TouchSpin({
@@ -222,8 +240,9 @@
                     <div class="panel-heading" style="padding-bottom: 0; display: -webkit-box;">
 
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tabsPedidos_1" id="aTabsPedidos_1" data-toggle="tab">Pedido</a></li>
-                            <li class="" style="display: none;"><a href="#tabsPedidos_2" id="aTabsPedidos_2" data-toggle="tab">Cartelux</a></li>
+                            <li class="active"><a href="#tabsPedidos_1" id="aTabsPedidos_1" data-toggle="tab">Pasacalle</a></li>
+                            <li class=""><a href="#tabsPedidos_2" id="aTabsPedidos_2" data-toggle="tab">Roll up</a></li>
+                            <%--<li class=""><a href="#tabsPedidos_2" id="aTabsPedidos_2" data-toggle="tab">Cartelux</a></li>--%>
                         </ul>
                         <input id="chbRepetidos" class="form-check-input form-control pull-right" type="checkbox" onclick="checkbox_repetidos()" style="width: 40px; position: absolute; right: 30px;">
                     </div>
@@ -244,13 +263,13 @@
                                         <div class="login-container sub-form">
                                             <label class="_label1 unselectable">1) Ingrese sus datos</label>
                                             <div class="form-group unselectable">
-                                                <input class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" required runat="server" id="txbTel" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
+                                                <input id="txbTelefono" class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" required runat="server" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
                                             </div>
                                             <div class="form-group unselectable">
-                                                <input class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" required runat="server" id="txbNombre" clientidmode="static" autofocus />
+                                                <input id="txbNombre" class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" required runat="server" clientidmode="static" autofocus />
                                             </div>
                                             <hr />
-                                            <label class="_label1 unselectable">2) Datos del cartel</label>
+                                            <label class="_label1 unselectable">2) Datos del Pasacalle</label>
                                             <br />
 
                                             <%--<asp:DropDownList ID="ddlTipoCartel" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />--%>
@@ -269,7 +288,7 @@
 
                                             <br />
                                             <br />
-                                            <div class="form-group unselectable">
+                                            <div class="form-group unselectable" style="display:none;">
                                                 <asp:TextBox runat="server" ID="txbTexto1" TextMode="multiline" CssClass="form-control txbEditable multitext" placeholder="Indicaciones del diseño (opcional)" TabIndex="3"></asp:TextBox>
                                             </div>
 
@@ -280,10 +299,10 @@
                                             <asp:DropDownList ID="ddlTipoEntrega1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required ddlBorder"></asp:DropDownList>
 
                                             <div class="form-group unselectable">
-                                                <input class="form-control txbEditable ctrl-required" placeholder="Ciudad de envío" type="text" tabindex="6" runat="server" id="txbCiudad" clientidmode="static" />
+                                                <input id="txbCiudad" class="form-control txbEditable ctrl-required" placeholder="Ciudad de envío" type="text" tabindex="6" runat="server" clientidmode="static" />
                                             </div>
                                             <div class="form-group unselectable">
-                                                <input type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" id="txbFecha" tabindex="7" runat="server" clientidmode="static" />
+                                                <input id="txbFecha" type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" tabindex="7" runat="server" clientidmode="static" />
                                             </div>
                                             <hr />
 
@@ -300,7 +319,7 @@
 
                                             <div class="form-group" id="dir_groupX" style="display: none;">
                                                 Dirección escrita
-                                                <input class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" tabindex="5" runat="server" id="txbDireccion" clientidmode="static" />
+                                                <input id="txbDireccion" class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" tabindex="5" runat="server" clientidmode="static" />
                                                 <hr />
                                             </div>
 
@@ -324,7 +343,7 @@
 
                                             <br />
                                             <div class="form-group unselectable">
-                                                <asp:Button runat="server" CssClass="form-control btn btn-danger btnConfirm1" ID="btnConfirmar1" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm();" ClientIDMode="Static" Text="GUARDAR" />
+                                                <asp:Button ID="btnConfirmar1" runat="server" CssClass="form-control btn btn-danger btnConfirm1" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm_tab1();" ClientIDMode="Static" Text="GUARDAR" />
                                             </div>
 
                                         </div>
@@ -350,7 +369,7 @@
 
                             <div class="tab-pane fade in" id="tabsPedidos_2">
 
-                                <div class="row" style="margin: auto; display: inline-flex; width: 100%;">
+                                <%--<div class="row" style="margin: auto; display: inline-flex; width: 100%;">
                                     <div class="col-sm-12 col-md-12" style="margin: auto; padding: 0;">
                                         <div class="login-container sub-form">
                                             <label class="_label1 unselectable">Contacto cliente</label>
@@ -381,6 +400,114 @@
 
                                         </div>
                                     </div>
+                                </div>--%>
+
+                                <div class="row" style="margin: auto; display: inline-flex; width: 100%;">
+
+                                    <div class="col-sm-12 col-md-12" style="margin: auto; padding: 0;">
+                                        <div class="login-container sub-form">
+                                            <label class="_label1 unselectable">1) Ingrese sus datos</label>
+                                            <div class="form-group unselectable">
+                                                <input id="txbTelefono_tab2" class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" runat="server" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
+                                            </div>
+                                            <div class="form-group unselectable">
+                                                <input id="txbNombre_tab2" class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" runat="server" clientidmode="static" />
+                                            </div>
+                                            <hr />
+                                            <label class="_label1 unselectable">2) Datos del Roll up</label>
+                                            <br />
+
+                                            <%--<asp:DropDownList ID="ddlTipoCartel" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />--%>
+
+                                            <asp:DropDownList ID="ddlTamano1_tab2" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required form-control" />
+                                            <label style="font-weight: normal;">¿Tiene el diseño?</label>
+                                            <asp:CheckBox ID="CheckBox1" runat="server" ClientIDMode="Static" CssClass="txbEditable" Enabled="false" TextAlign="Left" />
+                                            <a id="aCollapse_bosquejo_tab2" data-toggle="collapse" href="#div_bosquejo" class="collapsed">Cargar aquí</a>
+                                            <div id="div_bosquejo_tab2" class="col-xs-12 col-sm-12 col-md-12 panel-collapse collapse in" aria-expanded="false">
+                                                <div class="form-group unselectable">
+                                                    <p style="font-size: small;">Si lo desea cargue un bosquejo hecho a mano del diseño deseado aquí</p>
+                                                    <asp:FileUpload ID="FileUpload1_tab2" runat="server" accept="image/*" />
+                                                </div>
+                                                <hr />
+                                            </div>
+
+                                            <br />
+                                            <br />
+                                            <div class="form-group unselectable" style="display:none;">
+                                                <asp:TextBox runat="server" ID="txbTexto1_tab2" TextMode="multiline" CssClass="form-control txbEditable multitext" placeholder="Indicaciones del diseño (opcional)" TabIndex="3"></asp:TextBox>
+                                            </div>
+
+                                            <hr />
+                                            <label class="_label1 unselectable">3) Datos de la entrega</label>
+                                            <br />
+
+                                            <asp:DropDownList ID="ddlTipoEntrega1_tab2" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required ddlBorder"></asp:DropDownList>
+
+                                            <div class="form-group unselectable">
+                                                <input id="txbCiudad_tab2" class="form-control txbEditable ctrl-required" placeholder="Ciudad de envío" type="text" tabindex="6" runat="server" clientidmode="static" />
+                                            </div>
+                                            <div class="form-group unselectable">
+                                                <input id="txbFecha_tab2" type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" tabindex="7" runat="server" clientidmode="static" />
+                                            </div>
+                                            <hr />
+
+                                            <div class="form-group" id="dir_group_tab2" style="display: none;">
+                                                <div class="form-group row" style="margin-left: 0; margin-right: 0;">
+                                                    <input class="form-control txbEditable ctrl-required pull-left" placeholder="Calle" type="text" tabindex="5" runat="server" id="Text4" clientidmode="static" style="width: 45%;" />
+                                                    <input class="form-control txbEditable pull-right" placeholder="Número de puerta" type="number" tabindex="5" runat="server" id="Number2" clientidmode="static" style="width: 45%;" />
+                                                </div>
+                                                <div class="form-group row" style="margin-left: 0; margin-right: 0;">
+                                                    <input class="form-control txbEditable pull-left" placeholder="Apto" type="text" tabindex="5" runat="server" id="Text5" clientidmode="static" style="width: 45%;" />
+                                                    <input class="form-control txbEditable pull-right" placeholder="Esquina" type="text" tabindex="5" runat="server" id="Text6" clientidmode="static" style="width: 45%;" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group" id="dir_groupX_tab2" style="display: none;">
+                                                Dirección escrita
+                                                <input id="txbDireccion_tab2" class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" tabindex="5" runat="server" clientidmode="static" />
+                                                <hr />
+                                            </div>
+
+                                            <%--<div class="form-group unselectable" style="display: none;">
+
+                                                <style>
+                                                    #map-canvas {
+                                                        width: 400px;
+                                                        height: 400px;
+                                                    }
+                                                </style>
+
+                                                <div class="form-group" id="map_group_tab2">
+                                                    Dirección en el Mapa
+                                                    <input type="text" id="mapSearch_tab2" class="form-control ctrl-required" placeholder="Dirección de entrega" />
+                                                    <div id="map-canvas_tab2" style="margin: auto; width: 100%;"></div>
+                                                    <p id="mapSearch_msg_tab2" style="font-size: small; color: red;">Asegúrese que la ubicación en el mapa sea la correcta por favor</p>
+                                                </div>
+
+                                            </div>--%>
+
+                                            <br />
+                                            <div class="form-group unselectable">
+                                                <asp:Button ID="btnConfirmar1_tab2" runat="server" CssClass="form-control btn btn-danger btnConfirm1" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm_tab2();" ClientIDMode="Static" Text="GUARDAR" />
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <h4 id="msj_result_tab2" runat="server" style="margin: auto; display: none;"><span class="label label-success">Los datos se guardaron correctamente</span></h4>
+                                        </div>
+                                        <hr />
+                                        <div style="font-size: small" class="unselectable">
+                                            <div class="row" style="margin-left: 0; margin-right: 0;">
+                                                <span>Última actualización del pedido:</span>
+                                                <label id="lblLastUpdate_tab2" runat="server">-</label>
+                                            </div>
+                                            <div class="row" style="margin-left: 0; margin-right: 0;">
+                                                <%--<img src="/Content/img/Dropbox_logo.png" class="img-responsive" alt="Cartelux" style="width: 5%;" />--%>
+                                                <a href="https://goo.gl/as2weV" title="" target="_blank">Click aquí para ver el álbum de fotos</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                             </div>
@@ -407,4 +534,5 @@
     <asp:HiddenField ID="hdnCurrentLAT" runat="server" ClientIDMode="Static" Value="0" />
     <asp:HiddenField ID="hdnCurrentLNG" runat="server" ClientIDMode="Static" Value="0" />
     <asp:HiddenField ID="hdnPedidoCantidad" runat="server" ClientIDMode="Static" Value="1" />
+    <asp:HiddenField ID="hdnIS_TAB_PASACALLE" runat="server" ClientIDMode="Static" Value="1" />
 </asp:Content>

@@ -13,13 +13,13 @@ namespace Cartelux1 {
     public partial class Formulario {
         
         /// <summary>
-        /// txbTel control.
+        /// txbTelefono control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txbTel;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txbTelefono;
         
         /// <summary>
         /// txbNombre control.
@@ -166,22 +166,22 @@ namespace Cartelux1 {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblLastUpdate;
         
         /// <summary>
-        /// Number1 control.
+        /// txbTelefono_tab2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Number1;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txbTelefono_tab2;
         
         /// <summary>
-        /// Text1 control.
+        /// txbNombre_tab2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Text1;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txbNombre_tab2;
         
         /// <summary>
         /// ddlTamano1_tab2 control.
@@ -353,5 +353,14 @@ namespace Cartelux1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnPedidoCantidad;
+        
+        /// <summary>
+        /// hdnIS_TAB_PASACALLE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnIS_TAB_PASACALLE;
     }
 }

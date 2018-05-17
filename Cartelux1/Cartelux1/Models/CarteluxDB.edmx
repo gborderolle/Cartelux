@@ -59,6 +59,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Codigo" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Agrupacion" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="lista_pedido_estados">
           <Key>
@@ -77,6 +78,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Codigo" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Agrupacion" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="lista_pedido_tamanos">
           <Key>
@@ -86,6 +88,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Codigo" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Agrupacion" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="lista_pedido_tematicas">
           <Key>
@@ -313,6 +316,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Codigo" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Agrupacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="lista_pedido_materiales">
           <Key>
@@ -322,6 +326,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Codigo" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Agrupacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="lista_pedido_tamanos">
           <Key>
@@ -331,6 +336,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Codigo" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Agrupacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="lista_pedido_tematicas">
           <Key>
@@ -486,6 +492,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <EntitySetMapping Name="lista_entregas_tipos">
             <EntityTypeMapping TypeName="carteluxdb1Model.lista_entregas_tipos">
               <MappingFragment StoreEntitySet="lista_entregas_tipos">
+                <ScalarProperty Name="Agrupacion" ColumnName="Agrupacion" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -496,6 +503,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <EntitySetMapping Name="lista_pedido_materiales">
             <EntityTypeMapping TypeName="carteluxdb1Model.lista_pedido_materiales">
               <MappingFragment StoreEntitySet="lista_pedido_materiales">
+                <ScalarProperty Name="Agrupacion" ColumnName="Agrupacion" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -506,6 +514,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <EntitySetMapping Name="lista_pedido_tamanos">
             <EntityTypeMapping TypeName="carteluxdb1Model.lista_pedido_tamanos">
               <MappingFragment StoreEntitySet="lista_pedido_tamanos">
+                <ScalarProperty Name="Agrupacion" ColumnName="Agrupacion" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />

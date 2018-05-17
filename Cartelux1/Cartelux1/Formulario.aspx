@@ -11,11 +11,29 @@
     <script type="text/javascript">
 
         TAB_COUNT = 1;
+        IS_TAB_1 = 1;
 
         $(function () {
             $(".dropdown").selectmenu();
             $("#txbFecha").datepicker({ dateFormat: 'dd-mm-yy' });
+            $("#txbFecha_tab2").datepicker({ dateFormat: 'dd-mm-yy' });
             google.maps.event.addDomListener(window, 'load', initialize);
+
+            //$("#aTabsPedidos_1").tabs({
+            //    click: function (event, ui) {
+            //        alert("1!");
+            //        IS_TAB_1 = 1;
+            //        $("#hdnIS_TAB_PASACALLE").val("1");
+            //    }
+            //});
+
+            //$("#aTabsPedidos_2").tabs({
+            //    click: function (event, ui) {
+            //        alert("2!");
+            //        IS_TAB_1 = 0;
+            //        $("#hdnIS_TAB_PASACALLE").val("0");
+            //    }
+            //});
 
             // SOURCE: https://www.jqueryscript.net/demo/Touch-Friendly-jQuery-Input-Spinner-Plugin-For-Bootstrap-3-TouchSpin/
             $("#txtRepeat").TouchSpin({
@@ -245,10 +263,10 @@
                                         <div class="login-container sub-form">
                                             <label class="_label1 unselectable">1) Ingrese sus datos</label>
                                             <div class="form-group unselectable">
-                                                <input class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" required runat="server" id="txbTel" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
+                                                <input id="txbTelefono" class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" required runat="server" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
                                             </div>
                                             <div class="form-group unselectable">
-                                                <input class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" required runat="server" id="txbNombre" clientidmode="static" autofocus />
+                                                <input id="txbNombre" class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" required runat="server" clientidmode="static" autofocus />
                                             </div>
                                             <hr />
                                             <label class="_label1 unselectable">2) Datos del Pasacalle</label>
@@ -325,7 +343,7 @@
 
                                             <br />
                                             <div class="form-group unselectable">
-                                                <asp:Button ID="btnConfirmar1" runat="server" CssClass="form-control btn btn-danger btnConfirm1" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm();" ClientIDMode="Static" Text="GUARDAR" />
+                                                <asp:Button ID="btnConfirmar1" runat="server" CssClass="form-control btn btn-danger btnConfirm1" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm_tab1();" ClientIDMode="Static" Text="GUARDAR" />
                                             </div>
 
                                         </div>
@@ -390,10 +408,10 @@
                                         <div class="login-container sub-form">
                                             <label class="_label1 unselectable">1) Ingrese sus datos</label>
                                             <div class="form-group unselectable">
-                                                <input class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" required runat="server" id="Number1" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
+                                                <input id="txbTelefono_tab2" class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" runat="server" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
                                             </div>
                                             <div class="form-group unselectable">
-                                                <input class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" required runat="server" id="Text1" clientidmode="static" autofocus />
+                                                <input id="txbNombre_tab2" class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" runat="server" clientidmode="static" />
                                             </div>
                                             <hr />
                                             <label class="_label1 unselectable">2) Datos del Roll up</label>
@@ -429,7 +447,7 @@
                                                 <input id="txbCiudad_tab2" class="form-control txbEditable ctrl-required" placeholder="Ciudad de envío" type="text" tabindex="6" runat="server" clientidmode="static" />
                                             </div>
                                             <div class="form-group unselectable">
-                                                <input type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" id="txbFecha_tab2" tabindex="7" runat="server" clientidmode="static" />
+                                                <input id="txbFecha_tab2" type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" tabindex="7" runat="server" clientidmode="static" />
                                             </div>
                                             <hr />
 
@@ -459,18 +477,18 @@
                                                     }
                                                 </style>
 
-                                                <div class="form-group" id="map_group">
+                                                <div class="form-group" id="map_group_tab2">
                                                     Dirección en el Mapa
-                                                    <input type="text" id="mapSearch" class="form-control ctrl-required" placeholder="Dirección de entrega" />
-                                                    <div id="map-canvas" style="margin: auto; width: 100%;"></div>
-                                                    <p id="mapSearch_msg" style="font-size: small; color: red;">Asegúrese que la ubicación en el mapa sea la correcta por favor</p>
+                                                    <input type="text" id="mapSearch_tab2" class="form-control ctrl-required" placeholder="Dirección de entrega" />
+                                                    <div id="map-canvas_tab2" style="margin: auto; width: 100%;"></div>
+                                                    <p id="mapSearch_msg_tab2" style="font-size: small; color: red;">Asegúrese que la ubicación en el mapa sea la correcta por favor</p>
                                                 </div>
 
                                             </div>--%>
 
                                             <br />
                                             <div class="form-group unselectable">
-                                                <asp:Button ID="btnConfirmar1_tab2" runat="server" CssClass="form-control btn btn-danger btnConfirm1" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm();" ClientIDMode="Static" Text="GUARDAR" />
+                                                <asp:Button ID="btnConfirmar1_tab2" runat="server" CssClass="form-control btn btn-danger btnConfirm1" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm_tab2();" ClientIDMode="Static" Text="GUARDAR" />
                                             </div>
 
                                         </div>
@@ -516,4 +534,5 @@
     <asp:HiddenField ID="hdnCurrentLAT" runat="server" ClientIDMode="Static" Value="0" />
     <asp:HiddenField ID="hdnCurrentLNG" runat="server" ClientIDMode="Static" Value="0" />
     <asp:HiddenField ID="hdnPedidoCantidad" runat="server" ClientIDMode="Static" Value="1" />
+    <asp:HiddenField ID="hdnIS_TAB_PASACALLE" runat="server" ClientIDMode="Static" Value="1" />
 </asp:Content>

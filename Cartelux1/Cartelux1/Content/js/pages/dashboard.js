@@ -103,6 +103,14 @@ function bindEvents() {
 
     month_onClickEvent();
     //load_calendar();
+
+    $(".close").click(function () {
+        $(this).closest(".popbox").hide();
+    })
+}
+
+function closeAll_popups() {
+    //$(".popbox").hide();
 }
 
 function load_calendar() {
@@ -185,17 +193,20 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value) {
                     $("#gridFormularios").empty();
 
                     if (response.d.length > 0) {
-                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>T/Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>T/Cartel</th> <th scope='col'>Impr/Pint</th> <th scope='col'>Cant</th> <th scope='col'>Zona</th> <th scope='col'>¿Bosquejo?</th> <th scope='col'>GMaps</th> <th scope='col'>Form</th> <th scope='col'>WPP</th> <th scope='col'>OPC</th> </tr></thead><tbody>");
+                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>T/Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>T/Cartel</th> <th scope='col'>Impr/Pint</th> <th scope='col'>Cant</th> <th scope='col'>Zona</th> <th scope='col'>¿Bosquejo?</th> <th scope='col'>CTO</th> <th scope='col'>OPC</th> </tr></thead><tbody>"); //<th scope='col'>GMaps</th> <th scope='col'>Form</th> <th scope='col'>WPP</th>
                         for (var i = 0; i < response.d.length; i++) {
-                            var goToURL = "<a id='btnURL' role='button' href='" + response.d[i].URL_short + "' class='btn btn-warning glyphicon fa fa-wpforms' title='' target='_blank'></a>";
 
-                            var goToGMaps = "<a id='btnGMaps' role='button' href='" + response.d[i].URL_gmaps + "' class='btn btn-warning fa fa-map' title='' target='_blank'></a>";
+                            //var goToURL = "<a id='btnURL' role='button' href='" + response.d[i].URL_short + "' class='btn btn-warning glyphicon fa fa-wpforms' title='' target='_blank'></a>";
+                            var goToURL = response.d[i].URL_short;
 
-                            var tel = response.d[i].lblTelefono;
+                            //var goToGMaps = "<a id='btnGMaps' role='button' href='" + response.d[i].URL_gmaps + "' class='btn btn-warning fa fa-map' title='' target='_blank'></a>";
+                            var goToGMaps = response.d[i].URL_gmaps;
+
+                            var telefono = response.d[i].lblTelefono;
                             // Si el número empieza con 0 lo borra
-                            var first = tel.charAt(0);
+                            var first = telefono.charAt(0);
                             if (first === "0") {
-                                tel = tel.substring(1);
+                                telefono = telefono.substring(1);
                             }
 
                             // Tipo de entregas:
@@ -248,23 +259,37 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value) {
                             var lblTipoCodigo = check_nullValues(response.d[i].lblTipoCodigo);
                             if (lblTipoCodigo !== null || lblTipoCodigo !== "") {
                                 if (lblTipoCodigo === 3 || lblTipoCodigo === 4) {
-                                    goToGMaps = "<a id='btnGMaps' role='button' href='#' class='btn btn-warning fa fa-map disabled' title='' disabled='disabled' aria-disabled='true'></a>";
+                                    //goToGMaps = "<a id='btnGMaps' role='button' href='#' class='btn btn-warning fa fa-map disabled' title='' disabled='disabled' aria-disabled='true'></a>";
                                 }
                             }
 
-                            var url = "https://api.whatsapp.com/send?phone=598" + tel;
+                            var url = "https://api.whatsapp.com/send?phone=598" + telefono;
                             //url += "&text=" + hashMessages["Msj_inicioCliente"];
 
-                            var goToWPP = "<a id='btnWPP' role='button' href='" + url + "' class='btn btn-warning btn-xs fa fa-whatsapp fa-2x' title='' target='_blank'></a>";
+                            //var goToWPP = "<a id='btnWPP' role='button' href='" + url + "' class='btn btn-warning btn-xs fa fa-whatsapp fa-2x' title='' target='_blank'></a>";
+                            var goToWPP = url;
 
-                            var btnOPC_id = "btnOPC_" + formID;
                             var formID = check_nullValues(response.d[i].Formulario_ID);
                             var nombre = check_nullValues(response.d[i].lblNombre);
+
+                            // Botón OPC - Opciones
+                            var btnOPC_id = "btnOPC_" + formID;
                             console.log("goToOPC values");
                             console.log(formID);
                             console.log(nombre);
-                            console.log(tel);
-                            var goToOPC = "<a id=\"" + btnOPC_id + "\" role='button' href='#' class='btn btn-info btn-xs fa fa-asterisk fa-2x' onclick='return showActionMenu(\"" + formID + "\", \"" + tel + "\", \"" + nombre + "\", \"" + btnOPC_id + "\")'></a>";
+                            console.log(telefono);
+                            var goToOPC = "<a id=\"" + btnOPC_id + "\" role='button' href='#' class='btn btn-info btn-xs fa fa-asterisk fa-2x' onclick='return showActionMenu_OPC(\"" + formID + "\", \"" + telefono + "\", \"" + nombre + "\", \"" + btnOPC_id + "\")'></a>";
+                            // ----------------------
+
+                            // Botón CTO - Contacto
+                            var btnCTO_id = "btnCTO_" + formID;
+                            console.log("goToCTO values");
+                            console.log(goToURL);
+                            console.log(goToGMaps);
+                            console.log(goToWPP);
+                            var goToCTO = "<a id=\"" + btnCTO_id + "\" role='button' href='#' class='btn btn-warning btn-xs fa fa-address-card fa-2x' onclick='return showActionMenu_CTO(\"" + formID + "\", \"" + nombre + "\", \"" + goToURL + "\", \"" + goToGMaps + "\", \"" + goToWPP + "\", \"" + btnCTO_id + "\")'></a>";
+                            // ----------------------
+
                             var date = moment(response.d[i].lblFechaEntrega, "DD-MM-YYYY").format("DD-MM-YYYY");
 
                             $("#gridFormularios").append("<tr><td class='hiddencol hiddencol_real' " + text_color + ">" +
@@ -281,9 +306,10 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value) {
                             check_nullValues(response.d[i].lblCantidad) + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(response.d[i].lblZona) + "</td><td class='td-short' " + text_color + ">" +
                             check_nullValues(convertBool(response.d[i].chbTieneBosquejo)) + "</td><td class='td-short'>" +
-                            goToGMaps + "</td><td class='td-very_short'>" +
-                            goToURL + "</td><td class='td-very_short'>" +
-                            goToWPP + "</td><td class='td-very_short'>" +
+                            //goToGMaps + "</td><td class='td-very_short'>" +
+                            //goToURL + "</td><td class='td-very_short'>" +
+                            //goToWPP + "</td><td class='td-very_short'>" +
+                            goToCTO + "</td><td class='td-very_short'>" +
                             goToOPC + "</td></tr>");
 
                             create_calendar_events(response.d[i]);
@@ -556,25 +582,27 @@ function GetMonthFilter() {
     }
 }
 
-function showActionMenu(formID, tel, nombre, btnID) {
-    var divPopbox = $("#divPopbox");
+function showActionMenu_OPC(formID, tel, nombre, btnID) {
+    closeAll_popups();
+
+    var divPopbox = $("#divPopbox_OPC");
     var btnID = $("#" + btnID);
     if (divPopbox !== null && divPopbox !== undefined && btnID !== null && btnID !== undefined) {
 
         var new_w = parseInt(divPopbox.css("width"), 10);
         var new_h = parseInt(divPopbox.css("height"), 10);
 
-        var prom_w = (Math.abs(new_w)) / 2;
-        var prom_h = (Math.abs(new_h)) / 2;
+        //var prom_w = (Math.abs(new_w)) / 2;
+        //var prom_h = (Math.abs(new_h)) / 2;
 
         divPopbox.offset({ top: btnID.offset().top });
         divPopbox.offset({ left: btnID.offset().left - new_w });
 
         //divPopbox.position(btnID.position());
 
-        $("#lbl_options_header").text("Formulario: " + nombre);
-        $("#lbl_options_info").text("Seleccione una acción");
-        $("#divPopbox").show("highlight", 700);
+        $("#lbl_options_header_OPC").text("Formulario: " + nombre);
+        $("#lbl_options_info_OPC").text("Seleccione una acción");
+        $("#divPopbox_OPC").show("highlight", 700);
 
         // Estados de pedidos:
         // 0: Vigente - gris
@@ -584,28 +612,70 @@ function showActionMenu(formID, tel, nombre, btnID) {
         // 4: Diseño OK, pronto para imprimir - azul
 
         // Cargar acciones
-        var lbl_options_button1 = $("#lbl_options_button1");
-        var lbl_options_button2 = $("#lbl_options_button2");
-        var lbl_options_button3 = $("#lbl_options_button3");
-        var lbl_options_button4 = $("#lbl_options_button4");
+        var lbl_options_button1 = $("#lbl_options_button1_OPC");
+        var lbl_options_button2 = $("#lbl_options_button2_OPC");
+        var lbl_options_button3 = $("#lbl_options_button3_OPC");
+        var lbl_options_button4 = $("#lbl_options_button4_OPC");
         if (lbl_options_button1 !== null && lbl_options_button1 !== undefined && 
         lbl_options_button2 !== null && lbl_options_button2 !== undefined && 
         lbl_options_button3 !== null && lbl_options_button3 !== undefined &&
         lbl_options_button4 !== null && lbl_options_button4 !== undefined) {
-            var onclick_1 = "doAction(1, \"" + formID + "\")";
-            var onclick_2 = "doAction(4, \"" + formID + "\")";
-            var onclick_3 = "doAction(2, \"" + formID + "\")";
-            var onclick_4 = "doAction(0, \"" + formID + "\")";
-            lbl_options_button1.attr('onclick', onclick_1);
-            lbl_options_button2.attr('onclick', onclick_2);
+            var onclick_1 = "doAction_OPC(1, \"" + formID + "\")";
+            var onclick_2 = "doAction_OPC(4, \"" + formID + "\")";
+            var onclick_3 = "doAction_OPC(2, \"" + formID + "\")";
+            var onclick_4 = "doAction_OPC(0, \"" + formID + "\")";
+            lbl_options_button1.attr('onclick', onclick_2);
+            lbl_options_button2.attr('onclick', onclick_1);
             lbl_options_button3.attr('onclick', onclick_3);
             lbl_options_button4.attr('onclick', onclick_4);
         }
     }
 }
 
-function doAction(actionID, formID) {
-    
+function showActionMenu_CTO(formID, nombre, goToURL, goToGMaps, goToWPP, btnID) {
+    closeAll_popups();
+
+    var divPopbox = $("#divPopbox_CTO");
+    var btnID = $("#" + btnID);
+    if (divPopbox !== null && divPopbox !== undefined && btnID !== null && btnID !== undefined) {
+
+        var new_w = parseInt(divPopbox.css("width"), 10);
+        var new_h = parseInt(divPopbox.css("height"), 10);
+
+        //var prom_w = (Math.abs(new_w)) / 2;
+        //var prom_h = (Math.abs(new_h)) / 2;
+
+        divPopbox.offset({ top: btnID.offset().top });
+        divPopbox.offset({ left: btnID.offset().left - new_w });
+
+        //divPopbox.position(btnID.position());
+
+        $("#lbl_options_header_CTO").text("Formulario: " + nombre);
+        $("#lbl_options_info_CTO").text("Seleccione una acción");
+        $("#divPopbox_CTO").show("highlight", 700);
+
+        // Estados de pedidos:
+        // 0: Vigente - gris
+        // 1: Concluído - verde
+        // 2: Cancelado - rojo
+        // 3: Eliminado - rojo
+        // 4: Diseño OK, pronto para imprimir - azul
+
+        // Cargar acciones
+        var lbl_options_button1 = $("#lbl_options_button1_CTO");
+        var lbl_options_button2 = $("#lbl_options_button2_CTO");
+        var lbl_options_button3 = $("#lbl_options_button3_CTO");
+        if (lbl_options_button1 !== null && lbl_options_button1 !== undefined &&
+        lbl_options_button2 !== null && lbl_options_button2 !== undefined &&
+        lbl_options_button3 !== null && lbl_options_button3 !== undefined) {
+            lbl_options_button1.attr('href', goToURL);
+            lbl_options_button2.attr('href', goToGMaps);
+            lbl_options_button3.attr('href', goToWPP);
+        }
+    }
+}
+
+function doAction_OPC(actionID, formID) {
     // Ajax call parameters
     console.log("Ajax call 1: Dashboard.aspx/PedidosUpdateState. Params:");
     console.log("actionID, type: " + type(actionID) + ", value: " + actionID);
@@ -630,7 +700,33 @@ function doAction(actionID, formID) {
             }
         }
     }); // Ajax
+}
 
+function doAction_CTO(actionID, formID) {
+    // Ajax call parameters
+    console.log("Ajax call 1: Dashboard.aspx/PedidosUpdateState. Params:");
+    console.log("actionID, type: " + type(actionID) + ", value: " + actionID);
+    console.log("formID, type: " + type(formID) + ", value: " + formID);
+    console.log("End Ajax call");
+
+    $.ajax({
+        type: "POST",
+        url: "Dashboard.aspx/PedidosUpdateState",
+        data: '{actionID: "' + actionID + '",formID: "' + formID + '"}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            var resultado = response.d;
+            if (resultado !== null && resultado) {
+                $(".popbox-box.popbox").hide();
+                showMessage(hashMessages["ConfirmacionCambios"]);
+                //setTimeout(location.reload(), 5000);
+                CX_Message_AutoClose();
+            } else {
+                alert("Error interno.");
+            }
+        }
+    }); // Ajax
 }
 
 function CX_Message_AutoClose() {

@@ -18,5 +18,6 @@ namespace Cartelux1.Models
         public string Nombre { get; set; }
         public int Codigo { get; set; }
         public string Descripcion { get; set; }
+        public string Agrupacion { get; set; }
     }
 }

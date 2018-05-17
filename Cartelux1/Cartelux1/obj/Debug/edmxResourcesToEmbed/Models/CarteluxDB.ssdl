@@ -54,6 +54,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Codigo" Type="int" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="Agrupacion" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="lista_pedido_estados">
     <Key>
@@ -72,6 +73,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Codigo" Type="int" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="Agrupacion" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="lista_pedido_tamanos">
     <Key>
@@ -81,6 +83,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Codigo" Type="int" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="Agrupacion" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="lista_pedido_tematicas">
     <Key>

@@ -8,7 +8,7 @@
 
     _TEL = getUrlParameter('TEL');
     if (_TEL !== null && _TEL !== undefined && _TEL.length > 0) {
-        $("#txbCX_tel").val(_TEL);
+        //$("#txbCX_tel").val(_TEL);
     }
 
     setTimeout(function () {
@@ -16,7 +16,8 @@
         style_controls(false);
 
         // Load enabled controls
-        loadPreviousState();
+        loadPreviousState_tab_pasacalle();
+        loadPreviousState_tab_rollup();
     }, 300);
 
     TAB_COUNT = $("#hdnPedidoCantidad").val();
@@ -78,6 +79,12 @@ function style_controls(correct) {
 }
 
 function loadEvents() {
+
+    tipoEntrega_tab_pasacalle_click();
+    tipoEntrega_tab_rollup_click();
+}
+
+function tipoEntrega_tab_pasacalle_click() {
     $("#ddlTipoEntrega1-menu").on("click", function () {
 
         var controls = $("#ddlTipoEntrega1-button span");
@@ -86,8 +93,6 @@ function loadEvents() {
             var value = $("#ddlTipoEntrega1 option").filter(function () {
                 return this.text === text;
             }).attr('selected', true).val();
-
-            //$("#ddlTipoEntrega1-button span")[1]
 
             if (value !== null && value !== undefined && value.length > 0) {
 
@@ -151,7 +156,66 @@ function loadEvents() {
     });
 }
 
-function loadPreviousState() {
+function tipoEntrega_tab_rollup_click() {
+    $("#ddlTipoEntrega1_tab2-menu").on("click", function () {
+
+        var controls = $("#ddlTipoEntrega1_tab2-button span");
+        if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
+            var text = controls[1].innerText;
+            var value = $("#ddlTipoEntrega1_tab2 option").filter(function () {
+                return this.text === text;
+            }).attr('selected', true).val();
+
+            if (value !== null && value !== undefined && value.length > 0) {
+
+                // Hide all controls
+                hideAllControls();
+
+                switch (value) {
+                    case "2":
+                        { // Envío
+
+                            // Show 
+                            showControl("dir_group_tab2", true);
+                            //showControl("map_group_tab2", true);
+                            //showControl("map-canvas_tab2", true);
+
+                            // Hide
+                            showControl("txbCiudad_tab2", false);
+
+                            break;
+                        }
+                    case "3":
+                        { // Interior
+
+                            // Show 
+                            showControl("txbCiudad_tab2", true);
+
+                            // Hide
+                            showControl("dir_group_tab2", false);
+                            //showControl("map_group_tab2", false);
+                            //showControl("map-canvas_tab2", false);
+
+                            break;
+                        }
+                    case "4":
+                        { // Taller
+
+                            // Hide
+                            showControl("txbCiudad_tab2", false);
+                            showControl("dir_group_tab2", false);
+                            //showControl("map_group_tab2", false);
+                            //showControl("map-canvas_tab2", false);
+
+                            break;
+                        }
+                }
+            }
+        }
+    });
+}
+
+function loadPreviousState_tab_pasacalle() {
     var controls = $(".ui-selectmenu-text");
     if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null) {
         var text = $(".ui-selectmenu-text")[1].innerText;
@@ -216,6 +280,58 @@ function loadPreviousState() {
     }
 }
 
+function loadPreviousState_tab_rollup() {
+    var controls = $(".ui-selectmenu-text_tab2");
+    if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null) {
+        var text = $(".ui-selectmenu-text_tab2")[1].innerText;
+        var value = $("#ddlTipoEntrega1_tab2 option").filter(function () {
+            return this.text === text;
+        }).attr('selected', true).val();
+        if (value !== null && value !== undefined && value.length > 0) {
+
+            switch (value) {               
+                case 2:
+                    { // Envío
+
+                        // Show 
+                        showControl("dir_group_tab2", true);
+                        //showControl("map_group_tab2", true);
+                        //showControl("map-canvas_tab2", true);
+
+                        // Hide
+                        showControl("txbCiudad_tab2", false);
+
+                        break;
+                    }
+                case 3:
+                    { // Interior
+
+                        // Show 
+                        showControl("txbCiudad_tab2", true);
+
+                        // Hide
+                        showControl("dir_group_tab2", false);
+                        //showControl("map_group_tab2", false);
+                        //showControl("map-canvas_tab2", false);
+
+                        break;
+                    }
+                case 4:
+                    { // Taller
+
+                        // Hide
+                        showControl("txbCiudad_tab2", false);
+                        showControl("dir_group_tab2", false);
+                        //showControl("map_group_tab2", false);
+                        //showControl("map-canvas_tab2", false);
+
+                        break;
+                    }
+            }
+        }
+    }
+}
+
 function readonlyControl(doEnable, idControl) {
     $("#" + idControl).attr("readonly", doEnable);
 }
@@ -246,6 +362,11 @@ function hideAllControls() {
     showControl("dir_group", false);
     showControl("map_group", false);
     showControl("map-canvas", false);
+
+    showControl("txbCiudad_tab2", false);
+    showControl("dir_group_tab2", false);
+    //showControl("map_group_tab2", false);
+    //showControl("map-canvas_tab2", false);
 }
 
 function editFields() {
@@ -314,19 +435,31 @@ function apply_savedStyle() {
     }, 300);
 }
 
-function pre_confirm() {
-    var _check_logic = check_logic();
-    var _check_emptyFields = check_emptyFields();
+function pre_confirm_tab1() {
+    var _check_logic_tab_pasacalle = check_logic_tab_pasacalle();
+    var _check_emptyFields_tab_pasacalle = check_emptyFields_tab_pasacalle();
 
     var ok = true;
-    if (!_check_logic || !_check_emptyFields) {
+    if (!_check_logic_tab_pasacalle || !_check_emptyFields_tab_pasacalle) {
         showMessage(hashMessages["FaltanDatos"]);
         ok = false;
     }
     return ok;
 }
 
-function check_logic() {
+function pre_confirm_tab2() {
+    var _check_logic_tab_rollup = check_logic_tab_rollup();
+    var _check_emptyFields_tab_rollup = check_emptyFields_tab_rollup();
+
+    var ok = true;
+    if (!_check_logic_tab_rollup || !_check_emptyFields_tab_rollup) {
+        showMessage(hashMessages["FaltanDatos"]);
+        ok = false;
+    }
+    return ok;
+}
+
+function check_logic_tab_pasacalle() {
     var ok = true;
 
     var ddlTamano1 = 0;
@@ -367,7 +500,7 @@ function check_logic() {
         ok = false;
     }
 
-    // Colocación o envío a domicilio
+    // Colocación o envío a domicilio - TAB Pasacalle
     if (ddlTipoEntrega1 === 1 || ddlTipoEntrega1 === 2) {
         var txbDireccion_calle = $("#txbDireccion_calle").val();
         var txbDireccion_numero = $("#txbDireccion_numero").val();
@@ -380,7 +513,7 @@ function check_logic() {
         }
     }
 
-    // Envío al interior
+    // Envío al interior  - TAB Pasacalle
     if (ddlTipoEntrega1 === 3) {
         var txbCiudad = $("#txbCiudad").val();
         if (txbCiudad === null || txbCiudad === undefined || txbCiudad.length === 0){
@@ -390,15 +523,94 @@ function check_logic() {
     return ok;
 }
 
-function check_emptyFields() {
+function check_logic_tab_rollup() {
+    var ok = true;
+
+    var ddlTamano1 = 0;
+    var controls = $("#ddlTamano1-button_tab2 span");
+    if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
+        var text = controls[1].innerText;
+        var value = $("#ddlTamano1_tab2 option").filter(function () {
+            return this.text === text;
+        }).attr('selected', true).val();
+        if (value !== null && value !== undefined && value.length > 0) {
+            // Parse int
+            ddlTamano1 = value;
+            if (type(value) === "string") {
+                ddlTamano1 = TryParseInt(value, 0);
+            }
+        }
+    }
+    if (ddlTamano1 === 0) {
+        ok = false;
+    }
+
+    var ddlTipoEntrega1 = 0;
+    controls = $("#ddlTipoEntrega1-button_tab2 span");
+    if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
+        text = controls[1].innerText;
+        value = $("#ddlTipoEntrega1_tab2 option").filter(function () {
+            return this.text === text;
+        }).attr('selected', true).val();
+        if (value !== null && value !== undefined && value.length > 0) {
+            // Parse int
+            ddlTipoEntrega1 = value;
+            if (type(value) === "string") {
+                ddlTipoEntrega1 = TryParseInt(value, 0);
+            }
+        }
+    }
+    if (ddlTipoEntrega1 === 0) {
+        ok = false;
+    }
+
+    // Colocación o envío a domicilio - TAB Roll up
+    if (ddlTipoEntrega1 === 1 || ddlTipoEntrega1 === 2) {
+        var txbDireccion_calle = $("#txbDireccion_calle_tab2").val();
+        var txbDireccion_numero = $("#txbDireccion_numero_tab2").val();
+        var txbDireccion_esquina = $("#txbDireccion_esquina_tab2").val();
+        //var mapSearch = $("#mapSearch").val();
+        if ((txbDireccion_calle === null || txbDireccion_calle === undefined || txbDireccion_calle.length === 0)) {
+            //|| (txbDireccion_numero === null || txbDireccion_numero === undefined || txbDireccion_numero.length === 0)
+            //|| (txbDireccion_esquina === null || txbDireccion_esquina === undefined || txbDireccion_esquina.length === 0)) {
+            ok = false;
+        }
+    }
+
+    // Envío al interior  - TAB Roll up
+    if (ddlTipoEntrega1 === 3) {
+        var txbCiudad = $("#txbCiudad_tab2").val();
+        if (txbCiudad === null || txbCiudad === undefined || txbCiudad.length === 0) {
+            ok = false;
+        }
+    }
+    return ok;
+}
+
+function check_emptyFields_tab_pasacalle() {
     var ok = true;
 
     var txbNombre = $("#txbNombre").val();
-    var txbTel = $("#txbTel").val();
+    var txbTelefono = $("#txbTelefono").val();
     var txbFecha = $("#txbFecha").val();
 
     if ((txbNombre === null || txbNombre === undefined || txbNombre.length === 0)
-       || (txbTel === null || txbTel === undefined || txbTel.length === 0)
+       || (txbTelefono === null || txbTelefono === undefined || txbTelefono.length === 0)
+       || (txbFecha === null || txbFecha === undefined || txbFecha.length === 0)) {
+        ok = false;
+    }
+    return ok;
+}
+
+function check_emptyFields_tab_rollup() {
+    var ok = true;
+
+    var txbNombre = $("#txbNombre_tab2").val();
+    var txbTelefono = $("#txbTelefono_tab2").val();
+    var txbFecha = $("#txbFecha_tab2").val();
+
+    if ((txbNombre === null || txbNombre === undefined || txbNombre.length === 0)
+       || (txbTelefono === null || txbTelefono === undefined || txbTelefono.length === 0)
        || (txbFecha === null || txbFecha === undefined || txbFecha.length === 0)) {
         ok = false;
     }

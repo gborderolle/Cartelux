@@ -10,11 +10,13 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Web;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static Cartelux1.Global_Objects.GlobalVariables;
 
 namespace Cartelux1
 {
@@ -76,23 +78,41 @@ namespace Cartelux1
                 // DDL Types
                 DataTable dt1 = new DataTable();
 
-                // DDL Tamaños
+                // DDL Tamaños - Pasacalle
                 dt1 = new DataTable();
-                dt1 = Extras.ToDataTable(context.lista_pedido_tamanos.OrderBy(e => e.Nombre).ToList());
+                dt1 = Extras.ToDataTable(context.lista_pedido_tamanos.Where(v => v.Agrupacion == Agrupacion.Todas.ToString() || v.Agrupacion == Agrupacion.Pasacalle.ToString()).OrderBy(e => e.Nombre).ToList());
                 ddlTamano1.DataSource = dt1;
                 ddlTamano1.DataTextField = "Nombre";
                 ddlTamano1.DataValueField = "Codigo";
                 ddlTamano1.DataBind();
                 ddlTamano1.Items.Insert(0, new ListItem("Tamaño", "0"));
 
-                // DDL Entregas
+                // DDL Entregas - Pasacalle
                 dt1 = new DataTable();
-                dt1 = Extras.ToDataTable(context.lista_entregas_tipos.OrderBy(e => e.Nombre).ToList());
+                dt1 = Extras.ToDataTable(context.lista_entregas_tipos.Where(v => v.Agrupacion == Agrupacion.Todas.ToString() || v.Agrupacion == Agrupacion.Pasacalle.ToString()).OrderBy(e => e.Nombre).ToList());
                 ddlTipoEntrega1.DataSource = dt1;
                 ddlTipoEntrega1.DataTextField = "Nombre";
                 ddlTipoEntrega1.DataValueField = "Codigo";
                 ddlTipoEntrega1.DataBind();
                 ddlTipoEntrega1.Items.Insert(0, new ListItem("Tipo de entrega", "0"));
+
+                // DDL Tamaños - Roll up
+                dt1 = new DataTable();
+                dt1 = Extras.ToDataTable(context.lista_pedido_tamanos.Where(v => v.Agrupacion == Agrupacion.Todas.ToString() || v.Agrupacion == Agrupacion.Rollup.ToString()).OrderBy(e => e.Nombre).ToList());
+                ddlTamano1_tab2.DataSource = dt1;
+                ddlTamano1_tab2.DataTextField = "Nombre";
+                ddlTamano1_tab2.DataValueField = "Codigo";
+                ddlTamano1_tab2.DataBind();
+                ddlTamano1_tab2.Items.Insert(0, new ListItem("Tamaño", "0"));
+
+                // DDL Entregas - Roll up
+                dt1 = new DataTable();
+                dt1 = Extras.ToDataTable(context.lista_entregas_tipos.Where(v => v.Agrupacion == Agrupacion.Todas.ToString() || v.Agrupacion == Agrupacion.Rollup.ToString()).OrderBy(e => e.Nombre).ToList());
+                ddlTipoEntrega1_tab2.DataSource = dt1;
+                ddlTipoEntrega1_tab2.DataTextField = "Nombre";
+                ddlTipoEntrega1_tab2.DataValueField = "Codigo";
+                ddlTipoEntrega1_tab2.DataBind();
+                ddlTipoEntrega1_tab2.Items.Insert(0, new ListItem("Tipo de entrega", "0"));
 
             }
         }
@@ -153,7 +173,10 @@ namespace Cartelux1
                         if (_cliente != null)
                         {
                             txbNombre.Value = _cliente.Nombre;
-                            txbTel.Value = _cliente.Telefono;
+                            txbTelefono.Value = _cliente.Telefono;
+
+                            txbNombre_tab2.Value = _cliente.Nombre;
+                            txbTelefono_tab2.Value = _cliente.Telefono;
                         }
 
                         // Pedidos
@@ -205,7 +228,7 @@ namespace Cartelux1
                                              * Codigo = 3: Envío al interior
                                              * Codigo = 4: Retiro en el taller
                                              * */
-                                            if (codigo == 1 || codigo == 2) 
+                                            if (codigo == 1 || codigo == 2)
                                             {
                                                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>showControl_withDelay('dir_group', true);</script>", false);
                                             }
@@ -265,7 +288,7 @@ namespace Cartelux1
                     }
                     else
                     {
-                        txbTel.Value = tel_str;
+                        txbTelefono.Value = tel_str;
                     }
                 }
             }
@@ -287,7 +310,7 @@ namespace Cartelux1
             {
                 // Contacto
                 txbNombre.Attributes.Add("readonly", "readonly");
-                txbTel.Attributes.Add("readonly", "readonly");
+                txbTelefono.Attributes.Add("readonly", "readonly");
 
                 // Entrega
                 txbDireccion_calle.Attributes.Add("readonly", "readonly");
@@ -308,7 +331,7 @@ namespace Cartelux1
             {
                 // Contacto
                 txbNombre.Attributes.Add("readonly", "false");
-                txbTel.Attributes.Add("readonly", "false");
+                txbTelefono.Attributes.Add("readonly", "false");
 
                 // Entrega
                 txbDireccion_calle.Attributes.Add("readonly", "false");
@@ -342,7 +365,7 @@ namespace Cartelux1
                 {
                     formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Serie.Equals(serie_str));
                     _formulario = _formulario != null ? _formulario : new formularios();
-                    _formulario.Fecha_update = DateTime.Now;
+                    _formulario.Fecha_update = GetCurrentTime();
 
                     // Cliente
                     _formulario.Cliente_ID = NEW_Cliente(context);
@@ -359,7 +382,7 @@ namespace Cartelux1
 
                         _formulario.Formulario_ID = 0;
                         _formulario.Serie = serie_str;
-                        _formulario.Fecha_creado = DateTime.Now;
+                        _formulario.Fecha_creado = GetCurrentTime();
                         context.formularios.Add(_formulario);
 
                         save_ok = Guardar_Contexto(context);
@@ -373,6 +396,8 @@ namespace Cartelux1
                     }
                     else
                     {
+                        #region Pedido ya existe
+
                         // Pedido ya existe
                         // ISSUE a resolver cuando efectivamente los Formularios tengan muchos Pedidos
                         pedidos _pedido = (pedidos)context.pedidos.FirstOrDefault(v => v.Formulario_ID.Equals(_formulario.Formulario_ID));
@@ -426,13 +451,6 @@ namespace Cartelux1
                             }
                             #endregion
 
-                            #region Temática
-                            //if (ddlTamano.SelectedIndex > 0)
-                            //{
-                            //    pedido.Pedido_Tamano_ID = ddlTamano.SelectedIndex;
-                            //}
-                            #endregion
-
                             #region UPDATE Diseño
                             pedido_disenos _pedido_diseno = (pedido_disenos)context.pedido_disenos.FirstOrDefault(v => v.Pedido_Diseno_ID.Equals(_pedido.Pedido_Diseno_ID));
                             if (_pedido_diseno != null)
@@ -474,6 +492,9 @@ namespace Cartelux1
                                     {
                                         _pedido_entrega.Ciudad = txbCiudad.Value;
                                     }
+
+                                    string sqlFormattedDate = _pedido_entrega.Fecha_entrega.HasValue ? _pedido_entrega.Fecha_entrega.Value.ToString(GlobalVariables.ShortDateTime_format1) : "null";
+                                    txbFecha.Value = sqlFormattedDate;
                                 }
 
                                 string gmaps_url = Get_GMaps_URL();
@@ -495,6 +516,7 @@ namespace Cartelux1
                             #endregion
                         }
 
+                        #endregion END Pedido ya existe
                     }
 
                     save_ok = Guardar_Contexto(context);
@@ -723,6 +745,9 @@ namespace Cartelux1
                 _pedido.Formulario_ID = formulario_ID;
 
                 context.pedidos.Add(_pedido);
+
+                // Enviar notificación al equipo por EMAIL
+                SendNotification_Email_2();
             }
         }
 
@@ -751,13 +776,13 @@ namespace Cartelux1
         private int NEW_Cliente(CarteluxDB context)
         {
             int ret_ID = 0;
-            string client_tel = txbTel.Value;
+            string client_tel = txbTelefono.Value;
             string client_name = txbNombre.Value;
             if (context != null && !string.IsNullOrWhiteSpace(client_tel) && !string.IsNullOrWhiteSpace(client_name))
             {
                 clientes cliente = (clientes)context.clientes.FirstOrDefault(v => v.Telefono.Equals(client_tel));
                 cliente = cliente != null ? cliente : new clientes();
-                cliente.Fecha_update = DateTime.Now;
+                cliente.Fecha_update = GetCurrentTime();
                 ret_ID = cliente.Cliente_ID;
 
                 if (string.IsNullOrWhiteSpace(cliente.Nombre))
@@ -766,7 +791,7 @@ namespace Cartelux1
                     cliente.Cliente_ID = 0;
                     cliente.Nombre = client_name;
                     cliente.Telefono = client_tel;
-                    cliente.Fecha_creado = DateTime.Now;
+                    cliente.Fecha_creado = GetCurrentTime();
 
                     context.clientes.Add(cliente);
                     Guardar_Contexto(context);
@@ -1540,9 +1565,75 @@ namespace Cartelux1
             return uploadBOX_ok;
         }
 
-                #endregion
+        private void SendNotification_Email()
+        {
+            SmtpClient smtpClient = new SmtpClient("mail.cartelux.uy", 25);
+
+            smtpClient.Credentials = new System.Net.NetworkCredential("proyectos@cartelux.uy", "Cartelux1234$");
+            smtpClient.UseDefaultCredentials = true;
+            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtpClient.EnableSsl = false;
+            MailMessage mail = new MailMessage();
+
+            //Setting From , To and CC
+            mail.From = new MailAddress("proyectos@cartelux.uy", "Cartelux");
+            mail.To.Add(new MailAddress("gborderolle@gmail.com"));
+            //mail.To.Add(new MailAddress("maxi.cartelux@gmail.com"));
+            //mail.CC.Add(new MailAddress("MyEmailID@gmail.com"));
+
+            smtpClient.Send(mail);
+        }
+
+        private void SendNotification_Email_2()
+        {
+            // SOURCE: https://www.smarterasp.net/support/kb/a179/how-to-send-email-in-asp_net.aspx
+            string nombre = txbNombre.Value;
+            string telefono = txbTelefono.Value;
+            string fecha_entrega = GetDatetimeFormated(txbFecha.Value).ToShortDateString();
+            string url = HttpContext.Current.Request.Url.AbsoluteUri;
+            if (!string.IsNullOrWhiteSpace(nombre) || !string.IsNullOrWhiteSpace(telefono) || !string.IsNullOrWhiteSpace(fecha_entrega) || !string.IsNullOrWhiteSpace(url))
+            {
+                //create the mail message 
+                MailMessage mail = new MailMessage();
+
+                //set the addresses 
+                mail.From = new MailAddress("proyectos@cartelux.uy"); //IMPORTANT: This must be same as your smtp authentication address.
+                mail.To.Add("gborderolle@gmail.com");
+                mail.To.Add("maxi.cartelux@gmail.com");
+
+                //set the content 
+                mail.Subject = "CX-AVISO: ¡Pedido nuevo! > " + nombre;
+                mail.Body = "Nombre: " + nombre;
+                mail.Body += "\r\nTelefono: " + telefono;
+                mail.Body += "\r\nEntrega: " + fecha_entrega;
+                mail.Body += "\r\n\r\n\r\n";
+                mail.Body += "LINKS -----------------------------";
+                mail.Body += "\r\n>Form cliente: " + url;
+                mail.Body += "\r\n>Dashboard: www.pedidos.cartelux.uy/Dashboard";
+                mail.Body += "\r\n\r\n\r\n";
+                mail.Body += "Este es un email auto-generado por favor no lo responda.";
+                mail.Body += "\r\nTimestamp: " + GetCurrentTime();
+
+                //send the message 
+                SmtpClient smtp = new SmtpClient("mail.cartelux.uy");
+
+                //IMPORANT:  Your smtp login email MUST be same as your FROM address. 
+                NetworkCredential Credentials = new NetworkCredential("proyectos@cartelux.uy", "Cartelux1234$");
+                smtp.Credentials = Credentials;
+                smtp.Send(mail);
+            }
+        }
+
+        #endregion
 
         #region Static Methods 
+
+        public static DateTime GetCurrentTime()
+        {
+            DateTime serverTime = DateTime.Now;
+            DateTime _localTime = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(serverTime, TimeZoneInfo.Local.Id, "Montevideo Standard Time");
+            return _localTime;
+        }
 
         private static string GetQueryStringDecrypt(string serie_str)
         {
@@ -1603,7 +1694,7 @@ namespace Cartelux1
                 {
                     formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Serie.Equals(serie_str));
                     _formulario = _formulario != null ? _formulario : new formularios();
-                    _formulario.Fecha_update = DateTime.Now;
+                    _formulario.Fecha_update = GetCurrentTime();
 
                     // Cliente
                     //_formulario.Cliente_ID = NEW_Cliente(context); // FIX
@@ -1620,7 +1711,7 @@ namespace Cartelux1
 
                         _formulario.Formulario_ID = 0;
                         _formulario.Serie = serie_str;
-                        _formulario.Fecha_creado = DateTime.Now;
+                        _formulario.Fecha_creado = GetCurrentTime();
                         context.formularios.Add(_formulario);
 
                         //Guardar_Contexto(context); // FIX

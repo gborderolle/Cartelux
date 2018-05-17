@@ -230,21 +230,21 @@ namespace Cartelux1
                                 }
                             }
 
-                            LinkButton btnGMaps = e.Row.FindControl("btnGMaps") as LinkButton;
-                            if (btnGMaps != null)
-                            {
-                                btnGMaps.Text = string.Empty;
-                                pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(c => c.Pedido_Entrega_ID == _pedido.Pedido_Entrega_ID);
-                                if (_pedido_entrega != null)
-                                {
-                                    string value = "#";
-                                    if (!string.IsNullOrWhiteSpace(_pedido_entrega.Google_maps_URL) && _pedido_entrega.Google_maps_URL != "0")
-                                    {
-                                        value = _pedido_entrega.Google_maps_URL;
-                                    }
-                                    btnGMaps.Text = value;
-                                }
-                            }
+                            //LinkButton btnGMaps = e.Row.FindControl("btnGMaps") as LinkButton;
+                            //if (btnGMaps != null)
+                            //{
+                            //    btnGMaps.Text = string.Empty;
+                            //    pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(c => c.Pedido_Entrega_ID == _pedido.Pedido_Entrega_ID);
+                            //    if (_pedido_entrega != null)
+                            //    {
+                            //        string value = "#";
+                            //        if (!string.IsNullOrWhiteSpace(_pedido_entrega.Google_maps_URL) && _pedido_entrega.Google_maps_URL != "0")
+                            //        {
+                            //            value = _pedido_entrega.Google_maps_URL;
+                            //        }
+                            //        btnGMaps.Text = value;
+                            //    }
+                            //}
 
                         }
                     }

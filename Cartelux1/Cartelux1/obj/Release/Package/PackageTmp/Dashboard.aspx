@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="/Content/css/bootstrap-table.css" />
 
     <style type="text/css">
-
         .ui-dialog-titlebar {
             background-color: rgba(255, 119, 0, 0.78);
         }
@@ -332,13 +331,13 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="GMaps" ControlStyle-CssClass="btn btn-warning btn-xs">
+                                                <asp:TemplateField HeaderText="CTO" ControlStyle-CssClass="btn btn-warning btn-xs">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="btnGMaps" runat="server" CommandName="View" CssClass="btn btn-warning btn-xs fa fa-map" />
+                                                        <asp:LinkButton ID="btnCTO" runat="server" CommandName="View" CssClass="btn btn-warning btn-xs fa fa-address-card" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Form" ControlStyle-CssClass="btn btn-warning btn-xs">
+                                                <%-- <asp:TemplateField HeaderText="Form" ControlStyle-CssClass="btn btn-warning btn-xs">
                                                     <ItemTemplate>
                                                         <a id="btnURL" role="button" href='<%# Eval("URL_short") %>' class="btn btn-warning btn-xs fa fa-wpforms" title="" target="_blank"></a>
                                                     </ItemTemplate>
@@ -348,7 +347,7 @@
                                                     <ItemTemplate>
                                                         <a id="btnURL" role="button" href='<%# Eval("URL_short") %>' class="btn btn-warning btn-xs fa fa-wpforms" title="" target="_blank"></a>
                                                     </ItemTemplate>
-                                                </asp:TemplateField>
+                                                </asp:TemplateField>--%>
 
                                                 <asp:TemplateField HeaderText="OPC" ControlStyle-CssClass="btn btn-warning btn-xs">
                                                     <ItemTemplate>
@@ -429,37 +428,64 @@
     </div>
 
     <div id="simplePopbox" class='popbox'></div>
-    <div id="divPopbox" class='popbox-box popbox'>
+    <div id="divPopbox_OPC" class='popbox-box popbox'>
         <div class='arrow' style="left: 250px;"></div>
         <div class='arrow-border' style="left: 250px;"></div>
         <div class="row row-short" style="padding: 10px;">
-            <label id="lbl_options_header" class="label" style="font-size: 100%; color: rgba(68, 89, 156, 1); font-size: 16px;">Borrar elemento seleccionado</label>
+            <label id="lbl_options_header_OPC" class="label" style="font-size: 100%; color: rgba(68, 89, 156, 1); font-size: 16px;">Borrar elemento seleccionado</label>
+        </div>
+        <div class="form-group">
+            <div class="row row-short" style="padding: 10px;">
+                <div id="lbl_options_divBox_OPC" class="alert alert-warning" role="alert">
+                    <span id="lbl_options_color_OPC" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                    <span id="lbl_options_info_OPC">Está a punto de borrar el elemento, confirme su contraseña para continuar</span>
+                </div>
+            </div>
+            <div id="popbox_footer_OPC" class="row row-short" style="margin-right: 15px; margin-top: -7px;">
+                <button id="lbl_options_button1_OPC" type="button" class="btn btn-success btnAcciones" title="Diseño OK">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </button>
+                <button id="lbl_options_button2_OPC" type="button" class="btn btn-primary btnAcciones" title="Concluído">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </button>
+                <button id="lbl_options_button3_OPC" type="button" class="btn btn-danger btnAcciones" title="Cancelado">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </button>
+                <button id="lbl_options_button4_OPC" type="button" class="btn btn-default btnAcciones" title="Inicial">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+        <button type="button" class="btn close" style="padding: 5px;">
+            <span class="fa fa-times-circle" aria-hidden="true"></span>
+        </button>
+    </div>
+
+    <div id="divPopbox_CTO" class='popbox-box popbox'>
+        <div class='arrow' style="left: 250px;"></div>
+        <div class='arrow-border' style="left: 250px;"></div>
+        <div class="row row-short" style="padding: 10px;">
+            <label id="lbl_options_header_CTO" class="label" style="font-size: 100%; color: rgba(68, 89, 156, 1); font-size: 16px;">Borrar elemento seleccionado</label>
         </div>
         <div class="form-group">
             <div class="row row-short" style="padding: 10px;">
 
-                <div id="lbl_options_divBox" class="alert alert-warning" role="alert">
-                    <span id="lbl_options_color" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                    <span id="lbl_options_info">Está a punto de borrar el elemento, confirme su contraseña para continuar</span>
+                <div id="lbl_options_divBox_CTO" class="alert alert-warning" role="alert">
+                    <span id="lbl_options_color_CTO" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                    <span id="lbl_options_info_CTO">Está a punto de borrar el elemento, confirme su contraseña para continuar</span>
                 </div>
                 <%--<input id="lbl_options_password" type="password" class="form-control" placeholder="Contraseña" name="login-username" required="required" />--%>
                 <!--  -->
             </div>
-            <div id="popbox_footer" class="row row-short" style="margin-right: 15px; margin-top: -7px;">
-                <button id="lbl_options_button1" type="button" class="btn btn-success btnAcciones" title="Concluído">
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                </button>
-                <button id="lbl_options_button2" type="button" class="btn btn-primary btnAcciones" title="Diseño OK">
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                </button>
-                <button id="lbl_options_button3" type="button" class="btn btn-danger btnAcciones" title="Cancelado">
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                </button>
-                <button id="lbl_options_button4" type="button" class="btn btn-default btnAcciones" title="Inicial">
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                </button>
+            <div id="popbox_footer_CTO" class="row row-short" style="margin-right: 15px; margin-top: -7px;">
+                <a id='lbl_options_button1_CTO' role='button' href='#' class='btnAcciones btn btn-primary fa fa-wpforms fa-2x' title='' target='_blank'></a>
+                <a id='lbl_options_button2_CTO' role='button' href='#' class='btnAcciones btn btn-danger fa fa-map-marker fa-2x' title='' target='_blank'></a>
+                <a id='lbl_options_button3_CTO' role='button' href='#' class='btnAcciones btn btn-success fa fa-whatsapp fa-2x' title='' target='_blank'></a>
             </div>
         </div>
+        <button type="button" class="btn close" style="padding: 5px;">
+            <span class="fa fa-times-circle" aria-hidden="true"></span>
+        </button>
     </div>
 
     <asp:HiddenField ID="hdn_FormularioID" runat="server" ClientIDMode="Static" />
