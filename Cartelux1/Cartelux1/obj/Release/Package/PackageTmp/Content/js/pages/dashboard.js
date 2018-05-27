@@ -19,8 +19,8 @@ Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function (evt, args
 
 // SOURCE: https://www.jqueryscript.net/time-clock/Simple-jQuery-Calendar-Schedule-Plugin-For-Bootstrap-Bic-Calendar.html
 function loadCalendar() {
-    mesos = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    dias = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
+    months_list = ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
+    days_list = ["LUN", "MAR", "MIE", "JUE", "VIE", "SAB", "DOM"];
 
     $('#calendar').empty();
     var day = 1 + "";
@@ -33,17 +33,17 @@ function loadCalendar() {
         date: moment(date_comlete, "DD/MM/YYYY").format("DD/MM/YYYY"),
 
         events: EVENTS_LIST,
-        enableSelect: true,
-        dayNames: dias,
-        monthNames: mesos,
+        enableSelect: false,
+        dayNames: days_list,
+        monthNames: months_list,
         showDays: true,
-        displayMonthController: true,
-        displayYearController: true,                                
+        displayMonthController: false,
+        displayYearController: false,                                
         //set ajax call
-        reqAjax: {
-            type: 'get',
-            url: 'http://bic.cat/bic_calendar/index.php'
-        }
+        //reqAjax: {
+        //    type: 'get',
+        //    url: 'http://bic.cat/bic_calendar/index.php'
+        //}
     });
 }
 
@@ -106,11 +106,7 @@ function bindEvents() {
 
     $(".close").click(function () {
         $(this).closest(".popbox").hide();
-    })
-}
-
-function closeAll_popups() {
-    //$(".popbox").hide();
+    })   
 }
 
 function load_calendar() {
@@ -148,6 +144,10 @@ function bindDelayEvents() {
         if ($("#gridFormularios tbody tr").length > 0) {
             //$("#gridFormularios").tablesorter();
         }
+
+        $("#gridFormularios").tablesorter();
+        var gridFormularios = $("#gridFormularios tbody tr");
+        $("#txbSearchPedidos").quicksearch(gridFormularios);
     }, 100);
 }
 
@@ -161,8 +161,9 @@ function month_paintSelected(month_index) {
     $(".btn-table").filter("td[data-value='" + month_index + "']").toggleClass("btn-warning");
 }
 
-function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value) {
-    if (month_value !== null && month_value !== undefined && month_value > 0 && soloVigentes_value !== null && soloVigentes_value !== undefined && soloJuanchy_value !== null && soloJuanchy_value !== undefined) {
+function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value, incluirCancelados_value) {
+    if (month_value !== null && month_value !== undefined && month_value > 0 && soloVigentes_value !== null && soloVigentes_value !== undefined &&
+        soloJuanchy_value !== null && soloJuanchy_value !== undefined && incluirCancelados_value !== null && incluirCancelados_value !== undefined) {
         
         month_setMonthName(month_value);
         month_clearSelected()
@@ -181,12 +182,13 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value) {
             console.log("month_value, type: " + type(month_value) + ", value: " + month_value);
             console.log("soloVigentes_value, type: " + type(soloVigentes_value) + ", value: " + soloVigentes_value);
             console.log("soloJuanchy_value, type: " + type(soloJuanchy_value) + ", value: " + soloJuanchy_value);
+            console.log("incluirCancelados_value, type: " + type(incluirCancelados_value) + ", value: " + incluirCancelados_value);
 
             $.ajax({
                 type: "POST",
                 url: "Dashboard.aspx/GetData_BindGridFormularios",
                 contentType: "application/json;charset=utf-8",
-                data: '{year_value: "' + year_value + '",month_value: "' + month_value + '",soloVigentes_value: "' + soloVigentes_value + '",soloJuanchy_value: "' + soloJuanchy_value + '"}',
+                data: '{year_value: "' + year_value + '",month_value: "' + month_value + '",soloVigentes_value: "' + soloVigentes_value + '",soloJuanchy_value: "' + soloJuanchy_value + '",incluirCancelados_value: "' + incluirCancelados_value + '"}',
                 dataType: "json",
                 success: function (response) {
 
@@ -220,7 +222,7 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value) {
                             // 1: Concluído - verde
                             // 2: Cancelado - rojo
                             // 3: Eliminado - rojo
-                            // 4: Diseño OK, pronto para imprimir - azul
+                            // 4: Diseño aprobado, pronto para imprimir - azul
 
                             var text_color = "style='color:#333;'";
                             var estadoNro = check_nullValues(response.d[i].EstadoNro);
@@ -330,34 +332,41 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value) {
 }
 
 function create_calendar_events(values) {
-    var color = "blue"; // Envío a domicilio
-    switch (values) {
-        case "Colocación": {
-            color = "red";
-            break;
-        }
-        case "Retiro en el taller": {
-            color = "green";
-            break;
-        }
-        case "Envío al interior": {
-            color = "gray";
-            break;
-        }
-    }
+    if (values !== null && values !== undefined) {
+        var color = "blue"; // Envío a domicilio
 
-    var object = {
-        date: check_nullValues(moment(values.lblFechaEntrega, "DD-MM-YYYY").format("D/M/YYYY")),
-        title: check_nullValues(values.lblTipoEntrega),
-        color: color,
-        //link: check_nullValues(values.URL_short),
-        //linkTarget: '_blank',
-        content: 'Nombre: ' + check_nullValues(values.lblNombre) + ' <br> Tel: ' + check_nullValues(values.lblNumber),
-        displayMonthController: true,
-        displayYearController: true,
-        nMonths: 6
+        if (values.lblTipoEntrega !== null && values.lblTipoEntrega !== undefined) {
+            switch (values.lblTipoEntrega) {
+                case "Colocación": {
+                    color = "red";
+                    break;
+                }
+                case "Retiro en el taller": {
+                    color = "green";
+                    break;
+                }
+                case "Envío al interior": {
+                    color = "gray";
+                    break;
+                }
+            }
+        }
+
+        if (values.lblFechaEntrega !== null && values.lblTipoEntrega !== null && values.lblNombre !== null && values.lblNumber !== null) {
+            var object = {
+                date: check_nullValues(moment(values.lblFechaEntrega, "DD-MM-YYYY").format("D/M/YYYY")),
+                title: check_nullValues(values.lblTipoEntrega),
+                color: color,
+                //link: check_nullValues(values.URL_short),
+                //linkTarget: '_blank',
+                content: 'Nombre: ' + check_nullValues(values.lblNombre) + ' <br> Tel: ' + check_nullValues(values.lblNumber),
+                displayMonthController: true,
+                displayYearController: true,
+                nMonths: 6
+            }
+            EVENTS_LIST.push(object);
+        }
     }
-    EVENTS_LIST.push(object);
 }
 
 function check_zeros(value) {
@@ -520,7 +529,9 @@ function month_onClickEvent() {
 
                 $("#chbSoloVigentes").prop('checked', false);
                 $("#chbSoloJuanchy").prop('checked', false);
-                month_selectMonth(month_value_int, true, false);
+                $("#chbInclCancelados").prop('checked', false);
+                
+                month_selectMonth(month_value_int, true, false, false);
 
                 if (IS_MOBILE) {
                     $("#aCollapse_left_panel").show();
@@ -549,17 +560,19 @@ function filtrar_soloVigentes() {
 function filtrar() {
     var chbSoloJuanchy = $("#chbSoloJuanchy");
     var chbSoloVigentes = $("#chbSoloVigentes");
+    var chbInclCancelados = $("#chbInclCancelados");
     var hdn_monthSelected = $("#hdn_monthSelected");
-    if (hdn_monthSelected !== null && hdn_monthSelected.val() !== null && chbSoloJuanchy !== null && chbSoloVigentes !== null) {
+    if (hdn_monthSelected !== null && hdn_monthSelected.val() !== null && chbSoloJuanchy !== null && chbSoloVigentes !== null && chbInclCancelados !== null) {
         var soloJuanchy_value = chbSoloJuanchy.is(":checked")
         var soloVigentes_value = chbSoloVigentes.is(":checked")
+        var incluirCancelados_value = chbInclCancelados.is(":checked")
         var month_value = hdn_monthSelected.val();
 
         var month_value_int = month_value;
         if (type(month_value) === "string") {
             month_value_int = TryParseInt(month_value, 0);
         }
-        month_selectMonth(month_value_int, !soloVigentes_value, soloJuanchy_value)
+        month_selectMonth(month_value_int, !soloVigentes_value, soloJuanchy_value, incluirCancelados_value)
     }
 }
 
@@ -583,8 +596,6 @@ function GetMonthFilter() {
 }
 
 function showActionMenu_OPC(formID, tel, nombre, btnID) {
-    closeAll_popups();
-
     var divPopbox = $("#divPopbox_OPC");
     var btnID = $("#" + btnID);
     if (divPopbox !== null && divPopbox !== undefined && btnID !== null && btnID !== undefined) {
@@ -609,32 +620,30 @@ function showActionMenu_OPC(formID, tel, nombre, btnID) {
         // 1: Concluído - verde
         // 2: Cancelado - rojo
         // 3: Eliminado - rojo
-        // 4: Diseño OK, pronto para imprimir - azul
+        // 4: Diseño aprobado, pronto para imprimir - azul
 
         // Cargar acciones
-        var lbl_options_button1 = $("#lbl_options_button1_OPC");
-        var lbl_options_button2 = $("#lbl_options_button2_OPC");
-        var lbl_options_button3 = $("#lbl_options_button3_OPC");
-        var lbl_options_button4 = $("#lbl_options_button4_OPC");
+        var lbl_options_button1 = $("#lbl_options_button1_OPC"); // verde - Concluído
+        var lbl_options_button2 = $("#lbl_options_button2_OPC"); // azul - Diseño aprobado
+        var lbl_options_button3 = $("#lbl_options_button3_OPC"); // rojo - Cancelado
+        var lbl_options_button4 = $("#lbl_options_button4_OPC"); // negro - Inicial
         if (lbl_options_button1 !== null && lbl_options_button1 !== undefined && 
         lbl_options_button2 !== null && lbl_options_button2 !== undefined && 
         lbl_options_button3 !== null && lbl_options_button3 !== undefined &&
         lbl_options_button4 !== null && lbl_options_button4 !== undefined) {
-            var onclick_1 = "doAction_OPC(1, \"" + formID + "\")";
-            var onclick_2 = "doAction_OPC(4, \"" + formID + "\")";
-            var onclick_3 = "doAction_OPC(2, \"" + formID + "\")";
-            var onclick_4 = "doAction_OPC(0, \"" + formID + "\")";
-            lbl_options_button1.attr('onclick', onclick_2);
-            lbl_options_button2.attr('onclick', onclick_1);
-            lbl_options_button3.attr('onclick', onclick_3);
-            lbl_options_button4.attr('onclick', onclick_4);
+            var onclick_1 = "doAction_OPC(4, \"" + formID + "\")"; // azul - Diseño aprobado
+            var onclick_2 = "doAction_OPC(1, \"" + formID + "\")"; // verde - Concluído
+            var onclick_3 = "doAction_OPC(3, \"" + formID + "\")"; // rojo - Cancelado
+            var onclick_4 = "doAction_OPC(0, \"" + formID + "\")"; // negro - Inicial
+            lbl_options_button1.attr('onclick', onclick_2); // verde - Concluído
+            lbl_options_button2.attr('onclick', onclick_1); // azul - Diseño aprobado
+            lbl_options_button3.attr('onclick', onclick_3); // rojo - Cancelado
+            lbl_options_button4.attr('onclick', onclick_4); // negro - Inicial
         }
     }
 }
 
 function showActionMenu_CTO(formID, nombre, goToURL, goToGMaps, goToWPP, btnID) {
-    closeAll_popups();
-
     var divPopbox = $("#divPopbox_CTO");
     var btnID = $("#" + btnID);
     if (divPopbox !== null && divPopbox !== undefined && btnID !== null && btnID !== undefined) {
@@ -659,7 +668,7 @@ function showActionMenu_CTO(formID, nombre, goToURL, goToGMaps, goToWPP, btnID) 
         // 1: Concluído - verde
         // 2: Cancelado - rojo
         // 3: Eliminado - rojo
-        // 4: Diseño OK, pronto para imprimir - azul
+        // 4: Diseño aprobado, pronto para imprimir - azul
 
         // Cargar acciones
         var lbl_options_button1 = $("#lbl_options_button1_CTO");

@@ -193,7 +193,7 @@ namespace Cartelux1
                             lbl1 = e.Row.FindControl("lblTipo") as Label;
                             if (lbl1 != null)
                             {
-                                lista_pedido_tipos _lista_pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Tipo_ID);
+                                lista_pedido_tipos _lista_pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(c => c.Pedido_Tipo_ID == _pedido.Pedido_Tipo_ID);
                                 if (_lista_pedido_tipo != null)
                                 {
                                     string nombre = string.Empty;
@@ -446,7 +446,7 @@ namespace Cartelux1
             }
         }
 
-        public static List<formularios> GetFormularios_ByMonth(CarteluxDB context, DateTime date1, DateTime date2)
+        public static List<formularios> GetFormularios_ByMonth(CarteluxDB context, DateTime date1, DateTime date2, bool incluye_cancelados = false)
         {
             List<formularios> formularios_elements = new List<formularios>();
             if (context != null)
@@ -457,17 +457,31 @@ namespace Cartelux1
                 {
                     // Get Pedidos
                     var pedidos_elements = context.pedidos.Where(v => v.Pedido_Entrega_ID == _pedido_entrega.Pedido_Entrega_ID).ToList();
-                    foreach (pedidos _pedidos in pedidos_elements)
+                    foreach (pedidos _pedido in pedidos_elements)
                     {
-                        int pedido_entrega_ID = _pedidos.Pedido_Entrega_ID;
-                        formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Formulario_ID == _pedidos.Formulario_ID);
+                        // Filtro No incluye cancelados
+                        if (!incluye_cancelados)
+                        {
+                            lista_pedido_estados _pedidoEstado = (lista_pedido_estados)context.lista_pedido_estados.FirstOrDefault(c => c.Pedido_Estado_ID == _pedido.Pedido_Estado_ID);
+                            if (_pedidoEstado != null)
+                            {
+                                if ((_pedido.Pedido_Estado_ID == _pedidoEstado.Pedido_Estado_ID && (_pedidoEstado.Codigo == 2 || _pedidoEstado.Codigo == 3)))
+                                {
+                                    continue;
+                                }
+                            }
+                        }
+
+                        int pedido_entrega_ID = _pedido.Pedido_Entrega_ID;
+                        formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Formulario_ID == _pedido.Formulario_ID);
                         if (_formulario != null)
                         {
-                            // Get Formulario
+                            // Add Formulario
                             formularios_elements.Add(_formulario);
                         }
-                    }
-                }
+                    } // foreach pedidos
+                } // foreach pedido_entregas
+
             }
             return formularios_elements;
         }
@@ -478,7 +492,7 @@ namespace Cartelux1
         #region Static Methods
 
         [WebMethod]
-        public static _GridFormularios[] GetData_BindGridFormularios(string year_value, string month_value, bool soloVigentes_value, bool soloJuanchy_value)
+        public static _GridFormularios[] GetData_BindGridFormularios(string year_value, string month_value, bool soloVigentes_value, bool soloJuanchy_value, bool incluirCancelados_value)
         {
             List<_GridFormularios> _GridFormularios_list = new List<_GridFormularios>();
             if (!string.IsNullOrWhiteSpace(year_value) && !string.IsNullOrWhiteSpace(month_value))
@@ -525,7 +539,7 @@ namespace Cartelux1
                         DateTime date2 = new DateTime(year_int, month_int, last_day);
 
                         int number = 1;
-                        List<formularios> formularios_elements = GetFormularios_ByMonth(context, date1, date2);
+                        List<formularios> formularios_elements = GetFormularios_ByMonth(context, date1, date2, incluirCancelados_value);
                         foreach (formularios _formulario in formularios_elements)
                         {
                             if (_formulario != null)
@@ -555,7 +569,7 @@ namespace Cartelux1
                                     lista_pedido_estados _pedidoEstado = (lista_pedido_estados)context.lista_pedido_estados.FirstOrDefault(c => c.Pedido_Estado_ID == _pedido.Pedido_Estado_ID);
                                     if (_pedidoEstado != null)
                                     {
-                                        _GridFormulario1.EstadoNro = _pedidoEstado.Codigo; 
+                                        _GridFormulario1.EstadoNro = _pedidoEstado.Codigo;
                                     }
 
                                     #region Pedido Entrega ---------------------------------------------------------------------------------------------------------
@@ -578,6 +592,7 @@ namespace Cartelux1
                                             _GridFormulario1.EstadoNro = 1; // Concluídos
                                         }
 
+                                        // Filtro Juanchy
                                         lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Codigo == _pedido_entrega.Entrega_Tipo_ID);
                                         if (_lista_entregas_tipo != null)
                                         {
@@ -589,6 +604,7 @@ namespace Cartelux1
                                                 continue;
                                             }
                                         }
+
                                     }
                                     #endregion END Pedido Entrega
 
@@ -608,17 +624,27 @@ namespace Cartelux1
                                     }
                                     #endregion END Pedido Tamaño
 
-                                    #region Pedido TipoTipo ---------------------------------------------------------------------------------------------------------
-                                    lista_pedido_tipos _lista_pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Tipo_ID);
+                                    #region Pedido Tipo ---------------------------------------------------------------------------------------------------------
+                                    lista_pedido_tipos _lista_pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(c => c.Pedido_Tipo_ID == _pedido.Pedido_Tipo_ID);
                                     if (_lista_pedido_tipo != null)
                                     {
-                                        _GridFormulario1.lblTipo = _lista_pedido_tipo.Nombre;
+                                        if (!string.IsNullOrWhiteSpace(_lista_pedido_tipo.Nombre))
+                                        {
+                                            _GridFormulario1.lblTipo = _lista_pedido_tipo.Nombre;
+                                        }
                                     }
+                                    // WORKAROUND
+                                    if (string.IsNullOrWhiteSpace(_GridFormulario1.lblTipo))
+                                    {
+                                        _GridFormulario1.lblTipo = "Pasacalle";
+                                    }
+
                                     #endregion END Pedido Tipo
 
                                     #region Pedido Material ---------------------------------------------------------------------------------------------------------
-                                    lista_pedido_materiales _lista_pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Material_ID);
-                                    if (_lista_pedido_material != null)
+                                    _GridFormulario1.lblMaterial = "Impreso";
+                                    lista_pedido_materiales _lista_pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(c => c.Pedido_Material_ID == _pedido.Pedido_Material_ID);
+                                    if (_lista_pedido_material != null && !string.IsNullOrWhiteSpace(_lista_pedido_material.Nombre))
                                     {
                                         _GridFormulario1.lblMaterial = _lista_pedido_material.Nombre;
                                     }

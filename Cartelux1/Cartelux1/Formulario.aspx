@@ -263,13 +263,13 @@
                                         <div class="login-container sub-form">
                                             <label class="_label1 unselectable">1) Ingrese sus datos</label>
                                             <div class="form-group unselectable">
-                                                <input id="txbTelefono" class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" required runat="server" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
+                                                <input id="txbTelefono" class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" runat="server" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
                                             </div>
                                             <div class="form-group unselectable">
-                                                <input id="txbNombre" class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" required runat="server" clientidmode="static" autofocus />
+                                                <input id="txbNombre" class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" runat="server" clientidmode="static" autofocus />
                                             </div>
                                             <hr />
-                                            <label class="_label1 unselectable">2) Datos del Pasacalle</label>
+                                            <label class="_label1 unselectable">2) Datos del Cartel</label>
                                             <br />
 
                                             <%--<asp:DropDownList ID="ddlTipoCartel" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />--%>
@@ -288,7 +288,15 @@
 
                                             <br />
                                             <br />
-                                            <div class="form-group unselectable" style="display:none;">
+
+                                            <!--Radio group-->
+                                            <div class="row-short pull-left">
+                                                <asp:RadioButton ID="radImpreso1" runat="server" ClientIDMode="Static" CssClass="radio-inline" Checked="true" Text="Impreso" GroupName="radImpreso" />
+                                                <asp:RadioButton ID="radImpreso2" runat="server" ClientIDMode="Static" CssClass="radio-inline" Text="Pintado" GroupName="radImpreso" />
+                                            </div>
+                                            <!--Radio group-->
+                                            <br />
+                                            <div class="form-group unselectable" style="display: none;">
                                                 <asp:TextBox runat="server" ID="txbTexto1" TextMode="multiline" CssClass="form-control txbEditable multitext" placeholder="Indicaciones del diseño (opcional)" TabIndex="3"></asp:TextBox>
                                             </div>
 
@@ -308,12 +316,12 @@
 
                                             <div class="form-group" id="dir_group" style="display: none;">
                                                 <div class="form-group row" style="margin-left: 0; margin-right: 0;">
-                                                    <input class="form-control txbEditable ctrl-required pull-left" placeholder="Calle" type="text" tabindex="5" runat="server" id="txbDireccion_calle" clientidmode="static" style="width: 45%;" />
-                                                    <input class="form-control txbEditable pull-right" placeholder="Número de puerta" type="number" tabindex="5" runat="server" id="txbDireccion_numero" clientidmode="static" style="width: 45%;" />
+                                                    <input id="txbDireccion_calle" class="form-control txbEditable ctrl-required pull-left" placeholder="Calle" type="text" tabindex="5" runat="server" clientidmode="static" style="width: 45%;" />
+                                                    <input id="txbDireccion_numero" class="form-control txbEditable pull-right" placeholder="Número de puerta" type="number" tabindex="5" runat="server" clientidmode="static" style="width: 45%;" />
                                                 </div>
                                                 <div class="form-group row" style="margin-left: 0; margin-right: 0;">
-                                                    <input class="form-control txbEditable pull-left" placeholder="Apto" type="text" tabindex="5" runat="server" id="txbDireccion_apto" clientidmode="static" style="width: 45%;" />
-                                                    <input class="form-control txbEditable pull-right" placeholder="Esquina" type="text" tabindex="5" runat="server" id="txbDireccion_esquina" clientidmode="static" style="width: 45%;" />
+                                                    <input id="txbDireccion_apto" class="form-control txbEditable pull-left" placeholder="Apto" type="text" tabindex="5" runat="server" clientidmode="static" style="width: 45%;" />
+                                                    <input id="txbDireccion_esquina" class="form-control txbEditable pull-right" placeholder="Esquina" type="text" tabindex="5" runat="server" clientidmode="static" style="width: 45%;" />
                                                 </div>
                                             </div>
 
@@ -421,19 +429,19 @@
 
                                             <asp:DropDownList ID="ddlTamano1_tab2" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required form-control" />
                                             <label style="font-weight: normal;">¿Tiene el diseño?</label>
-                                            <asp:CheckBox ID="CheckBox1" runat="server" ClientIDMode="Static" CssClass="txbEditable" Enabled="false" TextAlign="Left" />
-                                            <a id="aCollapse_bosquejo_tab2" data-toggle="collapse" href="#div_bosquejo" class="collapsed">Cargar aquí</a>
+                                            <asp:CheckBox ID="chbBosquejo_tab2" runat="server" ClientIDMode="Static" CssClass="txbEditable" Enabled="false" TextAlign="Left" />
+                                            <a id="aCollapse_bosquejo_tab2" data-toggle="collapse" href="#div_bosquejo_tab2" class="collapsed">Cargar aquí</a>
                                             <div id="div_bosquejo_tab2" class="col-xs-12 col-sm-12 col-md-12 panel-collapse collapse in" aria-expanded="false">
                                                 <div class="form-group unselectable">
-                                                    <p style="font-size: small;">Si lo desea cargue un bosquejo hecho a mano del diseño deseado aquí</p>
-                                                    <asp:FileUpload ID="FileUpload1_tab2" runat="server" accept="image/*" />
+                                                    <p style="font-size: small;">Si lo desea cargue el disñeo a imprimir aquí</p>
+                                                    <asp:FileUpload ID="MyFileUpload_tab2" runat="server" accept="image/*" />
                                                 </div>
                                                 <hr />
                                             </div>
 
                                             <br />
                                             <br />
-                                            <div class="form-group unselectable" style="display:none;">
+                                            <div class="form-group unselectable" style="display: none;">
                                                 <asp:TextBox runat="server" ID="txbTexto1_tab2" TextMode="multiline" CssClass="form-control txbEditable multitext" placeholder="Indicaciones del diseño (opcional)" TabIndex="3"></asp:TextBox>
                                             </div>
 
@@ -453,12 +461,12 @@
 
                                             <div class="form-group" id="dir_group_tab2" style="display: none;">
                                                 <div class="form-group row" style="margin-left: 0; margin-right: 0;">
-                                                    <input class="form-control txbEditable ctrl-required pull-left" placeholder="Calle" type="text" tabindex="5" runat="server" id="Text4" clientidmode="static" style="width: 45%;" />
-                                                    <input class="form-control txbEditable pull-right" placeholder="Número de puerta" type="number" tabindex="5" runat="server" id="Number2" clientidmode="static" style="width: 45%;" />
+                                                    <input id="txbDireccion_calle_tab2" class="form-control txbEditable ctrl-required pull-left" placeholder="Calle" type="text" tabindex="5" runat="server" clientidmode="static" style="width: 45%;" />
+                                                    <input id="txbDireccion_numero_tab2" class="form-control txbEditable pull-right" placeholder="Número de puerta" type="number" tabindex="5" runat="server" clientidmode="static" style="width: 45%;" />
                                                 </div>
                                                 <div class="form-group row" style="margin-left: 0; margin-right: 0;">
-                                                    <input class="form-control txbEditable pull-left" placeholder="Apto" type="text" tabindex="5" runat="server" id="Text5" clientidmode="static" style="width: 45%;" />
-                                                    <input class="form-control txbEditable pull-right" placeholder="Esquina" type="text" tabindex="5" runat="server" id="Text6" clientidmode="static" style="width: 45%;" />
+                                                    <input id="txbDireccion_apto_tab2" class="form-control txbEditable pull-left" placeholder="Apto" type="text" tabindex="5" runat="server" clientidmode="static" style="width: 45%;" />
+                                                    <input id="txbDireccion_esquina_tab2" class="form-control txbEditable pull-right" placeholder="Esquina" type="text" tabindex="5" runat="server" clientidmode="static" style="width: 45%;" />
                                                 </div>
                                             </div>
 
@@ -488,7 +496,7 @@
 
                                             <br />
                                             <div class="form-group unselectable">
-                                                <asp:Button ID="btnConfirmar1_tab2" runat="server" CssClass="form-control btn btn-danger btnConfirm1" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm_tab2();" ClientIDMode="Static" Text="GUARDAR" />
+                                                <asp:Button ID="btnConfirmar1_tab2" runat="server" CssClass="form-control btn btn-danger btnConfirm1" OnClick="btnConfirmar_ServerClick_tab2" OnClientClick="return pre_confirm_tab2();" ClientIDMode="Static" Text="GUARDAR" />
                                             </div>
 
                                         </div>

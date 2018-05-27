@@ -124,6 +124,8 @@
     <script type="text/javascript" src="/Content/js/glDatePicker.min.js"></script>
     <script type="text/javascript" src="/Content/js/bic_calendar.js"></script>
     <script type="text/javascript" src="/Content/js/popbox.js"></script>
+    <script type="text/javascript" src="/Content/js/jquery.tablesorter.js"></script>
+    <script type="text/javascript" src="/Content/js/jquery.quicksearch.js"></script>
 
     <!-- Bootstrap table -->
     <script type="text/javascript" src="/Content/js/bootstrap-table.js"></script>
@@ -220,9 +222,23 @@
                                     <asp:HiddenField ID="hdn_clientID" runat="server" ClientIDMode="Static" />
 
                                     <div class="row">
-                                        <div class="col-sm-12 col-md-4 pull-left">
-                                            <h2 style="margin-top: 0;">
-                                                <label id="lblMonth" class="pull-left unselectable">[MES]</label></h2>
+                                        <div class="col-sm-12 col-md-4 pull-left" style="display: grid;">
+                                            <div class="row-short">
+                                                <h2 style="margin-top: 0;">
+                                                    <label id="lblMonth" class="pull-left unselectable">[MES]</label></h2>
+                                            </div>
+                                            <div class="row-short">
+                                                <form action="#" method="get" class="sidebar-form" style="display: block !important; width: 100%;">
+                                                    <div class="input-group ">
+                                                        <input type="text" id="txbSearchPedidos" name="q" class="form-control" placeholder="Buscar...">
+                                                        <span class="input-group-btn">
+                                                            <a id="btnSearchPedidos" role="button"" href="#" name="search" class="btn btn-info">
+                                                                <i class="glyphicon glyphicon-search"></i>
+                                                            </a>
+                                                        </span>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
                                         <div class="col-sm-12 col-md-6 pull-right">
                                             <div class="input-group pull-right" style="padding: 5px;">
@@ -237,6 +253,13 @@
                                                     <input id="chbSoloVigentes" class="form-check-input" type="checkbox" onclick="filtrar()">
                                                     <label class="form-check-label unselectable" for="chbSoloVigentes">
                                                         Todo el mes
+                                                    </label>
+                                                </div>
+
+                                                <div class="form-check">
+                                                    <input id="chbInclCancelados" class="form-check-input" type="checkbox" onclick="filtrar()">
+                                                    <label class="form-check-label unselectable" for="chbInclCancelados">
+                                                        Incluir cancelados
                                                     </label>
                                                 </div>
                                             </div>
@@ -337,18 +360,6 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <%-- <asp:TemplateField HeaderText="Form" ControlStyle-CssClass="btn btn-warning btn-xs">
-                                                    <ItemTemplate>
-                                                        <a id="btnURL" role="button" href='<%# Eval("URL_short") %>' class="btn btn-warning btn-xs fa fa-wpforms" title="" target="_blank"></a>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-
-                                                <asp:TemplateField HeaderText="WPP" ControlStyle-CssClass="btn btn-warning btn-xs">
-                                                    <ItemTemplate>
-                                                        <a id="btnURL" role="button" href='<%# Eval("URL_short") %>' class="btn btn-warning btn-xs fa fa-wpforms" title="" target="_blank"></a>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>--%>
-
                                                 <asp:TemplateField HeaderText="OPC" ControlStyle-CssClass="btn btn-warning btn-xs">
                                                     <ItemTemplate>
                                                         <asp:LinkButton ID="btnOPC" runat="server" CommandName="View" CssClass="btn btn-primary btn-xs fa fa-asterisk" />
@@ -367,6 +378,17 @@
 
                                 </ContentTemplate>
                             </asp:UpdatePanel>
+
+                            <br />
+                            <div class="row">
+                                <label style="color: #333">Vigente</label>
+                                | 
+        <label style="color: green">Conluído</label>
+                                | 
+        <label style="color: blue">Diseño aprobado</label>
+                                | 
+        <label style="color: red">Cancelado</label>
+                            </div>
                         </div>
 
                         <div id="tabsFormularios_2">
@@ -381,7 +403,7 @@
                                                 <h2>Calendario de pedidos</h2>
                                             </div>
 
-                                            <div class="col-sm-12 col-md-4 pull-right">
+                                            <%-- <div class="col-sm-12 col-md-4 pull-right">
                                                 <form action="#" method="get" class="sidebar-form" style="display: block !important; width: 100%;">
                                                     <div class="input-group ">
                                                         <input type="text" id="txbSearchViajes" name="q" class="form-control" placeholder="Buscar...">
@@ -392,23 +414,27 @@
                                                         </span>
                                                     </div>
                                                 </form>
-                                            </div>
+                                            </div>--%>
                                         </div>
 
                                         <%--SOURCE: http://glad.github.io/glDatePicker/#examples --%>
-                                        <%-- <input type="text" id="mydate" />
-
-                                        <input type="text" id="example3" gldp-id="gldp-9183641266" class="">
-                                        <div gldp-el="gldp-9183641266"></div>--%>
-
-                                        <%--<div id="calendarContainer">
-                                        </div>--%>
 
                                         <div id="calendar"></div>
 
 
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
+
+                                <br />
+                                <div class="row">
+                                    <label style="color: #333">Envío al interior</label>
+                                    | 
+        <label style="color: green">Retiro en el taller</label>
+                                    | 
+        <label style="color: blue">Envío a domicilio</label>
+                                    | 
+        <label style="color: red">Colocación</label>
+                                </div>
 
                             </div>
 
@@ -420,6 +446,7 @@
 
             </div>
         </div>
+
     </div>
 
 
@@ -442,10 +469,10 @@
                 </div>
             </div>
             <div id="popbox_footer_OPC" class="row row-short" style="margin-right: 15px; margin-top: -7px;">
-                <button id="lbl_options_button1_OPC" type="button" class="btn btn-success btnAcciones" title="Diseño OK">
+                <button id="lbl_options_button1_OPC" type="button" class="btn btn-success btnAcciones" title="Concluído">
                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 </button>
-                <button id="lbl_options_button2_OPC" type="button" class="btn btn-primary btnAcciones" title="Concluído">
+                <button id="lbl_options_button2_OPC" type="button" class="btn btn-primary btnAcciones" title="Diseño aprobado">
                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 </button>
                 <button id="lbl_options_button3_OPC" type="button" class="btn btn-danger btnAcciones" title="Cancelado">

@@ -35,14 +35,6 @@ namespace Cartelux1
                 {
                     BindData(serie_str, tel_str);
                 }
-                else
-                {
-                    //SetFieldsReadOnly(true);
-                }
-            }
-            else
-            {
-
             }
         }
 
@@ -58,6 +50,16 @@ namespace Cartelux1
             if (!string.IsNullOrWhiteSpace(form_ID_str) && !string.IsNullOrWhiteSpace(tel_str))
             {
                 SaveData(form_ID_str, tel_str);
+            }
+        }
+
+        protected void btnConfirmar_ServerClick_tab2(object sender, EventArgs e)
+        {
+            string form_ID_str = GetURLParam_Decrypted("ID");
+            string tel_str = GetURLParam("TEL");
+            if (!string.IsNullOrWhiteSpace(form_ID_str) && !string.IsNullOrWhiteSpace(tel_str))
+            {
+                SaveData(form_ID_str, tel_str, false);
             }
         }
 
@@ -187,108 +189,209 @@ namespace Cartelux1
                             {
                                 hdnPedidoCantidad.Value = _pedido.Cantidad.ToString();
 
-                                // GET Diseño
-                                pedido_disenos _pedido_diseno = (pedido_disenos)context.pedido_disenos.FirstOrDefault(v => v.Pedido_Diseno_ID.Equals(_pedido.Pedido_Diseno_ID));
-                                if (_pedido_diseno != null)
+                                #region ¿Is Pasacalle OR Roll up?
+
+                                bool isPasacalle = true;
+                                int tipoPedidoID = _pedido.Pedido_Tipo_ID;
+                                lista_pedido_tipos _pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(v => v.Pedido_Tipo_ID.Equals(tipoPedidoID));
+                                if (_pedido_tipo != null)
                                 {
-                                    txbTexto1.Text = _pedido_diseno.Texto;
-                                    chbBosquejo.Checked = string.IsNullOrWhiteSpace(_pedido_diseno.Boceto_nombre) ? false : true;
+                                    // Si es código 4 ==> Roll up
+                                    isPasacalle = _pedido_tipo.Codigo == 4 ? false : true;
                                 }
 
-                                // GET Entrega
-                                pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(v => v.Pedido_Entrega_ID.Equals(_pedido.Pedido_Entrega_ID));
-                                if (_pedido_entrega != null)
+                                #endregion ¿Is Pasacalle OR Roll up?
+
+                                #region IS PASACALLE
+
+                                if (isPasacalle)
                                 {
-                                    txbDireccion_calle.Value = _pedido_entrega.Direccion_calle;
-                                    txbDireccion_numero.Value = _pedido_entrega.Direccion_numero;
-                                    txbDireccion_apto.Value = _pedido_entrega.Direccion_apto;
-                                    txbDireccion_esquina.Value = _pedido_entrega.Direccion_esquina;
+                                    #region GET Material
 
-                                    string sqlFormattedDate = _pedido_entrega.Fecha_entrega.HasValue ? _pedido_entrega.Fecha_entrega.Value.ToString(GlobalVariables.ShortDateTime_format1) : "null";
-                                    txbFecha.Value = sqlFormattedDate;
-
-                                    txbCiudad.Value = _pedido_entrega.Ciudad;
-
-                                    /*
-                                    hdnCurrentLAT.Value = _pedido_entrega.Coordenadas_X;
-                                    hdnCurrentLNG.Value = _pedido_entrega.Coordenadas_Y;
-                                    hdnCurrentLocationURL.Value = _pedido_entrega.Google_maps_URL;
-                                    */
-
-                                    if (_pedido_entrega.Entrega_Tipo_ID > 0)
+                                    int material = 1;
+                                    lista_pedido_materiales _pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(v => v.Pedido_Material_ID.Equals(_pedido.Pedido_Material_ID));
+                                    if (_pedido_material != null)
                                     {
-                                        lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(v => v.Codigo.Equals(_pedido_entrega.Entrega_Tipo_ID));
-                                        if (_lista_entregas_tipo != null)
-                                        {
-                                            ddlTipoEntrega1.SelectedValue = _lista_entregas_tipo.Codigo.ToString();
-                                            int codigo = _lista_entregas_tipo.Codigo;
-                                            /*
-                                             * Codigo = 1: Colocación
-                                             * Codigo = 2: Envío a domicilio
-                                             * Codigo = 3: Envío al interior
-                                             * Codigo = 4: Retiro en el taller
-                                             * */
-                                            if (codigo == 1 || codigo == 2)
+                                        material = _pedido_material.Codigo;
+                                    }
+
+                                    switch (material)
+                                    {
+                                        case 1:
                                             {
-                                                ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>showControl_withDelay('dir_group', true);</script>", false);
+                                                // Impreso
+                                                radImpreso1.Checked = true;
+                                                radImpreso2.Checked = false;
+                                                break;
                                             }
-                                            else if (codigo == 3)
+                                        case 2:
                                             {
-                                                ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>showControl_withDelay('txbCiudad', true);</script>", false);
+                                                // Pintado
+                                                radImpreso1.Checked = false;
+                                                radImpreso2.Checked = true;
+                                                break;
+                                            }
+                                    }
+
+                                    #endregion GET Material
+
+                                    #region GET Diseño
+
+                                    pedido_disenos _pedido_diseno = (pedido_disenos)context.pedido_disenos.FirstOrDefault(v => v.Pedido_Diseno_ID.Equals(_pedido.Pedido_Diseno_ID));
+                                    if (_pedido_diseno != null)
+                                    {
+                                        txbTexto1.Text = _pedido_diseno.Texto;
+                                        chbBosquejo.Checked = string.IsNullOrWhiteSpace(_pedido_diseno.Boceto_nombre) ? false : true;
+                                    }
+
+                                    #endregion GET Diseño
+
+                                    #region GET Entrega
+
+                                    pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(v => v.Pedido_Entrega_ID.Equals(_pedido.Pedido_Entrega_ID));
+                                    if (_pedido_entrega != null)
+                                    {
+                                        txbDireccion_calle.Value = _pedido_entrega.Direccion_calle;
+                                        txbDireccion_numero.Value = _pedido_entrega.Direccion_numero;
+                                        txbDireccion_apto.Value = _pedido_entrega.Direccion_apto;
+                                        txbDireccion_esquina.Value = _pedido_entrega.Direccion_esquina;
+
+                                        string sqlFormattedDate = _pedido_entrega.Fecha_entrega.HasValue ? _pedido_entrega.Fecha_entrega.Value.ToString(GlobalVariables.ShortDateTime_format1) : "null";
+                                        txbFecha.Value = sqlFormattedDate;
+
+                                        txbCiudad.Value = _pedido_entrega.Ciudad;
+
+                                        /*
+                                        hdnCurrentLAT.Value = _pedido_entrega.Coordenadas_X;
+                                        hdnCurrentLNG.Value = _pedido_entrega.Coordenadas_Y;
+                                        hdnCurrentLocationURL.Value = _pedido_entrega.Google_maps_URL;
+                                        */
+
+                                        if (_pedido_entrega.Entrega_Tipo_ID > 0)
+                                        {
+                                            lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(v => v.Codigo.Equals(_pedido_entrega.Entrega_Tipo_ID));
+                                            if (_lista_entregas_tipo != null)
+                                            {
+                                                ddlTipoEntrega1.SelectedValue = _lista_entregas_tipo.Codigo.ToString();
+                                                int codigo = _lista_entregas_tipo.Codigo;
+                                                /*
+                                                 * Codigo = 1: Colocación
+                                                 * Codigo = 2: Envío a domicilio
+                                                 * Codigo = 3: Envío al interior
+                                                 * Codigo = 4: Retiro en el taller
+                                                 * */
+                                                if (codigo == 1 || codigo == 2)
+                                                {
+                                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>showControl_withDelay('dir_group', true);</script>", false);
+                                                }
+                                                else if (codigo == 3)
+                                                {
+                                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>showControl_withDelay('txbCiudad', true);</script>", false);
+                                                }
                                             }
                                         }
                                     }
-                                }
 
-                                #region Tipo
-                                //if (_pedido.Pedido_Tipo_ID > 0)
-                                //{
-                                //    lista_pedido_tipos _lista_pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(v => v.Codigo.Equals(_pedido.Pedido_Tipo_ID));
-                                //    if (_lista_pedido_tipo != null)
-                                //    {
-                                //        ddlTipoCartel.SelectedValue = _lista_pedido_tipo.Codigo.ToString();
-                                //    }
-                                //}
-                                #endregion
+                                    #endregion GET Entrega
 
-                                #region Material = Pintado / Impreso
-                                if (_pedido.Pedido_Material_ID > 0)
-                                {
-                                    //ddlMotivo.DataBind();
-                                    //ddlMotivo.SelectedIndex = cartel.Tematica_ID;
-                                }
-                                #endregion
-
-                                #region Tamaño
-                                if (_pedido.Pedido_Tamano_ID > 0)
-                                {
-                                    lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(v => v.Codigo.Equals(_pedido.Pedido_Tamano_ID));
-                                    if (_lista_pedido_tamano != null)
+                                    #region Tamaño
+                                    if (_pedido.Pedido_Tamano_ID > 0)
                                     {
-                                        ddlTamano1.SelectedValue = _lista_pedido_tamano.Codigo.ToString();
+                                        lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(v => v.Codigo.Equals(_pedido.Pedido_Tamano_ID));
+                                        if (_lista_pedido_tamano != null)
+                                        {
+                                            ddlTamano1.SelectedValue = _lista_pedido_tamano.Codigo.ToString();
+                                        }
                                     }
-                                }
-                                #endregion
+                                    #endregion                                    
 
-                                #region Temática
-                                if (_pedido.Pedido_Tematica_ID > 0)
+                                } // if isPasacalle
+
+                                #endregion IS PASACALLE
+
+                                #region IS ROLL UP
+
+                                else
                                 {
-                                    //ddlMotivo.DataBind();
-                                    //ddlMotivo.SelectedIndex = cartel.Tematica_ID;
-                                }
-                                #endregion
+                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Set ROLLUP", "<script type='text/javascript'>$('#aTabsPedidos_2').click();</script>", false);
 
+                                    #region GET Diseño
+
+                                    pedido_disenos _pedido_diseno = (pedido_disenos)context.pedido_disenos.FirstOrDefault(v => v.Pedido_Diseno_ID.Equals(_pedido.Pedido_Diseno_ID));
+                                    if (_pedido_diseno != null)
+                                    {
+                                        txbTexto1_tab2.Text = _pedido_diseno.Texto;
+                                        chbBosquejo_tab2.Checked = string.IsNullOrWhiteSpace(_pedido_diseno.Boceto_nombre) ? false : true;
+                                    }
+
+                                    #endregion GET Diseño
+
+                                    #region GET Entrega
+
+                                    pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(v => v.Pedido_Entrega_ID.Equals(_pedido.Pedido_Entrega_ID));
+                                    if (_pedido_entrega != null)
+                                    {
+                                        txbDireccion_calle_tab2.Value = _pedido_entrega.Direccion_calle;
+                                        txbDireccion_numero_tab2.Value = _pedido_entrega.Direccion_numero;
+                                        txbDireccion_apto_tab2.Value = _pedido_entrega.Direccion_apto;
+                                        txbDireccion_esquina_tab2.Value = _pedido_entrega.Direccion_esquina;
+
+                                        string sqlFormattedDate = _pedido_entrega.Fecha_entrega.HasValue ? _pedido_entrega.Fecha_entrega.Value.ToString(GlobalVariables.ShortDateTime_format1) : "null";
+                                        txbFecha_tab2.Value = sqlFormattedDate;
+
+                                        txbCiudad_tab2.Value = _pedido_entrega.Ciudad;
+
+                                        if (_pedido_entrega.Entrega_Tipo_ID > 0)
+                                        {
+                                            lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(v => v.Codigo.Equals(_pedido_entrega.Entrega_Tipo_ID));
+                                            if (_lista_entregas_tipo != null)
+                                            {
+                                                ddlTipoEntrega1_tab2.SelectedValue = _lista_entregas_tipo.Codigo.ToString();
+                                                int codigo = _lista_entregas_tipo.Codigo;
+                                                /*
+                                                 * Codigo = 1: Colocación
+                                                 * Codigo = 2: Envío a domicilio
+                                                 * Codigo = 3: Envío al interior
+                                                 * Codigo = 4: Retiro en el taller
+                                                 * */
+                                                if (codigo == 1 || codigo == 2)
+                                                {
+                                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>showControl_withDelay('dir_group_tab2', true);</script>", false);
+                                                }
+                                                else if (codigo == 3)
+                                                {
+                                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>showControl_withDelay('txbCiudad_tab2', true);</script>", false);
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    #endregion GET Entrega
+
+                                    #region Tamaño
+                                    if (_pedido.Pedido_Tamano_ID > 0)
+                                    {
+                                        lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(v => v.Codigo.Equals(_pedido.Pedido_Tamano_ID));
+                                        if (_lista_pedido_tamano != null)
+                                        {
+                                            ddlTamano1_tab2.SelectedValue = _lista_pedido_tamano.Codigo.ToString();
+                                        }
+                                    }
+                                    #endregion
+
+                                }
+
+                                #endregion IS ROLL UP
                             }
                         }
 
                         // Última actualización del pedido
                         lblLastUpdate.InnerText = " " + _formulario.Fecha_update.ToString();
-
-                        //SetFieldsReadOnly(true);
                     }
                     else
                     {
                         txbTelefono.Value = tel_str;
+                        txbTelefono_tab2.Value = tel_str;
                     }
                 }
             }
@@ -322,7 +425,6 @@ namespace Cartelux1
 
                 // Cartel
                 txbTexto1.Attributes.Add("readonly", "readonly");
-                //txbDetalles.Attributes.Add("readonly", "readonly");
 
                 msj_result.Visible = true;
                 btnConfirmar1.Enabled = false;
@@ -343,14 +445,12 @@ namespace Cartelux1
 
                 // Cartel
                 txbTexto1.Attributes.Add("readonly", "false");
-                //txbDetalles.Attributes.Add("readonly", "false");
 
-                //btnConfirmar.Disabled = false;
                 btnConfirmar1.Enabled = true;
             }
         }
 
-        private void SaveData(string serie_str, string tel_str)
+        private void SaveData(string serie_str, string tel_str, bool isPasacalle = true)
         {
             // Logger variables
             System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
@@ -391,7 +491,7 @@ namespace Cartelux1
                         int formulario_ID = Get_NextFormularioID(context);
                         if (formulario_ID > 0)
                         {
-                            NEW_Pedido(context, formulario_ID);
+                            NEW_Pedido(context, formulario_ID, isPasacalle);
                         }
                     }
                     else
@@ -418,24 +518,43 @@ namespace Cartelux1
                             // Updates
 
                             #region Tipo = Pasacalle / Roll up / etc
-                            //if (ddlTipoCartel.SelectedIndex > 0)
-                            //{
-                            //    int selected = 1;
-                            //    if (!int.TryParse(ddlTipoCartel.SelectedValue, out selected))
-                            //    {
-                            //        selected = 1;
-                            //        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTipoCartel.SelectedValue);
-                            //    }
-                            //    _pedido.Pedido_Tipo_ID = selected;
-                            //}
-                            _pedido.Pedido_Tipo_ID = 1;
+
+                            /* Código tipo pedido
+                             * 1 - Pasacalle
+                             * 2 - Pancarta
+                             * 3 - Lona informativa / decorativa
+                             * 4 - Roll up
+                             * */
+
+                            int tipo_codigo = 1; // Pasacalle
+                            if (!isPasacalle)
+                            {
+                                tipo_codigo = 4; // Roll up
+                            }
+
+                            _pedido.Pedido_Tipo_ID = 2; // ID Pasacalle
+                            lista_pedido_tipos _pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(v => v.Codigo.Equals(tipo_codigo));
+                            if (_pedido_tipo != null)
+                            {
+                                _pedido.Pedido_Tipo_ID = _pedido_tipo.Pedido_Tipo_ID;
+                            }
+
                             #endregion
 
                             #region Material = Pintado / Impreso
-                            //if (ddlTamano.SelectedIndex > 0)
-                            //{
-                            //    pedido.Pedido_Material_ID = ddlTamano.SelectedIndex;
-                            //}
+                            int material = 1; // Impreso
+                            if (!radImpreso1.Checked)
+                            {
+                                material = 2;
+                            }
+
+                            int materialID = _pedido.Pedido_Material_ID;
+                            lista_pedido_materiales _pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(v => v.Codigo.Equals(material));
+                            if (_pedido_material != null)
+                            {
+                                materialID = _pedido_material.Pedido_Material_ID;
+                            }
+                            _pedido.Pedido_Material_ID = materialID;
                             #endregion
 
                             #region UPDATE Tamaño
@@ -545,14 +664,21 @@ namespace Cartelux1
             }
         }
 
-        private string Get_GMaps_URL()
+        private string Get_GMaps_URL(bool isPasacalle = true)
         {
             string gmaps_url = "https://www.google.com/maps/search/?api=1&query=";
             if (ConfigurationManager.AppSettings != null)
             {
                 gmaps_url = ConfigurationManager.AppSettings["GMap_URL"].ToString();
             }
-            gmaps_url += txbDireccion_calle.Value + " " + txbDireccion_numero.Value;
+            if (isPasacalle)
+            {
+                gmaps_url += txbDireccion_calle.Value + " " + txbDireccion_numero.Value;
+            }
+            else
+            {
+                gmaps_url += txbDireccion_calle_tab2.Value + " " + txbDireccion_numero_tab2.Value;
+            }
             return gmaps_url;
         }
 
@@ -597,7 +723,7 @@ namespace Cartelux1
             return save_ok;
         }
 
-        private void NEW_Pedido(CarteluxDB context, int formulario_ID)
+        private void NEW_Pedido(CarteluxDB context, int formulario_ID, bool isPasacalle)
         {
             if (formulario_ID > 0)
             {
@@ -621,133 +747,281 @@ namespace Cartelux1
                 }
                 _pedido.Cantidad = cantidad;
 
-                #region Tipo cartel = Pasacalle / Roll up
-                _pedido.Pedido_Tipo_ID = 1;
-                //if (ddlTipoCartel.SelectedIndex > 0)
-                //{
-                //    int selected = 1;
-                //    if (!int.TryParse(ddlTipoCartel.SelectedValue, out selected))
-                //    {
-                //        selected = 1;
-                //        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTipoCartel.SelectedValue);
-                //    }
-                //    _pedido.Pedido_Tipo_ID = selected;
-                //}
-                #endregion
 
-                #region Material = Pintado / Impreso
-                //if (ddlTamano.SelectedIndex > 0)
-                //{
-                //    pedido.Pedido_Material_ID = ddlTamano.SelectedIndex;
-                //}
-                _pedido.Pedido_Material_ID = 0;
-                #endregion
 
-                #region Tamaño
-                _pedido.Pedido_Tamano_ID = 0;
-                if (ddlTamano1.SelectedIndex > 0)
+                #region IS PASACALLE
+
+                if (isPasacalle)
                 {
-                    int selected = 1;
-                    if (!int.TryParse(ddlTamano1.SelectedValue, out selected))
+                    #region Tipo cartel = Pasacalle / Roll up
+
+                    /* Código tipo pedido
+                     * 1 - Pasacalle
+                     * 2 - Pancarta
+                     * 3 - Lona informativa / decorativa
+                     * 4 - Roll up
+                     * */
+
+                    int tipo_codigo = 1; // Pasacalle
+                    _pedido.Pedido_Tipo_ID = 2; // ID Pasacalle
+                    lista_pedido_tipos _pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(v => v.Codigo.Equals(tipo_codigo));
+                    if (_pedido_tipo != null)
                     {
-                        selected = 1;
-                        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTamano1.SelectedValue);
+                        _pedido.Pedido_Tipo_ID = _pedido_tipo.Pedido_Tipo_ID;
                     }
-                    _pedido.Pedido_Tamano_ID = selected;
-                }
-                #endregion
 
-                #region Temática
-                //if (ddlTamano.SelectedIndex > 0)
-                //{
-                //    pedido.Pedido_Tamano_ID = ddlTamano.SelectedIndex;
-                //}
-                _pedido.Pedido_Tematica_ID = 0;
-                #endregion
+                    #endregion
 
-                #region NEW Diseño
-                pedido_disenos _pedido_diseno = new pedido_disenos();
-                _pedido_diseno.Pedido_Diseno_ID = 0;
-
-                _pedido_diseno.Texto = txbTexto1.Text;
-
-                context.pedido_disenos.Add(_pedido_diseno);
-                Guardar_Contexto(context);
-
-                int pedido_diseno_ID = Get_NextPedido_DisenoID(context);
-                if (pedido_diseno_ID > 0)
-                {
-                    _pedido.Pedido_Diseno_ID = pedido_diseno_ID;
-                }
-                #endregion
-
-                #region NEW Entrega
-                pedido_entregas _pedido_entrega = new pedido_entregas();
-                _pedido_entrega.Pedido_Entrega_ID = 0;
-
-                _pedido_entrega.Fecha_entrega = GetDatetimeFormated(txbFecha.Value);
-
-                _pedido_entrega.Entrega_Tipo_ID = 0;
-                if (ddlTipoEntrega1.SelectedIndex > 0)
-                {
-                    int codigo = 1;
-                    if (!int.TryParse(ddlTipoEntrega1.SelectedValue, out codigo))
+                    #region Material = Pintado / Impreso
+                    int material = 1; // Impreso
+                    if (!radImpreso1.Checked)
                     {
-                        codigo = 1;
-                        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTipoEntrega1.SelectedValue);
+                        material = 2;
                     }
-                    _pedido_entrega.Entrega_Tipo_ID = codigo;
+
+                    int materialID = 2;
+                    lista_pedido_materiales _pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(v => v.Codigo.Equals(material));
+                    if (_pedido_material != null)
+                    {
+                        materialID = _pedido_material.Pedido_Material_ID;
+                    }
+                    _pedido.Pedido_Material_ID = materialID;
+                    #endregion
+
+                    #region Tamaño
+                    _pedido.Pedido_Tamano_ID = 0;
+                    if (ddlTamano1.SelectedIndex > 0)
+                    {
+                        int selected = 1;
+                        if (!int.TryParse(ddlTamano1.SelectedValue, out selected))
+                        {
+                            selected = 1;
+                            Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTamano1.SelectedValue);
+                        }
+                        _pedido.Pedido_Tamano_ID = selected;
+                    }
+                    #endregion
+
+                    #region Temática
+                    _pedido.Pedido_Tematica_ID = 0;
+                    #endregion
+
+                    #region NEW Diseño
+                    pedido_disenos _pedido_diseno = new pedido_disenos();
+                    _pedido_diseno.Pedido_Diseno_ID = 0;
+
+                    _pedido_diseno.Texto = txbTexto1.Text;
+
+                    context.pedido_disenos.Add(_pedido_diseno);
+                    Guardar_Contexto(context);
+
+                    int pedido_diseno_ID = Get_NextPedido_DisenoID(context);
+                    if (pedido_diseno_ID > 0)
+                    {
+                        _pedido.Pedido_Diseno_ID = pedido_diseno_ID;
+                    }
+                    #endregion
+
+                    #region NEW Entrega
+                    pedido_entregas _pedido_entrega = new pedido_entregas();
+                    _pedido_entrega.Pedido_Entrega_ID = 0;
+
+                    _pedido_entrega.Fecha_entrega = GetDatetimeFormated(txbFecha.Value);
+
+                    _pedido_entrega.Entrega_Tipo_ID = 0;
+                    if (ddlTipoEntrega1.SelectedIndex > 0)
+                    {
+                        int codigo = 1;
+                        if (!int.TryParse(ddlTipoEntrega1.SelectedValue, out codigo))
+                        {
+                            codigo = 1;
+                            Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTipoEntrega1.SelectedValue);
+                        }
+                        _pedido_entrega.Entrega_Tipo_ID = codigo;
+
+                        /*
+                        * Codigo = 1: Colocación
+                        * Codigo = 2: Envío a domicilio
+                        * Codigo = 3: Envío al interior
+                        * Codigo = 4: Retiro en el taller
+                        * */
+                        if (codigo == 1 || codigo == 2)
+                        {
+                            _pedido_entrega.Direccion_calle = txbDireccion_calle.Value;
+                            _pedido_entrega.Direccion_numero = txbDireccion_numero.Value;
+                            _pedido_entrega.Direccion_apto = txbDireccion_apto.Value;
+                            _pedido_entrega.Direccion_esquina = txbDireccion_esquina.Value;
+                        }
+                        else if (codigo == 3)
+                        {
+                            _pedido_entrega.Ciudad = txbCiudad.Value;
+                        }
+                    }
+
+                    string gmaps_url = Get_GMaps_URL();
+                    if (!string.IsNullOrWhiteSpace(gmaps_url))
+                    {
+                        _pedido_entrega.Google_maps_URL = gmaps_url;
+                    }
 
                     /*
-                    * Codigo = 1: Colocación
-                    * Codigo = 2: Envío a domicilio
-                    * Codigo = 3: Envío al interior
-                    * Codigo = 4: Retiro en el taller
-                    * */
-                    if (codigo == 1 || codigo == 2)
+                    // Save current LAT and LNG
+                    if (!string.IsNullOrWhiteSpace(hdnCurrentLAT.Value) && !string.IsNullOrWhiteSpace(hdnCurrentLNG.Value) && !string.IsNullOrWhiteSpace(hdnCurrentLocationURL.Value))
                     {
-                        _pedido_entrega.Direccion_calle = txbDireccion_calle.Value;
-                        _pedido_entrega.Direccion_numero = txbDireccion_numero.Value;
-                        _pedido_entrega.Direccion_apto = txbDireccion_apto.Value;
-                        _pedido_entrega.Direccion_esquina = txbDireccion_esquina.Value;
+                        _pedido_entrega.Coordenadas_X = hdnCurrentLAT.Value;
+                        _pedido_entrega.Coordenadas_Y = hdnCurrentLNG.Value;
+                        _pedido_entrega.Google_maps_URL = hdnCurrentLocationURL.Value;
                     }
-                    else if (codigo == 3)
+                    */
+
+                    context.pedido_entregas.Add(_pedido_entrega);
+                    Guardar_Contexto(context);
+                    int pedido_entrega_ID = Get_NextPedido_EntregaID(context);
+                    if (pedido_entrega_ID > 0)
                     {
-                        _pedido_entrega.Ciudad = txbCiudad.Value;
+                        _pedido.Pedido_Entrega_ID = pedido_entrega_ID;
                     }
+                    #endregion
+
+
+                } // if isPasacalle
+
+                #endregion IS PASACALLE
+
+                #region IS ROLL UP
+
+                else
+                {
+                    #region Tipo cartel = Pasacalle / Roll up
+
+                    /* Código tipo pedido
+                     * 1 - Pasacalle
+                     * 2 - Pancarta
+                     * 3 - Lona informativa / decorativa
+                     * 4 - Roll up
+                     * */
+
+                    int tipo_codigo = 4; // Roll up
+                    _pedido.Pedido_Tipo_ID = 5; // ID Pasacalle
+                    lista_pedido_tipos _pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(v => v.Codigo.Equals(tipo_codigo));
+                    if (_pedido_tipo != null)
+                    {
+                        _pedido.Pedido_Tipo_ID = _pedido_tipo.Pedido_Tipo_ID;
+                    }
+
+                    #endregion
+
+                    #region Material = Pintado / Impreso
+                    _pedido.Pedido_Material_ID = 0;
+                    #endregion
+
+                    #region Tamaño
+                    _pedido.Pedido_Tamano_ID = 0;
+                    if (ddlTamano1_tab2.SelectedIndex > 0)
+                    {
+                        int selected = 1;
+                        if (!int.TryParse(ddlTamano1_tab2.SelectedValue, out selected))
+                        {
+                            selected = 1;
+                            Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTamano1.SelectedValue);
+                        }
+                        _pedido.Pedido_Tamano_ID = selected;
+                    }
+                    #endregion
+
+                    #region Temática
+                    _pedido.Pedido_Tematica_ID = 0;
+                    #endregion
+
+                    #region NEW Diseño
+                    pedido_disenos _pedido_diseno = new pedido_disenos();
+                    _pedido_diseno.Pedido_Diseno_ID = 0;
+
+                    _pedido_diseno.Texto = txbTexto1_tab2.Text;
+
+                    context.pedido_disenos.Add(_pedido_diseno);
+                    Guardar_Contexto(context);
+
+                    int pedido_diseno_ID = Get_NextPedido_DisenoID(context);
+                    if (pedido_diseno_ID > 0)
+                    {
+                        _pedido.Pedido_Diseno_ID = pedido_diseno_ID;
+                    }
+                    #endregion
+
+                    #region NEW Entrega
+                    pedido_entregas _pedido_entrega = new pedido_entregas();
+                    _pedido_entrega.Pedido_Entrega_ID = 0;
+
+                    _pedido_entrega.Fecha_entrega = GetDatetimeFormated(txbFecha_tab2.Value);
+
+                    _pedido_entrega.Entrega_Tipo_ID = 0;
+                    if (ddlTipoEntrega1_tab2.SelectedIndex > 0)
+                    {
+                        int codigo = 1;
+                        if (!int.TryParse(ddlTipoEntrega1_tab2.SelectedValue, out codigo))
+                        {
+                            codigo = 1;
+                            Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTipoEntrega1.SelectedValue);
+                        }
+                        _pedido_entrega.Entrega_Tipo_ID = codigo;
+
+                        /*
+                        * Codigo = 1: Colocación
+                        * Codigo = 2: Envío a domicilio
+                        * Codigo = 3: Envío al interior
+                        * Codigo = 4: Retiro en el taller
+                        * */
+                        if (codigo == 1 || codigo == 2)
+                        {
+                            _pedido_entrega.Direccion_calle = txbDireccion_calle_tab2.Value;
+                            _pedido_entrega.Direccion_numero = txbDireccion_numero_tab2.Value;
+                            _pedido_entrega.Direccion_apto = txbDireccion_apto_tab2.Value;
+                            _pedido_entrega.Direccion_esquina = txbDireccion_esquina_tab2.Value;
+                        }
+                        else if (codigo == 3)
+                        {
+                            _pedido_entrega.Ciudad = txbCiudad_tab2.Value;
+                        }
+                    }
+
+                    string gmaps_url = Get_GMaps_URL(false);
+                    if (!string.IsNullOrWhiteSpace(gmaps_url))
+                    {
+                        _pedido_entrega.Google_maps_URL = gmaps_url;
+                    }
+
+                    /*
+                    // Save current LAT and LNG
+                    if (!string.IsNullOrWhiteSpace(hdnCurrentLAT.Value) && !string.IsNullOrWhiteSpace(hdnCurrentLNG.Value) && !string.IsNullOrWhiteSpace(hdnCurrentLocationURL.Value))
+                    {
+                        _pedido_entrega.Coordenadas_X = hdnCurrentLAT.Value;
+                        _pedido_entrega.Coordenadas_Y = hdnCurrentLNG.Value;
+                        _pedido_entrega.Google_maps_URL = hdnCurrentLocationURL.Value;
+                    }
+                    */
+
+                    context.pedido_entregas.Add(_pedido_entrega);
+                    Guardar_Contexto(context);
+                    int pedido_entrega_ID = Get_NextPedido_EntregaID(context);
+                    if (pedido_entrega_ID > 0)
+                    {
+                        _pedido.Pedido_Entrega_ID = pedido_entrega_ID;
+                    }
+                    #endregion
                 }
 
-                string gmaps_url = Get_GMaps_URL();
-                if (!string.IsNullOrWhiteSpace(gmaps_url))
-                {
-                    _pedido_entrega.Google_maps_URL = gmaps_url;
-                }
-
-                /*
-                // Save current LAT and LNG
-                if (!string.IsNullOrWhiteSpace(hdnCurrentLAT.Value) && !string.IsNullOrWhiteSpace(hdnCurrentLNG.Value) && !string.IsNullOrWhiteSpace(hdnCurrentLocationURL.Value))
-                {
-                    _pedido_entrega.Coordenadas_X = hdnCurrentLAT.Value;
-                    _pedido_entrega.Coordenadas_Y = hdnCurrentLNG.Value;
-                    _pedido_entrega.Google_maps_URL = hdnCurrentLocationURL.Value;
-                }
-                */
-
-                context.pedido_entregas.Add(_pedido_entrega);
-                Guardar_Contexto(context);
-                int pedido_entrega_ID = Get_NextPedido_EntregaID(context);
-                if (pedido_entrega_ID > 0)
-                {
-                    _pedido.Pedido_Entrega_ID = pedido_entrega_ID;
-                }
-                #endregion
+                #endregion IS ROLL UP
 
                 _pedido.Formulario_ID = formulario_ID;
 
                 context.pedidos.Add(_pedido);
 
                 // Enviar notificación al equipo por EMAIL
-                SendNotification_Email_2();
+                if (!HttpContext.Current.Request.IsLocal)
+                {
+                    SendNotification_Email_2();
+                }
             }
         }
 
@@ -1599,7 +1873,8 @@ namespace Cartelux1
                 //set the addresses 
                 mail.From = new MailAddress("proyectos@cartelux.uy"); //IMPORTANT: This must be same as your smtp authentication address.
                 mail.To.Add("gborderolle@gmail.com");
-                mail.To.Add("maxi.cartelux@gmail.com");
+                mail.To.Add("gborderolle2@gmail.com");
+                mail.CC.Add("maxi.cartelux@gmail.com");
 
                 //set the content 
                 mail.Subject = "CX-AVISO: ¡Pedido nuevo! > " + nombre;
@@ -1662,7 +1937,6 @@ namespace Cartelux1
             return result;
         }
 
-
         [WebMethod]
         public static bool SaveForm(string form_ID_param, string tel_param)
         {
@@ -1696,9 +1970,6 @@ namespace Cartelux1
                     _formulario = _formulario != null ? _formulario : new formularios();
                     _formulario.Fecha_update = GetCurrentTime();
 
-                    // Cliente
-                    //_formulario.Cliente_ID = NEW_Cliente(context); // FIX
-
                     // Nuevo formulario
                     if (string.IsNullOrWhiteSpace(_formulario.Serie))
                     {
@@ -1714,14 +1985,6 @@ namespace Cartelux1
                         _formulario.Fecha_creado = GetCurrentTime();
                         context.formularios.Add(_formulario);
 
-                        //Guardar_Contexto(context); // FIX
-
-                        // Nuevo pedido
-                        //int formulario_ID = Get_NextFormularioID(context); // FIX
-                        //if (formulario_ID > 0)
-                        //{
-                        //    NEW_Pedido(context, formulario_ID);
-                        //}
                     }
                     else
                     {
@@ -1824,13 +2087,6 @@ namespace Cartelux1
                         }
 
                     }
-
-                    // Guardar_Contexto(context); // FIX
-
-                    //if (MyFileUpload.PostedFile != null && !string.IsNullOrWhiteSpace(MyFileUpload.PostedFile.FileName)) // FIX
-                    //{
-                    //    UploadMegaAPI(_formulario, tel_str);
-                    //}
                 }
             }
             else

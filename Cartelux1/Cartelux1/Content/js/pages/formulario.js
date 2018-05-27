@@ -46,6 +46,7 @@
     hideAllControls();
 
     $("#aCollapse_bosquejo").click();
+    $("#aCollapse_bosquejo_tab2").click();
 
 }); // END On Ready
 
@@ -527,7 +528,7 @@ function check_logic_tab_rollup() {
     var ok = true;
 
     var ddlTamano1 = 0;
-    var controls = $("#ddlTamano1-button_tab2 span");
+    var controls = $("#ddlTamano1_tab2-button span");
     if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
         var text = controls[1].innerText;
         var value = $("#ddlTamano1_tab2 option").filter(function () {
@@ -546,7 +547,7 @@ function check_logic_tab_rollup() {
     }
 
     var ddlTipoEntrega1 = 0;
-    controls = $("#ddlTipoEntrega1-button_tab2 span");
+    controls = $("#ddlTipoEntrega1_tab2-button span");
     if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
         text = controls[1].innerText;
         value = $("#ddlTipoEntrega1_tab2 option").filter(function () {

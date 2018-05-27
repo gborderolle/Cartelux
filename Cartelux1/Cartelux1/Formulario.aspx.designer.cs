@@ -58,6 +58,24 @@ namespace Cartelux1 {
         protected global::System.Web.UI.WebControls.FileUpload MyFileUpload;
         
         /// <summary>
+        /// radImpreso1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton radImpreso1;
+        
+        /// <summary>
+        /// radImpreso2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton radImpreso2;
+        
+        /// <summary>
         /// txbTexto1 control.
         /// </summary>
         /// <remarks>
@@ -193,22 +211,22 @@ namespace Cartelux1 {
         protected global::System.Web.UI.WebControls.DropDownList ddlTamano1_tab2;
         
         /// <summary>
-        /// CheckBox1 control.
+        /// chbBosquejo_tab2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox1;
+        protected global::System.Web.UI.WebControls.CheckBox chbBosquejo_tab2;
         
         /// <summary>
-        /// FileUpload1_tab2 control.
+        /// MyFileUpload_tab2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUpload1_tab2;
+        protected global::System.Web.UI.WebControls.FileUpload MyFileUpload_tab2;
         
         /// <summary>
         /// txbTexto1_tab2 control.
@@ -247,40 +265,40 @@ namespace Cartelux1 {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txbFecha_tab2;
         
         /// <summary>
-        /// Text4 control.
+        /// txbDireccion_calle_tab2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Text4;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txbDireccion_calle_tab2;
         
         /// <summary>
-        /// Number2 control.
+        /// txbDireccion_numero_tab2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Number2;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txbDireccion_numero_tab2;
         
         /// <summary>
-        /// Text5 control.
+        /// txbDireccion_apto_tab2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Text5;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txbDireccion_apto_tab2;
         
         /// <summary>
-        /// Text6 control.
+        /// txbDireccion_esquina_tab2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Text6;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txbDireccion_esquina_tab2;
         
         /// <summary>
         /// txbDireccion_tab2 control.
