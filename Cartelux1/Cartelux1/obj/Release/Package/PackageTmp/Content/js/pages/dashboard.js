@@ -195,7 +195,7 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value, i
                     $("#gridFormularios").empty();
 
                     if (response.d.length > 0) {
-                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>T/Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>T/Cartel</th> <th scope='col'>Impr/Pint</th> <th scope='col'>Cant</th> <th scope='col'>Zona</th> <th scope='col'>¿Bosquejo?</th> <th scope='col'>CTO</th> <th scope='col'>OPC</th> </tr></thead><tbody>"); //<th scope='col'>GMaps</th> <th scope='col'>Form</th> <th scope='col'>WPP</th>
+                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>T/Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>T/Cartel</th> <th scope='col'>Impr/Pint</th> <th scope='col'>Cant</th> <th scope='col'>Zona</th> <th scope='col'>¿Archivo?</th> <th scope='col'>Diseño referido</th> <th scope='col'>CTO</th> <th scope='col'>OPC</th> </tr></thead><tbody>"); //<th scope='col'>GMaps</th> <th scope='col'>Form</th> <th scope='col'>WPP</th>
                         for (var i = 0; i < response.d.length; i++) {
 
                             //var goToURL = "<a id='btnURL' role='button' href='" + response.d[i].URL_short + "' class='btn btn-warning glyphicon fa fa-wpforms' title='' target='_blank'></a>";
@@ -307,7 +307,8 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value, i
                             check_nullValues(response.d[i].lblMaterial) + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(response.d[i].lblCantidad) + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(response.d[i].lblZona) + "</td><td class='td-short' " + text_color + ">" +
-                            check_nullValues(convertBool(response.d[i].chbTieneBosquejo)) + "</td><td class='td-short'>" +
+                            check_nullValues(convertBool(response.d[i].chbTieneBosquejo)) + "</td><td class='td-short' " + text_color + ">" +
+                            check_nullValues(convertBool(response.d[i].lblDisenoReferido)) + "</td><td class='td-short'>" +
                             //goToGMaps + "</td><td class='td-very_short'>" +
                             //goToURL + "</td><td class='td-very_short'>" +
                             //goToWPP + "</td><td class='td-very_short'>" +
@@ -528,7 +529,7 @@ function month_onClickEvent() {
                 MONTH_SELECTED = month_value_int;
 
                 $("#chbSoloVigentes").prop('checked', false);
-                $("#chbSoloJuanchy").prop('checked', false);
+                $("#chbSoloEntrCol").prop('checked', false);
                 $("#chbInclCancelados").prop('checked', false);
                 
                 month_selectMonth(month_value_int, true, false, false);
@@ -558,12 +559,12 @@ function filtrar_soloVigentes() {
 }
 
 function filtrar() {
-    var chbSoloJuanchy = $("#chbSoloJuanchy");
+    var chbSoloEntrCol = $("#chbSoloEntrCol");
     var chbSoloVigentes = $("#chbSoloVigentes");
     var chbInclCancelados = $("#chbInclCancelados");
     var hdn_monthSelected = $("#hdn_monthSelected");
-    if (hdn_monthSelected !== null && hdn_monthSelected.val() !== null && chbSoloJuanchy !== null && chbSoloVigentes !== null && chbInclCancelados !== null) {
-        var soloJuanchy_value = chbSoloJuanchy.is(":checked")
+    if (hdn_monthSelected !== null && hdn_monthSelected.val() !== null && chbSoloEntrCol !== null && chbSoloVigentes !== null && chbInclCancelados !== null) {
+        var soloJuanchy_value = chbSoloEntrCol.is(":checked")
         var soloVigentes_value = chbSoloVigentes.is(":checked")
         var incluirCancelados_value = chbInclCancelados.is(":checked")
         var month_value = hdn_monthSelected.val();

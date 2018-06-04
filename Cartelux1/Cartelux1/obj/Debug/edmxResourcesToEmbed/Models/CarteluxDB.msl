@@ -33,6 +33,7 @@
     <EntitySetMapping Name="pedido_disenos">
       <EntityTypeMapping TypeName="carteluxdb1Model.pedido_disenos">
         <MappingFragment StoreEntitySet="pedido_disenos">
+          <ScalarProperty Name="Diseno_referido" ColumnName="Diseno_referido" />
           <ScalarProperty Name="Pedido_Diseno_ID" ColumnName="Pedido_Diseno_ID" />
           <ScalarProperty Name="Codigo_guia" ColumnName="Codigo_guia" />
           <ScalarProperty Name="Texto" ColumnName="Texto" />
@@ -180,6 +181,19 @@
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Pedido_Estado_ID" ColumnName="Pedido_Estado_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="confi_emails">
+      <EntityTypeMapping TypeName="carteluxdb1Model.confi_emails">
+        <MappingFragment StoreEntitySet="confi_emails">
+          <ScalarProperty Name="EsEntrega" ColumnName="EsEntrega" />
+          <ScalarProperty Name="EsEmisor" ColumnName="EsEmisor" />
+          <ScalarProperty Name="Clave" ColumnName="Clave" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Confi_emails_ID" ColumnName="Confi_emails_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

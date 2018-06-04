@@ -1,4 +1,7 @@
-﻿$(document).ready(function () {
+﻿/**** Local variables ****/
+var IS_MOBILE;
+
+$(document).ready(function () {
     var ID = getUrlParameter('ID');
     if (ID !== null && ID !== undefined && ID.length > 0) {
         //loadPreviousState();
@@ -12,12 +15,15 @@
     }
 
     setTimeout(function () {
+        checkMobile();
         loadEvents();
         style_controls(false);
 
         // Load enabled controls
         loadPreviousState_tab_pasacalle();
         loadPreviousState_tab_rollup();
+
+        load_gadgets();
     }, 300);
 
     TAB_COUNT = $("#hdnPedidoCantidad").val();
@@ -64,6 +70,24 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
+
+function load_gadgets() {
+    var w = '8';
+    var h = '6';
+    if (IS_MOBILE) {
+        w = 'auto';
+    }
+    $("#aLinkToUnitegallery").fancybox({
+        //'width': '680',
+        //'height': '495',
+        'width': w,
+        'height': h,
+        'autoScale': false,
+        'transitionIn': 'none',
+        'transitionOut': 'none',
+        'type': 'iframe'
+    });
+}
 
 function style_controls(correct) {
     var combos = $("select.ctrl-required").next("[role='combobox']");
@@ -423,7 +447,6 @@ function apply_savedStyle() {
         form.addClass("div-form2");
     }
 
-
     setTimeout(function () {
         style_controls(true);
 
@@ -432,8 +455,15 @@ function apply_savedStyle() {
             controls.removeClass("ctrl-required");
             controls.addClass("ctrl-required_correct");
         }
-
     }, 300);
+}
+
+function checkMobile() {
+    var mobile = (/iphone|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
+    IS_MOBILE = false;
+    if (mobile) {
+        IS_MOBILE = true;
+    }
 }
 
 function pre_confirm_tab1() {

@@ -243,9 +243,9 @@
                                         <div class="col-sm-12 col-md-6 pull-right">
                                             <div class="input-group pull-right" style="padding: 5px;">
                                                 <div class="form-check">
-                                                    <input id="chbSoloJuanchy" class="form-check-input" type="checkbox" onclick="filtrar()">
-                                                    <label class="form-check-label unselectable" for="chbSoloJuanchy">
-                                                        Filtro Juanchy
+                                                    <input id="chbSoloEntrCol" class="form-check-input" type="checkbox" onclick="filtrar()">
+                                                    <label class="form-check-label unselectable" for="chbSoloEntrCol">
+                                                        Filtro entr/col
                                                     </label>
                                                 </div>
 
@@ -348,9 +348,15 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="¿Bosquejo?">
+                                                <asp:TemplateField HeaderText="¿Archivo?">
                                                     <ItemTemplate>
-                                                        <asp:CheckBox ID="chbTieneBosquejo" runat="server" Checked="false" />
+                                                        <asp:Label ID="chbTieneBosquejo" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Diseño referido">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblDisenoReferido" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
@@ -383,7 +389,7 @@
                             <div class="row">
                                 <label style="color: #333">Vigente</label>
                                 | 
-        <label style="color: green">Conluído</label>
+        <label style="color: green">Impreso</label>
                                 | 
         <label style="color: blue">Diseño aprobado</label>
                                 | 
@@ -469,7 +475,7 @@
                 </div>
             </div>
             <div id="popbox_footer_OPC" class="row row-short" style="margin-right: 15px; margin-top: -7px;">
-                <button id="lbl_options_button1_OPC" type="button" class="btn btn-success btnAcciones" title="Concluído">
+                <button id="lbl_options_button1_OPC" type="button" class="btn btn-success btnAcciones" title="Impreso">
                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 </button>
                 <button id="lbl_options_button2_OPC" type="button" class="btn btn-primary btnAcciones" title="Diseño aprobado">

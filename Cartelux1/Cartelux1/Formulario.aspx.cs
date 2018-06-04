@@ -242,6 +242,9 @@ namespace Cartelux1
                                     {
                                         txbTexto1.Text = _pedido_diseno.Texto;
                                         chbBosquejo.Checked = string.IsNullOrWhiteSpace(_pedido_diseno.Boceto_nombre) ? false : true;
+
+                                        string Diseno_referido = !string.IsNullOrWhiteSpace(_pedido_diseno.Diseno_referido) ? _pedido_diseno.Diseno_referido : "Elija un diseño aquí por favor";
+                                        ScriptManager.RegisterStartupScript(this, this.GetType(), "Set Diseno_referido", "<script type='text/javascript'>$('#aLinkToUnitegallery').val('" + Diseno_referido + "') </script>", false);
                                     }
 
                                     #endregion GET Diseño
@@ -575,6 +578,10 @@ namespace Cartelux1
                             if (_pedido_diseno != null)
                             {
                                 _pedido_diseno.Texto = txbTexto1.Text;
+                                if (!string.IsNullOrWhiteSpace(hdnDisenoSeleccionado.Value))
+                                {
+                                    _pedido_diseno.Diseno_referido = hdnDisenoSeleccionado.Value;
+                                }
                             }
                             #endregion
 
@@ -747,7 +754,7 @@ namespace Cartelux1
                 }
                 _pedido.Cantidad = cantidad;
 
-
+                bool isColocacion_entrega = false;
 
                 #region IS PASACALLE
 
@@ -811,6 +818,10 @@ namespace Cartelux1
                     _pedido_diseno.Pedido_Diseno_ID = 0;
 
                     _pedido_diseno.Texto = txbTexto1.Text;
+                    if (!string.IsNullOrWhiteSpace(hdnDisenoSeleccionado.Value))
+                    {
+                        _pedido_diseno.Diseno_referido = hdnDisenoSeleccionado.Value;
+                    }
 
                     context.pedido_disenos.Add(_pedido_diseno);
                     Guardar_Contexto(context);
@@ -851,6 +862,7 @@ namespace Cartelux1
                             _pedido_entrega.Direccion_numero = txbDireccion_numero.Value;
                             _pedido_entrega.Direccion_apto = txbDireccion_apto.Value;
                             _pedido_entrega.Direccion_esquina = txbDireccion_esquina.Value;
+                            isColocacion_entrega = true;
                         }
                         else if (codigo == 3)
                         {
@@ -912,7 +924,7 @@ namespace Cartelux1
                     #endregion
 
                     #region Material = Pintado / Impreso
-                    _pedido.Pedido_Material_ID = 0;
+                    _pedido.Pedido_Material_ID = 1; // 1 Impreso
                     #endregion
 
                     #region Tamaño
@@ -978,6 +990,7 @@ namespace Cartelux1
                             _pedido_entrega.Direccion_numero = txbDireccion_numero_tab2.Value;
                             _pedido_entrega.Direccion_apto = txbDireccion_apto_tab2.Value;
                             _pedido_entrega.Direccion_esquina = txbDireccion_esquina_tab2.Value;
+                            isColocacion_entrega = true;
                         }
                         else if (codigo == 3)
                         {
@@ -1020,7 +1033,7 @@ namespace Cartelux1
                 // Enviar notificación al equipo por EMAIL
                 if (!HttpContext.Current.Request.IsLocal)
                 {
-                    SendNotification_Email_2();
+                    SendNotification_Email_2(isColocacion_entrega);
                 }
             }
         }
@@ -1858,42 +1871,103 @@ namespace Cartelux1
             smtpClient.Send(mail);
         }
 
-        private void SendNotification_Email_2()
+        private void SendNotification_Email_2(bool isColocacion_entrega = false)
         {
             // SOURCE: https://www.smarterasp.net/support/kb/a179/how-to-send-email-in-asp_net.aspx
             string nombre = txbNombre.Value;
             string telefono = txbTelefono.Value;
-            string fecha_entrega = GetDatetimeFormated(txbFecha.Value).ToShortDateString();
+
+            string material = "Impreso";
+            if (!radImpreso1.Checked)
+            {
+                material = "Pintado";
+            }
+            string fecha_entrega = GetDatetimeFormated(txbFecha.Value).ToString(GlobalVariables.ShortDateTime_format1);
             string url = HttpContext.Current.Request.Url.AbsoluteUri;
             if (!string.IsNullOrWhiteSpace(nombre) || !string.IsNullOrWhiteSpace(telefono) || !string.IsNullOrWhiteSpace(fecha_entrega) || !string.IsNullOrWhiteSpace(url))
             {
                 //create the mail message 
                 MailMessage mail = new MailMessage();
+                mail.IsBodyHtml = true;
+
+                string email_emisor = "notificaciones@cartelux.uy";
+                List<string> email_receptor = new List<string>();
+                List<string> email_receptor_entrega = new List<string>();
+                using (CarteluxDB context = new CarteluxDB())
+                {
+                    List<confi_emails> lista_confi_emails = (List<confi_emails>)context.confi_emails.ToList();
+                    if (lista_confi_emails != null && lista_confi_emails.Count > 0)
+                    {
+                        foreach (confi_emails _confi_emails in lista_confi_emails)
+                        {
+                            if (_confi_emails.EsEmisor)
+                            {
+                                email_emisor = _confi_emails.Email;
+                            }
+                            else
+                            {
+                                if (_confi_emails.EsEntrega)
+                                {
+                                    email_receptor_entrega.Add(_confi_emails.Email);
+                                }
+                                else
+                                {
+                                    email_receptor.Add(_confi_emails.Email);
+                                }
+                            }
+                        }
+                    }
+                }
 
                 //set the addresses 
-                mail.From = new MailAddress("proyectos@cartelux.uy"); //IMPORTANT: This must be same as your smtp authentication address.
-                mail.To.Add("gborderolle@gmail.com");
-                mail.To.Add("gborderolle2@gmail.com");
-                mail.CC.Add("maxi.cartelux@gmail.com");
+                mail.From = new MailAddress(email_emisor); //IMPORTANT: This must be same as your smtp authentication address.
+                foreach (string email in email_receptor)
+                {
+                    int index = email_receptor.IndexOf(email);
+                    if (index == 0)
+                    {
+                        mail.To.Add(email);
+                    }
+                    else
+                    {
+                        mail.CC.Add(email);
+                    }
+                }
+
+                if (isColocacion_entrega)
+                {
+                    foreach (string email in email_receptor_entrega)
+                    {
+                        mail.CC.Add(email);
+                    }
+                }
 
                 //set the content 
                 mail.Subject = "CX-AVISO: ¡Pedido nuevo! > " + nombre;
-                mail.Body = "Nombre: " + nombre;
-                mail.Body += "\r\nTelefono: " + telefono;
-                mail.Body += "\r\nEntrega: " + fecha_entrega;
-                mail.Body += "\r\n\r\n\r\n";
-                mail.Body += "LINKS -----------------------------";
-                mail.Body += "\r\n>Form cliente: " + url;
-                mail.Body += "\r\n>Dashboard: www.pedidos.cartelux.uy/Dashboard";
-                mail.Body += "\r\n\r\n\r\n";
-                mail.Body += "Este es un email auto-generado por favor no lo responda.";
-                mail.Body += "\r\nTimestamp: " + GetCurrentTime();
+                mail.Body = "<div><strong>Información básica del pedido nuevo.</strong></div>";
+                mail.Body += "<br/><div><strong>Nombre:</strong> " + nombre + "</div>";
+                mail.Body += "<div><strong>Telefono:</strong> " + telefono + "</div>";
+                mail.Body += "<div><strong>Material:</strong> " + material + "</div>";
+                mail.Body += "<div><strong>Entrega:</strong> " + fecha_entrega + "</div>";
+                mail.Body += "<br/><br/>";
+                mail.Body += "<div><font size='2'><strong><span style='color:#e15211'>------------------------------<wbr>------------------------------<wbr>-------------</span></strong></font></div>";
+                mail.Body += "<div><strong><span style='font-size:12pt;color:#e15211'>Links</span></strong></div>";
+                mail.Body += "<div><strong>Form cliente:</strong> " + url + "</div>";
+                mail.Body += "<div><strong>Dashboard:</strong> www.pedidos.cartelux.uy/Dashboard</div>";
+                mail.Body += "<br/><br/>";
+                mail.Body += "<div>Este es un email auto-generado por favor no lo responda.</div>";
+                mail.Body += "<div>Fecha creación: " + GetCurrentTime().ToString(GlobalVariables.ShortDateTime_format1) + "</div>";
+
+                string sign_1 = "<br/><div><font size='2'><strong><span style='color:#e15211'>------------------------------<wbr>------------------------------<wbr>-------------</span></strong></font></div>";
+                string sign_2 = "<div><strong><span style='font-size:8pt;color:#e15211'>Cartelux Publicidad 2018</span></strong><strong><span style='color:#4a442a'> | </span></strong><strong><span style='FONT-SIZE:8pt;'>www.cartelux.uy</span></strong></div>";
+                string sign_3 = "<div><font size='2'><strong><span style='color:#e15211'>------------------------------<wbr>------------------------------<wbr>-------------</span></strong></font></div>";
+                mail.Body += sign_1 + sign_2 + sign_3;
 
                 //send the message 
                 SmtpClient smtp = new SmtpClient("mail.cartelux.uy");
 
                 //IMPORANT:  Your smtp login email MUST be same as your FROM address. 
-                NetworkCredential Credentials = new NetworkCredential("proyectos@cartelux.uy", "Cartelux1234$");
+                NetworkCredential Credentials = new NetworkCredential("notificaciones@cartelux.uy", "Cartelux1234$");
                 smtp.Credentials = Credentials;
                 smtp.Send(mail);
             }
@@ -1935,165 +2009,6 @@ namespace Cartelux1
                 }
             }
             return result;
-        }
-
-        [WebMethod]
-        public static bool SaveForm(string form_ID_param, string tel_param)
-        {
-            bool ret = false;
-            if (!string.IsNullOrWhiteSpace(form_ID_param) && !string.IsNullOrWhiteSpace(tel_param))
-            {
-                string form_ID_str = GetQueryStringDecrypt(form_ID_param);
-                string tel_str = GetQueryStringDecrypt(tel_param);
-                if (!string.IsNullOrWhiteSpace(form_ID_str) && !string.IsNullOrWhiteSpace(tel_str))
-                {
-                    SaveData_static(form_ID_str, tel_str);
-                }
-                ret = true;
-            }
-            return ret;
-        }
-
-        private static void SaveData_static(string serie_str, string tel_str)
-        {
-            // Logger variables
-            System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
-            System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
-            string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
-            string methodName = stackFrame.GetMethod().Name;
-
-            if (!string.IsNullOrWhiteSpace(serie_str) && !string.IsNullOrWhiteSpace(tel_str))
-            {
-                using (CarteluxDB context = new CarteluxDB())
-                {
-                    formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Serie.Equals(serie_str));
-                    _formulario = _formulario != null ? _formulario : new formularios();
-                    _formulario.Fecha_update = GetCurrentTime();
-
-                    // Nuevo formulario
-                    if (string.IsNullOrWhiteSpace(_formulario.Serie))
-                    {
-                        string url_complete = HttpContext.Current.Request.Url.AbsoluteUri;
-                        if (!string.IsNullOrWhiteSpace(url_complete))
-                        {
-                            _formulario.URL_completa = url_complete;
-                            _formulario.URL_short = url_complete; //
-                        }
-
-                        _formulario.Formulario_ID = 0;
-                        _formulario.Serie = serie_str;
-                        _formulario.Fecha_creado = GetCurrentTime();
-                        context.formularios.Add(_formulario);
-
-                    }
-                    else
-                    {
-                        // Pedido ya existe
-                        // ISSUE a resolver cuando efectivamente los Formularios tengan muchos Pedidos
-                        pedidos _pedido = (pedidos)context.pedidos.FirstOrDefault(v => v.Formulario_ID.Equals(_formulario.Formulario_ID));
-                        if (_pedido != null)
-                        {
-                            // Update cantidad de Pedidos
-                            int cantidad = _pedido.Cantidad;
-                            //if (!string.IsNullOrWhiteSpace(hdnPedidoCantidad.Value)) // FIX
-                            //{
-                            //    if (!int.TryParse(hdnPedidoCantidad.Value, out cantidad))
-                            //    {
-                            //        cantidad = _pedido.Cantidad;
-                            //        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, hdnPedidoCantidad.Value);
-                            //    }
-                            //}
-                            _pedido.Cantidad = cantidad;
-
-                            // Updates
-
-                            #region Tipo = Pasacalle / Roll up / etc
-                            //if (ddlTipoCartel.SelectedIndex > 0)
-                            //{
-                            //    int selected = 1;
-                            //    if (!int.TryParse(ddlTipoCartel.SelectedValue, out selected))
-                            //    {
-                            //        selected = 1;
-                            //        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTipoCartel.SelectedValue);
-                            //    }
-                            //    _pedido.Pedido_Tipo_ID = selected;
-                            //}
-                            _pedido.Pedido_Tipo_ID = 1;
-                            #endregion
-
-                            #region Material = Pintado / Impreso
-                            //if (ddlTamano.SelectedIndex > 0)
-                            //{
-                            //    pedido.Pedido_Material_ID = ddlTamano.SelectedIndex;
-                            //}
-                            #endregion
-
-                            #region UPDATE Tamaño
-                            //if (ddlTamano1.SelectedIndex > 0) // FIX
-                            //{
-                            //    int selected = 1;
-                            //    if (!int.TryParse(ddlTamano1.SelectedValue, out selected))
-                            //    {
-                            //        selected = 1;
-                            //        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTamano1.SelectedValue);
-                            //    }
-                            //    _pedido.Pedido_Tamano_ID = selected;
-                            //}
-                            #endregion
-
-                            #region Temática
-                            //if (ddlTamano.SelectedIndex > 0)
-                            //{
-                            //    pedido.Pedido_Tamano_ID = ddlTamano.SelectedIndex;
-                            //}
-                            #endregion
-
-                            #region UPDATE Diseño
-                            pedido_disenos _pedido_diseno = (pedido_disenos)context.pedido_disenos.FirstOrDefault(v => v.Pedido_Diseno_ID.Equals(_pedido.Pedido_Diseno_ID));
-                            if (_pedido_diseno != null)
-                            {
-                                //_pedido_diseno.Texto = txbTexto1.Text; // FIX
-                            }
-                            #endregion
-
-                            #region UPDATE Entrega
-                            pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(v => v.Pedido_Entrega_ID.Equals(_pedido.Pedido_Entrega_ID));
-                            if (_pedido_entrega != null)
-                            {
-                                //_pedido_entrega.Direccion = txbDireccion.Value; // FIX
-
-                                //_pedido_entrega.Fecha_entrega = GetDatetimeFormated(txbFecha.Value);
-
-                                //if (ddlTipoEntrega1.SelectedIndex > 0)
-                                //{
-                                //    int selected = 1;
-                                //    if (!int.TryParse(ddlTipoEntrega1.SelectedValue, out selected))
-                                //    {
-                                //        selected = 1;
-                                //        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTipoEntrega1.SelectedValue);
-                                //    }
-                                //    _pedido_entrega.Entrega_Tipo_ID = selected;
-                                //}
-
-                                // Save current LAT and LNG
-                                //if (!string.IsNullOrWhiteSpace(hdnCurrentLAT.Value) && !string.IsNullOrWhiteSpace(hdnCurrentLNG.Value) && !string.IsNullOrWhiteSpace(hdnCurrentLocationURL.Value))
-                                //{
-                                //    _pedido_entrega.Coordenadas_X = hdnCurrentLAT.Value;
-                                //    _pedido_entrega.Coordenadas_Y = hdnCurrentLNG.Value;
-                                //    _pedido_entrega.Google_maps_URL = hdnCurrentLocationURL.Value;
-                                //}
-                            }
-                            #endregion
-                        }
-
-                    }
-                }
-            }
-            else
-            {
-                Logs.AddErrorLog("Error. FormID no válido. ERROR:", className, methodName, serie_str);
-                //ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>alert('Error interno. \nComunícate con el equipo de Cartelux por favor.'); </script>", false); // FIX
-            }
         }
 
         #endregion

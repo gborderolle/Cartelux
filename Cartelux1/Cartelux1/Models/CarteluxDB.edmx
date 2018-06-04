@@ -18,6 +18,18 @@
           <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
           <Property Name="Fecha_update" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="confi_emails">
+          <Key>
+            <PropertyRef Name="Confi_emails_ID" />
+          </Key>
+          <Property Name="Confi_emails_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Clave" Type="varchar" MaxLength="50" />
+          <Property Name="EsEmisor" Type="bit" Nullable="false" />
+          <Property Name="EsEntrega" Type="bit" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="confi_formularios_anos">
@@ -118,6 +130,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Boceto_nombre" Type="varchar" MaxLength="30" />
           <Property Name="Boceto_extension" Type="varchar" MaxLength="10" />
           <Property Name="Boceto_PATH" Type="varchar" MaxLength="100" />
+          <Property Name="Diseno_referido" Type="varchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="pedido_entregas">
           <Key>
@@ -177,6 +190,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
         </EntityType>
         <EntityContainer Name="carteluxdb1ModelStoreContainer">
           <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="confi_emails" EntityType="Self.confi_emails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="formularios" EntityType="Self.formularios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_departamentos" EntityType="Self.lista_departamentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_entregas_tipos" EntityType="Self.lista_entregas_tipos" Schema="dbo" store:Type="Tables" />
@@ -238,6 +252,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Boceto_nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Boceto_extension" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Boceto_PATH" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Diseno_referido" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="pedidos">
           <Key>
@@ -280,6 +295,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <EntitySet Name="lista_pedido_tipos" EntityType="carteluxdb1Model.lista_pedido_tipos" />
           <EntitySet Name="pedido_entregas" EntityType="carteluxdb1Model.pedido_entregas" />
           <EntitySet Name="lista_pedido_estados" EntityType="carteluxdb1Model.lista_pedido_estados" />
+          <EntitySet Name="confi_emails" EntityType="carteluxdb1Model.confi_emails" />
         </EntityContainer>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -386,6 +402,18 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Codigo" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="confi_emails">
+          <Key>
+            <PropertyRef Name="Confi_emails_ID" />
+          </Key>
+          <Property Name="Confi_emails_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EsEmisor" Type="Boolean" Nullable="false" />
+          <Property Name="EsEntrega" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -424,6 +452,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <EntitySetMapping Name="pedido_disenos">
             <EntityTypeMapping TypeName="carteluxdb1Model.pedido_disenos">
               <MappingFragment StoreEntitySet="pedido_disenos">
+                <ScalarProperty Name="Diseno_referido" ColumnName="Diseno_referido" />
                 <ScalarProperty Name="Pedido_Diseno_ID" ColumnName="Pedido_Diseno_ID" />
                 <ScalarProperty Name="Codigo_guia" ColumnName="Codigo_guia" />
                 <ScalarProperty Name="Texto" ColumnName="Texto" />
@@ -571,6 +600,19 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Pedido_Estado_ID" ColumnName="Pedido_Estado_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="confi_emails">
+            <EntityTypeMapping TypeName="carteluxdb1Model.confi_emails">
+              <MappingFragment StoreEntitySet="confi_emails">
+                <ScalarProperty Name="EsEntrega" ColumnName="EsEntrega" />
+                <ScalarProperty Name="EsEmisor" ColumnName="EsEmisor" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Confi_emails_ID" ColumnName="Confi_emails_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

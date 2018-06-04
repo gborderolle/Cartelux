@@ -13,6 +13,18 @@
     <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
     <Property Name="Fecha_update" Type="datetime" Nullable="false" />
   </EntityType>
+  <EntityType Name="confi_emails">
+    <Key>
+      <PropertyRef Name="Confi_emails_ID" />
+    </Key>
+    <Property Name="Confi_emails_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="Clave" Type="varchar" MaxLength="50" />
+    <Property Name="EsEmisor" Type="bit" Nullable="false" />
+    <Property Name="EsEntrega" Type="bit" Nullable="false" />
+  </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="confi_formularios_anos">
@@ -113,6 +125,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <Property Name="Boceto_nombre" Type="varchar" MaxLength="30" />
     <Property Name="Boceto_extension" Type="varchar" MaxLength="10" />
     <Property Name="Boceto_PATH" Type="varchar" MaxLength="100" />
+    <Property Name="Diseno_referido" Type="varchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="pedido_entregas">
     <Key>
@@ -172,6 +185,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
   </EntityType>
   <EntityContainer Name="carteluxdb1ModelStoreContainer">
     <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="confi_emails" EntityType="Self.confi_emails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="formularios" EntityType="Self.formularios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_departamentos" EntityType="Self.lista_departamentos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_entregas_tipos" EntityType="Self.lista_entregas_tipos" Schema="dbo" store:Type="Tables" />

@@ -33,6 +33,7 @@
     <EntitySetMapping Name="pedido_disenos">
       <EntityTypeMapping TypeName="carteluxdb1Model.pedido_disenos">
         <MappingFragment StoreEntitySet="pedido_disenos">
+          <ScalarProperty Name="Diseno_referido" ColumnName="Diseno_referido" />
           <ScalarProperty Name="Pedido_Diseno_ID" ColumnName="Pedido_Diseno_ID" />
           <ScalarProperty Name="Codigo_guia" ColumnName="Codigo_guia" />
           <ScalarProperty Name="Texto" ColumnName="Texto" />

@@ -613,6 +613,7 @@ namespace Cartelux1
                                     if (_pedido_diseno != null)
                                     {
                                         _GridFormulario1.chbTieneBosquejo = string.IsNullOrWhiteSpace(_pedido_diseno.Boceto_nombre) ? false : true;
+                                        _GridFormulario1.lblDisenoReferido = _pedido_diseno.Diseno_referido;
                                     }
                                     #endregion END Pedido Diseño
 
@@ -678,6 +679,7 @@ namespace Cartelux1
             public string URL_short { get; set; }
             public string URL_gmaps { get; set; }
             public bool chbTieneBosquejo { get; set; }
+            public string lblDisenoReferido { get; set; }
             public int EstadoNro { get; set; }
         }
 

@@ -20,5 +20,6 @@ namespace Cartelux1.Models
         public string Boceto_nombre { get; set; }
         public string Boceto_extension { get; set; }
         public string Boceto_PATH { get; set; }
+        public string Diseno_referido { get; set; }
     }
 }

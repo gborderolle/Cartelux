@@ -113,6 +113,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <Property Name="Boceto_nombre" Type="varchar" MaxLength="30" />
     <Property Name="Boceto_extension" Type="varchar" MaxLength="10" />
     <Property Name="Boceto_PATH" Type="varchar" MaxLength="100" />
+    <Property Name="Diseno_referido" Type="varchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="pedido_entregas">
     <Key>

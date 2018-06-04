@@ -4,12 +4,12 @@
     <!-- STYLES EXTENSION -->
     <link rel="stylesheet" href="/Content/css/jquery-ui.css" />
     <link rel="stylesheet" href="/Content/css/jquery.bootstrap-touchspin.css" />
-
+    <link rel="stylesheet" href="/Content/fancybox/jquery.fancybox-1.3.4.css" />
+    
     <!-- PAGE CSS -->
     <link rel="stylesheet" href="/Content/css/pages/formulario.css" />
 
     <script type="text/javascript">
-
         TAB_COUNT = 1;
         IS_TAB_1 = 1;
 
@@ -18,22 +18,6 @@
             $("#txbFecha").datepicker({ dateFormat: 'dd-mm-yy' });
             $("#txbFecha_tab2").datepicker({ dateFormat: 'dd-mm-yy' });
             google.maps.event.addDomListener(window, 'load', initialize);
-
-            //$("#aTabsPedidos_1").tabs({
-            //    click: function (event, ui) {
-            //        alert("1!");
-            //        IS_TAB_1 = 1;
-            //        $("#hdnIS_TAB_PASACALLE").val("1");
-            //    }
-            //});
-
-            //$("#aTabsPedidos_2").tabs({
-            //    click: function (event, ui) {
-            //        alert("2!");
-            //        IS_TAB_1 = 0;
-            //        $("#hdnIS_TAB_PASACALLE").val("0");
-            //    }
-            //});
 
             // SOURCE: https://www.jqueryscript.net/demo/Touch-Friendly-jQuery-Input-Spinner-Plugin-For-Bootstrap-3-TouchSpin/
             $("#txtRepeat").TouchSpin({
@@ -49,7 +33,7 @@
                 $("#hdnPedidoCantidad").val(txtRepeat);
             });
 
-        });
+        });       
 
         function clientGoogleMaps() {
             var maps_url = _current_completeURL;
@@ -63,7 +47,6 @@
         function clientWhatsApp() {
             var tel = _TEL;
             if (tel != null && tel.length > 0) {
-
                 // Si el número empieza con 0 lo borra
                 var first = tel.charAt(0);
                 if (first === "0") {
@@ -71,7 +54,6 @@
                 }
                 var url = "https://api.whatsapp.com/send?phone=598" + tel;
                 url += "&text=" + hashMessages["Msj_inicioCliente"];
-
                 window.open(url, '_blank');
             }
         }
@@ -222,6 +204,10 @@
 
     <!-- JS -->
     <script type="text/javascript" src="/Content/js/jquery.bootstrap-touchspin.js"></script>
+    <script type="text/javascript" src="/Content/fancybox/jquery.fancybox-1.3.4.js"></script>
+
+    <%--SOURCE: https://stackoverflow.com/questions/5540395/can-i-open-a-url-in-a-jqueryui-dialog
+    SOURCE: http://fancybox.net/--%>
 
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
@@ -240,7 +226,7 @@
                     <div class="panel-heading" style="padding-bottom: 0; display: -webkit-box;">
 
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tabsPedidos_1" id="aTabsPedidos_1" data-toggle="tab">Pasacalle</a></li>
+                            <li class="active"><a href="#tabsPedidos_1" id="aTabsPedidos_1" data-toggle="tab">Cartel</a></li>
                             <li class=""><a href="#tabsPedidos_2" id="aTabsPedidos_2" data-toggle="tab">Roll up</a></li>
                             <%--<li class=""><a href="#tabsPedidos_2" id="aTabsPedidos_2" data-toggle="tab">Cartelux</a></li>--%>
                         </ul>
@@ -272,8 +258,6 @@
                                             <label class="_label1 unselectable">2) Datos del Cartel</label>
                                             <br />
 
-                                            <%--<asp:DropDownList ID="ddlTipoCartel" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />--%>
-
                                             <asp:DropDownList ID="ddlTamano1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required form-control" />
                                             <label style="font-weight: normal;">¿Tiene bosquejo o ejemplo?</label>
                                             <asp:CheckBox ID="chbBosquejo" runat="server" ClientIDMode="Static" CssClass="txbEditable" Enabled="false" TextAlign="Left" />
@@ -286,6 +270,8 @@
                                                 <hr />
                                             </div>
 
+                                            <br />
+                                            <a id="aLinkToUnitegallery" href="UniteGallery.aspx" style="color: darkgreen; display:none;">ELEGIR DISEÑO</a>
                                             <br />
                                             <br />
 
@@ -349,7 +335,6 @@
 
                                             </div>
 
-                                            <br />
                                             <div class="form-group unselectable">
                                                 <asp:Button ID="btnConfirmar1" runat="server" CssClass="form-control btn btn-danger btnConfirm1" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm_tab1();" ClientIDMode="Static" Text="GUARDAR" />
                                             </div>
@@ -543,4 +528,5 @@
     <asp:HiddenField ID="hdnCurrentLNG" runat="server" ClientIDMode="Static" Value="0" />
     <asp:HiddenField ID="hdnPedidoCantidad" runat="server" ClientIDMode="Static" Value="1" />
     <asp:HiddenField ID="hdnIS_TAB_PASACALLE" runat="server" ClientIDMode="Static" Value="1" />
+    <asp:HiddenField ID="hdnDisenoSeleccionado" runat="server" ClientIDMode="Static" Value="1" />
 </asp:Content>
