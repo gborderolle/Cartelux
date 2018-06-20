@@ -184,5 +184,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="confi_emails">
+      <EntityTypeMapping TypeName="carteluxdb1Model.confi_emails">
+        <MappingFragment StoreEntitySet="confi_emails">
+          <ScalarProperty Name="EsEntrega" ColumnName="EsEntrega" />
+          <ScalarProperty Name="EsEmisor" ColumnName="EsEmisor" />
+          <ScalarProperty Name="Clave" ColumnName="Clave" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Confi_emails_ID" ColumnName="Confi_emails_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

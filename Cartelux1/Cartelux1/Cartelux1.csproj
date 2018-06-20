@@ -806,6 +806,7 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="_Backup\Web_14-06-2018.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Acceso.aspx.cs">

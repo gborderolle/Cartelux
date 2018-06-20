@@ -80,6 +80,7 @@
     <EntitySet Name="lista_pedido_tipos" EntityType="carteluxdb1Model.lista_pedido_tipos" />
     <EntitySet Name="pedido_entregas" EntityType="carteluxdb1Model.pedido_entregas" />
     <EntitySet Name="lista_pedido_estados" EntityType="carteluxdb1Model.lista_pedido_estados" />
+    <EntitySet Name="confi_emails" EntityType="carteluxdb1Model.confi_emails" />
   </EntityContainer>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -185,5 +186,17 @@
     <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Codigo" Type="Int32" Nullable="false" />
     <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="confi_emails">
+    <Key>
+      <PropertyRef Name="Confi_emails_ID" />
+    </Key>
+    <Property Name="Confi_emails_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EsEmisor" Type="Boolean" Nullable="false" />
+    <Property Name="EsEntrega" Type="Boolean" Nullable="false" />
   </EntityType>
 </Schema>
