@@ -35,6 +35,11 @@ namespace Cartelux1
                 {
                     BindData(serie_str, tel_str);
                 }
+                if (string.IsNullOrWhiteSpace(serie_str))
+                {
+                    // Si no tiene ID como parámetro, tomar como si fuese un ingreso nuestro. Mostrar botón de limpiar campos 
+                    // (usar js función emptyFields_all_tabs) y verificar que guarde OK
+                }
             }
         }
 
