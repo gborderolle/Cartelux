@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 using System.Reflection;
 using System.IO;
+using Cartelux1.Global_Objects;
 
 namespace Cartelux1
 {
@@ -75,7 +76,7 @@ namespace Cartelux1
             {
                 if (!IsPostBack)
                 {
-                    build_date = GetLinkerTime(Assembly.GetExecutingAssembly()).ToString();
+                    build_date = GetLinkerTime(Assembly.GetExecutingAssembly()).ToString(GlobalVariables.ShortDateTime_format1);
                 }
             }
             else

@@ -386,7 +386,6 @@ namespace Cartelux1
                                         }
                                     }
                                     #endregion
-
                                 }
 
                                 #endregion IS ROLL UP
@@ -394,7 +393,7 @@ namespace Cartelux1
                         }
 
                         // Última actualización del pedido
-                        lblLastUpdate.InnerText = " " + _formulario.Fecha_update.ToString();
+                        lblLastUpdate.InnerText = " " + _formulario.Fecha_update.ToString(GlobalVariables.ShortDateTime_format1_long);
                     }
                     else
                     {
@@ -1961,7 +1960,7 @@ namespace Cartelux1
                 mail.Body += "<div><strong>Dashboard:</strong> www.pedidos.cartelux.uy/Dashboard</div>";
                 mail.Body += "<br/><br/>";
                 mail.Body += "<div>Este es un email auto-generado por favor no lo responda.</div>";
-                mail.Body += "<div>Fecha creación: " + GetCurrentTime().ToString(GlobalVariables.ShortDateTime_format1) + "</div>";
+                mail.Body += "<div>Fecha creación: " + GetCurrentTime().ToString(GlobalVariables.ShortDateTime_format1_long) + "</div>";
 
                 string sign_1 = "<br/><div><font size='2'><strong><span style='color:#e15211'>------------------------------<wbr>------------------------------<wbr>-------------</span></strong></font></div>";
                 string sign_2 = "<div><strong><span style='font-size:8pt;color:#e15211'>Cartelux Publicidad 2018</span></strong><strong><span style='color:#4a442a'> | </span></strong><strong><span style='FONT-SIZE:8pt;'>www.cartelux.uy</span></strong></div>";

@@ -249,7 +249,7 @@
                                         <div class="login-container sub-form">
                                             <label class="_label1 unselectable">1) Ingrese sus datos</label>
                                             <div class="form-group unselectable">
-                                                <input id="txbTelefono" class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" runat="server" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
+                                                <input id="txbTelefono" class="form-control ctrl-required" type="number" tabindex="90" placeholder="Teléfono de contacto" runat="server" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
                                             </div>
                                             <div class="form-group unselectable">
                                                 <input id="txbNombre" class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" runat="server" clientidmode="static" autofocus />
@@ -283,7 +283,7 @@
                                             <!--Radio group-->
                                             <br />
                                             <div class="form-group unselectable" style="display: none;">
-                                                <asp:TextBox runat="server" ID="txbTexto1" TextMode="multiline" CssClass="form-control txbEditable multitext" placeholder="Indicaciones del diseño (opcional)" TabIndex="3"></asp:TextBox>
+                                                <asp:TextBox runat="server" ID="txbTexto1" TextMode="multiline" CssClass="form-control txbEditable multitext" placeholder="Indicaciones del diseño (opcional)"></asp:TextBox>
                                             </div>
 
                                             <hr />
@@ -302,12 +302,12 @@
 
                                             <div class="form-group" id="dir_group" style="display: none;">
                                                 <div class="form-group row" style="margin-left: 0; margin-right: 0;">
-                                                    <input id="txbDireccion_calle" class="form-control txbEditable ctrl-required pull-left" placeholder="Calle" type="text" tabindex="5" runat="server" clientidmode="static" style="width: 45%;" />
-                                                    <input id="txbDireccion_numero" class="form-control txbEditable pull-right" placeholder="Número de puerta" type="number" tabindex="5" runat="server" clientidmode="static" style="width: 45%;" />
+                                                    <input id="txbDireccion_calle" class="form-control txbEditable ctrl-required pull-left" placeholder="Calle" type="text" tabindex="5" runat="server" clientidmode="static" style="width: 47%;" />
+                                                    <input id="txbDireccion_numero" class="form-control txbEditable pull-right" placeholder="Número de puerta" type="number" tabindex="5" runat="server" clientidmode="static" style="width: 47%;" />
                                                 </div>
                                                 <div class="form-group row" style="margin-left: 0; margin-right: 0;">
-                                                    <input id="txbDireccion_apto" class="form-control txbEditable pull-left" placeholder="Apto" type="text" tabindex="5" runat="server" clientidmode="static" style="width: 45%;" />
-                                                    <input id="txbDireccion_esquina" class="form-control txbEditable pull-right" placeholder="Esquina" type="text" tabindex="5" runat="server" clientidmode="static" style="width: 45%;" />
+                                                    <input id="txbDireccion_apto" class="form-control txbEditable pull-left" placeholder="Apto" type="text" tabindex="5" runat="server" clientidmode="static" style="width: 47%;" />
+                                                    <input id="txbDireccion_esquina" class="form-control txbEditable pull-right" placeholder="Esquina" type="text" tabindex="5" runat="server" clientidmode="static" style="width: 47%;" />
                                                 </div>
                                             </div>
 

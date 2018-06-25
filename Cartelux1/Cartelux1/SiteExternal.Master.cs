@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Cartelux1.Global_Objects;
 
 namespace Cartelux1
 {
@@ -71,7 +72,7 @@ namespace Cartelux1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            build_date = GetLinkerTime(Assembly.GetExecutingAssembly()).ToString();
+            build_date = GetLinkerTime(Assembly.GetExecutingAssembly()).ToString(GlobalVariables.ShortDateTime_format1);
         }
 
         public static DateTime GetLinkerTime(Assembly assembly, TimeZoneInfo target = null)

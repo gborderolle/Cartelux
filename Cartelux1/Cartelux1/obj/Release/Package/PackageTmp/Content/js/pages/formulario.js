@@ -71,6 +71,16 @@ var getUrlParameter = function getUrlParameter(sParam) {
     }
 };
 
+function emptyFields_all_tabs() {
+    $("#txbNombre").val("");
+    $("#txbTelefono").val("");
+    $("#txbFecha").val("");
+
+    $("#txbNombre_tab2").val("");
+    $("#txbTelefono_tab2").val("");
+    $("#txbFecha_tab2").val("");
+}
+
 function load_gadgets() {
     var w = '8';
     var h = '6';

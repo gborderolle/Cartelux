@@ -9,9 +9,10 @@
     <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
   </configSections>
   <connectionStrings>
-    <!--<add name="DefaultConnection" connectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\aspnet-Cartelux1-20170911125958.mdf;Initial Catalog=aspnet-Cartelux1-20170911125958;Integrated Security=True;User Instance=True" providerName="System.Data.SqlClient" />-->
-    <!--<add name="carteluxdbEntities" connectionString="metadata=res://*/Models.CarteluxModel.csdl|res://*/Models.CarteluxModel.ssdl|res://*/Models.CarteluxModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=GBORDEROLLE1\SQLEXPRESS;initial catalog=carteluxdb;user id=cartelux_login;password=cartelux1234; MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />-->
-    <add name="CarteluxDB" connectionString="metadata=res://*/Models.CarteluxModel.csdl|res://*/Models.CarteluxModel.ssdl|res://*/Models.CarteluxModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=sql5017.smarterasp.net;initial catalog=db_a2a582_carteluxdb;persist security info=True;user id=DB_A2A582_carteluxdb_admin;password=cartelux1234;multipleactiveresultsets=True;application name=EntityFramework&quot;" providerName="System.Data.EntityClient" />
+    <!--LOCAL-->
+     <!-- <add name="CarteluxDB" connectionString="metadata=res://*/Models.CarteluxDB.csdl|res://*/Models.CarteluxDB.ssdl|res://*/Models.CarteluxDB.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=192.168.1.2,49170;initial catalog=carteluxdb1;user id=cartelux_login;password=cartelux1234;multipleactiveresultsets=True;application name=EntityFramework&quot;" providerName="System.Data.EntityClient" /> -->
+    <!--DEPLOY-->
+        <add name="CarteluxDB" connectionString="metadata=res://*/Models.CarteluxDB.csdl|res://*/Models.CarteluxDB.ssdl|res://*/Models.CarteluxDB.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=SQL5017.site4now.net;initial catalog=DB_A2A582_carteluxdb;user id=DB_A2A582_carteluxdb_admin;password=cartelux1234;multipleactiveresultsets=True;application name=EntityFramework&quot;" providerName="System.Data.EntityClient" />
   </connectionStrings>
   <system.web>
     <authentication mode="None" />
@@ -29,7 +30,7 @@
     <membership>
       <providers>
         <!--
-	      ASP.NET Membership is disabled in this template. Please visit the following link http://go.microsoft.com/fwlink/?LinkId=301889 to learn about the ASP.NET Membership support in this template
+        ASP.NET Membership is disabled in this template. Please visit the following link http://go.microsoft.com/fwlink/?LinkId=301889 to learn about the ASP.NET Membership support in this template
         -->
         <clear />
       </providers>
@@ -37,14 +38,14 @@
     <profile>
       <providers>
         <!--
-	      ASP.NET Membership Profile is disabled in this template. Please visit the following link http://go.microsoft.com/fwlink/?LinkId=301889 to learn about the ASP.NET Membership support in this template
+        ASP.NET Membership Profile is disabled in this template. Please visit the following link http://go.microsoft.com/fwlink/?LinkId=301889 to learn about the ASP.NET Membership support in this template
         -->
         <clear />
       </providers>
     </profile>
     <roleManager>
       <!--
-	        ASP.NET Membership Role is disabled in this template. Please visit the following link http://go.microsoft.com/fwlink/?LinkId=301889 to learn about the ASP.NET Membership support in this template
+          ASP.NET Membership Role is disabled in this template. Please visit the following link http://go.microsoft.com/fwlink/?LinkId=301889 to learn about the ASP.NET Membership support in this template
         -->
       <providers>
         <clear />
@@ -127,12 +128,13 @@
     <!-- Keys de configuración -->
     <add key="Path_Log" value="Logs\" />
     <add key="File_ErrorLog" value="cx_error_log.txt" />
+    <!-- LOCAL -->
     <!--<add key="URL_formulario" value="http://192.168.1.2:8082?ID=" />-->
-    <!--<add key="URL_formulario" value="http://pedidos.cartelux.uy/Formulario?ID=" />-->
+    <!-- DEPLOY -->
     <add key="URL_formulario" value="http://pedidos.cartelux.uy?ID=" />
-	   <add key="LocalRepoPath" value="C:\Cartelux\Resources\Bocetos\" />
+    <add key="LocalRepoPath" value="C:\Cartelux\Resources\Bocetos\" />
     <add key="ServerRepoPath" value="Resources\Bocetos\" />
-	   <add key="FTP_Server" value="ftp://ftp.site4now.net:21/" />
+    <add key="FTP_Server" value="ftp://ftp.site4now.net:21/" />
     <add key="FTP_User" value="madelux-001" />
     <add key="FTP_Password" value="madelux1234" />
     <add key="FTP_Path" value="Cartelux/cxpedidos/Resources/Bocetos/" />
@@ -145,7 +147,7 @@
     <add key="BOX_Password" value="154060gb" />
     <add key="BOX_Path1" value="Cartelux" />
     <add key="BOX_Path2" value="Workspace" />
-    
+  
   </appSettings>
 </configuration>
 <!--ProjectGuid: {503B6030-0E10-4F5C-9E51-FBED212D4E04}-->

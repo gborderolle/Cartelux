@@ -11,6 +11,7 @@ namespace Cartelux1.Global_Objects
         public static string ShortDateTime_format2 = "dd/MM/yyyy";
         public static string ShortDateTime_format3 = "MM-dd-yyyy";
         public static string ShortDateTime_format4 = "MM/dd/yyyy";
+        public static string ShortDateTime_format1_long = "dd-MM-yyyy HH:mm:ss";
 
         public enum Agrupacion
         {
