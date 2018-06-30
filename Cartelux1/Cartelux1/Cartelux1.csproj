@@ -806,7 +806,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="_Backup\Web_14-06-2018.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Acceso.aspx.cs">
@@ -1085,6 +1084,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="_Backup\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

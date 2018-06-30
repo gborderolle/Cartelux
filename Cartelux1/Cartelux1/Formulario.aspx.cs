@@ -1950,16 +1950,16 @@ namespace Cartelux1
                 mail.Subject = "CX-AVISO: ¡Pedido nuevo! > " + nombre;
                 mail.Body = "<div><strong>Información básica del pedido nuevo.</strong></div>";
                 mail.Body += "<br/><div><strong>Nombre:</strong> " + nombre + "</div>";
-                mail.Body += "<div><strong>Telefono:</strong> " + telefono + "</div>";
+                mail.Body += "<div><strong>Teléfono:</strong> " + telefono + "</div>";
                 mail.Body += "<div><strong>Material:</strong> " + material + "</div>";
                 mail.Body += "<div><strong>Entrega:</strong> " + fecha_entrega + "</div>";
                 mail.Body += "<br/><br/>";
                 mail.Body += "<div><font size='2'><strong><span style='color:#e15211'>------------------------------<wbr>------------------------------<wbr>-------------</span></strong></font></div>";
-                mail.Body += "<div><strong><span style='font-size:12pt;color:#e15211'>Links</span></strong></div>";
-                mail.Body += "<div><strong>Form cliente:</strong> " + url + "</div>";
-                mail.Body += "<div><strong>Dashboard:</strong> www.pedidos.cartelux.uy/Dashboard</div>";
+                mail.Body += "<div><strong><span style='font-size:12pt;color:#e15211'>Accesos</span></strong></div>";
+                mail.Body += "<div><strong><a href='" + url + "' title='' target='_blank'>Formulario</a></strong></div>";
+                mail.Body += "<div><strong><a href='www.pedidos.cartelux.uy/Dashboard' title='' target='_blank'>Dashboard</a></strong></div>";
                 mail.Body += "<br/><br/>";
-                mail.Body += "<div>Este es un email auto-generado por favor no lo responda.</div>";
+                mail.Body += "<div>Este es un email auto-generado, por favor no lo responda.</div>";
                 mail.Body += "<div>Fecha creación: " + GetCurrentTime().ToString(GlobalVariables.ShortDateTime_format1_long) + "</div>";
 
                 string sign_1 = "<br/><div><font size='2'><strong><span style='color:#e15211'>------------------------------<wbr>------------------------------<wbr>-------------</span></strong></font></div>";
