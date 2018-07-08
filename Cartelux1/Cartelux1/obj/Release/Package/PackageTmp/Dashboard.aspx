@@ -232,7 +232,7 @@
                                                     <div class="input-group ">
                                                         <input type="text" id="txbSearchPedidos" name="q" class="form-control" placeholder="Buscar...">
                                                         <span class="input-group-btn">
-                                                            <a id="btnSearchPedidos" role="button"" href="#" name="search" class="btn btn-info">
+                                                            <a id="btnSearchPedidos" role="button" href="#" name="search" class="btn btn-info">
                                                                 <i class="glyphicon glyphicon-search"></i>
                                                             </a>
                                                         </span>
@@ -245,7 +245,7 @@
                                                 <div class="form-check">
                                                     <input id="chbSoloEntrCol" class="form-check-input" type="checkbox" onclick="filtrar()">
                                                     <label class="form-check-label unselectable" for="chbSoloEntrCol">
-                                                        Filtro entr/col
+                                                        Entregas/Cols.
                                                     </label>
                                                 </div>
 
@@ -336,7 +336,7 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                              <%--  <asp:TemplateField HeaderText="Cant">
+                                                <%--  <asp:TemplateField HeaderText="Cant">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblCantidad" runat="server" CommandName="View" />
                                                     </ItemTemplate>
@@ -387,9 +387,9 @@
 
                             <br />
                             <div class="row">
-                                <label style="color: #333">Vigente</label>
+                                <label style="color: green">Concluído</label>
                                 | 
-        <label style="color: green">Impreso</label>
+        <label style="color: #333">Vigente</label>
                                 | 
         <label style="color: blue">Diseño aprobado</label>
                                 | 
@@ -467,24 +467,24 @@
         <div class="row row-short" style="padding: 10px;">
             <label id="lbl_options_header_OPC" class="label" style="font-size: 100%; color: rgba(68, 89, 156, 1); font-size: 16px;">Borrar elemento seleccionado</label>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="margin-bottom: 0;">
             <div class="row row-short" style="padding: 10px;">
                 <div id="lbl_options_divBox_OPC" class="alert alert-warning" role="alert">
                     <span id="lbl_options_color_OPC" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                    <span id="lbl_options_info_OPC">Está a punto de borrar el elemento, confirme su contraseña para continuar</span>
+                    <span id="lbl_options_info_OPC" class="unselectable">Opciones de estado</span>
                 </div>
             </div>
-            <div id="popbox_footer_OPC" class="row row-short" style="margin-right: 15px; margin-top: -7px;">
-                <button id="lbl_options_button1_OPC" type="button" class="btn btn-success btnAcciones" title="Impreso">
+            <div id="popbox_footer_OPC" class="row row-short" style="margin-top: -7px;">
+                <%--<button id="lbl_options_button1_OPC" type="button" class="btn btn-success btnAcciones" title="Impreso">
                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                </button>
-                <button id="lbl_options_button2_OPC" type="button" class="btn btn-primary btnAcciones" title="Diseño aprobado">
+                </button>--%>
+                <button id="lbl_options_button2_OPC" type="button" class="btn btn-primary btnAcciones" title="Aprobado">
                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 </button>
                 <button id="lbl_options_button3_OPC" type="button" class="btn btn-danger btnAcciones" title="Cancelado">
                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 </button>
-                <button id="lbl_options_button4_OPC" type="button" class="btn btn-default btnAcciones" title="Inicial">
+                <button id="lbl_options_button4_OPC" type="button" class="btn btn-default btnAcciones" title="Vigente">
                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 </button>
             </div>
@@ -500,17 +500,16 @@
         <div class="row row-short" style="padding: 10px;">
             <label id="lbl_options_header_CTO" class="label" style="font-size: 100%; color: rgba(68, 89, 156, 1); font-size: 16px;">Borrar elemento seleccionado</label>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="margin-bottom: 0;">
             <div class="row row-short" style="padding: 10px;">
 
                 <div id="lbl_options_divBox_CTO" class="alert alert-warning" role="alert">
                     <span id="lbl_options_color_CTO" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                    <span id="lbl_options_info_CTO">Está a punto de borrar el elemento, confirme su contraseña para continuar</span>
+                    <span id="lbl_options_info_CTO" class="unselectable">Opciones de contacto</span>
                 </div>
                 <%--<input id="lbl_options_password" type="password" class="form-control" placeholder="Contraseña" name="login-username" required="required" />--%>
-                <!--  -->
             </div>
-            <div id="popbox_footer_CTO" class="row row-short" style="margin-right: 15px; margin-top: -7px;">
+            <div id="popbox_footer_CTO" class="row row-short" style="margin-top: -7px;">
                 <a id='lbl_options_button1_CTO' role='button' href='#' class='btnAcciones btn btn-primary fa fa-wpforms fa-2x' title='' target='_blank'></a>
                 <a id='lbl_options_button2_CTO' role='button' href='#' class='btnAcciones btn btn-danger fa fa-map-marker fa-2x' title='' target='_blank'></a>
                 <a id='lbl_options_button3_CTO' role='button' href='#' class='btnAcciones btn btn-success fa fa-whatsapp fa-2x' title='' target='_blank'></a>
