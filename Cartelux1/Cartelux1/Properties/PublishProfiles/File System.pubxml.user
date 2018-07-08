@@ -85,7 +85,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/11/2018 23:21:02</publishTime>
     </File>
     <File Include="bin/Cartelux1.dll">
-      <publishTime>06/30/2018 01:36:14</publishTime>
+      <publishTime>07/08/2018 05:28:06</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>09/11/2017 02:52:49</publishTime>
@@ -1123,7 +1123,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/24/2017 03:06:38</publishTime>
     </File>
     <File Include="Content/js/pages/dashboard.js">
-      <publishTime>06/19/2018 23:46:03</publishTime>
+      <publishTime>07/08/2018 04:45:22</publishTime>
     </File>
     <File Include="Content/js/pages/formulario.js">
       <publishTime>06/20/2018 00:16:54</publishTime>
@@ -1675,7 +1675,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/19/2018 23:46:03</publishTime>
     </File>
     <File Include="Dashboard.aspx">
-      <publishTime>06/19/2018 23:46:03</publishTime>
+      <publishTime>07/08/2018 04:13:28</publishTime>
     </File>
     <File Include="Default.aspx">
       <publishTime>09/11/2017 00:59:15</publishTime>
@@ -1894,7 +1894,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/20/2018 06:05:13</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/24/2018 20:55:10</publishTime>
+      <publishTime>07/08/2018 05:28:15</publishTime>
     </File>
     <File Include="_Backup/Web_14-06-2018.config">
       <publishTime>06/14/2018 02:05:22</publishTime>

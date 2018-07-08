@@ -169,6 +169,8 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value, i
         month_clearSelected()
         month_paintSelected(month_value);
 
+        month_value += "";
+
         var year_value = 2018; // DUMMY
         var ddl_year = $("#ddl_year option:selected");
         if (ddl_year !== null && ddl_year !== undefined && ddl_year.text() !== null && ddl_year.text() !== undefined) {
@@ -192,10 +194,10 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value, i
                 dataType: "json",
                 success: function (response) {
 
-                    $("#gridFormularios").empty();
-
                     if (response.d.length > 0) {
-                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>T/Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>T/Cartel</th> <th scope='col'>Impr/Pint</th> <th scope='col'>Cant</th> <th scope='col'>Zona</th> <th scope='col'>¿Archivo?</th> <th scope='col'>Diseño referido</th> <th scope='col'>CTO</th> <th scope='col'>OPC</th> </tr></thead><tbody>"); //<th scope='col'>GMaps</th> <th scope='col'>Form</th> <th scope='col'>WPP</th>
+                        $("#gridFormularios").empty();
+
+                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>T/Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>T/Cartel</th> <th scope='col'>Impr/Pint</th> <th scope='col'>CTO</th> <th scope='col'>OPC</th> </tr></thead><tbody>"); //<th scope='col'>GMaps</th> <th scope='col'>Form</th> <th scope='col'>WPP</th> //<th scope='col'>Cant</th> <th scope='col'>Zona</th> <th scope='col'>¿Archivo?</th> <th scope='col'>Diseño referido</th>
                         for (var i = 0; i < response.d.length; i++) {
 
                             //var goToURL = "<a id='btnURL' role='button' href='" + response.d[i].URL_short + "' class='btn btn-warning glyphicon fa fa-wpforms' title='' target='_blank'></a>";
@@ -257,6 +259,8 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value, i
                                         }
                                 }
                             }
+                            console.log(estadoNro);
+                            console.log(text_color);
 
                             var lblTipoCodigo = check_nullValues(response.d[i].lblTipoCodigo);
                             if (lblTipoCodigo !== null || lblTipoCodigo !== "") {
@@ -289,6 +293,7 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value, i
                             console.log(goToURL);
                             console.log(goToGMaps);
                             console.log(goToWPP);
+                            console.log("-------------- END --------------");
                             var goToCTO = "<a id=\"" + btnCTO_id + "\" role='button' href='#' class='btn btn-warning btn-xs fa fa-address-card fa-2x' onclick='return showActionMenu_CTO(\"" + formID + "\", \"" + nombre + "\", \"" + goToURL + "\", \"" + goToGMaps + "\", \"" + goToWPP + "\", \"" + btnCTO_id + "\")'></a>";
                             // ----------------------
 
@@ -305,10 +310,10 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value, i
                             check_nullValues(response.d[i].lblTamano) + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(response.d[i].lblTipo) + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(response.d[i].lblMaterial) + "</td> <td class='td-very_short' " + text_color + ">" +
-                            check_nullValues(response.d[i].lblCantidad) + "</td> <td class='td-very_short' " + text_color + ">" +
-                            check_nullValues(response.d[i].lblZona) + "</td><td class='td-short' " + text_color + ">" +
-                            check_nullValues(convertBool(response.d[i].chbTieneBosquejo)) + "</td><td class='td-short' " + text_color + ">" +
-                            check_nullValues(convertBool(response.d[i].lblDisenoReferido)) + "</td><td class='td-short'>" +
+                            //check_nullValues(response.d[i].lblCantidad) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            //check_nullValues(response.d[i].lblZona) + "</td><td class='td-short' " + text_color + ">" +
+                            //check_nullValues(convertBool(response.d[i].chbTieneBosquejo)) + "</td><td class='td-short' " + text_color + ">" +
+                            //check_nullValues(convertBool(response.d[i].lblDisenoReferido)) + "</td><td class='td-short'>" +
                             //goToGMaps + "</td><td class='td-very_short'>" +
                             //goToURL + "</td><td class='td-very_short'>" +
                             //goToWPP + "</td><td class='td-very_short'>" +

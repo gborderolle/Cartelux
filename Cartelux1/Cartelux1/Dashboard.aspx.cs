@@ -557,6 +557,7 @@ namespace Cartelux1
                                  * 3: Eliminado
                                  * 4: Diseño OK, pronto para imprimir
                                  * */
+                                bool es_cancelado = false;
 
                                 clientes _cliente = (clientes)context.clientes.FirstOrDefault(c => c.Cliente_ID == _formulario.Cliente_ID);
                                 pedidos _pedido = (pedidos)context.pedidos.FirstOrDefault(c => c.Formulario_ID == _formulario.Formulario_ID);
@@ -570,6 +571,10 @@ namespace Cartelux1
                                     if (_pedidoEstado != null)
                                     {
                                         _GridFormulario1.EstadoNro = _pedidoEstado.Codigo;
+                                        if(_pedidoEstado.Codigo == 2 || _pedidoEstado.Codigo == 3) // Si Cancelado o Eliminado, no concluye después
+                                        {
+                                            es_cancelado = true;
+                                        }
                                     }
 
                                     #region Pedido Entrega ---------------------------------------------------------------------------------------------------------
@@ -586,12 +591,15 @@ namespace Cartelux1
                                         }
                                         _GridFormulario1.URL_gmaps = value;
 
-                                        if (_pedido_entrega.Fecha_entrega.Value.Month < DateTime.Now.Month ||
-                                            (_pedido_entrega.Fecha_entrega.Value.Month == DateTime.Now.Month && _pedido_entrega.Fecha_entrega.Value.Day < DateTime.Now.Day))
+                                        if (!es_cancelado)
                                         {
-                                            _GridFormulario1.EstadoNro = 1; // Concluídos
+                                            // Check vencimiento
+                                            if (_pedido_entrega.Fecha_entrega.Value.Month < DateTime.Now.Month ||
+                                                (_pedido_entrega.Fecha_entrega.Value.Month == DateTime.Now.Month && _pedido_entrega.Fecha_entrega.Value.Day < DateTime.Now.Day))
+                                            {
+                                                _GridFormulario1.EstadoNro = 1; // Concluídos
+                                            }
                                         }
-
                                         // Filtro Juanchy
                                         lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Codigo == _pedido_entrega.Entrega_Tipo_ID);
                                         if (_lista_entregas_tipo != null)

@@ -336,7 +336,7 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Cant">
+                                              <%--  <asp:TemplateField HeaderText="Cant">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblCantidad" runat="server" CommandName="View" />
                                                     </ItemTemplate>
@@ -358,7 +358,7 @@
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblDisenoReferido" runat="server" CommandName="View" />
                                                     </ItemTemplate>
-                                                </asp:TemplateField>
+                                                </asp:TemplateField>--%>
 
                                                 <asp:TemplateField HeaderText="CTO" ControlStyle-CssClass="btn btn-warning btn-xs">
                                                     <ItemTemplate>

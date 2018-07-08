@@ -1942,7 +1942,7 @@ namespace Cartelux1
                 {
                     foreach (string email in email_receptor_entrega)
                     {
-                        mail.CC.Add(email);
+                        //mail.CC.Add(email); // POR EL MOMENTO NO
                     }
                 }
 
