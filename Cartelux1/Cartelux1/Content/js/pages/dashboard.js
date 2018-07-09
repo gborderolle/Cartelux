@@ -621,6 +621,7 @@ function showActionMenu_OPC(formID, tel, nombre, btnID) {
 
         //divPopbox.position(btnID.position());
 
+        $("#lbl_options_header_OPC").text(nombre);
         //$("#lbl_options_info_OPC").text("Seleccione una acción");
         $("#divPopbox_OPC").show("highlight", 700);
 
