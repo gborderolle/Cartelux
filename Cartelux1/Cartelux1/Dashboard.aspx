@@ -391,7 +391,7 @@
                                 | 
         <label style="color: #333">Vigente</label>
                                 | 
-        <label style="color: blue">Diseño aprobado</label>
+        <label style="color: blue">Aprobado</label>
                                 | 
         <label style="color: red">Cancelado</label>
                             </div>
@@ -510,9 +510,9 @@
                 <%--<input id="lbl_options_password" type="password" class="form-control" placeholder="Contraseña" name="login-username" required="required" />--%>
             </div>
             <div id="popbox_footer_CTO" class="row row-short" style="margin-top: -7px;">
-                <a id='lbl_options_button1_CTO' role='button' href='#' class='btnAcciones btn btn-primary fa fa-wpforms fa-2x' title='' target='_blank'></a>
-                <a id='lbl_options_button2_CTO' role='button' href='#' class='btnAcciones btn btn-danger fa fa-map-marker fa-2x' title='' target='_blank'></a>
-                <a id='lbl_options_button3_CTO' role='button' href='#' class='btnAcciones btn btn-success fa fa-whatsapp fa-2x' title='' target='_blank'></a>
+                <a id='lbl_options_button1_CTO' role='button' href='#' class='btnAcciones btn btn-primary fa fa-wpforms fa-2x' title='Ir a formulario' target='_blank'></a>
+                <a id='lbl_options_button2_CTO' role='button' href='#' class='btnAcciones btn btn-danger fa fa-map-marker fa-2x' title='Ir a Google Maps' target='_blank'></a>
+                <a id='lbl_options_button3_CTO' role='button' href='#' class='btnAcciones btn btn-success fa fa-whatsapp fa-2x' title='Ir a WhatsApp' target='_blank'></a>
             </div>
         </div>
         <button type="button" class="btn close" style="padding: 5px;">
