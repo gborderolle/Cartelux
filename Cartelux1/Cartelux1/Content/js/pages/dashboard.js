@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 // attach the event binding function to every partial update
 Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function (evt, args) {
-    bindEvents();
+    bindEvents(); 
     bindDelayEvents();
 });
 
@@ -324,6 +324,10 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value, i
 
                         } // for
                         $("#gridFormularios").append("</tbody>");
+
+
+                        // Volver a cargar eventos sobre la grilla
+                        bindDelayEvents();
                     }
 
                     // Load calendario completo
@@ -617,8 +621,7 @@ function showActionMenu_OPC(formID, tel, nombre, btnID) {
 
         //divPopbox.position(btnID.position());
 
-        $("#lbl_options_header_OPC").text("Formulario: " + nombre);
-        $("#lbl_options_info_OPC").text("Seleccione una acción");
+        //$("#lbl_options_info_OPC").text("Seleccione una acción");
         $("#divPopbox_OPC").show("highlight", 700);
 
         // Estados de pedidos:
@@ -665,8 +668,8 @@ function showActionMenu_CTO(formID, nombre, goToURL, goToGMaps, goToWPP, btnID) 
 
         //divPopbox.position(btnID.position());
 
-        $("#lbl_options_header_CTO").text("Formulario: " + nombre);
-        $("#lbl_options_info_CTO").text("Seleccione una acción");
+        $("#lbl_options_header_CTO").text(nombre);
+        //$("#lbl_options_info_CTO").text("Seleccione una acción");
         $("#divPopbox_CTO").show("highlight", 700);
 
         // Estados de pedidos:
