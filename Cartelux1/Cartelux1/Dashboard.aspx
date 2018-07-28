@@ -212,6 +212,7 @@
                         <ul>
                             <li><a href="#tabsFormularios_1" class="tabsFormularios">Formularios</a></li>
                             <li><a href="#tabsFormularios_2" class="tabsFormularios">Calendario</a></li>
+                            <li><a href="#tabsFormularios_2" class="tabsFormularios">Reportes</a></li>
                         </ul>
 
                         <!-- Tab Formularios BEGIN -->

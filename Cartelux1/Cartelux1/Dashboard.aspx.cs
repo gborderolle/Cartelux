@@ -528,6 +528,12 @@ namespace Cartelux1
                             soloVigentes_value = false;
                         }
 
+                        // Si es mes pasado
+                        if (year_int <= DateTime.Now.Year && month_int < DateTime.Now.Month)
+                        {
+                            soloVigentes_value = true;
+                        }
+
                         int day_value = 1;
                         if (soloVigentes_value)
                         {
