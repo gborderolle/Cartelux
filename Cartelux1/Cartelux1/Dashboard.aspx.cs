@@ -531,7 +531,7 @@ namespace Cartelux1
                         // Si es mes pasado
                         if (year_int <= DateTime.Now.Year && month_int < DateTime.Now.Month)
                         {
-                            soloVigentes_value = true;
+                            soloVigentes_value = false;
                         }
 
                         int day_value = 1;

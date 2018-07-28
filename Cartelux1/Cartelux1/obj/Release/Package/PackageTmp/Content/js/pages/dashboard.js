@@ -194,9 +194,10 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value, i
                 dataType: "json",
                 success: function (response) {
 
+                    //$("#gridFormularios").empty();
+                    $("#gridFormularios tbody").remove();
                     if (response.d.length > 0) {
                         $("#gridFormularios").empty();
-
                         $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>T/Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>T/Cartel</th> <th scope='col'>Impr/Pint</th> <th scope='col'>CTO</th> <th scope='col'>OPC</th> </tr></thead><tbody>"); //<th scope='col'>GMaps</th> <th scope='col'>Form</th> <th scope='col'>WPP</th> //<th scope='col'>Cant</th> <th scope='col'>Zona</th> <th scope='col'>¿Archivo?</th> <th scope='col'>Diseño referido</th>
                         for (var i = 0; i < response.d.length; i++) {
 

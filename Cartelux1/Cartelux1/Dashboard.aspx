@@ -20,6 +20,17 @@
     <!-- Bootstrap table -->
     <link rel="stylesheet" href="/Content/css/bootstrap-table.css" />
 
+    <!-- STYLES REPORTES TEMPLATE -->
+
+    <!-- NProgress -->
+    <link href="/Content/reportes_template/nprogress/nprogress.css" rel="stylesheet"/>
+    <!-- iCheck -->
+    <link href="/Content/reportes_template/iCheck/flat/green.css" rel="stylesheet"/>
+    <!-- bootstrap-progressbar -->
+    <link href="/Content/reportes_template/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet"/>
+    <!-- Custom Theme Style -->
+    <link href="/Content/reportes_template/custom.css" rel="stylesheet"/>
+
     <style type="text/css">
         .ui-dialog-titlebar {
             background-color: rgba(255, 119, 0, 0.78);
@@ -135,6 +146,35 @@
     <script type="text/javascript" src="/Content/js/pages/auxiliar_functions.js"></script>
     <script type="text/javascript" src="/Content/js/pages/dashboard.js"></script>
 
+    <!-- STYLES REPORTES TEMPLATE -->
+
+    <!-- FastClick -->
+    <script src="/Content/reportes_template/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="/Content/reportes_template/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="/Content/reportes_template/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="/Content/reportes_template/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="/Content/reportes_template/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="/Content/reportes_template/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="/Content/reportes_template/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="/Content/reportes_template/Flot/jquery.flot.js"></script>
+    <script src="/Content/reportes_template/Flot/jquery.flot.pie.js"></script>
+    <script src="/Content/reportes_template/Flot/jquery.flot.time.js"></script>
+    <script src="/Content/reportes_template/Flot/jquery.flot.stack.js"></script>
+    <script src="/Content/reportes_template/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="/Content/reportes_template/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="/Content/reportes_template/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="/Content/reportes_template/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="/Content/reportes_template/DateJS/build/date.js"></script>
+
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
@@ -212,7 +252,7 @@
                         <ul>
                             <li><a href="#tabsFormularios_1" class="tabsFormularios">Formularios</a></li>
                             <li><a href="#tabsFormularios_2" class="tabsFormularios">Calendario</a></li>
-                            <li><a href="#tabsFormularios_2" class="tabsFormularios">Reportes</a></li>
+                            <li><a href="#tabsFormularios_3" class="tabsFormularios">Reportes</a></li>
                         </ul>
 
                         <!-- Tab Formularios BEGIN -->
@@ -446,6 +486,75 @@
                             </div>
 
                         </div>
+
+                        <div id="tabsFormularios_3">
+
+
+
+
+                             <!-- page content -->
+        <div class="right_col" role="main" style="margin-left:0">
+          <!-- top tiles -->
+          <div class="row tile_count">
+                <h1>Pedidos</h1>
+            <div class="col-md-3 col-sm-12 col-xs-12 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Total Pedidos</span>
+              <div class="count green">2500</div>
+              <span class="count_bottom"><i class="green">4% </i> que el mes anterior</span>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-clock-o"></i> Total Carteles</span>
+              <div class="count">123.50</div>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> que el mes anterior</span>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Total Banners</span>
+              <div class="count">2,500</div>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> que el mes anterior</span>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Total Roll ups</span>
+              <div class="count">4,567</div>
+              <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> que el mes anterior</span>
+            </div>
+          </div>
+
+            <div class="row tile_count">
+                <h1>Otros</h1>
+            <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Colocaciones</span>
+              <div class="count">2500</div>
+              <span class="count_bottom"><i class="green">4% </i> que el mes anterior</span>
+            </div>
+                <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Lona usada mts.</span>
+              <div class="count">2500</div>
+              <span class="count_bottom"><i class="green">4% </i> que el mes anterior</span>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-clock-o"></i> Total Palos</span>
+              <div class="count">123.50</div>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> que el mes anterior</span>
+            </div>            
+          </div>
+          <!-- /top tiles -->
+
+          <br />
+
+
+        </div>
+        <!-- /page content -->
+
+
+
+
+
+
+
+
+
+
+                            </div>
 
                     </div>
 
