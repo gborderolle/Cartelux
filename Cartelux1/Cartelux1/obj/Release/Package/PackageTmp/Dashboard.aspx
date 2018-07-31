@@ -32,6 +32,10 @@
     <link href="/Content/reportes_template/custom.css" rel="stylesheet"/>
 
     <style type="text/css">
+        span {
+            color:#4e5254;
+        }
+
         .ui-dialog-titlebar {
             background-color: rgba(255, 119, 0, 0.78);
         }
@@ -137,6 +141,8 @@
     <script type="text/javascript" src="/Content/js/popbox.js"></script>
     <script type="text/javascript" src="/Content/js/jquery.tablesorter.js"></script>
     <script type="text/javascript" src="/Content/js/jquery.quicksearch.js"></script>
+    <script type="text/javascript" src="/Content/js/clipboard.min.js"></script>
+    <script type="text/javascript" src="/Content/js/clipboard-action.js"></script>
 
     <!-- Bootstrap table -->
     <script type="text/javascript" src="/Content/js/bootstrap-table.js"></script>
@@ -496,36 +502,46 @@
         <div class="right_col" role="main" style="margin-left:0">
           <!-- top tiles -->
           <div class="row tile_count">
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                <h1>Pedidos</h1>
+            <div class="col-md-3 col-sm-12 col-xs-12 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Total Pedidos</span>
-              <div class="count">2500</div>
-              <span class="count_bottom"><i class="green">4% </i> que el mes anterior</span>
+              <div class="count green">78</div>
+              <span class="count_bottom"><i class="green">16% </i> que el mes anterior</span>
             </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-clock-o"></i> Total Colocaciones</span>
-              <div class="count">123.50</div>
+            <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-clock-o"></i> Total Carteles</span>
+              <div class="count">69</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> que el mes anterior</span>
             </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Lona usada mts.</span>
-              <div class="count green">2,500</div>
+            <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Total Banners</span>
+              <div class="count">6</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> que el mes anterior</span>
             </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Pintados</span>
-              <div class="count">4,567</div>
+            <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Total Roll ups</span>
+              <div class="count">11</div>
               <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> que el mes anterior</span>
             </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Pintados</span>
-              <div class="count">2,315</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> que el mes anterior</span>
+          </div>
+
+            <div class="row tile_count">
+                <h1>Otros</h1>
+            <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Colocaciones</span>
+              <div class="count">14</div>
+              <span class="count_bottom"><i class="green">4% </i> que el mes anterior</span>
             </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
-              <div class="count">7,325</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> que el mes anterior</span>
+                <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Lona usada mts.</span>
+              <div class="count">188</div>
+              <span class="count_bottom"><i class="green">4% </i> que el mes anterior</span>
             </div>
+            <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-clock-o"></i> Total Palos</span>
+              <div class="count">162</div>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> que el mes anterior</span>
+            </div>            
           </div>
           <!-- /top tiles -->
 
@@ -613,6 +629,14 @@
                 <a id='lbl_options_button1_CTO' role='button' href='#' class='btnAcciones btn btn-primary fa fa-wpforms fa-2x' title='Ir a formulario' target='_blank'></a>
                 <a id='lbl_options_button2_CTO' role='button' href='#' class='btnAcciones btn btn-danger fa fa-map-marker fa-2x' title='Ir a Google Maps' target='_blank'></a>
                 <a id='lbl_options_button3_CTO' role='button' href='#' class='btnAcciones btn btn-success fa fa-whatsapp fa-2x' title='Ir a WhatsApp' target='_blank'></a>
+                
+                <input class="form-control pull-left text-to-copy" id="txbLink" onclick="this.select();" value="?" style="width: 85%; display:none;" />
+                <%--SOURCE: https://clipboardjs.com/--%>
+                    <a id="aBtnCopy" href="#" class="btn btn-lg pull-right js-copy-btn" data-clipboard-action="copy" data-clipboard-target="input#txbLink" style="padding: 10px;" onclick="doMagic2()">
+                        <i class="glyphicon glyphicon-copy"></i>
+                </a>
+                <%--<button type="button" class="form-control btn-warning js-copy-btn btn-lg" style="height: auto;" id="btnCopy" onclick="doMagic2()">Copiar</button>--%>
+
             </div>
         </div>
         <button type="button" class="btn close" style="padding: 5px;">
@@ -622,5 +646,191 @@
 
     <asp:HiddenField ID="hdn_FormularioID" runat="server" ClientIDMode="Static" />
     <asp:HiddenField ID="hdn_monthSelected" runat="server" ClientIDMode="Static" />
+
+    <script type="text/javascript">
+
+        var clipboard = new Clipboard('#aBtnCopy');
+        clipboard.on('success', function (e) {
+            console.log(e);
+        });
+        clipboard.on('error', function (e) {
+            console.log(e);
+        });
+
+
+        //<![CDATA[
+        /*jslint browser:true, white:true, single:true*/
+        (function () {
+            'use strict';
+
+            doMagic();
+
+        }());
+        //]]>
+
+        function doMagic() {
+            var textClassName = 'text-to-copy';
+            var buttonClassName = 'js-copy-btn';
+            var sets = {};
+            var regexBuilder = function (prefix) {
+                return new RegExp(prefix + '\\S*');
+            };
+
+            window.addEventListener('DOMContentLoaded', function () {
+
+                var texts = Array.prototype.slice.call(document.querySelectorAll(
+                  '[class*=' + textClassName + ']'));
+                var buttons = Array.prototype.slice.call(document.querySelectorAll(
+                  '[class*=' + buttonClassName + ']'));
+
+                var classNameFinder = function (arr, regex, namePrefix) {
+                    return arr.map(function (item) {
+                        return (item.className.match(regex)) ? item.className
+                          .match(regex)[0].replace(namePrefix, '') : false;
+                    }).sort();
+                };
+
+                sets.texts = classNameFinder(
+                  texts, regexBuilder(textClassName), textClassName);
+
+                sets.buttons = classNameFinder(
+                  buttons, regexBuilder(buttonClassName), buttonClassName);
+
+                var matches = sets.texts.map(function (ignore, index) {
+                    return sets.texts[index].match(sets.buttons[index]);
+                });
+
+                var throwErr = function (err) {
+                    throw new Error(err);
+                };
+                var iPhoneORiPod = false;
+                var iPad = false;
+                var oldSafari = false;
+                var navAgent = window.navigator.userAgent;
+
+                // CHEQUEO
+                var txbLink = $("#txbLink").val();
+                if (txbLink !== null && txbLink.length > 0 && txbLink !== "?") {
+
+                    if (
+                      (/^((?!chrome).)*safari/i).test(navAgent)
+                        // ^ Fancy safari detection thanks to: https://stackoverflow.com/a/23522755
+                      &&
+                      !(/^((?!chrome).)*[0-9][0-9](\.[0-9][0-9]?)?\ssafari/i).test(
+                        navAgent)
+                        // ^ Even fancier Safari < 10 detection thanks to regex.  :^)
+                    ) {
+                        oldSafari = true;
+                    }
+                    // We need to test for older Safari and the device,
+                    // because of quirky awesomeness.
+                    if (navAgent.match(/iPhone|iPod/i)) {
+                        iPhoneORiPod = true;
+                    } else if (navAgent.match(/iPad/i)) {
+                        iPad = true;
+                    }
+                    var cheval = function (btn, text) {
+                        var copyBtn = document.querySelector(btn);
+
+                        var setCopyBtnText = function (textToSet) {
+                            copyBtn.textContent = textToSet;
+                        };
+                        if (iPhoneORiPod || iPad) {
+                            if (oldSafari) {
+                                setCopyBtnText("Select text");
+                            }
+                        }
+                        if (copyBtn) {
+                            copyBtn.addEventListener('click', function () {
+                                var oldPosX = window.scrollX;
+                                var oldPosY = window.scrollY;
+                                // Clone the text-to-copy node so that we can
+                                // create a hidden textarea, with its text value.
+                                // Thanks to @LeaVerou for the idea.
+                                var originalCopyItem = document.querySelector(text);
+                                var dollyTheSheep = originalCopyItem.cloneNode(true);
+                                var copyItem = document.createElement('textarea');
+                                copyItem.style.opacity = 0;
+                                copyItem.style.position = "absolute";
+                                // If .value is undefined, .textContent will
+                                // get assigned to the textarea we made.
+                                copyItem.value = dollyTheSheep.value || dollyTheSheep
+                                  .textContent;
+                                document.body.appendChild(copyItem);
+                                if (copyItem) {
+                                    // Select the text:
+                                    copyItem.focus();
+                                    copyItem.selectionStart = 0;
+                                    // For some reason the 'copyItem' does not get
+                                    // the correct length, so we use the OG.
+                                    //copyItem.selectionEnd = originalCopyItem.textContent.length;
+                                    copyItem.selectionEnd = 999999999;
+                                    try {
+                                        // Now that we've selected the text, execute the copy command:
+                                        document.execCommand('copy');
+                                        if (oldSafari) {
+                                            if (iPhoneORiPod) {
+                                                setCopyBtnText("Now tap 'Copy'");
+                                            } else if (iPad) {
+                                                // The iPad doesn't have the 'Copy' box pop up,
+                                                // you have to tap the text first.
+                                                setCopyBtnText(
+                                                  "Now tap the text, then 'Copy'");
+                                            } else {
+                                                // Just old!
+                                                setCopyBtnText("Press Command + C to copy");
+                                            }
+                                        } else {
+                                            setCopyBtnText("¡Listo!");
+                                        }
+                                    } catch (ignore) {
+                                        setCopyBtnText("Please copy manually");
+                                    }
+                                    originalCopyItem.focus();
+                                    // Restore the user's original position to avoid
+                                    // 'jumping' when they click a copy button.
+                                    window.scrollTo(oldPosX, oldPosY);
+                                    originalCopyItem.selectionStart = 0;
+                                    originalCopyItem.selectionEnd = originalCopyItem.textContent
+                                      .length;
+                                    copyItem.remove();
+                                } else {
+                                    throwErr(
+                                      "You don't have an element with the class: '" +
+                                      textClassName +
+                                      "'. Please check the cheval README."
+                                    );
+                                }
+                            });
+                        } else {
+                            throwErr(
+                              "You don't have a <button> with the class: '" +
+                              buttonClassName + "'. Please check the cheval README."
+                            );
+                        }
+                    };
+
+                    // Loop through all sets of elements and buttons:
+                    matches.map(function (i) {
+                        cheval('.' + buttonClassName + i, '.' + textClassName + i);
+                    });
+
+                } // CHEQUEO
+
+            });
+        }
+
+        function CopyTextAUX() {
+            /* Get the text field */
+            var copyText = document.getElementById("txbLink");
+
+            /* Select the text field */
+            copyText.select();
+
+            /* Copy the text inside the text field */
+            document.execCommand("Copy");
+        }
+
+    </script>
 
 </asp:Content>
