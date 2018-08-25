@@ -764,21 +764,61 @@ namespace Cartelux1
 
                 if (isPasacalle)
                 {
+                    #region Tamaño
+
+                    /* Código tamaño cartel
+                    * 1 - 150x80
+                    * 2 - 300x80
+                    * 3 - 500x80
+                    * 4 - Pancarta otra medida
+                    * 5 - 150x80
+                    * 6 - 200x80
+                    * 7 - Banner 80x90
+                    * 8 - Banner otra medida
+                    * */
+                    bool isBanner = false;
+                    _pedido.Pedido_Tamano_ID = 0;
+                    if (ddlTamano1.SelectedIndex > 0)
+                    {
+                        int tamano_codigo = 1;
+                        if (!int.TryParse(ddlTamano1.SelectedValue, out tamano_codigo))
+                        {
+                            tamano_codigo = 1;
+                            Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTamano1.SelectedValue);
+                        }
+                        lista_pedido_tamanos _pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(v => v.Codigo.Equals(tamano_codigo));
+                        if (_pedido_tamano != null)
+                        {
+                            _pedido.Pedido_Tamano_ID = _pedido_tamano.Pedido_Tamano_ID;
+                        }
+
+                        if(tamano_codigo == 7 || tamano_codigo == 8)
+                        {
+                            isBanner = true;
+                        }
+                    }
+                    #endregion
+
                     #region Tipo cartel = Pasacalle / Roll up
 
                     /* Código tipo pedido
                      * 1 - Pasacalle
                      * 2 - Pancarta
-                     * 3 - Lona informativa / decorativa
+                     * 3 - Banner
                      * 4 - Roll up
                      * */
 
                     int tipo_codigo = 1; // Pasacalle
-                    _pedido.Pedido_Tipo_ID = 2; // ID Pasacalle
+                    _pedido.Pedido_Tipo_ID = 2; // ID Pasacalle (por si falla)
+                    if (isBanner)
+                    {
+                        tipo_codigo = 3; // Banner
+                    }
+
                     lista_pedido_tipos _pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(v => v.Codigo.Equals(tipo_codigo));
                     if (_pedido_tipo != null)
                     {
-                        _pedido.Pedido_Tipo_ID = _pedido_tipo.Pedido_Tipo_ID;
+                        _pedido.Pedido_Tipo_ID = _pedido_tipo.Pedido_Tipo_ID;                       
                     }
 
                     #endregion
@@ -797,20 +837,6 @@ namespace Cartelux1
                         materialID = _pedido_material.Pedido_Material_ID;
                     }
                     _pedido.Pedido_Material_ID = materialID;
-                    #endregion
-
-                    #region Tamaño
-                    _pedido.Pedido_Tamano_ID = 0;
-                    if (ddlTamano1.SelectedIndex > 0)
-                    {
-                        int selected = 1;
-                        if (!int.TryParse(ddlTamano1.SelectedValue, out selected))
-                        {
-                            selected = 1;
-                            Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTamano1.SelectedValue);
-                        }
-                        _pedido.Pedido_Tamano_ID = selected;
-                    }
                     #endregion
 
                     #region Temática
@@ -918,7 +944,7 @@ namespace Cartelux1
                      * */
 
                     int tipo_codigo = 4; // Roll up
-                    _pedido.Pedido_Tipo_ID = 5; // ID Pasacalle
+                    _pedido.Pedido_Tipo_ID = 5; // ID Pasacalle (por si falla)
                     lista_pedido_tipos _pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(v => v.Codigo.Equals(tipo_codigo));
                     if (_pedido_tipo != null)
                     {
@@ -935,13 +961,17 @@ namespace Cartelux1
                     _pedido.Pedido_Tamano_ID = 0;
                     if (ddlTamano1_tab2.SelectedIndex > 0)
                     {
-                        int selected = 1;
-                        if (!int.TryParse(ddlTamano1_tab2.SelectedValue, out selected))
+                        int tamano_codigo = 1;
+                        if (!int.TryParse(ddlTamano1_tab2.SelectedValue, out tamano_codigo))
                         {
-                            selected = 1;
-                            Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTamano1.SelectedValue);
+                            tamano_codigo = 1;
+                            Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTamano1_tab2.SelectedValue);
                         }
-                        _pedido.Pedido_Tamano_ID = selected;
+                        lista_pedido_tamanos _pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(v => v.Codigo.Equals(tamano_codigo));
+                        if (_pedido_tamano != null)
+                        {
+                            _pedido.Pedido_Tamano_ID = _pedido_tamano.Pedido_Tamano_ID;
+                        }
                     }
                     #endregion
 

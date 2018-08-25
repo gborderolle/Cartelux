@@ -342,6 +342,172 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value, i
     }
 }
 
+function month_selectMonth_reports(month_value, soloVigentes_value, soloJuanchy_value, incluirCancelados_value) {
+    if (month_value !== null && month_value !== undefined && month_value > 0 && soloVigentes_value !== null && soloVigentes_value !== undefined &&
+        soloJuanchy_value !== null && soloJuanchy_value !== undefined && incluirCancelados_value !== null && incluirCancelados_value !== undefined) {
+
+        month_value += "";
+
+        var year_value = 2018; // DUMMY
+        var ddl_year = $("#ddl_year option:selected");
+        if (ddl_year !== null && ddl_year !== undefined && ddl_year.text() !== null && ddl_year.text() !== undefined) {
+            year_value = ddl_year.text();
+            YEAR_SELECTED = year_value;
+
+            reportes_clearData();
+
+            // Source: https://www.codeproject.com/Tips/775585/Bind-Gridview-using-AJAX
+            // Ajax call parameters
+            console.log("Ajax call: Dashboard.aspx/GetData_BindGridFormularios. Params:");
+            console.log("year_value, type: " + type(year_value) + ", value: " + year_value);
+            console.log("month_value, type: " + type(month_value) + ", value: " + month_value);
+            console.log("soloVigentes_value, type: " + type(soloVigentes_value) + ", value: " + soloVigentes_value);
+            console.log("soloJuanchy_value, type: " + type(soloJuanchy_value) + ", value: " + soloJuanchy_value);
+            console.log("incluirCancelados_value, type: " + type(incluirCancelados_value) + ", value: " + incluirCancelados_value);
+
+            $.ajax({
+                type: "POST",
+                url: "Dashboard.aspx/GetData_BindGridFormularios",
+                contentType: "application/json;charset=utf-8",
+                data: '{year_value: "' + year_value + '",month_value: "' + month_value + '",soloVigentes_value: "' + soloVigentes_value + '",soloJuanchy_value: "' + soloJuanchy_value + '",incluirCancelados_value: "' + incluirCancelados_value + '"}',
+                dataType: "json",
+                success: function (response) {
+
+                    // total pedidos
+                    var total_pedidos = 0;
+
+                    // total carteles = pasacalles
+                    var total_carteles = 0;
+
+                    // total banners
+                    var total_banners = 0;
+
+                    // total roll ups
+                    var total_rollups = 0;
+
+                    // total colocaciones
+                    var total_colocaciones = 0;
+
+                    // total envios a domicilio
+                    var total_envios_domicilio = 0;
+
+                    // total envios al interior
+                    var total_envios_interior = 0;
+
+                    // total retiros taller
+                    var total_retirosTaller = 0;
+
+                    // total lona usada
+                    var total_lona_mts = 0;
+
+                    // total palos
+                    var total_palos = 0;
+
+                    if (response.d.length > 0) {
+
+                        total_pedidos = response.d.length;
+                        for (var i = 0; i < response.d.length; i++) {
+
+                            // Cancelados
+                            var estadoNro = check_nullValues(response.d[i].EstadoNro);
+                            if (estadoNro == 2 || estadoNro == 3) {
+                                total_pedidos--;
+                            }
+
+                            // Tipo cartel
+                            switch (response.d[i].lblTipo) {
+                                case "Pasacalle":
+                                    {
+                                        total_carteles++;
+                                        break;
+                                    }
+                                case "Banner":
+                                    {
+                                        total_banners++;
+                                        break;
+                                    }
+                                case "Roll up":
+                                    {
+                                        total_rollups++;
+                                        break;
+                                    }
+                            }
+
+                            // Tipo entrega
+                            switch (response.d[i].lblTipoEntrega) {
+                                case "Colocación":
+                                    {
+                                        total_colocaciones++;
+                                        break;
+                                    }
+                                case "Envío a domicilio":
+                                    {
+                                        total_envios_domicilio++;
+                                        break;
+                                    }
+                                case "Envío al interior":
+                                    {
+                                        total_envios_interior++;
+                                        break;
+                                    }
+                                case "Retiro en el taller":
+                                    {
+                                        total_retirosTaller++;
+                                        break;
+                                    }
+                            }
+
+                            // Largo de lona usada
+                            var lblTamano_largo_cm = response.d[i].lblTamano_largo_cm;
+                            if (type(lblTamano_largo_cm) === "string") {
+                                total_lona_mts += TryParseInt(lblTamano_largo_cm, 0);
+                            }
+                            
+                        } // for
+
+                        if (total_lona_mts != 0) {
+                            total_lona_mts = total_lona_mts / 100;
+                        }
+
+                        total_palos = total_carteles * 2;
+
+                        reportes_loadData(total_pedidos, total_carteles, total_banners, total_rollups, total_colocaciones, total_envios_domicilio, total_envios_interior, total_retirosTaller, total_lona_mts, total_palos);
+
+                        // Volver a cargar eventos sobre la grilla
+                        //bindDelayEvents();
+                    }
+
+                    // Load calendario completo
+                    //loadCalendar();
+
+                }, // end success
+                failure: function (response) {
+                }
+            }); // Ajax
+        }
+    }
+}
+
+function reportes_clearData() {
+    $("#total_pedidos").text(0);
+    $("#total_carteles").text(0);
+    $("#total_banners").text(0);
+    $("#total_rollups").text(0);
+    $("#total_colocaciones").text(0);
+    $("#total_lona_mts").text(0);
+    $("#total_palos").text(0);
+}
+
+function reportes_loadData(total_pedidos, total_carteles, total_banners, total_rollups, total_colocaciones, total_envios_domicilio, total_envios_interior, total_retirosTaller, total_lona_mts, total_palos) {
+    $("#total_pedidos").text(total_pedidos);
+    $("#total_carteles").text(total_carteles);
+    $("#total_banners").text(total_banners);
+    $("#total_rollups").text(total_rollups);
+    $("#total_colocaciones").text(total_colocaciones);
+    $("#total_lona_mts").text(total_lona_mts);
+    $("#total_palos").text(total_palos);
+}
+
 function create_calendar_events(values) {
     if (values !== null && values !== undefined) {
         var color = "blue"; // Envío a domicilio
@@ -538,11 +704,16 @@ function month_onClickEvent() {
                 }
                 MONTH_SELECTED = month_value_int;
 
+                $("#tabsFormularios li:nth-child(1) a").click();
+
                 $("#chbSoloVigentes").prop('checked', false);
                 $("#chbSoloEntrCol").prop('checked', false);
                 $("#chbInclCancelados").prop('checked', false);
                 
                 month_selectMonth(month_value_int, true, false, false);
+
+                // Reportes data
+                month_selectMonth_reports(month_value_int, false, false, true);
 
                 if (IS_MOBILE) {
                     $("#aCollapse_left_panel").show();
