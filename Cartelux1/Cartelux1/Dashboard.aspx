@@ -505,22 +505,22 @@
                 <h1>Pedidos</h1>
             <div class="col-md-3 col-sm-12 col-xs-12 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Total Pedidos</span>
-              <div class="count green">78</div>
+              <div id="total_pedidos" class="count green">78</div>
               <span class="count_bottom"><i class="green">16% </i> que el mes anterior</span>
             </div>
             <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-clock-o"></i> Total Carteles</span>
-              <div class="count">69</div>
+              <span class="count_top"><i class="fa fa-clock-o"></i> Total Pasacalles</span>
+              <div id="total_carteles" class="count">69</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> que el mes anterior</span>
             </div>
             <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Total Banners</span>
-              <div class="count">6</div>
+              <div id="total_banners" class="count">6</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> que el mes anterior</span>
             </div>
             <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Total Roll ups</span>
-              <div class="count">11</div>
+              <div id="total_rollups" class="count">11</div>
               <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> que el mes anterior</span>
             </div>
           </div>
@@ -529,18 +529,22 @@
                 <h1>Otros</h1>
             <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Colocaciones</span>
-              <div class="count">14</div>
+              <div id="total_colocaciones" class="count">14</div>
               <span class="count_bottom"><i class="green">4% </i> que el mes anterior</span>
             </div>
                 <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Lona usada mts.</span>
-              <div class="count">188</div>
+              <div id="total_lona_mts" class="count">188</div>
               <span class="count_bottom"><i class="green">4% </i> que el mes anterior</span>
+              <span class="row"></span>
+              <span class="count_bottom">Valor estimado</span>
             </div>
             <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-clock-o"></i> Total Palos</span>
-              <div class="count">162</div>
+              <div id="total_palos" class="count">162</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> que el mes anterior</span>
+              <span class="row"></span>
+              <span class="count_bottom">Valor estimado</span>
             </div>            
           </div>
           <!-- /top tiles -->

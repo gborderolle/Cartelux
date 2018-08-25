@@ -388,14 +388,71 @@ namespace Cartelux1
                 current_month = month_int;
             }
 
+            // If is future month
+            if (current_year >= DateTime.Now.Year && current_month > DateTime.Now.Month)
+            {
+                solo_vigentes = false;
+            }
+
+            List<formularios> formularios_elements = GetFormularios_pre(solo_vigentes, current_year, current_month);
+
+            // Reportes - Todos los formularios
+            //List<formularios> formularios_elements_reportes = GetFormularios_pre(false, current_year, current_month);
+
+            #region Fill reports data
+
+            //if (formularios_elements_reportes.Count() > 0)
+            //{
+            //    int totalPedidos = formularios_elements_reportes.Count();
+            //    pnl_rpt_totalPedidos.Controls.Clear();
+            //    pnl_rpt_totalPedidos.Controls.Add(new LiteralControl(totalPedidos.ToString()));
+            //    //lbl_rpt_totalPedidos.Text = totalPedidos.ToString();
+            //}
+
+            #endregion Fill reports data
+
+
+            #region Fill gridFormularios
+
+            if (formularios_elements.Count() > 0)
+            {
+                gridFormularios.DataSource = formularios_elements;
+                gridFormularios.DataBind();
+
+                gridFormularios.UseAccessibleHeader = true;
+                gridFormularios.HeaderRow.TableSection = TableRowSection.TableHeader;
+
+                lblgridFormulariosCount.Text = "# " + formularios_elements.Count();
+            }
+            else
+            {
+                var obj = new List<formularios>();
+                obj.Add(new formularios());
+
+                // Bind the DataTable which contain a blank row to the GridView
+                gridFormularios.DataSource = obj;
+                gridFormularios.DataBind();
+                int columnsCount = gridFormularios.Columns.Count;
+                gridFormularios.Rows[0].Cells.Clear();// clear all the cells in the row
+                gridFormularios.Rows[0].Cells.Add(new TableCell()); //add a new blank cell
+                gridFormularios.Rows[0].Cells[0].ColumnSpan = columnsCount; //set the column span to the new added cell
+
+                //You can set the styles here
+                gridFormularios.Rows[0].Cells[0].HorizontalAlign = HorizontalAlign.Center;
+                gridFormularios.Rows[0].Cells[0].ForeColor = System.Drawing.Color.Red;
+                gridFormularios.Rows[0].Cells[0].Font.Bold = true;
+
+                //set No Results found to the new added cell
+                gridFormularios.Rows[0].Cells[0].Text = "No hay registros";
+            }
+
+            #endregion
+        }
+
+        private List<formularios> GetFormularios_pre(bool solo_vigentes, int current_year, int current_month)
+        {
             using (CarteluxDB context = new CarteluxDB())
             {
-                // If is future month
-                if (current_year >= DateTime.Now.Year && current_month > DateTime.Now.Month)
-                {
-                    solo_vigentes = false;
-                }
-
                 int day_value = 1;
                 if (solo_vigentes)
                 {
@@ -406,43 +463,7 @@ namespace Cartelux1
                 int last_day = DateTime.DaysInMonth(current_year, current_month);
                 DateTime date2 = new DateTime(current_year, current_month, last_day);
 
-                List<formularios> formularios_elements = GetFormularios_ByMonth(context, date1, date2);
-
-                #region Fill gridFormularios
-
-                if (formularios_elements.Count() > 0)
-                {
-                    gridFormularios.DataSource = formularios_elements;
-                    gridFormularios.DataBind();
-
-                    gridFormularios.UseAccessibleHeader = true;
-                    gridFormularios.HeaderRow.TableSection = TableRowSection.TableHeader;
-
-                    lblgridFormulariosCount.Text = "# " + formularios_elements.Count();
-                }
-                else
-                {
-                    var obj = new List<formularios>();
-                    obj.Add(new formularios());
-
-                    // Bind the DataTable which contain a blank row to the GridView
-                    gridFormularios.DataSource = obj;
-                    gridFormularios.DataBind();
-                    int columnsCount = gridFormularios.Columns.Count;
-                    gridFormularios.Rows[0].Cells.Clear();// clear all the cells in the row
-                    gridFormularios.Rows[0].Cells.Add(new TableCell()); //add a new blank cell
-                    gridFormularios.Rows[0].Cells[0].ColumnSpan = columnsCount; //set the column span to the new added cell
-
-                    //You can set the styles here
-                    gridFormularios.Rows[0].Cells[0].HorizontalAlign = HorizontalAlign.Center;
-                    gridFormularios.Rows[0].Cells[0].ForeColor = System.Drawing.Color.Red;
-                    gridFormularios.Rows[0].Cells[0].Font.Bold = true;
-
-                    //set No Results found to the new added cell
-                    gridFormularios.Rows[0].Cells[0].Text = "No hay registros";
-                }
-
-                #endregion
+                return GetFormularios_ByMonth(context, date1, date2);
             }
         }
 
@@ -636,6 +657,7 @@ namespace Cartelux1
                                     if (_lista_pedido_tamano != null)
                                     {
                                         _GridFormulario1.lblTamano = _lista_pedido_tamano.Nombre;
+                                        _GridFormulario1.lblTamano_largo_cm = _lista_pedido_tamano.Descripcion;
                                     }
                                     #endregion END Pedido Tamaño
 
@@ -685,6 +707,7 @@ namespace Cartelux1
             public string lblTipoEntrega { get; set; }
             public string lblTipoCodigo { get; set; }
             public string lblTamano { get; set; }
+            public string lblTamano_largo_cm { get; set; }
             public string lblTipo { get; set; }
             public string lblMaterial { get; set; }
             public int lblCantidad { get; set; }
