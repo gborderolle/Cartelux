@@ -162,7 +162,7 @@ namespace Cartelux1
                                 pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(c => c.Pedido_Entrega_ID == _pedido.Pedido_Entrega_ID);
                                 if (_pedido_entrega != null)
                                 {
-                                    lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Codigo == _pedido_entrega.Entrega_Tipo_ID);
+                                    lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Entrega_Tipo_ID == _pedido_entrega.Entrega_Tipo_ID);
                                     if (_lista_entregas_tipo != null)
                                     {
                                         string nombre = string.Empty;
@@ -178,7 +178,7 @@ namespace Cartelux1
                             lbl1 = e.Row.FindControl("lblTamano") as Label;
                             if (lbl1 != null)
                             {
-                                lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Tamano_ID);
+                                lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _pedido.Pedido_Tamano_ID);
                                 if (_lista_pedido_tamano != null)
                                 {
                                     string nombre = string.Empty;
@@ -208,7 +208,7 @@ namespace Cartelux1
                             lbl1 = e.Row.FindControl("lblMaterial") as Label;
                             if (lbl1 != null)
                             {
-                                lista_pedido_materiales _lista_pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Material_ID);
+                                lista_pedido_materiales _lista_pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(c => c.Pedido_Material_ID == _pedido.Pedido_Material_ID);
                                 if (_lista_pedido_material != null)
                                 {
                                     lbl1.Text = _lista_pedido_material.Nombre;
@@ -628,7 +628,7 @@ namespace Cartelux1
                                             }
                                         }
                                         // Filtro Juanchy
-                                        lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Codigo == _pedido_entrega.Entrega_Tipo_ID);
+                                        lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Entrega_Tipo_ID == _pedido_entrega.Entrega_Tipo_ID);
                                         if (_lista_entregas_tipo != null)
                                         {
                                             _GridFormulario1.lblTipoEntrega = _lista_entregas_tipo.Nombre;
@@ -653,7 +653,7 @@ namespace Cartelux1
                                     #endregion END Pedido Diseño
 
                                     #region Pedido Tamaño ---------------------------------------------------------------------------------------------------------
-                                    lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Codigo == _pedido.Pedido_Tamano_ID);
+                                    lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _pedido.Pedido_Tamano_ID);
                                     if (_lista_pedido_tamano != null)
                                     {
                                         _GridFormulario1.lblTamano = _lista_pedido_tamano.Nombre;

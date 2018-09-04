@@ -6,8 +6,16 @@
     <link rel="stylesheet" href="/Content/css/jquery.bootstrap-touchspin.css" />
     <link rel="stylesheet" href="/Content/fancybox/jquery.fancybox-1.3.4.css" />
     
+    
+    <link rel="stylesheet" href="/Content/plugins/jquery-radiocharm/jquery-radiocharm.css" />
+    <link rel="stylesheet" href="/Content/plugins/icheck-1.x/skins/futurico/futurico.css" />
+    <link rel="stylesheet" href="/Content/plugins/icheck-1.x/skins/flat/blue.css" />
+
+
+
     <!-- PAGE CSS -->
     <link rel="stylesheet" href="/Content/css/pages/formulario.css" />
+
 
     <script type="text/javascript">
         TAB_COUNT = 1;
@@ -33,7 +41,35 @@
                 $("#hdnPedidoCantidad").val(txtRepeat);
             });
 
-        });       
+            // Radiobuttons styles
+
+            //$('input').each(function () {
+            //    var self = $(this),
+            //      label = self.next(),
+            //      label_text = label.text();
+
+            //    label.remove();
+            //    self.iCheck({
+            //        checkboxClass: 'icheckbox_line-blue',
+            //        radioClass: 'iradio_line-blue',
+            //        insert: '<div class="icheck_line-icon"></div>' + label_text
+            //    });
+            //});
+
+                //$('input').each(function () {
+                //    var self = $(this),
+                //      label = self.next(),
+                //      label_text = label.text();
+
+                //    label.remove();
+                //    self.iCheck({
+                //        checkboxClass: 'icheckbox_line-blue',
+                //        radioClass: 'iradio_line-blue',
+                //        insert: '<div class="icheck_line-icon"></div>' + label_text
+                //    });
+                //});
+
+        });
 
         function clientGoogleMaps() {
             var maps_url = _current_completeURL;
@@ -206,9 +242,14 @@
     <script type="text/javascript" src="/Content/js/jquery.bootstrap-touchspin.js"></script>
     <script type="text/javascript" src="/Content/fancybox/jquery.fancybox-1.3.4.js"></script>
 
+
+    <script type="text/javascript" src="/Content/plugins/jquery-radiocharm/jquery-radiocharm.js"></script>
+    <script type="text/javascript" src="/Content/plugins/icheck-1.x/icheck.min.js"></script>
+
+
+
     <%--SOURCE: https://stackoverflow.com/questions/5540395/can-i-open-a-url-in-a-jqueryui-dialog
     SOURCE: http://fancybox.net/--%>
-
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="col-sm-12 col-md-12" style="padding: 0;">
@@ -219,7 +260,7 @@
             <div class="form-check pull-right" style="margin: 20px;">
             </div>
             <br />
-
+            <p class="text-info">Por favor, asegúrese de ingresar correctamente los datos del pedido para evitar demoras innecesarias.</p>
             <div id="tabPedidos">
 
                 <div class="panel with-nav-tabs panel-danger">
@@ -247,7 +288,7 @@
 
                                     <div class="col-sm-12 col-md-12" style="margin: auto; padding: 0;">
                                         <div class="login-container sub-form">
-                                            <label class="_label1 unselectable">1) Ingrese sus datos</label>
+                                            <label class="_label1 unselectable" style="font-weight: normal;">1) Ingrese sus datos</label>
                                             <div class="form-group unselectable">
                                                 <input id="txbTelefono" class="form-control ctrl-required" type="number" tabindex="90" placeholder="Teléfono de contacto" runat="server" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
                                             </div>
@@ -255,13 +296,15 @@
                                                 <input id="txbNombre" class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" runat="server" clientidmode="static" autofocus />
                                             </div>
                                             <hr />
-                                            <label class="_label1 unselectable">2) Datos del Cartel</label>
+                                            <label class="_label1 unselectable" style="font-weight: normal;">2) Datos del Cartel</label>
                                             <br />
 
                                             <asp:DropDownList ID="ddlTamano1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required form-control" />
-                                            <label style="font-weight: normal;">¿Tiene bosquejo o ejemplo?</label>
-                                            <asp:CheckBox ID="chbBosquejo" runat="server" ClientIDMode="Static" CssClass="txbEditable" Enabled="false" TextAlign="Left" />
-                                            <a id="aCollapse_bosquejo" data-toggle="collapse" href="#div_bosquejo" class="collapsed">Cargar aquí</a>
+                                            <div style="display: none;">
+                                                <label style="font-weight: normal;">¿Tiene bosquejo o ejemplo?</label>
+                                                <asp:CheckBox ID="chbBosquejo" runat="server" ClientIDMode="Static" CssClass="txbEditable" Enabled="false" TextAlign="Left" />
+                                                <a id="aCollapse_bosquejo" data-toggle="collapse" href="#div_bosquejo" class="collapsed">Cargar aquí</a>
+                                            </div>
                                             <div id="div_bosquejo" class="col-xs-12 col-sm-12 col-md-12 panel-collapse collapse in" aria-expanded="false">
                                                 <div class="form-group unselectable">
                                                     <p style="font-size: small;">Si lo desea cargue un bosquejo hecho a mano del diseño deseado aquí</p>
@@ -271,14 +314,30 @@
                                             </div>
 
                                             <br />
-                                            <a id="aLinkToUnitegallery" href="UniteGallery.aspx" style="color: darkgreen; display:none;">ELEGIR DISEÑO</a>
-                                            <br />
+                                            <a id="aLinkToUnitegallery" href="UniteGallery.aspx" style="color: darkgreen; display: none;">ELEGIR DISEÑO</a>
                                             <br />
 
                                             <!--Radio group-->
-                                            <div class="row-short pull-left">
+                                            <div class="row-short pull-left"> Tipo de cartel: 
                                                 <asp:RadioButton ID="radImpreso1" runat="server" ClientIDMode="Static" CssClass="radio-inline" Checked="true" Text="Impreso" GroupName="radImpreso" />
                                                 <asp:RadioButton ID="radImpreso2" runat="server" ClientIDMode="Static" CssClass="radio-inline" Text="Pintado" GroupName="radImpreso" />
+                                                <%--<asp:RadioButton ID="radImpreso1" runat="server" ClientIDMode="Static" CssClass="radio-inline" Checked="true" GroupName="radImpreso"/>
+                                                <asp:RadioButton ID="radImpreso2" runat="server" ClientIDMode="Static" CssClass="radio-inline" GroupName="radImpreso"/>--%>
+
+                                                <%--<br />
+                                                <asp:radiobuttonlist id="rdlFavColor" runat="server">
+    <asp:listitem text="Red" value="1">
+    <asp:listitem text="Blue" value="2">
+</asp:listitem></asp:listitem></asp:radiobuttonlist>
+ 
+<asp:checkboxlist runat="server" id="chkLstFavColor">
+    <asp:listitem text="Red" value="1">
+    <asp:listitem text="Blue" value="2">
+</asp:listitem></asp:listitem></asp:checkboxlist>--%>
+
+                                                
+                                                <%--Source: http://www.codingfusion.com/Post/Styling-radiobuttons-and-checkboxes-in-asp-net-us--%>
+                                                <%--Source: https://www.jqueryscript.net/form/Lable-Style-Radio-Buttons-jQuery-Radiocharm.html--%>
                                             </div>
                                             <!--Radio group-->
                                             <br />
@@ -287,7 +346,7 @@
                                             </div>
 
                                             <hr />
-                                            <label class="_label1 unselectable">3) Datos de la entrega</label>
+                                            <label class="_label1 unselectable" style="font-weight: normal;">3) Datos de la entrega</label>
                                             <br />
 
                                             <asp:DropDownList ID="ddlTipoEntrega1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required ddlBorder"></asp:DropDownList>
@@ -351,7 +410,7 @@
                                             </div>
                                             <div class="row" style="margin-left: 0; margin-right: 0;">
                                                 <%--<img src="/Content/img/Dropbox_logo.png" class="img-responsive" alt="Cartelux" style="width: 5%;" />--%>
-                                                <a href="http://cartelux.uy/album" title="" target="_blank">Click aquí para ver el álbum de fotos</a>
+                                                <a href="http://cartelux.uy/album" title="" target="_blank" style="font-size: large;">Ver el álbum de fotos</a>
                                             </div>
                                         </div>
                                     </div>
@@ -399,7 +458,7 @@
 
                                     <div class="col-sm-12 col-md-12" style="margin: auto; padding: 0;">
                                         <div class="login-container sub-form">
-                                            <label class="_label1 unselectable">1) Ingrese sus datos</label>
+                                            <label class="_label1 unselectable" style="font-weight: normal;">1) Ingrese sus datos</label>
                                             <div class="form-group unselectable">
                                                 <input id="txbTelefono_tab2" class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" runat="server" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
                                             </div>
@@ -407,7 +466,7 @@
                                                 <input id="txbNombre_tab2" class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" runat="server" clientidmode="static" />
                                             </div>
                                             <hr />
-                                            <label class="_label1 unselectable">2) Datos del Roll up</label>
+                                            <label class="_label1 unselectable" style="font-weight: normal;">2) Datos del Roll up</label>
                                             <br />
 
                                             <%--<asp:DropDownList ID="ddlTipoCartel" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />--%>
@@ -431,7 +490,7 @@
                                             </div>
 
                                             <hr />
-                                            <label class="_label1 unselectable">3) Datos de la entrega</label>
+                                            <label class="_label1 unselectable" style="font-weight: normal;">3) Datos de la entrega</label>
                                             <br />
 
                                             <asp:DropDownList ID="ddlTipoEntrega1_tab2" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required ddlBorder"></asp:DropDownList>

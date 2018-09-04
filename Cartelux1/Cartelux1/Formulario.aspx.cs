@@ -28,6 +28,7 @@ namespace Cartelux1
             if (!Page.IsPostBack)
             {
                 Bind_DataConfig();
+                LoadAttributes();
 
                 string serie_str = GetURLParam_Decrypted("ID");
                 string tel_str = GetURLParam("TEL");
@@ -41,6 +42,12 @@ namespace Cartelux1
                     // (usar js función emptyFields_all_tabs) y verificar que guarde OK
                 }
             }
+        }
+
+        private void LoadAttributes()
+        {
+            radImpreso1.Attributes.Add("data-radiocharm-label", "Impreso");
+            radImpreso2.Attributes.Add("data-radiocharm-label", "Pintado");
         }
 
         protected void btnEdit_Click(object sender, EventArgs e)
@@ -777,7 +784,7 @@ namespace Cartelux1
                     * 8 - Banner otra medida
                     * */
                     bool isBanner = false;
-                    _pedido.Pedido_Tamano_ID = 0;
+                    _pedido.Pedido_Tamano_ID = 2;
                     if (ddlTamano1.SelectedIndex > 0)
                     {
                         int tamano_codigo = 1;

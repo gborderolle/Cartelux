@@ -85,7 +85,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/30/2018 16:45:30</publishTime>
     </File>
     <File Include="bin/Cartelux1.dll">
-      <publishTime>08/25/2018 03:10:57</publishTime>
+      <publishTime>09/04/2018 01:43:38</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>02/03/2015 09:32:26</publishTime>
@@ -1145,6 +1145,360 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/js/unitegallery.min.js">
       <publishTime>02/27/2017 06:39:04</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/icheck.jquery.json">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/icheck.js">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/icheck.min.js">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/all.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/aero%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/aero.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/aero.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/blue%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/blue.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/blue.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/flat%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/flat.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/flat.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/green%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/green.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/green.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/grey%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/grey.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/grey.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/orange%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/orange.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/orange.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/pink%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/pink.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/pink.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/purple%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/purple.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/purple.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/red%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/red.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/red.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/yellow%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/yellow.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/yellow.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/flat/_all.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/futurico/futurico%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/futurico/futurico.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/futurico/futurico.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/line/aero.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/line/blue.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/line/green.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/line/grey.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/line/line%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/line/line.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/line/line.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/line/orange.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/line/pink.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/line/purple.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/line/red.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/line/yellow.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/line/_all.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/aero%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/aero.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/aero.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/blue%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/blue.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/blue.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/green%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/green.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/green.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/grey%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/grey.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/grey.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/minimal%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/minimal.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/minimal.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/orange%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/orange.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/orange.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/pink%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/pink.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/pink.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/purple%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/purple.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/purple.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/red%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/red.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/red.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/yellow%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/yellow.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/yellow.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/minimal/_all.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/polaris/polaris%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/polaris/polaris.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/polaris/polaris.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/aero%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/aero.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/aero.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/blue%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/blue.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/blue.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/green%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/green.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/green.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/grey%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/grey.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/grey.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/orange%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/orange.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/orange.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/pink%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/pink.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/pink.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/purple%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/purple.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/purple.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/red%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/red.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/red.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/square%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/square.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/square.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/yellow%402x.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/yellow.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/yellow.png">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/icheck-1.x/skins/square/_all.css">
+      <publishTime>05/18/2015 13:16:30</publishTime>
+    </File>
+    <File Include="Content/plugins/jquery-radiocharm/jquery-radiocharm.css">
+      <publishTime>04/10/2017 17:14:24</publishTime>
+    </File>
+    <File Include="Content/plugins/jquery-radiocharm/jquery-radiocharm.js">
+      <publishTime>04/10/2017 17:14:24</publishTime>
     </File>
     <File Include="Content/reportes_template/bootstrap-progressbar/.bower.json">
       <publishTime>06/18/2018 04:54:28</publishTime>
@@ -5689,7 +6043,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/11/2017 00:59:32</publishTime>
     </File>
     <File Include="Formulario.aspx">
-      <publishTime>07/27/2018 23:03:36</publishTime>
+      <publishTime>09/04/2018 01:42:07</publishTime>
     </File>
     <File Include="Formulario2.aspx">
       <publishTime>01/14/2018 17:54:48</publishTime>
@@ -5857,7 +6211,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/11/2017 00:59:37</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>07/28/2018 01:35:34</publishTime>
+      <publishTime>09/04/2018 01:43:16</publishTime>
     </File>
     <File Include="Site.Master">
       <publishTime>04/08/2018 16:00:23</publishTime>
