@@ -669,6 +669,7 @@
 
             doMagic();
 
+            USER_ID = '<%= Session["UserID"].ToString() %>';
         }());
         //]]>
 

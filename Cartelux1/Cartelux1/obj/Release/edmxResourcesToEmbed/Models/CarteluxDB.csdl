@@ -53,6 +53,7 @@
     <Property Name="Pedido_Entrega_ID" Type="Int32" Nullable="false" />
     <Property Name="Cantidad" Type="Int32" Nullable="false" />
     <Property Name="Pedido_Estado_ID" Type="Int32" />
+    <Property Name="Pedido_Estado_UltimaModificacion_Usuario_ID" Type="Int32" />
   </EntityType>
   <EntityType Name="usuarios">
     <Key>

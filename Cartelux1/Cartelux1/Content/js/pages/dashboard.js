@@ -3,6 +3,7 @@ var IS_MOBILE;
 var EVENTS_LIST = [];
 var MONTH_SELECTED;
 var YEAR_SELECTED;
+var USER_ID;
 
 $(document).ready(function () {
     checkMobile();
@@ -86,7 +87,7 @@ function checkMobile() {
 
 function initVariables() {
     $("#ddl_year").prop('selectedIndex', 1);
-    var year_value = $('#ddl_year :selected').text();
+    var year_value = $('#ddl_year :selected').text();    
 
     if (IS_MOBILE) {
         $("#aCollapse_left_panel").show();
@@ -880,7 +881,7 @@ function doAction_OPC(actionID, formID) {
     $.ajax({
         type: "POST",
         url: "Dashboard.aspx/PedidosUpdateState",
-        data: '{actionID: "' + actionID + '",formID: "' + formID + '"}',
+        data: '{actionID: "' + actionID + '",formID: "' + formID + '",userID: "' + USER_ID + '"}',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {

@@ -722,7 +722,7 @@ namespace Cartelux1
 
 
         [WebMethod]
-        public static bool PedidosUpdateState(int actionID, string formID)
+        public static bool PedidosUpdateState(int actionID, string formID, string userID)
         {
             bool ret = false;
             if (!string.IsNullOrWhiteSpace(formID))
@@ -741,7 +741,13 @@ namespace Cartelux1
                         formID_int = 0;
                         Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, formID);
                     }
-                    if (formID_int > 0)
+                    int userID_int = 0;
+                    if (!int.TryParse(userID, out userID_int))
+                    {
+                        userID_int = 0;
+                        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, userID);
+                    }
+                    if (formID_int > 0 && userID_int > 0)
                     {
                         pedidos _pedido = (pedidos)context.pedidos.FirstOrDefault(v => v.Formulario_ID.Equals(formID_int));
                         if (_pedido != null)
@@ -754,6 +760,7 @@ namespace Cartelux1
 
                                 int estadoID = _pedidoEstado.Pedido_Estado_ID;
                                 _pedido.Pedido_Estado_ID = estadoID;
+                                _pedido.Pedido_Estado_UltimaModificacion_Usuario_ID = userID_int;
                                 ret = true;
 
                                 context.SaveChanges();

@@ -167,6 +167,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Pedido_Entrega_ID" Type="int" Nullable="false" />
           <Property Name="Cantidad" Type="int" Nullable="false" />
           <Property Name="Pedido_Estado_ID" Type="int" />
+          <Property Name="Pedido_Estado_UltimaModificacion_Usuario_ID" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -268,6 +269,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Pedido_Entrega_ID" Type="Int32" Nullable="false" />
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
           <Property Name="Pedido_Estado_ID" Type="Int32" />
+          <Property Name="Pedido_Estado_UltimaModificacion_Usuario_ID" Type="Int32" />
         </EntityType>
         <EntityType Name="usuarios">
           <Key>
@@ -465,6 +467,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <EntitySetMapping Name="pedidos">
             <EntityTypeMapping TypeName="carteluxdb1Model.pedidos">
               <MappingFragment StoreEntitySet="pedidos">
+                <ScalarProperty Name="Pedido_Estado_UltimaModificacion_Usuario_ID" ColumnName="Pedido_Estado_UltimaModificacion_Usuario_ID" />
                 <ScalarProperty Name="Pedido_Estado_ID" ColumnName="Pedido_Estado_ID" />
                 <ScalarProperty Name="Pedido_ID" ColumnName="Pedido_ID" />
                 <ScalarProperty Name="Formulario_ID" ColumnName="Formulario_ID" />

@@ -284,7 +284,7 @@ namespace Cartelux1
 
                                         if (_pedido_entrega.Entrega_Tipo_ID > 0)
                                         {
-                                            lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(v => v.Codigo.Equals(_pedido_entrega.Entrega_Tipo_ID));
+                                            lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(v => v.Entrega_Tipo_ID.Equals(_pedido_entrega.Entrega_Tipo_ID));
                                             if (_lista_entregas_tipo != null)
                                             {
                                                 ddlTipoEntrega1.SelectedValue = _lista_entregas_tipo.Codigo.ToString();
@@ -312,7 +312,7 @@ namespace Cartelux1
                                     #region Tamaño
                                     if (_pedido.Pedido_Tamano_ID > 0)
                                     {
-                                        lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(v => v.Codigo.Equals(_pedido.Pedido_Tamano_ID));
+                                        lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(v => v.Pedido_Tamano_ID.Equals(_pedido.Pedido_Tamano_ID));
                                         if (_lista_pedido_tamano != null)
                                         {
                                             ddlTamano1.SelectedValue = _lista_pedido_tamano.Codigo.ToString();
@@ -358,7 +358,7 @@ namespace Cartelux1
 
                                         if (_pedido_entrega.Entrega_Tipo_ID > 0)
                                         {
-                                            lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(v => v.Codigo.Equals(_pedido_entrega.Entrega_Tipo_ID));
+                                            lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(v => v.Entrega_Tipo_ID.Equals(_pedido_entrega.Entrega_Tipo_ID));
                                             if (_lista_entregas_tipo != null)
                                             {
                                                 ddlTipoEntrega1_tab2.SelectedValue = _lista_entregas_tipo.Codigo.ToString();
@@ -386,7 +386,7 @@ namespace Cartelux1
                                     #region Tamaño
                                     if (_pedido.Pedido_Tamano_ID > 0)
                                     {
-                                        lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(v => v.Codigo.Equals(_pedido.Pedido_Tamano_ID));
+                                        lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(v => v.Pedido_Tamano_ID.Equals(_pedido.Pedido_Tamano_ID));
                                         if (_lista_pedido_tamano != null)
                                         {
                                             ddlTamano1_tab2.SelectedValue = _lista_pedido_tamano.Codigo.ToString();
