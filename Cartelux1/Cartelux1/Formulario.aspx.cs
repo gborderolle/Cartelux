@@ -110,6 +110,15 @@ namespace Cartelux1
                 ddlTipoEntrega1.DataBind();
                 ddlTipoEntrega1.Items.Insert(0, new ListItem("Tipo de entrega", "0"));
 
+                // DDL Temáticas - Pasacalle
+                dt1 = new DataTable();
+                dt1 = Extras.ToDataTable(context.lista_pedido_tematicas.ToList());
+                ddlTematica.DataSource = dt1;
+                ddlTematica.DataTextField = "Nombre";
+                ddlTematica.DataValueField = "Codigo";
+                ddlTematica.DataBind();
+                ddlTematica.Items.Insert(0, new ListItem("Temática", "0"));
+
                 // DDL Tamaños - Roll up
                 dt1 = new DataTable();
                 dt1 = Extras.ToDataTable(context.lista_pedido_tamanos.Where(v => v.Agrupacion == Agrupacion.Todas.ToString() || v.Agrupacion == Agrupacion.Rollup.ToString()).OrderBy(e => e.Nombre).ToList());
@@ -260,6 +269,17 @@ namespace Cartelux1
                                     }
 
                                     #endregion GET Diseño
+
+                                    #region GET Temática
+                                    if (_pedido.Pedido_Tematica_ID > 0)
+                                    {
+                                        lista_pedido_tematicas _lista_pedido_tematica = (lista_pedido_tematicas)context.lista_pedido_tematicas.FirstOrDefault(v => v.Pedido_Tematica_ID.Equals(_pedido.Pedido_Tematica_ID));
+                                        if (_lista_pedido_tematica != null)
+                                        {
+                                            ddlTematica.SelectedValue = _lista_pedido_tematica.Codigo.ToString();
+                                        }
+                                    }
+                                    #endregion GET Temática
 
                                     #region GET Entrega
 
@@ -596,6 +616,25 @@ namespace Cartelux1
                             }
                             #endregion
 
+                            #region UPDATE Temática
+                            if (ddlTematica.SelectedIndex > 0)
+                            {
+                                int codigo = 1;
+                                if (!int.TryParse(ddlTematica.SelectedValue, out codigo))
+                                {
+                                    codigo = 1;
+                                    Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTematica.SelectedValue);
+                                }
+                                int tipoID = 1;
+                                lista_pedido_tematicas _lista_pedido_tematica = (lista_pedido_tematicas)context.lista_pedido_tematicas.FirstOrDefault(v => v.Codigo.Equals(codigo));
+                                if (_lista_pedido_tematica != null)
+                                {
+                                    tipoID = _lista_pedido_tematica.Pedido_Tematica_ID;
+                                }
+                                _pedido.Pedido_Tematica_ID = tipoID;
+                            }
+                            #endregion Temática
+
                             #region UPDATE Entrega
                             pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(v => v.Pedido_Entrega_ID.Equals(_pedido.Pedido_Entrega_ID));
                             if (_pedido_entrega != null)
@@ -610,7 +649,14 @@ namespace Cartelux1
                                         codigo = 1;
                                         Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTipoEntrega1.SelectedValue);
                                     }
-                                    _pedido_entrega.Entrega_Tipo_ID = codigo;
+
+                                    int tipoID = 1;
+                                    lista_entregas_tipos _pedido_entrega_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(v => v.Codigo.Equals(codigo));
+                                    if (_pedido_entrega_tipo != null)
+                                    {
+                                        tipoID = _pedido_entrega_tipo.Entrega_Tipo_ID;
+                                    }
+                                    _pedido_entrega.Entrega_Tipo_ID = tipoID;
 
                                     /*
                                      * Codigo = 1: Colocación
@@ -799,7 +845,7 @@ namespace Cartelux1
                             _pedido.Pedido_Tamano_ID = _pedido_tamano.Pedido_Tamano_ID;
                         }
 
-                        if(tamano_codigo == 7 || tamano_codigo == 8)
+                        if (tamano_codigo == 7 || tamano_codigo == 8)
                         {
                             isBanner = true;
                         }
@@ -825,7 +871,7 @@ namespace Cartelux1
                     lista_pedido_tipos _pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(v => v.Codigo.Equals(tipo_codigo));
                     if (_pedido_tipo != null)
                     {
-                        _pedido.Pedido_Tipo_ID = _pedido_tipo.Pedido_Tipo_ID;                       
+                        _pedido.Pedido_Tipo_ID = _pedido_tipo.Pedido_Tipo_ID;
                     }
 
                     #endregion
@@ -848,6 +894,23 @@ namespace Cartelux1
 
                     #region Temática
                     _pedido.Pedido_Tematica_ID = 0;
+                    if (ddlTematica.SelectedIndex > 0)
+                    {
+                        int codigo = 1;
+                        if (!int.TryParse(ddlTematica.SelectedValue, out codigo))
+                        {
+                            codigo = 1;
+                            Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTematica.SelectedValue);
+                        }
+                        int tematicaID = 1;
+                        lista_pedido_tematicas _pedido_tematica = (lista_pedido_tematicas)context.lista_pedido_tematicas.FirstOrDefault(v => v.Codigo.Equals(codigo));
+                        if (_pedido_tematica != null)
+                        {
+                            tematicaID = _pedido_tematica.Pedido_Tematica_ID;
+                        }
+                        _pedido.Pedido_Tematica_ID = tematicaID;
+                    }
+
                     #endregion
 
                     #region NEW Diseño
@@ -984,6 +1047,17 @@ namespace Cartelux1
 
                     #region Temática
                     _pedido.Pedido_Tematica_ID = 0;
+                    //if (ddlTematica.SelectedIndex > 0)
+                    //{
+                    //    int codigo = 1;
+                    //    if (!int.TryParse(ddlTematica.SelectedValue, out codigo))
+                    //    {
+                    //        codigo = 1;
+                    //        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTematica.SelectedValue);
+                    //    }
+                    //    _pedido.Pedido_Tematica_ID = codigo;
+                    //}
+
                     #endregion
 
                     #region NEW Diseño

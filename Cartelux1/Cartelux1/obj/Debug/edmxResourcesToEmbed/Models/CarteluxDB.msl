@@ -46,6 +46,7 @@
     <EntitySetMapping Name="pedidos">
       <EntityTypeMapping TypeName="carteluxdb1Model.pedidos">
         <MappingFragment StoreEntitySet="pedidos">
+          <ScalarProperty Name="Pedido_Estado_UltimaModificacion_Usuario_ID" ColumnName="Pedido_Estado_UltimaModificacion_Usuario_ID" />
           <ScalarProperty Name="Pedido_Estado_ID" ColumnName="Pedido_Estado_ID" />
           <ScalarProperty Name="Pedido_ID" ColumnName="Pedido_ID" />
           <ScalarProperty Name="Formulario_ID" ColumnName="Formulario_ID" />

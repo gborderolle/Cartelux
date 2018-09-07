@@ -162,6 +162,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <Property Name="Pedido_Entrega_ID" Type="int" Nullable="false" />
     <Property Name="Cantidad" Type="int" Nullable="false" />
     <Property Name="Pedido_Estado_ID" Type="int" />
+    <Property Name="Pedido_Estado_UltimaModificacion_Usuario_ID" Type="int" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>

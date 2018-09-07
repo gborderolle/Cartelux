@@ -33,7 +33,7 @@
 
     <style type="text/css">
         span {
-            color:#4e5254;
+            color:black !important;
         }
 
         .ui-dialog-titlebar {
@@ -123,6 +123,7 @@
         .td-very_short {
             max-width: 80px;
         }
+
     </style>
 
 </asp:Content>
@@ -383,6 +384,18 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
+                                                <asp:TemplateField HeaderText="Temática">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblTematica" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Usuario">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblUsuario" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
                                                 <%--  <asp:TemplateField HeaderText="Cant">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblCantidad" runat="server" CommandName="View" />
@@ -434,8 +447,8 @@
 
                             <br />
                             <div class="row">
-                                <label style="color: green">Concluído</label>
-                                | 
+                                <%--<label style="color: green">Concluído</label>
+                                | --%>
         <label style="color: #333">Vigente</label>
                                 | 
         <label style="color: blue">Aprobado</label>

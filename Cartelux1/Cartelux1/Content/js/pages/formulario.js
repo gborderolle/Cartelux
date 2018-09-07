@@ -503,6 +503,7 @@ function pre_confirm_tab2() {
 function check_logic_tab_pasacalle() {
     var ok = true;
 
+    // Check TAMAÑO vacío
     var ddlTamano1 = 0;
     var controls = $("#ddlTamano1-button span");
     if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
@@ -522,6 +523,27 @@ function check_logic_tab_pasacalle() {
         ok = false;
     }
 
+    // Check TEMÁTICA vacía
+    var ddlTematica = 0;
+    var controls = $("#ddlTematica-button span");
+    if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
+        var text = controls[1].innerText;
+        var value = $("#ddlTematica option").filter(function () {
+            return this.text === text;
+        }).attr('selected', true).val();
+        if (value !== null && value !== undefined && value.length > 0) {
+            // Parse int
+            ddlTematica = value;
+            if (type(value) === "string") {
+                ddlTematica = TryParseInt(value, 0);
+            }
+        }
+    }
+    if (ddlTematica === 0) {
+        ok = false;
+    }
+
+    // Check TIPO ENTREGA vacío
     var ddlTipoEntrega1 = 0;
     controls = $("#ddlTipoEntrega1-button span");
     if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {

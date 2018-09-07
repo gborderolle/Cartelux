@@ -215,20 +215,45 @@ namespace Cartelux1
                                 }
                             }
 
-                            lbl1 = e.Row.FindControl("lblZona") as Label;
+                            lbl1 = e.Row.FindControl("lblTematica") as Label;
                             if (lbl1 != null)
                             {
-                                pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(c => c.Pedido_Entrega_ID == _pedido.Pedido_Entrega_ID);
-                                if (_pedido_entrega != null)
+                                lista_pedido_tematicas _lista_pedido_tematica = (lista_pedido_tematicas)context.lista_pedido_tematicas.FirstOrDefault(c => c.Pedido_Tematica_ID == _pedido.Pedido_Tematica_ID);
+                                if (_lista_pedido_tematica != null)
+                                {
+                                    lbl1.Text = _lista_pedido_tematica.Nombre;
+                                }
+                            }
+
+                            lbl1 = e.Row.FindControl("lblUsuario") as Label;
+                            if (lbl1 != null)
+                            {
+                                usuarios _usuario = (usuarios)context.usuarios.FirstOrDefault(c => c.Usuario_ID == _pedido.Pedido_Estado_UltimaModificacion_Usuario_ID);
+                                if (_usuario != null)
                                 {
                                     string nombre = string.Empty;
-                                    if (!string.IsNullOrWhiteSpace(_pedido_entrega.Barrio))
+                                    if (!string.IsNullOrWhiteSpace(_usuario.Usuario))
                                     {
-                                        nombre = _pedido_entrega.Barrio;
+                                        nombre = _usuario.Usuario;
                                     }
                                     lbl1.Text = nombre;
                                 }
                             }
+
+                            //lbl1 = e.Row.FindControl("lblZona") as Label;
+                            //if (lbl1 != null)
+                            //{
+                            //    pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(c => c.Pedido_Entrega_ID == _pedido.Pedido_Entrega_ID);
+                            //    if (_pedido_entrega != null)
+                            //    {
+                            //        string nombre = string.Empty;
+                            //        if (!string.IsNullOrWhiteSpace(_pedido_entrega.Barrio))
+                            //        {
+                            //            nombre = _pedido_entrega.Barrio;
+                            //        }
+                            //        lbl1.Text = nombre;
+                            //    }
+                            //}
 
                             //LinkButton btnGMaps = e.Row.FindControl("btnGMaps") as LinkButton;
                             //if (btnGMaps != null)
@@ -687,6 +712,24 @@ namespace Cartelux1
                                     }
                                     #endregion END Pedido Material
 
+                                    #region Pedido Temática ---------------------------------------------------------------------------------------------------------
+                                    _GridFormulario1.lblTematica = "N/D";
+                                    lista_pedido_tematicas _lista_pedido_tematica = (lista_pedido_tematicas)context.lista_pedido_tematicas.FirstOrDefault(c => c.Pedido_Tematica_ID == _pedido.Pedido_Tematica_ID);
+                                    if (_lista_pedido_tematica != null && !string.IsNullOrWhiteSpace(_lista_pedido_tematica.Nombre))
+                                    {
+                                        _GridFormulario1.lblTematica = _lista_pedido_tematica.Nombre;
+                                    }
+                                    #endregion END Pedido Material
+
+                                    #region Pedido Usuario que modifica ---------------------------------------------------------------------------------------------------------
+                                    _GridFormulario1.lblUsuario = "N/D";
+                                    usuarios _usuario = (usuarios)context.usuarios.FirstOrDefault(c => c.Usuario_ID == _pedido.Pedido_Estado_UltimaModificacion_Usuario_ID);
+                                    if (_usuario != null && !string.IsNullOrWhiteSpace(_usuario.Usuario))
+                                    {
+                                        _GridFormulario1.lblUsuario = _usuario.Usuario;
+                                    }
+                                    #endregion END Pedido Usuario que modifica
+
                                 }
                                 _GridFormularios_list.Add(_GridFormulario1);
                             }
@@ -710,6 +753,8 @@ namespace Cartelux1
             public string lblTamano_largo_cm { get; set; }
             public string lblTipo { get; set; }
             public string lblMaterial { get; set; }
+            public string lblTematica { get; set; }
+            public string lblUsuario { get; set; }
             public int lblCantidad { get; set; }
             public string lblZona { get; set; }
             public string Formulario_ID { get; set; }

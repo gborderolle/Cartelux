@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="/Content/css/jquery-ui.css" />
     <link rel="stylesheet" href="/Content/css/jquery.bootstrap-touchspin.css" />
     <link rel="stylesheet" href="/Content/fancybox/jquery.fancybox-1.3.4.css" />
-    
-    
+
+
     <link rel="stylesheet" href="/Content/plugins/jquery-radiocharm/jquery-radiocharm.css" />
     <link rel="stylesheet" href="/Content/plugins/icheck-1.x/skins/futurico/futurico.css" />
     <link rel="stylesheet" href="/Content/plugins/icheck-1.x/skins/flat/blue.css" />
@@ -22,6 +22,13 @@
         IS_TAB_1 = 1;
 
         $(function () {
+
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_flat-blue',
+                radioClass: 'iradio_flat-blue',
+                increaseArea: '20%' // optional
+            });
+
             $(".dropdown").selectmenu();
             $("#txbFecha").datepicker({ dateFormat: 'dd-mm-yy' });
             $("#txbFecha_tab2").datepicker({ dateFormat: 'dd-mm-yy' });
@@ -56,18 +63,18 @@
             //    });
             //});
 
-                //$('input').each(function () {
-                //    var self = $(this),
-                //      label = self.next(),
-                //      label_text = label.text();
+            //$('input').each(function () {
+            //    var self = $(this),
+            //      label = self.next(),
+            //      label_text = label.text();
 
-                //    label.remove();
-                //    self.iCheck({
-                //        checkboxClass: 'icheckbox_line-blue',
-                //        radioClass: 'iradio_line-blue',
-                //        insert: '<div class="icheck_line-icon"></div>' + label_text
-                //    });
-                //});
+            //    label.remove();
+            //    self.iCheck({
+            //        checkboxClass: 'icheckbox_line-blue',
+            //        radioClass: 'iradio_line-blue',
+            //        insert: '<div class="icheck_line-icon"></div>' + label_text
+            //    });
+            //});
 
         });
 
@@ -230,6 +237,10 @@
         .login-container {
             font-size: large;
         }
+
+        .hand-cursor > label {
+            cursor: pointer !important;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="SubbodyContent" runat="server">
@@ -260,7 +271,10 @@
             <div class="form-check pull-right" style="margin: 20px;">
             </div>
             <br />
-            <p class="text-info">Por favor, asegúrese de ingresar correctamente los datos del pedido para evitar demoras innecesarias.</p>
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <i class="glyphicon glyphicon-warning-sign"></i>&nbsp;<strong>Por favor,</strong> asegúrese de ingresar correctamente los datos del pedido para evitar demoras innecesarias.
+            </div>
             <div id="tabPedidos">
 
                 <div class="panel with-nav-tabs panel-danger">
@@ -271,7 +285,7 @@
                             <li class=""><a href="#tabsPedidos_2" id="aTabsPedidos_2" data-toggle="tab">Roll up</a></li>
                             <%--<li class=""><a href="#tabsPedidos_2" id="aTabsPedidos_2" data-toggle="tab">Cartelux</a></li>--%>
                         </ul>
-                        <input id="chbRepetidos" class="form-check-input form-control pull-right" type="checkbox" onclick="checkbox_repetidos()" style="width: 40px; position: absolute; right: 30px;">
+<%--                        <input id="chbRepetidos" class="form-check-input form-control pull-right" type="checkbox" onclick="checkbox_repetidos()" style="width: 40px; position: absolute; right: 30px; display:none;">--%>
                     </div>
 
                     <div style="margin: 20px;">
@@ -318,32 +332,17 @@
                                             <br />
 
                                             <!--Radio group-->
-                                            <div class="row-short pull-left"> Tipo de cartel: 
-                                                <asp:RadioButton ID="radImpreso1" runat="server" ClientIDMode="Static" CssClass="radio-inline" Checked="true" Text="Impreso" GroupName="radImpreso" />
-                                                <asp:RadioButton ID="radImpreso2" runat="server" ClientIDMode="Static" CssClass="radio-inline" Text="Pintado" GroupName="radImpreso" />
-                                                <%--<asp:RadioButton ID="radImpreso1" runat="server" ClientIDMode="Static" CssClass="radio-inline" Checked="true" GroupName="radImpreso"/>
-                                                <asp:RadioButton ID="radImpreso2" runat="server" ClientIDMode="Static" CssClass="radio-inline" GroupName="radImpreso"/>--%>
-
-                                                <%--<br />
-                                                <asp:radiobuttonlist id="rdlFavColor" runat="server">
-    <asp:listitem text="Red" value="1">
-    <asp:listitem text="Blue" value="2">
-</asp:listitem></asp:listitem></asp:radiobuttonlist>
- 
-<asp:checkboxlist runat="server" id="chkLstFavColor">
-    <asp:listitem text="Red" value="1">
-    <asp:listitem text="Blue" value="2">
-</asp:listitem></asp:listitem></asp:checkboxlist>--%>
-
-                                                
-                                                <%--Source: http://www.codingfusion.com/Post/Styling-radiobuttons-and-checkboxes-in-asp-net-us--%>
-                                                <%--Source: https://www.jqueryscript.net/form/Lable-Style-Radio-Buttons-jQuery-Radiocharm.html--%>
+                                            <div class="row-short pull-left">
+                                                Tipo de cartel: 
+                                                <asp:RadioButton ID="radImpreso1" runat="server" ClientIDMode="Static" CssClass="radio-inline hand-cursor" Checked="true" Text="&nbsp;IMPRESO" GroupName="radImpreso" />
+                                                <asp:RadioButton ID="radImpreso2" runat="server" ClientIDMode="Static" CssClass="radio-inline hand-cursor" Text="&nbsp;PINTADO" GroupName="radImpreso" />
                                             </div>
                                             <!--Radio group-->
                                             <br />
                                             <div class="form-group unselectable" style="display: none;">
                                                 <asp:TextBox runat="server" ID="txbTexto1" TextMode="multiline" CssClass="form-control txbEditable multitext" placeholder="Indicaciones del diseño (opcional)"></asp:TextBox>
                                             </div>
+                                            <asp:DropDownList ID="ddlTematica" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required form-control" />
 
                                             <hr />
                                             <label class="_label1 unselectable" style="font-weight: normal;">3) Datos de la entrega</label>
