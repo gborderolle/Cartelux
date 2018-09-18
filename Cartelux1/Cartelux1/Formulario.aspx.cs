@@ -27,20 +27,27 @@ namespace Cartelux1
         {
             if (!Page.IsPostBack)
             {
-                Bind_DataConfig();
-                LoadAttributes();
+                if (Request.QueryString.Count > 0)
+                {
+                    Bind_DataConfig();
+                    LoadAttributes();
 
-                string serie_str = GetURLParam_Decrypted("ID");
-                string tel_str = GetURLParam("TEL");
-                if (!string.IsNullOrWhiteSpace(serie_str) && !string.IsNullOrWhiteSpace(tel_str))
-                {
-                    BindData(serie_str, tel_str);
+                    string serie_str = GetURLParam_Decrypted("ID");
+                    string tel_str = GetURLParam("TEL");
+                    if (!string.IsNullOrWhiteSpace(serie_str) && !string.IsNullOrWhiteSpace(tel_str))
+                    {
+                        BindData(serie_str, tel_str);
+                    }
+                    if (string.IsNullOrWhiteSpace(serie_str))
+                    {
+                        // Si no tiene ID como parámetro, tomar como si fuese un ingreso nuestro. Mostrar botón de limpiar campos 
+                        // (usar js función emptyFields_all_tabs) y verificar que guarde OK
+                    }
                 }
-                if (string.IsNullOrWhiteSpace(serie_str))
-                {
-                    // Si no tiene ID como parámetro, tomar como si fuese un ingreso nuestro. Mostrar botón de limpiar campos 
-                    // (usar js función emptyFields_all_tabs) y verificar que guarde OK
-                }
+            }
+            else
+            {
+                Response.Redirect("/Acceso.aspx");
             }
         }
 
