@@ -6,16 +6,12 @@
     <link rel="stylesheet" href="/Content/css/jquery.bootstrap-touchspin.css" />
     <link rel="stylesheet" href="/Content/fancybox/jquery.fancybox-1.3.4.css" />
 
-
     <link rel="stylesheet" href="/Content/plugins/jquery-radiocharm/jquery-radiocharm.css" />
     <link rel="stylesheet" href="/Content/plugins/icheck-1.x/skins/futurico/futurico.css" />
     <link rel="stylesheet" href="/Content/plugins/icheck-1.x/skins/flat/blue.css" />
 
-
-
     <!-- PAGE CSS -->
     <link rel="stylesheet" href="/Content/css/pages/formulario.css" />
-
 
     <script type="text/javascript">
         TAB_COUNT = 1;

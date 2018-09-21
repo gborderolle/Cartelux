@@ -74,6 +74,8 @@ function generarURL() {
                                     $("#btnGenerar").attr("title", response.id);
                                     $("#txbLink").val(response.id);
 
+                                    $("#aBtnGoToURL").attr("href", response.id);
+
                                     formulario_url = response.id;
 
                                     }, // end success
@@ -81,18 +83,16 @@ function generarURL() {
                                     alert("Error interno generando LINK.");
 
                                     $("#btnGenerar").attr("title", form_url);
-                                    //$("#btnGenerar").attr("title", wpp_url);
                                     $("#txbLink").val(form_url);
-                                    //$("#txbLink").val(wpp_url);
                                 }
                             }); // Ajax
 
                         } else {
                             // Ambiente local
                             $("#btnGenerar").attr("title", form_url);
-                            //$("#btnGenerar").attr("title", wpp_url);
                             $("#txbLink").val(form_url);
-                            //$("#txbLink").val(wpp_url);
+
+                            $("#aBtnGoToURL").attr("href", form_url);
                         }
                         // En todos los casos
 

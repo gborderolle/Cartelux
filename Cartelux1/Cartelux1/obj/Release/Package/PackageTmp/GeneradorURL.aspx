@@ -64,13 +64,17 @@
 
             <div class="row center">
                 <div class="col-sm-12 col-md-10 center">
-                    <input class="form-control text-to-copy pull-left" id="txbLink" onclick="this.select();" value="?" style="width: 85%;" readonly />
+                    <div style="display: flex;">
+                        <input class="form-control text-to-copy pull-left" id="txbLink" onclick="this.select();" value="?" style="width: 85%;" readonly />
 
-                    <%--SOURCE: https://clipboardjs.com/--%>
-                    <a id="aBtnCopy" href="#" class="btn btn-lg pull-right" data-clipboard-action="copy" data-clipboard-target="input#txbLink" style="padding: 10px;">
-                        <i class="glyphicon glyphicon-copy"></i>
-                    </a>
-
+                        <%--SOURCE: https://clipboardjs.com/--%>
+                        <a id="aBtnCopy" href="#" class="btn btn-lg" data-clipboard-action="copy" data-clipboard-target="input#txbLink" style="padding: 8px;" title="Copiar Formulario">
+                            <i class="glyphicon glyphicon-copy"></i>
+                        </a>
+                        <a id="aBtnGoToURL" href="#" class="btn btn-lg pull-right" style="padding: 8px;" title="Ir a Formulario">
+                            <i class="glyphicon glyphicon-flash"></i>
+                        </a>
+                    </div>
                     <button type="button" class="form-control btn-warning js-copy-btn btn-lg" style="height: auto;" id="btnCopy" onclick="enviarWPP()">Copiar y enviar por WhatsApp</button>
 
                     <a href="Dashboard" title="" target="_blank" class="pull-left" style="margin-top: 10px;">Ir al Dashboard</a>

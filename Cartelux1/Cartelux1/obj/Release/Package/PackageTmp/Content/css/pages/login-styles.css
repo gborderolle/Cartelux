@@ -1,6 +1,7 @@
 
 .loginTitleImage {
-    width: 44px;
+    width: 50px;
+    padding-top: 10px;
 }
 
 footer > p{
@@ -13,7 +14,7 @@ footer > p{
  div.loginTitleBread {
      font-family: Arial;
      font-size: 14px;
-     color: #757272;
+     color: whitesmoke;
      padding-left: 55px;
      text-align: left;
      margin-top: 13px;
@@ -25,8 +26,17 @@ footer > p{
      padding-left: 55px;
      text-align: left;
      margin-top: 2px;
+     color: whitesmoke;
  }
- #content {} #inboxMainFooter {
+ #btnSubmit{
+     margin: auto; 
+     width: -webkit-fill-available;
+ }
+
+.btnSubmit_candidato {
+    display: none;
+}
+#inboxMainFooter {
      position: fixed;
      bottom: 0;
      width: 100%;
@@ -45,28 +55,36 @@ footer > p{
  body {
      width: 100%;
      height: 100%;
-     /*min-height: 700px;*/
      margin: 0;
     background: #444 !important;
  }
+
  .generalContainer {
      width: 100%;
      margin: 0 auto;
-     margin-top: 20px;
  }
  .loginTitleContainer {
      height: 80px;
      width: 440px;
-     background-image: url(/Content/img/CX-web1.png);
      margin: 0 auto;
  }
- /* popup (view) */
  
+ .loginTitleArea{
+         padding: 10px;
+         width: 70%;
+             margin: auto;
+ }
+
+ #lblMessages {
+     font-weight: normal; 
+     font-size: medium;
+ }
+
  .loginFormContainer {
-     /*max-width: 440px;
-     min-height: 400px;*/
+        margin: 5em;
+     float: right; 
+     background-color: #e18532;
      padding: 15px;
-     background-color: #dddddd;
      border: 1px solid #eeeeee;
      -moz-border-radius: 4px;
      -webkit-border-radius: 4px;
@@ -78,22 +96,33 @@ footer > p{
      -o-box-shadow: 0 0 10px rgba(0, 0, 0, 1);
      box-shadow: 0 0 10px rgba(0, 0, 0, 1);
      -khtml-box-shadow: 0 0 10px rgba(0, 0, 0, 1);
-     /* Center */
-     
-     /*width: 50%;*/
-     margin: 0 auto;
+         padding-left: 0;
+    padding-right: 0;
  }
+
+@media (max-width: 768px){
+    .loginFormContainer {
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .loginTitleArea {
+    width: 100%;
+    }
+    .generalContainer {
+        background-position: right;
+    }
+}
+
  .loginFormElements {
      max-width: 100%;
      background-color: #dddddd
  }
- /* title */
- 
+
  .loginFormTitle {
      float: left;
      height: 30px;
      width: 390px;
-     padding-left: 20px;
+     /*padding-left: 20px;*/
      padding-top: 10px;
      margin-bottom: 0px;
      font-family: Arial;
@@ -173,6 +202,10 @@ footer > p{
  }
  /* button */
  
+ button {
+     font-size: x-large !important;
+ }
+
  .loginFormButton {
      height: 36px;
      width: 130px;
@@ -226,7 +259,7 @@ footer > p{
  .loginFormMessageContainer {
      padding-bottom: 20px;
      padding-top: 20px;
-     border-top: 1px solid #ffffff
+     border-top: 1px solid #ffffff;
  }
  /* error messages */
  
@@ -275,7 +308,8 @@ footer > p{
      background-color: #161616;
      background-image: url(../images/loginMessageIconProcess.c481cc9e0149a851.gif);
      background-repeat: no-repeat;
-     background-position: 8px 8px
+     background-position: 8px 8px;
+     display: none;
  }
  /* message text container (both) */
  
