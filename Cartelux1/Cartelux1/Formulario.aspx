@@ -44,34 +44,6 @@
                 $("#hdnPedidoCantidad").val(txtRepeat);
             });
 
-            // Radiobuttons styles
-
-            //$('input').each(function () {
-            //    var self = $(this),
-            //      label = self.next(),
-            //      label_text = label.text();
-
-            //    label.remove();
-            //    self.iCheck({
-            //        checkboxClass: 'icheckbox_line-blue',
-            //        radioClass: 'iradio_line-blue',
-            //        insert: '<div class="icheck_line-icon"></div>' + label_text
-            //    });
-            //});
-
-            //$('input').each(function () {
-            //    var self = $(this),
-            //      label = self.next(),
-            //      label_text = label.text();
-
-            //    label.remove();
-            //    self.iCheck({
-            //        checkboxClass: 'icheckbox_line-blue',
-            //        radioClass: 'iradio_line-blue',
-            //        insert: '<div class="icheck_line-icon"></div>' + label_text
-            //    });
-            //});
-
         });
 
         function clientGoogleMaps() {
@@ -413,7 +385,6 @@
                                                 <label id="lblLastUpdate" runat="server">-</label>
                                             </div>
                                             <div class="row" style="margin-left: 0; margin-right: 0;">
-                                                <%--<img src="/Content/img/Dropbox_logo.png" class="img-responsive" alt="Cartelux" style="width: 5%;" />--%>
                                                 <a href="http://cartelux.uy/album" title="" target="_blank" style="font-size: large;">Ver el álbum de fotos</a>
                                             </div>
                                         </div>
@@ -568,7 +539,6 @@
                                                 <label id="lblLastUpdate_tab2" runat="server">-</label>
                                             </div>
                                             <div class="row" style="margin-left: 0; margin-right: 0;">
-                                                <%--<img src="/Content/img/Dropbox_logo.png" class="img-responsive" alt="Cartelux" style="width: 5%;" />--%>
                                                 <a href="http://cartelux.uy/album" title="" target="_blank">Click aquí para ver el álbum de fotos</a>
                                             </div>
                                         </div>

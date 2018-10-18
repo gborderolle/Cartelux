@@ -2,7 +2,7 @@
 var hashMessages = {};
 
 //hashMessages["ConfirmacionPedido"] = "¡MUCHAS GRACIAS!";
-hashMessages["ConfirmacionPedido"] = "¡PEDIDO CONFIRMADO! Por favor, asuma su compra con compromiso.";
+hashMessages["ConfirmacionPedido"] = "¡PEDIDO CONFIRMADO!\nPor favor, asuma su compra con compromiso.";
 hashMessages["Msj_inicioCliente"] = "Hola, soy de Cartelux. ¡Un gusto!";
 hashMessages["FaltanDatos"] = "Por favor, complete todos los campos con borde rojo";
 hashMessages["ConfirmacionCambios"] = "Estado actualizado.";
