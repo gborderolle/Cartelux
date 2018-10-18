@@ -1,4 +1,8 @@
-﻿.form-control {
+﻿.radio2{
+    font-size: medium !important;
+}
+
+.form-control {
     height: 50px !important;
     font-size: larger !important;
 }
@@ -58,4 +62,4 @@ button {
     .build {
         font-size: small;
     }
-}*/
+}

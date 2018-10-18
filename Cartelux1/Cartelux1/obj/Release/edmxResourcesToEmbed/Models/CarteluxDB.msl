@@ -4,6 +4,7 @@
     <EntitySetMapping Name="clientes">
       <EntityTypeMapping TypeName="carteluxdb1Model.clientes">
         <MappingFragment StoreEntitySet="clientes">
+          <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />
           <ScalarProperty Name="Cliente_ID" ColumnName="Cliente_ID" />
           <ScalarProperty Name="Departamento_ID" ColumnName="Departamento_ID" />
           <ScalarProperty Name="Telefono" ColumnName="Telefono" />

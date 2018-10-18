@@ -75,10 +75,12 @@ function emptyFields_all_tabs() {
     $("#txbNombre").val("");
     $("#txbTelefono").val("");
     $("#txbFecha").val("");
+    $("#txbDocumento").val("");
 
     $("#txbNombre_tab2").val("");
     $("#txbTelefono_tab2").val("");
     $("#txbFecha_tab2").val("");
+    $("#txbDocumento_tab2").val("");
 }
 
 function load_gadgets() {
@@ -482,7 +484,9 @@ function pre_confirm_tab1() {
 
     var ok = true;
     if (!_check_logic_tab_pasacalle || !_check_emptyFields_tab_pasacalle) {
-        showMessage(hashMessages["FaltanDatos"]);
+        if (!_check_emptyFields_tab_pasacalle) {
+            showMessage(hashMessages["FaltanDatos"]);
+        }
         ok = false;
     }
     return ok;
@@ -501,86 +505,113 @@ function pre_confirm_tab2() {
 }
 
 function check_logic_tab_pasacalle() {
-    var ok = true;
+    var ok = false;
 
-    // Check TAMAÑO vacío
-    var ddlTamano1 = 0;
-    var controls = $("#ddlTamano1-button span");
-    if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
-        var text = controls[1].innerText;
-        var value = $("#ddlTamano1 option").filter(function () {
-            return this.text === text;
-        }).attr('selected', true).val();
-        if (value !== null && value !== undefined && value.length > 0) {
-            // Parse int
-            ddlTamano1 = value;
-            if (type(value) === "string") {
-                ddlTamano1 = TryParseInt(value, 0);
+    var ok_documento = true;
+    var documento = $("#txbDocumento").val(); 
+    var radDoc1 = $('input[id*=radDoc1]').is(":checked");
+
+    if ((documento !== null && documento !== undefined && documento.length > 0)) {
+        if (radDoc1) {
+            // Check CI
+            ok_documento = validarCedula(documento);
+        }
+        else {
+            // Check RUT
+            ok_documento = validarRut(documento);
+        }
+        ok = ok_documento;        
+    }
+
+    if (ok) {
+
+        // Check TAMAÑO vacío
+        var ddlTamano1 = 0;
+        var controls = $("#ddlTamano1-button span");
+        if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
+            var text = controls[1].innerText;
+            var value = $("#ddlTamano1 option").filter(function () {
+                return this.text === text;
+            }).attr('selected', true).val();
+            if (value !== null && value !== undefined && value.length > 0) {
+                // Parse int
+                ddlTamano1 = value;
+                if (type(value) === "string") {
+                    ddlTamano1 = TryParseInt(value, 0);
+                }
             }
         }
-    }
-    if (ddlTamano1 === 0) {
-        ok = false;
-    }
-
-    // Check TEMÁTICA vacía
-    var ddlTematica = 0;
-    var controls = $("#ddlTematica-button span");
-    if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
-        var text = controls[1].innerText;
-        var value = $("#ddlTematica option").filter(function () {
-            return this.text === text;
-        }).attr('selected', true).val();
-        if (value !== null && value !== undefined && value.length > 0) {
-            // Parse int
-            ddlTematica = value;
-            if (type(value) === "string") {
-                ddlTematica = TryParseInt(value, 0);
-            }
-        }
-    }
-    if (ddlTematica === 0) {
-        ok = false;
-    }
-
-    // Check TIPO ENTREGA vacío
-    var ddlTipoEntrega1 = 0;
-    controls = $("#ddlTipoEntrega1-button span");
-    if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
-        text = controls[1].innerText;
-        value = $("#ddlTipoEntrega1 option").filter(function () {
-            return this.text === text;
-        }).attr('selected', true).val();
-        if (value !== null && value !== undefined && value.length > 0) {
-            // Parse int
-            ddlTipoEntrega1 = value;
-            if (type(value) === "string") {
-                ddlTipoEntrega1 = TryParseInt(value, 0);
-            }
-        }
-    }
-    if (ddlTipoEntrega1 === 0) {
-        ok = false;
-    }
-
-    // Colocación o envío a domicilio - TAB Pasacalle
-    if (ddlTipoEntrega1 === 1 || ddlTipoEntrega1 === 2) {
-        var txbDireccion_calle = $("#txbDireccion_calle").val();
-        var txbDireccion_numero = $("#txbDireccion_numero").val();
-        var txbDireccion_esquina = $("#txbDireccion_esquina").val();
-        //var mapSearch = $("#mapSearch").val();
-        if ((txbDireccion_calle === null || txbDireccion_calle === undefined || txbDireccion_calle.length === 0)){
-        //|| (txbDireccion_numero === null || txbDireccion_numero === undefined || txbDireccion_numero.length === 0)
-            //|| (txbDireccion_esquina === null || txbDireccion_esquina === undefined || txbDireccion_esquina.length === 0)) {
+        if (ddlTamano1 === 0) {
             ok = false;
         }
+
+        // Check TEMÁTICA vacía
+        var ddlTematica = 0;
+        var controls = $("#ddlTematica-button span");
+        if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
+            var text = controls[1].innerText;
+            var value = $("#ddlTematica option").filter(function () {
+                return this.text === text;
+            }).attr('selected', true).val();
+            if (value !== null && value !== undefined && value.length > 0) {
+                // Parse int
+                ddlTematica = value;
+                if (type(value) === "string") {
+                    ddlTematica = TryParseInt(value, 0);
+                }
+            }
+        }
+        if (ddlTematica === 0) {
+            ok = false;
+        }
+
+        // Check TIPO ENTREGA vacío
+        var ddlTipoEntrega1 = 0;
+        controls = $("#ddlTipoEntrega1-button span");
+        if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
+            text = controls[1].innerText;
+            value = $("#ddlTipoEntrega1 option").filter(function () {
+                return this.text === text;
+            }).attr('selected', true).val();
+            if (value !== null && value !== undefined && value.length > 0) {
+                // Parse int
+                ddlTipoEntrega1 = value;
+                if (type(value) === "string") {
+                    ddlTipoEntrega1 = TryParseInt(value, 0);
+                }
+            }
+        }
+        if (ddlTipoEntrega1 === 0) {
+            ok = false;
+        }
+
+        // Colocación o envío a domicilio - TAB Pasacalle
+        if (ddlTipoEntrega1 === 1 || ddlTipoEntrega1 === 2) {
+            var txbDireccion_calle = $("#txbDireccion_calle").val();
+            var txbDireccion_numero = $("#txbDireccion_numero").val();
+            var txbDireccion_esquina = $("#txbDireccion_esquina").val();
+            //var mapSearch = $("#mapSearch").val();
+            if ((txbDireccion_calle === null || txbDireccion_calle === undefined || txbDireccion_calle.length === 0)) {
+                //|| (txbDireccion_numero === null || txbDireccion_numero === undefined || txbDireccion_numero.length === 0)
+                //|| (txbDireccion_esquina === null || txbDireccion_esquina === undefined || txbDireccion_esquina.length === 0)) {
+                ok = false;
+            }
+        }
+
+        // Envío al interior  - TAB Pasacalle
+        if (ddlTipoEntrega1 === 3) {
+            var txbCiudad = $("#txbCiudad").val();
+            if (txbCiudad === null || txbCiudad === undefined || txbCiudad.length === 0) {
+                ok = false;
+            }
+        }
     }
 
-    // Envío al interior  - TAB Pasacalle
-    if (ddlTipoEntrega1 === 3) {
-        var txbCiudad = $("#txbCiudad").val();
-        if (txbCiudad === null || txbCiudad === undefined || txbCiudad.length === 0){
-            ok = false;
+    if (!ok) {
+        if (!ok_documento) {
+            showMessage(hashMessages["DocumentoIncorrecto"]);
+        } else {
+            showMessage(hashMessages["FaltanDatos"]);
         }
     }
     return ok;
@@ -656,10 +687,12 @@ function check_emptyFields_tab_pasacalle() {
     var txbNombre = $("#txbNombre").val();
     var txbTelefono = $("#txbTelefono").val();
     var txbFecha = $("#txbFecha").val();
-
+    var txbDocumento = $("#txbDocumento").val();
+    
     if ((txbNombre === null || txbNombre === undefined || txbNombre.length === 0)
        || (txbTelefono === null || txbTelefono === undefined || txbTelefono.length === 0)
-       || (txbFecha === null || txbFecha === undefined || txbFecha.length === 0)) {
+       || (txbFecha === null || txbFecha === undefined || txbFecha.length === 0)
+       || (txbDocumento === null || txbDocumento === undefined || txbDocumento.length === 0)) {
         ok = false;
     }
     return ok;
@@ -671,11 +704,13 @@ function check_emptyFields_tab_rollup() {
     var txbNombre = $("#txbNombre_tab2").val();
     var txbTelefono = $("#txbTelefono_tab2").val();
     var txbFecha = $("#txbFecha_tab2").val();
+    var txbDocumento_tab2 = $("#txbDocumento_tab2").val();
 
     if ((txbNombre === null || txbNombre === undefined || txbNombre.length === 0)
        || (txbTelefono === null || txbTelefono === undefined || txbTelefono.length === 0)
-       || (txbFecha === null || txbFecha === undefined || txbFecha.length === 0)) {
-        ok = false;
+       || (txbFecha === null || txbFecha === undefined || txbFecha.length === 0)
+        || (txbDocumento_tab2 === null || txbDocumento_tab2 === undefined || txbDocumento_tab2.length === 0)) {
+            ok = false;
     }
     return ok;
 }

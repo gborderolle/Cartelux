@@ -27,7 +27,6 @@ namespace Cartelux1
         {
             if (!Page.IsPostBack)
             {
-
                 Bind_DataConfig();
                 LoadAttributes();
 
@@ -202,9 +201,21 @@ namespace Cartelux1
                         {
                             txbNombre.Value = _cliente.Nombre;
                             txbTelefono.Value = _cliente.Telefono;
+                            txbDocumento.Value = _cliente.NroDocumento.ToString();
 
                             txbNombre_tab2.Value = _cliente.Nombre;
                             txbTelefono_tab2.Value = _cliente.Telefono;
+                            txbDocumento_tab2.Value = _cliente.NroDocumento.ToString();
+
+                            if (_cliente.NroDocumento.ToString().Length > 8)
+                            {
+                                radDoc1.Checked = false;
+                                radDoc2.Checked = true;
+                            }else
+                            {
+                                radDoc1.Checked = true;
+                                radDoc2.Checked = false;
+                            }
                         }
 
                         // Pedidos
@@ -1183,29 +1194,47 @@ namespace Cartelux1
         private int NEW_Cliente(CarteluxDB context)
         {
             int ret_ID = 0;
-            string client_tel = txbTelefono.Value;
-            string client_name = txbNombre.Value;
-            if (context != null && !string.IsNullOrWhiteSpace(client_tel) && !string.IsNullOrWhiteSpace(client_name))
-            {
-                clientes cliente = (clientes)context.clientes.FirstOrDefault(v => v.Telefono.Equals(client_tel));
-                cliente = cliente != null ? cliente : new clientes();
-                cliente.Fecha_update = GetCurrentTime();
-                ret_ID = cliente.Cliente_ID;
+            if (context != null) {
+                System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+                string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+                string methodName = stackFrame.GetMethod().Name;
 
-                if (string.IsNullOrWhiteSpace(cliente.Nombre))
+                string client_tel = txbTelefono.Value;
+                string client_name = txbNombre.Value;
+
+                int txbDocumento_int = 0;
+                if (!string.IsNullOrWhiteSpace(txbDocumento.Value))
                 {
-                    // Cliente nuevo 
-                    cliente.Cliente_ID = 0;
-                    cliente.Nombre = client_name;
-                    cliente.Telefono = client_tel;
-                    cliente.Fecha_creado = GetCurrentTime();
-
-                    context.clientes.Add(cliente);
-                    Guardar_Contexto(context);
-
-                    ret_ID = Get_NextClientID(context);
+                    if (!int.TryParse(txbDocumento.Value, out txbDocumento_int))
+                    {
+                        txbDocumento_int = 0;
+                        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, txbDocumento.Value);
+                    }
                 }
-                cliente.Nombre = client_name;
+
+                if (!string.IsNullOrWhiteSpace(client_tel) && !string.IsNullOrWhiteSpace(client_name) && txbDocumento_int > 0)
+                {
+                    clientes cliente = (clientes)context.clientes.FirstOrDefault(v => v.Telefono.Equals(client_tel));
+                    cliente = cliente != null ? cliente : new clientes();
+                    cliente.Fecha_update = GetCurrentTime();
+                    ret_ID = cliente.Cliente_ID;
+
+                    if (string.IsNullOrWhiteSpace(cliente.Nombre))
+                    {
+                        // Cliente nuevo 
+                        cliente.Cliente_ID = 0;
+                        cliente.Nombre = client_name;
+                        cliente.Telefono = client_tel;
+                        cliente.Fecha_creado = GetCurrentTime();
+                        cliente.NroDocumento = txbDocumento_int;
+
+                        context.clientes.Add(cliente);
+                        Guardar_Contexto(context);
+
+                        ret_ID = Get_NextClientID(context);
+                    }
+                    cliente.Nombre = client_name;
+                }
             }
             return ret_ID;
         }
@@ -2058,9 +2087,16 @@ namespace Cartelux1
                 {
                     foreach (string email in email_receptor_entrega)
                     {
-                        //mail.CC.Add(email); // POR EL MOMENTO NO
+                        //mail.CC.Add(email); // POR EL MOMENTO NO AVISAR A JUANCHY
                     }
                 }
+
+                string telefono_aux = string.Empty;
+                if (telefono[0].Equals("0"))
+                {
+                    telefono_aux = telefono.Substring(1);
+                }
+                string wpp_url = "https://api.whatsapp.com/send?phone=598" + telefono_aux;
 
                 //set the content 
                 mail.Subject = "CX-AVISO: ¡Pedido nuevo! > " + nombre;
@@ -2074,6 +2110,7 @@ namespace Cartelux1
                 mail.Body += "<div><strong><span style='font-size:12pt;color:#e15211'>Accesos</span></strong></div>";
                 mail.Body += "<div><strong><a href='" + url + "' title='' target='_blank'>Formulario</a></strong></div>";
                 mail.Body += "<div><strong><a href='www.pedidos.cartelux.uy/Dashboard' title='' target='_blank'>Dashboard</a></strong></div>";
+                mail.Body += "<div><strong><a href='" + wpp_url + "' title='' target='_blank'>WhatsApp URL</a></strong></div>";
                 mail.Body += "<br/><br/>";
                 mail.Body += "<div>Este es un email auto-generado, por favor no lo responda.</div>";
                 mail.Body += "<div>Fecha creación: " + GetCurrentTime().ToString(GlobalVariables.ShortDateTime_format1_long) + "</div>";

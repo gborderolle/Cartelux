@@ -244,15 +244,14 @@
     <!-- PAGE JS -->
     <script type="text/javascript" src="/Content/js/pages/auxiliar_functions.js"></script>
     <script type="text/javascript" src="/Content/js/pages/formulario.js"></script>
+    <script type="text/javascript" src="/Content/js/pages/validar_documento.js"></script>
 
     <!-- JS -->
     <script type="text/javascript" src="/Content/js/jquery.bootstrap-touchspin.js"></script>
     <script type="text/javascript" src="/Content/fancybox/jquery.fancybox-1.3.4.js"></script>
 
-
     <script type="text/javascript" src="/Content/plugins/jquery-radiocharm/jquery-radiocharm.js"></script>
     <script type="text/javascript" src="/Content/plugins/icheck-1.x/icheck.min.js"></script>
-
 
 
     <%--SOURCE: https://stackoverflow.com/questions/5540395/can-i-open-a-url-in-a-jqueryui-dialog
@@ -269,7 +268,7 @@
             <br />
             <div class="alert alert-warning alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <i class="glyphicon glyphicon-warning-sign"></i>&nbsp;<strong>Por favor,</strong> asegúrese de ingresar correctamente los datos del pedido para evitar demoras innecesarias.
+                <i class="glyphicon glyphicon-warning-sign"></i>&nbsp;<strong>Atención,</strong> con la confirmación de este formulario, ud. se compromete a la realización del pedido y abono del mismo. Cartelux se encuentra adherido a Clearing de Infomes - Equifax®.
             </div>
             <div id="tabPedidos">
 
@@ -303,8 +302,18 @@
                                                 <input id="txbTelefono" class="form-control ctrl-required" type="number" tabindex="90" placeholder="Teléfono de contacto" runat="server" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
                                             </div>
                                             <div class="form-group unselectable">
-                                                <input id="txbNombre" class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" runat="server" clientidmode="static" autofocus />
+                                                <input id="txbNombre" class="form-control txbEditable ctrl-required" placeholder="Nombre completo / Empresa" type="text" tabindex="1" runat="server" clientidmode="static" autofocus />
                                             </div>
+                                            <!--Radio group-->
+                                            <div class="row-short pull-left">
+                                                Tipo de documento: 
+                                                <asp:RadioButton ID="radDoc1" runat="server" ClientIDMode="Static" CssClass="radio-inline hand-cursor radio2" Checked="true" Text="&nbsp;CI / DNI" GroupName="radDoc" />
+                                                <asp:RadioButton ID="radDoc2" runat="server" ClientIDMode="Static" CssClass="radio-inline hand-cursor radio2" Text="&nbsp;RUT" GroupName="radDoc" />
+                                            </div>
+                                            <div class="form-group unselectable">
+                                                <input id="txbDocumento" class="form-control txbEditable ctrl-required" placeholder="Sin puntos ni guiones - Ej: 12345678 / 123456789123" type="number" tabindex="1" runat="server" clientidmode="static" />
+                                            </div>
+                                            <!--Radio group-->
                                             <hr />
                                             <label class="_label1 unselectable" style="font-weight: normal;">2) Datos del Cartel</label>
                                             <br />
@@ -458,8 +467,18 @@
                                                 <input id="txbTelefono_tab2" class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" runat="server" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
                                             </div>
                                             <div class="form-group unselectable">
-                                                <input id="txbNombre_tab2" class="form-control txbEditable ctrl-required" placeholder="Nombre completo" type="text" tabindex="1" runat="server" clientidmode="static" />
+                                                <input id="txbNombre_tab2" class="form-control txbEditable ctrl-required" placeholder="Nombre completo / Empresa" type="text" tabindex="1" runat="server" clientidmode="static" />
                                             </div>
+                                            <!--Radio group-->
+                                            <div class="row-short pull-left">
+                                                Tipo de documento: 
+                                                <asp:RadioButton ID="radDoc1_tab2" runat="server" ClientIDMode="Static" CssClass="radio-inline hand-cursor radio2" Text="&nbsp;CI/DNI" GroupName="radDoc_tab2" />
+                                                <asp:RadioButton ID="radDoc2_tab2" runat="server" ClientIDMode="Static" CssClass="radio-inline hand-cursor radio2" Text="&nbsp;RUT" GroupName="radDoc_tab2" />
+                                            </div>
+                                            <div class="form-group unselectable">
+                                                <input id="txbDocumento_tab2" class="form-control txbEditable ctrl-required" placeholder="Documento - Sin puntos ni guiones" type="number" tabindex="1" runat="server" clientidmode="static" />
+                                            </div>
+                                            <!--Radio group-->
                                             <hr />
                                             <label class="_label1 unselectable" style="font-weight: normal;">2) Datos del Roll up</label>
                                             <br />

@@ -31,6 +31,33 @@ namespace Cartelux1 {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txbNombre;
         
         /// <summary>
+        /// radDoc1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton radDoc1;
+        
+        /// <summary>
+        /// radDoc2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton radDoc2;
+        
+        /// <summary>
+        /// txbDocumento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txbDocumento;
+        
+        /// <summary>
         /// ddlTamano1 control.
         /// </summary>
         /// <remarks>
@@ -209,6 +236,33 @@ namespace Cartelux1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txbNombre_tab2;
+        
+        /// <summary>
+        /// radDoc1_tab2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton radDoc1_tab2;
+        
+        /// <summary>
+        /// radDoc2_tab2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton radDoc2_tab2;
+        
+        /// <summary>
+        /// txbDocumento_tab2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txbDocumento_tab2;
         
         /// <summary>
         /// ddlTamano1_tab2 control.

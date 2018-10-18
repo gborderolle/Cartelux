@@ -12,6 +12,7 @@
     <Property Name="Comentarios" Type="varchar" MaxLength="100" />
     <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
     <Property Name="Fecha_update" Type="datetime" Nullable="false" />
+    <Property Name="NroDocumento" Type="int" />
   </EntityType>
   <EntityType Name="confi_emails">
     <Key>

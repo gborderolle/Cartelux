@@ -85,13 +85,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/30/2018 16:45:30</publishTime>
     </File>
     <File Include="bin/Cartelux1.dll">
-      <publishTime>09/21/2018 02:02:27</publishTime>
+      <publishTime>10/18/2018 02:46:43</publishTime>
+    </File>
+    <File Include="bin/DataMatrix.net.dll">
+      <publishTime>02/28/2017 06:55:46</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>03/02/2015 09:32:26</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
       <publishTime>03/02/2015 09:32:26</publishTime>
+    </File>
+    <File Include="bin/itextsharp.dll">
+      <publishTime>01/22/2018 18:40:38</publishTime>
     </File>
     <File Include="bin/MegaApiClient.dll">
       <publishTime>01/21/2018 21:33:20</publishTime>
@@ -598,7 +604,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/09/2018 01:22:33</publishTime>
     </File>
     <File Include="Content/css/pages/formulario.css">
-      <publishTime>05/09/2018 00:59:16</publishTime>
+      <publishTime>10/17/2018 23:03:54</publishTime>
     </File>
     <File Include="Content/css/pages/generador.css">
       <publishTime>04/09/2018 17:23:28</publishTime>
@@ -1126,7 +1132,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/07/2018 00:25:21</publishTime>
     </File>
     <File Include="Content/js/pages/formulario.js">
-      <publishTime>09/07/2018 00:40:24</publishTime>
+      <publishTime>10/18/2018 02:45:33</publishTime>
     </File>
     <File Include="Content/js/pages/generador.js">
       <publishTime>09/19/2018 18:26:36</publishTime>
@@ -1136,6 +1142,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/js/pages/login.js">
       <publishTime>04/09/2018 17:23:28</publishTime>
+    </File>
+    <File Include="Content/js/pages/validar_documento.js">
+      <publishTime>10/18/2018 02:45:15</publishTime>
     </File>
     <File Include="Content/js/popbox.js">
       <publishTime>05/16/2012 14:09:24</publishTime>
@@ -6043,7 +6052,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/11/2017 00:59:32</publishTime>
     </File>
     <File Include="Formulario.aspx">
-      <publishTime>09/19/2018 17:54:42</publishTime>
+      <publishTime>10/18/2018 01:21:28</publishTime>
     </File>
     <File Include="Formulario2.aspx">
       <publishTime>01/14/2018 17:54:48</publishTime>
@@ -6061,7 +6070,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/11/2017 00:59:15</publishTime>
     </File>
     <File Include="Global_Objects/Messages.js">
-      <publishTime>05/09/2018 01:38:37</publishTime>
+      <publishTime>10/17/2018 23:20:10</publishTime>
     </File>
     <File Include="Models/CarteluxDB.edmx.diagram">
       <publishTime>06/03/2018 21:13:31</publishTime>
@@ -6073,13 +6082,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/15/2017 22:38:03</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>05/03/2018 00:26:52</publishTime>
+      <publishTime>10/09/2018 23:51:32</publishTime>
     </File>
     <File Include="Pages/Formulario.aspx">
       <publishTime>09/14/2017 03:39:20</publishTime>
     </File>
     <File Include="Pages/GeneradorLink.aspx">
       <publishTime>09/14/2017 07:26:45</publishTime>
+    </File>
+    <File Include="Rappipagos1/Procesar.aspx">
+      <publishTime>10/10/2018 01:01:20</publishTime>
     </File>
     <File Include="Scripts/ai.0.15.0-build58334.js">
       <publishTime>08/19/2016 18:17:50</publishTime>
@@ -6211,7 +6223,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/11/2017 00:59:37</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>09/04/2018 01:43:16</publishTime>
+      <publishTime>10/17/2018 22:59:18</publishTime>
     </File>
     <File Include="Site.Master">
       <publishTime>04/08/2018 16:00:23</publishTime>
@@ -6238,7 +6250,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/09/2018 16:32:22</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/28/2018 00:27:32</publishTime>
+      <publishTime>10/18/2018 02:47:21</publishTime>
     </File>
     <File Include="_Backup/Web_14-06-2018.config">
       <publishTime>06/14/2018 02:05:22</publishTime>

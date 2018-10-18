@@ -186,3 +186,6 @@ C:\Users\Gonzalo\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\System.Identi
 C:\Users\Gonzalo\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\Microsoft.IdentityModel.Logging.xml
 C:\Users\Gonzalo\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\Microsoft.IdentityModel.Tokens.xml
 C:\Users\Gonzalo\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\DataMatrix.net.dll
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\itextsharp.dll
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\itextsharp.xml

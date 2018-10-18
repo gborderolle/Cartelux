@@ -53,6 +53,13 @@
       <HintPath>..\packages\Box.V2.3.8.0\lib\net45\Box.V2.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="DataMatrix.net">
+      <HintPath>Content\plugins\DataMatrixNet\DataMatrix.net.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MegaApiClient, Version=1.6.2.393, Culture=neutral, PublicKeyToken=0480d311efbeb4e2, processorArchitecture=MSIL">
       <HintPath>..\packages\MegaApiClient.1.6.2-master-393\lib\net46\MegaApiClient.dll</HintPath>
       <Private>True</Private>
@@ -479,6 +486,7 @@
     <Content Include="Content\js\moment.js" />
     <Content Include="Content\js\MonthPicker.js" />
     <Content Include="Content\js\pages\auxiliar_functions.js" />
+    <Content Include="Content\js\pages\validar_documento.js" />
     <Content Include="Content\js\pages\dashboard.js" />
     <Content Include="Content\js\pages\formulario.js" />
     <Content Include="Content\js\pages\generador.js" />
@@ -2184,6 +2192,7 @@
     <Content Include="Content\reportes_template\skycons\README.md" />
     <Content Include="Content\plugins\icheck-1.x\icheck.jquery.json" />
     <None Include="Properties\PublishProfiles\File System.pubxml" />
+    <Content Include="Rappipagos1\Procesar.aspx" />
     <Content Include="Scripts\bootstrap.js+" />
     <Content Include="Scripts\bootstrap.min.js+" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -2479,6 +2488,13 @@
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rappipagos1\Procesar.aspx.cs">
+      <DependentUpon>Procesar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Rappipagos1\Procesar.aspx.designer.cs">
+      <DependentUpon>Procesar.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2532,6 +2548,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Rappipagos1\Files\" />
     <Folder Include="_Backup\" />
   </ItemGroup>
   <ItemGroup>

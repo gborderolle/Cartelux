@@ -192,8 +192,10 @@ C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\AspNet
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\AspNet.ScriptManager.jQuery.dll
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\BouncyCastle.Crypto.dll
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\Box.V2.dll
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\DataMatrix.net.dll
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\EntityFramework.dll
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\EntityFramework.SqlServer.dll
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\itextsharp.dll
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\MegaApiClient.dll
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\Microsoft.AI.Agent.Intercept.dll
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\Microsoft.AI.DependencyCollector.dll
@@ -233,6 +235,7 @@ C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\System
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\System.Web.Optimization.dll
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\System.Web.Providers.dll
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\WebGrease.dll
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\itextsharp.xml
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\MegaApiClient.xml
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\Microsoft.AI.DependencyCollector.xml
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\Microsoft.AI.ServerTelemetryChannel.xml
@@ -262,6 +265,6 @@ C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\Micros
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\bin\Microsoft.Owin.Security.OAuth.xml
-C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\obj\Debug\Cartelux1.csprojResolveAssemblyReference.cache
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\obj\Debug\Cartelux1.dll
 C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\obj\Debug\Cartelux1.pdb
+C:\Users\GBORDEROLLE-PC\Documents\GitHub\Cartelux\Cartelux1\Cartelux1\obj\Debug\Cartelux1.csprojResolveAssemblyReference.cache
