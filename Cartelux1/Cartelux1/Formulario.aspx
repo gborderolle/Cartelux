@@ -130,6 +130,14 @@
             font-size: larger;
         }
 
+        .btnConfirm3 {
+            background-image: none;
+            height: 30px;
+            font-size: medium;
+            float: right;
+            width: auto;
+        }
+
         .control-short {
             width: 90%;
         }
@@ -238,21 +246,21 @@
             <div class="form-check pull-right" style="margin: 20px;">
             </div>
             <br />
-            <div class="alert alert-warning alert-dismissible" role="alert">
+            <%--<div class="alert alert-warning alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <i class="glyphicon glyphicon-warning-sign"></i>&nbsp;<strong>Atención:</strong> con la confirmación de este formulario, ud. se compromete a la realización del pedido y abono del mismo. Cartelux se encuentra adherido a Clearing de Infomes - Equifax®.
-            </div>
+            </div>--%>
             <div id="tabPedidos">
 
                 <div class="panel with-nav-tabs panel-danger">
-                    <div class="panel-heading" style="padding-bottom: 0; display: -webkit-box;">
-
+                    <%--<div class="panel-heading" style="padding-bottom: 0; display: -webkit-box;">--%>
+                    <div class="panel-heading" style="padding-bottom: 0; width: -webkit-fill-available;">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tabsPedidos_1" id="aTabsPedidos_1" data-toggle="tab">Cartel</a></li>
-                            <li class=""><a href="#tabsPedidos_2" id="aTabsPedidos_2" data-toggle="tab">Roll up</a></li>
+                            <li class="active"><a href="#tabsPedidos_1" id="aTabsPedidos_1" data-toggle="tab">Pedido</a></li>
+                            <%--<li class=""><a href="#tabsPedidos_2" id="aTabsPedidos_2" data-toggle="tab">Roll up</a></li>--%>
                             <%--<li class=""><a href="#tabsPedidos_2" id="aTabsPedidos_2" data-toggle="tab">Cartelux</a></li>--%>
                         </ul>
-<%--                        <input id="chbRepetidos" class="form-check-input form-control pull-right" type="checkbox" onclick="checkbox_repetidos()" style="width: 40px; position: absolute; right: 30px; display:none;">--%>
+                        <%--                        <input id="chbRepetidos" class="form-check-input form-control pull-right" type="checkbox" onclick="checkbox_repetidos()" style="width: 40px; position: absolute; right: 30px; display:none;">--%>
                     </div>
 
                     <div style="margin: 20px;">
@@ -269,25 +277,30 @@
 
                                     <div class="col-sm-12 col-md-12" style="margin: auto; padding: 0;">
                                         <div class="login-container sub-form">
-                                            <label class="_label1 unselectable" style="font-weight: normal;">1) Ingrese sus datos</label>
+                                            <label class="_label1 unselectable" style="font-weight: normal;">1) Datos del cliente</label>
                                             <div class="form-group unselectable">
-                                                <input id="txbTelefono" class="form-control ctrl-required" type="number" tabindex="90" placeholder="Teléfono de contacto" runat="server" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
+                                                <input id="txbTelefono" class="form-control ctrl-required" type="number" tabindex="1" placeholder="Teléfono de contacto" runat="server" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" autofocus />
                                             </div>
                                             <div class="form-group unselectable">
-                                                <input id="txbNombre" class="form-control txbEditable ctrl-required" placeholder="Nombre completo / Empresa" type="text" tabindex="1" runat="server" clientidmode="static" autofocus />
+                                                <input id="txbNombre" class="form-control txbEditable ctrl-required" placeholder="Nombre completo / Empresa" type="text" tabindex="2" runat="server" clientidmode="static" />
+                                            </div>
+                                            <div class="form-group unselectable">
+                                                <input id="txbEmail" class="form-control txbEditable" placeholder="Email" type="text" tabindex="3" runat="server" clientidmode="static" />
                                             </div>
                                             <!--Radio group-->
-                                            <div class="row-short pull-left">
-                                                Tipo de documento: 
+                                            <div style="display: none;">
+                                                <div class="row-short pull-left">
+                                                    Tipo de documento: 
                                                 <asp:RadioButton ID="radDoc1" runat="server" ClientIDMode="Static" CssClass="radio-inline hand-cursor radio2" Checked="true" Text="&nbsp;CI / DNI" GroupName="radDoc" />
-                                                <asp:RadioButton ID="radDoc2" runat="server" ClientIDMode="Static" CssClass="radio-inline hand-cursor radio2" Text="&nbsp;RUT" GroupName="radDoc" />
-                                            </div>
-                                            <div class="form-group unselectable">
-                                                <input id="txbDocumento" class="form-control txbEditable ctrl-required" placeholder="Sin puntos ni guiones - Ej: 12345678 / 123456789123" type="number" tabindex="1" runat="server" clientidmode="static" />
+                                                    <asp:RadioButton ID="radDoc2" runat="server" ClientIDMode="Static" CssClass="radio-inline hand-cursor radio2" Text="&nbsp;RUT" GroupName="radDoc" />
+                                                </div>
+                                                <div class="form-group unselectable">
+                                                    <input id="txbDocumento" class="form-control txbEditable ctrl-required" placeholder="Sin puntos ni guiones - Ej: 12345678 / 123456789123" type="number" tabindex="4" runat="server" clientidmode="static" />
+                                                </div>
                                             </div>
                                             <!--Radio group-->
                                             <hr />
-                                            <label class="_label1 unselectable" style="font-weight: normal;">2) Datos del Cartel</label>
+                                            <label class="_label1 unselectable" style="font-weight: normal;">2) Datos del pedido</label>
                                             <br />
 
                                             <asp:DropDownList ID="ddlTamano1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required form-control" />
@@ -328,27 +341,27 @@
                                             <asp:DropDownList ID="ddlTipoEntrega1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required ddlBorder"></asp:DropDownList>
 
                                             <div class="form-group unselectable">
-                                                <input id="txbCiudad" class="form-control txbEditable ctrl-required" placeholder="Ciudad de envío" type="text" tabindex="6" runat="server" clientidmode="static" />
+                                                <input id="txbCiudad" class="form-control txbEditable ctrl-required" placeholder="Ciudad de envío" type="text" tabindex="5" runat="server" clientidmode="static" />
                                             </div>
                                             <div class="form-group unselectable">
-                                                <input id="txbFecha" type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" tabindex="7" runat="server" clientidmode="static" />
+                                                <input id="txbFecha" type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" tabindex="6" runat="server" clientidmode="static" />
                                             </div>
                                             <hr />
 
                                             <div class="form-group" id="dir_group" style="display: none;">
                                                 <div class="form-group row" style="margin-left: 0; margin-right: 0;">
-                                                    <input id="txbDireccion_calle" class="form-control txbEditable ctrl-required pull-left" placeholder="Calle" type="text" tabindex="5" runat="server" clientidmode="static" style="width: 47%;" />
-                                                    <input id="txbDireccion_numero" class="form-control txbEditable pull-right" placeholder="Número de puerta" type="number" tabindex="5" runat="server" clientidmode="static" style="width: 47%;" />
+                                                    <input id="txbDireccion_calle" class="form-control txbEditable ctrl-required pull-left" placeholder="Calle" type="text" tabindex="7" runat="server" clientidmode="static" style="width: 47%;" />
+                                                    <input id="txbDireccion_numero" class="form-control txbEditable pull-right" placeholder="Número de puerta" type="number" tabindex="8" runat="server" clientidmode="static" style="width: 47%;" />
                                                 </div>
                                                 <div class="form-group row" style="margin-left: 0; margin-right: 0;">
-                                                    <input id="txbDireccion_apto" class="form-control txbEditable pull-left" placeholder="Apto" type="text" tabindex="5" runat="server" clientidmode="static" style="width: 47%;" />
-                                                    <input id="txbDireccion_esquina" class="form-control txbEditable pull-right" placeholder="Esquina" type="text" tabindex="5" runat="server" clientidmode="static" style="width: 47%;" />
+                                                    <input id="txbDireccion_apto" class="form-control txbEditable pull-left" placeholder="Apto" type="text" tabindex="9" runat="server" clientidmode="static" style="width: 47%;" />
+                                                    <input id="txbDireccion_esquina" class="form-control txbEditable pull-right" placeholder="Esquina" type="text" tabindex="10" runat="server" clientidmode="static" style="width: 47%;" />
                                                 </div>
                                             </div>
 
                                             <div class="form-group" id="dir_groupX" style="display: none;">
                                                 Dirección escrita
-                                                <input id="txbDireccion" class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" tabindex="5" runat="server" clientidmode="static" />
+                                                <input id="txbDireccion" class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" tabindex="11" runat="server" clientidmode="static" />
                                                 <hr />
                                             </div>
 
@@ -372,6 +385,9 @@
 
                                             <div class="form-group unselectable">
                                                 <asp:Button ID="btnConfirmar1" runat="server" CssClass="form-control btn btn-danger btnConfirm1" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm_tab1();" ClientIDMode="Static" Text="GUARDAR" />
+                                            </div>
+                                            <div class="form-group unselectable">
+                                                <asp:Button ID="btnLimpiar" runat="server" CssClass="btn btn-info btnConfirm3" OnClick="btnLimpiar_ServerClick" ClientIDMode="Static" Text="Limpiar datos" />
                                             </div>
 
                                         </div>
@@ -435,23 +451,25 @@
                                         <div class="login-container sub-form">
                                             <label class="_label1 unselectable" style="font-weight: normal;">1) Ingrese sus datos</label>
                                             <div class="form-group unselectable">
-                                                <input id="txbTelefono_tab2" class="form-control ctrl-required" type="number" tabindex="99" placeholder="Teléfono de contacto" runat="server" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
+                                                <input id="txbTelefono_tab2" class="form-control ctrl-required" type="number" placeholder="Teléfono de contacto" runat="server" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
                                             </div>
                                             <div class="form-group unselectable">
-                                                <input id="txbNombre_tab2" class="form-control txbEditable ctrl-required" placeholder="Nombre completo / Empresa" type="text" tabindex="1" runat="server" clientidmode="static" />
+                                                <input id="txbNombre_tab2" class="form-control txbEditable ctrl-required" placeholder="Nombre completo / Empresa" type="text" runat="server" clientidmode="static" />
                                             </div>
                                             <!--Radio group-->
-                                            <div class="row-short pull-left">
-                                                Tipo de documento: 
+                                            <div style="display: none;">
+                                                <div class="row-short pull-left">
+                                                    Tipo de documento: 
                                                 <asp:RadioButton ID="radDoc1_tab2" runat="server" ClientIDMode="Static" CssClass="radio-inline hand-cursor radio2" Text="&nbsp;CI/DNI" GroupName="radDoc_tab2" />
-                                                <asp:RadioButton ID="radDoc2_tab2" runat="server" ClientIDMode="Static" CssClass="radio-inline hand-cursor radio2" Text="&nbsp;RUT" GroupName="radDoc_tab2" />
-                                            </div>
-                                            <div class="form-group unselectable">
-                                                <input id="txbDocumento_tab2" class="form-control txbEditable ctrl-required" placeholder="Documento - Sin puntos ni guiones" type="number" tabindex="1" runat="server" clientidmode="static" />
+                                                    <asp:RadioButton ID="radDoc2_tab2" runat="server" ClientIDMode="Static" CssClass="radio-inline hand-cursor radio2" Text="&nbsp;RUT" GroupName="radDoc_tab2" />
+                                                </div>
+                                                <div class="form-group unselectable">
+                                                    <input id="txbDocumento_tab2" class="form-control txbEditable ctrl-required" placeholder="Documento - Sin puntos ni guiones" type="number" runat="server" clientidmode="static" />
+                                                </div>
                                             </div>
                                             <!--Radio group-->
                                             <hr />
-                                            <label class="_label1 unselectable" style="font-weight: normal;">2) Datos del Roll up</label>
+                                            <label class="_label1 unselectable" style="font-weight: normal;">2) Datos del roll up</label>
                                             <br />
 
                                             <%--<asp:DropDownList ID="ddlTipoCartel" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />--%>
@@ -471,7 +489,7 @@
                                             <br />
                                             <br />
                                             <div class="form-group unselectable" style="display: none;">
-                                                <asp:TextBox runat="server" ID="txbTexto1_tab2" TextMode="multiline" CssClass="form-control txbEditable multitext" placeholder="Indicaciones del diseño (opcional)" TabIndex="3"></asp:TextBox>
+                                                <asp:TextBox runat="server" ID="txbTexto1_tab2" TextMode="multiline" CssClass="form-control txbEditable multitext" placeholder="Indicaciones del diseño (opcional)"></asp:TextBox>
                                             </div>
 
                                             <hr />
@@ -481,27 +499,27 @@
                                             <asp:DropDownList ID="ddlTipoEntrega1_tab2" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required ddlBorder"></asp:DropDownList>
 
                                             <div class="form-group unselectable">
-                                                <input id="txbCiudad_tab2" class="form-control txbEditable ctrl-required" placeholder="Ciudad de envío" type="text" tabindex="6" runat="server" clientidmode="static" />
+                                                <input id="txbCiudad_tab2" class="form-control txbEditable ctrl-required" placeholder="Ciudad de envío" type="text" runat="server" clientidmode="static" />
                                             </div>
                                             <div class="form-group unselectable">
-                                                <input id="txbFecha_tab2" type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" tabindex="7" runat="server" clientidmode="static" />
+                                                <input id="txbFecha_tab2" type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" runat="server" clientidmode="static" />
                                             </div>
                                             <hr />
 
                                             <div class="form-group" id="dir_group_tab2" style="display: none;">
                                                 <div class="form-group row" style="margin-left: 0; margin-right: 0;">
-                                                    <input id="txbDireccion_calle_tab2" class="form-control txbEditable ctrl-required pull-left" placeholder="Calle" type="text" tabindex="5" runat="server" clientidmode="static" style="width: 45%;" />
-                                                    <input id="txbDireccion_numero_tab2" class="form-control txbEditable pull-right" placeholder="Número de puerta" type="number" tabindex="5" runat="server" clientidmode="static" style="width: 45%;" />
+                                                    <input id="txbDireccion_calle_tab2" class="form-control txbEditable ctrl-required pull-left" placeholder="Calle" type="text" runat="server" clientidmode="static" style="width: 45%;" />
+                                                    <input id="txbDireccion_numero_tab2" class="form-control txbEditable pull-right" placeholder="Número de puerta" type="number" runat="server" clientidmode="static" style="width: 45%;" />
                                                 </div>
                                                 <div class="form-group row" style="margin-left: 0; margin-right: 0;">
-                                                    <input id="txbDireccion_apto_tab2" class="form-control txbEditable pull-left" placeholder="Apto" type="text" tabindex="5" runat="server" clientidmode="static" style="width: 45%;" />
-                                                    <input id="txbDireccion_esquina_tab2" class="form-control txbEditable pull-right" placeholder="Esquina" type="text" tabindex="5" runat="server" clientidmode="static" style="width: 45%;" />
+                                                    <input id="txbDireccion_apto_tab2" class="form-control txbEditable pull-left" placeholder="Apto" type="text" runat="server" clientidmode="static" style="width: 45%;" />
+                                                    <input id="txbDireccion_esquina_tab2" class="form-control txbEditable pull-right" placeholder="Esquina" type="text" runat="server" clientidmode="static" style="width: 45%;" />
                                                 </div>
                                             </div>
 
                                             <div class="form-group" id="dir_groupX_tab2" style="display: none;">
                                                 Dirección escrita
-                                                <input id="txbDireccion_tab2" class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" tabindex="5" runat="server" clientidmode="static" />
+                                                <input id="txbDireccion_tab2" class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" runat="server" clientidmode="static" />
                                                 <hr />
                                             </div>
 

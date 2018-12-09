@@ -31,6 +31,15 @@ namespace Cartelux1 {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txbNombre;
         
         /// <summary>
+        /// txbEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txbEmail;
+        
+        /// <summary>
         /// radDoc1 control.
         /// </summary>
         /// <remarks>
@@ -200,6 +209,15 @@ namespace Cartelux1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnConfirmar1;
+        
+        /// <summary>
+        /// btnLimpiar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLimpiar;
         
         /// <summary>
         /// msj_result control.

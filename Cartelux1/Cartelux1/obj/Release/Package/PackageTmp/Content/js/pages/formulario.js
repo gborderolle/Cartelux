@@ -2,17 +2,17 @@
 var IS_MOBILE;
 
 $(document).ready(function () {
-    var ID = getUrlParameter('ID');
-    if (ID !== null && ID !== undefined && ID.length > 0) {
-        //loadPreviousState();
-    } else {
-        $("#btnEdit").hide();
-    }
+    //var ID = getUrlParameter('ID');
+    //if (ID !== null && ID !== undefined && ID.length > 0) {
+    //    //loadPreviousState();
+    //} else {
+    //    $("#btnEdit").hide();
+    //}
 
-    _TEL = getUrlParameter('TEL');
-    if (_TEL !== null && _TEL !== undefined && _TEL.length > 0) {
-        //$("#txbCX_tel").val(_TEL);
-    }
+    //_TEL = getUrlParameter('TEL');
+    //if (_TEL !== null && _TEL !== undefined && _TEL.length > 0) {
+    //    //$("#txbCX_tel").val(_TEL);
+    //}
 
     setTimeout(function () {
         checkMobile();
@@ -75,12 +75,12 @@ function emptyFields_all_tabs() {
     $("#txbNombre").val("");
     $("#txbTelefono").val("");
     $("#txbFecha").val("");
-    $("#txbDocumento").val("");
+    //$("#txbDocumento").val("");
 
     $("#txbNombre_tab2").val("");
     $("#txbTelefono_tab2").val("");
     $("#txbFecha_tab2").val("");
-    $("#txbDocumento_tab2").val("");
+    //$("#txbDocumento_tab2").val("");
 }
 
 function load_gadgets() {
@@ -426,6 +426,10 @@ function confirmacionPedido() {
     showMessage(hashMessages["ConfirmacionPedido"]);
 }
 
+function actualizacionPedido() {
+    showMessage(hashMessages["ActualizacionPedido"]);
+}
+
 function showMessage(value) {
     $("#dialog p").text(value);
     $("#dialog").dialog({
@@ -505,24 +509,25 @@ function pre_confirm_tab2() {
 }
 
 function check_logic_tab_pasacalle() {
-    var ok = false;
+    //var ok = false;
 
     var ok_documento = true;
     var documento = $("#txbDocumento").val(); 
     var radDoc1 = $('input[id*=radDoc1]').is(":checked");
 
-    if ((documento !== null && documento !== undefined && documento.length > 0)) {
-        if (radDoc1) {
-            // Check CI
-            ok_documento = validarCedula(documento);
-        }
-        else {
-            // Check RUT
-            ok_documento = validarRut(documento);
-        }
-        ok = ok_documento;        
-    }
+    //if ((documento !== null && documento !== undefined && documento.length > 0)) {
+    //    if (radDoc1) {
+    //        // Check CI
+    //        ok_documento = validarCedula(documento);
+    //    }
+    //    else {
+    //        // Check RUT
+    //        ok_documento = validarRut(documento);
+    //    }
+    //    ok = ok_documento;        
+    //}
 
+    var ok = true;
     if (ok) {
 
         // Check TAMAÑO vacío
@@ -547,10 +552,10 @@ function check_logic_tab_pasacalle() {
 
         // Check TEMÁTICA vacía
         var ddlTematica = 0;
-        var controls = $("#ddlTematica-button span");
+        controls = $("#ddlTematica-button span");
         if (controls !== null && controls !== undefined && controls.length > 0 && controls[1] !== null && controls[1] !== undefined) {
-            var text = controls[1].innerText;
-            var value = $("#ddlTematica option").filter(function () {
+            text = controls[1].innerText;
+            value = $("#ddlTematica option").filter(function () {
                 return this.text === text;
             }).attr('selected', true).val();
             if (value !== null && value !== undefined && value.length > 0) {
@@ -687,12 +692,12 @@ function check_emptyFields_tab_pasacalle() {
     var txbNombre = $("#txbNombre").val();
     var txbTelefono = $("#txbTelefono").val();
     var txbFecha = $("#txbFecha").val();
-    var txbDocumento = $("#txbDocumento").val();
+    //var txbDocumento = $("#txbDocumento").val();
     
     if ((txbNombre === null || txbNombre === undefined || txbNombre.length === 0)
        || (txbTelefono === null || txbTelefono === undefined || txbTelefono.length === 0)
-       || (txbFecha === null || txbFecha === undefined || txbFecha.length === 0)
-       || (txbDocumento === null || txbDocumento === undefined || txbDocumento.length === 0)) {
+       || (txbFecha === null || txbFecha === undefined || txbFecha.length === 0)) {
+       //|| (txbDocumento === null || txbDocumento === undefined || txbDocumento.length === 0)) {
         ok = false;
     }
     return ok;
@@ -704,12 +709,12 @@ function check_emptyFields_tab_rollup() {
     var txbNombre = $("#txbNombre_tab2").val();
     var txbTelefono = $("#txbTelefono_tab2").val();
     var txbFecha = $("#txbFecha_tab2").val();
-    var txbDocumento_tab2 = $("#txbDocumento_tab2").val();
+    //var txbDocumento_tab2 = $("#txbDocumento_tab2").val();
 
     if ((txbNombre === null || txbNombre === undefined || txbNombre.length === 0)
        || (txbTelefono === null || txbTelefono === undefined || txbTelefono.length === 0)
-       || (txbFecha === null || txbFecha === undefined || txbFecha.length === 0)
-        || (txbDocumento_tab2 === null || txbDocumento_tab2 === undefined || txbDocumento_tab2.length === 0)) {
+       || (txbFecha === null || txbFecha === undefined || txbFecha.length === 0)) {
+        //|| (txbDocumento_tab2 === null || txbDocumento_tab2 === undefined || txbDocumento_tab2.length === 0)) {
             ok = false;
     }
     return ok;

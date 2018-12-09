@@ -4,6 +4,7 @@
     <EntitySetMapping Name="clientes">
       <EntityTypeMapping TypeName="carteluxdb1Model.clientes">
         <MappingFragment StoreEntitySet="clientes">
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />
           <ScalarProperty Name="Cliente_ID" ColumnName="Cliente_ID" />
           <ScalarProperty Name="Departamento_ID" ColumnName="Departamento_ID" />
@@ -196,6 +197,18 @@
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Confi_emails_ID" ColumnName="Confi_emails_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clientes_frecuentes">
+      <EntityTypeMapping TypeName="carteluxdb1Model.clientes_frecuentes">
+        <MappingFragment StoreEntitySet="clientes_frecuentes">
+          <ScalarProperty Name="Ultimo_pedido" ColumnName="Ultimo_pedido" />
+          <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+          <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+          <ScalarProperty Name="Frecuencia" ColumnName="Frecuencia" />
+          <ScalarProperty Name="Cliente_ID" ColumnName="Cliente_ID" />
+          <ScalarProperty Name="Cliente_Frecuente_ID" ColumnName="Cliente_Frecuente_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

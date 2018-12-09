@@ -156,7 +156,6 @@
     <script type="text/javascript" src="/Content/js/bic_calendar.js"></script>
     <script type="text/javascript" src="/Content/js/popbox.js"></script>
     <script type="text/javascript" src="/Content/js/jquery.tablesorter.js"></script>
-    <script type="text/javascript" src="/Content/js/jquery.quicksearch.js"></script>
     <script type="text/javascript" src="/Content/js/clipboard.min.js"></script>
     <script type="text/javascript" src="/Content/js/clipboard-action.js"></script>
 
@@ -308,7 +307,7 @@
                                                 <div class="form-check">
                                                     <input id="chbSoloEntrCol" class="form-check-input" type="checkbox" onclick="filtrar()">
                                                     <label class="form-check-label unselectable" for="chbSoloEntrCol">
-                                                        Entregas/Cols.
+                                                        Entregas e Inst.
                                                     </label>
                                                 </div>
 
@@ -357,7 +356,7 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Entrega">
+                                                <asp:TemplateField HeaderText="Fecha">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblFechaEntrega" runat="server" CommandName="View" Text='<%# Eval("Fecha_creado", "{0:dd-MM-yyyy}") %>' />
                                                     </ItemTemplate>
@@ -365,7 +364,7 @@
 
                                                 <asp:TemplateField HeaderText="Teléfono">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblTelefono" runat="server" CommandName="View" />
+                                                        <asp:LinkButton ID="lblTelefono" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 

@@ -27,7 +27,6 @@ namespace Cartelux1
             gridFormularios.UseAccessibleHeader = true;
             gridFormularios.HeaderRow.TableSection = TableRowSection.TableHeader;
             gridFormularios.FooterRow.TableSection = TableRowSection.TableFooter;
-            //ScriptManager.GetCurrent(Page).RegisterPostBackControl(btnExport);
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -88,6 +87,19 @@ namespace Cartelux1
             {
                 if (!string.IsNullOrWhiteSpace(e.CommandArgument.ToString()) && !string.IsNullOrWhiteSpace(e.CommandName))
                 {
+                    if (e.CommandName.Equals("View"))
+                    {
+                        string[] values = e.CommandArgument.ToString().Split(new char[] { ',' });
+                        if (values.Length > 1)
+                        {
+                            string tabla = values[0];
+                            string dato = values[1];
+                            if (!string.IsNullOrWhiteSpace(tabla) && !string.IsNullOrWhiteSpace(dato))
+                            {
+                                Response.Redirect("Listados.aspx?tabla=" + tabla + "&dato=" + dato);
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -134,15 +146,16 @@ namespace Cartelux1
                                 }
                             }
 
-                            lbl1 = e.Row.FindControl("lblTelefono") as Label;
-                            if (lbl1 != null)
+                            LinkButton lbtn = e.Row.FindControl("lblTelefono") as LinkButton;
+                            if (lbtn != null)
                             {
                                 string nombre = string.Empty;
                                 if (!string.IsNullOrWhiteSpace(_cliente.Telefono))
                                 {
                                     nombre = _cliente.Telefono;
                                 }
-                                lbl1.Text = nombre;
+                                lbtn.Text = nombre;
+                                lbtn.CommandArgument = "clientes," + nombre;
                             }
 
                             lbl1 = e.Row.FindControl("lblNombre") as Label;
@@ -532,13 +545,12 @@ namespace Cartelux1
             return formularios_elements;
         }
 
-
         #endregion
 
         #region Static Methods
 
         [WebMethod]
-        public static _GridFormularios[] GetData_BindGridFormularios(string year_value, string month_value, bool soloVigentes_value, bool soloJuanchy_value, bool incluirCancelados_value)
+        public static _GridFormularios[] GetData_BindGridFormularios(string year_value, string month_value, bool soloVigentes_value, bool soloEntrCol_value, bool incluirCancelados_value)
         {
             List<_GridFormularios> _GridFormularios_list = new List<_GridFormularios>();
             if (!string.IsNullOrWhiteSpace(year_value) && !string.IsNullOrWhiteSpace(month_value))
@@ -623,7 +635,7 @@ namespace Cartelux1
                                     if (_pedidoEstado != null)
                                     {
                                         _GridFormulario1.EstadoNro = _pedidoEstado.Codigo;
-                                        if(_pedidoEstado.Codigo == 2 || _pedidoEstado.Codigo == 3) // Si Cancelado o Eliminado, no concluye después
+                                        if (_pedidoEstado.Codigo == 2 || _pedidoEstado.Codigo == 3) // Si Cancelado o Eliminado, no concluye después
                                         {
                                             es_cancelado = true;
                                         }
@@ -652,14 +664,20 @@ namespace Cartelux1
                                                 _GridFormulario1.EstadoNro = 1; // Concluídos
                                             }
                                         }
-                                        // Filtro Juanchy
+                                        // Filtro Entregas o Colocaciones
+                                        /*
+                        * Codigo = 1: Colocación
+                        * Codigo = 2: Envío a domicilio
+                        * Codigo = 3: Envío al interior
+                        * Codigo = 4: Retiro en el taller
+                        * */
                                         lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Entrega_Tipo_ID == _pedido_entrega.Entrega_Tipo_ID);
                                         if (_lista_entregas_tipo != null)
                                         {
                                             _GridFormulario1.lblTipoEntrega = _lista_entregas_tipo.Nombre;
                                             _GridFormulario1.lblTipoCodigo = _lista_entregas_tipo.Codigo.ToString();
 
-                                            if (soloJuanchy_value && (_lista_entregas_tipo.Codigo != 1 && _lista_entregas_tipo.Codigo != 2))
+                                            if (soloEntrCol_value && (_lista_entregas_tipo.Codigo != 1 && _lista_entregas_tipo.Codigo != 2 && _lista_entregas_tipo.Codigo != 3))
                                             {
                                                 continue;
                                             }

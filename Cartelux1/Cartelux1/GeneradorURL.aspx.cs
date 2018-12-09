@@ -1,4 +1,5 @@
 ﻿using Cartelux1.Global_Objects;
+using Cartelux1.Helpers;
 using Cartelux1.Models;
 using System;
 using System.Configuration;
@@ -13,11 +14,11 @@ namespace Cartelux1
 {
     public partial class GeneradorURL : System.Web.UI.Page
     {
-        public static string _Serie
-        {
-            get { return (string)GetCurrentPageViewState()["_Serie"]; }
-            set { GetCurrentPageViewState()["_Serie"] = value; }
-        }
+        //public static string _Serie
+        //{
+        //    get { return (string)GetCurrentPageViewState()["_Serie"]; }
+        //    set { GetCurrentPageViewState()["_Serie"] = value; }
+        //}
 
         public static string _ClientTEL
         {
@@ -93,18 +94,8 @@ namespace Cartelux1
 
                 if (!string.IsNullOrWhiteSpace(url))
                 {
-                    DateTime date = DateTime.Now;
-                    string serie = date.ToString("yyyy-MM-dd-hh-mm-ss", CultureInfo.InvariantCulture).Replace("-", "");
-                    _Serie = serie;
-
-                    resultado += serie;
-
-                    string resultado_parcial = Utilities.Encrypt(resultado);
-                    if (!string.IsNullOrWhiteSpace(resultado_parcial))
-                    {
-                        resultado = resultado_parcial;
-                    }
-                    resultado = url + resultado;
+                    //_Serie = serie;
+                    resultado = url + Extras.Generar_Serie();
 
                     // Agrega el número de contacto del cliente al final para usar en el propio form
                     // Si el número NO empieza con 0 lo agrega

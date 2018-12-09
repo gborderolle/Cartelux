@@ -13,6 +13,18 @@
     <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
     <Property Name="Fecha_update" Type="datetime" Nullable="false" />
     <Property Name="NroDocumento" Type="int" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="clientes_frecuentes">
+    <Key>
+      <PropertyRef Name="Cliente_Frecuente_ID" />
+    </Key>
+    <Property Name="Cliente_Frecuente_ID" Type="int" Nullable="false" />
+    <Property Name="Cliente_ID" Type="int" Nullable="false" />
+    <Property Name="Frecuencia" Type="varchar" MaxLength="100" />
+    <Property Name="Descuento" Type="varchar" MaxLength="100" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="100" />
+    <Property Name="Ultimo_pedido" Type="datetime" />
   </EntityType>
   <EntityType Name="confi_emails">
     <Key>
@@ -187,6 +199,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
   </EntityType>
   <EntityContainer Name="carteluxdb1ModelStoreContainer">
     <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="clientes_frecuentes" EntityType="Self.clientes_frecuentes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="confi_emails" EntityType="Self.confi_emails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="formularios" EntityType="Self.formularios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_departamentos" EntityType="Self.lista_departamentos" Schema="dbo" store:Type="Tables" />

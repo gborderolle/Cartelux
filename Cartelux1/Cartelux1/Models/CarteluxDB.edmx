@@ -18,6 +18,18 @@
           <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
           <Property Name="Fecha_update" Type="datetime" Nullable="false" />
           <Property Name="NroDocumento" Type="int" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="clientes_frecuentes">
+          <Key>
+            <PropertyRef Name="Cliente_Frecuente_ID" />
+          </Key>
+          <Property Name="Cliente_Frecuente_ID" Type="int" Nullable="false" />
+          <Property Name="Cliente_ID" Type="int" Nullable="false" />
+          <Property Name="Frecuencia" Type="varchar" MaxLength="100" />
+          <Property Name="Descuento" Type="varchar" MaxLength="100" />
+          <Property Name="Comentarios" Type="varchar" MaxLength="100" />
+          <Property Name="Ultimo_pedido" Type="datetime" />
         </EntityType>
         <EntityType Name="confi_emails">
           <Key>
@@ -192,6 +204,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
         </EntityType>
         <EntityContainer Name="carteluxdb1ModelStoreContainer">
           <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="clientes_frecuentes" EntityType="Self.clientes_frecuentes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="confi_emails" EntityType="Self.confi_emails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="formularios" EntityType="Self.formularios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_departamentos" EntityType="Self.lista_departamentos" Schema="dbo" store:Type="Tables" />
@@ -230,6 +243,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Fecha_creado" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Fecha_update" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NroDocumento" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="formularios">
           <Key>
@@ -300,6 +314,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <EntitySet Name="pedido_entregas" EntityType="carteluxdb1Model.pedido_entregas" />
           <EntitySet Name="lista_pedido_estados" EntityType="carteluxdb1Model.lista_pedido_estados" />
           <EntitySet Name="confi_emails" EntityType="carteluxdb1Model.confi_emails" />
+          <EntitySet Name="clientes_frecuentes" EntityType="carteluxdb1Model.clientes_frecuentes" />
         </EntityContainer>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -418,6 +433,17 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="EsEmisor" Type="Boolean" Nullable="false" />
           <Property Name="EsEntrega" Type="Boolean" Nullable="false" />
         </EntityType>
+        <EntityType Name="clientes_frecuentes">
+          <Key>
+            <PropertyRef Name="Cliente_Frecuente_ID" />
+          </Key>
+          <Property Name="Cliente_Frecuente_ID" Type="Int32" Nullable="false" />
+          <Property Name="Cliente_ID" Type="Int32" Nullable="false" />
+          <Property Name="Frecuencia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Descuento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Comentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Ultimo_pedido" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -427,6 +453,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <EntitySetMapping Name="clientes">
             <EntityTypeMapping TypeName="carteluxdb1Model.clientes">
               <MappingFragment StoreEntitySet="clientes">
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />
                 <ScalarProperty Name="Cliente_ID" ColumnName="Cliente_ID" />
                 <ScalarProperty Name="Departamento_ID" ColumnName="Departamento_ID" />
@@ -619,6 +646,18 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Confi_emails_ID" ColumnName="Confi_emails_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clientes_frecuentes">
+            <EntityTypeMapping TypeName="carteluxdb1Model.clientes_frecuentes">
+              <MappingFragment StoreEntitySet="clientes_frecuentes">
+                <ScalarProperty Name="Ultimo_pedido" ColumnName="Ultimo_pedido" />
+                <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="Frecuencia" ColumnName="Frecuencia" />
+                <ScalarProperty Name="Cliente_ID" ColumnName="Cliente_ID" />
+                <ScalarProperty Name="Cliente_Frecuente_ID" ColumnName="Cliente_Frecuente_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

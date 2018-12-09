@@ -23,5 +23,6 @@ namespace Cartelux1.Models
         public System.DateTime Fecha_creado { get; set; }
         public System.DateTime Fecha_update { get; set; }
         public Nullable<int> NroDocumento { get; set; }
+        public string Email { get; set; }
     }
 }

@@ -162,9 +162,9 @@ function month_paintSelected(month_index) {
     $(".btn-table").filter("td[data-value='" + month_index + "']").toggleClass("btn-warning");
 }
 
-function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value, incluirCancelados_value) {
+function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, incluirCancelados_value) {
     if (month_value !== null && month_value !== undefined && month_value > 0 && soloVigentes_value !== null && soloVigentes_value !== undefined &&
-        soloJuanchy_value !== null && soloJuanchy_value !== undefined && incluirCancelados_value !== null && incluirCancelados_value !== undefined) {
+        soloEntrCol_value !== null && soloEntrCol_value !== undefined && incluirCancelados_value !== null && incluirCancelados_value !== undefined) {
         
         month_setMonthName(month_value);
         month_clearSelected()
@@ -184,14 +184,14 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value, i
             console.log("year_value, type: " + type(year_value) + ", value: " + year_value);
             console.log("month_value, type: " + type(month_value) + ", value: " + month_value);
             console.log("soloVigentes_value, type: " + type(soloVigentes_value) + ", value: " + soloVigentes_value);
-            console.log("soloJuanchy_value, type: " + type(soloJuanchy_value) + ", value: " + soloJuanchy_value);
+            console.log("soloEntrCol_value, type: " + type(soloEntrCol_value) + ", value: " + soloEntrCol_value);
             console.log("incluirCancelados_value, type: " + type(incluirCancelados_value) + ", value: " + incluirCancelados_value);
 
             $.ajax({
                 type: "POST",
                 url: "Dashboard.aspx/GetData_BindGridFormularios",
                 contentType: "application/json;charset=utf-8",
-                data: '{year_value: "' + year_value + '",month_value: "' + month_value + '",soloVigentes_value: "' + soloVigentes_value + '",soloJuanchy_value: "' + soloJuanchy_value + '",incluirCancelados_value: "' + incluirCancelados_value + '"}',
+                data: '{year_value: "' + year_value + '",month_value: "' + month_value + '",soloVigentes_value: "' + soloVigentes_value + '",soloEntrCol_value: "' + soloEntrCol_value + '",incluirCancelados_value: "' + incluirCancelados_value + '"}',
                 dataType: "json",
                 success: function (response) {
 
@@ -300,13 +300,17 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value, i
                             // ----------------------
 
                             var date = moment(response.d[i].lblFechaEntrega, "DD-MM-YYYY").format("DD-MM-YYYY");
+                            var tel1 = check_nullValues(response.d[i].lblTelefono);
+
 
                             $("#gridFormularios").append("<tr><td class='hiddencol hiddencol_real' " + text_color + ">" +
                             formID + "</td> <td class='hiddencol hiddencol_real' " + text_color + ">" +
-                            check_nullValues(response.d[i].URL_short) + "</td> <td class='td-very_short' " + text_color + ">" +
-                            check_nullValues(response.d[i].lblNumero) + "</td> <td class='td-very_short' " + text_color + ">" +
-                            check_nullValues(date) + "</td> <td class='td-very_short' " + text_color + ">" +
-                            check_nullValues(response.d[i].lblTelefono) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            //check_nullValues(response.d[i].URL_short) + "</td> <td class='td-very_short' " + text_color + "><a href='Listados.aspx?tabla=pedidos&dato=" + tel1 + "'>" +
+                            check_nullValues(response.d[i].URL_short) + "</td> <td class='td-very_short' " + text_color + "><a href='Listados.aspx?tabla=pedidos&dato=" + formID + "'>" +
+                            check_nullValues(response.d[i].lblNumero) + "</a></td> <td class='td-very_short' " + text_color + ">" +
+                            // Listados.aspx?tabla=" + tabla + "&dato=" + dato);
+                            check_nullValues(date) + "</td> <td class='td-very_short' " + text_color + "><a href='Listados.aspx?tabla=clientes&dato="+ tel1 +"'>" +
+                            tel1 + "</a></td> <td class='td-very_short' " + text_color + ">" +
                             nombre + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(response.d[i].lblTipoEntrega) + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(response.d[i].lblTamano) + "</td> <td class='td-very_short' " + text_color + ">" +
@@ -345,9 +349,9 @@ function month_selectMonth(month_value, soloVigentes_value, soloJuanchy_value, i
     }
 }
 
-function month_selectMonth_reports(month_value, soloVigentes_value, soloJuanchy_value, incluirCancelados_value) {
+function month_selectMonth_reports(month_value, soloVigentes_value, soloEntrCol_value, incluirCancelados_value) {
     if (month_value !== null && month_value !== undefined && month_value > 0 && soloVigentes_value !== null && soloVigentes_value !== undefined &&
-        soloJuanchy_value !== null && soloJuanchy_value !== undefined && incluirCancelados_value !== null && incluirCancelados_value !== undefined) {
+        soloEntrCol_value !== null && soloEntrCol_value !== undefined && incluirCancelados_value !== null && incluirCancelados_value !== undefined) {
 
         month_value += "";
 
@@ -365,14 +369,14 @@ function month_selectMonth_reports(month_value, soloVigentes_value, soloJuanchy_
             console.log("year_value, type: " + type(year_value) + ", value: " + year_value);
             console.log("month_value, type: " + type(month_value) + ", value: " + month_value);
             console.log("soloVigentes_value, type: " + type(soloVigentes_value) + ", value: " + soloVigentes_value);
-            console.log("soloJuanchy_value, type: " + type(soloJuanchy_value) + ", value: " + soloJuanchy_value);
+            console.log("soloEntrCol_value, type: " + type(soloEntrCol_value) + ", value: " + soloEntrCol_value);
             console.log("incluirCancelados_value, type: " + type(incluirCancelados_value) + ", value: " + incluirCancelados_value);
 
             $.ajax({
                 type: "POST",
                 url: "Dashboard.aspx/GetData_BindGridFormularios",
                 contentType: "application/json;charset=utf-8",
-                data: '{year_value: "' + year_value + '",month_value: "' + month_value + '",soloVigentes_value: "' + soloVigentes_value + '",soloJuanchy_value: "' + soloJuanchy_value + '",incluirCancelados_value: "' + incluirCancelados_value + '"}',
+                data: '{year_value: "' + year_value + '",month_value: "' + month_value + '",soloVigentes_value: "' + soloVigentes_value + '",soloEntrCol_value: "' + soloEntrCol_value + '",incluirCancelados_value: "' + incluirCancelados_value + '"}',
                 dataType: "json",
                 success: function (response) {
 
@@ -413,7 +417,7 @@ function month_selectMonth_reports(month_value, soloVigentes_value, soloJuanchy_
 
                             // Cancelados
                             var estadoNro = check_nullValues(response.d[i].EstadoNro);
-                            if (estadoNro == 2 || estadoNro == 3) {
+                            if (estadoNro === 2 || estadoNro === 3) {
                                 total_pedidos--;
                             }
 
@@ -468,7 +472,7 @@ function month_selectMonth_reports(month_value, soloVigentes_value, soloJuanchy_
                             
                         } // for
 
-                        if (total_lona_mts != 0) {
+                        if (total_lona_mts !== 0) {
                             total_lona_mts = total_lona_mts / 100;
                         }
 
@@ -748,7 +752,7 @@ function filtrar() {
     var chbInclCancelados = $("#chbInclCancelados");
     var hdn_monthSelected = $("#hdn_monthSelected");
     if (hdn_monthSelected !== null && hdn_monthSelected.val() !== null && chbSoloEntrCol !== null && chbSoloVigentes !== null && chbInclCancelados !== null) {
-        var soloJuanchy_value = chbSoloEntrCol.is(":checked")
+        var soloEntrCol_value = chbSoloEntrCol.is(":checked")
         var soloVigentes_value = chbSoloVigentes.is(":checked")
         var incluirCancelados_value = chbInclCancelados.is(":checked")
         var month_value = hdn_monthSelected.val();
@@ -757,7 +761,7 @@ function filtrar() {
         if (type(month_value) === "string") {
             month_value_int = TryParseInt(month_value, 0);
         }
-        month_selectMonth(month_value_int, !soloVigentes_value, soloJuanchy_value, incluirCancelados_value)
+        month_selectMonth(month_value_int, !soloVigentes_value, soloEntrCol_value, incluirCancelados_value)
     }
 }
 
@@ -780,9 +784,9 @@ function GetMonthFilter() {
     }
 }
 
-function showActionMenu_OPC(formID, tel, nombre, btnID) {
+function showActionMenu_OPC(formID, tel, nombre, btnID_value) {
     var divPopbox = $("#divPopbox_OPC");
-    var btnID = $("#" + btnID);
+    var btnID = $("#" + btnID_value);
     if (divPopbox !== null && divPopbox !== undefined && btnID !== null && btnID !== undefined) {
 
         var new_w = parseInt(divPopbox.css("width"), 10);
@@ -828,9 +832,9 @@ function showActionMenu_OPC(formID, tel, nombre, btnID) {
     }
 }
 
-function showActionMenu_CTO(formID, nombre, goToURL, goToGMaps, goToWPP, btnID) {
+function showActionMenu_CTO(formID, nombre, goToURL, goToGMaps, goToWPP, btnID_value) {
     var divPopbox = $("#divPopbox_CTO");
-    var btnID = $("#" + btnID);
+    var btnID = $("#" + btnID_value);
     if (divPopbox !== null && divPopbox !== undefined && btnID !== null && btnID !== undefined) {
 
         var new_w = parseInt(divPopbox.css("width"), 10);

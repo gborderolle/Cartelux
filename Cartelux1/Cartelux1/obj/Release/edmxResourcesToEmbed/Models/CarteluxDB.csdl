@@ -13,6 +13,7 @@
     <Property Name="Fecha_creado" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Fecha_update" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="NroDocumento" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="formularios">
     <Key>
@@ -83,6 +84,7 @@
     <EntitySet Name="pedido_entregas" EntityType="carteluxdb1Model.pedido_entregas" />
     <EntitySet Name="lista_pedido_estados" EntityType="carteluxdb1Model.lista_pedido_estados" />
     <EntitySet Name="confi_emails" EntityType="carteluxdb1Model.confi_emails" />
+    <EntitySet Name="clientes_frecuentes" EntityType="carteluxdb1Model.clientes_frecuentes" />
   </EntityContainer>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -200,5 +202,16 @@
     <Property Name="Clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="EsEmisor" Type="Boolean" Nullable="false" />
     <Property Name="EsEntrega" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="clientes_frecuentes">
+    <Key>
+      <PropertyRef Name="Cliente_Frecuente_ID" />
+    </Key>
+    <Property Name="Cliente_Frecuente_ID" Type="Int32" Nullable="false" />
+    <Property Name="Cliente_ID" Type="Int32" Nullable="false" />
+    <Property Name="Frecuencia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Descuento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Comentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Ultimo_pedido" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>
