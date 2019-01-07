@@ -212,5 +212,35 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="lista_proyecto_estados">
+      <EntityTypeMapping TypeName="carteluxdb1Model.lista_proyecto_estados">
+        <MappingFragment StoreEntitySet="lista_proyecto_estados">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Proyecto_Estado_ID" ColumnName="Proyecto_Estado_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="proyectos">
+      <EntityTypeMapping TypeName="carteluxdb1Model.proyectos">
+        <MappingFragment StoreEntitySet="proyectos">
+          <ScalarProperty Name="Fecha_update" ColumnName="Fecha_update" />
+          <ScalarProperty Name="Fecha_creado" ColumnName="Fecha_creado" />
+          <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+          <ScalarProperty Name="Contacto_2_email" ColumnName="Contacto_2_email" />
+          <ScalarProperty Name="Contacto_2_telefono" ColumnName="Contacto_2_telefono" />
+          <ScalarProperty Name="Contacto_2_nombre" ColumnName="Contacto_2_nombre" />
+          <ScalarProperty Name="Contacto_1_email" ColumnName="Contacto_1_email" />
+          <ScalarProperty Name="Contacto_1_telefono" ColumnName="Contacto_1_telefono" />
+          <ScalarProperty Name="Contacto_1_nombre" ColumnName="Contacto_1_nombre" />
+          <ScalarProperty Name="Fecha_estimada" ColumnName="Fecha_estimada" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Proyecto_estado_ID" ColumnName="Proyecto_estado_ID" />
+          <ScalarProperty Name="Proyecto_ID" ColumnName="Proyecto_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

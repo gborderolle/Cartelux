@@ -2692,6 +2692,9 @@
     <Compile Include="Models\lista_pedido_tipos.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\lista_proyecto_estados.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pedidos.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
@@ -2699,6 +2702,9 @@
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pedido_entregas.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\proyectos.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">

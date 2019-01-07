@@ -85,6 +85,8 @@
     <EntitySet Name="lista_pedido_estados" EntityType="carteluxdb1Model.lista_pedido_estados" />
     <EntitySet Name="confi_emails" EntityType="carteluxdb1Model.confi_emails" />
     <EntitySet Name="clientes_frecuentes" EntityType="carteluxdb1Model.clientes_frecuentes" />
+    <EntitySet Name="lista_proyecto_estados" EntityType="carteluxdb1Model.lista_proyecto_estados" />
+    <EntitySet Name="proyectos" EntityType="carteluxdb1Model.proyectos" />
   </EntityContainer>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -213,5 +215,33 @@
     <Property Name="Descuento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Comentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Ultimo_pedido" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="lista_proyecto_estados">
+    <Key>
+      <PropertyRef Name="Proyecto_Estado_ID" />
+    </Key>
+    <Property Name="Proyecto_Estado_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Codigo" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="proyectos">
+    <Key>
+      <PropertyRef Name="Proyecto_ID" />
+    </Key>
+    <Property Name="Proyecto_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Proyecto_estado_ID" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha_estimada" Type="DateTime" Precision="3" />
+    <Property Name="Contacto_1_nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Contacto_1_telefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Contacto_1_email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Contacto_2_nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Contacto_2_telefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Contacto_2_email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Comentarios" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha_creado" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Fecha_update" Type="DateTime" Nullable="false" Precision="3" />
   </EntityType>
 </Schema>

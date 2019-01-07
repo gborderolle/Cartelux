@@ -76,6 +76,51 @@ namespace Cartelux1 {
         protected global::System.Web.UI.UpdatePanel upCalendario;
         
         /// <summary>
+        /// upProyectos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upProyectos;
+        
+        /// <summary>
+        /// hdn_proyectoID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdn_proyectoID;
+        
+        /// <summary>
+        /// gridProyectos_lblMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label gridProyectos_lblMessage;
+        
+        /// <summary>
+        /// gridProyectos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gridProyectos;
+        
+        /// <summary>
+        /// lblgridProyectosCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblgridProyectosCount;
+        
+        /// <summary>
         /// hdn_FormularioID control.
         /// </summary>
         /// <remarks>

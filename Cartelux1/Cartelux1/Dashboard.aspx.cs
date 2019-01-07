@@ -22,11 +22,16 @@ namespace Cartelux1
             {
                 Bind_DataConfig();
                 Bind_GridFormularios();
+                Bind_GridProyectos();
             }
 
             gridFormularios.UseAccessibleHeader = true;
             gridFormularios.HeaderRow.TableSection = TableRowSection.TableHeader;
             gridFormularios.FooterRow.TableSection = TableRowSection.TableFooter;
+
+            gridProyectos.UseAccessibleHeader = true;
+            gridProyectos.HeaderRow.TableSection = TableRowSection.TableHeader;
+            gridProyectos.FooterRow.TableSection = TableRowSection.TableFooter;
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -99,6 +104,20 @@ namespace Cartelux1
                                 Response.Redirect("Listados.aspx?tabla=" + tabla + "&dato=" + dato);
                             }
                         }
+                    }
+                }
+            }
+        }
+
+        protected void gridProyectos_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandArgument != null)
+            {
+                if (!string.IsNullOrWhiteSpace(e.CommandArgument.ToString()) && !string.IsNullOrWhiteSpace(e.CommandName))
+                {
+                    if (e.CommandName.Equals("View"))
+                    {
+                        
                     }
                 }
             }
@@ -302,6 +321,117 @@ namespace Cartelux1
             }
         }
 
+        protected void gridProyectos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            #region Labels
+
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                using (CarteluxDB context = new CarteluxDB())
+                {
+                    proyectos _proyecto = (proyectos)(e.Row.DataItem);
+                    if (_proyecto != null)
+                    {
+                        Label lbl1 = e.Row.FindControl("lblNumber_proy") as Label;
+                        if (lbl1 != null)
+                        {
+                            lbl1.Text = e.Row.RowIndex.ToString();
+                        }
+
+                        lbl1 = e.Row.FindControl("lblNombre_proy") as Label;
+                        if (lbl1 != null)
+                        {
+                            lbl1.Text = _proyecto.Nombre.ToString();
+                        }
+
+                        lbl1 = e.Row.FindControl("lblDescripcion_proy") as Label;
+                        if (lbl1 != null)
+                        {
+                            lbl1.Text = _proyecto.Descripcion.ToString();
+                        }
+
+                        lbl1 = e.Row.FindControl("lblFechaEstimada") as Label;
+                        if (lbl1 != null)
+                        {
+                            string fecha = _proyecto.Fecha_estimada.Value.ToString(GlobalVariables.ShortDateTime_format1);
+                            if (_proyecto.Fecha_estimada.Value == DateTime.MinValue)
+                            {
+                                fecha = string.Empty;
+                            }
+                            lbl1.Text = fecha;
+                        }
+
+                        lbl1 = e.Row.FindControl("lblContacto1") as Label;
+                        if (lbl1 != null)
+                        {
+                            lbl1.Text = _proyecto.Contacto_1_nombre.ToString();
+                        }
+
+                        lbl1 = e.Row.FindControl("lblTelefono1") as Label;
+                        if (lbl1 != null)
+                        {
+                            lbl1.Text = _proyecto.Contacto_1_telefono.ToString();
+                        }
+
+                        lbl1 = e.Row.FindControl("lblEmail1") as Label;
+                        if (lbl1 != null)
+                        {
+                            lbl1.Text = _proyecto.Contacto_1_email.ToString();
+                        }
+
+                        lbl1 = e.Row.FindControl("lblContacto2") as Label;
+                        if (lbl1 != null)
+                        {
+                            lbl1.Text = _proyecto.Contacto_2_nombre.ToString();
+                        }
+
+                        lbl1 = e.Row.FindControl("lblTelefono2") as Label;
+                        if (lbl1 != null)
+                        {
+                            lbl1.Text = _proyecto.Contacto_2_telefono.ToString();
+                        }
+
+                        lbl1 = e.Row.FindControl("lblEmail2") as Label;
+                        if (lbl1 != null)
+                        {
+                            lbl1.Text = _proyecto.Contacto_2_email.ToString();
+                        }
+
+                        lbl1 = e.Row.FindControl("lblComentarios_proy") as Label;
+                        if (lbl1 != null)
+                        {
+                            lbl1.Text = _proyecto.Comentarios.ToString();
+                        }
+
+                        lbl1 = e.Row.FindControl("lblEstado_proy") as Label;
+                        if (lbl1 != null)
+                        {
+                            string nombre = string.Empty;
+                            lista_proyecto_estados _proyectoEstado = (lista_proyecto_estados)context.lista_proyecto_estados.FirstOrDefault(c => c.Proyecto_Estado_ID == _proyecto.Proyecto_estado_ID);
+                            if (_proyectoEstado != null)
+                            {
+                                nombre = _proyectoEstado.Nombre;
+                            }
+                            lbl1.Text = nombre.ToString();
+                        }
+
+                    }
+                }
+
+                #endregion Labels
+
+                if (e.Row.RowType == DataControlRowType.Header)
+                {
+                    e.Row.TableSection = TableRowSection.TableHeader;
+                }
+
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+                    e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(gridFormularios, "Select$" + e.Row.RowIndex);
+                }
+            }
+        }
+
         protected void gridFormularios_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             // Source: http://www.codeproject.com/Tips/622720/Fire-GridView-SelectedIndexChanged-Event-without-S
@@ -362,6 +492,62 @@ namespace Cartelux1
             }
         }
 
+        protected void gridProyectos_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Source: http://www.codeproject.com/Tips/622720/Fire-GridView-SelectedIndexChanged-Event-without-S
+
+            // Logger variables
+            System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
+            System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+            string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+            string methodName = stackFrame.GetMethod().Name;
+
+            foreach (GridViewRow row in gridProyectos.Rows)
+            {
+                if (row.RowIndex == gridProyectos.SelectedIndex)
+                {
+                    string Proyecto_ID_str = gridProyectos.SelectedRow.Cells[0].Text;
+                    if (!string.IsNullOrWhiteSpace(Proyecto_ID_str))
+                    {
+                        int Proyecto_ID = 0;
+                        if (!int.TryParse(Proyecto_ID_str, out Proyecto_ID))
+                        {
+                            Proyecto_ID = 0;
+                            Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, Proyecto_ID_str);
+                        }
+
+                        if (Proyecto_ID > 0)
+                        {
+                            using (CarteluxDB context = new CarteluxDB())
+                            {
+                                proyectos _proyecto = (proyectos)context.proyectos.FirstOrDefault(c => c.Proyecto_ID == Proyecto_ID);
+                                if (_proyecto != null)
+                                {
+                                    // Filtrar por fechas del mes corriente por defecto
+                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "gridProyectos_OnSelectedIndexChanged", "<script type='text/javascript'></script>", false);
+
+                                    hdn_proyectoID.Value = Proyecto_ID_str;
+                                }
+                            }
+                        }
+                    }
+                    row.BackColor = ColorTranslator.FromHtml("#A1DCF2");
+                    foreach (TableCell cell in row.Cells)
+                    {
+                        cell.BackColor = ColorTranslator.FromHtml("#A1DCF2");
+                    }
+                }
+                else
+                {
+                    row.BackColor = ColorTranslator.FromHtml("#FFFFFF");
+                    foreach (TableCell cell in row.Cells)
+                    {
+                        cell.BackColor = ColorTranslator.FromHtml("#FFFFFF");
+                    }
+                }
+            }
+        }
+
 
         #endregion Events
 
@@ -385,6 +571,7 @@ namespace Cartelux1
                 ddl_year.DataValueField = "Confi_formularios_ano_ID";
                 ddl_year.DataBind();
                 ddl_year.Items.Insert(0, new ListItem("Elegir", "0"));
+                ddl_year.SelectedValue = DateTime.Now.Year.ToString();
             }
         }
 
@@ -465,7 +652,18 @@ namespace Cartelux1
             else
             {
                 var obj = new List<formularios>();
-                obj.Add(new formularios());
+                formularios _formulario1 = new formularios();
+                _formulario1.Formulario_ID = 1;
+                _formulario1.Cliente_ID= 1;
+                _formulario1.URL_short = string.Empty;
+                _formulario1.URL_completa = string.Empty;
+                _formulario1.Fecha_creado = DateTime.MinValue;
+                _formulario1.Fecha_update = DateTime.MinValue;
+                _formulario1.Comentarios = string.Empty;
+                _formulario1.Monto = 0;
+                _formulario1.Serie= string.Empty;
+
+                obj.Add(_formulario1);
 
                 // Bind the DataTable which contain a blank row to the GridView
                 gridFormularios.DataSource = obj;
@@ -486,6 +684,103 @@ namespace Cartelux1
 
             #endregion
         }
+
+        private void Bind_GridProyectos(string year = "", string month = "")
+        {
+            // Logger variables
+            System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
+            System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+            string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+            string methodName = stackFrame.GetMethod().Name;
+
+            int current_year = DateTime.Now.Year;
+            int current_month = DateTime.Now.Month;
+
+            // Current datetime
+            DateTime datetime = DateTime.Now;
+            if (!string.IsNullOrWhiteSpace(year) && !string.IsNullOrWhiteSpace(month))
+            {
+                int year_int = 0;
+                if (!int.TryParse(year, out year_int))
+                {
+                    year_int = 0;
+                    Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, year);
+                }
+
+                int month_int = 0;
+                if (!int.TryParse(month, out month_int))
+                {
+                    month_int = 0;
+                    Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, month);
+                }
+
+                if (year_int > 0 && month_int > 0)
+                {
+                    datetime = new DateTime(year_int, month_int, 1);
+                }
+
+                current_year = year_int;
+                current_month = month_int;
+            }
+
+            List<proyectos> proyectos_elements = GetProyectos_pre(current_year, current_month);
+
+            // Reportes - Todos los formularios
+            //List<formularios> formularios_elements_reportes = GetFormularios_pre(false, current_year, current_month);
+
+            #region Fill gridProyectos
+
+            if (proyectos_elements.Count() > 0)
+            {
+                gridProyectos.DataSource = proyectos_elements;
+                gridProyectos.DataBind();
+
+                gridProyectos.UseAccessibleHeader = true;
+                gridProyectos.HeaderRow.TableSection = TableRowSection.TableHeader;
+
+                lblgridProyectosCount.Text = "# " + proyectos_elements.Count();
+            }
+            else
+            {
+                var obj = new List<proyectos>();
+                proyectos _proyecto1 = new proyectos();
+                _proyecto1.Proyecto_ID = 1;
+                _proyecto1.Nombre = string.Empty;
+                _proyecto1.Descripcion = string.Empty;
+                _proyecto1.Fecha_estimada = DateTime.MinValue;
+                _proyecto1.Fecha_creado = DateTime.MinValue;
+                _proyecto1.Fecha_update = DateTime.MinValue;
+                _proyecto1.Contacto_1_nombre = string.Empty;
+                _proyecto1.Contacto_1_telefono = string.Empty;
+                _proyecto1.Contacto_1_email = string.Empty;
+                _proyecto1.Contacto_2_nombre = string.Empty;
+                _proyecto1.Contacto_2_telefono = string.Empty;
+                _proyecto1.Contacto_2_email = string.Empty;
+                _proyecto1.Comentarios = string.Empty;
+                _proyecto1.Proyecto_estado_ID = 1;
+
+                obj.Add(_proyecto1);
+
+                // Bind the DataTable which contain a blank row to the GridView
+                gridProyectos.DataSource = obj;
+                gridProyectos.DataBind();
+                int columnsCount = gridProyectos.Columns.Count;
+                gridProyectos.Rows[0].Cells.Clear();// clear all the cells in the row
+                gridProyectos.Rows[0].Cells.Add(new TableCell()); //add a new blank cell
+                gridProyectos.Rows[0].Cells[0].ColumnSpan = columnsCount; //set the column span to the new added cell
+
+                //You can set the styles here
+                gridProyectos.Rows[0].Cells[0].HorizontalAlign = HorizontalAlign.Center;
+                gridProyectos.Rows[0].Cells[0].ForeColor = System.Drawing.Color.Red;
+                gridProyectos.Rows[0].Cells[0].Font.Bold = true;
+
+                //set No Results found to the new added cell
+                gridProyectos.Rows[0].Cells[0].Text = "No hay registros";
+            }
+
+            #endregion
+        }
+
 
         private List<formularios> GetFormularios_pre(bool solo_vigentes, int current_year, int current_month)
         {
@@ -543,6 +838,19 @@ namespace Cartelux1
 
             }
             return formularios_elements;
+        }
+
+        private List<proyectos> GetProyectos_pre(int current_year, int current_month)
+        {
+            using (CarteluxDB context = new CarteluxDB())
+            {
+                int day_value = DateTime.Now.Day;
+                DateTime date1 = new DateTime(current_year, current_month, 1);
+                int last_day = DateTime.DaysInMonth(current_year, current_month);
+                DateTime date2 = new DateTime(current_year, current_month, last_day);
+
+                return context.proyectos.Where(v => v.Fecha_creado >= date1 && v.Fecha_creado <= date2).OrderBy(e => e.Fecha_creado).ToList();
+            }
         }
 
         #endregion
@@ -783,6 +1091,96 @@ namespace Cartelux1
             public int EstadoNro { get; set; }
         }
 
+        public class _GridProyectos
+        {
+            public string Proyecto_ID { get; set; }
+            public string lblNumber_proy { get; set; }
+            public string lblNombre_proy { get; set; }
+            public string lblDescripcion_proy { get; set; }
+            public string lblFechaEstimada { get; set; }
+            public string lblContacto1 { get; set; }
+            public string lblTelefono1 { get; set; }
+            public string lblEmail1 { get; set; }
+            public string lblContacto2 { get; set; }
+            public string lblTelefono2 { get; set; }
+            public string lblEmail2 { get; set; }
+            public string lblComentarios_proy { get; set; }
+            public string lblEstado_proy { get; set; }
+        }
+
+        [WebMethod]
+        public static _GridProyectos[] GetData_BindGridProyectos(string year_value, string month_value)
+        {
+            List<_GridProyectos> _GridProyectos_list = new List<_GridProyectos>();
+            if (!string.IsNullOrWhiteSpace(year_value) && !string.IsNullOrWhiteSpace(month_value))
+            {
+                // Logger variables
+                System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
+                System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+                string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+                string methodName = stackFrame.GetMethod().Name;
+
+                int year_int = 0;
+                if (!int.TryParse(year_value, out year_int))
+                {
+                    year_int = 0;
+                    Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, year_value);
+                }
+
+                int month_int = 0;
+                if (!int.TryParse(month_value, out month_int))
+                {
+                    month_int = 0;
+                    Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, month_value);
+                }
+
+                // Source: https://www.codeproject.com/Tips/775585/Bind-Gridview-using-AJAX
+                if (year_int > 0 && month_int > 0)
+                {
+                    using (CarteluxDB context = new CarteluxDB())
+                    {
+                        DateTime date1 = new DateTime(year_int, month_int, 1);
+                        int last_day = DateTime.DaysInMonth(year_int, month_int);
+                        DateTime date2 = new DateTime(year_int, month_int, last_day);
+
+                        int number = 1;
+                        List<proyectos> proyectos_elements = context.proyectos.Where(v => v.Fecha_creado >= date1 && v.Fecha_creado <= date2).OrderBy(e => e.Fecha_creado).ToList();
+                        foreach (proyectos _proyecto in proyectos_elements)
+                        {
+                            if (_proyecto != null)
+                            {
+                                _GridProyectos _GridProyecto1 = new Cartelux1.Dashboard._GridProyectos();
+                                _GridProyecto1.Proyecto_ID = _proyecto.Proyecto_ID.ToString();
+
+                                _GridProyecto1.lblNumber_proy = number.ToString();
+                                _GridProyecto1.lblNombre_proy = _proyecto.Nombre.ToString();
+                                _GridProyecto1.lblDescripcion_proy = _proyecto.Descripcion.ToString();
+                                _GridProyecto1.lblFechaEstimada = _proyecto.Fecha_estimada.ToString();
+                                _GridProyecto1.lblContacto1 = _proyecto.Contacto_1_nombre.ToString();
+                                _GridProyecto1.lblTelefono1 = _proyecto.Contacto_1_telefono.ToString();
+                                _GridProyecto1.lblEmail1 = _proyecto.Contacto_1_email.ToString();
+                                _GridProyecto1.lblContacto2 = _proyecto.Contacto_2_nombre.ToString();
+                                _GridProyecto1.lblTelefono2 = _proyecto.Contacto_2_telefono.ToString();
+                                _GridProyecto1.lblEmail2 = _proyecto.Contacto_2_email.ToString();
+                                _GridProyecto1.lblComentarios_proy = _proyecto.Proyecto_ID.ToString();
+
+                                string estado = string.Empty;
+                                lista_proyecto_estados _proyecto_estado = (lista_proyecto_estados)context.lista_proyecto_estados.FirstOrDefault(c => c.Proyecto_Estado_ID == _proyecto.Proyecto_estado_ID);
+                                if (_proyecto_estado != null)
+                                {
+                                    estado = _proyecto_estado.Nombre;
+                                }
+                                _GridProyecto1.lblEstado_proy = estado.ToString();
+
+                                _GridProyectos_list.Add(_GridProyecto1);
+                            }
+                            number++;
+                        } // foreach
+                    }
+                }
+            }
+            return _GridProyectos_list.ToArray();
+        }
 
         [WebMethod]
         public static bool PedidosUpdateState(int actionID, string formID, string userID)

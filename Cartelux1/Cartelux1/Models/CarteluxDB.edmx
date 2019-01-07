@@ -133,6 +133,15 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Codigo" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="lista_proyecto_estados">
+          <Key>
+            <PropertyRef Name="Proyecto_Estado_ID" />
+          </Key>
+          <Property Name="Proyecto_Estado_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Codigo" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="pedido_disenos">
           <Key>
             <PropertyRef Name="Pedido_Diseno_ID" />
@@ -182,6 +191,25 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Pedido_Estado_ID" Type="int" />
           <Property Name="Pedido_Estado_UltimaModificacion_Usuario_ID" Type="int" />
         </EntityType>
+        <EntityType Name="proyectos">
+          <Key>
+            <PropertyRef Name="Proyecto_ID" />
+          </Key>
+          <Property Name="Proyecto_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Proyecto_estado_ID" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="150" />
+          <Property Name="Fecha_estimada" Type="datetime" />
+          <Property Name="Contacto_1_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contacto_1_telefono" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contacto_1_email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contacto_2_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contacto_2_telefono" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contacto_2_email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Comentarios" Type="varchar" MaxLength="150" />
+          <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
+          <Property Name="Fecha_update" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -214,9 +242,11 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <EntitySet Name="lista_pedido_tamanos" EntityType="Self.lista_pedido_tamanos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_pedido_tematicas" EntityType="Self.lista_pedido_tematicas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_pedido_tipos" EntityType="Self.lista_pedido_tipos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lista_proyecto_estados" EntityType="Self.lista_proyecto_estados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pedido_disenos" EntityType="Self.pedido_disenos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pedido_entregas" EntityType="Self.pedido_entregas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pedidos" EntityType="Self.pedidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="proyectos" EntityType="Self.proyectos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="confi_formularios_anos" EntityType="Self.confi_formularios_anos" store:Type="Tables" store:Schema="dbo">
@@ -315,6 +345,8 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <EntitySet Name="lista_pedido_estados" EntityType="carteluxdb1Model.lista_pedido_estados" />
           <EntitySet Name="confi_emails" EntityType="carteluxdb1Model.confi_emails" />
           <EntitySet Name="clientes_frecuentes" EntityType="carteluxdb1Model.clientes_frecuentes" />
+          <EntitySet Name="lista_proyecto_estados" EntityType="carteluxdb1Model.lista_proyecto_estados" />
+          <EntitySet Name="proyectos" EntityType="carteluxdb1Model.proyectos" />
         </EntityContainer>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -443,6 +475,34 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Descuento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Comentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Ultimo_pedido" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="lista_proyecto_estados">
+          <Key>
+            <PropertyRef Name="Proyecto_Estado_ID" />
+          </Key>
+          <Property Name="Proyecto_Estado_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="proyectos">
+          <Key>
+            <PropertyRef Name="Proyecto_ID" />
+          </Key>
+          <Property Name="Proyecto_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Proyecto_estado_ID" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_estimada" Type="DateTime" Precision="3" />
+          <Property Name="Contacto_1_nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contacto_1_telefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contacto_1_email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contacto_2_nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contacto_2_telefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contacto_2_email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comentarios" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_creado" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha_update" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -658,6 +718,36 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
                 <ScalarProperty Name="Frecuencia" ColumnName="Frecuencia" />
                 <ScalarProperty Name="Cliente_ID" ColumnName="Cliente_ID" />
                 <ScalarProperty Name="Cliente_Frecuente_ID" ColumnName="Cliente_Frecuente_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lista_proyecto_estados">
+            <EntityTypeMapping TypeName="carteluxdb1Model.lista_proyecto_estados">
+              <MappingFragment StoreEntitySet="lista_proyecto_estados">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Proyecto_Estado_ID" ColumnName="Proyecto_Estado_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="proyectos">
+            <EntityTypeMapping TypeName="carteluxdb1Model.proyectos">
+              <MappingFragment StoreEntitySet="proyectos">
+                <ScalarProperty Name="Fecha_update" ColumnName="Fecha_update" />
+                <ScalarProperty Name="Fecha_creado" ColumnName="Fecha_creado" />
+                <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+                <ScalarProperty Name="Contacto_2_email" ColumnName="Contacto_2_email" />
+                <ScalarProperty Name="Contacto_2_telefono" ColumnName="Contacto_2_telefono" />
+                <ScalarProperty Name="Contacto_2_nombre" ColumnName="Contacto_2_nombre" />
+                <ScalarProperty Name="Contacto_1_email" ColumnName="Contacto_1_email" />
+                <ScalarProperty Name="Contacto_1_telefono" ColumnName="Contacto_1_telefono" />
+                <ScalarProperty Name="Contacto_1_nombre" ColumnName="Contacto_1_nombre" />
+                <ScalarProperty Name="Fecha_estimada" ColumnName="Fecha_estimada" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Proyecto_estado_ID" ColumnName="Proyecto_estado_ID" />
+                <ScalarProperty Name="Proyecto_ID" ColumnName="Proyecto_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

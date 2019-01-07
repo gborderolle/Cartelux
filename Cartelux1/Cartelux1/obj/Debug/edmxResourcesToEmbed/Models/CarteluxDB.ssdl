@@ -128,6 +128,15 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <Property Name="Codigo" Type="int" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="100" />
   </EntityType>
+  <EntityType Name="lista_proyecto_estados">
+    <Key>
+      <PropertyRef Name="Proyecto_Estado_ID" />
+    </Key>
+    <Property Name="Proyecto_Estado_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+  </EntityType>
   <EntityType Name="pedido_disenos">
     <Key>
       <PropertyRef Name="Pedido_Diseno_ID" />
@@ -177,6 +186,25 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <Property Name="Pedido_Estado_ID" Type="int" />
     <Property Name="Pedido_Estado_UltimaModificacion_Usuario_ID" Type="int" />
   </EntityType>
+  <EntityType Name="proyectos">
+    <Key>
+      <PropertyRef Name="Proyecto_ID" />
+    </Key>
+    <Property Name="Proyecto_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Proyecto_estado_ID" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="150" />
+    <Property Name="Fecha_estimada" Type="datetime" />
+    <Property Name="Contacto_1_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contacto_1_telefono" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contacto_1_email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contacto_2_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contacto_2_telefono" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contacto_2_email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="150" />
+    <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
+    <Property Name="Fecha_update" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
       <PropertyRef Name="diagram_id" />
@@ -209,9 +237,11 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <EntitySet Name="lista_pedido_tamanos" EntityType="Self.lista_pedido_tamanos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_pedido_tematicas" EntityType="Self.lista_pedido_tematicas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_pedido_tipos" EntityType="Self.lista_pedido_tipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_proyecto_estados" EntityType="Self.lista_proyecto_estados" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="pedido_disenos" EntityType="Self.pedido_disenos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="pedido_entregas" EntityType="Self.pedido_entregas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="pedidos" EntityType="Self.pedidos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="proyectos" EntityType="Self.proyectos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="confi_formularios_anos" EntityType="Self.confi_formularios_anos" store:Type="Tables" store:Schema="dbo">

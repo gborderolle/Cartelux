@@ -102,6 +102,8 @@ function bindEvents() {
     $("#gridFormularios").filterTable();
     // SOURCE: https://github.com/sunnywalker/jQuery.FilterTable
 
+    $("#gridProyectos").filterTable();
+
     month_onClickEvent();
     //load_calendar();
 
@@ -142,13 +144,23 @@ function load_calendar() {
 
 function bindDelayEvents() {
     setTimeout(function () {
-        if ($("#gridFormularios tbody tr").length > 0) {
-            //$("#gridFormularios").tablesorter();
-        }
 
+        /* Formularios */
         $("#gridFormularios").tablesorter();
         var gridFormularios = $("#gridFormularios tbody tr");
         $("#txbSearchPedidos").quicksearch(gridFormularios);
+
+    }, 100);
+}
+
+function bindDelayEvents_proy() {
+    setTimeout(function () {
+
+        /* Proyectos */
+        $("#gridProyectos").tablesorter();
+        var gridProyectos = $("#gridProyectos tbody tr");
+        $("#txbSearchPedidos_proy").quicksearch(gridProyectos);
+
     }, 100);
 }
 
@@ -177,6 +189,8 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
         if (ddl_year !== null && ddl_year !== undefined && ddl_year.text() !== null && ddl_year.text() !== undefined) {
             year_value = ddl_year.text();
             YEAR_SELECTED = year_value;
+
+            /* Formularios */
 
             // Source: https://www.codeproject.com/Tips/775585/Bind-Gridview-using-AJAX
             // Ajax call parameters
@@ -333,9 +347,67 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
                         } // for
                         $("#gridFormularios").append("</tbody>");
 
-
                         // Volver a cargar eventos sobre la grilla
                         bindDelayEvents();
+                    }
+
+                    // Load calendario completo
+                    loadCalendar();
+
+                }, // end success
+                failure: function (response) {
+                }
+            }); // Ajax
+
+
+            // ------------------ ------------------ ------------------ ------------------ ------------------ ------------------
+
+            /* Proyectos */
+
+            // Source: https://www.codeproject.com/Tips/775585/Bind-Gridview-using-AJAX
+            // Ajax call parameters
+            console.log("Ajax call: Dashboard.aspx/GetData_BindGridProyectos. Params:");
+            console.log("year_value, type: " + type(year_value) + ", value: " + year_value);
+            console.log("month_value, type: " + type(month_value) + ", value: " + month_value);
+
+            $.ajax({
+                type: "POST",
+                url: "Dashboard.aspx/GetData_BindGridProyectos",
+                contentType: "application/json;charset=utf-8",
+                data: '{year_value: "' + year_value + '",month_value: "' + month_value + '"}',
+                dataType: "json",
+                success: function (response) {
+
+                    $("#gridProyectos tbody").remove();
+                    if (response.d.length > 0) {
+                        $("#gridProyectos").empty();
+                        $("#gridProyectos").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Proyecto_ID</th> <th scope='col'>#</th> <th scope='col'>Nombre</th> <th scope='col'>Descripción</th> <th scope='col'>Fecha estimada</th> <th scope='col'>T/Contacto 1</th> <th scope='col'>Tel 1</th> <th scope='col'>Email 1</th> <th scope='col'>Contacto 2</th> <th scope='col'>Tel 2</th> <th scope='col'>Email 2</th> <th scope='col'>Comentarios</th> <th scope='col'>Estado</th> </tr></thead><tbody>");
+                        for (var i = 0; i < response.d.length; i++) {
+
+                            var proyID = check_nullValues(response.d[i].Proyecto_ID);
+                            var nombre = check_nullValues(response.d[i].lblNombre_proy);
+
+                            $("#gridProyectos").append("<tr><td class='hiddencol hiddencol_real' " + text_color + ">" +
+                            proyID + "</td> <td class='hiddencol hiddencol_real' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblNumber_proy) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            nombre + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblDescripcion_proy) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblFechaEstimada) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblContacto1) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblTelefono1) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblEmail1) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblContacto2) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblTelefono2) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblEmail2) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblComentarios_proy) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblEstado_proy) + "</td> </tr>");
+
+                        } // for
+                        $("#gridProyectos").append("</tbody>");
+
+
+                        // Volver a cargar eventos sobre la grilla
+                        bindDelayEvents_proy();
                     }
 
                     // Load calendario completo
@@ -640,6 +712,7 @@ function month_setMonthName(month_value) {
                 }
         }
         $("#lblMonth").text(month_name);
+        $("#lblMonth_proy").text(month_name);
     }
 }
 

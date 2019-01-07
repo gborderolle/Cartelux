@@ -23,13 +23,13 @@
     <!-- STYLES REPORTES TEMPLATE -->
 
     <!-- NProgress -->
-    <link href="/Content/reportes_template/nprogress/nprogress.css" rel="stylesheet"/>
+    <link href="/Content/reportes_template/nprogress/nprogress.css" rel="stylesheet" />
     <!-- iCheck -->
-    <link href="/Content/reportes_template/iCheck/flat/green.css" rel="stylesheet"/>
+    <link href="/Content/reportes_template/iCheck/flat/green.css" rel="stylesheet" />
     <!-- bootstrap-progressbar -->
-    <link href="/Content/reportes_template/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet"/>
+    <link href="/Content/reportes_template/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" />
     <!-- Custom Theme Style -->
-    <link href="/Content/reportes_template/custom.css" rel="stylesheet"/>
+    <link href="/Content/reportes_template/custom.css" rel="stylesheet" />
 
     <style type="text/css">
         .font-size {
@@ -38,17 +38,17 @@
             padding-left: 10pt;
         }
 
-        .comparacion{
+        .comparacion {
             font-size: 13px !important;
             color: #1ABB9C;
         }
 
-        .w_right{
+        .w_right {
             display: flex;
         }
 
         span {
-            color:black !important;
+            color: black !important;
         }
 
         .ui-dialog-titlebar {
@@ -138,7 +138,6 @@
         .td-very_short {
             max-width: 80px;
         }
-
     </style>
 
 </asp:Content>
@@ -274,6 +273,7 @@
                             <li><a href="#tabsFormularios_1" class="tabsFormularios">Formularios</a></li>
                             <li><a href="#tabsFormularios_2" class="tabsFormularios">Calendario</a></li>
                             <li><a href="#tabsFormularios_3" class="tabsFormularios">Reportes</a></li>
+                            <li><a href="#tabsFormularios_4" class="tabsFormularios">Proyectos</a></li>
                         </ul>
 
                         <!-- Tab Formularios BEGIN -->
@@ -463,7 +463,7 @@
                             <div class="row">
                                 <%--<label style="color: green">Concluído</label>
                                 | --%>
-        <label style="color: #333">Vigente</label>
+                                <label style="color: #333">Vigente</label>
                                 | 
         <label style="color: blue">Aprobado</label>
                                 | 
@@ -522,311 +522,307 @@
 
                         <div id="tabsFormularios_3">
 
+                            <!-- page content -->
+                            <div class="right_col" role="main" style="margin-left: 0">
+                                <!-- top tiles -->
+                                <div class="row tile_count">
+                                    <h1>Pedidos</h1>
+                                    <div class="col-md-3 col-sm-12 col-xs-12 tile_stats_count">
+                                        <span class="count_top"><i class="fa fa-user"></i>Total Pedidos</span>
+                                        <%--<div id="total_pedidos" class="count green">78</div>--%>
+                                        <span class="count_bottom"><i class="green">16% </i>que el mes anterior</span>
+                                    </div>
+                                    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                                        <span class="count_top"><i class="fa fa-clock-o"></i>Total Pasacalles</span>
+                                        <%--<div id="total_carteles" class="count">69</div>--%>
+                                        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i>que el mes anterior</span>
+                                    </div>
+                                    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                                        <span class="count_top"><i class="fa fa-user"></i>Total Banners</span>
+                                        <%--<div id="total_banners" class="count">6</div>--%>
+                                        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i>que el mes anterior</span>
+                                    </div>
+                                    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                                        <span class="count_top"><i class="fa fa-user"></i>Total Roll ups</span>
+                                        <%--              <div id="total_rollups" class="count">11</div>--%>
+                                        <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i>que el mes anterior</span>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <div class="x_panel tile fixed_height_320">
+                                            <div class="x_title">
+                                                <h2>Pedidos</h2>
+                                                <ul class="nav navbar-right panel_toolbox">
+                                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                    </li>
+                                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                                    </li>
+                                                </ul>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="x_content">
+                                                <h4>Totales generales</h4>
+                                                <div class="widget_summary">
+                                                    <div class="w_left w_25">
+                                                        <span>TOTAL</span>
+                                                    </div>
+                                                    <div class="w_center w_55">
+                                                        <div class="progress">
+                                                            <div id="total_pedidos_bar" class="progress-bar bg-green" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                                                <span class="sr-only">60% Complete</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w_right w_20">
+                                                        <%--<span>123k</span>--%>
+                                                        <div id="total_pedidos" class="count green font-size">78</div>
+                                                        <span class="count_bottom comparacion"><i class="fa fa-sort-asc"></i><i class="green">16% </i></span>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+
+                                                <div class="widget_summary">
+                                                    <div class="w_left w_25">
+                                                        <span>Pasacalles</span>
+                                                    </div>
+                                                    <div class="w_center w_55">
+                                                        <div class="progress">
+                                                            <div id="total_carteles_bar" class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
+                                                                <span class="sr-only">60% Complete</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w_right w_20">
+                                                        <%--<span>53k</span>--%>
+                                                        <div id="total_carteles" class="count green font-size">78</div>
+
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="widget_summary">
+                                                    <div class="w_left w_25">
+                                                        <span>Banners</span>
+                                                    </div>
+                                                    <div class="w_center w_55">
+                                                        <div class="progress">
+                                                            <div id="total_banners_bar" class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+                                                                <span class="sr-only">60% Complete</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w_right w_20">
+                                                        <%--<span>23k</span>--%>
+                                                        <div id="total_banners" class="count green font-size">78</div>
+
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="widget_summary">
+                                                    <div class="w_left w_25">
+                                                        <span>Roll ups</span>
+                                                    </div>
+                                                    <div class="w_center w_55">
+                                                        <div class="progress">
+                                                            <div id="total_rollups_bar" class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
+                                                                <span class="sr-only">60% Complete</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w_right w_20">
+                                                        <%--<span>3k</span>--%>
+                                                        <div id="total_rollups" class="count green font-size">78</div>
+
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="widget_summary">
+                                                    <div class="w_left w_25">
+                                                        <span>-</span>
+                                                    </div>
+                                                    <div class="w_center w_55">
+                                                        <div class="progress">
+                                                            <div id="total_x_bar" class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 2%;">
+                                                                <span class="sr-only">60% Complete</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w_right w_20">
+                                                        <span>-</span>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <div class="x_panel tile fixed_height_320 overflow_hidden">
+                                            <div class="x_title">
+                                                <h2>Temáticas</h2>
+                                                <ul class="nav navbar-right panel_toolbox">
+                                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                    </li>
+                                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                                    </li>
+                                                </ul>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="x_content">
+                                                <table class="" style="width: 100%">
+                                                    <tr>
+                                                        <th>
+                                                            <p class="">Distribución</p>
+                                                        </th>
+                                                        <th>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                                                <p class="">Temáticas 1</p>
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                                                <p class="">Progreso</p>
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                                                <p class="">Temáticas 2</p>
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                                                <p class="">Progreso</p>
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <canvas class="canvasDoughnut" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
+                                                        </td>
+                                                        <td>
+                                                            <table class="tile_info">
+                                                                <tr>
+                                                                    <td>
+                                                                        <p><i class="fa fa-square blue"></i>IOS </p>
+                                                                    </td>
+                                                                    <td>30%</td>
+                                                                    <td>
+                                                                        <p><i class="fa fa-square blue"></i>IOS </p>
+                                                                    </td>
+                                                                    <td>30%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <p><i class="fa fa-square green"></i>Android </p>
+                                                                    </td>
+                                                                    <td>10%</td>
+                                                                    <td>
+                                                                        <p><i class="fa fa-square blue"></i>IOS </p>
+                                                                    </td>
+                                                                    <td>30%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <p><i class="fa fa-square purple"></i>Blackberry </p>
+                                                                    </td>
+                                                                    <td>20%</td>
+                                                                    <td>
+                                                                        <p><i class="fa fa-square blue"></i>IOS </p>
+                                                                    </td>
+                                                                    <td>30%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <p><i class="fa fa-square aero"></i>Symbian </p>
+                                                                    </td>
+                                                                    <td>15%</td>
+                                                                    <td>
+                                                                        <p><i class="fa fa-square blue"></i>IOS </p>
+                                                                    </td>
+                                                                    <td>30%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <p><i class="fa fa-square red"></i>Others </p>
+                                                                    </td>
+                                                                    <td>30%</td>
+                                                                    <td>
+                                                                        <p><i class="fa fa-square blue"></i>IOS </p>
+                                                                    </td>
+                                                                    <td>30%</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
 
-                             <!-- page content -->
-        <div class="right_col" role="main" style="margin-left:0">
-          <!-- top tiles -->
-          <div class="row tile_count">
-                <h1>Pedidos</h1>
-            <div class="col-md-3 col-sm-12 col-xs-12 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Pedidos</span>
-              <%--<div id="total_pedidos" class="count green">78</div>--%>
-              <span class="count_bottom"><i class="green">16% </i> que el mes anterior</span>
-            </div>
-            <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-clock-o"></i> Total Pasacalles</span>
-              <%--<div id="total_carteles" class="count">69</div>--%>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> que el mes anterior</span>
-            </div>
-            <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Banners</span>
-              <%--<div id="total_banners" class="count">6</div>--%>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> que el mes anterior</span>
-            </div>
-            <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Roll ups</span>
-<%--              <div id="total_rollups" class="count">11</div>--%>
-              <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> que el mes anterior</span>
-            </div>
-          </div>
-
-                      <div class="row">
+                                    <div class="right_col" role="main" style="margin-left: 0">
 
 
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="x_panel tile fixed_height_320">
-                <div class="x_title">
-                  <h2>Pedidos</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <h4>Totales generales</h4>
-                  <div class="widget_summary">
-                    <div class="w_left w_25">
-                      <span>TOTAL</span>
-                    </div>
-                    <div class="w_center w_55">
-                      <div class="progress">
-                        <div id="total_pedidos_bar" class="progress-bar bg-green" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                          <span class="sr-only">60% Complete</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w_right w_20">
-                      <%--<span>123k</span>--%>
-                        <div id="total_pedidos" class="count green font-size">78</div>
-              <span class="count_bottom comparacion"><i class="fa fa-sort-asc"></i><i class="green">16% </i></span>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <div class="x_panel tile fixed_height_320">
+                                                <div class="x_title">
+                                                    <h2>Quick Settings</h2>
+                                                    <ul class="nav navbar-right panel_toolbox">
+                                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                        </li>
+                                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="x_content">
+                                                    <div class="dashboard-widget-content">
 
-                  <div class="widget_summary">
-                    <div class="w_left w_25">
-                      <span>Pasacalles</span>
-                    </div>
-                    <div class="w_center w_55">
-                      <div class="progress">
-                        <div id="total_carteles_bar" class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
-                          <span class="sr-only">60% Complete</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w_right w_20">
-                      <%--<span>53k</span>--%>
-                        <div id="total_carteles" class="count green font-size">78</div>
+                                                        <div class="sidebar-widget">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="widget_summary">
-                    <div class="w_left w_25">
-                      <span>Banners</span>
-                    </div>
-                    <div class="w_center w_55">
-                      <div class="progress">
-                        <div id="total_banners_bar" class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
-                          <span class="sr-only">60% Complete</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w_right w_20">
-                      <%--<span>23k</span>--%>
-                        <div id="total_banners" class="count green font-size">78</div>
-
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="widget_summary">
-                    <div class="w_left w_25">
-                      <span>Roll ups</span>
-                    </div>
-                    <div class="w_center w_55">
-                      <div class="progress">
-                        <div id="total_rollups_bar" class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
-                          <span class="sr-only">60% Complete</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w_right w_20">
-                      <%--<span>3k</span>--%>
-                        <div id="total_rollups" class="count green font-size">78</div>
-
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="widget_summary">
-                    <div class="w_left w_25">
-                      <span>-</span>
-                    </div>
-                    <div class="w_center w_55">
-                      <div class="progress">
-                        <div id="total_x_bar" class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 2%;">
-                          <span class="sr-only">60% Complete</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w_right w_20">
-                      <span>-</span>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="x_panel tile fixed_height_320 overflow_hidden">
-                <div class="x_title">
-                  <h2>Temáticas</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <table class="" style="width:100%">
-                    <tr>
-                        <th>
-                          <p class="">Distribución</p>
-                      </th>
-                        <th>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                          <p class="">Temáticas 1</p>
-                        </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                          <p class="">Progreso</p>
-                        </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                          <p class="">Temáticas 2</p>
-                        </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                          <p class="">Progreso</p>
-                        </div>
-                      </th>
-                    </tr>
-                    <tr>
-                        <td>
-                        <canvas class="canvasDoughnut" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
-                      </td>
-                      <td>
-                        <table class="tile_info">
-                          <tr>
-                            <td>
-                              <p><i class="fa fa-square blue"></i>IOS </p>
-                            </td>
-                            <td>30%</td>
-                              <td>
-                              <p><i class="fa fa-square blue"></i>IOS </p>
-                            </td>
-                            <td>30%</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><i class="fa fa-square green"></i>Android </p>
-                            </td>
-                            <td>10%</td>
-                              <td>
-                              <p><i class="fa fa-square blue"></i>IOS </p>
-                            </td>
-                            <td>30%</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><i class="fa fa-square purple"></i>Blackberry </p>
-                            </td>
-                            <td>20%</td>
-                              <td>
-                              <p><i class="fa fa-square blue"></i>IOS </p>
-                            </td>
-                            <td>30%</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><i class="fa fa-square aero"></i>Symbian </p>
-                            </td>
-                            <td>15%</td>
-                              <td>
-                              <p><i class="fa fa-square blue"></i>IOS </p>
-                            </td>
-                            <td>30%</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><i class="fa fa-square red"></i>Others </p>
-                            </td>
-                            <td>30%</td>
-                              <td>
-                              <p><i class="fa fa-square blue"></i>IOS </p>
-                            </td>
-                            <td>30%</td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
+                                    </div>
 
 
 
-            <div class="right_col" role="main" style="margin-left:0">
+                                </div>
 
 
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="x_panel tile fixed_height_320">
-                <div class="x_title">
-                  <h2>Quick Settings</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <div class="dashboard-widget-content">
+                                <div class="right_col" role="main" style="margin-left: 0">
+                                    <!-- top tiles -->
 
-                    <div class="sidebar-widget">
-                        
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                                    <div class="row tile_count">
+                                        <h1>Otros</h1>
+                                        <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                                            <span class="count_top"><i class="fa fa-user"></i>Colocaciones</span>
+                                            <div id="total_colocaciones" class="count">14</div>
+                                            <span class="count_bottom"><i class="green">4% </i>que el mes anterior</span>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                                            <span class="count_top"><i class="fa fa-user"></i>Lona usada mts.</span>
+                                            <div id="total_lona_mts" class="count">188</div>
+                                            <span class="count_bottom"><i class="green">4% </i>que el mes anterior</span>
+                                            <span class="row"></span>
+                                            <span class="count_bottom">Valor estimado</span>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                                            <span class="count_top"><i class="fa fa-clock-o"></i>Total Palos</span>
+                                            <div id="total_palos" class="count">162</div>
+                                            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i>que el mes anterior</span>
+                                            <span class="row"></span>
+                                            <span class="count_bottom">Valor estimado</span>
+                                        </div>
+                                    </div>
+                                    <!-- /top tiles -->
 
-          </div>
-
-
-
-          </div>
-
-
-            <div class="right_col" role="main" style="margin-left:0">
-          <!-- top tiles -->
-
-            <div class="row tile_count">
-                <h1>Otros</h1>
-            <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Colocaciones</span>
-              <div id="total_colocaciones" class="count">14</div>
-              <span class="count_bottom"><i class="green">4% </i> que el mes anterior</span>
-            </div>
-                <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Lona usada mts.</span>
-              <div id="total_lona_mts" class="count">188</div>
-              <span class="count_bottom"><i class="green">4% </i> que el mes anterior</span>
-              <span class="row"></span>
-              <span class="count_bottom">Valor estimado</span>
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-clock-o"></i> Total Palos</span>
-              <div id="total_palos" class="count">162</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> que el mes anterior</span>
-              <span class="row"></span>
-              <span class="count_bottom">Valor estimado</span>
-            </div>            
-          </div>
-          <!-- /top tiles -->
-
-          <br />
+                                    <br />
 
 
-        </div>
-        <!-- /page content -->
+                                </div>
+                                <!-- /page content -->
 
 
 
@@ -839,276 +835,404 @@
 
                             </div>
 
+                        </div>
+
+                        <!-- Tab Formularios BEGIN -->
+                        <div id="tabsFormularios_4" style="padding: 6px;">
+                            <asp:UpdatePanel ID="upProyectos" runat="server">
+                                <ContentTemplate>
+
+                                    <asp:HiddenField ID="hdn_proyectoID" runat="server" ClientIDMode="Static" />
+
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-4 pull-left" style="display: grid;">
+                                            <div class="row-short">
+                                                <h2 style="margin-top: 0;">
+                                                    <label id="lblMonth_proy" class="pull-left unselectable">[MES]</label></h2>
+                                            </div>
+                                            <div class="row-short">
+                                                <form action="#" method="get" class="sidebar-form" style="display: block !important; width: 100%;">
+                                                    <div class="input-group ">
+                                                        <input type="text" id="txbSearchPedidos_proy" name="q" class="form-control" placeholder="Buscar...">
+                                                        <span class="input-group-btn">
+                                                            <a id="btnSearchPedidos_proy" role="button" href="#" name="search" class="btn btn-info">
+                                                                <i class="glyphicon glyphicon-search"></i>
+                                                            </a>
+                                                        </span>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 pull-right">
+                                            <div class="input-group pull-right" style="padding: 5px;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <asp:Label ID="gridProyectos_lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
+                                    <div id="div_gridProyectos" style="overflow: auto;">
+                                        <asp:GridView ID="gridProyectos" runat="server" ClientIDMode="Static" HorizontalAlign="Center" AutoGenerateColumns="false" CssClass="table table-hover table-striped" AllowPaging="false" AllowSorting="false"
+                                            DataKeyNames="Proyecto_ID"
+                                            OnRowDataBound="gridProyectos_RowDataBound"
+                                            OnRowCommand="gridProyectos_RowCommand">
+
+                                            <Columns>
+                                                <asp:BoundField DataField="Proyecto_ID" HeaderText="Proyecto_ID" HtmlEncode="false" ItemStyle-CssClass="hiddencol hiddencol_real" HeaderStyle-CssClass="hiddencol hiddencol_real" />
+                                                <asp:TemplateField HeaderText="#">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblNumber_proy" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Nombre">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblNombre_proy" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Descripción">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblDescripcion_proy" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Fecha estimada">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblFechaEstimada" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Contacto 1">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblContacto1" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Tel 1">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblTelefono1" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Email 1">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblEmail1" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Contacto 2">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblContacto2" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Tel 2">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblTelefono2" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Email 2">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblEmail2" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Comentarios">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblComentarios_proy" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Estado">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblEstado_proy" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                            </Columns>
+                                        </asp:GridView>
+                                    </div>
+                                    <asp:Label ID="lblgridProyectosCount" runat="server" ClientIDMode="Static" Text="Resultados: 0" CssClass="lblResultados label label-info"></asp:Label>
+
+                                    <hr style="margin-top: 5px; margin-bottom: 5px;" />
+                                    <div class="row" style="margin: 0;">
+                                        <div class="col-md-12 pull-left" style="padding: 10px;">
+                                        </div>
+                                    </div>
+
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+
+                            <br />
+                            <div class="row">
+                                <%--<label style="color: green">Concluído</label>
+                                | --%>
+                                <label style="color: #333">Vigente</label>
+                                | 
+        <label style="color: blue">Aprobado</label>
+                                | 
+        <label style="color: red">Cancelado</label>
+                            </div>
+                        </div>
+                        <!-- Tab Formularios END-->
+
+
+
                     </div>
 
                 </div>
-
             </div>
+
         </div>
 
-    </div>
 
-
-    <div id="dialog" title="Mensaje Cartelux">
-        <p style="text-align: left;"></p>
-    </div>
-
-    <div id="simplePopbox" class='popbox'></div>
-    <div id="divPopbox_OPC" class='popbox-box popbox'>
-        <div class='arrow' style="left: 250px;"></div>
-        <div class='arrow-border' style="left: 250px;"></div>
-        <div class="row row-short" style="padding: 10px;">
-            <label id="lbl_options_header_OPC" class="label" style="font-size: 100%; color: rgba(68, 89, 156, 1); font-size: 16px;">Borrar elemento seleccionado</label>
+        <div id="dialog" title="Mensaje Cartelux">
+            <p style="text-align: left;"></p>
         </div>
-        <div class="form-group" style="margin-bottom: 0;">
+
+        <div id="simplePopbox" class='popbox'></div>
+        <div id="divPopbox_OPC" class='popbox-box popbox'>
+            <div class='arrow' style="left: 250px;"></div>
+            <div class='arrow-border' style="left: 250px;"></div>
             <div class="row row-short" style="padding: 10px;">
-                <div id="lbl_options_divBox_OPC" class="alert alert-warning" role="alert">
-                    <span id="lbl_options_color_OPC" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                    <span id="lbl_options_info_OPC" class="unselectable">Opciones de estado</span>
-                </div>
+                <label id="lbl_options_header_OPC" class="label" style="font-size: 100%; color: rgba(68, 89, 156, 1); font-size: 16px;">Borrar elemento seleccionado</label>
             </div>
-            <div id="popbox_footer_OPC" class="row row-short" style="margin-top: -7px;">
-                <%--<button id="lbl_options_button1_OPC" type="button" class="btn btn-success btnAcciones" title="Impreso">
+            <div class="form-group" style="margin-bottom: 0;">
+                <div class="row row-short" style="padding: 10px;">
+                    <div id="lbl_options_divBox_OPC" class="alert alert-warning" role="alert">
+                        <span id="lbl_options_color_OPC" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        <span id="lbl_options_info_OPC" class="unselectable">Opciones de estado</span>
+                    </div>
+                </div>
+                <div id="popbox_footer_OPC" class="row row-short" style="margin-top: -7px;">
+                    <%--<button id="lbl_options_button1_OPC" type="button" class="btn btn-success btnAcciones" title="Impreso">
                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 </button>--%>
-                <button id="lbl_options_button2_OPC" type="button" class="btn btn-primary btnAcciones" title="Aprobado">
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                </button>
-                <button id="lbl_options_button3_OPC" type="button" class="btn btn-danger btnAcciones" title="Cancelado">
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                </button>
-                <button id="lbl_options_button4_OPC" type="button" class="btn btn-default btnAcciones" title="Vigente">
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                </button>
-            </div>
-        </div>
-        <button type="button" class="btn close" style="padding: 5px;">
-            <span class="fa fa-times-circle" aria-hidden="true"></span>
-        </button>
-    </div>
-
-    <div id="divPopbox_CTO" class='popbox-box popbox'>
-        <div class='arrow' style="left: 250px;"></div>
-        <div class='arrow-border' style="left: 250px;"></div>
-        <div class="row row-short" style="padding: 10px;">
-            <label id="lbl_options_header_CTO" class="label" style="font-size: 100%; color: rgba(68, 89, 156, 1); font-size: 16px;">Borrar elemento seleccionado</label>
-        </div>
-        <div class="form-group" style="margin-bottom: 0;">
-            <div class="row row-short" style="padding: 10px;">
-
-                <div id="lbl_options_divBox_CTO" class="alert alert-warning" role="alert">
-                    <span id="lbl_options_color_CTO" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                    <span id="lbl_options_info_CTO" class="unselectable">Opciones de contacto</span>
+                    <button id="lbl_options_button2_OPC" type="button" class="btn btn-primary btnAcciones" title="Aprobado">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    </button>
+                    <button id="lbl_options_button3_OPC" type="button" class="btn btn-danger btnAcciones" title="Cancelado">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    </button>
+                    <button id="lbl_options_button4_OPC" type="button" class="btn btn-default btnAcciones" title="Vigente">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    </button>
                 </div>
-                <%--<input id="lbl_options_password" type="password" class="form-control" placeholder="Contraseña" name="login-username" required="required" />--%>
             </div>
-            <div id="popbox_footer_CTO" class="row row-short" style="margin-top: -7px;">
-                <a id='lbl_options_button1_CTO' role='button' href='#' class='btnAcciones btn btn-primary fa fa-wpforms fa-2x' title='Ir a formulario' target='_blank'></a>
-                <a id='lbl_options_button2_CTO' role='button' href='#' class='btnAcciones btn btn-danger fa fa-map-marker fa-2x' title='Ir a Google Maps' target='_blank'></a>
-                <a id='lbl_options_button3_CTO' role='button' href='#' class='btnAcciones btn btn-success fa fa-whatsapp fa-2x' title='Ir a WhatsApp' target='_blank'></a>
-                
-                <input class="form-control pull-left text-to-copy" id="txbLink" onclick="this.select();" value="?" style="width: 85%; display:none;" />
-                <%--SOURCE: https://clipboardjs.com/--%>
+            <button type="button" class="btn close" style="padding: 5px;">
+                <span class="fa fa-times-circle" aria-hidden="true"></span>
+            </button>
+        </div>
+
+        <div id="divPopbox_CTO" class='popbox-box popbox'>
+            <div class='arrow' style="left: 250px;"></div>
+            <div class='arrow-border' style="left: 250px;"></div>
+            <div class="row row-short" style="padding: 10px;">
+                <label id="lbl_options_header_CTO" class="label" style="font-size: 100%; color: rgba(68, 89, 156, 1); font-size: 16px;">Borrar elemento seleccionado</label>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+                <div class="row row-short" style="padding: 10px;">
+
+                    <div id="lbl_options_divBox_CTO" class="alert alert-warning" role="alert">
+                        <span id="lbl_options_color_CTO" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        <span id="lbl_options_info_CTO" class="unselectable">Opciones de contacto</span>
+                    </div>
+                    <%--<input id="lbl_options_password" type="password" class="form-control" placeholder="Contraseña" name="login-username" required="required" />--%>
+                </div>
+                <div id="popbox_footer_CTO" class="row row-short" style="margin-top: -7px;">
+                    <a id='lbl_options_button1_CTO' role='button' href='#' class='btnAcciones btn btn-primary fa fa-wpforms fa-2x' title='Ir a formulario' target='_blank'></a>
+                    <a id='lbl_options_button2_CTO' role='button' href='#' class='btnAcciones btn btn-danger fa fa-map-marker fa-2x' title='Ir a Google Maps' target='_blank'></a>
+                    <a id='lbl_options_button3_CTO' role='button' href='#' class='btnAcciones btn btn-success fa fa-whatsapp fa-2x' title='Ir a WhatsApp' target='_blank'></a>
+
+                    <input class="form-control pull-left text-to-copy" id="txbLink" onclick="this.select();" value="?" style="width: 85%; display: none;" />
+                    <%--SOURCE: https://clipboardjs.com/--%>
                     <a id="aBtnCopy" href="#" class="btn btn-lg pull-right js-copy-btn" data-clipboard-action="copy" data-clipboard-target="input#txbLink" style="padding: 10px;" onclick="doMagic2()">
                         <i class="glyphicon glyphicon-copy"></i>
-                </a>
-                <%--<button type="button" class="form-control btn-warning js-copy-btn btn-lg" style="height: auto;" id="btnCopy" onclick="doMagic2()">Copiar</button>--%>
-
+                    </a>
+                    <%--<button type="button" class="form-control btn-warning js-copy-btn btn-lg" style="height: auto;" id="btnCopy" onclick="doMagic2()">Copiar</button>--%>
+                </div>
             </div>
+            <button type="button" class="btn close" style="padding: 5px;">
+                <span class="fa fa-times-circle" aria-hidden="true"></span>
+            </button>
         </div>
-        <button type="button" class="btn close" style="padding: 5px;">
-            <span class="fa fa-times-circle" aria-hidden="true"></span>
-        </button>
-    </div>
 
-    <asp:HiddenField ID="hdn_FormularioID" runat="server" ClientIDMode="Static" />
-    <asp:HiddenField ID="hdn_monthSelected" runat="server" ClientIDMode="Static" />
+        <asp:HiddenField ID="hdn_FormularioID" runat="server" ClientIDMode="Static" />
+        <asp:HiddenField ID="hdn_monthSelected" runat="server" ClientIDMode="Static" />
 
-    <script type="text/javascript">
+        <script type="text/javascript">
 
-        var clipboard = new Clipboard('#aBtnCopy');
-        clipboard.on('success', function (e) {
-            console.log(e);
-        });
-        clipboard.on('error', function (e) {
-            console.log(e);
-        });
+            var clipboard = new Clipboard('#aBtnCopy');
+            clipboard.on('success', function (e) {
+                console.log(e);
+            });
+            clipboard.on('error', function (e) {
+                console.log(e);
+            });
 
+            //<![CDATA[
+            /*jslint browser:true, white:true, single:true*/
+            (function () {
+                'use strict';
 
-        //<![CDATA[
-        /*jslint browser:true, white:true, single:true*/
-        (function () {
-            'use strict';
+                doMagic();
 
-            doMagic();
+                USER_ID = '<%= Session["UserID"].ToString() %>';
+            }());
+            //]]>
 
-            USER_ID = '<%= Session["UserID"].ToString() %>';
-        }());
-        //]]>
-
-        function doMagic() {
-            var textClassName = 'text-to-copy';
-            var buttonClassName = 'js-copy-btn';
-            var sets = {};
-            var regexBuilder = function (prefix) {
-                return new RegExp(prefix + '\\S*');
-            };
-
-            window.addEventListener('DOMContentLoaded', function () {
-
-                var texts = Array.prototype.slice.call(document.querySelectorAll(
-                  '[class*=' + textClassName + ']'));
-                var buttons = Array.prototype.slice.call(document.querySelectorAll(
-                  '[class*=' + buttonClassName + ']'));
-
-                var classNameFinder = function (arr, regex, namePrefix) {
-                    return arr.map(function (item) {
-                        return (item.className.match(regex)) ? item.className
-                          .match(regex)[0].replace(namePrefix, '') : false;
-                    }).sort();
+            function doMagic() {
+                var textClassName = 'text-to-copy';
+                var buttonClassName = 'js-copy-btn';
+                var sets = {};
+                var regexBuilder = function (prefix) {
+                    return new RegExp(prefix + '\\S*');
                 };
 
-                sets.texts = classNameFinder(
-                  texts, regexBuilder(textClassName), textClassName);
+                window.addEventListener('DOMContentLoaded', function () {
 
-                sets.buttons = classNameFinder(
-                  buttons, regexBuilder(buttonClassName), buttonClassName);
+                    var texts = Array.prototype.slice.call(document.querySelectorAll(
+                      '[class*=' + textClassName + ']'));
+                    var buttons = Array.prototype.slice.call(document.querySelectorAll(
+                      '[class*=' + buttonClassName + ']'));
 
-                var matches = sets.texts.map(function (ignore, index) {
-                    return sets.texts[index].match(sets.buttons[index]);
-                });
-
-                var throwErr = function (err) {
-                    throw new Error(err);
-                };
-                var iPhoneORiPod = false;
-                var iPad = false;
-                var oldSafari = false;
-                var navAgent = window.navigator.userAgent;
-
-                // CHEQUEO
-                var txbLink = $("#txbLink").val();
-                if (txbLink !== null && txbLink.length > 0 && txbLink !== "?") {
-
-                    if (
-                      (/^((?!chrome).)*safari/i).test(navAgent)
-                        // ^ Fancy safari detection thanks to: https://stackoverflow.com/a/23522755
-                      &&
-                      !(/^((?!chrome).)*[0-9][0-9](\.[0-9][0-9]?)?\ssafari/i).test(
-                        navAgent)
-                        // ^ Even fancier Safari < 10 detection thanks to regex.  :^)
-                    ) {
-                        oldSafari = true;
-                    }
-                    // We need to test for older Safari and the device,
-                    // because of quirky awesomeness.
-                    if (navAgent.match(/iPhone|iPod/i)) {
-                        iPhoneORiPod = true;
-                    } else if (navAgent.match(/iPad/i)) {
-                        iPad = true;
-                    }
-                    var cheval = function (btn, text) {
-                        var copyBtn = document.querySelector(btn);
-
-                        var setCopyBtnText = function (textToSet) {
-                            copyBtn.textContent = textToSet;
-                        };
-                        if (iPhoneORiPod || iPad) {
-                            if (oldSafari) {
-                                setCopyBtnText("Select text");
-                            }
-                        }
-                        if (copyBtn) {
-                            copyBtn.addEventListener('click', function () {
-                                var oldPosX = window.scrollX;
-                                var oldPosY = window.scrollY;
-                                // Clone the text-to-copy node so that we can
-                                // create a hidden textarea, with its text value.
-                                // Thanks to @LeaVerou for the idea.
-                                var originalCopyItem = document.querySelector(text);
-                                var dollyTheSheep = originalCopyItem.cloneNode(true);
-                                var copyItem = document.createElement('textarea');
-                                copyItem.style.opacity = 0;
-                                copyItem.style.position = "absolute";
-                                // If .value is undefined, .textContent will
-                                // get assigned to the textarea we made.
-                                copyItem.value = dollyTheSheep.value || dollyTheSheep
-                                  .textContent;
-                                document.body.appendChild(copyItem);
-                                if (copyItem) {
-                                    // Select the text:
-                                    copyItem.focus();
-                                    copyItem.selectionStart = 0;
-                                    // For some reason the 'copyItem' does not get
-                                    // the correct length, so we use the OG.
-                                    //copyItem.selectionEnd = originalCopyItem.textContent.length;
-                                    copyItem.selectionEnd = 999999999;
-                                    try {
-                                        // Now that we've selected the text, execute the copy command:
-                                        document.execCommand('copy');
-                                        if (oldSafari) {
-                                            if (iPhoneORiPod) {
-                                                setCopyBtnText("Now tap 'Copy'");
-                                            } else if (iPad) {
-                                                // The iPad doesn't have the 'Copy' box pop up,
-                                                // you have to tap the text first.
-                                                setCopyBtnText(
-                                                  "Now tap the text, then 'Copy'");
-                                            } else {
-                                                // Just old!
-                                                setCopyBtnText("Press Command + C to copy");
-                                            }
-                                        } else {
-                                            setCopyBtnText("¡Listo!");
-                                        }
-                                    } catch (ignore) {
-                                        setCopyBtnText("Please copy manually");
-                                    }
-                                    originalCopyItem.focus();
-                                    // Restore the user's original position to avoid
-                                    // 'jumping' when they click a copy button.
-                                    window.scrollTo(oldPosX, oldPosY);
-                                    originalCopyItem.selectionStart = 0;
-                                    originalCopyItem.selectionEnd = originalCopyItem.textContent
-                                      .length;
-                                    copyItem.remove();
-                                } else {
-                                    throwErr(
-                                      "You don't have an element with the class: '" +
-                                      textClassName +
-                                      "'. Please check the cheval README."
-                                    );
-                                }
-                            });
-                        } else {
-                            throwErr(
-                              "You don't have a <button> with the class: '" +
-                              buttonClassName + "'. Please check the cheval README."
-                            );
-                        }
+                    var classNameFinder = function (arr, regex, namePrefix) {
+                        return arr.map(function (item) {
+                            return (item.className.match(regex)) ? item.className
+                              .match(regex)[0].replace(namePrefix, '') : false;
+                        }).sort();
                     };
 
-                    // Loop through all sets of elements and buttons:
-                    matches.map(function (i) {
-                        cheval('.' + buttonClassName + i, '.' + textClassName + i);
+                    sets.texts = classNameFinder(
+                      texts, regexBuilder(textClassName), textClassName);
+
+                    sets.buttons = classNameFinder(
+                      buttons, regexBuilder(buttonClassName), buttonClassName);
+
+                    var matches = sets.texts.map(function (ignore, index) {
+                        return sets.texts[index].match(sets.buttons[index]);
                     });
 
-                } // CHEQUEO
+                    var throwErr = function (err) {
+                        throw new Error(err);
+                    };
+                    var iPhoneORiPod = false;
+                    var iPad = false;
+                    var oldSafari = false;
+                    var navAgent = window.navigator.userAgent;
 
-            });
-        }
+                    // CHEQUEO
+                    var txbLink = $("#txbLink").val();
+                    if (txbLink !== null && txbLink.length > 0 && txbLink !== "?") {
 
-        function CopyTextAUX() {
-            /* Get the text field */
-            var copyText = document.getElementById("txbLink");
+                        if (
+                          (/^((?!chrome).)*safari/i).test(navAgent)
+                            // ^ Fancy safari detection thanks to: https://stackoverflow.com/a/23522755
+                          &&
+                          !(/^((?!chrome).)*[0-9][0-9](\.[0-9][0-9]?)?\ssafari/i).test(
+                            navAgent)
+                            // ^ Even fancier Safari < 10 detection thanks to regex.  :^)
+                        ) {
+                            oldSafari = true;
+                        }
+                        // We need to test for older Safari and the device,
+                        // because of quirky awesomeness.
+                        if (navAgent.match(/iPhone|iPod/i)) {
+                            iPhoneORiPod = true;
+                        } else if (navAgent.match(/iPad/i)) {
+                            iPad = true;
+                        }
+                        var cheval = function (btn, text) {
+                            var copyBtn = document.querySelector(btn);
 
-            /* Select the text field */
-            copyText.select();
+                            var setCopyBtnText = function (textToSet) {
+                                copyBtn.textContent = textToSet;
+                            };
+                            if (iPhoneORiPod || iPad) {
+                                if (oldSafari) {
+                                    setCopyBtnText("Select text");
+                                }
+                            }
+                            if (copyBtn) {
+                                copyBtn.addEventListener('click', function () {
+                                    var oldPosX = window.scrollX;
+                                    var oldPosY = window.scrollY;
+                                    // Clone the text-to-copy node so that we can
+                                    // create a hidden textarea, with its text value.
+                                    // Thanks to @LeaVerou for the idea.
+                                    var originalCopyItem = document.querySelector(text);
+                                    var dollyTheSheep = originalCopyItem.cloneNode(true);
+                                    var copyItem = document.createElement('textarea');
+                                    copyItem.style.opacity = 0;
+                                    copyItem.style.position = "absolute";
+                                    // If .value is undefined, .textContent will
+                                    // get assigned to the textarea we made.
+                                    copyItem.value = dollyTheSheep.value || dollyTheSheep
+                                      .textContent;
+                                    document.body.appendChild(copyItem);
+                                    if (copyItem) {
+                                        // Select the text:
+                                        copyItem.focus();
+                                        copyItem.selectionStart = 0;
+                                        // For some reason the 'copyItem' does not get
+                                        // the correct length, so we use the OG.
+                                        //copyItem.selectionEnd = originalCopyItem.textContent.length;
+                                        copyItem.selectionEnd = 999999999;
+                                        try {
+                                            // Now that we've selected the text, execute the copy command:
+                                            document.execCommand('copy');
+                                            if (oldSafari) {
+                                                if (iPhoneORiPod) {
+                                                    setCopyBtnText("Now tap 'Copy'");
+                                                } else if (iPad) {
+                                                    // The iPad doesn't have the 'Copy' box pop up,
+                                                    // you have to tap the text first.
+                                                    setCopyBtnText(
+                                                      "Now tap the text, then 'Copy'");
+                                                } else {
+                                                    // Just old!
+                                                    setCopyBtnText("Press Command + C to copy");
+                                                }
+                                            } else {
+                                                setCopyBtnText("¡Listo!");
+                                            }
+                                        } catch (ignore) {
+                                            setCopyBtnText("Please copy manually");
+                                        }
+                                        originalCopyItem.focus();
+                                        // Restore the user's original position to avoid
+                                        // 'jumping' when they click a copy button.
+                                        window.scrollTo(oldPosX, oldPosY);
+                                        originalCopyItem.selectionStart = 0;
+                                        originalCopyItem.selectionEnd = originalCopyItem.textContent
+                                          .length;
+                                        copyItem.remove();
+                                    } else {
+                                        throwErr(
+                                          "You don't have an element with the class: '" +
+                                          textClassName +
+                                          "'. Please check the cheval README."
+                                        );
+                                    }
+                                });
+                            } else {
+                                throwErr(
+                                  "You don't have a <button> with the class: '" +
+                                  buttonClassName + "'. Please check the cheval README."
+                                );
+                            }
+                        };
 
-            /* Copy the text inside the text field */
-            document.execCommand("Copy");
-        }
+                        // Loop through all sets of elements and buttons:
+                        matches.map(function (i) {
+                            cheval('.' + buttonClassName + i, '.' + textClassName + i);
+                        });
 
-    </script>
+                    } // CHEQUEO
 
+                });
+            }
+
+            function CopyTextAUX() {
+                /* Get the text field */
+                var copyText = document.getElementById("txbLink");
+
+                /* Select the text field */
+                copyText.select();
+
+                /* Copy the text inside the text field */
+                document.execCommand("Copy");
+            }
+
+        </script>
 </asp:Content>
