@@ -56,6 +56,7 @@
     <Property Name="Cantidad" Type="Int32" Nullable="false" />
     <Property Name="Pedido_Estado_ID" Type="Int32" />
     <Property Name="Pedido_Estado_UltimaModificacion_Usuario_ID" Type="Int32" />
+    <Property Name="Pedido_MedioDePago_ID" Type="Int32" />
   </EntityType>
   <EntityType Name="usuarios">
     <Key>
@@ -87,6 +88,7 @@
     <EntitySet Name="clientes_frecuentes" EntityType="carteluxdb1Model.clientes_frecuentes" />
     <EntitySet Name="lista_proyecto_estados" EntityType="carteluxdb1Model.lista_proyecto_estados" />
     <EntitySet Name="proyectos" EntityType="carteluxdb1Model.proyectos" />
+    <EntitySet Name="lista_pedido_mediosDePago" EntityType="carteluxdb1Model.lista_pedido_mediosDePago" />
   </EntityContainer>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -243,5 +245,14 @@
     <Property Name="Comentarios" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="Fecha_creado" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Fecha_update" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="lista_pedido_mediosDePago">
+    <Key>
+      <PropertyRef Name="Pedido_mediosDePago_ID" />
+    </Key>
+    <Property Name="Pedido_mediosDePago_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Codigo" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

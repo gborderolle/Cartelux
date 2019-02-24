@@ -44,5 +44,6 @@ namespace Cartelux1.Models
         public virtual DbSet<clientes_frecuentes> clientes_frecuentes { get; set; }
         public virtual DbSet<lista_proyecto_estados> lista_proyecto_estados { get; set; }
         public virtual DbSet<proyectos> proyectos { get; set; }
+        public virtual DbSet<lista_pedido_mediosDePago> lista_pedido_mediosDePago { get; set; }
     }
 }

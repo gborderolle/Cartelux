@@ -86,7 +86,17 @@ function checkMobile() {
 }
 
 function initVariables() {
-    $("#ddl_year").prop('selectedIndex', 1);
+    var year = (new Date()).getFullYear() + "";
+
+    var dd = document.getElementById('ddl_year');
+    for (var i = 0; i < dd.options.length; i++) {
+        if (dd.options[i].text === year) {
+            dd.selectedIndex = i;
+            break;
+        }
+    }
+
+    //$("#ddl_year").prop('selectedIndex', 1);
     var year_value = $('#ddl_year :selected').text();    
 
     if (IS_MOBILE) {
@@ -216,8 +226,8 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
                         $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>T/Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>T/Cartel</th> <th scope='col'>Impr/Pint</th> <th scope='col'>Temática</th> <th scope='col'>Usuario</th> <th scope='col'>CTO</th> <th scope='col'>OPC</th> </tr></thead><tbody>"); //<th scope='col'>GMaps</th> <th scope='col'>Form</th> <th scope='col'>WPP</th> //<th scope='col'>Cant</th> <th scope='col'>Zona</th> <th scope='col'>¿Archivo?</th> <th scope='col'>Diseño referido</th>
                         for (var i = 0; i < response.d.length; i++) {
 
-                            //var goToURL = "<a id='btnURL' role='button' href='" + response.d[i].URL_short + "' class='btn btn-warning glyphicon fa fa-wpforms' title='' target='_blank'></a>";
-                            var goToURL = response.d[i].URL_short;
+                            //var goToFormulario = "<a id='btnURL' role='button' href='" + response.d[i].URL_short + "' class='btn btn-warning glyphicon fa fa-wpforms' title='' target='_blank'></a>";
+                            var goToFormulario = response.d[i].URL_short;
 
                             //var goToGMaps = "<a id='btnGMaps' role='button' href='" + response.d[i].URL_gmaps + "' class='btn btn-warning fa fa-map' title='' target='_blank'></a>";
                             var goToGMaps = response.d[i].URL_gmaps;
@@ -306,11 +316,11 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
                             // Botón CTO - Contacto
                             var btnCTO_id = "btnCTO_" + formID;
                             console.log("goToCTO values");
-                            console.log(goToURL);
+                            console.log(goToFormulario);
                             console.log(goToGMaps);
                             console.log(goToWPP);
                             console.log("-------------- END --------------");
-                            var goToCTO = "<a id=\"" + btnCTO_id + "\" role='button' href='#' class='btn btn-warning btn-xs fa fa-address-card fa-2x' onclick='return showActionMenu_CTO(\"" + formID + "\", \"" + nombre + "\", \"" + goToURL + "\", \"" + goToGMaps + "\", \"" + goToWPP + "\", \"" + btnCTO_id + "\")'></a>";
+                            var goToCTO = "<a id=\"" + btnCTO_id + "\" role='button' href='#' class='btn btn-warning btn-xs fa fa-address-card fa-2x' onclick='return showActionMenu_CTO(\"" + formID + "\", \"" + nombre + "\", \"" + goToFormulario + "\", \"" + goToGMaps + "\", \"" + goToWPP + "\", \"" + btnCTO_id + "\")'></a>";
                             // ----------------------
 
                             var date = moment(response.d[i].lblFechaEntrega, "DD-MM-YYYY").format("DD-MM-YYYY");
@@ -337,7 +347,7 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
                             //check_nullValues(convertBool(response.d[i].chbTieneBosquejo)) + "</td><td class='td-short' " + text_color + ">" +
                             //check_nullValues(convertBool(response.d[i].lblDisenoReferido)) + "</td><td class='td-short'>" +
                             //goToGMaps + "</td><td class='td-very_short'>" +
-                            //goToURL + "</td><td class='td-very_short'>" +
+                            //goToFormulario + "</td><td class='td-very_short'>" +
                             //goToWPP + "</td><td class='td-very_short'>" +
                             goToCTO + "</td><td class='td-very_short'>" +
                             goToOPC + "</td></tr>");
@@ -905,7 +915,7 @@ function showActionMenu_OPC(formID, tel, nombre, btnID_value) {
     }
 }
 
-function showActionMenu_CTO(formID, nombre, goToURL, goToGMaps, goToWPP, btnID_value) {
+function showActionMenu_CTO(formID, nombre, goToFormulario, goToGMaps, goToWPP, btnID_value) {
     var divPopbox = $("#divPopbox_CTO");
     var btnID = $("#" + btnID_value);
     if (divPopbox !== null && divPopbox !== undefined && btnID !== null && btnID !== undefined) {
@@ -942,7 +952,7 @@ function showActionMenu_CTO(formID, nombre, goToURL, goToGMaps, goToWPP, btnID_v
         lbl_options_button2 !== null && lbl_options_button2 !== undefined &&
         lbl_options_button3 !== null && lbl_options_button3 !== undefined &&
         txbLink !== null && txbLink !== undefined) {
-            lbl_options_button1.attr('href', goToURL);
+            lbl_options_button1.attr('href', goToFormulario);
             lbl_options_button2.attr('href', goToGMaps);
             lbl_options_button3.attr('href', goToWPP);
             txbLink.val(goToWPP);

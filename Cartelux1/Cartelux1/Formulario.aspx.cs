@@ -36,6 +36,14 @@ namespace Cartelux1
                 {
                     serie_str = System.Web.HttpContext.Current.Session["form_serie"].ToString();
                 }
+                if (string.IsNullOrWhiteSpace(serie_str))
+                {
+                    if (Request.QueryString["form_serie"] != null)
+                    {
+                        serie_str = Request.QueryString["form_serie"].ToString();
+                    }
+                }
+                
                 BindData(serie_str); // Existe el formulario con la serie?
 
                 //string tel_str = GetURLParam("TEL");
@@ -143,6 +151,15 @@ namespace Cartelux1
                 ddlTipoEntrega1_tab2.DataValueField = "Codigo";
                 ddlTipoEntrega1_tab2.DataBind();
                 ddlTipoEntrega1_tab2.Items.Insert(0, new ListItem("Tipo de entrega", "0"));
+
+                // DDL Medio de pago
+                dt1 = new DataTable();
+                dt1 = Extras.ToDataTable(context.lista_pedido_mediosDePago.ToList());
+                ddlMedioDePago.DataSource = dt1;
+                ddlMedioDePago.DataTextField = "Nombre";
+                ddlMedioDePago.DataValueField = "Codigo";
+                ddlMedioDePago.DataBind();
+                ddlMedioDePago.Items.Insert(0, new ListItem("Medio de pago", "0"));
 
             }
         }
@@ -300,6 +317,17 @@ namespace Cartelux1
                                         }
                                         #endregion GET Temática
 
+                                        #region GET Medio de pago
+                                        if (_pedido.Pedido_MedioDePago_ID > 0)
+                                        {
+                                            lista_pedido_mediosDePago _lista_pedido_mediosDePago = (lista_pedido_mediosDePago)context.lista_pedido_mediosDePago.FirstOrDefault(v => v.Pedido_mediosDePago_ID.Equals(_pedido.Pedido_MedioDePago_ID));
+                                            if (_lista_pedido_mediosDePago != null)
+                                            {
+                                                ddlMedioDePago.SelectedValue = _lista_pedido_mediosDePago.Codigo.ToString();
+                                            }
+                                        }
+                                        #endregion GET Medio de pago
+
                                         #region GET Entrega
 
                                         pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(v => v.Pedido_Entrega_ID.Equals(_pedido.Pedido_Entrega_ID));
@@ -348,7 +376,7 @@ namespace Cartelux1
 
                                         #endregion GET Entrega
 
-                                        #region Tamaño
+                                        #region GET Tamaño
                                         if (_pedido.Pedido_Tamano_ID > 0)
                                         {
                                             lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(v => v.Pedido_Tamano_ID.Equals(_pedido.Pedido_Tamano_ID));
@@ -560,7 +588,7 @@ namespace Cartelux1
                     if (!string.IsNullOrWhiteSpace(url_complete))
                     {
                         _formulario.URL_completa = url_complete;
-                        _formulario.URL_short = url_complete; //
+                        _formulario.URL_short = url_complete + "?form_serie=" + serie_str; //
                     }
 
                     _formulario.Formulario_ID = 0;
@@ -691,6 +719,25 @@ namespace Cartelux1
                                 tipoID = _lista_pedido_tematica.Pedido_Tematica_ID;
                             }
                             _pedido.Pedido_Tematica_ID = tipoID;
+                        }
+                        #endregion Temática
+
+                        #region UPDATE Medio de pago
+                        if (ddlMedioDePago.SelectedIndex > 0)
+                        {
+                            int codigo = 1;
+                            if (!int.TryParse(ddlMedioDePago.SelectedValue, out codigo))
+                            {
+                                codigo = 1;
+                                Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlMedioDePago.SelectedValue);
+                            }
+                            int tipoID = 1;
+                            lista_pedido_mediosDePago _lista_pedido_mediosDePago = (lista_pedido_mediosDePago)context.lista_pedido_mediosDePago.FirstOrDefault(v => v.Codigo.Equals(codigo));
+                            if (_lista_pedido_mediosDePago != null)
+                            {
+                                tipoID = _lista_pedido_mediosDePago.Pedido_mediosDePago_ID;
+                            }
+                            _pedido.Pedido_MedioDePago_ID = tipoID;
                         }
                         #endregion Temática
 
@@ -982,7 +1029,26 @@ namespace Cartelux1
                         }
                         _pedido.Pedido_Tematica_ID = tematicaID;
                     }
+                    #endregion
 
+                    #region Medio de pago
+                    _pedido.Pedido_MedioDePago_ID = 0;
+                    if (ddlMedioDePago.SelectedIndex > 0)
+                    {
+                        int codigo = 1;
+                        if (!int.TryParse(ddlMedioDePago.SelectedValue, out codigo))
+                        {
+                            codigo = 1;
+                            Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlMedioDePago.SelectedValue);
+                        }
+                        int medioPagoID = 1;
+                        lista_pedido_mediosDePago _pedido_mediosDePago = (lista_pedido_mediosDePago)context.lista_pedido_mediosDePago.FirstOrDefault(v => v.Codigo.Equals(codigo));
+                        if (_pedido_mediosDePago != null)
+                        {
+                            medioPagoID = _pedido_mediosDePago.Pedido_mediosDePago_ID;
+                        }
+                        _pedido.Pedido_MedioDePago_ID = medioPagoID;
+                    }
                     #endregion
 
                     #region NEW Diseño
@@ -1258,7 +1324,12 @@ namespace Cartelux1
                 // Enviar notificación al equipo por EMAIL
                 if (!HttpContext.Current.Request.IsLocal)
                 {
-                    SendNotification_Email_2(isColocacion_entrega);
+                    string serie = string.Empty;
+                    if (!string.IsNullOrWhiteSpace(_formulario.Serie))
+                    {
+                        serie = _formulario.Serie;
+                    }
+                    SendNotification_Email(serie, isColocacion_entrega);
                 }
             }
         }
@@ -1321,6 +1392,7 @@ namespace Cartelux1
                         cliente.Nombre = client_name;
                         cliente.Telefono = client_tel;
                         cliente.Fecha_creado = GetCurrentTime();
+                        cliente.Email = client_email;
                         //cliente.NroDocumento = txbDocumento_int;
 
                         context.clientes.Add(cliente);
@@ -2095,26 +2167,8 @@ namespace Cartelux1
             }
             return uploadBOX_ok;
         }
-
-        private void SendNotification_Email()
-        {
-            SmtpClient smtpClient = new SmtpClient("mail.cartelux.uy", 25);
-
-            smtpClient.Credentials = new System.Net.NetworkCredential("proyectos@cartelux.uy", "Cartelux1234$");
-            smtpClient.UseDefaultCredentials = true;
-            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtpClient.EnableSsl = false;
-            MailMessage mail = new MailMessage();
-
-            //Setting From , To and CC
-            mail.From = new MailAddress("proyectos@cartelux.uy", "Cartelux");
-            mail.To.Add(new MailAddress("gborderolle@gmail.com"));
-            //mail.To.Add(new MailAddress("maxi.cartelux@gmail.com"));
-
-            smtpClient.Send(mail);
-        }
-
-        private void SendNotification_Email_2(bool isColocacion_entrega = false)
+       
+        private void SendNotification_Email(string serie, bool isColocacion_entrega = false)
         {
             // SOURCE: https://www.smarterasp.net/support/kb/a179/how-to-send-email-in-asp_net.aspx
             string nombre = txbNombre.Value;
@@ -2128,7 +2182,7 @@ namespace Cartelux1
             }
             string fecha_entrega = GetDatetimeFormated(txbFecha.Value).ToString(GlobalVariables.ShortDateTime_format1);
             string day_name = GetDatetimeFormated(txbFecha.Value).ToString("ddd", new CultureInfo("es-UY"));
-            string url = HttpContext.Current.Request.Url.AbsoluteUri;
+            string url = HttpContext.Current.Request.Url.AbsoluteUri + "?form_serie=" + serie;
             if (!string.IsNullOrWhiteSpace(nombre) || !string.IsNullOrWhiteSpace(telefono) || !string.IsNullOrWhiteSpace(fecha_entrega) || !string.IsNullOrWhiteSpace(url))
             {
                 //create the mail message 
@@ -2244,6 +2298,7 @@ namespace Cartelux1
 
             ddlTamano1.SelectedIndex = 0;
             ddlTematica.SelectedIndex = 0;
+            ddlMedioDePago.SelectedIndex = 0;
             ddlTipoEntrega1.SelectedIndex = 0;
 
             radDoc1.Checked = true;

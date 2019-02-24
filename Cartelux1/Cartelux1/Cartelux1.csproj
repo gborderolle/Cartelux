@@ -2393,7 +2393,6 @@
     <Content Include="Content\reportes_template\skycons\README.md" />
     <Content Include="Content\plugins\icheck-1.x\icheck.jquery.json" />
     <None Include="Properties\PublishProfiles\File System.pubxml" />
-    <Content Include="Rappipagos1\Procesar.aspx" />
     <Content Include="Scripts\bootstrap.js+" />
     <Content Include="Scripts\bootstrap.min.js+" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -2683,6 +2682,9 @@
     <Compile Include="Models\lista_pedido_materiales.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\lista_pedido_mediosDePago.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\lista_pedido_tamanos.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
@@ -2714,13 +2716,6 @@
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rappipagos1\Procesar.aspx.cs">
-      <DependentUpon>Procesar.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Rappipagos1\Procesar.aspx.designer.cs">
-      <DependentUpon>Procesar.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2788,7 +2783,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Rappipagos1\Files\" />
     <Folder Include="_Backup\" />
   </ItemGroup>
   <ItemGroup>

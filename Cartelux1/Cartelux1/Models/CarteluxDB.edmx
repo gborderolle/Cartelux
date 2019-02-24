@@ -105,6 +105,15 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
           <Property Name="Agrupacion" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="lista_pedido_mediosDePago">
+          <Key>
+            <PropertyRef Name="Pedido_mediosDePago_ID" />
+          </Key>
+          <Property Name="Pedido_mediosDePago_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Codigo" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="lista_pedido_tamanos">
           <Key>
             <PropertyRef Name="Pedido_Tamano_ID" />
@@ -190,6 +199,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Cantidad" Type="int" Nullable="false" />
           <Property Name="Pedido_Estado_ID" Type="int" />
           <Property Name="Pedido_Estado_UltimaModificacion_Usuario_ID" Type="int" />
+          <Property Name="Pedido_MedioDePago_ID" Type="int" />
         </EntityType>
         <EntityType Name="proyectos">
           <Key>
@@ -239,6 +249,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <EntitySet Name="lista_entregas_tipos" EntityType="Self.lista_entregas_tipos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_pedido_estados" EntityType="Self.lista_pedido_estados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_pedido_materiales" EntityType="Self.lista_pedido_materiales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lista_pedido_mediosDePago" EntityType="Self.lista_pedido_mediosDePago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_pedido_tamanos" EntityType="Self.lista_pedido_tamanos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_pedido_tematicas" EntityType="Self.lista_pedido_tematicas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_pedido_tipos" EntityType="Self.lista_pedido_tipos" Schema="dbo" store:Type="Tables" />
@@ -316,6 +327,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
           <Property Name="Pedido_Estado_ID" Type="Int32" />
           <Property Name="Pedido_Estado_UltimaModificacion_Usuario_ID" Type="Int32" />
+          <Property Name="Pedido_MedioDePago_ID" Type="Int32" />
         </EntityType>
         <EntityType Name="usuarios">
           <Key>
@@ -347,6 +359,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <EntitySet Name="clientes_frecuentes" EntityType="carteluxdb1Model.clientes_frecuentes" />
           <EntitySet Name="lista_proyecto_estados" EntityType="carteluxdb1Model.lista_proyecto_estados" />
           <EntitySet Name="proyectos" EntityType="carteluxdb1Model.proyectos" />
+          <EntitySet Name="lista_pedido_mediosDePago" EntityType="carteluxdb1Model.lista_pedido_mediosDePago" />
         </EntityContainer>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -504,6 +517,15 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <Property Name="Fecha_creado" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Fecha_update" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="lista_pedido_mediosDePago">
+          <Key>
+            <PropertyRef Name="Pedido_mediosDePago_ID" />
+          </Key>
+          <Property Name="Pedido_mediosDePago_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -557,6 +579,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
           <EntitySetMapping Name="pedidos">
             <EntityTypeMapping TypeName="carteluxdb1Model.pedidos">
               <MappingFragment StoreEntitySet="pedidos">
+                <ScalarProperty Name="Pedido_MedioDePago_ID" ColumnName="Pedido_MedioDePago_ID" />
                 <ScalarProperty Name="Pedido_Estado_UltimaModificacion_Usuario_ID" ColumnName="Pedido_Estado_UltimaModificacion_Usuario_ID" />
                 <ScalarProperty Name="Pedido_Estado_ID" ColumnName="Pedido_Estado_ID" />
                 <ScalarProperty Name="Pedido_ID" ColumnName="Pedido_ID" />
@@ -748,6 +771,16 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Proyecto_estado_ID" ColumnName="Proyecto_estado_ID" />
                 <ScalarProperty Name="Proyecto_ID" ColumnName="Proyecto_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lista_pedido_mediosDePago">
+            <EntityTypeMapping TypeName="carteluxdb1Model.lista_pedido_mediosDePago">
+              <MappingFragment StoreEntitySet="lista_pedido_mediosDePago">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Pedido_mediosDePago_ID" ColumnName="Pedido_mediosDePago_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

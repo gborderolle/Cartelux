@@ -100,6 +100,15 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <Property Name="Descripcion" Type="varchar" MaxLength="100" />
     <Property Name="Agrupacion" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="lista_pedido_mediosDePago">
+    <Key>
+      <PropertyRef Name="Pedido_mediosDePago_ID" />
+    </Key>
+    <Property Name="Pedido_mediosDePago_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+  </EntityType>
   <EntityType Name="lista_pedido_tamanos">
     <Key>
       <PropertyRef Name="Pedido_Tamano_ID" />
@@ -185,6 +194,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <Property Name="Cantidad" Type="int" Nullable="false" />
     <Property Name="Pedido_Estado_ID" Type="int" />
     <Property Name="Pedido_Estado_UltimaModificacion_Usuario_ID" Type="int" />
+    <Property Name="Pedido_MedioDePago_ID" Type="int" />
   </EntityType>
   <EntityType Name="proyectos">
     <Key>
@@ -234,6 +244,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <EntitySet Name="lista_entregas_tipos" EntityType="Self.lista_entregas_tipos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_pedido_estados" EntityType="Self.lista_pedido_estados" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_pedido_materiales" EntityType="Self.lista_pedido_materiales" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_pedido_mediosDePago" EntityType="Self.lista_pedido_mediosDePago" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_pedido_tamanos" EntityType="Self.lista_pedido_tamanos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_pedido_tematicas" EntityType="Self.lista_pedido_tematicas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_pedido_tipos" EntityType="Self.lista_pedido_tipos" Schema="dbo" store:Type="Tables" />

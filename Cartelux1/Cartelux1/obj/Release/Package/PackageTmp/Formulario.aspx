@@ -358,6 +358,7 @@
                                                     <input id="txbDireccion_esquina" class="form-control txbEditable pull-right" placeholder="Esquina" type="text" tabindex="10" runat="server" clientidmode="static" style="width: 47%;" />
                                                 </div>
                                             </div>
+                                            <asp:DropDownList ID="ddlMedioDePago" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />
 
                                             <div class="form-group" id="dir_groupX" style="display: none;">
                                                 Dirección escrita

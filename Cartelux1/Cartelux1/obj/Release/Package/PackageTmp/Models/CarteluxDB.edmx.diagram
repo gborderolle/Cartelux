@@ -24,6 +24,7 @@
         <EntityTypeShape EntityType="carteluxdb1Model.clientes_frecuentes" Width="1.5" PointX="12.375" PointY="7.75" />
         <EntityTypeShape EntityType="carteluxdb1Model.lista_proyecto_estados" Width="1.5" PointX="7.375" PointY="12.75" />
         <EntityTypeShape EntityType="carteluxdb1Model.proyectos" Width="1.5" PointX="9.375" PointY="12.75" />
+        <EntityTypeShape EntityType="carteluxdb1Model.lista_pedido_mediosDePago" Width="1.5" PointX="12.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

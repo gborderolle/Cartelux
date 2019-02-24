@@ -37,3 +37,12 @@
 10/18/2018 2:43:47 AM: [ln:1211] Formulario: NEW_Cliente() - Excepcion. Convirtiendo int. ERROR: 211406340011.
 10/18/2018 2:44:20 AM: [ln:1211] Formulario: NEW_Cliente() - Excepcion. Convirtiendo int. ERROR: 217466170014.
 12/2/2018 8:50:46 AM: [ln:773] Formulario: SaveData() - Error. FormID no válido. ERROR: .
+1/7/2019 2:50:20 AM: [ln:876] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+1/7/2019 2:50:20 AM: [ln:1127] Dashboard: GetData_BindGridProyectos() - Excepcion. Convirtiendo int. ERROR: Elegir.
+1/7/2019 2:50:20 AM: [ln:876] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+1/7/2019 2:50:27 AM: [ln:876] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+1/7/2019 2:50:27 AM: [ln:876] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+1/7/2019 2:50:28 AM: [ln:1127] Dashboard: GetData_BindGridProyectos() - Excepcion. Convirtiendo int. ERROR: Elegir.
+1/7/2019 2:51:00 AM: [ln:876] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+1/7/2019 2:51:00 AM: [ln:1127] Dashboard: GetData_BindGridProyectos() - Excepcion. Convirtiendo int. ERROR: Elegir.
+1/7/2019 2:51:01 AM: [ln:876] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
