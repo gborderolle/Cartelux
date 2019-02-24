@@ -237,16 +237,6 @@ namespace Cartelux1
                                 }
                             }
 
-                            lbl1 = e.Row.FindControl("lblMaterial") as Label;
-                            if (lbl1 != null)
-                            {
-                                lista_pedido_materiales _lista_pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(c => c.Pedido_Material_ID == _pedido.Pedido_Material_ID);
-                                if (_lista_pedido_material != null)
-                                {
-                                    lbl1.Text = _lista_pedido_material.Nombre;
-                                }
-                            }
-
                             lbl1 = e.Row.FindControl("lblTematica") as Label;
                             if (lbl1 != null)
                             {
@@ -254,6 +244,16 @@ namespace Cartelux1
                                 if (_lista_pedido_tematica != null)
                                 {
                                     lbl1.Text = _lista_pedido_tematica.Nombre;
+                                }
+                            }
+
+                            lbl1 = e.Row.FindControl("lblMedioP") as Label;
+                            if (lbl1 != null)
+                            {
+                                lista_pedido_mediosDePago _lista_pedido_mediosDePago = (lista_pedido_mediosDePago)context.lista_pedido_mediosDePago.FirstOrDefault(c => c.Pedido_mediosDePago_ID == _pedido.Pedido_MedioDePago_ID);
+                                if (_lista_pedido_mediosDePago != null)
+                                {
+                                    lbl1.Text = _lista_pedido_mediosDePago.Nombre;
                                 }
                             }
 
@@ -1029,14 +1029,14 @@ namespace Cartelux1
 
                                     #endregion END Pedido Tipo
 
-                                    #region Pedido Material ---------------------------------------------------------------------------------------------------------
-                                    _GridFormulario1.lblMaterial = "Impreso";
-                                    lista_pedido_materiales _lista_pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(c => c.Pedido_Material_ID == _pedido.Pedido_Material_ID);
-                                    if (_lista_pedido_material != null && !string.IsNullOrWhiteSpace(_lista_pedido_material.Nombre))
+                                    #region Pedido Medio de pago ---------------------------------------------------------------------------------------------------------
+                                    _GridFormulario1.lblMedioP = "Abitab";
+                                    lista_pedido_mediosDePago _lista_pedido_mediosDePago = (lista_pedido_mediosDePago)context.lista_pedido_mediosDePago.FirstOrDefault(c => c.Pedido_mediosDePago_ID == _pedido.Pedido_MedioDePago_ID);
+                                    if (_lista_pedido_mediosDePago != null && !string.IsNullOrWhiteSpace(_lista_pedido_mediosDePago.Nombre))
                                     {
-                                        _GridFormulario1.lblMaterial = _lista_pedido_material.Nombre;
+                                        _GridFormulario1.lblMedioP = _lista_pedido_mediosDePago.Nombre;
                                     }
-                                    #endregion END Pedido Material
+                                    #endregion END Pedido Medio de pago
 
                                     #region Pedido Temática ---------------------------------------------------------------------------------------------------------
                                     _GridFormulario1.lblTematica = "N/D";
@@ -1045,7 +1045,7 @@ namespace Cartelux1
                                     {
                                         _GridFormulario1.lblTematica = _lista_pedido_tematica.Nombre;
                                     }
-                                    #endregion END Pedido Material
+                                    #endregion END Pedido Temática
 
                                     #region Pedido Usuario que modifica ---------------------------------------------------------------------------------------------------------
                                     _GridFormulario1.lblUsuario = "N/D";
@@ -1078,7 +1078,7 @@ namespace Cartelux1
             public string lblTamano { get; set; }
             public string lblTamano_largo_cm { get; set; }
             public string lblTipo { get; set; }
-            public string lblMaterial { get; set; }
+            public string lblMedioP { get; set; }
             public string lblTematica { get; set; }
             public string lblUsuario { get; set; }
             public int lblCantidad { get; set; }

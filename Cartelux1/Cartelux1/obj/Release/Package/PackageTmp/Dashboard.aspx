@@ -392,9 +392,9 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Impr/Pint">
+                                                <asp:TemplateField HeaderText="MedioP">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblMaterial" runat="server" CommandName="View" />
+                                                        <asp:Label ID="lblMedioP" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 

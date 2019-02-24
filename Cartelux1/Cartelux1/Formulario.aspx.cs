@@ -43,7 +43,7 @@ namespace Cartelux1
                         serie_str = Request.QueryString["form_serie"].ToString();
                     }
                 }
-                
+
                 BindData(serie_str); // Existe el formulario con la serie?
 
                 //string tel_str = GetURLParam("TEL");
@@ -320,7 +320,7 @@ namespace Cartelux1
                                         #region GET Medio de pago
                                         if (_pedido.Pedido_MedioDePago_ID > 0)
                                         {
-                                            lista_pedido_mediosDePago _lista_pedido_mediosDePago = (lista_pedido_mediosDePago)context.lista_pedido_mediosDePago.FirstOrDefault(v => v.Pedido_mediosDePago_ID.Equals(_pedido.Pedido_MedioDePago_ID));
+                                            lista_pedido_mediosDePago _lista_pedido_mediosDePago = (lista_pedido_mediosDePago)context.lista_pedido_mediosDePago.FirstOrDefault(v => v.Pedido_mediosDePago_ID == _pedido.Pedido_MedioDePago_ID);
                                             if (_lista_pedido_mediosDePago != null)
                                             {
                                                 ddlMedioDePago.SelectedValue = _lista_pedido_mediosDePago.Codigo.ToString();
@@ -517,7 +517,7 @@ namespace Cartelux1
                 // Contacto
                 txbNombre.Attributes.Add("readonly", "false");
                 txbTelefono.Attributes.Add("readonly", "false");
-                txbEmail.Attributes.Add("readonly", "false");                
+                txbEmail.Attributes.Add("readonly", "false");
 
                 // Entrega
                 txbDireccion_calle.Attributes.Add("readonly", "false");
@@ -1359,7 +1359,8 @@ namespace Cartelux1
         private int Cliente_Nuevo(CarteluxDB context)
         {
             int ret_ID = 0;
-            if (context != null) {
+            if (context != null)
+            {
                 System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
                 string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
                 string methodName = stackFrame.GetMethod().Name;
@@ -1367,7 +1368,7 @@ namespace Cartelux1
                 string client_tel = txbTelefono.Value;
                 string client_name = txbNombre.Value;
                 string client_email = txbEmail.Value;
-                
+
                 //int txbDocumento_int = 0;
                 //if (!string.IsNullOrWhiteSpace(txbDocumento.Value))
                 //{
@@ -2167,13 +2168,13 @@ namespace Cartelux1
             }
             return uploadBOX_ok;
         }
-       
+
         private void SendNotification_Email(string serie, bool isColocacion_entrega = false)
         {
             // SOURCE: https://www.smarterasp.net/support/kb/a179/how-to-send-email-in-asp_net.aspx
             string nombre = txbNombre.Value;
             string telefono = txbTelefono.Value;
-            string email1 = txbEmail.Value;            
+            string email1 = txbEmail.Value;
 
             string material = "Impreso";
             if (!radImpreso1.Checked)
@@ -2237,7 +2238,7 @@ namespace Cartelux1
                 {
                     foreach (string email in email_receptor_entrega)
                     {
-                        mail.CC.Add(email); 
+                        mail.CC.Add(email);
                     }
                 }
 
@@ -2287,7 +2288,7 @@ namespace Cartelux1
             txbNombre.Value = string.Empty;
             txbTelefono.Value = string.Empty;
             txbEmail.Value = string.Empty;
-            
+
             //txbDocumento.Value = string.Empty;
             txbDireccion_calle.Value = string.Empty;
             txbDireccion_numero.Value = string.Empty;
