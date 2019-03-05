@@ -223,7 +223,7 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
                     $("#gridFormularios tbody").remove();
                     if (response.d.length > 0) {
                         $("#gridFormularios").empty();
-                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>T/Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>T/Cartel</th> <th scope='col'>Temática</th> <th scope='col'>MedioP</th> <th scope='col'>Usuario</th> <th scope='col'>CTO</th> <th scope='col'>OPC</th> </tr></thead><tbody>"); //<th scope='col'>GMaps</th> <th scope='col'>Form</th> <th scope='col'>WPP</th> //<th scope='col'>Cant</th> <th scope='col'>Zona</th> <th scope='col'>¿Archivo?</th> <th scope='col'>Diseño referido</th>
+                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>T/Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>T/Cartel</th> <th scope='col'>Temática</th> <th scope='col'>MedioP</th> <th scope='col'>Monto $</th> <th scope='col'>Us</th> <th scope='col'>CTO</th> <th scope='col'>OPC</th> </tr></thead><tbody>"); //<th scope='col'>GMaps</th> <th scope='col'>Form</th> <th scope='col'>WPP</th> //<th scope='col'>Cant</th> <th scope='col'>Zona</th> <th scope='col'>¿Archivo?</th> <th scope='col'>Diseño referido</th>
                         for (var i = 0; i < response.d.length; i++) {
 
                             //var goToFormulario = "<a id='btnURL' role='button' href='" + response.d[i].URL_short + "' class='btn btn-warning glyphicon fa fa-wpforms' title='' target='_blank'></a>";
@@ -341,6 +341,7 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
                             check_nullValues(response.d[i].lblTipo) + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(response.d[i].lblTematica) + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(response.d[i].lblMedioP) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblMonto) + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(response.d[i].lblUsuario) + "</td> <td class='td-very_short' " + text_color + ">" +
                             //check_nullValues(response.d[i].lblCantidad) + "</td> <td class='td-very_short' " + text_color + ">" +
                             //check_nullValues(response.d[i].lblZona) + "</td><td class='td-short' " + text_color + ">" +

@@ -111,6 +111,10 @@
             font-size: x-large;
         }
 
+        #ddlMedioDePago-button {
+            width: 47% !important;
+        }
+
         .ddlBorder {
             border-style: solid;
             border-width: 1px;
@@ -346,7 +350,6 @@
                                             <div class="form-group unselectable">
                                                 <input id="txbFecha" type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" tabindex="6" runat="server" clientidmode="static" />
                                             </div>
-                                            <hr />
 
                                             <div class="form-group" id="dir_group" style="display: none;">
                                                 <div class="form-group row" style="margin-left: 0; margin-right: 0;">
@@ -358,7 +361,6 @@
                                                     <input id="txbDireccion_esquina" class="form-control txbEditable pull-right" placeholder="Esquina" type="text" tabindex="10" runat="server" clientidmode="static" style="width: 47%;" />
                                                 </div>
                                             </div>
-                                            <asp:DropDownList ID="ddlMedioDePago" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />
 
                                             <div class="form-group" id="dir_groupX" style="display: none;">
                                                 Dirección escrita
@@ -366,13 +368,26 @@
                                                 <hr />
                                             </div>
 
+                                            <hr />
+                                            <label class="_label1 unselectable" style="font-weight: normal;">4) Datos del pago</label>
+                                            <br />
+
+                                            <div class="form-group" id="pago_group">
+                                                <div class="form-group row" style="margin-left: 0; margin-right: 0;">
+                                            <asp:DropDownList ID="ddlMedioDePago" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required ddlMedioDePago" tabindex="11"/>
+                                                    <%--<input id="Text1" class="form-control txbEditable ctrl-required pull-left" placeholder="Calle" type="text" tabindex="7" runat="server" clientidmode="static" style="width: 47%;" />--%>
+                                                    <input id="txbMonto" class="form-control txbEditable pull-right" placeholder="Monto $" type="number" tabindex="12" runat="server" clientidmode="static" style="width: 47%;" />
+                                                </div>
+                                            </div>
+
+
                                             <div class="form-group unselectable" style="display: none;">
 
-                                                <style>
+                                                <style type="text/css>
                                                     #map-canvas {
                                                         width: 400px;
                                                         height: 400px;
-                                                    }
+                                                    }                                                   
                                                 </style>
 
                                                 <div class="form-group" id="map_group">

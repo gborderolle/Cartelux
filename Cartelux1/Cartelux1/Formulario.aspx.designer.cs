@@ -193,6 +193,15 @@ namespace Cartelux1 {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txbDireccion_esquina;
         
         /// <summary>
+        /// txbDireccion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txbDireccion;
+        
+        /// <summary>
         /// ddlMedioDePago control.
         /// </summary>
         /// <remarks>
@@ -202,13 +211,13 @@ namespace Cartelux1 {
         protected global::System.Web.UI.WebControls.DropDownList ddlMedioDePago;
         
         /// <summary>
-        /// txbDireccion control.
+        /// txbMonto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txbDireccion;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txbMonto;
         
         /// <summary>
         /// btnConfirmar1 control.

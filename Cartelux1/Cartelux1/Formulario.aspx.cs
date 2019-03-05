@@ -224,6 +224,7 @@ namespace Cartelux1
                                 txbNombre.Value = _cliente.Nombre;
                                 txbTelefono.Value = _cliente.Telefono;
                                 txbEmail.Value = _cliente.Email;
+                                txbMonto.Value = _formulario.Monto.ToString();
                                 //txbDocumento.Value = _cliente.NroDocumento.ToString();
 
                                 //if (_cliente.NroDocumento.ToString().Length > 8)
@@ -497,6 +498,7 @@ namespace Cartelux1
                 txbNombre.Attributes.Add("readonly", "readonly");
                 txbTelefono.Attributes.Add("readonly", "readonly");
                 txbEmail.Attributes.Add("readonly", "readonly");
+                txbMonto.Attributes.Add("readonly", "readonly");
 
                 // Entrega
                 txbDireccion_calle.Attributes.Add("readonly", "readonly");
@@ -518,6 +520,7 @@ namespace Cartelux1
                 txbNombre.Attributes.Add("readonly", "false");
                 txbTelefono.Attributes.Add("readonly", "false");
                 txbEmail.Attributes.Add("readonly", "false");
+                txbMonto.Attributes.Add("readonly", "false");
 
                 // Entrega
                 txbDireccion_calle.Attributes.Add("readonly", "false");
@@ -624,6 +627,13 @@ namespace Cartelux1
                     pedidos _pedido = (pedidos)context.pedidos.FirstOrDefault(v => v.Formulario_ID.Equals(_formulario.Formulario_ID));
                     if (_pedido != null)
                     {
+                        int? txbMonto_int = _formulario.Monto;
+                        if (!string.IsNullOrWhiteSpace(txbMonto.Value))
+                        {
+                            txbMonto_int = int.Parse(txbMonto.Value);
+                        }
+                        _formulario.Monto = txbMonto_int;
+
                         // Update cantidad de Pedidos
                         int cantidad = _pedido.Cantidad;
                         if (!string.IsNullOrWhiteSpace(hdnPedidoCantidad.Value))
@@ -929,6 +939,17 @@ namespace Cartelux1
                     }
                 }
                 _pedido.Cantidad = cantidad;
+
+                int txbMonto_int = 0;
+                if (!string.IsNullOrWhiteSpace(txbMonto.Value))
+                {
+                    if (!int.TryParse(txbMonto.Value, out txbMonto_int))
+                    {
+                        txbMonto_int = 0;
+                        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, txbMonto.Value);
+                    }
+                }
+                _formulario.Monto = txbMonto_int;
 
                 bool isColocacion_entrega = false;
 
@@ -2288,6 +2309,7 @@ namespace Cartelux1
             txbNombre.Value = string.Empty;
             txbTelefono.Value = string.Empty;
             txbEmail.Value = string.Empty;
+            txbMonto.Value = string.Empty;
 
             //txbDocumento.Value = string.Empty;
             txbDireccion_calle.Value = string.Empty;

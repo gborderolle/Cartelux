@@ -454,6 +454,7 @@
     <Content Include="Content\images\white-asc.gif" />
     <Content Include="Content\images\white-desc.gif" />
     <Content Include="Content\images\white-unsorted.gif" />
+    <Content Include="Content\img\background-cx.jpg" />
     <Content Include="Content\img\Background.jpg" />
     <Content Include="Content\img\cancel.png" />
     <Content Include="Content\img\Cartelux-bolas-ico2.ico" />

@@ -398,13 +398,19 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
+                                                <asp:TemplateField HeaderText="Monto $">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblMonto" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
                                                 <asp:TemplateField HeaderText="Temática">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblTematica" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Usuario">
+                                                <asp:TemplateField HeaderText="Us">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblUsuario" runat="server" CommandName="View" />
                                                     </ItemTemplate>

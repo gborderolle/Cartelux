@@ -257,6 +257,12 @@ namespace Cartelux1
                                 }
                             }
 
+                            lbl1 = e.Row.FindControl("lblMonto") as Label;
+                            if (lbl1 != null)
+                            {
+                                lbl1.Text = _formulario.Monto.ToString();
+                            }
+
                             lbl1 = e.Row.FindControl("lblUsuario") as Label;
                             if (lbl1 != null)
                             {
@@ -1030,13 +1036,17 @@ namespace Cartelux1
                                     #endregion END Pedido Tipo
 
                                     #region Pedido Medio de pago ---------------------------------------------------------------------------------------------------------
-                                    _GridFormulario1.lblMedioP = "Abitab";
+                                    _GridFormulario1.lblMedioP = "N/D";
                                     lista_pedido_mediosDePago _lista_pedido_mediosDePago = (lista_pedido_mediosDePago)context.lista_pedido_mediosDePago.FirstOrDefault(c => c.Pedido_mediosDePago_ID == _pedido.Pedido_MedioDePago_ID);
                                     if (_lista_pedido_mediosDePago != null && !string.IsNullOrWhiteSpace(_lista_pedido_mediosDePago.Nombre))
                                     {
                                         _GridFormulario1.lblMedioP = _lista_pedido_mediosDePago.Nombre;
                                     }
                                     #endregion END Pedido Medio de pago
+
+                                    #region Pedido Monto ---------------------------------------------------------------------------------------------------------
+                                    _GridFormulario1.lblMonto = _formulario.Monto;
+                                    #endregion END Monto
 
                                     #region Pedido Temática ---------------------------------------------------------------------------------------------------------
                                     _GridFormulario1.lblTematica = "N/D";
@@ -1079,6 +1089,7 @@ namespace Cartelux1
             public string lblTamano_largo_cm { get; set; }
             public string lblTipo { get; set; }
             public string lblMedioP { get; set; }
+            public int? lblMonto { get; set; }
             public string lblTematica { get; set; }
             public string lblUsuario { get; set; }
             public int lblCantidad { get; set; }
