@@ -398,7 +398,7 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Monto $">
+                                                <asp:TemplateField HeaderText="$ Monto">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblMonto" runat="server" CommandName="View" />
                                                     </ItemTemplate>

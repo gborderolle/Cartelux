@@ -546,8 +546,8 @@ namespace Cartelux1
             string methodName = stackFrame.GetMethod().Name;
 
             bool save_ok = true;
+            bool formularioYaExiste = false;
 
-            bool existe_form = false;
             //string serie_str = GetURLParam_Decrypted("ID"); 
             // Existe el formulario con la serie?
             string serie_str = string.Empty;
@@ -564,10 +564,10 @@ namespace Cartelux1
                     _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Serie.Equals(serie_str));
                     if (_formulario != null)
                     {
-                        existe_form = true;
+                        formularioYaExiste = true;
                     }
                 }
-                if (!existe_form)
+                if (!formularioYaExiste)
                 {
                     _formulario = new formularios();
                 }
@@ -577,8 +577,8 @@ namespace Cartelux1
                 // Cliente
                 _formulario.Cliente_ID = Cliente_Nuevo(context);
 
-                // Nuevo formulario
-                if (!existe_form)
+                // ---------------------------------- NUEVO Formulario
+                if (!formularioYaExiste)
                 {
                     // Genero la nueva Serie para el formulario
                     serie_str = Extras.Generar_Serie();
@@ -620,6 +620,7 @@ namespace Cartelux1
                 }
                 else
                 {
+                    // ---------------------------------- YA EXISTE Formulario
                     #region Pedido ya existe
 
                     // Pedido ya existe
@@ -2204,7 +2205,14 @@ namespace Cartelux1
             }
             string fecha_entrega = GetDatetimeFormated(txbFecha.Value).ToString(GlobalVariables.ShortDateTime_format1);
             string day_name = GetDatetimeFormated(txbFecha.Value).ToString("ddd", new CultureInfo("es-UY"));
-            string url = HttpContext.Current.Request.Url.AbsoluteUri + "?form_serie=" + serie;
+
+            string url = HttpContext.Current.Request.Url.AbsoluteUri;
+
+            if (Request.QueryString["form_serie"] == null)
+            {
+                url += "?form_serie=" + serie;
+            }
+
             if (!string.IsNullOrWhiteSpace(nombre) || !string.IsNullOrWhiteSpace(telefono) || !string.IsNullOrWhiteSpace(fecha_entrega) || !string.IsNullOrWhiteSpace(url))
             {
                 //create the mail message 

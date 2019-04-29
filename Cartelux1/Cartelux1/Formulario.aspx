@@ -111,6 +111,10 @@
             font-size: x-large;
         }
 
+        .price {
+            text-align: right;
+        }
+
         #ddlMedioDePago-button {
             width: 47% !important;
         }
@@ -380,10 +384,16 @@
                                                 </div>
                                             </div>
 
+                                            <div class="form-group unselectable">
+                                                <asp:Button ID="btnConfirmar1" runat="server" CssClass="form-control btn btn-danger btnConfirm1" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm_tab1();" ClientIDMode="Static" Text="GUARDAR" />
+                                            </div>
+                                            <div class="form-group unselectable">
+                                                <asp:Button ID="btnLimpiar" runat="server" CssClass="btn btn-info btnConfirm3" OnClick="btnLimpiar_ServerClick" ClientIDMode="Static" Text="Limpiar datos" />
+                                            </div>
 
                                             <div class="form-group unselectable" style="display: none;">
 
-                                                <style type="text/css>
+                                                <style type="text/css">
                                                     #map-canvas {
                                                         width: 400px;
                                                         height: 400px;
@@ -397,13 +407,6 @@
                                                     <p id="mapSearch_msg" style="font-size: small; color: red;">Asegúrese que la ubicación en el mapa sea la correcta por favor</p>
                                                 </div>
 
-                                            </div>
-
-                                            <div class="form-group unselectable">
-                                                <asp:Button ID="btnConfirmar1" runat="server" CssClass="form-control btn btn-danger btnConfirm1" OnClick="btnConfirmar_ServerClick" OnClientClick="return pre_confirm_tab1();" ClientIDMode="Static" Text="GUARDAR" />
-                                            </div>
-                                            <div class="form-group unselectable">
-                                                <asp:Button ID="btnLimpiar" runat="server" CssClass="btn btn-info btnConfirm3" OnClick="btnLimpiar_ServerClick" ClientIDMode="Static" Text="Limpiar datos" />
                                             </div>
 
                                         </div>
