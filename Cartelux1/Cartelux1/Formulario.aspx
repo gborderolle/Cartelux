@@ -327,14 +327,12 @@
 
                                             <br />
                                             <a id="aLinkToUnitegallery" href="UniteGallery.aspx" style="color: darkgreen; display: none;">ELEGIR DISEÑO</a>
-                                            <br />
-
                                             <!--Radio group-->
-                                            <div class="row-short pull-left">
+                                            <%--<div class="row-short pull-left">
                                                 Tipo de cartel: 
                                                 <asp:RadioButton ID="radImpreso1" runat="server" ClientIDMode="Static" CssClass="radio-inline hand-cursor" Checked="true" Text="&nbsp;IMPRESO" GroupName="radImpreso" />
                                                 <asp:RadioButton ID="radImpreso2" runat="server" ClientIDMode="Static" CssClass="radio-inline hand-cursor" Text="&nbsp;PINTADO" GroupName="radImpreso" />
-                                            </div>
+                                            </div>--%>
                                             <!--Radio group-->
                                             <br />
                                             <div class="form-group unselectable" style="display: none;">
@@ -428,163 +426,6 @@
                                 </div>
 
                             </div>
-
-                            <div class="tab-pane fade in" id="tabsPedidos_2">
-
-                                <%--<div class="row" style="margin: auto; display: inline-flex; width: 100%;">
-                                    <div class="col-sm-12 col-md-12" style="margin: auto; padding: 0;">
-                                        <div class="login-container sub-form">
-                                            <label class="_label1 unselectable">Contacto cliente</label>
-                                            <div class="form-group unselectable">
-                                                Teléfono
-                                                <div class="row-special" style="display: flex;">
-                                                    <input class="form-control" id="txbCX_tel" readonly="true" style="width: 90%; display: inline-block; margin-right: 10px;" />
-                                                    <a href="#" class="btn btn-warning" style="display: inline-block;" onclick="clientWhatsApp()">
-                                                        <i class="fa fa-whatsapp fa-2x"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="form-group unselectable">
-                                                Google Maps
-                                                <div class="row-special" style="display: flex;">
-                                                    <input class="form-control" id="txbCX_URL" readonly="true" style="width: 90%; display: inline-block; margin-right: 10px;" />
-                                                    <a href="#" class="btn btn-warning" style="display: inline-block;" onclick="clientGoogleMaps()">
-                                                        <i class="fa fa-map fa-2x"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="form-group unselectable">
-                                                Dirección
-                                                <div class="row-special" style="display: flex;">
-                                                    <input class="form-control" type="text" tabindex="5" runat="server" id="txbCX_dir" clientidmode="static" readonly="true" />
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>--%>
-
-                                <div class="row" style="margin: auto; display: inline-flex; width: 100%;">
-
-                                    <div class="col-sm-12 col-md-12" style="margin: auto; padding: 0;">
-                                        <div class="login-container sub-form">
-                                            <label class="_label1 unselectable" style="font-weight: normal;">1) Ingrese sus datos</label>
-                                            <div class="form-group unselectable">
-                                                <input id="txbTelefono_tab2" class="form-control ctrl-required" type="number" placeholder="Teléfono de contacto" runat="server" clientidmode="static" pattern=".{6,}" title="6 dígitos mínimo" />
-                                            </div>
-                                            <div class="form-group unselectable">
-                                                <input id="txbNombre_tab2" class="form-control txbEditable ctrl-required" placeholder="Nombre completo / Empresa" type="text" runat="server" clientidmode="static" />
-                                            </div>
-                                            <!--Radio group-->
-                                            <div style="display: none;">
-                                                <div class="row-short pull-left">
-                                                    Tipo de documento: 
-                                                <asp:RadioButton ID="radDoc1_tab2" runat="server" ClientIDMode="Static" CssClass="radio-inline hand-cursor radio2" Text="&nbsp;CI/DNI" GroupName="radDoc_tab2" />
-                                                    <asp:RadioButton ID="radDoc2_tab2" runat="server" ClientIDMode="Static" CssClass="radio-inline hand-cursor radio2" Text="&nbsp;RUT" GroupName="radDoc_tab2" />
-                                                </div>
-                                                <div class="form-group unselectable">
-                                                    <input id="txbDocumento_tab2" class="form-control txbEditable ctrl-required" placeholder="Documento - Sin puntos ni guiones" type="number" runat="server" clientidmode="static" />
-                                                </div>
-                                            </div>
-                                            <!--Radio group-->
-                                            <hr />
-                                            <label class="_label1 unselectable" style="font-weight: normal;">2) Datos del roll up</label>
-                                            <br />
-
-                                            <%--<asp:DropDownList ID="ddlTipoCartel" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required" />--%>
-
-                                            <asp:DropDownList ID="ddlTamano1_tab2" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required form-control" />
-                                            <label style="font-weight: normal;">¿Tiene el diseño?</label>
-                                            <asp:CheckBox ID="chbBosquejo_tab2" runat="server" ClientIDMode="Static" CssClass="txbEditable" Enabled="false" TextAlign="Left" />
-                                            <a id="aCollapse_bosquejo_tab2" data-toggle="collapse" href="#div_bosquejo_tab2" class="collapsed">Cargar aquí</a>
-                                            <div id="div_bosquejo_tab2" class="col-xs-12 col-sm-12 col-md-12 panel-collapse collapse in" aria-expanded="false">
-                                                <div class="form-group unselectable">
-                                                    <p style="font-size: small;">Si lo desea cargue el disñeo a imprimir aquí</p>
-                                                    <asp:FileUpload ID="MyFileUpload_tab2" runat="server" accept="image/*" />
-                                                </div>
-                                                <hr />
-                                            </div>
-
-                                            <br />
-                                            <br />
-                                            <div class="form-group unselectable" style="display: none;">
-                                                <asp:TextBox runat="server" ID="txbTexto1_tab2" TextMode="multiline" CssClass="form-control txbEditable multitext" placeholder="Indicaciones del diseño (opcional)"></asp:TextBox>
-                                            </div>
-
-                                            <hr />
-                                            <label class="_label1 unselectable" style="font-weight: normal;">3) Datos de la entrega</label>
-                                            <br />
-
-                                            <asp:DropDownList ID="ddlTipoEntrega1_tab2" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required ddlBorder"></asp:DropDownList>
-
-                                            <div class="form-group unselectable">
-                                                <input id="txbCiudad_tab2" class="form-control txbEditable ctrl-required" placeholder="Ciudad de envío" type="text" runat="server" clientidmode="static" />
-                                            </div>
-                                            <div class="form-group unselectable">
-                                                <input id="txbFecha_tab2" type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" runat="server" clientidmode="static" />
-                                            </div>
-                                            <hr />
-
-                                            <div class="form-group" id="dir_group_tab2" style="display: none;">
-                                                <div class="form-group row" style="margin-left: 0; margin-right: 0;">
-                                                    <input id="txbDireccion_calle_tab2" class="form-control txbEditable ctrl-required pull-left" placeholder="Calle" type="text" runat="server" clientidmode="static" style="width: 45%;" />
-                                                    <input id="txbDireccion_numero_tab2" class="form-control txbEditable pull-right" placeholder="Número de puerta" type="number" runat="server" clientidmode="static" style="width: 45%;" />
-                                                </div>
-                                                <div class="form-group row" style="margin-left: 0; margin-right: 0;">
-                                                    <input id="txbDireccion_apto_tab2" class="form-control txbEditable pull-left" placeholder="Apto" type="text" runat="server" clientidmode="static" style="width: 45%;" />
-                                                    <input id="txbDireccion_esquina_tab2" class="form-control txbEditable pull-right" placeholder="Esquina" type="text" runat="server" clientidmode="static" style="width: 45%;" />
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group" id="dir_groupX_tab2" style="display: none;">
-                                                Dirección escrita
-                                                <input id="txbDireccion_tab2" class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" runat="server" clientidmode="static" />
-                                                <hr />
-                                            </div>
-
-                                            <%--<div class="form-group unselectable" style="display: none;">
-
-                                                <style>
-                                                    #map-canvas {
-                                                        width: 400px;
-                                                        height: 400px;
-                                                    }
-                                                </style>
-
-                                                <div class="form-group" id="map_group_tab2">
-                                                    Dirección en el Mapa
-                                                    <input type="text" id="mapSearch_tab2" class="form-control ctrl-required" placeholder="Dirección de entrega" />
-                                                    <div id="map-canvas_tab2" style="margin: auto; width: 100%;"></div>
-                                                    <p id="mapSearch_msg_tab2" style="font-size: small; color: red;">Asegúrese que la ubicación en el mapa sea la correcta por favor</p>
-                                                </div>
-
-                                            </div>--%>
-
-                                            <br />
-                                            <div class="form-group unselectable">
-                                                <asp:Button ID="btnConfirmar1_tab2" runat="server" CssClass="form-control btn btn-danger btnConfirm1" OnClick="btnConfirmar_ServerClick_tab2" OnClientClick="return pre_confirm_tab2();" ClientIDMode="Static" Text="GUARDAR" />
-                                            </div>
-
-                                        </div>
-                                        <div class="row">
-                                            <h4 id="msj_result_tab2" runat="server" style="margin: auto; display: none;"><span class="label label-success">Los datos se guardaron correctamente</span></h4>
-                                        </div>
-                                        <hr />
-                                        <div style="font-size: small" class="unselectable">
-                                            <div class="row" style="margin-left: 0; margin-right: 0;">
-                                                <span>Última actualización del pedido:</span>
-                                                <label id="lblLastUpdate_tab2" runat="server">-</label>
-                                            </div>
-                                            <div class="row" style="margin-left: 0; margin-right: 0;">
-                                                <a href="http://cartelux.uy/album" title="" target="_blank">Click aquí para ver el álbum de fotos</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
                         </div>
                     </div>
 

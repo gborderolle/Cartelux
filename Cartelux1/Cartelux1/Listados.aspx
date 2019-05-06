@@ -50,8 +50,8 @@
         }
 
         .body-content {
-                margin-top: 30px;
-            }
+            margin-top: 30px;
+        }
 
         @media (max-width: 768px) {
             body {

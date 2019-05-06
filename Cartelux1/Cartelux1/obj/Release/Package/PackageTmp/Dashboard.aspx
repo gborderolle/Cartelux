@@ -558,7 +558,7 @@
                                 <div class="row">
 
 
-                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="x_panel tile fixed_height_320">
                                             <div class="x_title">
                                                 <h2>Pedidos</h2>
@@ -666,7 +666,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="x_panel tile fixed_height_320 overflow_hidden">
                                             <div class="x_title">
                                                 <h2>Temáticas</h2>
@@ -681,9 +681,6 @@
                                             <div class="x_content">
                                                 <table class="" style="width: 100%">
                                                     <tr>
-                                                        <th>
-                                                            <p class="">Distribución</p>
-                                                        </th>
                                                         <th>
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                                                 <p class="">Temáticas 1</p>
@@ -700,9 +697,6 @@
                                                         </th>
                                                     </tr>
                                                     <tr>
-                                                        <td>
-                                                            <canvas class="canvasDoughnut" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
-                                                        </td>
                                                         <td>
                                                             <table class="tile_info">
                                                                 <tr>
@@ -765,7 +759,7 @@
 
 
 
-                                    <div class="right_col" role="main" style="margin-left: 0">
+                                    <%--<div class="right_col" role="main" style="margin-left: 0">
 
 
                                         <div class="col-md-4 col-sm-4 col-xs-12">
@@ -790,7 +784,7 @@
                                             </div>
                                         </div>
 
-                                    </div>
+                                    </div>--%>
 
 
 

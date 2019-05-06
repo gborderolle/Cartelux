@@ -22,6 +22,11 @@ function load_quicksearch() {
     }
 }
 
+function empty_quicksearch() {
+    $("#txbSearch").val("");
+    $("#txbSearch").trigger("keyup");
+}
+
 function show_tabla() {
     if (QueryString !== null) {
         if (QueryString['tabla'] !== null && QueryString['tabla'] !== "") {
@@ -43,7 +48,7 @@ function show_tabla() {
 }
 
 function show_dato() {
-    if (QueryString !== null) {
+    if (QueryString !== null) { // || _PEDIDOS === 1
         if (_CLIENTES === 1) {
             if (QueryString['dato'] !== null && QueryString['dato'] !== "") {
                 var dato = QueryString['dato'];

@@ -34,6 +34,7 @@
         <asp:BoundField DataField="lblTematica" HeaderText="Temática" />
         <asp:BoundField DataField="lblTamano" HeaderText="Tamaño" />
         <asp:BoundField DataField="lblTipoEntrega" HeaderText="Tipo Entrega"/>
+        <asp:BoundField DataField="lblImporte" HeaderText="$ Monto" DataFormatString="{0:C2}"/>
         <asp:BoundField DataField="lblComentarios" HeaderText="Comentarios"/>
     </Columns>
 

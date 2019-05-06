@@ -66,8 +66,8 @@ namespace Cartelux1
 
         private void LoadAttributes()
         {
-            radImpreso1.Attributes.Add("data-radiocharm-label", "Impreso");
-            radImpreso2.Attributes.Add("data-radiocharm-label", "Pintado");
+            //radImpreso1.Attributes.Add("data-radiocharm-label", "Impreso");
+            //radImpreso2.Attributes.Add("data-radiocharm-label", "Pintado");
         }
 
         protected void btnEdit_Click(object sender, EventArgs e)
@@ -109,7 +109,8 @@ namespace Cartelux1
 
                 // DDL Tamaños - Pasacalle
                 dt1 = new DataTable();
-                dt1 = Extras.ToDataTable(context.lista_pedido_tamanos.Where(v => v.Agrupacion == Agrupacion.Todas.ToString() || v.Agrupacion == Agrupacion.Pasacalle.ToString()).OrderBy(e => e.Nombre).ToList());
+                //dt1 = Extras.ToDataTable(context.lista_pedido_tamanos.Where(v => v.Agrupacion == Agrupacion.Todas.ToString() || v.Agrupacion == Agrupacion.Pasacalle.ToString()).OrderBy(e => e.Nombre).ToList());
+                dt1 = Extras.ToDataTable(context.lista_pedido_tamanos.OrderBy(e => e.Nombre).ToList());
                 ddlTamano1.DataSource = dt1;
                 ddlTamano1.DataTextField = "Nombre";
                 ddlTamano1.DataValueField = "Codigo";
@@ -133,24 +134,6 @@ namespace Cartelux1
                 ddlTematica.DataValueField = "Codigo";
                 ddlTematica.DataBind();
                 ddlTematica.Items.Insert(0, new ListItem("Temática", "0"));
-
-                // DDL Tamaños - Roll up
-                dt1 = new DataTable();
-                dt1 = Extras.ToDataTable(context.lista_pedido_tamanos.Where(v => v.Agrupacion == Agrupacion.Todas.ToString() || v.Agrupacion == Agrupacion.Rollup.ToString()).OrderBy(e => e.Nombre).ToList());
-                ddlTamano1_tab2.DataSource = dt1;
-                ddlTamano1_tab2.DataTextField = "Nombre";
-                ddlTamano1_tab2.DataValueField = "Codigo";
-                ddlTamano1_tab2.DataBind();
-                ddlTamano1_tab2.Items.Insert(0, new ListItem("Tamaño", "0"));
-
-                // DDL Entregas - Roll up
-                dt1 = new DataTable();
-                dt1 = Extras.ToDataTable(context.lista_entregas_tipos.Where(v => v.Agrupacion == Agrupacion.Todas.ToString() || v.Agrupacion == Agrupacion.Rollup.ToString()).OrderBy(e => e.Nombre).ToList());
-                ddlTipoEntrega1_tab2.DataSource = dt1;
-                ddlTipoEntrega1_tab2.DataTextField = "Nombre";
-                ddlTipoEntrega1_tab2.DataValueField = "Codigo";
-                ddlTipoEntrega1_tab2.DataBind();
-                ddlTipoEntrega1_tab2.Items.Insert(0, new ListItem("Tipo de entrega", "0"));
 
                 // DDL Medio de pago
                 dt1 = new DataTable();
@@ -266,30 +249,30 @@ namespace Cartelux1
                                     {
                                         #region GET Material
 
-                                        int material = 1;
-                                        lista_pedido_materiales _pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(v => v.Pedido_Material_ID.Equals(_pedido.Pedido_Material_ID));
-                                        if (_pedido_material != null)
-                                        {
-                                            material = _pedido_material.Codigo;
-                                        }
+                                        //int material = 1;
+                                        //lista_pedido_materiales _pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(v => v.Pedido_Material_ID.Equals(_pedido.Pedido_Material_ID));
+                                        //if (_pedido_material != null)
+                                        //{
+                                        //    material = _pedido_material.Codigo;
+                                        //}
 
-                                        switch (material)
-                                        {
-                                            case 1:
-                                                {
-                                                    // Impreso
-                                                    radImpreso1.Checked = true;
-                                                    radImpreso2.Checked = false;
-                                                    break;
-                                                }
-                                            case 2:
-                                                {
-                                                    // Pintado
-                                                    radImpreso1.Checked = false;
-                                                    radImpreso2.Checked = true;
-                                                    break;
-                                                }
-                                        }
+                                        //switch (material)
+                                        //{
+                                        //    case 1:
+                                        //        {
+                                        //            // Impreso
+                                        //            radImpreso1.Checked = true;
+                                        //            radImpreso2.Checked = false;
+                                        //            break;
+                                        //        }
+                                        //    case 2:
+                                        //        {
+                                        //            // Pintado
+                                        //            radImpreso1.Checked = false;
+                                        //            radImpreso2.Checked = true;
+                                        //            break;
+                                        //        }
+                                        //}
 
                                         #endregion GET Material
 
@@ -391,79 +374,6 @@ namespace Cartelux1
                                     } // if isPasacalle
 
                                     #endregion IS PASACALLE
-
-                                    #region IS ROLL UP
-
-                                    else
-                                    {
-                                        ScriptManager.RegisterStartupScript(this, this.GetType(), "Set ROLLUP", "<script type='text/javascript'>$('#aTabsPedidos_2').click();</script>", false);
-
-                                        #region GET Diseño
-
-                                        pedido_disenos _pedido_diseno = (pedido_disenos)context.pedido_disenos.FirstOrDefault(v => v.Pedido_Diseno_ID.Equals(_pedido.Pedido_Diseno_ID));
-                                        if (_pedido_diseno != null)
-                                        {
-                                            txbTexto1_tab2.Text = _pedido_diseno.Texto;
-                                            chbBosquejo_tab2.Checked = string.IsNullOrWhiteSpace(_pedido_diseno.Boceto_nombre) ? false : true;
-                                        }
-
-                                        #endregion GET Diseño
-
-                                        #region GET Entrega
-
-                                        pedido_entregas _pedido_entrega = (pedido_entregas)context.pedido_entregas.FirstOrDefault(v => v.Pedido_Entrega_ID.Equals(_pedido.Pedido_Entrega_ID));
-                                        if (_pedido_entrega != null)
-                                        {
-                                            txbDireccion_calle_tab2.Value = _pedido_entrega.Direccion_calle;
-                                            txbDireccion_numero_tab2.Value = _pedido_entrega.Direccion_numero;
-                                            txbDireccion_apto_tab2.Value = _pedido_entrega.Direccion_apto;
-                                            txbDireccion_esquina_tab2.Value = _pedido_entrega.Direccion_esquina;
-
-                                            string sqlFormattedDate = _pedido_entrega.Fecha_entrega.HasValue ? _pedido_entrega.Fecha_entrega.Value.ToString(GlobalVariables.ShortDateTime_format1) : "null";
-                                            txbFecha_tab2.Value = sqlFormattedDate;
-
-                                            txbCiudad_tab2.Value = _pedido_entrega.Ciudad;
-
-                                            if (_pedido_entrega.Entrega_Tipo_ID > 0)
-                                            {
-                                                lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(v => v.Entrega_Tipo_ID.Equals(_pedido_entrega.Entrega_Tipo_ID));
-                                                if (_lista_entregas_tipo != null)
-                                                {
-                                                    ddlTipoEntrega1_tab2.SelectedValue = _lista_entregas_tipo.Codigo.ToString();
-                                                    int codigo = _lista_entregas_tipo.Codigo;
-                                                    /*
-                                                     * Codigo = 1: Colocación
-                                                     * Codigo = 2: Envío a domicilio
-                                                     * Codigo = 3: Envío al interior
-                                                     * Codigo = 4: Retiro en el taller
-                                                     * */
-                                                    if (codigo == 1 || codigo == 2)
-                                                    {
-                                                        ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>showControl_withDelay('dir_group_tab2', true);</script>", false);
-                                                    }
-                                                    else if (codigo == 3)
-                                                    {
-                                                        ScriptManager.RegisterStartupScript(this, this.GetType(), "Alerta", "<script type='text/javascript'>showControl_withDelay('txbCiudad_tab2', true);</script>", false);
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        #endregion GET Entrega
-
-                                        #region Tamaño
-                                        if (_pedido.Pedido_Tamano_ID > 0)
-                                        {
-                                            lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(v => v.Pedido_Tamano_ID.Equals(_pedido.Pedido_Tamano_ID));
-                                            if (_lista_pedido_tamano != null)
-                                            {
-                                                ddlTamano1_tab2.SelectedValue = _lista_pedido_tamano.Codigo.ToString();
-                                            }
-                                        }
-                                        #endregion
-                                    }
-
-                                    #endregion IS ROLL UP
                                 }
                             } // end pedido
 
@@ -474,7 +384,6 @@ namespace Cartelux1
                     else
                     {
                         //txbTelefono.Value = tel_str;
-                        //txbTelefono_tab2.Value = tel_str;
                     }
                 }
             }
@@ -674,19 +583,20 @@ namespace Cartelux1
                         #endregion
 
                         #region Material = Pintado / Impreso
-                        int material = 1; // Impreso
-                        if (!radImpreso1.Checked)
-                        {
-                            material = 2;
-                        }
+                        //int material = 1; // Impreso
+                        //if (!radImpreso1.Checked)
+                        //{
+                        //    material = 2;
+                        //}
 
-                        int materialID = _pedido.Pedido_Material_ID;
-                        lista_pedido_materiales _pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(v => v.Codigo.Equals(material));
-                        if (_pedido_material != null)
-                        {
-                            materialID = _pedido_material.Pedido_Material_ID;
-                        }
-                        _pedido.Pedido_Material_ID = materialID;
+                        //int materialID = _pedido.Pedido_Material_ID;
+                        //lista_pedido_materiales _pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(v => v.Codigo.Equals(material));
+                        //if (_pedido_material != null)
+                        //{
+                        //    materialID = _pedido_material.Pedido_Material_ID;
+                        //}
+                        //_pedido.Pedido_Material_ID = materialID;
+                        _pedido.Pedido_Material_ID = 1;
                         #endregion
 
                         #region UPDATE Tamaño
@@ -869,10 +779,7 @@ namespace Cartelux1
             {
                 gmaps_url += txbDireccion_calle.Value + " " + txbDireccion_numero.Value;
             }
-            else
-            {
-                gmaps_url += txbDireccion_calle_tab2.Value + " " + txbDireccion_numero_tab2.Value;
-            }
+            
             return gmaps_url;
         }
 
@@ -1018,19 +925,20 @@ namespace Cartelux1
                     #endregion
 
                     #region Material = Pintado / Impreso
-                    int material = 1; // Impreso
-                    if (!radImpreso1.Checked)
-                    {
-                        material = 2;
-                    }
+                    //int material = 1; // Impreso
+                    //if (!radImpreso1.Checked)
+                    //{
+                    //    material = 2;
+                    //}
 
-                    int materialID = 2;
-                    lista_pedido_materiales _pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(v => v.Codigo.Equals(material));
-                    if (_pedido_material != null)
-                    {
-                        materialID = _pedido_material.Pedido_Material_ID;
-                    }
-                    _pedido.Pedido_Material_ID = materialID;
+                    //int materialID = 2;
+                    //lista_pedido_materiales _pedido_material = (lista_pedido_materiales)context.lista_pedido_materiales.FirstOrDefault(v => v.Codigo.Equals(material));
+                    //if (_pedido_material != null)
+                    //{
+                    //    materialID = _pedido_material.Pedido_Material_ID;
+                    //}
+                    //_pedido.Pedido_Material_ID = materialID;
+                    _pedido.Pedido_Material_ID = 1;
                     #endregion
 
                     #region Temática
@@ -1178,166 +1086,6 @@ namespace Cartelux1
                 } // if isPasacalle
 
                 #endregion IS PASACALLE
-
-                #region IS ROLL UP
-
-                else
-                {
-                    #region Tipo cartel = Pasacalle / Roll up
-
-                    /* Código tipo pedido
-                     * 1 - Pasacalle
-                     * 2 - Pancarta
-                     * 3 - Lona informativa / decorativa
-                     * 4 - Roll up
-                     * */
-
-                    int tipo_codigo = 4; // Roll up
-                    _pedido.Pedido_Tipo_ID = 5; // ID Pasacalle (por si falla)
-                    lista_pedido_tipos _pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(v => v.Codigo.Equals(tipo_codigo));
-                    if (_pedido_tipo != null)
-                    {
-                        _pedido.Pedido_Tipo_ID = _pedido_tipo.Pedido_Tipo_ID;
-                    }
-
-                    #endregion
-
-                    #region Material = Pintado / Impreso
-                    _pedido.Pedido_Material_ID = 1; // 1 Impreso
-                    #endregion
-
-                    #region Tamaño
-                    _pedido.Pedido_Tamano_ID = 0;
-                    if (ddlTamano1_tab2.SelectedIndex > 0)
-                    {
-                        int tamano_codigo = 1;
-                        if (!int.TryParse(ddlTamano1_tab2.SelectedValue, out tamano_codigo))
-                        {
-                            tamano_codigo = 1;
-                            Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTamano1_tab2.SelectedValue);
-                        }
-                        lista_pedido_tamanos _pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(v => v.Codigo.Equals(tamano_codigo));
-                        if (_pedido_tamano != null)
-                        {
-                            _pedido.Pedido_Tamano_ID = _pedido_tamano.Pedido_Tamano_ID;
-                        }
-                    }
-                    #endregion
-
-                    #region Temática
-                    _pedido.Pedido_Tematica_ID = 0;
-                    //if (ddlTematica.SelectedIndex > 0)
-                    //{
-                    //    int codigo = 1;
-                    //    if (!int.TryParse(ddlTematica.SelectedValue, out codigo))
-                    //    {
-                    //        codigo = 1;
-                    //        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTematica.SelectedValue);
-                    //    }
-                    //    _pedido.Pedido_Tematica_ID = codigo;
-                    //}
-
-                    #endregion
-
-                    #region NEW Diseño
-                    pedido_disenos _pedido_diseno = new pedido_disenos();
-                    _pedido_diseno.Pedido_Diseno_ID = 0;
-
-                    _pedido_diseno.Texto = txbTexto1_tab2.Text;
-
-                    context.pedido_disenos.Add(_pedido_diseno);
-                    Guardar_Contexto(context);
-
-                    int pedido_diseno_ID = Get_NextPedido_DisenoID(context);
-                    if (pedido_diseno_ID > 0)
-                    {
-                        _pedido.Pedido_Diseno_ID = pedido_diseno_ID;
-                    }
-                    #endregion
-
-                    #region NEW Entrega
-                    pedido_entregas _pedido_entrega = new pedido_entregas();
-                    _pedido_entrega.Pedido_Entrega_ID = 0;
-
-                    _pedido_entrega.Fecha_entrega = GetDatetimeFormated(txbFecha_tab2.Value);
-
-                    _pedido_entrega.Entrega_Tipo_ID = 0;
-                    if (ddlTipoEntrega1_tab2.SelectedIndex > 0)
-                    {
-                        int codigo = 1;
-                        if (!int.TryParse(ddlTipoEntrega1_tab2.SelectedValue, out codigo))
-                        {
-                            codigo = 1;
-                            Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, ddlTipoEntrega1.SelectedValue);
-                        }
-
-                        int tipoID = codigo;
-                        lista_entregas_tipos _pedido_entrega_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(v => v.Codigo.Equals(codigo));
-                        if (_pedido_entrega_tipo != null)
-                        {
-                            tipoID = _pedido_entrega_tipo.Entrega_Tipo_ID;
-                        }
-                        _pedido_entrega.Entrega_Tipo_ID = tipoID;
-
-                        /*
-                        * Codigo = 1: Colocación
-                        * Codigo = 2: Envío a domicilio
-                        * Codigo = 3: Envío al interior
-                        * Codigo = 4: Retiro en el taller
-                        * */
-                        if (codigo == 1 || codigo == 2)
-                        {
-                            _pedido_entrega.Direccion_calle = txbDireccion_calle_tab2.Value;
-                            _pedido_entrega.Direccion_numero = txbDireccion_numero_tab2.Value;
-                            _pedido_entrega.Direccion_apto = txbDireccion_apto_tab2.Value;
-                            _pedido_entrega.Direccion_esquina = txbDireccion_esquina_tab2.Value;
-                            isColocacion_entrega = true;
-                        }
-                        else if (codigo == 3)
-                        {
-                            _pedido_entrega.Ciudad = txbCiudad_tab2.Value;
-                            isColocacion_entrega = true;
-
-                            // Guarda la ciudad del Interior en Comentarios del Cliente
-                            if (_formulario != null)
-                            {
-                                int cliente_ID = _formulario.Cliente_ID;
-                                clientes _cliente = (clientes)context.clientes.FirstOrDefault(v => v.Cliente_ID.Equals(cliente_ID));
-                                if (_cliente != null)
-                                {
-                                    _cliente.Comentarios = txbCiudad.Value;
-                                }
-                            }
-                        }
-                    }
-
-                    string gmaps_url = Get_GMaps_URL(false);
-                    if (!string.IsNullOrWhiteSpace(gmaps_url))
-                    {
-                        _pedido_entrega.Google_maps_URL = gmaps_url;
-                    }
-
-                    /*
-                    // Save current LAT and LNG
-                    if (!string.IsNullOrWhiteSpace(hdnCurrentLAT.Value) && !string.IsNullOrWhiteSpace(hdnCurrentLNG.Value) && !string.IsNullOrWhiteSpace(hdnCurrentLocationURL.Value))
-                    {
-                        _pedido_entrega.Coordenadas_X = hdnCurrentLAT.Value;
-                        _pedido_entrega.Coordenadas_Y = hdnCurrentLNG.Value;
-                        _pedido_entrega.Google_maps_URL = hdnCurrentLocationURL.Value;
-                    }
-                    */
-
-                    context.pedido_entregas.Add(_pedido_entrega);
-                    Guardar_Contexto(context);
-                    int pedido_entrega_ID = Get_NextPedido_EntregaID(context);
-                    if (pedido_entrega_ID > 0)
-                    {
-                        _pedido.Pedido_Entrega_ID = pedido_entrega_ID;
-                    }
-                    #endregion
-                }
-
-                #endregion IS ROLL UP
 
                 _pedido.Formulario_ID = formulario_ID;
 
@@ -2198,11 +1946,11 @@ namespace Cartelux1
             string telefono = txbTelefono.Value;
             string email1 = txbEmail.Value;
 
-            string material = "Impreso";
-            if (!radImpreso1.Checked)
-            {
-                material = "Pintado";
-            }
+            //string material = "Impreso";
+            //if (!radImpreso1.Checked)
+            //{
+            //    material = "Pintado";
+            //}
             string fecha_entrega = GetDatetimeFormated(txbFecha.Value).ToString(GlobalVariables.ShortDateTime_format1);
             string day_name = GetDatetimeFormated(txbFecha.Value).ToString("ddd", new CultureInfo("es-UY"));
 
@@ -2283,7 +2031,7 @@ namespace Cartelux1
                 mail.Body = "<div><strong>Información básica del pedido nuevo.</strong></div>";
                 mail.Body += "<br/><div><strong>Nombre:</strong> " + nombre + "</div>";
                 mail.Body += "<div><strong>Teléfono:</strong> " + telefono + "</div>";
-                mail.Body += "<div><strong>Material:</strong> " + material + "</div>";
+                //mail.Body += "<div><strong>Material:</strong> " + material + "</div>";
                 mail.Body += "<div><strong>Entrega:</strong> " + fecha_entrega + "</div>";
                 mail.Body += "<br/><br/>";
                 mail.Body += "<div><font size='2'><strong><span style='color:#e15211'>------------------------------<wbr>------------------------------<wbr>-------------</span></strong></font></div>";
@@ -2334,8 +2082,8 @@ namespace Cartelux1
 
             radDoc1.Checked = true;
             radDoc2.Checked = false;
-            radImpreso1.Checked = true;
-            radImpreso2.Checked = false;
+            //radImpreso1.Checked = true;
+            //radImpreso2.Checked = false;
         }
 
         #endregion
