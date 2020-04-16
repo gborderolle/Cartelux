@@ -21,13 +21,13 @@
         .grand {
             background-image: url('Content/img/background-cx.jpg');
             position: absolute;
-    width: 100%;
-    min-height: 100%;
-    left: 0;
-    top: 0;
-    right: 0;
-    background-size: cover;
-    background-attachment: fixed;
+            width: 100%;
+            min-height: 100%;
+            left: 0;
+            top: 0;
+            right: 0;
+            background-size: cover;
+            background-attachment: fixed;
         }
     </style>
 
@@ -44,20 +44,20 @@
     <div class="generalContainer grand">
 
         <div class="loginFormContainer col-md-3 col-sm-10 col-xs-12">
-             <div class="loginTitleArea unselectable">
-                    <img class="loginTitleImage pull-left" src="/Content/img/login.png" />
-                    <div class="loginTitleBread">Cartelux Administrativo</div>
-                    <div class="loginTitleText">Sistema de autenticación</div>
-                </div>
+            <div class="loginTitleArea unselectable">
+                <img class="loginTitleImage pull-left" src="/Content/img/login.png" />
+                <div class="loginTitleBread">Cartelux Administrativo</div>
+                <div class="loginTitleText">Sistema de autenticación</div>
+            </div>
 
-            <div class="loginFormElements">               
+            <div class="loginFormElements">
                 <div class="loginFormContent" style="margin-bottom: 0;">
 
                     <div class="form-group unselectable">
-                <input type="text" id="txbUser1" runat="server" placeholder="Usuario" class="txbUser form-control" style="padding: 25px; max-width: initial; font-size:larger;" />
+                        <input type="text" id="txbUser1" runat="server" placeholder="Usuario" class="txbUser form-control" style="padding: 25px; max-width: initial; font-size: larger;" />
                     </div>
                     <div class="form-group unselectable">
-                <input type="password" id="txbPassword1" runat="server" placeholder="Contraseña" class="txbPassword form-control" style="padding: 25px; max-width: initial; font-size:larger;" />
+                        <input type="password" id="txbPassword1" runat="server" placeholder="Contraseña" class="txbPassword form-control" style="padding: 25px; max-width: initial; font-size: larger;" />
                     </div>
 
                 </div>
@@ -74,9 +74,10 @@
                         <div id="divMessages" class="alert alert-danger" role="alert" style="display: none; background-color: inherit; border-color: transparent; padding: 5px; margin-bottom: 5px;">
                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                             <span class="sr-only">Error:</span>
-                            <label id="lblMessages"/>
+                            <label id="lblMessages" />
                         </div>
                     </div>
+                    <label id="lblIPClient" />
                 </div>
 
             </div>

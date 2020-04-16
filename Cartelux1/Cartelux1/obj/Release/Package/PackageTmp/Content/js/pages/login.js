@@ -27,6 +27,11 @@ function ShowErrorMessage(type, exception_message) {
     $('#divMessages').show();
 }
 
+function ShowIPClient(IP_str) {
+    var msj = "Su IP es: ";
+    $('#lblIPClient').text(msj + IP_str);
+}
+
 function checkSubmit() {
     var ok = false;
     var username = $(".txbUser").val();

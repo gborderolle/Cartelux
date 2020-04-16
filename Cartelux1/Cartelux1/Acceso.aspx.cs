@@ -13,6 +13,13 @@ namespace Cartelux1
         protected void Page_Load(object sender, EventArgs e)
         {
             Logout();
+            Load_IPClient();
+        }
+
+        private void Load_IPClient()
+        {
+            string IP_client = Logs.GetIPAddress();
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "ShowIPClient", "ShowIPClient(' " + IP_client + "');", true);
         }
 
         protected void btnSubmit_candidato1_ServerClick(object sender, EventArgs e)

@@ -718,7 +718,11 @@ function month_selectMonth_reports(month_value, soloVigentes_value, soloEntrCol_
 
                         // Volver a cargar eventos sobre la grilla
                         //bindDelayEvents();
+                    } // SI NO HAY PEDIDOS EN EL MES
+                    else {
+                        get_total_recaudacion_comparacion(0);
                     }
+
 
                     // Load calendario completo
                     //loadCalendar();
@@ -739,6 +743,11 @@ function reportes_clearData() {
     $("#total_colocaciones").text(0);
     $("#total_lona_mts").text(0);
     $("#total_palos").text(0);
+
+    $("#total_recaudacion").text(0);
+    $("#total_recaudacion_porcentaje_green").text(0);
+    $("#total_recaudacion_porcentaje_red").text(0);
+    $("#total_recaudacion_anterior").text("Mes anterior: $ " + 0);
 }
 
 function reportes_loadData(total_pedidos, total_pasacalles, total_banners, total_rollups, total_colocaciones, total_envios_domicilio, total_envios_interior, total_retirosTaller, total_lona_mts, total_palos, total_carteleria, total_lonas, total_vinilos, total_banderas, total_tercializaciones, total_otros, total_recaudacion) {
@@ -848,21 +857,30 @@ function get_total_recaudacion_comparacion(total_recaudacion_actual) {
             if (recaudacion_mesAnterior_int !== null && recaudacion_mesAnterior_int) {
                 var recaudacion_mesAnterior = numberWithCommas(recaudacion_mesAnterior_int);
 
-                var porcentaje_actual = total_recaudacion_actual * 100 / recaudacion_mesAnterior_int;
+                var porcentaje_actual = total_recaudacion_actual * 100 / recaudacion_mesAnterior_int; // COMPARAR CON EL MES ANTERIOR
                 var porcentaje_actual_fixed = porcentaje_actual.toFixed(2);
-                $("#total_recaudacion_anterior").text("Mes anterior: $ " + recaudacion_mesAnterior); // COMPARAR CON EL MES ANTERIOR
+                $("#total_recaudacion_anterior").text("Mes anterior: $ " + recaudacion_mesAnterior); 
 
                 // Sube o baja, ícono y color
-                if (porcentaje_actual >= recaudacion_mesAnterior_int) {
+                if (total_recaudacion_actual >= recaudacion_mesAnterior_int) {
                     // green
+                    $("#red_group").hide();
                     $("#green_group").show();
                     $("#total_recaudacion_porcentaje_green").text(" " + porcentaje_actual_fixed + "% ");
 
                 } else {
                     // red
+                    $("#green_group").hide();
                     $("#red_group").show();
                     $("#total_recaudacion_porcentaje_red").text(" " + porcentaje_actual_fixed + "% ");
                 }
+            } else {
+                // MES ANTERIOR $0
+
+                // green
+                $("#red_group").hide();
+                $("#green_group").show();
+                $("#total_recaudacion_porcentaje_green").text(" 0% ");
             }
 
         }, // end success
