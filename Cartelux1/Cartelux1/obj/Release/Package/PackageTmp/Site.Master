@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title> Cartelux Publicidad | <%: Page.Title %> </title>
+    <title>Cartelux Publicidad | <%: Page.Title %> </title>
 
     <meta name="description" content="Cartelux Publicidad | Formulario de pedidos" />
     <meta property="og:title" content="Cartelux Publicidad | Formulario de pedidos" />
@@ -73,7 +73,8 @@
             display: block;
             width: 100%;
         }
-        .navbar-brand, .navbar-nav > li > a{
+
+        .navbar-brand, .navbar-nav > li > a {
             color: whitesmoke !important;
         }
     </style>
@@ -93,7 +94,7 @@
         <asp:ContentPlaceHolder ID="SubbodyContent" runat="server">
         </asp:ContentPlaceHolder>
 
-        <div class="navbar navbar-inverse navbar-fixed-top" style="background-image: linear-gradient(to bottom,#ef753f 0,#dc561b 100%); border-color:#dc561b;">
+        <div class="navbar navbar-inverse navbar-fixed-top" style="background-image: linear-gradient(to bottom,#ef753f 0,#dc561b 100%); border-color: #dc561b;">
             <div class="container" style="max-width: 100%;">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -115,8 +116,7 @@
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a id="lblUsername" href="#" class="usernameInfo">-</a></li>
-                                <li><a id="lblDatetime" href="#">-</a></li>
+                                <li><a runat="server" href="#" style="color:#9dc1ff !important"><%=LblUserName%></a></li>
                                 <li><a runat="server" href="~/Acceso">Salir</a></li>
                             </ul>
                         </AnonymousTemplate>
@@ -136,7 +136,7 @@
     <footer class="footer unselectable" style="font-size: small;">
         <div class="container">
             <p>&copy; <%: DateTime.Now.Year %> - Cartelux - Build: <%=Build_date%></p>
-            <p>Cartelux Publicidad. Todos los derechos reservados, marca, empresa y software registrados, 2017.</p>
+            <p>Cartelux Publicidad. Todos los derechos reservados, marca, empresa y software registrados.</p>
         </div>
     </footer>
 </body>

@@ -883,11 +883,11 @@ namespace Cartelux1
                 int last_day = DateTime.DaysInMonth(current_year, current_month);
                 DateTime date2 = new DateTime(current_year, current_month, last_day);
 
-                return GetFormularios_ByMonth(context, date1, date2);
+                return GetFormularios_PorMes(context, date1, date2);
             }
         }
 
-        public static List<formularios> GetFormularios_ByMonth(CarteluxDB context, DateTime date1, DateTime date2, bool incluye_cancelados = false)
+        public static List<formularios> GetFormularios_PorMes(CarteluxDB context, DateTime date1, DateTime date2, bool incluye_cancelados = false)
         {
             List<formularios> formularios_elements = new List<formularios>();
             if (context != null)
@@ -925,6 +925,21 @@ namespace Cartelux1
 
             }
             return formularios_elements;
+        }
+
+        public static int? GetFormularios_PorMes_GetMonto(CarteluxDB context, DateTime date1, DateTime date2)
+        {
+            int? monto = 0;
+            if (context != null)
+            {
+                List<formularios> formularios_elements = new List<formularios>();
+                formularios_elements = GetFormularios_PorMes(context, date1, date2);
+                if (formularios_elements != null && formularios_elements.Count > 0)
+                {
+                    monto = formularios_elements.Sum(v => v.Monto);
+                }
+            }
+            return monto;
         }
 
         private List<proyectos> GetProyectos_pre(int current_year, int current_month)
@@ -998,7 +1013,7 @@ namespace Cartelux1
                         DateTime date2 = new DateTime(year_int, month_int, last_day);
 
                         int number = 1;
-                        List<formularios> formularios_elements = GetFormularios_ByMonth(context, date1, date2, incluirCancelados_value);
+                        List<formularios> formularios_elements = GetFormularios_PorMes(context, date1, date2, incluirCancelados_value);
                         foreach (formularios _formulario in formularios_elements)
                         {
                             if (_formulario != null)
@@ -1193,7 +1208,7 @@ namespace Cartelux1
                                     #endregion END Pedido Medio de pago
 
                                     #region Pedido Monto ---------------------------------------------------------------------------------------------------------
-                                    _GridFormulario1.lblMonto = _formulario.Monto;
+                                    _GridFormulario1.lblMonto = _formulario.Monto;                                    
                                     #endregion END Monto
 
                                     #region Pedido Temática ---------------------------------------------------------------------------------------------------------
@@ -1225,6 +1240,50 @@ namespace Cartelux1
             return _GridFormularios_list.ToArray();
         }
 
+        [WebMethod]
+        public static int? GetData_BindGridFormularios_MesAnterior(string year_value, string month_value)
+        {
+            int? monto_mesAnterior = 0;
+            if (!string.IsNullOrWhiteSpace(year_value) && !string.IsNullOrWhiteSpace(month_value))
+            {
+                // Logger variables
+                System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
+                System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+                string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+                string methodName = stackFrame.GetMethod().Name;
+
+                int year_int = 0;
+                if (!int.TryParse(year_value, out year_int))
+                {
+                    year_int = 0;
+                    Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, year_value);
+                }
+
+                int month_int = 0;
+                if (!int.TryParse(month_value, out month_int))
+                {
+                    month_int = 0;
+                    Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, month_value);
+                }
+
+                if (year_int > 0 && month_int > 0)
+                {
+                    using (CarteluxDB context = new CarteluxDB())
+                    {
+
+                        int day_value = 1;
+
+                        DateTime date1 = new DateTime(year_int, month_int, day_value);
+                        int last_day = DateTime.DaysInMonth(year_int, month_int);
+                        DateTime date2 = new DateTime(year_int, month_int, last_day);
+
+                        monto_mesAnterior = GetFormularios_PorMes_GetMonto(context, date1, date2);
+                    }
+                }
+            }
+            return monto_mesAnterior;
+        }
+
         public class _GridFormularios
         {
             public string lblNumero { get; set; }
@@ -1239,6 +1298,7 @@ namespace Cartelux1
             public string lblTipo { get; set; }
             public string lblMedioP { get; set; }
             public int? lblMonto { get; set; }
+            public int? lblMonto_mesAnterior { get; set; }
             public string lblTematica { get; set; }
             public string lblUsuario { get; set; }
             public int lblCantidad { get; set; }

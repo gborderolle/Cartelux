@@ -9,6 +9,9 @@ namespace Cartelux1
         private string build_date;
         public string Build_date { get { return build_date; } }
 
+        private string _lblUserName;
+        public string LblUserName { get { return _lblUserName; } }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserID"] != null && Session["UserName"] != null)
@@ -16,6 +19,7 @@ namespace Cartelux1
                 if (!IsPostBack)
                 {
                     build_date = GetLinkerTime(Assembly.GetExecutingAssembly()).ToString();
+                    _lblUserName = Session["UserName"].ToString();
                 }
             }
             else

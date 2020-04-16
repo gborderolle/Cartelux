@@ -32,6 +32,10 @@
     <link href="/Content/reportes_template/custom.css" rel="stylesheet" />
 
     <style type="text/css">
+        .red, .green {
+            font-size: x-large !important;
+        }
+
         .font-size {
             font-size: x-large;
             padding-right: 10pt;
@@ -296,7 +300,7 @@
                                             <div class="row-short">
                                                 <form action="#" method="get" class="sidebar-form" style="display: block !important; width: 100%;">
                                                     <div class="input-group ">
-                                                        <input type="text" id="txbSearchPedidos" name="q" class="form-control" placeholder="Buscar...">
+                                                        <input type="text" id="txbSearchPedidos" name="q" class="form-control" placeholder="Buscar..." />
                                                         <span class="input-group-btn">
                                                             <a id="btnSearchPedidos" role="button" href="#" name="search" class="btn btn-info">
                                                                 <i class="glyphicon glyphicon-search"></i>
@@ -966,26 +970,31 @@
                                         <div class="col-md-3 col-sm-3 col-xs-6 tile_stats_count">
                                             <span class="count_top"><i class="fa fa-money"></i>Recaudación</span>
                                             <div id="total_recaudacion" class="count">14</div>
-                                            <span class="count_bottom"><i class="green">4% </i>que el mes anterior</span>
+                                            <div class="count_bottom" style="display: inline-flex;">
+                                                <div id="green_group" style="display: none;"><i class="green fa fa-sort-asc"></i><i id="total_recaudacion_porcentaje_green" class="green">100% </i></div>
+                                                <div id="red_group" style="display: none;"><i class="red fa fa-sort-desc"></i><i id="total_recaudacion_porcentaje_red" class="red">100% </i></div>
+                                            </div>
+                                            <br />
+                                            <span class="count_bottom"><i id="total_recaudacion_anterior">0 </i></span>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-xs-6 tile_stats_count">
-                                            <span class="count_top"><i class="fa fa-user"></i>Colocaciones</span>
-                                            <div id="total_colocaciones" class="count">14</div>
-                                            <span class="count_bottom"><i class="green">4% </i>que el mes anterior</span>
+                                            <span class="count_top"><i class="fa fa-clock-o"></i>[ EN CONSTRUCCIÓN ]</span>
+                                            <div id="total_colocaciones" class="count">0</div>
+                                            <span class="count_bottom"><i class="green">0% </i>que el mes anterior</span>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-xs-6 tile_stats_count">
-                                            <span class="count_top"><i class="fa fa-user"></i>Lona usada mts.</span>
-                                            <div id="total_lona_mts" class="count">188</div>
-                                            <span class="count_bottom"><i class="green">4% </i>que el mes anterior</span>
+                                            <span class="count_top"><i class="fa fa-clock-o"></i>[ EN CONSTRUCCIÓN ]</span>
+                                            <div id="total_lona_mts" class="count">0</div>
+                                            <span class="count_bottom"><i class="green">0% </i>que el mes anterior</span>
                                             <span class="row"></span>
-                                            <span class="count_bottom">Valor estimado</span>
+                                            <%--<span class="count_bottom">Valor estimado</span>--%>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-xs-6 tile_stats_count">
-                                            <span class="count_top"><i class="fa fa-clock-o"></i>Total Palos</span>
-                                            <div id="total_palos" class="count">162</div>
-                                            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i>que el mes anterior</span>
+                                            <span class="count_top"><i class="fa fa-clock-o"></i>[ EN CONSTRUCCIÓN ]</span>
+                                            <div id="total_palos" class="count">0</div>
+                                            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>0% </i>que el mes anterior</span>
                                             <span class="row"></span>
-                                            <span class="count_bottom">Valor estimado</span>
+                                            <%--<span class="count_bottom">Valor estimado</span>--%>
                                         </div>
                                     </div>
                                     <!-- /top tiles -->

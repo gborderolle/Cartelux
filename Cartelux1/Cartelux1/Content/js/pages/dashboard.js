@@ -591,7 +591,7 @@ function month_selectMonth_reports(month_value, soloVigentes_value, soloEntrCol_
                     if (response.d.length > 0) {
 
                         total_pedidos = response.d.length;
-                        for (var i = 0; i < response.d.length; i++) {
+                        for (var i = 0; i < response.d.length; i++) { // Recorro todos los formularios de dicho mes
 
                             // Cancelados
                             var estadoNro = check_nullValues(response.d[i].EstadoNro);
@@ -754,12 +754,14 @@ function reportes_loadData(total_pedidos, total_pasacalles, total_banners, total
     $("#total_tercializaciones").text(total_tercializaciones);
     $("#total_otros").text(total_otros);
 
-    $("#total_palos").text(total_palos);
-    $("#total_lona_mts").text(total_lona_mts);
-    $("#total_palos").text(total_palos);
+    //$("#total_palos").text(total_palos);
+    //$("#total_lona_mts").text(total_lona_mts);
+    //$("#total_palos").text(total_palos);
 
     var total_recaudacion_txt = "$" + numberWithCommas(total_recaudacion);
     $("#total_recaudacion").text(total_recaudacion_txt);
+
+    get_total_recaudacion_comparacion(total_recaudacion);
 
     var total_pasacalles_barra = (total_pasacalles / total_pedidos * 100).toFixed(0);
     var total_banners_barra = (total_banners / total_pedidos * 100).toFixed(0);
@@ -813,6 +815,60 @@ function reportes_loadData(total_pedidos, total_pasacalles, total_banners, total
     // Setea torta
     init_chart_doughnut(total_pasacalles_barra, total_banners_barra, total_rollups_barra, total_carteleria_barra, total_lonas_barra, total_vinilos_barra, total_banderas_barra, total_tercializaciones_barra, total_otros_barra);
 
+}
+
+function get_total_recaudacion_comparacion(total_recaudacion_actual) {
+
+    var YEAR_SELECTED_int = TryParseInt(YEAR_SELECTED, 0);
+    var MONTH_SELECTED_int = MONTH_SELECTED;
+
+    var return_total_recaudacion_comparacion = 0;
+    var year_value = YEAR_SELECTED_int - 1;
+    var month_value = 12;
+    if (MONTH_SELECTED_int != 1) {
+        year_value = YEAR_SELECTED_int;
+        month_value = MONTH_SELECTED_int - 1;
+    }
+
+    // Ajax call parameters
+    console.log("Ajax call 1: Dashboard.aspx/GetData_BindGridFormularios_MesAnterior. Params:");
+    console.log("year_value, type: " + type(year_value) + ", value: " + year_value);
+    console.log("month_value, type: " + type(month_value) + ", value: " + month_value);
+    console.log("End Ajax call");
+
+    $.ajax({
+        type: "POST",
+        url: "Dashboard.aspx/GetData_BindGridFormularios_MesAnterior",
+        contentType: "application/json;charset=utf-8",
+        data: '{year_value: "' + year_value + '",month_value: "' + month_value + '"}',
+        dataType: "json",
+        success: function (response) {
+
+            var recaudacion_mesAnterior_int = response.d;
+            if (recaudacion_mesAnterior_int !== null && recaudacion_mesAnterior_int) {
+                var recaudacion_mesAnterior = numberWithCommas(recaudacion_mesAnterior_int);
+
+                var porcentaje_actual = total_recaudacion_actual * 100 / recaudacion_mesAnterior_int;
+                var porcentaje_actual_fixed = porcentaje_actual.toFixed(2);
+                $("#total_recaudacion_anterior").text("Mes anterior: $ " + recaudacion_mesAnterior); // COMPARAR CON EL MES ANTERIOR
+
+                // Sube o baja, ícono y color
+                if (porcentaje_actual >= recaudacion_mesAnterior_int) {
+                    // green
+                    $("#green_group").show();
+                    $("#total_recaudacion_porcentaje_green").text(" " + porcentaje_actual_fixed + "% ");
+
+                } else {
+                    // red
+                    $("#red_group").show();
+                    $("#total_recaudacion_porcentaje_red").text(" " + porcentaje_actual_fixed + "% ");
+                }
+            }
+
+        }, // end success
+        failure: function (response) {
+        }
+    }); // Ajax
 }
 
 function create_calendar_events(values) {

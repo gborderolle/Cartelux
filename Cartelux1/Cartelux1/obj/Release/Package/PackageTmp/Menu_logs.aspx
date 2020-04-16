@@ -83,7 +83,18 @@
             <div class="panel panel-default" style="margin-top: 10px; padding-top: 10px;">
 
                 <div class="row" style="padding: 20px; padding-top: 3px">
-                    <div class="input-group pull-right">
+                    <div class="col-md-4 col-sm-12 pull-left">
+                            <div class="input-group ">
+                                <input type="text" id="txbSearchPedidos" name="q" class="form-control" placeholder="Buscar..."/>
+                                <span class="input-group-btn">
+                                    <a id="btnSearchPedidos" role="button" href="#" name="search" class="btn btn-info">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </a>
+                                </span>
+                            </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-12 input-group pull-right" style="display: flex;">
                         <input type="text" id="txbFiltro1" class="form-control datepicker" placeholder="Desde" runat="server" style="width: 120px;">
                         <span class="input-group-btn"></span>
 
@@ -95,36 +106,44 @@
                     </div>
                 </div>
 
-                <div class="panel panel-default">
+            <div class="panel panel-default">
 
-                    <asp:UpdatePanel ID="upgridLogs" runat="server">
-                        <ContentTemplate>
+                <asp:UpdatePanel ID="upgridLogs" runat="server">
+                    <ContentTemplate>
 
-                            <asp:Label ID="gridLogs_lblMessage" runat="server" Text="" ForeColor="Red" Font-Size="Large"></asp:Label>
-                            <asp:GridView ID="gridLogs" runat="server" ClientIDMode="Static" HorizontalAlign="Center"
-                                AutoGenerateColumns="false" AllowPaging="true" CssClass="table table-hover table-striped"
-                                DataKeyNames="Log_ID" PageSize="30"
-                                OnPageIndexChanging="grid_PageIndexChanging">
+                        <asp:Label ID="gridLogs_lblMessage" runat="server" Text="" ForeColor="Red" Font-Size="Large"></asp:Label>
+                        <asp:GridView ID="gridLogs" runat="server" ClientIDMode="Static" HorizontalAlign="Center"
+                            AutoGenerateColumns="false" AllowPaging="true" CssClass="table table-hover table-striped"
+                            DataKeyNames="Log_ID" PageSize="30"
+                            OnPageIndexChanging="grid_PageIndexChanging" AllowSorting="True">
 
-                                <RowStyle Font-Size="Medium" />
+                            <FooterStyle Font-Size="12pt" />
+                            <PagerStyle Font-Size="16pt" HorizontalAlign="Center" />
 
-                                <Columns>
-                                    <asp:BoundField DataField="Log_ID" HeaderText="ID" HtmlEncode="false" ReadOnly="true" ItemStyle-CssClass="hiddencol_real" HeaderStyle-CssClass="hiddencol_real" />
-                                    <asp:BoundField DataField="Fecha_creado" HeaderText="Fecha" DataFormatString="{0:dd-MM-yyyy HH:mm:ss}" HtmlEncode="false" ReadOnly="true" />
-                                    <asp:BoundField DataField="Usuario" HeaderText="Usuario" HtmlEncode="false" ReadOnly="true" />
-                                    <asp:BoundField DataField="IP_client" HeaderText="IP" HtmlEncode="false" ReadOnly="true" />
-                                    <asp:BoundField DataField="Descripcion" HeaderText="Descripción" HtmlEncode="false" ReadOnly="true" />
-                                    <asp:BoundField DataField="Dato_afectado" HeaderText="ID Objeto" HtmlEncode="false" ReadOnly="true" />
-                                </Columns>
-                            </asp:GridView>
+                            <RowStyle Font-Size="Medium" />
 
-                        </ContentTemplate>
-                        <Triggers>
-                            <asp:AsyncPostBackTrigger ControlID="btnSearch" />
-                        </Triggers>
-                    </asp:UpdatePanel>
+                            <AlternatingRowStyle BackColor="#E2E2E2" />
 
-                </div>
+                            <Columns>
+                                <asp:BoundField DataField="Log_ID" HeaderText="ID" HtmlEncode="false" ReadOnly="true" ItemStyle-CssClass="hiddencol_real" HeaderStyle-CssClass="hiddencol_real">
+                                    <HeaderStyle CssClass="hiddencol_real" />
+                                    <ItemStyle CssClass="hiddencol_real" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="Fecha_creado" HeaderText="Fecha" DataFormatString="{0:dd-MM-yyyy HH:mm:ss}" HtmlEncode="false" ReadOnly="true" />
+                                <asp:BoundField DataField="Usuario" HeaderText="Usuario" HtmlEncode="false" ReadOnly="true" />
+                                <asp:BoundField DataField="IP_client" HeaderText="IP" HtmlEncode="false" ReadOnly="true" />
+                                <asp:BoundField DataField="Descripcion" HeaderText="Descripción" HtmlEncode="false" ReadOnly="true" />
+                                <asp:BoundField DataField="Dato_afectado" HeaderText="ID Objeto" HtmlEncode="false" ReadOnly="true" />
+                            </Columns>
+                        </asp:GridView>
+
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="btnSearch" />
+                    </Triggers>
+                </asp:UpdatePanel>
+
+            </div>
             </div>
         </div>
     </div>

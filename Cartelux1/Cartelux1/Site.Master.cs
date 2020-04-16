@@ -16,6 +16,9 @@ namespace Cartelux1
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
         private string _antiXsrfTokenValue;
 
+        private string _lblUserName;
+        public string LblUserName { get { return _lblUserName; } }
+
         private string build_date;
         public string Build_date { get { return build_date; } }
 
@@ -77,6 +80,7 @@ namespace Cartelux1
                 if (!IsPostBack)
                 {
                     build_date = GetLinkerTime(Assembly.GetExecutingAssembly()).ToString(GlobalVariables.ShortDateTime_format1);
+                    _lblUserName = Session["UserName"].ToString();
                 }
             }
             else

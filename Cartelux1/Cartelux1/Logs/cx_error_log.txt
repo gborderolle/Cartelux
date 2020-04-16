@@ -162,3 +162,5 @@
 3/25/2020 5:22:14 PM: [ln:51] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 03/17/2020.
 3/25/2020 5:23:00 PM: [ln:44] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 02/25/2020.
 3/25/2020 5:23:00 PM: [ln:51] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 03/11/2020.
+4/16/2020 1:43:50 AM: [ln:64] Logs: AddUserLog() - Excepcion. Convirtiendo int. ERROR: -.
+4/16/2020 1:46:25 AM: [ln:64] Logs: AddUserLog() - Excepcion. Convirtiendo int. ERROR: -.

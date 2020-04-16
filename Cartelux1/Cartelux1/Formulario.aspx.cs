@@ -535,7 +535,7 @@ namespace Cartelux1
                         string IP_client = Logs.GetIPAddress();
                         string UserID = "-";
                         string UserName = "-"; 
-                        if (Session["UserID"] != null && string.IsNullOrWhiteSpace(Session["UserID"].ToString()) && Session["UserName"] != null && string.IsNullOrWhiteSpace(Session["UserName"].ToString()))
+                        if (Session["UserID"] != null && !string.IsNullOrWhiteSpace(Session["UserID"].ToString()) && Session["UserName"] != null && !string.IsNullOrWhiteSpace(Session["UserName"].ToString()))
                         {
                             UserID = Session["UserID"].ToString();
                             UserName = Session["UserName"].ToString();
@@ -1166,8 +1166,6 @@ namespace Cartelux1
 
         private bool Check_IngresosMensual_2(CarteluxDB context, int? importe_meta, int nuevo_monto)
         {
-            int? monto_acumulado = 0;
-
             int month_int = DateTime.Now.Month;
             int year_int = DateTime.Now.Year;
 
@@ -1175,11 +1173,13 @@ namespace Cartelux1
             int last_day = DateTime.DaysInMonth(year_int, month_int);
             DateTime date2 = new DateTime(year_int, month_int, last_day);
 
-            List<formularios> formularios_elements = Dashboard.GetFormularios_ByMonth(context, date1, date2, false);
-            if (formularios_elements != null && formularios_elements.Count > 0)
-            {
-                monto_acumulado = formularios_elements.Sum(item => item.Monto);
-            }
+            //List<formularios> formularios_elements = Dashboard.GetFormularios_ByMonth(context, date1, date2, false);
+            //if (formularios_elements != null && formularios_elements.Count > 0)
+            //{
+            //    monto_acumulado = formularios_elements.Sum(item => item.Monto);
+            //}
+
+            int? monto_acumulado = Dashboard.GetFormularios_PorMes_GetMonto(context, date1, date2);
             return !((monto_acumulado + nuevo_monto) < importe_meta);
         }
 
