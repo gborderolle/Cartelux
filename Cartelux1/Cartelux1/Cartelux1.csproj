@@ -253,6 +253,7 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
+    <Content Include="Calculadora.aspx" />
     <Content Include="Cartelux-bolas-ico2.ico" />
     <Content Include="Cartelux1.ico" />
     <Content Include="Content\bootstrap.css" />
@@ -349,9 +350,12 @@
     <Content Include="Content\css\jquery.bootstrap-touchspin.css" />
     <Content Include="Content\css\jquery.modal.css" />
     <Content Include="Content\css\jquery.qtip.min.css" />
+    <Content Include="Content\css\pages\images\loginProcess_loading.gif" />
+    <Content Include="Content\css\pages\menu_logs.css" />
     <Content Include="Content\css\Modal_styles.css" />
     <Content Include="Content\css\MonthPicker.css" />
     <Content Include="Content\css\optionalStyling.css" />
+    <Content Include="Content\css\pages\calculadora.css" />
     <Content Include="Content\css\pages\dashboard.css" />
     <Content Include="Content\css\pages\datos.css" />
     <Content Include="Content\css\pages\formulario.css" />
@@ -461,11 +465,11 @@
     <Content Include="Content\img\Cartelux1.ico" />
     <Content Include="Content\img\checked.png" />
     <Content Include="Content\img\CX-2.png" />
-    <Content Include="Content\img\CX-Banner-form.jpg" />
     <Content Include="Content\img\CX-Banner-form1.png" />
     <Content Include="Content\img\CX-web1.png" />
     <Content Include="Content\img\CX-web2.png" />
     <Content Include="Content\img\CX-web3.png" />
+    <Content Include="Content\img\CX_popup2.jpg" />
     <Content Include="Content\img\Dropbox_logo.png" />
     <Content Include="Content\img\glyphicons-halflings.png" />
     <Content Include="Content\img\loader.gif" />
@@ -490,7 +494,9 @@
     <Content Include="Content\js\moment.js" />
     <Content Include="Content\js\MonthPicker.js" />
     <Content Include="Content\js\pages\auxiliar_functions.js" />
+    <Content Include="Content\js\pages\calculadora.js" />
     <Content Include="Content\js\pages\listados.js" />
+    <Content Include="Content\js\pages\menu_logs.js" />
     <Content Include="Content\js\pages\validar_documento.js" />
     <Content Include="Content\js\pages\dashboard.js" />
     <Content Include="Content\js\pages\formulario.js" />
@@ -2214,16 +2220,6 @@
     <Content Include="Global_Objects\Messages.js" />
     <Content Include="Listados.aspx" />
     <Content Include="Listados1.aspx" />
-    <Content Include="Models\CarteluxDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CarteluxDB.edmx</DependentUpon>
-      <LastGenOutput>CarteluxDB.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\CarteluxDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CarteluxDB.edmx</DependentUpon>
-      <LastGenOutput>CarteluxDB.cs</LastGenOutput>
-    </Content>
     <Content Include="Content\bootstrap\css\bootstrap-grid.css.map" />
     <Content Include="Content\bootstrap\css\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap\css\bootstrap-reboot.css.map" />
@@ -2267,13 +2263,6 @@
     <Content Include="Content\font-awesome\scss\_screen-reader.scss" />
     <Content Include="Content\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\font-awesome\scss\_variables.scss" />
-    <EntityDeploy Include="Models\CarteluxDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CarteluxDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\CarteluxDB.edmx.diagram">
-      <DependentUpon>CarteluxDB.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\reportes_template\bootstrap-progressbar\.bower.json" />
     <Content Include="Content\reportes_template\bootstrap-progressbar\bower.json" />
     <Content Include="Content\reportes_template\bootstrap-progressbar\CHANGELOG.md" />
@@ -2393,7 +2382,25 @@
     <Content Include="Content\reportes_template\skycons\.gitignore" />
     <Content Include="Content\reportes_template\skycons\README.md" />
     <Content Include="Content\plugins\icheck-1.x\icheck.jquery.json" />
+    <EntityDeploy Include="Models\CarteluxDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CarteluxDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Menu_logs.aspx" />
+    <Content Include="Models\CarteluxDB.edmx.diagram">
+      <DependentUpon>CarteluxDB.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\File System.pubxml" />
+    <Content Include="Models\CarteluxDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CarteluxDB.edmx</DependentUpon>
+      <LastGenOutput>CarteluxDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\CarteluxDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CarteluxDB.edmx</DependentUpon>
+      <LastGenOutput>CarteluxDB.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js+" />
     <Content Include="Scripts\bootstrap.min.js+" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -2584,6 +2591,13 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Calculadora.aspx.cs">
+      <DependentUpon>Calculadora.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Calculadora.aspx.designer.cs">
+      <DependentUpon>Calculadora.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2608,6 +2622,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Global_Objects\AlarmsThread.cs" />
     <Compile Include="Global_Objects\GlobalVariables.cs" />
     <Compile Include="Global_Objects\Logs.cs" />
     <Compile Include="Global_Objects\Utilities.cs" />
@@ -2625,6 +2640,13 @@
     </Compile>
     <Compile Include="Listados1.aspx.designer.cs">
       <DependentUpon>Listados1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Menu_logs.aspx.cs">
+      <DependentUpon>Menu_logs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Menu_logs.aspx.designer.cs">
+      <DependentUpon>Menu_logs.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\CarteluxDB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -2647,10 +2669,19 @@
     <Compile Include="Models\clientes_frecuentes.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\confi_emails.cs">
+    <Compile Include="Models\config_alarmas.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\confi_formularios_anos.cs">
+    <Compile Include="Models\config_alarmas_ingresosMensual.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\config_emails.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\config_formularios_anos.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\config_material_importes.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\formularios.cs">
@@ -2696,6 +2727,9 @@
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\lista_proyecto_estados.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\logs.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pedidos.cs">

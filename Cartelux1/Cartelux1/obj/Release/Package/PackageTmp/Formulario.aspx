@@ -312,6 +312,11 @@
                                             <br />
 
                                             <asp:DropDownList ID="ddlTamano1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required form-control" />
+                                            <div class="form-group unselectable">
+                                                <input id="txbTamanoReal" class="form-control txbEditable" placeholder="Tamaño" type="text" tabindex="5" runat="server" clientidmode="static" />
+                                                <br />
+                                                <input id="txbComentarios" class="form-control txbEditable" placeholder="Comentarios" type="text" tabindex="6" runat="server" clientidmode="static" />
+                                            </div>
                                             <div style="display: none;">
                                                 <label style="font-weight: normal;">¿Tiene bosquejo o ejemplo?</label>
                                                 <asp:CheckBox ID="chbBosquejo" runat="server" ClientIDMode="Static" CssClass="txbEditable" Enabled="false" TextAlign="Left" />
@@ -347,26 +352,26 @@
                                             <asp:DropDownList ID="ddlTipoEntrega1" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required ddlBorder"></asp:DropDownList>
 
                                             <div class="form-group unselectable">
-                                                <input id="txbCiudad" class="form-control txbEditable ctrl-required" placeholder="Ciudad de envío" type="text" tabindex="5" runat="server" clientidmode="static" />
+                                                <input id="txbCiudad" class="form-control txbEditable ctrl-required" placeholder="Ciudad de envío" type="text" tabindex="7" runat="server" clientidmode="static" />
                                             </div>
                                             <div class="form-group unselectable">
-                                                <input id="txbFecha" type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" tabindex="6" runat="server" clientidmode="static" />
+                                                <input id="txbFecha" type="text" class="form-control txbEditable ctrl-required" placeholder="Día de entrega" tabindex="8" runat="server" clientidmode="static" />
                                             </div>
 
                                             <div class="form-group" id="dir_group" style="display: none;">
                                                 <div class="form-group row" style="margin-left: 0; margin-right: 0;">
-                                                    <input id="txbDireccion_calle" class="form-control txbEditable ctrl-required pull-left" placeholder="Calle" type="text" tabindex="7" runat="server" clientidmode="static" style="width: 47%;" />
-                                                    <input id="txbDireccion_numero" class="form-control txbEditable pull-right" placeholder="Número de puerta" type="number" tabindex="8" runat="server" clientidmode="static" style="width: 47%;" />
+                                                    <input id="txbDireccion_calle" class="form-control txbEditable ctrl-required pull-left" placeholder="Calle" type="text" tabindex="9" runat="server" clientidmode="static" style="width: 47%;" />
+                                                    <input id="txbDireccion_numero" class="form-control txbEditable pull-right" placeholder="Número de puerta" type="number" tabindex="10" runat="server" clientidmode="static" style="width: 47%;" />
                                                 </div>
                                                 <div class="form-group row" style="margin-left: 0; margin-right: 0;">
-                                                    <input id="txbDireccion_apto" class="form-control txbEditable pull-left" placeholder="Apto" type="text" tabindex="9" runat="server" clientidmode="static" style="width: 47%;" />
-                                                    <input id="txbDireccion_esquina" class="form-control txbEditable pull-right" placeholder="Esquina" type="text" tabindex="10" runat="server" clientidmode="static" style="width: 47%;" />
+                                                    <input id="txbDireccion_apto" class="form-control txbEditable pull-left" placeholder="Apto" type="text" tabindex="11" runat="server" clientidmode="static" style="width: 47%;" />
+                                                    <input id="txbDireccion_esquina" class="form-control txbEditable pull-right" placeholder="Esquina" type="text" tabindex="12" runat="server" clientidmode="static" style="width: 47%;" />
                                                 </div>
                                             </div>
 
                                             <div class="form-group" id="dir_groupX" style="display: none;">
                                                 Dirección escrita
-                                                <input id="txbDireccion" class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" tabindex="11" runat="server" clientidmode="static" />
+                                                <input id="txbDireccion" class="form-control txbEditable ctrl-required" placeholder="Dirección de entrega en texto" type="text" tabindex="13" runat="server" clientidmode="static" />
                                                 <hr />
                                             </div>
 
@@ -376,9 +381,9 @@
 
                                             <div class="form-group" id="pago_group">
                                                 <div class="form-group row" style="margin-left: 0; margin-right: 0;">
-                                            <asp:DropDownList ID="ddlMedioDePago" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required ddlMedioDePago" tabindex="11"/>
+                                                    <asp:DropDownList ID="ddlMedioDePago" runat="server" ClientIDMode="Static" CssClass="dropdown txbEditable ctrl-required ddlMedioDePago" TabIndex="14" />
                                                     <%--<input id="Text1" class="form-control txbEditable ctrl-required pull-left" placeholder="Calle" type="text" tabindex="7" runat="server" clientidmode="static" style="width: 47%;" />--%>
-                                                    <input id="txbMonto" class="form-control txbEditable pull-right" placeholder="Monto $" type="number" tabindex="12" runat="server" clientidmode="static" style="width: 47%;" />
+                                                    <input id="txbMonto" class="form-control txbEditable pull-right" placeholder="Monto $" type="number" tabindex="15" runat="server" clientidmode="static" style="width: 47%;" />
                                                 </div>
                                             </div>
 
@@ -395,7 +400,7 @@
                                                     #map-canvas {
                                                         width: 400px;
                                                         height: 400px;
-                                                    }                                                   
+                                                    }
                                                 </style>
 
                                                 <div class="form-group" id="map_group">

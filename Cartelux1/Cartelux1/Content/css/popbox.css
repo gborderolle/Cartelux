@@ -17,13 +17,17 @@
     padding:8px;
   }
 
+  #lbl_options_divBox_OPC, #lbl_options_divBox_CTO{
+      border-color: rgba(130, 129, 128, 0.88);
+  }
+
     .popbox-box {
       display:block;
       display:none;
       background:#FFF;
-      border:solid 1px #BBBBBB;
+      border:solid 1px #a4a2a2;
       border-radius:5px;
-      box-shadow:0px 0px 15px #999;
+      box-shadow:0px 0px 20px #999;
       position:absolute;
     }
 

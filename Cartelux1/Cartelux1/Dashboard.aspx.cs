@@ -117,7 +117,7 @@ namespace Cartelux1
                 {
                     if (e.CommandName.Equals("View"))
                     {
-                        
+
                     }
                 }
             }
@@ -125,6 +125,12 @@ namespace Cartelux1
 
         protected void gridFormularios_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+            // Logger variables
+            System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
+            System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+            string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+            string methodName = stackFrame.GetMethod().Name;
+
             #region Labels
 
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -210,7 +216,71 @@ namespace Cartelux1
                             lbl1 = e.Row.FindControl("lblTamano") as Label;
                             if (lbl1 != null)
                             {
-                                lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _pedido.Pedido_Tamano_ID);
+                                /* Código tamaño cartel
+                                * 1 - 150x80 Pasacalle ID:2
+                                * 2 - 300x80 Pasacalle ID:3
+                                * 3 - 500x80 Pasacalle ID:4
+                                * 4 - Pancarta otra medida ID:5
+                                * 5 - 150x80 Roll up ID:6
+                                * 6 - 200x80 Roll up ID:7
+                                * 7 - Banner 80x90 ID:8
+                                * 8 - Banner otra medida ID:9
+                                * 9 - 200x80 Pasacalle ID:10
+                                * 
+                                * ---- ATENCIÓN: Desde 22 Julio 2019
+                                * Códigos nuevos:
+                                1 - Pasacalle	
+                                2 - Roll up	
+                                3 - Banner	
+                                4 - Cartelería	
+
+                                5 - total_lonas
+                                6 - total_vinilos	
+                                7 - total_banderas	
+                                8 - total_tercializaciones	
+                                9 - total_otros	
+                                * */
+
+                                string tamano_tipo_ID_str = _pedido.Pedido_Tamano_ID.ToString(); // Se usa ID, no código
+                                if (_formulario.Fecha_update <= GlobalVariables.GetDatetimeFormated("22-07-2019")) //dd-MM-yyyy
+                                {
+                                    switch (tamano_tipo_ID_str)
+                                    {
+                                        case "2":
+                                        case "3":
+                                        case "4":
+                                        case "5":
+                                        case "10":
+                                            {
+                                                // Pasacalles
+                                                tamano_tipo_ID_str = "2"; // ID, no código
+                                                break;
+                                            }
+                                        case "6":
+                                        case "7":
+                                            {
+                                                // Roll ups
+                                                tamano_tipo_ID_str = "3";
+                                                break;
+                                            }
+                                        case "8":
+                                        case "9":
+                                            {
+                                                // Banners
+                                                tamano_tipo_ID_str = "4";
+                                                break;
+                                            }
+                                    }
+                                }
+                                int _tamano_tipo_ID = 0;
+                                if (!int.TryParse(tamano_tipo_ID_str, out _tamano_tipo_ID))
+                                {
+                                    _tamano_tipo_ID = _pedido.Pedido_Tamano_ID;
+                                    Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, tamano_tipo_ID_str);
+                                }
+                                lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _tamano_tipo_ID);
+
+                                //lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _pedido.Pedido_Tamano_ID);
                                 if (_lista_pedido_tamano != null)
                                 {
                                     string nombre = string.Empty;
@@ -222,20 +292,31 @@ namespace Cartelux1
                                 }
                             }
 
-                            lbl1 = e.Row.FindControl("lblTipo") as Label;
+                            lbl1 = e.Row.FindControl("lblTamanoReal") as Label;
                             if (lbl1 != null)
                             {
-                                lista_pedido_tipos _lista_pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(c => c.Pedido_Tipo_ID == _pedido.Pedido_Tipo_ID);
-                                if (_lista_pedido_tipo != null)
+                                string tamanoReal = "N/D";
+                                if (!string.IsNullOrWhiteSpace(_pedido.Tamano_real))
                                 {
-                                    string nombre = string.Empty;
-                                    if (!string.IsNullOrWhiteSpace(_lista_pedido_tipo.Nombre))
-                                    {
-                                        nombre = _lista_pedido_tipo.Nombre;
-                                    }
-                                    lbl1.Text = nombre;
+                                    tamanoReal = _pedido.Tamano_real;
                                 }
+                                lbl1.Text = tamanoReal;
                             }
+
+                            //lbl1 = e.Row.FindControl("lblTipo") as Label;
+                            //if (lbl1 != null)
+                            //{
+                            //    lista_pedido_tipos _lista_pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(c => c.Pedido_Tipo_ID == _pedido.Pedido_Tipo_ID);
+                            //    if (_lista_pedido_tipo != null)
+                            //    {
+                            //        string nombre = string.Empty;
+                            //        if (!string.IsNullOrWhiteSpace(_lista_pedido_tipo.Nombre))
+                            //        {
+                            //            nombre = _lista_pedido_tipo.Nombre;
+                            //        }
+                            //        lbl1.Text = nombre;
+                            //    }
+                            //}
 
                             lbl1 = e.Row.FindControl("lblTematica") as Label;
                             if (lbl1 != null)
@@ -571,10 +652,10 @@ namespace Cartelux1
             {
                 // DDL Years
                 DataTable dt1 = new DataTable();
-                dt1 = Extras.ToDataTable(context.confi_formularios_anos.OrderBy(e => e.Nombre).ToList());
+                dt1 = Extras.ToDataTable(context.config_formularios_anos.OrderBy(e => e.Nombre).ToList());
                 ddl_year.DataSource = dt1;
                 ddl_year.DataTextField = "Nombre";
-                ddl_year.DataValueField = "Confi_formularios_ano_ID";
+                ddl_year.DataValueField = "Config_formularios_ano_ID";
                 ddl_year.DataBind();
                 ddl_year.Items.Insert(0, new ListItem("Elegir", "0"));
                 ddl_year.SelectedValue = DateTime.Now.Year.ToString();
@@ -660,14 +741,14 @@ namespace Cartelux1
                 var obj = new List<formularios>();
                 formularios _formulario1 = new formularios();
                 _formulario1.Formulario_ID = 1;
-                _formulario1.Cliente_ID= 1;
+                _formulario1.Cliente_ID = 1;
                 _formulario1.URL_short = string.Empty;
                 _formulario1.URL_completa = string.Empty;
                 _formulario1.Fecha_creado = DateTime.MinValue;
                 _formulario1.Fecha_update = DateTime.MinValue;
                 _formulario1.Comentarios = string.Empty;
                 _formulario1.Monto = 0;
-                _formulario1.Serie= string.Empty;
+                _formulario1.Serie = string.Empty;
 
                 obj.Add(_formulario1);
 
@@ -980,11 +1061,11 @@ namespace Cartelux1
                                         }
                                         // Filtro Entregas o Colocaciones
                                         /*
-                        * Codigo = 1: Colocación
-                        * Codigo = 2: Envío a domicilio
-                        * Codigo = 3: Envío al interior
-                        * Codigo = 4: Retiro en el taller
-                        * */
+                                        * Codigo = 1: Colocación
+                                        * Codigo = 2: Envío a domicilio
+                                        * Codigo = 3: Envío al interior
+                                        * Codigo = 4: Retiro en el taller
+                                        * */
                                         lista_entregas_tipos _lista_entregas_tipo = (lista_entregas_tipos)context.lista_entregas_tipos.FirstOrDefault(c => c.Entrega_Tipo_ID == _pedido_entrega.Entrega_Tipo_ID);
                                         if (_lista_entregas_tipo != null)
                                         {
@@ -1010,12 +1091,79 @@ namespace Cartelux1
                                     #endregion END Pedido Diseño
 
                                     #region Pedido Tamaño ---------------------------------------------------------------------------------------------------------
-                                    lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _pedido.Pedido_Tamano_ID);
+
+                                    /* Código tamaño cartel
+                                    * 1 - 150x80 Pasacalle ID:2
+                                    * 2 - 300x80 Pasacalle ID:3
+                                    * 3 - 500x80 Pasacalle ID:4
+                                    * 4 - Pancarta otra medida ID:5
+                                    * 5 - 150x80 Roll up ID:6
+                                    * 6 - 200x80 Roll up ID:7
+                                    * 7 - Banner 80x90 ID:8
+                                    * 8 - Banner otra medida ID:9
+                                    * 9 - 200x80 Pasacalle ID:10
+                                    * 
+                                    * ---- ATENCIÓN: Desde 22 Julio 2019
+                                    * Códigos nuevos:
+                                    1 - Pasacalle	
+                                    2 - Roll up	
+                                    3 - Banner	
+                                    4 - Cartelería	
+                                    * */
+
+                                    string tamano_tipo_ID_str = _pedido.Pedido_Tamano_ID.ToString(); // Se usa ID, no código
+                                    if (_formulario.Fecha_update <= GlobalVariables.GetDatetimeFormated("22-07-2019")) //dd-MM-yyyy
+                                    {
+                                        switch (tamano_tipo_ID_str)
+                                        {
+                                            case "2":
+                                            case "3":
+                                            case "4":
+                                            case "5":
+                                            case "10":
+                                                {
+                                                    // Pasacalles
+                                                    tamano_tipo_ID_str = "2"; // ID, no código
+                                                    break;
+                                                }
+                                            case "6":
+                                            case "7":
+                                                {
+                                                    // Roll ups
+                                                    tamano_tipo_ID_str = "3";
+                                                    break;
+                                                }
+                                            case "8":
+                                            case "9":
+                                                {
+                                                    // Banners
+                                                    tamano_tipo_ID_str = "4";
+                                                    break;
+                                                }
+                                        }
+                                    }
+
+                                    int _tamano_tipo_ID = 0;
+                                    if (!int.TryParse(tamano_tipo_ID_str, out _tamano_tipo_ID))
+                                    {
+                                        _tamano_tipo_ID = _pedido.Pedido_Tamano_ID;
+                                        Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, tamano_tipo_ID_str);
+                                    }
+                                    lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _tamano_tipo_ID);
+
+                                    //lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _pedido.Pedido_Tamano_ID);
                                     if (_lista_pedido_tamano != null)
                                     {
+                                        _GridFormulario1.lblTipoCartelCodigo = _lista_pedido_tamano.Codigo.ToString();
                                         _GridFormulario1.lblTamano = _lista_pedido_tamano.Nombre;
                                         _GridFormulario1.lblTamano_largo_cm = _lista_pedido_tamano.Descripcion;
                                     }
+                                    string _tamano_real = _pedido.Tamano_real;
+                                    if (string.IsNullOrWhiteSpace(_pedido.Tamano_real))
+                                    {
+                                        _tamano_real = "N/D";
+                                    }
+                                    _GridFormulario1.lblTamanoReal = _tamano_real;
                                     #endregion END Pedido Tamaño
 
                                     #region Pedido Tipo ---------------------------------------------------------------------------------------------------------
@@ -1086,6 +1234,7 @@ namespace Cartelux1
             public string lblTipoEntrega { get; set; }
             public string lblTipoCodigo { get; set; }
             public string lblTamano { get; set; }
+            public string lblTamanoReal { get; set; }
             public string lblTamano_largo_cm { get; set; }
             public string lblTipo { get; set; }
             public string lblMedioP { get; set; }
@@ -1100,6 +1249,7 @@ namespace Cartelux1
             public bool chbTieneBosquejo { get; set; }
             public string lblDisenoReferido { get; set; }
             public int EstadoNro { get; set; }
+            public string lblTipoCartelCodigo { get; set; }
         }
 
         public class _GridProyectos

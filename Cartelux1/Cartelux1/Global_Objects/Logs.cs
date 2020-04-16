@@ -3,6 +3,7 @@ using Cartelux1.Models;
 using System.Configuration;
 using System.IO;
 using System.Runtime.CompilerServices;
+using Cartelux1.Global_Objects;
 
 namespace Cartelux1.Global_Objects
 {
@@ -39,7 +40,7 @@ namespace Cartelux1.Global_Objects
             catch (Exception) { }
         }
 
-        public static void AddUserLog(string message, string object_ID, string userID_str, string username)
+        public static void AddUserLog(string message, string object_ID, string userID_str, string username, string IP_client = "")
         {
             // Logger variables
             System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
@@ -49,25 +50,46 @@ namespace Cartelux1.Global_Objects
 
             using (CarteluxDB context = new CarteluxDB())
             {
-                //log new_log = new log();
-                //new_log.Fecha = DateTime.Now;
-                //new_log.Usuario = username;
-                //new_log.Descripcion = message;
-                //new_log.Dato = object_ID;
+                logs _logs = new logs();
+                _logs.Fecha_creado = GlobalVariables.GetCurrentTime();
+                _logs.Usuario = username;
+                _logs.Descripcion = message;
+                _logs.Dato_afectado = object_ID;
+                _logs.IP_client = IP_client;
 
-                //int userID = 0;
-                //if (!int.TryParse(userID_str, out userID))
-                //{
-                //    userID = 0;
-                //    AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, userID_str);
-                //}
+                int userID = 0;
+                if (!int.TryParse(userID_str, out userID))
+                {
+                    userID = 0;
+                    AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, userID_str);
+                }
 
-                //new_log.Usuario_ID = userID;
-                //context.logs.Add(new_log);
-                //context.SaveChanges();
+                _logs.Usuario_ID = userID;
+                context.logs.Add(_logs);
+                context.SaveChanges();
             }
         }
 
+        internal static void AddErrorLog(string v, object className, object methodName, string tamano_tipo_ID_str)
+        {
+            throw new NotImplementedException();
+        }
 
+        public static string GetIPAddress()
+        {
+            System.Web.HttpContext context = System.Web.HttpContext.Current;
+            string ipAddress = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+
+            if (!string.IsNullOrEmpty(ipAddress))
+            {
+                string[] addresses = ipAddress.Split(',');
+                if (addresses.Length != 0)
+                {
+                    return addresses[0];
+                }
+            }
+
+            return context.Request.ServerVariables["REMOTE_ADDR"];
+        }
     }
 }

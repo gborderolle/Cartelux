@@ -30,9 +30,10 @@
     <Columns>
         <asp:BoundField DataField="lblNumero" HeaderText="#" />
         <asp:BoundField DataField="lblFechaEntrega" HeaderText="Fecha Entrega" />
-        <asp:BoundField DataField="lblTipoPedido" HeaderText="Tipo Pedido" />
+        <asp:BoundField DataField="lblTamano" HeaderText="Tipo" />
+        <asp:BoundField DataField="lblTamanoReal" HeaderText="Tamaño" />
+        <%--<asp:BoundField DataField="lblTipoPedido" HeaderText="Tipo Pedido" />--%>
         <asp:BoundField DataField="lblTematica" HeaderText="Temática" />
-        <asp:BoundField DataField="lblTamano" HeaderText="Tamaño" />
         <asp:BoundField DataField="lblTipoEntrega" HeaderText="Tipo Entrega"/>
         <asp:BoundField DataField="lblImporte" HeaderText="$ Monto" DataFormatString="{0:C2}"/>
         <asp:BoundField DataField="lblComentarios" HeaderText="Comentarios"/>

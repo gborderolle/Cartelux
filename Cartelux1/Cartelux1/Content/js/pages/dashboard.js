@@ -4,12 +4,14 @@ var EVENTS_LIST = [];
 var MONTH_SELECTED;
 var YEAR_SELECTED;
 var USER_ID;
+var WHATSAPP_URL;
 
 $(document).ready(function () {
     checkMobile();
     initVariables();
     bindEvents();
-    bindDelayEvents();   
+    bindDelayEvents();
+
 });
 
 // attach the event binding function to every partial update
@@ -86,6 +88,8 @@ function checkMobile() {
 }
 
 function initVariables() {
+    //WHATSAPP_URL = <%=ConfigurationManager.AppSettings["Inactivity"] %>;
+
     var year = (new Date()).getFullYear() + "";
 
     var dd = document.getElementById('ddl_year');
@@ -120,6 +124,76 @@ function bindEvents() {
     $(".close").click(function () {
         $(this).closest(".popbox").hide();
     })   
+}
+
+function init_chart_doughnut(total_pasacalles_barra, total_banners_barra, total_rollups_barra, total_carteleria_barra, total_lonas_barra, total_vinilos_barra, total_banderas_barra, total_tercializaciones_barra, total_otros_barra) {
+
+    if (typeof (Chart) === 'undefined') { return; }
+
+    if ($('.canvasDoughnut').length) {
+
+        var chart_doughnut_settings = {
+            type: 'doughnut',
+            tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+            data: {
+                labels: [
+                    "Pasacalles %",
+                    "Banners %",
+                    "Roll ups %",
+                    "Cartelería %",
+                    "Lonas %",
+
+                    "Vinilos %",
+                    "Banderas %",
+                    "Tercializaciones %",
+                    "Otros %"
+
+                ],
+                datasets: [{
+                    data: [total_pasacalles_barra, total_banners_barra, total_rollups_barra, total_carteleria_barra, total_lonas_barra, total_vinilos_barra, total_banderas_barra, total_tercializaciones_barra, total_otros_barra],
+                    backgroundColor: [
+                        "#3498DB",
+                        "#E74C3C",
+                        "#e7c2bc",
+                        "#ec50df",
+                        "#7e29dc",
+
+                        "#e0dd37",
+                        "#000000",
+                        "#bb691a",
+                        "#636161"
+
+                    ],
+                    hoverBackgroundColor: [
+                        "#70b8e8",
+                        "#f57f7f",
+                        "#f1dbd7",
+                        "#f598ed",
+                        "#9f64e1",
+
+                        "#f2f1ae",
+                        "#2a2828",
+                        "#dd8e41",
+                        "#898686"
+
+                    ]
+                }]
+            },
+            options: {
+                legend: false,
+                responsive: false
+            }
+        }
+
+        $('.canvasDoughnut').each(function () {
+
+            var chart_element = $(this);
+            var chart_doughnut = new Chart(chart_element, chart_doughnut_settings);
+
+        });
+
+    }
+
 }
 
 function load_calendar() {
@@ -223,8 +297,11 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
                     $("#gridFormularios tbody").remove();
                     if (response.d.length > 0) {
                         $("#gridFormularios").empty();
-                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>T/Entrega</th> <th scope='col'>Tamaño</th> <th scope='col'>T/Cartel</th> <th scope='col'>Temática</th> <th scope='col'>MedioP</th> <th scope='col'>$ Monto</th> <th scope='col'>Us</th> <th scope='col'>CTO</th> <th scope='col'>OPC</th> </tr></thead><tbody>"); //<th scope='col'>GMaps</th> <th scope='col'>Form</th> <th scope='col'>WPP</th> //<th scope='col'>Cant</th> <th scope='col'>Zona</th> <th scope='col'>¿Archivo?</th> <th scope='col'>Diseño referido</th>
+                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>T/Entrega</th> <th scope='col'>Tipo</th> <th scope='col'>Tamaño</th> <th scope='col'>Temática</th> <th scope='col'>MedioP</th> <th scope='col'>$ Monto</th> <th scope='col'>Us</th> <th scope='col'>CTO</th> <th scope='col'>OPC</th> </tr></thead><tbody>"); 
                         for (var i = 0; i < response.d.length; i++) {
+
+                            var monto_pedido = check_nullValues(response.d[i].lblMonto);
+                            //total_recaudacion += monto_pedido;
 
                             //var goToFormulario = "<a id='btnURL' role='button' href='" + response.d[i].URL_short + "' class='btn btn-warning glyphicon fa fa-wpforms' title='' target='_blank'></a>";
                             var goToFormulario = response.d[i].URL_short;
@@ -295,11 +372,16 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
                                 }
                             }
 
-                            var url = "https://api.whatsapp.com/send?phone=598" + telefono;
+
+
+                            // Click to Chat WhatsApp API
+                            var WHATSAPP_URL = "https://api.whatsapp.com/send?phone=598";
+                            var whatsapp_url = WHATSAPP_URL + telefono;
+                            //var url = "https://api.whatsapp.com/send?phone=598" + telefono;
                             //url += "&text=" + hashMessages["Msj_inicioCliente"];
 
                             //var goToWPP = "<a id='btnWPP' role='button' href='" + url + "' class='btn btn-warning btn-xs fa fa-whatsapp fa-2x' title='' target='_blank'></a>";
-                            var goToWPP = url;
+                            var goToWPP = whatsapp_url;
 
                             var formID = check_nullValues(response.d[i].Formulario_ID);
                             var nombre = check_nullValues(response.d[i].lblNombre);
@@ -326,7 +408,6 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
                             var date = moment(response.d[i].lblFechaEntrega, "DD-MM-YYYY").format("DD-MM-YYYY");
                             var tel1 = check_nullValues(response.d[i].lblTelefono);
 
-
                             $("#gridFormularios").append("<tr><td class='hiddencol hiddencol_real' " + text_color + ">" +
                             formID + "</td> <td class='hiddencol hiddencol_real' " + text_color + ">" +
                             //check_nullValues(response.d[i].URL_short) + "</td> <td class='td-very_short' " + text_color + "><a href='Listados.aspx?tabla=pedidos&dato=" + tel1 + "'>" +
@@ -337,11 +418,13 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
                             tel1 + "</a></td> <td class='td-very_short' " + text_color + ">" +
                             nombre + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(response.d[i].lblTipoEntrega) + "</td> <td class='td-very_short' " + text_color + ">" +
-                            check_nullValues(response.d[i].lblTamano) + "</td> <td class='td-very_short' " + text_color + ">" +
-                            check_nullValues(response.d[i].lblTipo) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblTamano) + "</td> <td class='td-very_short' " + text_color + ">" + // Tipo ahora
+                            //check_nullValues(response.d[i].lblTipo) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblTamanoReal) + "</td> <td class='td-very_short' " + text_color + ">" + // Tamaño real
+
                             check_nullValues(response.d[i].lblTematica) + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(response.d[i].lblMedioP) + "</td> <td class='td-very_short price' " + text_color + ">$ " +
-                            check_nullValues(response.d[i].lblMonto) + ",00</td> <td class='td-very_short' " + text_color + ">" +
+                            numberWithCommas(monto_pedido) + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(response.d[i].lblUsuario) + "</td> <td class='td-very_short' " + text_color + ">" +
                             //check_nullValues(response.d[i].lblCantidad) + "</td> <td class='td-very_short' " + text_color + ">" +
                             //check_nullValues(response.d[i].lblZona) + "</td><td class='td-short' " + text_color + ">" +
@@ -463,17 +546,29 @@ function month_selectMonth_reports(month_value, soloVigentes_value, soloEntrCol_
                 dataType: "json",
                 success: function (response) {
 
+                    // total recaudación
+                    var total_recaudacion = 0;
+
                     // total pedidos
                     var total_pedidos = 0;
 
                     // total carteles = pasacalles
-                    var total_carteles = 0;
+                    var total_pasacalles = 0;
 
                     // total banners
                     var total_banners = 0;
 
                     // total roll ups
                     var total_rollups = 0;
+
+                    // total cartelería
+                    var total_carteleria = 0;
+
+                    var total_lonas = 0;
+                    var total_vinilos = 0;
+                    var total_banderas = 0;
+                    var total_tercializaciones = 0;
+                    var total_otros = 0;
 
                     // total colocaciones
                     var total_colocaciones = 0;
@@ -502,66 +597,124 @@ function month_selectMonth_reports(month_value, soloVigentes_value, soloEntrCol_
                             var estadoNro = check_nullValues(response.d[i].EstadoNro);
                             if (estadoNro === 2 || estadoNro === 3) {
                                 total_pedidos--;
-                            }
+                            } else {
 
-                            // Tipo cartel
-                            switch (response.d[i].lblTipo) {
-                                case "Pasacalle":
-                                    {
-                                        total_carteles++;
-                                        break;
-                                    }
-                                case "Banner":
-                                    {
-                                        total_banners++;
-                                        break;
-                                    }
-                                case "Roll up":
-                                    {
-                                        total_rollups++;
-                                        break;
-                                    }
-                            }
+                                total_recaudacion += response.d[i].lblMonto;
 
-                            // Tipo entrega
-                            switch (response.d[i].lblTipoEntrega) {
-                                case "Colocación":
-                                    {
-                                        total_colocaciones++;
-                                        break;
-                                    }
-                                case "Envío a domicilio":
-                                    {
-                                        total_envios_domicilio++;
-                                        break;
-                                    }
-                                case "Envío al interior":
-                                    {
-                                        total_envios_interior++;
-                                        break;
-                                    }
-                                case "Retiro en el taller":
-                                    {
-                                        total_retirosTaller++;
-                                        break;
-                                    }
-                            }
+                                /* Código tamaño cartel
+                                * 1 - 150x80 Pasacalle ID:2 // Usar código
+                                * 2 - 300x80 Pasacalle ID:3
+                                * 3 - 500x80 Pasacalle ID:4
+                                * 4 - Pancarta otra medida ID:5
+                                * 5 - 150x80 Roll up ID:6
+                                * 6 - 200x80 Roll up ID:7
+                                * 7 - Banner 80x90 ID:8
+                                * 8 - Banner otra medida ID:9
+                                * 9 - 200x80 Pasacalle ID:10
+                                * 
+                                * ---- ATENCIÓN: Desde 22 Julio 2019
+                                * Códigos nuevos:
+                                1 - Pasacalle	
+                                2 - Roll up	
+                                3 - Banner	
+                                4 - Cartelería	
 
-                            // Largo de lona usada
-                            var lblTamano_largo_cm = response.d[i].lblTamano_largo_cm;
-                            if (type(lblTamano_largo_cm) === "string") {
-                                total_lona_mts += TryParseInt(lblTamano_largo_cm, 0);
+                                5 - total_lonas
+                                6 - total_vinilos	
+                                7 - total_banderas	
+                                8 - total_tercializaciones	
+                                9 - total_otros	
+
+                                * */
+
+                                // Tipo cartel
+                                switch (response.d[i].lblTipoCartelCodigo) {
+                                    case "1":
+                                        {
+                                            total_pasacalles++;
+                                            break;
+                                        }
+                                    case "2":
+                                        {
+                                            total_rollups++;
+                                            break;
+                                        }
+                                    case "3":
+                                        {
+                                            total_banners++;
+                                            break;
+                                        }
+                                    case "4":
+                                        {
+                                            total_carteleria++;
+                                            break;
+                                        }
+                                    case "5":
+                                        {
+                                            total_lonas++;
+                                            break;
+                                        }
+                                    case "6":
+                                        {
+                                            total_vinilos++;
+                                            break;
+                                        }
+                                    case "7":
+                                        {
+                                            total_banderas++;
+                                            break;
+                                        }
+                                    case "8":
+                                        {
+                                            total_tercializaciones++;
+                                            break;
+                                        }
+                                    case "9":
+                                        {
+                                            total_otros++;
+                                            break;
+                                        }
+                                }
+
+                                // Tipo entrega
+                                switch (response.d[i].lblTipoEntrega) {
+                                    case "Colocación":
+                                        {
+                                            total_colocaciones++;
+                                            break;
+                                        }
+                                    case "Envío a domicilio":
+                                        {
+                                            total_envios_domicilio++;
+                                            break;
+                                        }
+                                    case "Envío al interior":
+                                        {
+                                            total_envios_interior++;
+                                            break;
+                                        }
+                                    case "Retiro en el taller":
+                                        {
+                                            total_retirosTaller++;
+                                            break;
+                                        }
+                                }
+
+                                // Largo de lona usada
+                                var lblTamano_largo_cm = response.d[i].lblTamano_largo_cm;
+                                if (type(lblTamano_largo_cm) === "string") {
+                                    total_lona_mts += TryParseInt(lblTamano_largo_cm, 0);
+                                }
                             }
-                            
                         } // for
 
                         if (total_lona_mts !== 0) {
                             total_lona_mts = total_lona_mts / 100;
                         }
 
-                        total_palos = total_carteles * 2;
+                        total_palos = total_pasacalles * 2;
 
-                        reportes_loadData(total_pedidos, total_carteles, total_banners, total_rollups, total_colocaciones, total_envios_domicilio, total_envios_interior, total_retirosTaller, total_lona_mts, total_palos);
+                        reportes_loadData(total_pedidos, total_pasacalles, total_banners, total_rollups, total_colocaciones, total_envios_domicilio, total_envios_interior, total_retirosTaller, total_lona_mts, total_palos, total_carteleria, total_lonas, total_vinilos, total_banderas, total_tercializaciones, total_otros, total_recaudacion);
 
                         // Volver a cargar eventos sobre la grilla
                         //bindDelayEvents();
@@ -580,7 +733,7 @@ function month_selectMonth_reports(month_value, soloVigentes_value, soloEntrCol_
 
 function reportes_clearData() {
     $("#total_pedidos").text(0);
-    $("#total_carteles").text(0);
+    $("#total_pasacalles").text(0);
     $("#total_banners").text(0);
     $("#total_rollups").text(0);
     $("#total_colocaciones").text(0);
@@ -588,14 +741,78 @@ function reportes_clearData() {
     $("#total_palos").text(0);
 }
 
-function reportes_loadData(total_pedidos, total_carteles, total_banners, total_rollups, total_colocaciones, total_envios_domicilio, total_envios_interior, total_retirosTaller, total_lona_mts, total_palos) {
+function reportes_loadData(total_pedidos, total_pasacalles, total_banners, total_rollups, total_colocaciones, total_envios_domicilio, total_envios_interior, total_retirosTaller, total_lona_mts, total_palos, total_carteleria, total_lonas, total_vinilos, total_banderas, total_tercializaciones, total_otros, total_recaudacion) {
+
     $("#total_pedidos").text(total_pedidos);
-    $("#total_carteles").text(total_carteles);
+    $("#total_pasacalles").text(total_pasacalles);
     $("#total_banners").text(total_banners);
     $("#total_rollups").text(total_rollups);
-    $("#total_colocaciones").text(total_colocaciones);
+    $("#total_carteleria").text(total_carteleria);
+    $("#total_lonas").text(total_lonas);
+    $("#total_vinilos").text(total_vinilos);
+    $("#total_banderas").text(total_banderas);
+    $("#total_tercializaciones").text(total_tercializaciones);
+    $("#total_otros").text(total_otros);
+
+    $("#total_palos").text(total_palos);
     $("#total_lona_mts").text(total_lona_mts);
     $("#total_palos").text(total_palos);
+
+    var total_recaudacion_txt = "$" + numberWithCommas(total_recaudacion);
+    $("#total_recaudacion").text(total_recaudacion_txt);
+
+    var total_pasacalles_barra = (total_pasacalles / total_pedidos * 100).toFixed(0);
+    var total_banners_barra = (total_banners / total_pedidos * 100).toFixed(0);
+    var total_rollups_barra = (total_rollups / total_pedidos * 100).toFixed(0);
+    var total_colocaciones_barra = (total_colocaciones / total_pedidos * 100).toFixed(0);
+    var total_carteleria_barra = (total_carteleria / total_pedidos * 100).toFixed(0);
+    var total_lonas_barra = (total_lonas / total_pedidos * 100).toFixed(0);
+    var total_vinilos_barra = (total_vinilos / total_pedidos * 100).toFixed(0);
+    var total_banderas_barra = (total_banderas / total_pedidos * 100).toFixed(0);
+    var total_tercializaciones_barra = (total_tercializaciones / total_pedidos * 100).toFixed(0);
+    var total_otros_barra = (total_otros / total_pedidos * 100).toFixed(0);
+
+    console.log("total_pedidos, type: " + type(total_pedidos) + ", value: " + total_pedidos);
+    console.log("total_pasacalles, type: " + type(total_pasacalles) + ", value: " + total_pasacalles);
+    console.log("total_banners, type: " + type(total_banners) + ", value: " + total_banners);
+    console.log("total_rollups, type: " + type(total_rollups) + ", value: " + total_rollups);
+    console.log("total_carteleria, type: " + type(total_carteleria) + ", value: " + total_carteleria);
+    console.log("total_lonas, type: " + type(total_lonas) + ", value: " + total_lonas);
+    console.log("total_vinilos, type: " + type(total_vinilos) + ", value: " + total_vinilos);
+    console.log("total_banderas, type: " + type(total_banderas) + ", value: " + total_banderas);
+    console.log("total_tercializaciones, type: " + type(total_tercializaciones) + ", value: " + total_tercializaciones);
+    console.log("total_otros, type: " + type(total_otros) + ", value: " + total_otros);
+
+    console.log("total_palos, type: " + type(total_palos) + ", value: " + total_palos);
+    console.log("total_lona_mts, type: " + type(total_lona_mts) + ", value: " + total_lona_mts);
+    console.log("total_palos, type: " + type(total_palos) + ", value: " + total_palos);
+    console.log("total_recaudacion, type: " + type(total_recaudacion_txt) + ", value: " + total_recaudacion_txt);
+
+    // Setea barras
+    $("#total_pasacalles_barra1").css("width", total_pasacalles_barra + "%");
+    $("#total_banners_barra1").css("width", total_banners_barra + "%");
+    $("#total_rollups_barra1").css("width", total_rollups_barra + "%");
+    $("#total_carteleria_barra1").css("width", total_carteleria_barra + "%");
+    $("#total_lonas_barra1").css("width", total_lonas_barra + "%");
+    $("#total_vinilos_barra1").css("width", total_vinilos_barra + "%");
+    $("#total_banderas_barra1").css("width", total_banderas_barra + "%");
+    $("#total_tercializaciones_barra1").css("width", total_tercializaciones_barra + "%");
+    $("#total_otros_barra1").css("width", total_otros_barra + "%");
+
+    // Setea porcentajes
+    $("#total_pasacalles_barra2").text(total_pasacalles_barra + "%");
+    $("#total_banners_barra2").text(total_banners_barra + "%");
+    $("#total_rollups_barra2").text(total_rollups_barra + "%");
+    $("#total_carteleria_barra2").text(total_carteleria_barra + "%");
+    $("#total_lonas_barra2").text(total_lonas_barra + "%");
+    $("#total_vinilos_barra2").text(total_vinilos_barra + "%");
+    $("#total_banderas_barra2").text(total_banderas_barra + "%");
+    $("#total_tercializaciones_barra2").text(total_tercializaciones_barra + "%");
+    $("#total_otros_barra2").text(total_otros_barra + "%");
+
+    // Setea torta
+    init_chart_doughnut(total_pasacalles_barra, total_banners_barra, total_rollups_barra, total_carteleria_barra, total_lonas_barra, total_vinilos_barra, total_banderas_barra, total_tercializaciones_barra, total_otros_barra);
+
 }
 
 function create_calendar_events(values) {
@@ -920,6 +1137,14 @@ function showActionMenu_CTO(formID, nombre, goToFormulario, goToGMaps, goToWPP, 
     var divPopbox = $("#divPopbox_CTO");
     var btnID = $("#" + btnID_value);
     if (divPopbox !== null && divPopbox !== undefined && btnID !== null && btnID !== undefined) {
+
+        //$(".popbox-box.popbox").hide();
+
+        //$('.panel-default').css({ "opacity": "1" });
+        //$('.panel-default').css({ "background-color": "rgba(0, 0, 0,0.3)" });
+        //$('#tabsFormularios').css({ "background-color": "rgba(0, 0, 0,0.3)" });
+        //opacity: 1;
+        
 
         var new_w = parseInt(divPopbox.css("width"), 10);
         var new_h = parseInt(divPopbox.css("height"), 10);

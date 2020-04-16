@@ -46,3 +46,119 @@
 1/7/2019 2:51:00 AM: [ln:876] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
 1/7/2019 2:51:00 AM: [ln:1127] Dashboard: GetData_BindGridProyectos() - Excepcion. Convirtiendo int. ERROR: Elegir.
 1/7/2019 2:51:01 AM: [ln:876] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+9/25/2019 1:02:59 AM: [ln:857] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
+9/25/2019 1:02:59 AM: [ln:857] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
+9/25/2019 1:02:59 AM: [ln:857] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
+9/25/2019 1:02:59 AM: [ln:857] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details..
+10/12/2019 1:35:26 AM: [ln:833] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:35:27 AM: [ln:833] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:35:27 AM: [ln:833] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:35:27 AM: [ln:833] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:36:27 AM: [ln:833] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:36:27 AM: [ln:833] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:36:27 AM: [ln:833] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:36:27 AM: [ln:833] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:36:57 AM: [ln:833] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:36:57 AM: [ln:833] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:36:57 AM: [ln:833] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:36:57 AM: [ln:833] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:41:17 AM: [ln:833] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:41:27 AM: [ln:833] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:41:27 AM: [ln:833] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:41:29 AM: [ln:833] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:42:16 AM: [ln:833] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:46:52 AM: [ln:825] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:46:52 AM: [ln:825] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:46:52 AM: [ln:825] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:46:52 AM: [ln:825] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:48:41 AM: [ln:825] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:48:41 AM: [ln:825] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:48:41 AM: [ln:825] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:48:41 AM: [ln:825] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:55:20 AM: [ln:825] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:55:20 AM: [ln:825] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:55:20 AM: [ln:825] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:55:20 AM: [ln:825] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:58:30 AM: [ln:825] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:58:30 AM: [ln:825] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:58:30 AM: [ln:825] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 1:58:30 AM: [ln:825] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 2:02:55 AM: [ln:826] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 2:03:19 AM: [ln:826] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 2:03:19 AM: [ln:826] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 2:03:19 AM: [ln:826] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 2:04:06 AM: [ln:826] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 2:04:06 AM: [ln:826] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 2:04:06 AM: [ln:826] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 2:04:06 AM: [ln:826] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 2:05:00 AM: [ln:826] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 2:07:08 AM: [ln:826] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 2:07:09 AM: [ln:826] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 2:07:09 AM: [ln:826] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 2:08:25 AM: [ln:826] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 2:08:39 AM: [ln:826] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 2:08:39 AM: [ln:826] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+10/12/2019 2:08:39 AM: [ln:826] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+2/23/2020 6:42:15 PM: [ln:963] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 6:42:15 PM: [ln:1288] Dashboard: GetData_BindGridProyectos() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 6:42:16 PM: [ln:963] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 6:42:23 PM: [ln:963] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 6:42:23 PM: [ln:963] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 6:42:24 PM: [ln:1288] Dashboard: GetData_BindGridProyectos() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 6:42:24 PM: [ln:963] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 6:42:24 PM: [ln:1288] Dashboard: GetData_BindGridProyectos() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 7:27:17 PM: [ln:1292] Dashboard: GetData_BindGridProyectos() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 7:27:17 PM: [ln:967] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 7:27:18 PM: [ln:967] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 7:40:52 PM: [ln:967] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 7:40:52 PM: [ln:1292] Dashboard: GetData_BindGridProyectos() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 7:40:53 PM: [ln:967] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 7:47:46 PM: [ln:967] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 7:47:46 PM: [ln:967] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 7:47:47 PM: [ln:1292] Dashboard: GetData_BindGridProyectos() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 8:18:39 PM: [ln:967] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 8:18:40 PM: [ln:1292] Dashboard: GetData_BindGridProyectos() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 8:18:40 PM: [ln:967] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 8:25:08 PM: [ln:967] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 8:25:09 PM: [ln:1292] Dashboard: GetData_BindGridProyectos() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 8:25:09 PM: [ln:967] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 8:27:31 PM: [ln:967] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 8:27:31 PM: [ln:967] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 8:27:32 PM: [ln:1292] Dashboard: GetData_BindGridProyectos() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 8:28:26 PM: [ln:1292] Dashboard: GetData_BindGridProyectos() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 8:28:26 PM: [ln:967] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 8:28:26 PM: [ln:967] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 8:29:03 PM: [ln:967] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 8:29:03 PM: [ln:967] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 8:29:04 PM: [ln:1292] Dashboard: GetData_BindGridProyectos() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 8:30:33 PM: [ln:1292] Dashboard: GetData_BindGridProyectos() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 8:30:33 PM: [ln:967] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+2/23/2020 8:30:34 PM: [ln:967] Dashboard: GetData_BindGridFormularios() - Excepcion. Convirtiendo int. ERROR: Elegir.
+3/24/2020 11:43:40 PM: [ln:38] GlobalVariables: GetDatetimeFormated() - Excepcion. Convirtiendo datetime. ERROR: 1.
+3/24/2020 11:43:41 PM: [ln:827] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+3/24/2020 11:43:41 PM: [ln:827] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+3/24/2020 11:44:20 PM: [ln:38] GlobalVariables: GetDatetimeFormated() - Excepcion. Convirtiendo datetime. ERROR: 1.
+3/24/2020 11:44:20 PM: [ln:827] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+3/24/2020 11:44:47 PM: [ln:827] Formulario: Guardar_Contexto() - Excepcion. Guardando en la base de datos. ERROR: An error occurred while updating the entries. See the inner exception for details..
+3/25/2020 4:31:06 PM: [ln:62] Logs: AddUserLog() - Excepcion. Convirtiendo int. ERROR: -.
+3/25/2020 4:32:02 PM: [ln:62] Logs: AddUserLog() - Excepcion. Convirtiendo int. ERROR: -.
+3/25/2020 4:32:16 PM: [ln:62] Logs: AddUserLog() - Excepcion. Convirtiendo int. ERROR: -.
+3/25/2020 4:38:05 PM: [ln:63] Logs: AddUserLog() - Excepcion. Convirtiendo int. ERROR: -.
+3/25/2020 4:39:19 PM: [ln:63] Logs: AddUserLog() - Excepcion. Convirtiendo int. ERROR: -.
+3/25/2020 4:40:36 PM: [ln:63] Logs: AddUserLog() - Excepcion. Convirtiendo int. ERROR: -.
+3/25/2020 5:20:27 PM: [ln:44] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 03/01/2020.
+3/25/2020 5:20:27 PM: [ln:51] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 03/02/2020.
+3/25/2020 5:20:34 PM: [ln:44] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 01/26/2020.
+3/25/2020 5:20:34 PM: [ln:51] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 03/02/2020.
+3/25/2020 5:20:39 PM: [ln:44] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 01/26/2020.
+3/25/2020 5:20:39 PM: [ln:51] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 04/24/2020.
+3/25/2020 5:20:56 PM: [ln:44] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 07/29/2019.
+3/25/2020 5:20:56 PM: [ln:51] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 08/20/2020.
+3/25/2020 5:21:05 PM: [ln:44] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 07/29/2019.
+3/25/2020 5:21:05 PM: [ln:51] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 08/14/2020.
+3/25/2020 5:21:05 PM: [ln:44] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 07/29/2019.
+3/25/2020 5:21:05 PM: [ln:51] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 08/14/2020.
+3/25/2020 5:22:14 PM: [ln:44] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 03/10/2020.
+3/25/2020 5:22:14 PM: [ln:51] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 03/17/2020.
+3/25/2020 5:23:00 PM: [ln:44] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 02/25/2020.
+3/25/2020 5:23:00 PM: [ln:51] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 03/11/2020.

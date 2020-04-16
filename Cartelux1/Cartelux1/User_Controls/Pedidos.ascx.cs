@@ -124,12 +124,12 @@ namespace Cartelux1.User_Controls
                                                     }
                                                 }
 
-                                                // Tipo pedido
-                                                lista_pedido_tipos _lista_pedido_tipos = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(c => c.Pedido_Tipo_ID == _tupla_pedidos.Item1.Pedido_Tipo_ID);
-                                                if (_lista_pedido_tipos != null)
-                                                {
-                                                    pedido_adaptado.lblTipoPedido = _lista_pedido_tipos.Nombre;
-                                                }
+                                                //// Tipo pedido
+                                                //lista_pedido_tipos _lista_pedido_tipos = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(c => c.Pedido_Tipo_ID == _tupla_pedidos.Item1.Pedido_Tipo_ID);
+                                                //if (_lista_pedido_tipos != null)
+                                                //{
+                                                //    pedido_adaptado.lblTipoPedido = _lista_pedido_tipos.Nombre;
+                                                //}
 
                                                 // Temática
                                                 lista_pedido_tematicas _lista_pedido_tematicas = (lista_pedido_tematicas)context.lista_pedido_tematicas.FirstOrDefault(c => c.Pedido_Tematica_ID == _tupla_pedidos.Item1.Pedido_Tematica_ID);
@@ -138,12 +138,77 @@ namespace Cartelux1.User_Controls
                                                     pedido_adaptado.lblTematica = _lista_pedido_tematicas.Nombre;
                                                 }
 
-                                                // Tamaño
-                                                lista_pedido_tamanos _lista_pedido_tamanos = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _tupla_pedidos.Item1.Pedido_Tamano_ID);
+                                                /* Código tamaño cartel
+                                                * 1 - 150x80 Pasacalle ID:2
+                                                * 2 - 300x80 Pasacalle ID:3
+                                                * 3 - 500x80 Pasacalle ID:4
+                                                * 4 - Pancarta otra medida ID:5
+                                                * 5 - 150x80 Roll up ID:6
+                                                * 6 - 200x80 Roll up ID:7
+                                                * 7 - Banner 80x90 ID:8
+                                                * 8 - Banner otra medida ID:9
+                                                * 9 - 200x80 Pasacalle ID:10
+                                                * 
+                                                * ---- ATENCIÓN: Desde 22 Julio 2019
+                                                * Códigos nuevos:
+                                                1 - Pasacalle	
+                                                2 - Roll up	
+                                                3 - Banner	
+                                                4 - Cartelería	
+                                                * */
+
+                                                string tamano_tipo_ID_str = _tupla_pedidos.Item1.Pedido_Tamano_ID.ToString(); // Se usa ID, no código
+                                                if (_formulario.Fecha_update <= GlobalVariables.GetDatetimeFormated("22-07-2019")) //dd-MM-yyyy
+                                                {
+                                                    switch (tamano_tipo_ID_str)
+                                                    {
+                                                        case "2":
+                                                        case "3":
+                                                        case "4":
+                                                        case "5":
+                                                        case "10":
+                                                            {
+                                                                // Pasacalles
+                                                                tamano_tipo_ID_str = "2"; // ID, no código
+                                                                break;
+                                                            }
+                                                        case "6":
+                                                        case "7":
+                                                            {
+                                                                // Roll ups
+                                                                tamano_tipo_ID_str = "3";
+                                                                break;
+                                                            }
+                                                        case "8":
+                                                        case "9":
+                                                            {
+                                                                // Banners
+                                                                tamano_tipo_ID_str = "4";
+                                                                break;
+                                                            }
+                                                    }
+                                                }
+                                                int _tamano_tipo_ID = 0;
+                                                if (!int.TryParse(tamano_tipo_ID_str, out _tamano_tipo_ID))
+                                                {
+                                                    _tamano_tipo_ID = _tupla_pedidos.Item1.Pedido_Tamano_ID;
+                                                    Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, tamano_tipo_ID_str);
+                                                }
+
+                                                // Tamaño - Ahora es tipo de cartel
+                                                lista_pedido_tamanos _lista_pedido_tamanos = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _tamano_tipo_ID);
+                                                //lista_pedido_tamanos _lista_pedido_tamanos = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _tupla_pedidos.Item1.Pedido_Tamano_ID);
                                                 if (_lista_pedido_tamanos != null)
                                                 {
                                                     pedido_adaptado.lblTamano = _lista_pedido_tamanos.Nombre;
                                                 }
+
+                                                string _tamanoReal = "N/D";
+                                                if (!string.IsNullOrWhiteSpace(_tupla_pedidos.Item1.Tamano_real))
+                                                {
+                                                    _tamanoReal = _tupla_pedidos.Item1.Tamano_real;
+                                                }
+                                                pedido_adaptado.lblTamanoReal = _tamanoReal;
 
                                                 lista_pedidos_adaptada.Add(pedido_adaptado);
                                                 contador++;
@@ -190,7 +255,8 @@ namespace Cartelux1.User_Controls
                     //DataTable table = Extras.ToDataTable(lista_pedidos.ToList());
                     //gridPedidos.DataSource = table;
 
-                    gridPedidos.DataSource = lista_pedidos_adaptada.OrderByDescending(e => e.lblFechaEntregaReal);
+                    //gridPedidos.DataSource = lista_pedidos_adaptada.OrderByDescending(e => e.lblFechaEntregaReal);
+                    gridPedidos.DataSource = lista_pedidos_adaptada;
                     gridPedidos.DataBind();
                     //gridPedidos.DataSource = context.pedidos.ToList();
                     //gridPedidos.DataBind();
@@ -276,9 +342,10 @@ namespace Cartelux1.User_Controls
             public string lblNumero { get; set; }
             public Nullable<System.DateTime> lblFechaEntregaReal { get; set; }
             public string lblFechaEntrega { get; set; }
-            public string lblTipoPedido { get; set; }
+            //public string lblTipoPedido { get; set; }
             public string lblTematica { get; set; }
             public string lblTamano { get; set; }
+            public string lblTamanoReal { get; set; }
             public string lblTipoEntrega { get; set; }
             public int? lblImporte { get; set; }
             public string lblComentarios { get; set; }

@@ -4,27 +4,31 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="67d67dfe0f1044d5bd02c8579e458b0c" Name="Diagram1">
-        <EntityTypeShape EntityType="carteluxdb1Model.clientes" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="carteluxdb1Model.formularios" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="carteluxdb1Model.pedido_disenos" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="carteluxdb1Model.pedidos" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="carteluxdb1Model.usuarios" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="carteluxdb1Model.sysdiagrams" Width="1.5" PointX="9.375" PointY="3.75" />
-        <EntityTypeShape EntityType="carteluxdb1Model.confi_formularios_anos" Width="1.5" PointX="3.375" PointY="9.75" />
-        <EntityTypeShape EntityType="carteluxdb1Model.lista_departamentos" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="carteluxdb1Model.lista_entregas_tipos" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="carteluxdb1Model.lista_pedido_materiales" Width="1.5" PointX="5.75" PointY="3.75" />
-        <EntityTypeShape EntityType="carteluxdb1Model.lista_pedido_tamanos" Width="1.5" PointX="9.75" PointY="6.75" />
-        <EntityTypeShape EntityType="carteluxdb1Model.lista_pedido_tematicas" Width="1.5" PointX="9.75" PointY="9.75" />
-        <EntityTypeShape EntityType="carteluxdb1Model.lista_pedido_tipos" Width="1.5" PointX="11.75" PointY="0.75" />
-        <EntityTypeShape EntityType="carteluxdb1Model.pedido_entregas" Width="1.5" PointX="5.375" PointY="9.75" />
-        <EntityTypeShape EntityType="carteluxdb1Model.lista_pedido_estados" Width="1.5" PointX="0.75" PointY="11.75" />
-        <EntityTypeShape EntityType="carteluxdb1Model.confi_emails" Width="1.5" PointX="12.375" PointY="3.75" />
-        <EntityTypeShape EntityType="carteluxdb1Model.clientes_frecuentes" Width="1.5" PointX="12.375" PointY="7.75" />
-        <EntityTypeShape EntityType="carteluxdb1Model.lista_proyecto_estados" Width="1.5" PointX="7.375" PointY="12.75" />
-        <EntityTypeShape EntityType="carteluxdb1Model.proyectos" Width="1.5" PointX="9.375" PointY="12.75" />
-        <EntityTypeShape EntityType="carteluxdb1Model.lista_pedido_mediosDePago" Width="1.5" PointX="12.375" PointY="10.75" />
+      <Diagram DiagramId="b8ca2711070f45bebf8987100a6d75b5" Name="Diagram1">
+        <EntityTypeShape EntityType="carteluxdb1Model.config_alarmas" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="carteluxdb1Model.config_emails" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="carteluxdb1Model.lista_departamentos" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="carteluxdb1Model.lista_entregas_tipos" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="carteluxdb1Model.lista_pedido_estados" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="carteluxdb1Model.lista_pedido_materiales" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="carteluxdb1Model.lista_pedido_mediosDePago" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="carteluxdb1Model.lista_pedido_tamanos" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="carteluxdb1Model.lista_pedido_tematicas" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="carteluxdb1Model.lista_pedido_tipos" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="carteluxdb1Model.lista_proyecto_estados" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="carteluxdb1Model.pedido_disenos" Width="1.5" PointX="6.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="carteluxdb1Model.pedido_entregas" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="carteluxdb1Model.config_formularios_anos" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="carteluxdb1Model.config_material_importes" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="carteluxdb1Model.clientes" Width="1.5" PointX="5.375" PointY="13.75" />
+        <EntityTypeShape EntityType="carteluxdb1Model.formularios" Width="1.5" PointX="13.375" PointY="7.75" />
+        <EntityTypeShape EntityType="carteluxdb1Model.pedidos" Width="1.5" PointX="13.375" PointY="11.75" />
+        <EntityTypeShape EntityType="carteluxdb1Model.proyectos" Width="1.5" PointX="7.375" PointY="14.75" />
+        <EntityTypeShape EntityType="carteluxdb1Model.usuarios" Width="1.5" PointX="9.375" PointY="14.75" />
+        <EntityTypeShape EntityType="carteluxdb1Model.clientes_frecuentes" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="carteluxdb1Model.config_alarmas_ingresosMensual" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="carteluxdb1Model.sysdiagrams" Width="1.5" PointX="2.75" PointY="12.75" />
+        <EntityTypeShape EntityType="carteluxdb1Model.logs" Width="1.5" PointX="15.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

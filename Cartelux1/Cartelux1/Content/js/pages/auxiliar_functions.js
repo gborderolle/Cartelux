@@ -86,3 +86,6 @@ function roundUp(number, precision) {
     Math.ceil(number * precision) / precision;
 }
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

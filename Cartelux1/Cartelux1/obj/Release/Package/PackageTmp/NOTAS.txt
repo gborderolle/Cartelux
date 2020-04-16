@@ -23,8 +23,8 @@ Cartelux
 App: Formulario y Generador de IDs
 
 Server: sql5017.smarterasp.net
-BD: db_a2a582_carteluxdb
-User: DB_A2A582_carteluxdb_admin
+BD: db_a2a582_CarteluxDB
+User: DB_A2A582_CarteluxDB_admin
 Pass: cartelux1234
 
 

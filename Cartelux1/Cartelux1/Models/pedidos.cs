@@ -26,5 +26,6 @@ namespace Cartelux1.Models
         public Nullable<int> Pedido_Estado_ID { get; set; }
         public Nullable<int> Pedido_Estado_UltimaModificacion_Usuario_ID { get; set; }
         public Nullable<int> Pedido_MedioDePago_ID { get; set; }
+        public string Tamano_real { get; set; }
     }
 }

@@ -26,39 +26,81 @@
     <Property Name="Comentarios" Type="varchar" MaxLength="100" />
     <Property Name="Ultimo_pedido" Type="datetime" />
   </EntityType>
-  <EntityType Name="confi_emails">
+  <EntityType Name="config_alarmas">
     <Key>
-      <PropertyRef Name="Confi_emails_ID" />
+      <PropertyRef Name="Config_alarmas_ID" />
     </Key>
-    <Property Name="Confi_emails_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Config_alarmas_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="Aviso_monto_ok" Type="bit" Nullable="false" />
+    <Property Name="Aviso_monto" Type="int" />
+    <Property Name="Aviso_fecha_ok" Type="bit" Nullable="false" />
+    <Property Name="Aviso_fecha" Type="datetime" />
+    <Property Name="EstaActivo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="config_alarmas_ingresosMensual">
+    <Key>
+      <PropertyRef Name="Config_alarmas_ingresosMensual_ID" />
+    </Key>
+    <Property Name="Config_alarmas_ingresosMensual_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Importe" Type="int" />
+    <Property Name="EstaActivo" Type="bit" Nullable="false" />
+    <Property Name="FlagMensual" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="config_emails">
+    <Key>
+      <PropertyRef Name="Config_emails_ID" />
+    </Key>
+    <Property Name="Config_emails_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="100" />
     <Property Name="Clave" Type="varchar" MaxLength="50" />
     <Property Name="EsEmisor" Type="bit" Nullable="false" />
     <Property Name="EsEntrega" Type="bit" Nullable="false" />
+    <Property Name="EstaActivo" Type="bit" Nullable="false" />
+    <Property Name="AlarmasOK" Type="bit" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="confi_formularios_anos">
+warning 6002: The table/view 'carteluxdb1.dbo.config_formularios_anos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="config_formularios_anos">
     <Key>
-      <PropertyRef Name="Confi_formularios_ano_ID" />
+      <PropertyRef Name="Config_formularios_ano_ID" />
       <PropertyRef Name="Nombre" />
     </Key>
-    <Property Name="Confi_formularios_ano_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Config_formularios_ano_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="config_material_importes">
+    <Key>
+      <PropertyRef Name="Material_Importes_ID" />
+      <PropertyRef Name="Nombre" />
+      <PropertyRef Name="Codigo" />
+      <PropertyRef Name="Unidad" />
+    </Key>
+    <Property Name="Material_Importes_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Costo" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Precio" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Unidad" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="formularios">
     <Key>
       <PropertyRef Name="Formulario_ID" />
     </Key>
-    <Property Name="Formulario_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Formulario_ID" Type="int" Nullable="false" />
     <Property Name="Cliente_ID" Type="int" Nullable="false" />
-    <Property Name="Serie" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="URL_short" Type="varchar" MaxLength="120" Nullable="false" />
-    <Property Name="URL_completa" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="Serie" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="URL_short" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="URL_completa" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Monto" Type="int" />
-    <Property Name="Comentarios" Type="varchar" MaxLength="100" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="200" />
     <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
     <Property Name="Fecha_update" Type="datetime" Nullable="false" />
   </EntityType>
@@ -146,6 +188,18 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <Property Name="Codigo" Type="int" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="100" />
   </EntityType>
+  <EntityType Name="logs">
+    <Key>
+      <PropertyRef Name="Log_ID" />
+    </Key>
+    <Property Name="Log_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Usuario_ID" Type="int" Nullable="false" />
+    <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
+    <Property Name="Usuario" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="IP_client" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Dato_afectado" Type="varchar" MaxLength="150" Nullable="false" />
+  </EntityType>
   <EntityType Name="pedido_disenos">
     <Key>
       <PropertyRef Name="Pedido_Diseno_ID" />
@@ -195,6 +249,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <Property Name="Pedido_Estado_ID" Type="int" />
     <Property Name="Pedido_Estado_UltimaModificacion_Usuario_ID" Type="int" />
     <Property Name="Pedido_MedioDePago_ID" Type="int" />
+    <Property Name="Tamano_real" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="proyectos">
     <Key>
@@ -238,7 +293,9 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
   <EntityContainer Name="carteluxdb1ModelStoreContainer">
     <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="clientes_frecuentes" EntityType="Self.clientes_frecuentes" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="confi_emails" EntityType="Self.confi_emails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="config_alarmas" EntityType="Self.config_alarmas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="config_alarmas_ingresosMensual" EntityType="Self.config_alarmas_ingresosMensual" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="config_emails" EntityType="Self.config_emails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="formularios" EntityType="Self.formularios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_departamentos" EntityType="Self.lista_departamentos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_entregas_tipos" EntityType="Self.lista_entregas_tipos" Schema="dbo" store:Type="Tables" />
@@ -249,17 +306,30 @@ warning 6002: The table/view 'carteluxdb1.dbo.confi_formularios_anos' does not h
     <EntitySet Name="lista_pedido_tematicas" EntityType="Self.lista_pedido_tematicas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_pedido_tipos" EntityType="Self.lista_pedido_tipos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_proyecto_estados" EntityType="Self.lista_proyecto_estados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="logs" EntityType="Self.logs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="pedido_disenos" EntityType="Self.pedido_disenos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="pedido_entregas" EntityType="Self.pedido_entregas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="pedidos" EntityType="Self.pedidos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="proyectos" EntityType="Self.proyectos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="confi_formularios_anos" EntityType="Self.confi_formularios_anos" store:Type="Tables" store:Schema="dbo">
+    <EntitySet Name="config_formularios_anos" EntityType="Self.config_formularios_anos" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-    [confi_formularios_anos].[Confi_formularios_ano_ID] AS [Confi_formularios_ano_ID], 
-    [confi_formularios_anos].[Nombre] AS [Nombre]
-    FROM [dbo].[confi_formularios_anos] AS [confi_formularios_anos]</DefiningQuery>
+    [config_formularios_anos].[Config_formularios_ano_ID] AS [Config_formularios_ano_ID], 
+    [config_formularios_anos].[Nombre] AS [Nombre]
+    FROM [dbo].[config_formularios_anos] AS [config_formularios_anos]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="config_material_importes" EntityType="Self.config_material_importes" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [config_material_importes].[Material_Importes_ID] AS [Material_Importes_ID], 
+    [config_material_importes].[Nombre] AS [Nombre], 
+    [config_material_importes].[Costo] AS [Costo], 
+    [config_material_importes].[Precio] AS [Precio], 
+    [config_material_importes].[Codigo] AS [Codigo], 
+    [config_material_importes].[Unidad] AS [Unidad], 
+    [config_material_importes].[Descripcion] AS [Descripcion], 
+    [config_material_importes].[Comentarios] AS [Comentarios]
+    FROM [dbo].[config_material_importes] AS [config_material_importes]</DefiningQuery>
     </EntitySet>
   </EntityContainer>
 </Schema>

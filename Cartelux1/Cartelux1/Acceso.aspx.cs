@@ -48,6 +48,8 @@ namespace Cartelux1
                 {
                     try
                     {
+                        string IP_client = Logs.GetIPAddress();
+
                         context.Database.Connection.Open();
                         usuarios _usuario = (usuarios)context.usuarios.FirstOrDefault(v => v.Usuario == username && v.Clave == password);
                         if (_usuario != null)
@@ -59,7 +61,7 @@ namespace Cartelux1
                             try
                             {
                                 string userID1 = _usuario.Usuario_ID.ToString();
-                                //Global_Objects.Logs.AddUserLog("Acceso al sistema", obj.GetType().Name + ": " + obj.GetType().Name + ": " + obj.Viaje_ID, userID1, username);
+                                Logs.AddUserLog("OK: Acceso al sistema correcto con contraseña: '" + password + "'.", "", userID1, username, IP_client);
                             }
                             catch (Exception ex)
                             {
@@ -71,7 +73,9 @@ namespace Cartelux1
                         }
                         else
                         {
+                            // No se pudo autenticar
                             resultado = 2;
+                            Logs.AddUserLog("ERROR: Intento de acceso al sistema con contraseña: '" + password+"'.", "", "-", username, IP_client);
                         }
                     }
                     catch (Exception ex)

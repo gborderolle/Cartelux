@@ -8,6 +8,8 @@ using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using Cartelux1.Models;
+using System.Timers;
+using Cartelux1.Global_Objects;
 
 namespace Cartelux1
 {
@@ -64,6 +66,17 @@ namespace Cartelux1
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+        }
+        public void Init_ThreadServices()
+        {
+            // Acá comienza el Thread para chequear las Alarmas diarias ***********************
+            /*
+            const double interval60Minutes = 24 * 60 * 60 * 1000; // milliseconds to one hour -- Cada 24 horas
+
+            Timer checkForTime = new Timer(interval60Minutes);
+            checkForTime.Elapsed += new ElapsedEventHandler(AlarmsThread.checkForTime_Elapsed);
+            checkForTime.Enabled = true;
+            */
         }
     }
 }

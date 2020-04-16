@@ -195,6 +195,10 @@
     <!-- DateJS -->
     <script src="/Content/reportes_template/DateJS/build/date.js"></script>
 
+    <script type="text/javascript">
+        <%--WHATSAPP_URL = '<%=ConfigurationManager.AppSettings["WhatsApp_URL"].ToString()%>';--%>
+    </script>
+
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
@@ -380,17 +384,29 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Tamaño">
+                                                <asp:TemplateField HeaderText="Tipo">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblTamano" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="T/Cartel">
+                                                <asp:TemplateField HeaderText="Tamaño">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblTamanoReal" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Temática">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblTematica" runat="server" CommandName="View" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <%--<asp:TemplateField HeaderText="T/Cartel">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblTipo" runat="server" CommandName="View" />
                                                     </ItemTemplate>
-                                                </asp:TemplateField>
+                                                </asp:TemplateField>--%>
 
                                                 <asp:TemplateField HeaderText="MedioP">
                                                     <ItemTemplate>
@@ -404,11 +420,7 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Temática">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="lblTematica" runat="server" CommandName="View" />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
+
 
                                                 <asp:TemplateField HeaderText="Us">
                                                     <ItemTemplate>
@@ -533,24 +545,21 @@
                                 <!-- top tiles -->
                                 <div class="row tile_count">
                                     <h1>Pedidos</h1>
+                                    <br />
                                     <div class="col-md-3 col-sm-12 col-xs-12 tile_stats_count">
                                         <span class="count_top"><i class="fa fa-user"></i>Total Pedidos</span>
-                                        <%--<div id="total_pedidos" class="count green">78</div>--%>
                                         <span class="count_bottom"><i class="green">16% </i>que el mes anterior</span>
                                     </div>
                                     <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
                                         <span class="count_top"><i class="fa fa-clock-o"></i>Total Pasacalles</span>
-                                        <%--<div id="total_carteles" class="count">69</div>--%>
                                         <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i>que el mes anterior</span>
                                     </div>
                                     <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
                                         <span class="count_top"><i class="fa fa-user"></i>Total Banners</span>
-                                        <%--<div id="total_banners" class="count">6</div>--%>
                                         <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i>que el mes anterior</span>
                                     </div>
                                     <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
                                         <span class="count_top"><i class="fa fa-user"></i>Total Roll ups</span>
-                                        <%--              <div id="total_rollups" class="count">11</div>--%>
                                         <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i>que el mes anterior</span>
                                     </div>
                                 </div>
@@ -561,35 +570,31 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="x_panel tile fixed_height_320">
                                             <div class="x_title">
-                                                <h2>Pedidos</h2>
-                                                <ul class="nav navbar-right panel_toolbox">
-                                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                                    </li>
-                                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                                    </li>
-                                                </ul>
+                                                <%--<h2>Tipo de pedidos 1</h2>--%>
+
                                                 <div class="clearfix"></div>
                                             </div>
                                             <div class="x_content">
-                                                <h4>Totales generales</h4>
+                                                <h4>Totales barra</h4>
                                                 <div class="widget_summary">
                                                     <div class="w_left w_25">
-                                                        <span>TOTAL</span>
+                                                        <span style="font-weight: bold;">TOTAL</span>
                                                     </div>
                                                     <div class="w_center w_55">
                                                         <div class="progress">
-                                                            <div id="total_pedidos_bar" class="progress-bar bg-green" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                                            <div id="total_pedidos_barra1" class="progress-bar bg-green" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
                                                                 <span class="sr-only">60% Complete</span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="w_right w_20">
-                                                        <%--<span>123k</span>--%>
-                                                        <div id="total_pedidos" class="count green font-size">78</div>
-                                                        <span class="count_bottom comparacion"><i class="fa fa-sort-asc"></i><i class="green">16% </i></span>
+                                                        <div id="total_pedidos" class="count green font-size">0</div>
+                                                        <%--<span class="count_bottom comparacion"><i class="fa fa-sort-asc"></i><i class="green">100% </i></span>--%>
                                                     </div>
                                                     <div class="clearfix"></div>
                                                 </div>
+
+                                                <hr style="margin-top: 0px;" />
 
                                                 <div class="widget_summary">
                                                     <div class="w_left w_25">
@@ -597,14 +602,13 @@
                                                     </div>
                                                     <div class="w_center w_55">
                                                         <div class="progress">
-                                                            <div id="total_carteles_bar" class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
+                                                            <div id="total_pasacalles_barra1" class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                                                 <span class="sr-only">60% Complete</span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="w_right w_20">
-                                                        <%--<span>53k</span>--%>
-                                                        <div id="total_carteles" class="count green font-size">78</div>
+                                                        <div id="total_pasacalles" class="count blue font-size">0</div>
 
                                                     </div>
                                                     <div class="clearfix"></div>
@@ -615,14 +619,13 @@
                                                     </div>
                                                     <div class="w_center w_55">
                                                         <div class="progress">
-                                                            <div id="total_banners_bar" class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+                                                            <div id="total_banners_barra1" class="progress-bar bg-red" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                                                                 <span class="sr-only">60% Complete</span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="w_right w_20">
-                                                        <%--<span>23k</span>--%>
-                                                        <div id="total_banners" class="count green font-size">78</div>
+                                                        <div id="total_banners" class="count red font-size">0</div>
 
                                                     </div>
                                                     <div class="clearfix"></div>
@@ -633,34 +636,122 @@
                                                     </div>
                                                     <div class="w_center w_55">
                                                         <div class="progress">
-                                                            <div id="total_rollups_bar" class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
+                                                            <div id="total_rollups_barra1" class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 0%; background: #e7c2bc !important">
                                                                 <span class="sr-only">60% Complete</span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="w_right w_20">
-                                                        <%--<span>3k</span>--%>
-                                                        <div id="total_rollups" class="count green font-size">78</div>
-
+                                                        <div id="total_rollups" class="count font-size" style="color: #e7c2bc;">0</div>
                                                     </div>
                                                     <div class="clearfix"></div>
                                                 </div>
                                                 <div class="widget_summary">
                                                     <div class="w_left w_25">
-                                                        <span>-</span>
+                                                        <span>Cartelería</span>
                                                     </div>
                                                     <div class="w_center w_55">
                                                         <div class="progress">
-                                                            <div id="total_x_bar" class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 2%;">
+                                                            <div id="total_carteleria_barra1" class="progress-bar bg-violet" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 0%; background: #ec50df !important; border: #1px solid #992990 !important;">
                                                                 <span class="sr-only">60% Complete</span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="w_right w_20">
-                                                        <span>-</span>
+                                                        <div id="total_carteleria" class="count font-size" style="color: #ec50df">0</div>
                                                     </div>
                                                     <div class="clearfix"></div>
                                                 </div>
+
+
+
+
+                                                <div class="widget_summary">
+                                                    <div class="w_left w_25">
+                                                        <span>Lonas</span>
+                                                    </div>
+                                                    <div class="w_center w_55">
+                                                        <div class="progress">
+                                                            <div id="total_lonas_barra1" class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 0%; background: #7e29dc !important;">
+                                                                <span class="sr-only">60% Complete</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w_right w_20">
+                                                        <div id="total_lonas" class="count font-size" style="color: #254396">0</div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="widget_summary">
+                                                    <div class="w_left w_25">
+                                                        <span>Vinilos</span>
+                                                    </div>
+                                                    <div class="w_center w_55">
+                                                        <div class="progress">
+                                                            <div id="total_vinilos_barra1" class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 0%; background: #e0dd37 !important;">
+                                                                <span class="sr-only">60% Complete</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w_right w_20">
+                                                        <div id="total_vinilos" class="count font-size" style="color: #e0dd37">0</div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="widget_summary">
+                                                    <div class="w_left w_25">
+                                                        <span>Banderas</span>
+                                                    </div>
+                                                    <div class="w_center w_55">
+                                                        <div class="progress">
+                                                            <div id="total_banderas_barra1" class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 0%; background: #000000 !important;">
+                                                                <span class="sr-only">60% Complete</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w_right w_20">
+                                                        <div id="total_banderas" class="count font-size" style="color: black">0</div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="widget_summary">
+                                                    <div class="w_left w_25">
+                                                        <span>Tercializaciones</span>
+                                                    </div>
+                                                    <div class="w_center w_55">
+                                                        <div class="progress">
+                                                            <div id="total_tercializaciones_barra1" class="progress-bar bg-brown" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 0%; background: #ec50df !important; border: #1px solid #992990 !important;">
+                                                                <span class="sr-only">60% Complete</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w_right w_20">
+                                                        <div id="total_tercializaciones" class="count font-size" style="color: #bb691a">0</div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="widget_summary">
+                                                    <div class="w_left w_25">
+                                                        <span>Otros</span>
+                                                    </div>
+                                                    <div class="w_center w_55">
+                                                        <div class="progress">
+                                                            <div id="total_otros_barra1" class="progress-bar bg-aero" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 0%; background: #808080 !important; border: #1px solid  #808080 !important;">
+                                                                <span class="sr-only">60% Complete</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w_right w_20">
+                                                        <div id="total_otros" class="count font-size" style="color: #636161">0</div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+
+
+
+
+
+
 
                                             </div>
                                         </div>
@@ -669,16 +760,96 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="x_panel tile fixed_height_320 overflow_hidden">
                                             <div class="x_title">
-                                                <h2>Temáticas</h2>
-                                                <ul class="nav navbar-right panel_toolbox">
-                                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                                    </li>
-                                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                                    </li>
-                                                </ul>
+                                                <%--<h2>Datos</h2>--%>
+
                                                 <div class="clearfix"></div>
                                             </div>
                                             <div class="x_content">
+                                                <h4>Totales torta</h4>
+
+
+
+
+
+
+
+                                                <table class="" style="width: 100%">
+                                                    <tr>
+                                                        <td>
+                                                            <canvas class="canvasDoughnut" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
+                                                        </td>
+                                                        <td>
+                                                            <table class="tile_info">
+                                                                <tr>
+                                                                    <td>
+                                                                        <p><i class="fa fa-square " style="color: #3498DB"></i>Pasacalles </p>
+                                                                    </td>
+                                                                    <td id="total_pasacalles_barra2">100%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <p><i class="fa fa-square " style="color: #E74C3C"></i>Banners </p>
+                                                                    </td>
+                                                                    <td id="total_banners_barra2">100%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <p><i class="fa fa-square " style="color: #e7c2bc"></i>Roll ups </p>
+                                                                    </td>
+                                                                    <td id="total_rollups_barra2">100%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <p><i class="fa fa-square " style="color: #ec50df"></i>Cartelería </p>
+                                                                    </td>
+                                                                    <td id="total_carteleria_barra2">100%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <p><i class="fa fa-square " style="color: #7e29dc"></i>Lonas </p>
+                                                                    </td>
+                                                                    <td id="total_lonas_barra2">100%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <p><i class="fa fa-square " style="color: #e0dd37"></i>Vinilos </p>
+                                                                    </td>
+                                                                    <td id="total_vinilos_barra2">100%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <p><i class="fa fa-square " style="color: black"></i>Banderas </p>
+                                                                    </td>
+                                                                    <td id="total_banderas_barra2">100%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <p><i class="fa fa-square " style="color: #bb691a"></i>Tercializaciones </p>
+                                                                    </td>
+                                                                    <td id="total_tercializaciones_barra2">100%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <p><i class="fa fa-square" style="color: #636161"></i>Otros </p>
+                                                                    </td>
+                                                                    <td id="total_otros_barra2">100%</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
+
+
+
+
+
+
+
+
+                                            </div>
+
+                                            <%--<div class="x_content">
                                                 <table class="" style="width: 100%">
                                                     <tr>
                                                         <th>
@@ -753,7 +924,7 @@
                                                         </td>
                                                     </tr>
                                                 </table>
-                                            </div>
+                                            </div>--%>
                                         </div>
                                     </div>
 
@@ -785,9 +956,6 @@
                                         </div>
 
                                     </div>--%>
-
-
-
                                 </div>
 
 
@@ -795,20 +963,24 @@
                                     <!-- top tiles -->
 
                                     <div class="row tile_count">
-                                        <h1>Otros</h1>
-                                        <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                                        <div class="col-md-3 col-sm-3 col-xs-6 tile_stats_count">
+                                            <span class="count_top"><i class="fa fa-money"></i>Recaudación</span>
+                                            <div id="total_recaudacion" class="count">14</div>
+                                            <span class="count_bottom"><i class="green">4% </i>que el mes anterior</span>
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 col-xs-6 tile_stats_count">
                                             <span class="count_top"><i class="fa fa-user"></i>Colocaciones</span>
                                             <div id="total_colocaciones" class="count">14</div>
                                             <span class="count_bottom"><i class="green">4% </i>que el mes anterior</span>
                                         </div>
-                                        <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                                        <div class="col-md-3 col-sm-3 col-xs-6 tile_stats_count">
                                             <span class="count_top"><i class="fa fa-user"></i>Lona usada mts.</span>
                                             <div id="total_lona_mts" class="count">188</div>
                                             <span class="count_bottom"><i class="green">4% </i>que el mes anterior</span>
                                             <span class="row"></span>
                                             <span class="count_bottom">Valor estimado</span>
                                         </div>
-                                        <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                                        <div class="col-md-3 col-sm-3 col-xs-6 tile_stats_count">
                                             <span class="count_top"><i class="fa fa-clock-o"></i>Total Palos</span>
                                             <div id="total_palos" class="count">162</div>
                                             <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i>que el mes anterior</span>
@@ -1207,8 +1379,6 @@
                                 });
                             } else {
                                 throwErr(
-                                  "You don't have a <button> with the class: '" +
-                                  buttonClassName + "'. Please check the cheval README."
                                 );
                             }
                         };
@@ -1235,4 +1405,5 @@
             }
 
         </script>
+    </div>
 </asp:Content>
