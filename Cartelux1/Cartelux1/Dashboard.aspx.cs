@@ -306,7 +306,7 @@ namespace Cartelux1
                             //lbl1 = e.Row.FindControl("lblTipo") as Label;
                             //if (lbl1 != null)
                             //{
-                            //    lista_pedido_tipos _lista_pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(c => c.Pedido_Tipo_ID == _pedido.Pedido_Tipo_ID);
+                            //    lista_productos _lista_pedido_tipo = (lista_productos)context.lista_productos.FirstOrDefault(c => c.Pedido_Tipo_ID == _pedido.Pedido_Tipo_ID);
                             //    if (_lista_pedido_tipo != null)
                             //    {
                             //        string nombre = string.Empty;
@@ -1182,7 +1182,7 @@ namespace Cartelux1
                                     #endregion END Pedido Tamaño
 
                                     #region Pedido Tipo ---------------------------------------------------------------------------------------------------------
-                                    lista_pedido_tipos _lista_pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(c => c.Pedido_Tipo_ID == _pedido.Pedido_Tipo_ID);
+                                    lista_productos _lista_pedido_tipo = (lista_productos)context.lista_productos.FirstOrDefault(c => c.Producto_ID == _pedido.Pedido_Tipo_ID);
                                     if (_lista_pedido_tipo != null)
                                     {
                                         if (!string.IsNullOrWhiteSpace(_lista_pedido_tipo.Nombre))

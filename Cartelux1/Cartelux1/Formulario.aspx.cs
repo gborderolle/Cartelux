@@ -603,10 +603,10 @@ namespace Cartelux1
                         }
 
                         _pedido.Pedido_Tipo_ID = 2; // ID Pasacalle
-                        lista_pedido_tipos _pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(v => v.Codigo.Equals(tipo_codigo));
+                        lista_productos _pedido_tipo = (lista_productos)context.lista_productos.FirstOrDefault(v => v.Codigo.Equals(tipo_codigo));
                         if (_pedido_tipo != null)
                         {
-                            _pedido.Pedido_Tipo_ID = _pedido_tipo.Pedido_Tipo_ID;
+                            _pedido.Pedido_Tipo_ID = _pedido_tipo.Producto_ID;
                         }
 
                         #endregion Tipo = Pasacalle / Roll up / etc
@@ -943,7 +943,7 @@ namespace Cartelux1
                         tipo_codigo = 3; // Banner
                     }
 
-                    lista_pedido_tipos _pedido_tipo = (lista_pedido_tipos)context.lista_pedido_tipos.FirstOrDefault(v => v.Codigo.Equals(tipo_codigo));
+                    lista_productos _pedido_tipo = (lista_productos)context.lista_productos.FirstOrDefault(v => v.Codigo.Equals(tipo_codigo));
                     if (_pedido_tipo != null)
                     {
                         _pedido.Pedido_Tipo_ID = 0;//_pedido_tipo.Pedido_Tipo_ID; // NO SE USA MÁS, ahora está TAMAÑO

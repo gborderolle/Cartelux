@@ -109,6 +109,29 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
           <Property Name="Fecha_update" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="lista_componentes_unidad">
+          <Key>
+            <PropertyRef Name="componente_unidad_ID" />
+          </Key>
+          <Property Name="componente_unidad_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Codigo" Type="int" />
+          <Property Name="Costo_unidad" Type="decimal" Precision="10" Scale="3" />
+          <Property Name="Precio_venta" Type="decimal" Precision="10" Scale="3" />
+          <Property Name="Comentarios" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="lista_componentes_volumen">
+          <Key>
+            <PropertyRef Name="componente_volumen_ID" />
+          </Key>
+          <Property Name="componente_volumen_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Codigo" Type="int" />
+          <Property Name="Costo_volumen" Type="decimal" Precision="10" Scale="3" />
+          <Property Name="Precio_venta" Type="decimal" Precision="10" Scale="3" />
+          <Property Name="Comentarios" Type="varchar" MaxLength="200" />
+          <Property Name="isFondoColor" Type="bit" />
+        </EntityType>
         <EntityType Name="lista_departamentos">
           <Key>
             <PropertyRef Name="Departamento_ID" />
@@ -175,14 +198,16 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <Property Name="Codigo" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="lista_pedido_tipos">
+        <EntityType Name="lista_productos">
           <Key>
-            <PropertyRef Name="Pedido_Tipo_ID" />
+            <PropertyRef Name="Producto_ID" />
           </Key>
-          <Property Name="Pedido_Tipo_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Producto_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Codigo" Type="int" Nullable="false" />
+          <Property Name="Precio_sugerido" Type="decimal" Precision="10" Scale="3" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Comentarios" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="lista_proyecto_estados">
           <Key>
@@ -256,6 +281,25 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <Property Name="Pedido_MedioDePago_ID" Type="int" />
           <Property Name="Tamano_real" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="producto_componente_unidad">
+          <Key>
+            <PropertyRef Name="producto_componente_unidad_ID" />
+          </Key>
+          <Property Name="producto_componente_unidad_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Producto_ID" Type="int" />
+          <Property Name="Componente_unidad_ID" Type="int" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Comentarios" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="producto_componente_volumen">
+          <Key>
+            <PropertyRef Name="producto_componente_volumen_ID" />
+          </Key>
+          <Property Name="producto_componente_volumen_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Producto_ID" Type="int" />
+          <Property Name="Componente_volumen_ID" Type="int" />
+          <Property Name="Comentarios" Type="varchar" MaxLength="200" />
+        </EntityType>
         <EntityType Name="proyectos">
           <Key>
             <PropertyRef Name="Proyecto_ID" />
@@ -302,6 +346,8 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <EntitySet Name="config_alarmas_ingresosMensual" EntityType="Self.config_alarmas_ingresosMensual" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="config_emails" EntityType="Self.config_emails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="formularios" EntityType="Self.formularios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lista_componentes_unidad" EntityType="Self.lista_componentes_unidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lista_componentes_volumen" EntityType="Self.lista_componentes_volumen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_departamentos" EntityType="Self.lista_departamentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_entregas_tipos" EntityType="Self.lista_entregas_tipos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_pedido_estados" EntityType="Self.lista_pedido_estados" Schema="dbo" store:Type="Tables" />
@@ -309,12 +355,14 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <EntitySet Name="lista_pedido_mediosDePago" EntityType="Self.lista_pedido_mediosDePago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_pedido_tamanos" EntityType="Self.lista_pedido_tamanos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_pedido_tematicas" EntityType="Self.lista_pedido_tematicas" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="lista_pedido_tipos" EntityType="Self.lista_pedido_tipos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lista_productos" EntityType="Self.lista_productos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lista_proyecto_estados" EntityType="Self.lista_proyecto_estados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="logs" EntityType="Self.logs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pedido_disenos" EntityType="Self.pedido_disenos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pedido_entregas" EntityType="Self.pedido_entregas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pedidos" EntityType="Self.pedidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="producto_componente_unidad" EntityType="Self.producto_componente_unidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="producto_componente_volumen" EntityType="Self.producto_componente_volumen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="proyectos" EntityType="Self.proyectos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
@@ -434,15 +482,6 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <Property Name="Codigo" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="lista_pedido_tipos">
-          <Key>
-            <PropertyRef Name="Pedido_Tipo_ID" />
-          </Key>
-          <Property Name="Pedido_Tipo_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Codigo" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="lista_proyecto_estados">
           <Key>
             <PropertyRef Name="Proyecto_Estado_ID" />
@@ -519,7 +558,6 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <EntitySet Name="lista_pedido_mediosDePago" EntityType="Self.lista_pedido_mediosDePago" />
           <EntitySet Name="lista_pedido_tamanos" EntityType="Self.lista_pedido_tamanos" />
           <EntitySet Name="lista_pedido_tematicas" EntityType="Self.lista_pedido_tematicas" />
-          <EntitySet Name="lista_pedido_tipos" EntityType="Self.lista_pedido_tipos" />
           <EntitySet Name="lista_proyecto_estados" EntityType="Self.lista_proyecto_estados" />
           <EntitySet Name="pedido_disenos" EntityType="Self.pedido_disenos" />
           <EntitySet Name="pedido_entregas" EntityType="Self.pedido_entregas" />
@@ -534,6 +572,11 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <EntitySet Name="config_alarmas_ingresosMensual" EntityType="carteluxdb1Model.config_alarmas_ingresosMensual" />
           <EntitySet Name="sysdiagrams" EntityType="carteluxdb1Model.sysdiagrams" />
           <EntitySet Name="logs" EntityType="carteluxdb1Model.logs" />
+          <EntitySet Name="lista_componentes_unidad" EntityType="carteluxdb1Model.lista_componentes_unidad" />
+          <EntitySet Name="lista_componentes_volumen" EntityType="carteluxdb1Model.lista_componentes_volumen" />
+          <EntitySet Name="lista_productos" EntityType="carteluxdb1Model.lista_productos" />
+          <EntitySet Name="producto_componente_unidad" EntityType="carteluxdb1Model.producto_componente_unidad" />
+          <EntitySet Name="producto_componente_volumen" EntityType="carteluxdb1Model.producto_componente_volumen" />
         </EntityContainer>
         <EntityType Name="clientes">
           <Key>
@@ -653,6 +696,59 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <Property Name="Dato_afectado" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="IP_client" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="lista_componentes_unidad">
+          <Key>
+            <PropertyRef Name="componente_unidad_ID" />
+          </Key>
+          <Property Name="componente_unidad_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Costo_unidad" Type="Decimal" Precision="10" Scale="3" />
+          <Property Name="Precio_venta" Type="Decimal" Precision="10" Scale="3" />
+          <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="Int32" />
+        </EntityType>
+        <EntityType Name="lista_componentes_volumen">
+          <Key>
+            <PropertyRef Name="componente_volumen_ID" />
+          </Key>
+          <Property Name="componente_volumen_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Costo_volumen" Type="Decimal" Precision="10" Scale="3" />
+          <Property Name="Precio_venta" Type="Decimal" Precision="10" Scale="3" />
+          <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="Int32" />
+          <Property Name="isFondoColor" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="lista_productos">
+          <Key>
+            <PropertyRef Name="Producto_ID" />
+          </Key>
+          <Property Name="Producto_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="Int32" Nullable="false" />
+          <Property Name="Precio_sugerido" Type="Decimal" Precision="10" Scale="3" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="producto_componente_unidad">
+          <Key>
+            <PropertyRef Name="producto_componente_unidad_ID" />
+          </Key>
+          <Property Name="producto_componente_unidad_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Producto_ID" Type="Int32" />
+          <Property Name="Componente_unidad_ID" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="producto_componente_volumen">
+          <Key>
+            <PropertyRef Name="producto_componente_volumen_ID" />
+          </Key>
+          <Property Name="producto_componente_volumen_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Producto_ID" Type="Int32" />
+          <Property Name="Componente_volumen_ID" Type="Int32" />
+          <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -755,16 +851,6 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
             <EntityTypeMapping TypeName="carteluxdb1Model.lista_pedido_tematicas">
               <MappingFragment StoreEntitySet="lista_pedido_tematicas">
                 <ScalarProperty Name="Pedido_Tematica_ID" ColumnName="Pedido_Tematica_ID" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="lista_pedido_tipos">
-            <EntityTypeMapping TypeName="carteluxdb1Model.lista_pedido_tipos">
-              <MappingFragment StoreEntitySet="lista_pedido_tipos">
-                <ScalarProperty Name="Pedido_Tipo_ID" ColumnName="Pedido_Tipo_ID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
@@ -965,7 +1051,65 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="lista_componentes_unidad">
+            <EntityTypeMapping TypeName="carteluxdb1Model.lista_componentes_unidad">
+              <MappingFragment StoreEntitySet="lista_componentes_unidad">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+                <ScalarProperty Name="Precio_venta" ColumnName="Precio_venta" />
+                <ScalarProperty Name="Costo_unidad" ColumnName="Costo_unidad" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="componente_unidad_ID" ColumnName="componente_unidad_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lista_componentes_volumen">
+            <EntityTypeMapping TypeName="carteluxdb1Model.lista_componentes_volumen">
+              <MappingFragment StoreEntitySet="lista_componentes_volumen">
+                <ScalarProperty Name="isFondoColor" ColumnName="isFondoColor" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+                <ScalarProperty Name="Precio_venta" ColumnName="Precio_venta" />
+                <ScalarProperty Name="Costo_volumen" ColumnName="Costo_volumen" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="componente_volumen_ID" ColumnName="componente_volumen_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lista_productos">
+            <EntityTypeMapping TypeName="carteluxdb1Model.lista_productos">
+              <MappingFragment StoreEntitySet="lista_productos">
+                <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Precio_sugerido" ColumnName="Precio_sugerido" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Producto_ID" ColumnName="Producto_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="producto_componente_unidad">
+            <EntityTypeMapping TypeName="carteluxdb1Model.producto_componente_unidad">
+              <MappingFragment StoreEntitySet="producto_componente_unidad">
+                <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Componente_unidad_ID" ColumnName="Componente_unidad_ID" />
+                <ScalarProperty Name="Producto_ID" ColumnName="Producto_ID" />
+                <ScalarProperty Name="producto_componente_unidad_ID" ColumnName="producto_componente_unidad_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="producto_componente_volumen">
+            <EntityTypeMapping TypeName="carteluxdb1Model.producto_componente_volumen">
+              <MappingFragment StoreEntitySet="producto_componente_volumen">
+                <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+                <ScalarProperty Name="Componente_volumen_ID" ColumnName="Componente_volumen_ID" />
+                <ScalarProperty Name="Producto_ID" ColumnName="Producto_ID" />
+                <ScalarProperty Name="producto_componente_volumen_ID" ColumnName="producto_componente_volumen_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

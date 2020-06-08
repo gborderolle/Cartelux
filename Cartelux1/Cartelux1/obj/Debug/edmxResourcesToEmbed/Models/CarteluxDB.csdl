@@ -93,15 +93,6 @@
     <Property Name="Codigo" Type="Int32" Nullable="false" />
     <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="lista_pedido_tipos">
-    <Key>
-      <PropertyRef Name="Pedido_Tipo_ID" />
-    </Key>
-    <Property Name="Pedido_Tipo_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Codigo" Type="Int32" Nullable="false" />
-    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="lista_proyecto_estados">
     <Key>
       <PropertyRef Name="Proyecto_Estado_ID" />
@@ -178,7 +169,6 @@
     <EntitySet Name="lista_pedido_mediosDePago" EntityType="Self.lista_pedido_mediosDePago" />
     <EntitySet Name="lista_pedido_tamanos" EntityType="Self.lista_pedido_tamanos" />
     <EntitySet Name="lista_pedido_tematicas" EntityType="Self.lista_pedido_tematicas" />
-    <EntitySet Name="lista_pedido_tipos" EntityType="Self.lista_pedido_tipos" />
     <EntitySet Name="lista_proyecto_estados" EntityType="Self.lista_proyecto_estados" />
     <EntitySet Name="pedido_disenos" EntityType="Self.pedido_disenos" />
     <EntitySet Name="pedido_entregas" EntityType="Self.pedido_entregas" />
@@ -193,6 +183,11 @@
     <EntitySet Name="config_alarmas_ingresosMensual" EntityType="carteluxdb1Model.config_alarmas_ingresosMensual" />
     <EntitySet Name="sysdiagrams" EntityType="carteluxdb1Model.sysdiagrams" />
     <EntitySet Name="logs" EntityType="carteluxdb1Model.logs" />
+    <EntitySet Name="lista_componentes_unidad" EntityType="carteluxdb1Model.lista_componentes_unidad" />
+    <EntitySet Name="lista_componentes_volumen" EntityType="carteluxdb1Model.lista_componentes_volumen" />
+    <EntitySet Name="lista_productos" EntityType="carteluxdb1Model.lista_productos" />
+    <EntitySet Name="producto_componente_unidad" EntityType="carteluxdb1Model.producto_componente_unidad" />
+    <EntitySet Name="producto_componente_volumen" EntityType="carteluxdb1Model.producto_componente_volumen" />
   </EntityContainer>
   <EntityType Name="clientes">
     <Key>
@@ -311,5 +306,58 @@
     <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Dato_afectado" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="IP_client" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="lista_componentes_unidad">
+    <Key>
+      <PropertyRef Name="componente_unidad_ID" />
+    </Key>
+    <Property Name="componente_unidad_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Costo_unidad" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="Precio_venta" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Codigo" Type="Int32" />
+  </EntityType>
+  <EntityType Name="lista_componentes_volumen">
+    <Key>
+      <PropertyRef Name="componente_volumen_ID" />
+    </Key>
+    <Property Name="componente_volumen_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Costo_volumen" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="Precio_venta" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Codigo" Type="Int32" />
+    <Property Name="isFondoColor" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="lista_productos">
+    <Key>
+      <PropertyRef Name="Producto_ID" />
+    </Key>
+    <Property Name="Producto_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Codigo" Type="Int32" Nullable="false" />
+    <Property Name="Precio_sugerido" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="producto_componente_unidad">
+    <Key>
+      <PropertyRef Name="producto_componente_unidad_ID" />
+    </Key>
+    <Property Name="producto_componente_unidad_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Producto_ID" Type="Int32" />
+    <Property Name="Componente_unidad_ID" Type="Int32" />
+    <Property Name="Cantidad" Type="Int32" />
+    <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="producto_componente_volumen">
+    <Key>
+      <PropertyRef Name="producto_componente_volumen_ID" />
+    </Key>
+    <Property Name="producto_componente_volumen_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Producto_ID" Type="Int32" />
+    <Property Name="Componente_volumen_ID" Type="Int32" />
+    <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

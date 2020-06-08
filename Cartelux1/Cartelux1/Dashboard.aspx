@@ -1156,7 +1156,6 @@
 
         </div>
 
-
         <div id="dialog" title="Mensaje Cartelux">
             <p style="text-align: left;"></p>
         </div>

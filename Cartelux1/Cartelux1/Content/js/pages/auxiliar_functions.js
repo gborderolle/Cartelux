@@ -89,3 +89,7 @@ function roundUp(number, precision) {
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+function numberRemoveCommas(x) {
+    return parseFloat(x.replace(/,/g, ''));
+}

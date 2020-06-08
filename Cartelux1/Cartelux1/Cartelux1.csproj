@@ -497,6 +497,7 @@
     <Content Include="Content\js\pages\calculadora.js" />
     <Content Include="Content\js\pages\listados.js" />
     <Content Include="Content\js\pages\menu_logs.js" />
+    <Content Include="Content\js\pages\presupuestos.js" />
     <Content Include="Content\js\pages\validar_documento.js" />
     <Content Include="Content\js\pages\dashboard.js" />
     <Content Include="Content\js\pages\formulario.js" />
@@ -2401,6 +2402,7 @@
       <DependentUpon>CarteluxDB.edmx</DependentUpon>
       <LastGenOutput>CarteluxDB.cs</LastGenOutput>
     </Content>
+    <Content Include="Presupuestos.aspx" />
     <Content Include="Scripts\bootstrap.js+" />
     <Content Include="Scripts\bootstrap.min.js+" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -2702,6 +2704,12 @@
     <Compile Include="GeneradorURL.aspx.designer.cs">
       <DependentUpon>GeneradorURL.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\lista_componentes_unidad.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lista_componentes_volumen.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\lista_departamentos.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
@@ -2723,7 +2731,7 @@
     <Compile Include="Models\lista_pedido_tematicas.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\lista_pedido_tipos.cs">
+    <Compile Include="Models\lista_productos.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\lista_proyecto_estados.cs">
@@ -2741,6 +2749,12 @@
     <Compile Include="Models\pedido_entregas.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\producto_componente_unidad.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\producto_componente_volumen.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\proyectos.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
@@ -2749,6 +2763,13 @@
     </Compile>
     <Compile Include="Models\usuarios.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Presupuestos.aspx.cs">
+      <DependentUpon>Presupuestos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presupuestos.aspx.designer.cs">
+      <DependentUpon>Presupuestos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

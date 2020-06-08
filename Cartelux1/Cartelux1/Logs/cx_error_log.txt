@@ -164,3 +164,31 @@
 3/25/2020 5:23:00 PM: [ln:51] Menu_logs: BindGridLogs() - Excepcion. Convirtiendo datetime. ERROR: 03/11/2020.
 4/16/2020 1:43:50 AM: [ln:64] Logs: AddUserLog() - Excepcion. Convirtiendo int. ERROR: -.
 4/16/2020 1:46:25 AM: [ln:64] Logs: AddUserLog() - Excepcion. Convirtiendo int. ERROR: -.
+6/4/2020 2:56:54 AM: [ln:377] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo int. ERROR: undefined.
+6/4/2020 2:59:07 AM: [ln:377] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo int. ERROR: undefined.
+6/4/2020 2:59:35 AM: [ln:377] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo int. ERROR: undefined.
+6/4/2020 2:59:58 AM: [ln:377] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo int. ERROR: undefined.
+6/4/2020 3:01:57 AM: [ln:377] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo int. ERROR: undefined.
+6/7/2020 1:44:13 AM: [ln:90] Acceso: Perform_login() - Excepcion. Haciendo login. ERROR: An error occurred while preparing the command definition. See the inner exception for details..
+6/7/2020 3:50:03 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: [object Object].
+6/7/2020 3:50:14 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: [object Object].
+6/7/2020 3:50:15 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: [object Object].
+6/7/2020 3:50:16 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: [object Object].
+6/7/2020 3:50:16 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: [object Object].
+6/7/2020 3:50:16 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: [object Object].
+6/7/2020 3:50:16 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: [object Object].
+6/7/2020 3:50:16 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: [object Object].
+6/7/2020 3:50:17 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: [object Object].
+6/7/2020 3:50:17 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: [object Object].
+6/7/2020 3:50:17 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: [object Object].
+6/7/2020 3:50:17 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: [object Object].
+6/7/2020 3:50:17 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: [object Object].
+6/7/2020 3:50:18 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: [object Object].
+6/7/2020 3:50:18 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: [object Object].
+6/7/2020 3:50:18 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: [object Object].
+6/7/2020 3:50:45 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: [object Object].
+6/7/2020 3:51:36 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: [object Object].
+6/7/2020 3:52:05 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: on.
+6/7/2020 3:52:23 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: on.
+6/7/2020 3:52:29 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: on.
+6/7/2020 3:52:52 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: on.

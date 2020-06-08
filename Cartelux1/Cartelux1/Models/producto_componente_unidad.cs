@@ -12,11 +12,12 @@ namespace Cartelux1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class lista_pedido_tipos
+    public partial class producto_componente_unidad
     {
-        public int Pedido_Tipo_ID { get; set; }
-        public string Nombre { get; set; }
-        public int Codigo { get; set; }
-        public string Descripcion { get; set; }
+        public int producto_componente_unidad_ID { get; set; }
+        public Nullable<int> Producto_ID { get; set; }
+        public Nullable<int> Componente_unidad_ID { get; set; }
+        public Nullable<int> Cantidad { get; set; }
+        public string Comentarios { get; set; }
     }
 }

@@ -293,7 +293,6 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
                 dataType: "json",
                 success: function (response) {
 
-                    //$("#gridFormularios").empty();
                     $("#gridFormularios tbody").remove();
                     if (response.d.length > 0) {
                         $("#gridFormularios").empty();
@@ -375,8 +374,8 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
 
 
                             // Click to Chat WhatsApp API
-                            var WHATSAPP_URL = "https://api.whatsapp.com/send?phone=598";
-                            var whatsapp_url = WHATSAPP_URL + telefono;
+                            var wpp = "https://api.whatsapp.com/send?phone=598";
+                            var whatsapp_url = wpp + telefono;
                             //var url = "https://api.whatsapp.com/send?phone=598" + telefono;
                             //url += "&text=" + hashMessages["Msj_inicioCliente"];
 
@@ -834,7 +833,7 @@ function get_total_recaudacion_comparacion(total_recaudacion_actual) {
     var return_total_recaudacion_comparacion = 0;
     var year_value = YEAR_SELECTED_int - 1;
     var month_value = 12;
-    if (MONTH_SELECTED_int != 1) {
+    if (MONTH_SELECTED_int !== 1) {
         year_value = YEAR_SELECTED_int;
         month_value = MONTH_SELECTED_int - 1;
     }
@@ -1283,7 +1282,7 @@ function doAction_OPC(actionID, formID) {
             } else {
                 alert("Error interno.");
             }
-        }
+        } // end success
     }); // Ajax
 }
 
