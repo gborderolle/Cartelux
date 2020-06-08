@@ -274,7 +274,7 @@ function gridElementosSeleccionados_updateDescuento(lblElementoID) {
         var descuento = txbPrecioSubtotal1_value - (txbDescuento_value * txbPrecioSubtotal1_value / 100);
         txbPrecioSubtotal2_.val(numberWithCommas(descuento));
 
-        gridElementosSeleccionados_sumarTotales();
+        gridElementosSeleccionados_updateRedondeo(lblElementoID);
     }
 }
 
