@@ -53,5 +53,7 @@ namespace Cartelux1.Models
         public virtual DbSet<lista_productos> lista_productos { get; set; }
         public virtual DbSet<producto_componente_unidad> producto_componente_unidad { get; set; }
         public virtual DbSet<producto_componente_volumen> producto_componente_volumen { get; set; }
+        public virtual DbSet<presupuestos_generados> presupuestos_generados { get; set; }
+        public virtual DbSet<presupuestos_generados_productos> presupuestos_generados_productos { get; set; }
     }
 }

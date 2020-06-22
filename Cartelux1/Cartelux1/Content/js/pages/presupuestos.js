@@ -1,4 +1,5 @@
 ﻿/**** Local variables ****/
+ var _LISTA_gridElementosSeleccionados = [];
 
 $(document).ready(function () {
     bindEvents();
@@ -29,12 +30,23 @@ function bindDelayEvents() {
 
 function gridElementosSeleccionados_quitar(lblElementoID, rowID) {
     $("#" + rowID).remove();
+
+    // Quitar de la lista global
+
+    arrayRemoveByID(_LISTA_gridElementosSeleccionados, lblElementoID);
+    // Fuente: https://love2dev.com/blog/javascript-remove-from-array/
+    // https://stackoverflow.com/questions/7364150/find-object-by-id-in-an-array-of-javascript-objects
+
+    //const index = _LISTA_gridElementosSeleccionados.indexOf(x => x.lblElementoID === lblElementoID);
+    //if (index > -1) {
+    //    _LISTA_gridElementosSeleccionados.splice(index, 1);
+    //}
 }
 
 function gridElementosSeleccionados_calcular(lblElementoID, isFondoColor) {
     var volumen = $("#txbVolumen_" + lblElementoID).val();
     var cantidad_pedido = $("#txbCantidadTotal_" + lblElementoID).val();
-    if (volumen !== null && volumen > 0 && cantidad_pedido !== null) {
+    if (volumen !== null && cantidad_pedido !== null) {
 
         // Ajax call parameters
         console.log("Ajax call: Presupuestos.aspx/GridElementosSeleccionados_calcular. Params:");
@@ -53,10 +65,19 @@ function gridElementosSeleccionados_calcular(lblElementoID, isFondoColor) {
                 var resultado = response.d;
                 if (resultado !== null) {
 
+                    // Quitar check de Precio sugerido
+                    var chkPrecioSugerido = $("#chkPrecioSugerido_" + lblElementoID);
+                    if (chkPrecioSugerido !== null && chkPrecioSugerido !== undefined) {
+                        chkPrecioSugerido.prop('checked', false);
+                    }
+
                     $("#txbCostoUnitario_" + lblElementoID).val(numberWithCommas(resultado.costo_unitario));
                     $("#txbPrecioUnitario_" + lblElementoID).val(numberWithCommas(resultado.precio_unitario));
                     $("#txbCostoTotal_" + lblElementoID).val(numberWithCommas(resultado.costo_total));
                     $("#txbPrecioSubtotal1_" + lblElementoID).val(numberWithCommas(resultado.precio_total));
+
+
+                    gridElementosSeleccionados_updateDescuento(lblElementoID);
 
                     gridElementosSeleccionados_sumarTotales();
 
@@ -78,91 +99,91 @@ function gridElementosSeleccionados_sumarTotales() {
     var sum = 0;
     $("input[id^='txbCostoUnitario_']").each(function (index) {
         var value = $(this).val();
-        if (value !== null && value !== undefined && value != "") {
+        if (value !== null && value !== undefined && value !== "") {
             sum += parseFloat(numberRemoveCommas(value));
         }
-    });
-    var txbCostoUnitario_ = sum;
+    }); 
+    var txbCostoUnitario_ = numberWithCommas(sum);
 
     // COL: Precio unitario
     sum = 0;
     $("input[id^='txbPrecioUnitario_']").each(function (index) {
         var value = $(this).val();
-        if (value !== null && value !== undefined && value != "") {
+        if (value !== null && value !== undefined && value !== "") {
             sum += parseFloat(numberRemoveCommas(value));
         }
     });
-    var txbPrecioUnitario_ = sum;
+    var txbPrecioUnitario_ = numberWithCommas(sum);
 
     // COL: Cantidad total
     sum = 0;
     $("input[id^='txbCantidadTotal_']").each(function (index) {
         var value = $(this).val();
-        if (value !== null && value !== undefined && value != "") {
+        if (value !== null && value !== undefined && value !== "") {
             sum += parseFloat(numberRemoveCommas(value));
         }
     });
-    var txbCantidadTotal_ = sum;
+    var txbCantidadTotal_ = numberWithCommas(sum);
 
     // COL: Costo total
     sum = 0;
     $("input[id^='txbCostoTotal_']").each(function (index) {
         var value = $(this).val();
-        if (value !== null && value !== undefined && value != "") {
+        if (value !== null && value !== undefined && value !== "") {
             sum += parseFloat(numberRemoveCommas(value));
         }
     });
-    var txbCostoTotal_ = sum;
+    var txbCostoTotal_ = numberWithCommas(sum);
 
     // COL: Precio subtotal 1
     sum = 0;
     $("input[id^='txbPrecioSubtotal1_']").each(function (index) {
         var value = $(this).val();
-        if (value !== null && value !== undefined && value != "") {
+        if (value !== null && value !== undefined && value !== "") {
             sum += parseFloat(numberRemoveCommas(value));
         }
     });
-    var txbPrecioSubtotal1_ = sum;
+    var txbPrecioSubtotal1_ = numberWithCommas(sum);
 
     // COL: Precio descuento
     sum = 0;
     $("input[id^='txbPrecioDescuento_']").each(function (index) {
         var value = $(this).val();
-        if (value !== null && value !== undefined && value != "") {
+        if (value !== null && value !== undefined && value !== "") {
             sum += parseFloat(numberRemoveCommas(value));
         }
     });
-    var txbPrecioDescuento_ = sum;
+    var txbPrecioDescuento_ = numberWithCommas(sum);
 
     // COL: Precio subtotal 2
     sum = 0;
     $("input[id^='txbPrecioSubtotal2_']").each(function (index) {
         var value = $(this).val();
-        if (value !== null && value !== undefined && value != "") {
+        if (value !== null && value !== undefined && value !== "") {
             sum += parseFloat(numberRemoveCommas(value));
         }
     });
-    var txbPrecioSubtotal2_ = sum;
+    var txbPrecioSubtotal2_ = numberWithCommas(sum);
 
     // COL: Precio redondeo
     sum = 0;
     $("input[id^='txbPrecioRedondeo_']").each(function (index) {
         var value = $(this).val();
-        if (value !== null && value !== undefined && value != "") {
+        if (value !== null && value !== undefined && value !== "") {
             sum += parseFloat(numberRemoveCommas(value));
         }
     });
-    var txbPrecioRedondeo_ = sum;
+    var txbPrecioRedondeo_ = numberWithCommas(sum);
 
     // COL: Precio final
     sum = 0;
     $("input[id^='txbPrecioFinal_']").each(function (index) {
         var value = $(this).val();
-        if (value !== null && value !== undefined && value != "") {
+        if (value !== null && value !== undefined && value !== "") {
             sum += parseFloat(numberRemoveCommas(value));
         }
     });
-    var txbPrecioFinal_ = sum;
+    var txbPrecioFinal_ = numberWithCommas(sum);
 
     gridElementosSeleccionados_updateTotales(txbCostoUnitario_, txbPrecioUnitario_, txbCantidadTotal_, txbCostoTotal_, txbPrecioSubtotal1_, txbPrecioDescuento_, txbPrecioSubtotal2_, txbPrecioRedondeo_, txbPrecioFinal_);
 }
@@ -186,7 +207,7 @@ function gridElementosSeleccionados_updateTotales(txbCostoUnitario_, txbPrecioUn
     "<h4>" + numberWithCommas(txbPrecioFinal_) + "</h4></td></tr>"); // Precio Final
 }
 
-function gridElementosSeleccionados_btnAgregar1(lblElementoID, lblElementoNumero, lblElementoNombre) {
+function gridElementosSeleccionados_agregar(lblElementoID, lblElementoNumero, lblElementoNombre) {
 
     $("#gridElementosSeleccionados_blank").remove();
 
@@ -194,6 +215,8 @@ function gridElementosSeleccionados_btnAgregar1(lblElementoID, lblElementoNumero
 
     var btnQuitarID = "btnQuitar_" + lblElementoID;
     var btnQuitar = "<a id=\"" + btnQuitarID + "\" role='button' href='#' class='btn btn-danger btn-xs fa fa-arrow-circle-up fa-2x' onclick='return gridElementosSeleccionados_quitar(\"" + lblElementoID + "\", \"" + rowID + "\")'></a>";
+
+    var input_lblComentarios = "<input type='text' id='input_lblComentarios_" + lblElementoID + "' class='form-control' />";
 
     var btnCalcularVolumen = "<a id='btnCalcularVolumen_" + lblElementoID + "' role='button' href='#' class='btn btn-info btn-xs fa fa-calculator fa-2x' onclick='return show_calcularVolumen(\"" + lblElementoID + "\")'></a>";
     var input_volumen = "<input type='text' id='txbVolumen_" + lblElementoID + "' class='form-control' placeholder='Ingresar volumen CM2 + F/C' />";
@@ -213,13 +236,14 @@ function gridElementosSeleccionados_btnAgregar1(lblElementoID, lblElementoNumero
     var input_redondeo = "<input type='text' id='txbRedondeo_" + lblElementoID + "' class='form-control' placeholder='Ingresar redondeo' value='0'/>";
     var input_precioFinal = "<input type='text' id='txbPrecioFinal_" + lblElementoID + "' class='form-control' readonly/>";
 
+    var lblElementoNombre2 = "<input type='text' id='input_lblElementoNombre_" + lblElementoID + "' value='" + lblElementoNombre + "' class='form-control' readonly>";
 
     $("#gridElementosSeleccionados").append("<tr id='" + rowID + "'><td class='hiddencol hiddencol_real'>" +
     lblElementoID + "</td> <td class='td-very_short'>" +
     btnQuitar + "</td> <td class='td-very_short'>" +
     lblElementoNumero + "</td> <td class='td-very_short'>" +
-    lblElementoNombre + "</td> <td class='td-very_short'>" +
-    "</td> <td class='td' style='display: flex;'>" + // Comentarios
+    lblElementoNombre2 + "</td> <td class='td-very_short'>" +
+    input_lblComentarios + "</td> <td class='td' style='display: flex;'>" + // Comentarios
     btnCalcularVolumen + input_volumen + chk_fondoColor + "</td> <td class='td-very_short'>" + // Volumen
     input_costoUnitario + "</td> <td class='td' style='display: flex;'>" + // Costo Unitario
     input_precioUnitario + chk_precioSugerido + "</td> <td class='td-very_short'>" + // Precio Unitario
@@ -232,6 +256,26 @@ function gridElementosSeleccionados_btnAgregar1(lblElementoID, lblElementoNumero
     input_precioFinal + "</td></tr>"); // Precio Final
 
     $("#gridElementosSeleccionados").append("</tbody>");
+
+    // Update lista _LISTA_gridElementosSeleccionados
+    var object = {
+        lblElementoID: lblElementoID
+        //lblElementoNombre: lblElementoNombre,
+        //input_lblComentarios: input_lblComentarios,
+        //input_volumen: input_volumen,
+        //chk_fondoColor: chk_fondoColor,
+        //input_costoUnitario: input_costoUnitario,
+        //input_precioUnitario: input_precioUnitario,
+        //chk_precioSugerido: chk_precioSugerido,
+        //input_cantidadTotal: input_cantidadTotal,
+        //input_costoTotal: input_costoTotal,
+        //input_precioSubotal1: input_precioSubotal1,
+        //input_descuento: input_descuento,
+        //input_precioSubtotal2: input_precioSubtotal2,
+        //input_redondeo: input_redondeo,
+        //input_precioFinal: input_precioFinal
+    }
+    _LISTA_gridElementosSeleccionados.push(object);
 
     gridElementosSeleccionados_sumarTotales();
 
@@ -246,7 +290,15 @@ function bindOnChangeEvents(lblElementoID) {
         gridElementosSeleccionados_calcular(lblElementoID, false);
     });
     $("#txbCantidadTotal_" + lblElementoID).change(function () {
-        gridElementosSeleccionados_calcular(lblElementoID, false);
+        //gridElementosSeleccionados_calcular(lblElementoID, false);
+
+        var value = false;
+        var chkPrecioSugerido = $("#chkPrecioSugerido_" + lblElementoID);
+        if (chkPrecioSugerido !== null && chkPrecioSugerido !== undefined) {
+            value = chkPrecioSugerido.is(":checked");
+        }
+
+        gridElementosSeleccionados_setPrecioSugerido(lblElementoID, value);
     });
     $("#chkFondoColor_" + lblElementoID).change(function () {
         gridElementosSeleccionados_calcular(lblElementoID, this.checked);
@@ -267,7 +319,7 @@ function gridElementosSeleccionados_updateDescuento(lblElementoID) {
     var txbPrecioSubtotal1_ = $("#txbPrecioSubtotal1_" + lblElementoID);
     var txbPrecioSubtotal2_ = $("#txbPrecioSubtotal2_" + lblElementoID);
     if (txbDescuento_ !== null && txbDescuento_ !== undefined &&
-    txbPrecioSubtotal1_ !== null && txbPrecioSubtotal1_ !== undefined && txbPrecioSubtotal1_.val() != "" &&
+    txbPrecioSubtotal1_ !== null && txbPrecioSubtotal1_ !== undefined && txbPrecioSubtotal1_.val() !== "" &&
         txbPrecioSubtotal2_ !== null && txbPrecioSubtotal2_ !== undefined) {
         var txbDescuento_value = TryParseFloat(txbDescuento_.val(), 10);
         var txbPrecioSubtotal1_value = numberRemoveCommas(txbPrecioSubtotal1_.val());
@@ -283,7 +335,7 @@ function gridElementosSeleccionados_updateRedondeo(lblElementoID) {
     var txbPrecioSubtotal2_ = $("#txbPrecioSubtotal2_" + lblElementoID);
     var txbPrecioFinal_ = $("#txbPrecioFinal_" + lblElementoID);
     if (txbRedondeo_ !== null && txbRedondeo_ !== undefined &&
-    txbPrecioSubtotal2_ !== null && txbPrecioSubtotal2_ !== undefined && txbPrecioSubtotal2_.val() != "" &&
+    txbPrecioSubtotal2_ !== null && txbPrecioSubtotal2_ !== undefined && txbPrecioSubtotal2_.val() !== "" &&
         txbPrecioFinal_ !== null && txbPrecioFinal_ !== undefined) {
         var txbRedondeo_value = TryParseFloat(txbRedondeo_.val(), 10);
         var txbPrecioSubtotal2_value = numberRemoveCommas(txbPrecioSubtotal2_.val());
@@ -312,6 +364,8 @@ function gridElementosSeleccionados_setPrecioSugerido(lblElementoID, isPrecioSug
                     $("#txbCostoTotal_" + lblElementoID).val(0);
                     $("#txbPrecioSubtotal1_" + lblElementoID).val(numberWithCommas(precioSugerido_cantidad));
 
+                    gridElementosSeleccionados_updateDescuento(lblElementoID);
+
                     gridElementosSeleccionados_sumarTotales();
                 }
             }
@@ -321,8 +375,7 @@ function gridElementosSeleccionados_setPrecioSugerido(lblElementoID, isPrecioSug
                 gridElementosSeleccionados_calcular(lblElementoID, chkFondoColor.is(":checked"));               
             }
         }
-    }
-    
+    }    
 }
 
 function show_calcularVolumen(lblElementoID) {
@@ -390,6 +443,7 @@ function bindGridElementos() {
 
                     var lblElementoID = check_nullValues(response.d[i].lblElementoID);
                     var lblElementoNumero = check_nullValues(response.d[i].lblElementoNumero);
+                    //var lblElementoNombre = "<input type='text' id='input_lblElementoNombre_" + lblElementoID + "' value='" + check_nullValues(response.d[i].lblElementoNombre) + "' class='form-control' readonly>";
                     var lblElementoNombre = check_nullValues(response.d[i].lblElementoNombre);
                     var lblElementoPrecioSugerido = check_nullValues(response.d[i].lblElementoPrecioSugerido);
                     var lblElementoComentarios = check_nullValues(response.d[i].lblElementoComentarios);
@@ -398,7 +452,7 @@ function bindGridElementos() {
 
                     // Botón Agregar
                     var btnAgregar_id = "btnAgregar_" + lblElementoID;
-                    var goBtnAgregar = "<a id=\"" + btnAgregar_id + "\" role='button' href='#' style='margin-right:5px;' title='Agregar producto' class='btn btn-success btn-xs fa fa-arrow-circle-down fa-2x' onclick='return gridElementosSeleccionados_btnAgregar1(\"" + lblElementoID + "\", \"" + lblElementoNumero + "\", \"" + lblElementoNombre + "\")'></a>";
+                    var goBtnAgregar = "<a id=\"" + btnAgregar_id + "\" role='button' href='#' style='margin-right:5px;' title='Agregar producto' class='btn btn-success btn-xs fa fa-arrow-circle-down fa-2x' onclick='return gridElementosSeleccionados_agregar(\"" + lblElementoID + "\", \"" + lblElementoNumero + "\", \"" + lblElementoNombre + "\")'></a>";
                     // ----------------------
 
                     // Botón Historial
@@ -442,3 +496,106 @@ function gridElementosSeleccionados_limpiarLista() {
     $("#gridElementosSeleccionados > tbody > tr").remove();
     $("#gridElementosSeleccionados > tfoot > tr").remove();
 }
+
+function gridElementosSeleccionados_confirmarLista2(object, index) {
+    var lblElementoID = object.lblElementoID;
+    //var lblElementoNombre = object.lblElementoNombre;
+    //var lblElementoComentarios = object.lblElementoComentarios;
+    //var txbVolumen_ = object.txbVolumen_;
+    //var chkFondoColor_ = object.chkFondoColor_;
+    //var txbCostoUnitario_ = object.txbCostoUnitario_;
+    //var txbPrecioUnitario_ = object.txbPrecioUnitario_;
+    //var chkPrecioSugerido_ = object.chkPrecioSugerido_;
+    //var txbCantidadTotal_ = object.txbCantidadTotal_;
+    //var txbCostoTotal_ = object.txbCostoTotal_;
+    //var txbPrecioSubtotal1_ = object.txbPrecioSubtotal1_;
+    //var txbPrecioDescuento_ = object.txbPrecioDescuento_;
+    //var txbPrecioSubtotal2_ = object.txbPrecioSubtotal2_;
+    //var txbPrecioRedondeo_ = object.txbPrecioRedondeo_;
+    //var txbPrecioFinal_ = object.txbPrecioFinal_;
+
+}
+
+function gridElementosSeleccionados_confirmarLista() {
+
+    /*
+     * 1 ID lblElementoID
+     * 2 Nombre lblElementoNombre
+     * 3 Comentarios lblElementoComentarios
+     * 4 Volumen txbVolumen_
+     * 5 Fondo ch chkFondoColor_
+     * 6 Costo u txbCostoUnitario_
+     * 7 Precio u txbPrecioUnitario_
+     * 8 Sugerido ch chkPrecioSugerido_
+     * 9 Cantidad txbCantidadTotal_
+     * 10 Costo t txbCostoTotal_
+     * 10 Sub 1 txbPrecioSubtotal1_
+     * 11 Descuento txbPrecioDescuento_
+     * 12 Sub 2 txbPrecioSubtotal2_
+     * 12 Redondeo txbPrecioRedondeo_
+     * 12 Precio f txbPrecioFinal_
+     */
+
+    //_LISTA_gridElementosSeleccionados.forEach(gridElementosSeleccionados_confirmarLista2);
+
+
+    var _LISTA_elementosGuardar = [];
+
+    jQuery.each(_LISTA_gridElementosSeleccionados, function (i, value) {
+        //$("#" + i).append(document.createTextNode(" - " + val));
+        //console.log(value.lblElementoID);
+
+        var lblElementoID = value.lblElementoID;
+        var object = {
+
+            lblElementoID: lblElementoID,
+            input_lblElementoNombre_: $("#input_lblElementoNombre_" + lblElementoID).val(),
+            input_lblComentarios_: $("#input_lblComentarios_" + lblElementoID).val(),
+            txbVolumen_: $("#txbVolumen_" + lblElementoID).val(),
+            chkFondoColor_: $("#chkFondoColor_" + lblElementoID).is(":checked"),
+            txbCostoUnitario_: $("#txbCostoUnitario_" + lblElementoID).val(),
+            txbPrecioUnitario_: $("#txbPrecioUnitario_" + lblElementoID).val(),
+            chkPrecioSugerido_: $("#chkPrecioSugerido_" + lblElementoID).is(":checked"),
+            txbCantidadTotal_: $("#txbCantidadTotal_" + lblElementoID).val(),
+            txbCostoTotal_: $("#txbCostoTotal_" + lblElementoID).val(),
+            txbPrecioSubtotal1_: $("#txbPrecioSubtotal1_" + lblElementoID).val(),
+            txbDescuento_: $("#txbDescuento_" + lblElementoID).val(),
+            txbPrecioSubtotal2_: $("#txbPrecioSubtotal2_" + lblElementoID).val(),
+            txbRedondeo_: $("#txbRedondeo_" + lblElementoID).val(),
+            txbPrecioFinal_: $("#txbPrecioFinal_" + lblElementoID).val()
+
+        } // object
+        _LISTA_elementosGuardar.push(object);
+
+    });
+
+    if (_LISTA_elementosGuardar != null && _LISTA_elementosGuardar.length > 0) {
+
+        // Ajax call parameters
+        console.log("Ajax call: Presupuestos.aspx/gridElementosSeleccionados_confirmarLista. Params:");
+        console.log("_LISTA_elementosGuardar, type: " + type(_LISTA_elementosGuardar) + ", value: " + _LISTA_elementosGuardar);
+
+        // Fuente: https://stackoverflow.com/questions/2225781/asp-net-web-method-that-accepts-a-listcustomobject-is-failing-with-web-servic
+        // JSON.stringify()
+        $.ajax({
+            type: "POST",
+            url: "Presupuestos.aspx/gridElementosSeleccionados_confirmarLista",
+            contentType: "application/json;charset=utf-8",
+            //data: '{_LISTA_elementosGuardar: "' + _LISTA_elementosGuardar + '"}',
+            data: JSON.stringify(_LISTA_elementosGuardar),
+            dataType: "json",
+            success: function (response) {
+                var resultado = response.d;
+                if (resultado !== null) {
+
+                } else {
+                    alert("Error interno.");
+                }
+            }, // end success
+            failure: function (response) {
+            }
+        }); // Ajax
+    }
+}
+
+

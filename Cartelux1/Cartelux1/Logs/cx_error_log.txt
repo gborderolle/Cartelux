@@ -192,3 +192,17 @@
 6/7/2020 3:52:23 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: on.
 6/7/2020 3:52:29 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: on.
 6/7/2020 3:52:52 AM: [ln:409] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo bool. ERROR: on.
+6/10/2020 11:33:02 PM: [ln:349] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo decimal. ERROR: .
+6/10/2020 11:33:37 PM: [ln:349] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo decimal. ERROR: .
+6/10/2020 11:33:52 PM: [ln:349] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo decimal. ERROR: .
+6/11/2020 12:13:22 AM: [ln:349] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo decimal. ERROR: .
+6/11/2020 12:13:23 AM: [ln:349] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo decimal. ERROR: .
+6/19/2020 3:46:32 PM: [ln:356] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo decimal. ERROR: .
+6/19/2020 3:46:32 PM: [ln:356] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo decimal. ERROR: .
+6/19/2020 3:46:34 PM: [ln:356] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo decimal. ERROR: .
+6/19/2020 3:46:34 PM: [ln:356] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo decimal. ERROR: .
+6/22/2020 12:25:46 AM: [ln:355] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo decimal. ERROR: .
+6/22/2020 12:25:47 AM: [ln:355] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo decimal. ERROR: .
+6/22/2020 12:25:48 AM: [ln:355] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo decimal. ERROR: .
+6/22/2020 12:25:48 AM: [ln:355] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo decimal. ERROR: .
+6/22/2020 12:25:50 AM: [ln:355] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo decimal. ERROR: .

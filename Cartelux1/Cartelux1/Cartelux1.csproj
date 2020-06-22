@@ -2749,6 +2749,12 @@
     <Compile Include="Models\pedido_entregas.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\presupuestos_generados.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\presupuestos_generados_productos.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\producto_componente_unidad.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>

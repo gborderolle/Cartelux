@@ -188,6 +188,8 @@
     <EntitySet Name="lista_productos" EntityType="carteluxdb1Model.lista_productos" />
     <EntitySet Name="producto_componente_unidad" EntityType="carteluxdb1Model.producto_componente_unidad" />
     <EntitySet Name="producto_componente_volumen" EntityType="carteluxdb1Model.producto_componente_volumen" />
+    <EntitySet Name="presupuestos_generados" EntityType="carteluxdb1Model.presupuestos_generados" />
+    <EntitySet Name="presupuestos_generados_productos" EntityType="carteluxdb1Model.presupuestos_generados_productos" />
   </EntityContainer>
   <EntityType Name="clientes">
     <Key>
@@ -359,5 +361,34 @@
     <Property Name="Producto_ID" Type="Int32" />
     <Property Name="Componente_volumen_ID" Type="Int32" />
     <Property Name="Comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="presupuestos_generados">
+    <Key>
+      <PropertyRef Name="presupuesto_generado_ID" />
+    </Key>
+    <Property Name="presupuesto_generado_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Log_ID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="presupuestos_generados_productos">
+    <Key>
+      <PropertyRef Name="presupuesto_generado_producto_ID" />
+    </Key>
+    <Property Name="presupuesto_generado_producto_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="presupuesto_generado_ID" Type="Int32" Nullable="false" />
+    <Property Name="Producto_ID" Type="Int32" Nullable="false" />
+    <Property Name="Dato_fijo_txbNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Dato_fijo_txbVolumen" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_chkFondoColor" Type="Boolean" />
+    <Property Name="Dato_fijo_txbCostoUnitario" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_txbPrecioUnitario" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_chkSugerido" Type="Boolean" />
+    <Property Name="Dato_fijo_txbCantidadTotal" Type="Int32" />
+    <Property Name="Dato_fijo_txbSubotal1" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_txbDescuento" Type="Int32" />
+    <Property Name="Dato_fijo_txbSubotal2" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_txbRedondeo" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_txbPrecioFinal" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_txbComentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Dato_fijo_txbCostoTotal" Type="Decimal" Precision="10" Scale="3" />
   </EntityType>
 </Schema>

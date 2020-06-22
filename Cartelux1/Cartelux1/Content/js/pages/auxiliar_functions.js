@@ -93,3 +93,7 @@ function numberWithCommas(x) {
 function numberRemoveCommas(x) {
     return parseFloat(x.replace(/,/g, ''));
 }
+
+function arrayRemoveByID(array, value) {
+    return array.filter(function (obj) { return obj.lblElementoID !== lblElementoID; });
+}

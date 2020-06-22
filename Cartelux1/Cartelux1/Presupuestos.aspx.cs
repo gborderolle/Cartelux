@@ -99,15 +99,22 @@ namespace Cartelux1
             {
                 var obj = new List<_GridElementosSeleccionados>();
                 _GridElementosSeleccionados _GridElementosSeleccionados1 = new _GridElementosSeleccionados();
-                _GridElementosSeleccionados1.lblElementoSeleccionadoID = 1;
-                _GridElementosSeleccionados1.lblElementoSeleccionadoNumero = 0;
-                _GridElementosSeleccionados1.lblElementoSeleccionadoNombre = string.Empty;
-                _GridElementosSeleccionados1.lblElementoSeleccionadoComentarios = string.Empty;
-                _GridElementosSeleccionados1.lblElementoSeleccionadoVolumen = 0;
-                _GridElementosSeleccionados1.lblElementoSeleccionadoCostoUnitario = 0;
-                _GridElementosSeleccionados1.lblElementoSeleccionadoPrecioUnitario = 0;
-                _GridElementosSeleccionados1.lblElementoSeleccionadoCantidadTotal = 1;
-                _GridElementosSeleccionados1.lblElementoSeleccionadoCostoTotal = 0;
+                _GridElementosSeleccionados1.lblElementoID = 1;
+                _GridElementosSeleccionados1.lblElementoSeleccionadoNumero = 1;
+                _GridElementosSeleccionados1.lblElementoNombre = string.Empty;
+                _GridElementosSeleccionados1.lblElementoComentarios = string.Empty;
+                _GridElementosSeleccionados1.txbVolumen_ = 0;
+                _GridElementosSeleccionados1.chkFondoColor_ = false;
+                _GridElementosSeleccionados1.txbCostoUnitario_ = 0;
+                _GridElementosSeleccionados1.txbPrecioUnitario_ = 0;
+                _GridElementosSeleccionados1.chkPrecioSugerido_ = false;
+                _GridElementosSeleccionados1.txbCantidadTotal_ = 0;
+                _GridElementosSeleccionados1.txbCostoTotal_ = 0;
+                _GridElementosSeleccionados1.txbPrecioSubtotal1_ = 0;
+                _GridElementosSeleccionados1.txbPrecioDescuento_ = 0;
+                _GridElementosSeleccionados1.txbPrecioSubtotal2_ = 0;
+                _GridElementosSeleccionados1.txbPrecioRedondeo_ = 0;
+                _GridElementosSeleccionados1.txbPrecioFinal_ = 0;
 
                 obj.Add(_GridElementosSeleccionados1);
 
@@ -130,7 +137,6 @@ namespace Cartelux1
 
             }
         }
-
 
         protected void gridElementos_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -426,6 +432,85 @@ namespace Cartelux1
             return return_values;
         }
 
+        [WebMethod]
+        public static void gridElementosSeleccionados_confirmarLista(List<_LISTA_elementosGuardar_objeto> _lista_productos)
+        {
+            if (_lista_productos != null && _lista_productos.Count > 0)
+            {
+                // Logger variables
+                System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
+                System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+                string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+                string methodName = stackFrame.GetMethod().Name;
+
+                using (CarteluxDB context = new CarteluxDB())
+                {
+                    presupuestos_generados presupuestos_generados1 = new presupuestos_generados();
+
+                    int presupuesto_id = 1;
+                    presupuestos_generados presupuestos_generados_checkID = (presupuestos_generados)context.presupuestos_generados.OrderByDescending(p => p.presupuesto_generado_ID).FirstOrDefault();
+                    if (presupuestos_generados_checkID != null)
+                    {
+                        presupuesto_id = presupuestos_generados_checkID.presupuesto_generado_ID;
+                    }
+
+                    presupuestos_generados1.presupuesto_generado_ID = presupuesto_id;
+                    context.presupuestos_generados.Add(presupuestos_generados1);
+
+                    /*
+                    string IP_client = Logs.GetIPAddress();
+                    string UserID = "-";
+                    string UserName = "-";
+                    if (Session["UserID"] != null && !string.IsNullOrWhiteSpace(Session["UserID"].ToString()) && Session["UserName"] != null && !string.IsNullOrWhiteSpace(Session["UserName"].ToString()))
+                    {
+                        UserID = Session["UserID"].ToString();
+                        UserName = Session["UserName"].ToString();
+                    }
+                    Logs.AddUserLog("OK: Genera nuevo presupuesto: '", "", UserID, UserName, IP_client);
+                    */
+
+
+
+                    foreach (_LISTA_elementosGuardar_objeto _lista_producto1 in _lista_productos)
+                    {
+                        presupuestos_generados_productos producto1 = new presupuestos_generados_productos();
+                        producto1.Producto_ID = _lista_producto1.lblElementoID;
+                        producto1.Dato_fijo_txbNombre = _lista_producto1.input_lblElementoNombre_;
+                        producto1.Dato_fijo_txbVolumen = _lista_producto1.txbVolumen_;
+                        producto1.Dato_fijo_chkFondoColor = _lista_producto1.chkFondoColor_;
+                        producto1.Dato_fijo_txbCostoUnitario = _lista_producto1.txbCostoUnitario_;
+                        producto1.Dato_fijo_txbPrecioUnitario = _lista_producto1.txbPrecioUnitario_;
+                        producto1.Dato_fijo_chkSugerido = _lista_producto1.chkPrecioSugerido_;
+                        producto1.Dato_fijo_txbCantidadTotal = _lista_producto1.txbCantidadTotal_;
+                        producto1.Dato_fijo_txbCostoTotal = _lista_producto1.txbCostoTotal_;
+                        producto1.Dato_fijo_txbSubotal1 = _lista_producto1.txbPrecioSubtotal1_;
+                        producto1.Dato_fijo_txbDescuento = _lista_producto1.txbDescuento_;
+                        producto1.Dato_fijo_txbSubotal2 = _lista_producto1.txbPrecioSubtotal2_;
+                        producto1.Dato_fijo_txbRedondeo = _lista_producto1.txbRedondeo_;
+                        producto1.Dato_fijo_txbPrecioFinal = _lista_producto1.txbPrecioFinal_;
+                        producto1.Dato_fijo_txbComentarios = _lista_producto1.input_lblComentarios_;
+
+                        producto1.presupuesto_generado_ID = presupuesto_id;
+
+                        context.presupuestos_generados_productos.Add(producto1);
+                        //Guardar_Contexto(context);
+
+                        try
+                        {
+                            context.SaveChanges();
+                        }
+                        catch (Exception e)
+                        {
+                            Logs.AddErrorLog("Excepcion. Guardando en la base de datos. ERROR:", className, methodName, e.Message);
+                        }
+                    }
+                }
+
+            }
+        }
+
+
+
 
         #endregion
 
@@ -448,15 +533,42 @@ namespace Cartelux1
 
         public class _GridElementosSeleccionados
         {
-            public int lblElementoSeleccionadoID { get; set; }
+            public int lblElementoID { get; set; }
             public int lblElementoSeleccionadoNumero { get; set; }
-            public string lblElementoSeleccionadoNombre { get; set; }
-            public string lblElementoSeleccionadoComentarios { get; set; }
-            public decimal lblElementoSeleccionadoVolumen { get; set; }
-            public decimal lblElementoSeleccionadoCostoUnitario { get; set; }
-            public decimal lblElementoSeleccionadoPrecioUnitario { get; set; }
-            public int lblElementoSeleccionadoCantidadTotal { get; set; }
-            public decimal lblElementoSeleccionadoCostoTotal { get; set; }
+            public string lblElementoNombre { get; set; }
+            public string lblElementoComentarios { get; set; }
+            public decimal txbVolumen_ { get; set; }
+            public bool chkFondoColor_ { get; set; }
+            public decimal txbCostoUnitario_ { get; set; }
+            public decimal txbPrecioUnitario_ { get; set; }
+            public bool chkPrecioSugerido_ { get; set; }
+            public int txbCantidadTotal_ { get; set; }
+            public decimal txbCostoTotal_ { get; set; }
+            public decimal txbPrecioSubtotal1_ { get; set; }
+            public int txbPrecioDescuento_ { get; set; }
+            public decimal txbPrecioSubtotal2_ { get; set; }
+            public decimal txbPrecioRedondeo_ { get; set; }
+            public decimal txbPrecioFinal_ { get; set; }
+
+        }
+
+        public class _LISTA_elementosGuardar_objeto
+        {
+            public int lblElementoID { get; set; }
+            public string input_lblElementoNombre_ { get; set; }
+            public string input_lblComentarios_ { get; set; }
+            public decimal txbVolumen_ { get; set; }
+            public bool chkFondoColor_ { get; set; }
+            public decimal txbCostoUnitario_ { get; set; }
+            public decimal txbPrecioUnitario_ { get; set; }
+            public bool chkPrecioSugerido_ { get; set; }
+            public int txbCantidadTotal_ { get; set; }
+            public decimal txbCostoTotal_ { get; set; }
+            public decimal txbPrecioSubtotal1_ { get; set; }
+            public int txbDescuento_ { get; set; }
+            public decimal txbPrecioSubtotal2_ { get; set; }
+            public decimal txbRedondeo_ { get; set; }
+            public decimal txbPrecioFinal_ { get; set; }
 
         }
 

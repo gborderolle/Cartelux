@@ -239,12 +239,12 @@
                                     <asp:Label ID="gridElementosSeleccionados_lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
                                     <div id="div_gridElementosSeleccionados" style="overflow: auto;">
                                         <asp:GridView ID="gridElementosSeleccionados" runat="server" ClientIDMode="Static" HorizontalAlign="Center" AutoGenerateColumns="false" CssClass="table table-hover table-striped" AllowPaging="false" AllowSorting="false"
-                                            DataKeyNames="lblElementoSeleccionadoID"
+                                            DataKeyNames="lblElementoID"
                                             OnRowDataBound="gridElementosSeleccionados_RowDataBound"
                                             OnRowCommand="gridElementosSeleccionados_RowCommand">
 
                                             <Columns>
-                                                <asp:BoundField DataField="lblElementoSeleccionadoID" HeaderText="Elemento_ID" HtmlEncode="false" ItemStyle-CssClass="hiddencol hiddencol_real" HeaderStyle-CssClass="hiddencol hiddencol_real" />
+                                                <asp:BoundField DataField="lblElementoID" HeaderText="Elemento_ID" HtmlEncode="false" ItemStyle-CssClass="hiddencol hiddencol_real" HeaderStyle-CssClass="hiddencol hiddencol_real" />
 
                                                 <asp:TemplateField HeaderText="" ControlStyle-CssClass="btn btn-warning btn-xs">
                                                     <ItemTemplate>
@@ -260,73 +260,73 @@
 
                                                 <asp:TemplateField HeaderText="Nombre">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblElementoSeleccionadoNombre" runat="server" CommandName="View" />
+                                                        <asp:Label ID="lblElementoNombre" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="Comentarios">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblElementoSeleccionadoComentarios" runat="server" CommandName="View" />
+                                                        <asp:Label ID="lblElementoComentarios" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="Volumen CM2 / Fondo color">
                                                     <ItemTemplate>
-                                                        <asp:TextBox ID="lblElementoSeleccionadoVolumen" runat="server" CommandName="View" />
+                                                        <asp:TextBox ID="txbVolumen_" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="$ Costo unitario">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblElementoSeleccionadoCostoUnitario" runat="server" CommandName="View" />
+                                                        <asp:Label ID="txbCostoUnitario_" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="$ Precio unitario / Sugerido">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblElementoSeleccionadoPrecioUnitario" runat="server" CommandName="View" />
+                                                        <asp:Label ID="txbPrecioUnitario_" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="Cantidad total">
                                                     <ItemTemplate>
-                                                        <asp:TextBox ID="lblElementoSeleccionadoCantidadTotal" runat="server" CommandName="View" Text="1" />
+                                                        <asp:TextBox ID="txbCantidadTotal_" runat="server" CommandName="View" Text="1" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="$ Costo total">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblElementoSeleccionadoCostoTotal" runat="server" CommandName="View" />
+                                                        <asp:Label ID="txbCostoTotal_" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="$ Precio subtotal 1">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblElementoSeleccionadoPrecioSubtotal1" runat="server" CommandName="View" />
+                                                        <asp:Label ID="txbPrecioSubtotal1_" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="% Descuento">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblElementoSeleccionadoDescuento" runat="server" CommandName="View" />
+                                                        <asp:Label ID="txbPrecioDescuento_" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
                                                  <asp:TemplateField HeaderText="$ Precio subtotal 2">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblElementoSeleccionadoPrecioSubtotal2" runat="server" CommandName="View" />
+                                                        <asp:Label ID="txbPrecioSubtotal2_" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="Redondeo">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblElementoSeleccionadoRedondeo" runat="server" CommandName="View" />
+                                                        <asp:Label ID="txbPrecioRedondeo_" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="$ PRECIO FINAL">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblElementoSeleccionadoPrecioFinal" runat="server" CommandName="View" />
+                                                        <asp:Label ID="txbPrecioFinal_" runat="server" CommandName="View" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
@@ -334,17 +334,14 @@
                                         </asp:GridView>
                                     </div>
                                         <button type="button" class="btn btn-info btn-xs" onclick="gridElementosSeleccionados_limpiarLista()">Limpiar lista</button>
+                                        <button type="button" class="btn btn-success btn-xs" onclick="gridElementosSeleccionados_confirmarLista()">Confirmar lista</button>
                                     <asp:Label ID="Label2" runat="server" ClientIDMode="Static" Text="Resultados: 0" CssClass="lblResultados label label-info"></asp:Label>
 
                                 </ContentTemplate>
                             </asp:UpdatePanel>
 
 
-
-
                         </div>
-
-
 
 
 
