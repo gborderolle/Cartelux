@@ -569,7 +569,7 @@ function gridElementosSeleccionados_confirmarLista() {
 
     });
 
-    if (_LISTA_elementosGuardar != null && _LISTA_elementosGuardar.length > 0) {
+    if (_LISTA_elementosGuardar !== null && _LISTA_elementosGuardar.length > 0) {
 
         // Ajax call parameters
         console.log("Ajax call: Presupuestos.aspx/gridElementosSeleccionados_confirmarLista. Params:");
@@ -577,12 +577,20 @@ function gridElementosSeleccionados_confirmarLista() {
 
         // Fuente: https://stackoverflow.com/questions/2225781/asp-net-web-method-that-accepts-a-listcustomobject-is-failing-with-web-servic
         // JSON.stringify()
+
+
+
+        var _LISTA_elementosGuardar2 = ["Saab", "Volvo", "BMW"];
+
         $.ajax({
             type: "POST",
             url: "Presupuestos.aspx/gridElementosSeleccionados_confirmarLista",
             contentType: "application/json;charset=utf-8",
             //data: '{_LISTA_elementosGuardar: "' + _LISTA_elementosGuardar + '"}',
-            data: JSON.stringify(_LISTA_elementosGuardar),
+            //data: { _LISTA_elementosGuardar: JSON.stringify(_LISTA_elementosGuardar) },
+            //data: { _LISTA_elementosGuardar: _LISTA_elementosGuardar },
+            //data: JSON.stringify(_LISTA_elementosGuardar),
+            data: { _LISTA_elementosGuardar: _LISTA_elementosGuardar2 },
             dataType: "json",
             success: function (response) {
                 var resultado = response.d;

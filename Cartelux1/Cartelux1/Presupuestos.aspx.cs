@@ -433,9 +433,12 @@ namespace Cartelux1
         }
 
         [WebMethod]
-        public static void gridElementosSeleccionados_confirmarLista(List<_LISTA_elementosGuardar_objeto> _lista_productos)
+        public static void gridElementosSeleccionados_confirmarLista(string[] _LISTA_elementosGuardar)
+        //public static void gridElementosSeleccionados_confirmarLista(_LISTA_elementosGuardar_objeto[] _LISTA_elementosGuardar)
+        //public static void gridElementosSeleccionados_confirmarLista(object[] _LISTA_elementosGuardar)
+        //public static void gridElementosSeleccionados_confirmarLista(_LISTA_elementosGuardar_objeto[] _LISTA_elementosGuardar)
         {
-            if (_lista_productos != null && _lista_productos.Count > 0)
+            if (_LISTA_elementosGuardar != null)
             {
                 // Logger variables
                 System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
@@ -445,6 +448,7 @@ namespace Cartelux1
 
                 using (CarteluxDB context = new CarteluxDB())
                 {
+                    /*
                     presupuestos_generados presupuestos_generados1 = new presupuestos_generados();
 
                     int presupuesto_id = 1;
@@ -467,11 +471,8 @@ namespace Cartelux1
                         UserName = Session["UserName"].ToString();
                     }
                     Logs.AddUserLog("OK: Genera nuevo presupuesto: '", "", UserID, UserName, IP_client);
-                    */
 
-
-
-                    foreach (_LISTA_elementosGuardar_objeto _lista_producto1 in _lista_productos)
+                    foreach (_LISTA_elementosGuardar_objeto _lista_producto1 in _LISTA_elementosGuardar)
                     {
                         presupuestos_generados_productos producto1 = new presupuestos_generados_productos();
                         producto1.Producto_ID = _lista_producto1.lblElementoID;
@@ -504,13 +505,12 @@ namespace Cartelux1
                             Logs.AddErrorLog("Excepcion. Guardando en la base de datos. ERROR:", className, methodName, e.Message);
                         }
                     }
+                        */
+
                 }
 
             }
         }
-
-
-
 
         #endregion
 
@@ -570,6 +570,11 @@ namespace Cartelux1
             public decimal txbRedondeo_ { get; set; }
             public decimal txbPrecioFinal_ { get; set; }
 
+        }
+
+        public class _LISTA_elementosGuardar_objeto2
+        {
+            public string Column1 { get; set; }
         }
 
     }
