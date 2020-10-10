@@ -850,6 +850,8 @@ namespace Cartelux1
                 string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
                 string methodName = stackFrame.GetMethod().Name;
 
+                DateTime? date_value = GlobalVariables.GetDatetimeFormated(txbFecha.Value);
+
                 pedidos _pedido = new pedidos();
                 _pedido.Pedido_ID = 0;
 
@@ -1032,7 +1034,7 @@ namespace Cartelux1
                     pedido_entregas _pedido_entrega = new pedido_entregas();
                     _pedido_entrega.Pedido_Entrega_ID = 0;
 
-                    _pedido_entrega.Fecha_entrega = GlobalVariables.GetDatetimeFormated(txbFecha.Value);
+                    _pedido_entrega.Fecha_entrega = date_value;
 
                     _pedido_entrega.Entrega_Tipo_ID = 0;
                     if (ddlTipoEntrega1.SelectedIndex > 0)
@@ -1127,25 +1129,27 @@ namespace Cartelux1
                         serie = _formulario.Serie;
                     }
                     PedidoNuevo_Email(serie, isColocacion_entrega);
-                    Check_IngresosMensual_1(txbMonto_int);
+                    Check_IngresosMensual_1(txbMonto_int, date_value);
                 }
             }
         }
 
-        private void Check_IngresosMensual_1(int nuevo_monto)
+        private void Check_IngresosMensual_1(int nuevo_monto, DateTime? date_value)
         {
             using (CarteluxDB context = new CarteluxDB())
             {
                 List<config_alarmas_ingresosMensual> lista_config_alarmas_ingresosMensual = (List<config_alarmas_ingresosMensual>)context.config_alarmas_ingresosMensual.ToList();
                 if (lista_config_alarmas_ingresosMensual != null && lista_config_alarmas_ingresosMensual.Count > 0)
                 {
+                    int dia_hoy = DateTime.Now.Day;
+                    int dia_entrega = date_value.Value.Day;
                     foreach (config_alarmas_ingresosMensual _config_alarmas_ingresosMensual in lista_config_alarmas_ingresosMensual)
                     {
-                        int dia_hoy = DateTime.Now.Day;
-                        if (dia_hoy < 7)
+                        if (dia_hoy <= 7 || dia_entrega <= 7)
                         {
-                            // Limpiar FlagMensual, inicia el mes
+                            // Si es inicio de mes ==> limpiar FlagMensual y guarda
                             _config_alarmas_ingresosMensual.FlagMensual = false;
+                            Guardar_Contexto(context);
                         }
 
                         int? importe_meta = _config_alarmas_ingresosMensual.Importe;
@@ -1156,6 +1160,7 @@ namespace Cartelux1
                                 _config_alarmas_ingresosMensual.FlagMensual = true;
                                 Guardar_Contexto(context);
 
+                                // Envía notificación vía email
                                 Check_IngresosMensual_Email(context, importe_meta);
                             }
                         }

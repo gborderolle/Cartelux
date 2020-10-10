@@ -89,3 +89,19 @@ function roundUp(number, precision) {
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+function numberRemoveCommas(x) {
+    return parseFloat(x.replace(/,/g, ''));
+}
+
+function arrayRemoveByID(array, value) {
+    return array.filter(function (obj) { return obj.lblElementoID !== lblElementoID; });
+}
+
+function zero_or_isNaN(str) {
+    return_value = 0;
+    if (!isNaN(str)) {
+        return_value = str;
+    }
+    return return_value;
+}

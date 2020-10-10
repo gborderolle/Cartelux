@@ -121,6 +121,7 @@
                         <li><a runat="server" href="/BaseDeDatos">Base de datos</a></li>
                         <li><a runat="server" href="/Formulario" target="_blank">Nuevo pedido</a></li>
                         <li><a runat="server" href="/Calculadora">Calculadora</a></li>
+                        <li><a runat="server" href="/Presupuestos">Presupuestos</a></li>
                         <li><a runat="server" href="/Menu_logs">Logs</a></li>
                     </ul>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
