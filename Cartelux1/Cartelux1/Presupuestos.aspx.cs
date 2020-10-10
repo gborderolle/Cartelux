@@ -433,12 +433,9 @@ namespace Cartelux1
         }
 
         [WebMethod]
-        public static void gridElementosSeleccionados_confirmarLista(string[] _LISTA_elementosGuardar)
-        //public static void gridElementosSeleccionados_confirmarLista(_LISTA_elementosGuardar_objeto[] _LISTA_elementosGuardar)
-        //public static void gridElementosSeleccionados_confirmarLista(object[] _LISTA_elementosGuardar)
-        //public static void gridElementosSeleccionados_confirmarLista(_LISTA_elementosGuardar_objeto[] _LISTA_elementosGuardar)
+        public static bool gridElementosSeleccionados_confirmarLista(string _LISTA_elementosGuardar_string)
         {
-            if (_LISTA_elementosGuardar != null)
+            if (!string.IsNullOrWhiteSpace(_LISTA_elementosGuardar_string))
             {
                 // Logger variables
                 System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
@@ -446,70 +443,155 @@ namespace Cartelux1
                 string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
                 string methodName = stackFrame.GetMethod().Name;
 
-                using (CarteluxDB context = new CarteluxDB())
+                string[] elements_array = _LISTA_elementosGuardar_string.Split(',');
+                if (elements_array.Length > 0)
                 {
-                    /*
-                    presupuestos_generados presupuestos_generados1 = new presupuestos_generados();
-
-                    int presupuesto_id = 1;
-                    presupuestos_generados presupuestos_generados_checkID = (presupuestos_generados)context.presupuestos_generados.OrderByDescending(p => p.presupuesto_generado_ID).FirstOrDefault();
-                    if (presupuestos_generados_checkID != null)
+                    foreach (string _element in elements_array)
                     {
-                        presupuesto_id = presupuestos_generados_checkID.presupuesto_generado_ID;
-                    }
-
-                    presupuestos_generados1.presupuesto_generado_ID = presupuesto_id;
-                    context.presupuestos_generados.Add(presupuestos_generados1);
-
-                    /*
-                    string IP_client = Logs.GetIPAddress();
-                    string UserID = "-";
-                    string UserName = "-";
-                    if (Session["UserID"] != null && !string.IsNullOrWhiteSpace(Session["UserID"].ToString()) && Session["UserName"] != null && !string.IsNullOrWhiteSpace(Session["UserName"].ToString()))
-                    {
-                        UserID = Session["UserID"].ToString();
-                        UserName = Session["UserName"].ToString();
-                    }
-                    Logs.AddUserLog("OK: Genera nuevo presupuesto: '", "", UserID, UserName, IP_client);
-
-                    foreach (_LISTA_elementosGuardar_objeto _lista_producto1 in _LISTA_elementosGuardar)
-                    {
-                        presupuestos_generados_productos producto1 = new presupuestos_generados_productos();
-                        producto1.Producto_ID = _lista_producto1.lblElementoID;
-                        producto1.Dato_fijo_txbNombre = _lista_producto1.input_lblElementoNombre_;
-                        producto1.Dato_fijo_txbVolumen = _lista_producto1.txbVolumen_;
-                        producto1.Dato_fijo_chkFondoColor = _lista_producto1.chkFondoColor_;
-                        producto1.Dato_fijo_txbCostoUnitario = _lista_producto1.txbCostoUnitario_;
-                        producto1.Dato_fijo_txbPrecioUnitario = _lista_producto1.txbPrecioUnitario_;
-                        producto1.Dato_fijo_chkSugerido = _lista_producto1.chkPrecioSugerido_;
-                        producto1.Dato_fijo_txbCantidadTotal = _lista_producto1.txbCantidadTotal_;
-                        producto1.Dato_fijo_txbCostoTotal = _lista_producto1.txbCostoTotal_;
-                        producto1.Dato_fijo_txbSubotal1 = _lista_producto1.txbPrecioSubtotal1_;
-                        producto1.Dato_fijo_txbDescuento = _lista_producto1.txbDescuento_;
-                        producto1.Dato_fijo_txbSubotal2 = _lista_producto1.txbPrecioSubtotal2_;
-                        producto1.Dato_fijo_txbRedondeo = _lista_producto1.txbRedondeo_;
-                        producto1.Dato_fijo_txbPrecioFinal = _lista_producto1.txbPrecioFinal_;
-                        producto1.Dato_fijo_txbComentarios = _lista_producto1.input_lblComentarios_;
-
-                        producto1.presupuesto_generado_ID = presupuesto_id;
-
-                        context.presupuestos_generados_productos.Add(producto1);
-                        //Guardar_Contexto(context);
-
-                        try
+                        string[] values_array = _element.Split('#');
+                        if (values_array.Length > 1)
                         {
-                            context.SaveChanges();
-                        }
-                        catch (Exception e)
-                        {
-                            Logs.AddErrorLog("Excepcion. Guardando en la base de datos. ERROR:", className, methodName, e.Message);
+
+                            using (CarteluxDB context = new CarteluxDB())
+                            {
+                                presupuestos_generados presupuestos_generados1 = new presupuestos_generados();
+
+                                int presupuesto_id = 1;
+                                presupuestos_generados presupuestos_generados_checkID = (presupuestos_generados)context.presupuestos_generados.OrderByDescending(p => p.presupuesto_generado_ID).FirstOrDefault();
+                                if (presupuestos_generados_checkID != null)
+                                {
+                                    presupuesto_id = presupuestos_generados_checkID.presupuesto_generado_ID;
+                                }
+
+                                presupuestos_generados1.presupuesto_generado_ID = presupuesto_id;
+                                context.presupuestos_generados.Add(presupuestos_generados1);
+
+                                /*
+                                string IP_client = Logs.GetIPAddress();
+                                string UserID = "-";
+                                string UserName = "-";
+                                if (Session["UserID"] != null && !string.IsNullOrWhiteSpace(Session["UserID"].ToString()) && Session["UserName"] != null && !string.IsNullOrWhiteSpace(Session["UserName"].ToString()))
+                                {
+                                    UserID = Session["UserID"].ToString();
+                                    UserName = Session["UserName"].ToString();
+                                }
+                                Logs.AddUserLog("OK: Genera nuevo presupuesto: '", "", UserID, UserName, IP_client);
+                                */
+
+                                #region Get datos
+
+                                int producto_ID = Get_TryParse_int(className, methodName, values_array[0]);
+
+                                string nombre = values_array[1];
+                                string comentarios = values_array[2];
+
+                                decimal volumen = Get_TryParse_decimal(className, methodName, values_array[3]);
+
+                                bool chkFondoC = Get_TryParse_bool(className, methodName, values_array[4]);
+
+                                decimal costoU = Get_TryParse_decimal(className, methodName, values_array[5]);
+
+                                decimal precioU = Get_TryParse_decimal(className, methodName, values_array[6]);
+
+                                bool chkSugerido = Get_TryParse_bool(className, methodName, values_array[7]);
+
+                                int cantidadT = Get_TryParse_int(className, methodName, values_array[8]);
+
+                                decimal costoT = Get_TryParse_decimal(className, methodName, values_array[9]);
+                                decimal subtotal1 = Get_TryParse_decimal(className, methodName, values_array[10]);
+                                int descuento = Get_TryParse_int(className, methodName, values_array[11]);
+                                decimal subtotal2 = Get_TryParse_decimal(className, methodName, values_array[12]);
+                                decimal redondeo = Get_TryParse_decimal(className, methodName, values_array[13]);
+                                decimal precioF = Get_TryParse_decimal(className, methodName, values_array[14]);
+
+                                #endregion
+
+                                presupuestos_generados_productos producto1 = new presupuestos_generados_productos();
+                                producto1.Producto_ID = producto_ID;
+                                producto1.Dato_fijo_txbNombre = nombre;
+                                producto1.Dato_fijo_txbComentarios = comentarios;
+                                producto1.Dato_fijo_txbVolumen = volumen;
+                                producto1.Dato_fijo_chkFondoColor = chkFondoC;
+                                producto1.Dato_fijo_txbCostoUnitario = costoU;
+                                producto1.Dato_fijo_txbPrecioUnitario = precioU; ;
+                                producto1.Dato_fijo_chkSugerido = chkSugerido;
+                                producto1.Dato_fijo_txbCantidadTotal = cantidadT;
+                                producto1.Dato_fijo_txbCostoTotal = costoT;
+                                producto1.Dato_fijo_txbSubotal1 = subtotal1;
+                                producto1.Dato_fijo_txbDescuento = descuento;
+                                producto1.Dato_fijo_txbSubotal2 = subtotal2;
+                                producto1.Dato_fijo_txbRedondeo = redondeo;
+                                producto1.Dato_fijo_txbPrecioFinal = precioF;
+
+                                producto1.presupuesto_generado_ID = presupuesto_id;
+                                context.presupuestos_generados_productos.Add(producto1);
+
+                                try
+                                {
+                                    context.SaveChanges();
+                                }
+                                catch (Exception e)
+                                {
+                                    Logs.AddErrorLog("Excepcion. Guardando en la base de datos. ERROR:", className, methodName, e.Message);
+                                }
+
+                            }
                         }
                     }
-                        */
-
                 }
-
             }
+            return true;
+        }
+
+        private static decimal Get_TryParse_decimal(string className, string methodName, string value)
+        {
+            decimal final_value = 0;
+            if (!string.IsNullOrWhiteSpace(value))
+            {
+                if (!decimal.TryParse(value, out final_value))
+                {
+                    final_value = 0;
+                    Logs.AddErrorLog("Excepcion. Convirtiendo decimal. ERROR:", className, methodName, value);
+                }
+            }
+
+            return final_value;
+        }
+
+        private static int Get_TryParse_int(string className, string methodName, string value)
+        {
+            int final_value = 0;
+            if (!string.IsNullOrWhiteSpace(value))
+            {
+                if (!int.TryParse(value, out final_value))
+                {
+                    final_value = 0;
+                    Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, value);
+                }
+            }
+
+            return final_value;
+        }
+
+        private static bool Get_TryParse_bool(string className, string methodName, string value)
+        {
+            bool final_value = false;
+            if (!string.IsNullOrWhiteSpace(value))
+            {
+                if (!bool.TryParse(value, out final_value))
+                {
+                    final_value = false;
+                    Logs.AddErrorLog("Excepcion. Convirtiendo bool. ERROR:", className, methodName, value);
+                }
+            }
+
+            return final_value;
+        }
+        
+
+        [WebMethod]
+        public static void ConfirmarLista(string elementos_string)
+        {
         }
 
         #endregion

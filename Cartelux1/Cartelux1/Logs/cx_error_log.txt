@@ -206,3 +206,4 @@
 6/22/2020 12:25:48 AM: [ln:355] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo decimal. ERROR: .
 6/22/2020 12:25:48 AM: [ln:355] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo decimal. ERROR: .
 6/22/2020 12:25:50 AM: [ln:355] Presupuestos: GridElementosSeleccionados_calcular() - Excepcion. Convirtiendo decimal. ERROR: .
+6/26/2020 1:55:13 AM: [ln:572] Presupuestos: gridElementosSeleccionados_confirmarLista() - Excepcion. Convirtiendo int. ERROR: 103.68.

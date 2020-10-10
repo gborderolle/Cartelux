@@ -103,16 +103,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="lista_pedido_tipos">
-      <EntityTypeMapping TypeName="carteluxdb1Model.lista_pedido_tipos">
-        <MappingFragment StoreEntitySet="lista_pedido_tipos">
-          <ScalarProperty Name="Pedido_Tipo_ID" ColumnName="Pedido_Tipo_ID" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="lista_proyecto_estados">
       <EntityTypeMapping TypeName="carteluxdb1Model.lista_proyecto_estados">
         <MappingFragment StoreEntitySet="lista_proyecto_estados">
@@ -304,6 +294,95 @@
           <ScalarProperty Name="Fecha_creado" ColumnName="Fecha_creado" />
           <ScalarProperty Name="Usuario_ID" ColumnName="Usuario_ID" />
           <ScalarProperty Name="Log_ID" ColumnName="Log_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lista_componentes_unidad">
+      <EntityTypeMapping TypeName="carteluxdb1Model.lista_componentes_unidad">
+        <MappingFragment StoreEntitySet="lista_componentes_unidad">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+          <ScalarProperty Name="Precio_venta" ColumnName="Precio_venta" />
+          <ScalarProperty Name="Costo_unidad" ColumnName="Costo_unidad" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="componente_unidad_ID" ColumnName="componente_unidad_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lista_componentes_volumen">
+      <EntityTypeMapping TypeName="carteluxdb1Model.lista_componentes_volumen">
+        <MappingFragment StoreEntitySet="lista_componentes_volumen">
+          <ScalarProperty Name="isFondoColor" ColumnName="isFondoColor" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+          <ScalarProperty Name="Precio_venta" ColumnName="Precio_venta" />
+          <ScalarProperty Name="Costo_volumen" ColumnName="Costo_volumen" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="componente_volumen_ID" ColumnName="componente_volumen_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lista_productos">
+      <EntityTypeMapping TypeName="carteluxdb1Model.lista_productos">
+        <MappingFragment StoreEntitySet="lista_productos">
+          <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Precio_sugerido" ColumnName="Precio_sugerido" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Producto_ID" ColumnName="Producto_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="producto_componente_unidad">
+      <EntityTypeMapping TypeName="carteluxdb1Model.producto_componente_unidad">
+        <MappingFragment StoreEntitySet="producto_componente_unidad">
+          <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Componente_unidad_ID" ColumnName="Componente_unidad_ID" />
+          <ScalarProperty Name="Producto_ID" ColumnName="Producto_ID" />
+          <ScalarProperty Name="producto_componente_unidad_ID" ColumnName="producto_componente_unidad_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="producto_componente_volumen">
+      <EntityTypeMapping TypeName="carteluxdb1Model.producto_componente_volumen">
+        <MappingFragment StoreEntitySet="producto_componente_volumen">
+          <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+          <ScalarProperty Name="Componente_volumen_ID" ColumnName="Componente_volumen_ID" />
+          <ScalarProperty Name="Producto_ID" ColumnName="Producto_ID" />
+          <ScalarProperty Name="producto_componente_volumen_ID" ColumnName="producto_componente_volumen_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="presupuestos_generados">
+      <EntityTypeMapping TypeName="carteluxdb1Model.presupuestos_generados">
+        <MappingFragment StoreEntitySet="presupuestos_generados">
+          <ScalarProperty Name="Log_ID" ColumnName="Log_ID" />
+          <ScalarProperty Name="presupuesto_generado_ID" ColumnName="presupuesto_generado_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="presupuestos_generados_productos">
+      <EntityTypeMapping TypeName="carteluxdb1Model.presupuestos_generados_productos">
+        <MappingFragment StoreEntitySet="presupuestos_generados_productos">
+          <ScalarProperty Name="Dato_fijo_txbCostoTotal" ColumnName="Dato_fijo_txbCostoTotal" />
+          <ScalarProperty Name="Dato_fijo_txbComentarios" ColumnName="Dato_fijo_txbComentarios" />
+          <ScalarProperty Name="Dato_fijo_txbPrecioFinal" ColumnName="Dato_fijo_txbPrecioFinal" />
+          <ScalarProperty Name="Dato_fijo_txbRedondeo" ColumnName="Dato_fijo_txbRedondeo" />
+          <ScalarProperty Name="Dato_fijo_txbSubotal2" ColumnName="Dato_fijo_txbSubotal2" />
+          <ScalarProperty Name="Dato_fijo_txbDescuento" ColumnName="Dato_fijo_txbDescuento" />
+          <ScalarProperty Name="Dato_fijo_txbSubotal1" ColumnName="Dato_fijo_txbSubotal1" />
+          <ScalarProperty Name="Dato_fijo_txbCantidadTotal" ColumnName="Dato_fijo_txbCantidadTotal" />
+          <ScalarProperty Name="Dato_fijo_chkSugerido" ColumnName="Dato_fijo_chkSugerido" />
+          <ScalarProperty Name="Dato_fijo_txbPrecioUnitario" ColumnName="Dato_fijo_txbPrecioUnitario" />
+          <ScalarProperty Name="Dato_fijo_txbCostoUnitario" ColumnName="Dato_fijo_txbCostoUnitario" />
+          <ScalarProperty Name="Dato_fijo_chkFondoColor" ColumnName="Dato_fijo_chkFondoColor" />
+          <ScalarProperty Name="Dato_fijo_txbVolumen" ColumnName="Dato_fijo_txbVolumen" />
+          <ScalarProperty Name="Dato_fijo_txbNombre" ColumnName="Dato_fijo_txbNombre" />
+          <ScalarProperty Name="Producto_ID" ColumnName="Producto_ID" />
+          <ScalarProperty Name="presupuesto_generado_ID" ColumnName="presupuesto_generado_ID" />
+          <ScalarProperty Name="presupuesto_generado_producto_ID" ColumnName="presupuesto_generado_producto_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -104,6 +104,29 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
     <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
     <Property Name="Fecha_update" Type="datetime" Nullable="false" />
   </EntityType>
+  <EntityType Name="lista_componentes_unidad">
+    <Key>
+      <PropertyRef Name="componente_unidad_ID" />
+    </Key>
+    <Property Name="componente_unidad_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Codigo" Type="int" />
+    <Property Name="Costo_unidad" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Precio_venta" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="lista_componentes_volumen">
+    <Key>
+      <PropertyRef Name="componente_volumen_ID" />
+    </Key>
+    <Property Name="componente_volumen_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Codigo" Type="int" />
+    <Property Name="Costo_volumen" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Precio_venta" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="200" />
+    <Property Name="isFondoColor" Type="bit" />
+  </EntityType>
   <EntityType Name="lista_departamentos">
     <Key>
       <PropertyRef Name="Departamento_ID" />
@@ -170,14 +193,16 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
     <Property Name="Codigo" Type="int" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="100" />
   </EntityType>
-  <EntityType Name="lista_pedido_tipos">
+  <EntityType Name="lista_productos">
     <Key>
-      <PropertyRef Name="Pedido_Tipo_ID" />
+      <PropertyRef Name="Producto_ID" />
     </Key>
-    <Property Name="Pedido_Tipo_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Producto_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Precio_sugerido" Type="decimal" Precision="10" Scale="3" />
     <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="lista_proyecto_estados">
     <Key>
@@ -251,6 +276,54 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
     <Property Name="Pedido_MedioDePago_ID" Type="int" />
     <Property Name="Tamano_real" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="presupuestos_generados">
+    <Key>
+      <PropertyRef Name="presupuesto_generado_ID" />
+    </Key>
+    <Property Name="presupuesto_generado_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Log_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="presupuestos_generados_productos">
+    <Key>
+      <PropertyRef Name="presupuesto_generado_producto_ID" />
+    </Key>
+    <Property Name="presupuesto_generado_producto_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="presupuesto_generado_ID" Type="int" Nullable="false" />
+    <Property Name="Producto_ID" Type="int" Nullable="false" />
+    <Property Name="Dato_fijo_txbNombre" Type="varchar" MaxLength="50" />
+    <Property Name="Dato_fijo_txbVolumen" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_chkFondoColor" Type="bit" />
+    <Property Name="Dato_fijo_txbCostoUnitario" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_txbPrecioUnitario" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_chkSugerido" Type="bit" />
+    <Property Name="Dato_fijo_txbCantidadTotal" Type="int" />
+    <Property Name="Dato_fijo_txbSubotal1" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_txbDescuento" Type="int" />
+    <Property Name="Dato_fijo_txbSubotal2" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_txbRedondeo" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_txbPrecioFinal" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_txbComentarios" Type="varchar" MaxLength="100" />
+    <Property Name="Dato_fijo_txbCostoTotal" Type="decimal" Precision="10" Scale="3" />
+  </EntityType>
+  <EntityType Name="producto_componente_unidad">
+    <Key>
+      <PropertyRef Name="producto_componente_unidad_ID" />
+    </Key>
+    <Property Name="producto_componente_unidad_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Producto_ID" Type="int" />
+    <Property Name="Componente_unidad_ID" Type="int" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="producto_componente_volumen">
+    <Key>
+      <PropertyRef Name="producto_componente_volumen_ID" />
+    </Key>
+    <Property Name="producto_componente_volumen_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Producto_ID" Type="int" />
+    <Property Name="Componente_volumen_ID" Type="int" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="200" />
+  </EntityType>
   <EntityType Name="proyectos">
     <Key>
       <PropertyRef Name="Proyecto_ID" />
@@ -297,6 +370,8 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
     <EntitySet Name="config_alarmas_ingresosMensual" EntityType="Self.config_alarmas_ingresosMensual" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="config_emails" EntityType="Self.config_emails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="formularios" EntityType="Self.formularios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_componentes_unidad" EntityType="Self.lista_componentes_unidad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_componentes_volumen" EntityType="Self.lista_componentes_volumen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_departamentos" EntityType="Self.lista_departamentos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_entregas_tipos" EntityType="Self.lista_entregas_tipos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_pedido_estados" EntityType="Self.lista_pedido_estados" Schema="dbo" store:Type="Tables" />
@@ -304,12 +379,16 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
     <EntitySet Name="lista_pedido_mediosDePago" EntityType="Self.lista_pedido_mediosDePago" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_pedido_tamanos" EntityType="Self.lista_pedido_tamanos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_pedido_tematicas" EntityType="Self.lista_pedido_tematicas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="lista_pedido_tipos" EntityType="Self.lista_pedido_tipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_productos" EntityType="Self.lista_productos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lista_proyecto_estados" EntityType="Self.lista_proyecto_estados" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="logs" EntityType="Self.logs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="pedido_disenos" EntityType="Self.pedido_disenos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="pedido_entregas" EntityType="Self.pedido_entregas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="pedidos" EntityType="Self.pedidos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="presupuestos_generados" EntityType="Self.presupuestos_generados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="presupuestos_generados_productos" EntityType="Self.presupuestos_generados_productos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="producto_componente_unidad" EntityType="Self.producto_componente_unidad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="producto_componente_volumen" EntityType="Self.producto_componente_volumen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="proyectos" EntityType="Self.proyectos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />

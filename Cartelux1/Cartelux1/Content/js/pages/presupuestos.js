@@ -540,57 +540,65 @@ function gridElementosSeleccionados_confirmarLista() {
 
 
     var _LISTA_elementosGuardar = [];
+    var _LISTA_elementosGuardar_string = "";
 
     jQuery.each(_LISTA_gridElementosSeleccionados, function (i, value) {
-        //$("#" + i).append(document.createTextNode(" - " + val));
-        //console.log(value.lblElementoID);
 
         var lblElementoID = value.lblElementoID;
+        var input_lblElementoNombre_value = $("#input_lblElementoNombre_" + lblElementoID).val();
+        var input_lblComentarios_value = $("#input_lblComentarios_" + lblElementoID).val();
+        var txbVolumen_value = $("#txbVolumen_" + lblElementoID).val();
+        var chkFondoColor_value = $("#chkFondoColor_" + lblElementoID).is(":checked");
+        var txbCostoUnitario_value =  zero_or_isNaN(numberRemoveCommas($("#txbCostoUnitario_" + lblElementoID).val()));
+        var txbPrecioUnitario_value =  zero_or_isNaN(numberRemoveCommas($("#txbPrecioUnitario_" + lblElementoID).val()));
+        var chkPrecioSugerido_value = $("#chkPrecioSugerido_" + lblElementoID).is(":checked");
+        var txbCantidadTotal_value = $("#txbCantidadTotal_" + lblElementoID).val();
+        var txbCostoTotal_value =  zero_or_isNaN(numberRemoveCommas($("#txbCostoTotal_" + lblElementoID).val()));
+        var txbPrecioSubtotal1_value =  zero_or_isNaN(numberRemoveCommas($("#txbPrecioSubtotal1_" + lblElementoID).val()));
+        var txbDescuento_value = $("#txbDescuento_" + lblElementoID).val();
+        var txbPrecioSubtotal2_value =  zero_or_isNaN(numberRemoveCommas($("#txbPrecioSubtotal2_" + lblElementoID).val()));
+        var txbRedondeo_value = $("#txbRedondeo_" + lblElementoID).val();
+        var txbPrecioFinal_value = zero_or_isNaN(numberRemoveCommas($("#txbPrecioFinal_" + lblElementoID).val()));
+
         var object = {
-
             lblElementoID: lblElementoID,
-            input_lblElementoNombre_: $("#input_lblElementoNombre_" + lblElementoID).val(),
-            input_lblComentarios_: $("#input_lblComentarios_" + lblElementoID).val(),
-            txbVolumen_: $("#txbVolumen_" + lblElementoID).val(),
-            chkFondoColor_: $("#chkFondoColor_" + lblElementoID).is(":checked"),
-            txbCostoUnitario_: $("#txbCostoUnitario_" + lblElementoID).val(),
-            txbPrecioUnitario_: $("#txbPrecioUnitario_" + lblElementoID).val(),
-            chkPrecioSugerido_: $("#chkPrecioSugerido_" + lblElementoID).is(":checked"),
-            txbCantidadTotal_: $("#txbCantidadTotal_" + lblElementoID).val(),
-            txbCostoTotal_: $("#txbCostoTotal_" + lblElementoID).val(),
-            txbPrecioSubtotal1_: $("#txbPrecioSubtotal1_" + lblElementoID).val(),
-            txbDescuento_: $("#txbDescuento_" + lblElementoID).val(),
-            txbPrecioSubtotal2_: $("#txbPrecioSubtotal2_" + lblElementoID).val(),
-            txbRedondeo_: $("#txbRedondeo_" + lblElementoID).val(),
-            txbPrecioFinal_: $("#txbPrecioFinal_" + lblElementoID).val()
-
+            input_lblElementoNombre_: input_lblElementoNombre_value,
+            input_lblComentarios_: input_lblComentarios_value,
+            txbVolumen_: txbVolumen_value,
+            chkFondoColor_: chkFondoColor_value,
+            txbCostoUnitario_: txbCostoUnitario_value,
+            txbPrecioUnitario_: txbPrecioUnitario_value,
+            chkPrecioSugerido_: chkPrecioSugerido_value,
+            txbCantidadTotal_: txbCantidadTotal_value,
+            txbCostoTotal_: txbCostoTotal_value,
+            txbPrecioSubtotal1_: txbPrecioSubtotal1_value,
+            txbDescuento_: txbDescuento_value,
+            txbPrecioSubtotal2_: txbPrecioSubtotal2_value,
+            txbRedondeo_: txbRedondeo_value,
+            txbPrecioFinal_: txbPrecioFinal_value,
         } // object
         _LISTA_elementosGuardar.push(object);
 
+        _LISTA_elementosGuardar_string +=
+            lblElementoID + "#" + input_lblElementoNombre_value + "#" + input_lblComentarios_value + "#" + txbVolumen_value +
+            "#" + chkFondoColor_value + "#" + txbCostoUnitario_value + "#" + txbPrecioUnitario_value + "#" + chkPrecioSugerido_value + "#" +
+            "#" + txbCantidadTotal_value + "#" + txbCostoTotal_value + "#" + txbPrecioSubtotal1_value + "#" + txbDescuento_value + "#" +
+            "#" + txbPrecioSubtotal2_value + "#" + txbRedondeo_value + "#" + txbPrecioFinal_value + ",";
     });
 
-    if (_LISTA_elementosGuardar !== null && _LISTA_elementosGuardar.length > 0) {
+    if (_LISTA_elementosGuardar_string !== null && _LISTA_elementosGuardar_string != "") {
 
         // Ajax call parameters
         console.log("Ajax call: Presupuestos.aspx/gridElementosSeleccionados_confirmarLista. Params:");
-        console.log("_LISTA_elementosGuardar, type: " + type(_LISTA_elementosGuardar) + ", value: " + _LISTA_elementosGuardar);
+        console.log("_LISTA_elementosGuardar_string, type: " + type(_LISTA_elementosGuardar_string) + ", value: " + _LISTA_elementosGuardar_string);
 
         // Fuente: https://stackoverflow.com/questions/2225781/asp-net-web-method-that-accepts-a-listcustomobject-is-failing-with-web-servic
-        // JSON.stringify()
-
-
-
-        var _LISTA_elementosGuardar2 = ["Saab", "Volvo", "BMW"];
 
         $.ajax({
             type: "POST",
             url: "Presupuestos.aspx/gridElementosSeleccionados_confirmarLista",
             contentType: "application/json;charset=utf-8",
-            //data: '{_LISTA_elementosGuardar: "' + _LISTA_elementosGuardar + '"}',
-            //data: { _LISTA_elementosGuardar: JSON.stringify(_LISTA_elementosGuardar) },
-            //data: { _LISTA_elementosGuardar: _LISTA_elementosGuardar },
-            //data: JSON.stringify(_LISTA_elementosGuardar),
-            data: { _LISTA_elementosGuardar: _LISTA_elementosGuardar2 },
+            data: '{_LISTA_elementosGuardar_string: "' + _LISTA_elementosGuardar_string + '"}',
             dataType: "json",
             success: function (response) {
                 var resultado = response.d;
@@ -603,6 +611,7 @@ function gridElementosSeleccionados_confirmarLista() {
             failure: function (response) {
             }
         }); // Ajax
+
     }
 }
 

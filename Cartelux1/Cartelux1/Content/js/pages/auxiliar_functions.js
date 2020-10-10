@@ -97,3 +97,11 @@ function numberRemoveCommas(x) {
 function arrayRemoveByID(array, value) {
     return array.filter(function (obj) { return obj.lblElementoID !== lblElementoID; });
 }
+
+function zero_or_isNaN(str) {
+    return_value = 0;
+    if (!isNaN(str)) {
+        return_value = str;
+    }
+    return return_value;
+}
