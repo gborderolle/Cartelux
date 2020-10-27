@@ -2451,6 +2451,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
+    <Content Include="Trading_Dashboard1.aspx" />
     <Content Include="UniteGallery.aspx" />
     <Content Include="User_Controls\Clientes.ascx" />
     <Content Include="User_Controls\Pedidos.ascx" />
@@ -2767,6 +2768,27 @@
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\trading_activos.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\trading_lista_estados.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\trading_lista_instrumentos.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\trading_lista_mercados.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\trading_lista_operaciones.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\trading_ordenes.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\trading_trades.cs">
+      <DependentUpon>CarteluxDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\usuarios.cs">
       <DependentUpon>CarteluxDB.tt</DependentUpon>
     </Compile>
@@ -2807,6 +2829,13 @@
       <DependentUpon>SiteExternal.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Trading_Dashboard1.aspx.cs">
+      <DependentUpon>Trading_Dashboard1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Trading_Dashboard1.aspx.designer.cs">
+      <DependentUpon>Trading_Dashboard1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UniteGallery.aspx.cs">
       <DependentUpon>UniteGallery.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

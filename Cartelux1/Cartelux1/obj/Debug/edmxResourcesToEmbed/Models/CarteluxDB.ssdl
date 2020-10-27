@@ -19,7 +19,7 @@
     <Key>
       <PropertyRef Name="Cliente_Frecuente_ID" />
     </Key>
-    <Property Name="Cliente_Frecuente_ID" Type="int" Nullable="false" />
+    <Property Name="Cliente_Frecuente_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Cliente_ID" Type="int" Nullable="false" />
     <Property Name="Frecuencia" Type="varchar" MaxLength="100" />
     <Property Name="Descuento" Type="varchar" MaxLength="100" />
@@ -353,6 +353,66 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <EntityType Name="trading_activos">
+    <Key>
+      <PropertyRef Name="Activo_ID" />
+    </Key>
+    <Property Name="Activo_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Instrumento_ID" Type="int" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Ticker" Type="varchar" MaxLength="50" />
+    <Property Name="Mercado_ID" Type="int" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="trading_lista_estados">
+    <Key>
+      <PropertyRef Name="Estado_ID" />
+    </Key>
+    <Property Name="Estado_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="trading_lista_instrumentos">
+    <Key>
+      <PropertyRef Name="Instrumento_ID" />
+    </Key>
+    <Property Name="Instrumento_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="trading_lista_mercados">
+    <Key>
+      <PropertyRef Name="Mercado_ID" />
+    </Key>
+    <Property Name="Mercado_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="trading_lista_operaciones">
+    <Key>
+      <PropertyRef Name="Operacion_ID" />
+    </Key>
+    <Property Name="Operacion_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="trading_ordenes">
+    <Key>
+      <PropertyRef Name="Orden_ID" />
+    </Key>
+    <Property Name="Orden_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Operacion_ID" Type="int" />
+    <Property Name="Trade_ID" Type="int" />
+    <Property Name="Estado_ID" Type="int" />
+    <Property Name="Datetime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="trading_trades">
+    <Key>
+      <PropertyRef Name="Trade_ID" />
+    </Key>
+    <Property Name="Trade_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Activo_ID" Type="int" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Valor" Type="decimal" Precision="7" Scale="3" />
+  </EntityType>
   <EntityType Name="usuarios">
     <Key>
       <PropertyRef Name="Usuario_ID" />
@@ -362,6 +422,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
     <Property Name="Clave" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Rol_usuario_ID" Type="int" Nullable="false" />
     <Property Name="EsAdmin" Type="bit" Nullable="false" />
+    <Property Name="EsTrader" Type="bit" />
   </EntityType>
   <EntityContainer Name="carteluxdb1ModelStoreContainer">
     <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
@@ -391,6 +452,13 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
     <EntitySet Name="producto_componente_volumen" EntityType="Self.producto_componente_volumen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="proyectos" EntityType="Self.proyectos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="trading_activos" EntityType="Self.trading_activos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="trading_lista_estados" EntityType="Self.trading_lista_estados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="trading_lista_instrumentos" EntityType="Self.trading_lista_instrumentos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="trading_lista_mercados" EntityType="Self.trading_lista_mercados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="trading_lista_operaciones" EntityType="Self.trading_lista_operaciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="trading_ordenes" EntityType="Self.trading_ordenes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="trading_trades" EntityType="Self.trading_trades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="config_formularios_anos" EntityType="Self.config_formularios_anos" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 

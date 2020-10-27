@@ -24,7 +24,7 @@
           <Key>
             <PropertyRef Name="Cliente_Frecuente_ID" />
           </Key>
-          <Property Name="Cliente_Frecuente_ID" Type="int" Nullable="false" />
+          <Property Name="Cliente_Frecuente_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Cliente_ID" Type="int" Nullable="false" />
           <Property Name="Frecuencia" Type="varchar" MaxLength="100" />
           <Property Name="Descuento" Type="varchar" MaxLength="100" />
@@ -358,6 +358,66 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="trading_activos">
+          <Key>
+            <PropertyRef Name="Activo_ID" />
+          </Key>
+          <Property Name="Activo_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Instrumento_ID" Type="int" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Ticker" Type="varchar" MaxLength="50" />
+          <Property Name="Mercado_ID" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="trading_lista_estados">
+          <Key>
+            <PropertyRef Name="Estado_ID" />
+          </Key>
+          <Property Name="Estado_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="trading_lista_instrumentos">
+          <Key>
+            <PropertyRef Name="Instrumento_ID" />
+          </Key>
+          <Property Name="Instrumento_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="trading_lista_mercados">
+          <Key>
+            <PropertyRef Name="Mercado_ID" />
+          </Key>
+          <Property Name="Mercado_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="trading_lista_operaciones">
+          <Key>
+            <PropertyRef Name="Operacion_ID" />
+          </Key>
+          <Property Name="Operacion_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="trading_ordenes">
+          <Key>
+            <PropertyRef Name="Orden_ID" />
+          </Key>
+          <Property Name="Orden_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Operacion_ID" Type="int" />
+          <Property Name="Trade_ID" Type="int" />
+          <Property Name="Estado_ID" Type="int" />
+          <Property Name="Datetime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="trading_trades">
+          <Key>
+            <PropertyRef Name="Trade_ID" />
+          </Key>
+          <Property Name="Trade_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Activo_ID" Type="int" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Valor" Type="decimal" Precision="7" Scale="3" />
+        </EntityType>
         <EntityType Name="usuarios">
           <Key>
             <PropertyRef Name="Usuario_ID" />
@@ -367,6 +427,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <Property Name="Clave" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Rol_usuario_ID" Type="int" Nullable="false" />
           <Property Name="EsAdmin" Type="bit" Nullable="false" />
+          <Property Name="EsTrader" Type="bit" />
         </EntityType>
         <EntityContainer Name="carteluxdb1ModelStoreContainer">
           <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
@@ -396,6 +457,13 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <EntitySet Name="producto_componente_volumen" EntityType="Self.producto_componente_volumen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="proyectos" EntityType="Self.proyectos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="trading_activos" EntityType="Self.trading_activos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="trading_lista_estados" EntityType="Self.trading_lista_estados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="trading_lista_instrumentos" EntityType="Self.trading_lista_instrumentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="trading_lista_mercados" EntityType="Self.trading_lista_mercados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="trading_lista_operaciones" EntityType="Self.trading_lista_operaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="trading_ordenes" EntityType="Self.trading_ordenes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="trading_trades" EntityType="Self.trading_trades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="config_formularios_anos" EntityType="Self.config_formularios_anos" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -610,6 +678,13 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <EntitySet Name="producto_componente_volumen" EntityType="carteluxdb1Model.producto_componente_volumen" />
           <EntitySet Name="presupuestos_generados" EntityType="carteluxdb1Model.presupuestos_generados" />
           <EntitySet Name="presupuestos_generados_productos" EntityType="carteluxdb1Model.presupuestos_generados_productos" />
+          <EntitySet Name="trading_activos" EntityType="carteluxdb1Model.trading_activos" />
+          <EntitySet Name="trading_lista_estados" EntityType="carteluxdb1Model.trading_lista_estados" />
+          <EntitySet Name="trading_lista_instrumentos" EntityType="carteluxdb1Model.trading_lista_instrumentos" />
+          <EntitySet Name="trading_lista_operaciones" EntityType="carteluxdb1Model.trading_lista_operaciones" />
+          <EntitySet Name="trading_ordenes" EntityType="carteluxdb1Model.trading_ordenes" />
+          <EntitySet Name="trading_trades" EntityType="carteluxdb1Model.trading_trades" />
+          <EntitySet Name="trading_lista_mercados" EntityType="carteluxdb1Model.trading_lista_mercados" />
         </EntityContainer>
         <EntityType Name="clientes">
           <Key>
@@ -686,6 +761,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <Property Name="Clave" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Rol_usuario_ID" Type="Int32" Nullable="false" />
           <Property Name="EsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="EsTrader" Type="Boolean" />
         </EntityType>
         <EntityType Name="clientes_frecuentes">
           <Key>
@@ -810,6 +886,66 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <Property Name="Dato_fijo_txbPrecioFinal" Type="Decimal" Precision="10" Scale="3" />
           <Property Name="Dato_fijo_txbComentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Dato_fijo_txbCostoTotal" Type="Decimal" Precision="10" Scale="3" />
+        </EntityType>
+        <EntityType Name="trading_activos">
+          <Key>
+            <PropertyRef Name="Activo_ID" />
+          </Key>
+          <Property Name="Activo_ID" Type="Int32" Nullable="false" />
+          <Property Name="Instrumento_ID" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ticker" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mercado_ID" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="trading_lista_estados">
+          <Key>
+            <PropertyRef Name="Estado_ID" />
+          </Key>
+          <Property Name="Estado_ID" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="trading_lista_instrumentos">
+          <Key>
+            <PropertyRef Name="Instrumento_ID" />
+          </Key>
+          <Property Name="Instrumento_ID" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="trading_lista_operaciones">
+          <Key>
+            <PropertyRef Name="Operacion_ID" />
+          </Key>
+          <Property Name="Operacion_ID" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="trading_ordenes">
+          <Key>
+            <PropertyRef Name="Orden_ID" />
+          </Key>
+          <Property Name="Orden_ID" Type="Int32" Nullable="false" />
+          <Property Name="Operacion_ID" Type="Int32" />
+          <Property Name="Trade_ID" Type="Int32" />
+          <Property Name="Estado_ID" Type="Int32" />
+          <Property Name="Datetime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="trading_trades">
+          <Key>
+            <PropertyRef Name="Trade_ID" />
+          </Key>
+          <Property Name="Trade_ID" Type="Int32" Nullable="false" />
+          <Property Name="Activo_ID" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Valor" Type="Decimal" Precision="7" Scale="3" />
+        </EntityType>
+        <EntityType Name="trading_lista_mercados">
+          <Key>
+            <PropertyRef Name="Mercado_ID" />
+          </Key>
+          <Property Name="Mercado_ID" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1059,6 +1195,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <EntitySetMapping Name="usuarios">
             <EntityTypeMapping TypeName="carteluxdb1Model.usuarios">
               <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="EsTrader" ColumnName="EsTrader" />
                 <ScalarProperty Name="EsAdmin" ColumnName="EsAdmin" />
                 <ScalarProperty Name="Rol_usuario_ID" ColumnName="Rol_usuario_ID" />
                 <ScalarProperty Name="Clave" ColumnName="Clave" />
@@ -1202,6 +1339,73 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="trading_activos">
+            <EntityTypeMapping TypeName="carteluxdb1Model.trading_activos">
+              <MappingFragment StoreEntitySet="trading_activos">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Mercado_ID" ColumnName="Mercado_ID" />
+                <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Instrumento_ID" ColumnName="Instrumento_ID" />
+                <ScalarProperty Name="Activo_ID" ColumnName="Activo_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trading_lista_estados">
+            <EntityTypeMapping TypeName="carteluxdb1Model.trading_lista_estados">
+              <MappingFragment StoreEntitySet="trading_lista_estados">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Estado_ID" ColumnName="Estado_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trading_lista_instrumentos">
+            <EntityTypeMapping TypeName="carteluxdb1Model.trading_lista_instrumentos">
+              <MappingFragment StoreEntitySet="trading_lista_instrumentos">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Instrumento_ID" ColumnName="Instrumento_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trading_lista_operaciones">
+            <EntityTypeMapping TypeName="carteluxdb1Model.trading_lista_operaciones">
+              <MappingFragment StoreEntitySet="trading_lista_operaciones">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Operacion_ID" ColumnName="Operacion_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trading_ordenes">
+            <EntityTypeMapping TypeName="carteluxdb1Model.trading_ordenes">
+              <MappingFragment StoreEntitySet="trading_ordenes">
+                <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+                <ScalarProperty Name="Estado_ID" ColumnName="Estado_ID" />
+                <ScalarProperty Name="Trade_ID" ColumnName="Trade_ID" />
+                <ScalarProperty Name="Operacion_ID" ColumnName="Operacion_ID" />
+                <ScalarProperty Name="Orden_ID" ColumnName="Orden_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trading_trades">
+            <EntityTypeMapping TypeName="carteluxdb1Model.trading_trades">
+              <MappingFragment StoreEntitySet="trading_trades">
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Activo_ID" ColumnName="Activo_ID" />
+                <ScalarProperty Name="Trade_ID" ColumnName="Trade_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trading_lista_mercados">
+            <EntityTypeMapping TypeName="carteluxdb1Model.trading_lista_mercados">
+              <MappingFragment StoreEntitySet="trading_lista_mercados">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Mercado_ID" ColumnName="Mercado_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1216,7 +1420,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

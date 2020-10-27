@@ -12,13 +12,10 @@ namespace Cartelux1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class usuarios
+    public partial class trading_lista_estados
     {
-        public int Usuario_ID { get; set; }
-        public string Usuario { get; set; }
-        public string Clave { get; set; }
-        public int Rol_usuario_ID { get; set; }
-        public bool EsAdmin { get; set; }
-        public Nullable<bool> EsTrader { get; set; }
+        public int Estado_ID { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
     }
 }

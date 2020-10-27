@@ -31,6 +31,15 @@ namespace Cartelux1 {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder SubbodyContent;
         
         /// <summary>
+        /// aTrading control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aTrading;
+        
+        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>

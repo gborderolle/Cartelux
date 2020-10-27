@@ -1,3 +1,4 @@
+using Cartelux1.Global_Objects;
 using System;
 using System.IO;
 using System.Reflection;
@@ -20,6 +21,16 @@ namespace Cartelux1
                 {
                     build_date = GetLinkerTime(Assembly.GetExecutingAssembly()).ToString();
                     _lblUserName = Session["UserName"].ToString();
+
+                    string user_ID_str = Session["UserID"].ToString();
+                    if (!string.IsNullOrWhiteSpace(user_ID_str))
+                    {
+                        bool? esTrader = GlobalVariables.EsTrader(user_ID_str);
+                        if (esTrader == true)
+                        {
+                            aTrading.Visible = true;
+                        }
+                    }
                 }
             }
             else

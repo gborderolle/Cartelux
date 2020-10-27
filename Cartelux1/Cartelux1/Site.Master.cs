@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity;
 using System.Reflection;
 using System.IO;
 using Cartelux1.Global_Objects;
+using Cartelux1.Models;
+using System.Linq;
 
 namespace Cartelux1
 {
@@ -21,7 +23,7 @@ namespace Cartelux1
 
         private string build_date;
         public string Build_date { get { return build_date; } }
-
+        
         protected void Page_Init(object sender, EventArgs e)
         {
             // The code below helps to protect against XSRF attacks
@@ -81,6 +83,16 @@ namespace Cartelux1
                 {
                     build_date = GetLinkerTime(Assembly.GetExecutingAssembly()).ToString(GlobalVariables.ShortDateTime_format1);
                     _lblUserName = Session["UserName"].ToString();
+
+                    string user_ID_str = Session["UserID"].ToString();
+                    if (!string.IsNullOrWhiteSpace(user_ID_str))
+                    {
+                        bool? esTrader = GlobalVariables.EsTrader(user_ID_str);
+                        if (esTrader == true)
+                        {
+                            aTrading.Visible = true;
+                        }
+                    }
                 }
             }
             else

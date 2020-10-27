@@ -55,5 +55,12 @@ namespace Cartelux1.Models
         public virtual DbSet<producto_componente_volumen> producto_componente_volumen { get; set; }
         public virtual DbSet<presupuestos_generados> presupuestos_generados { get; set; }
         public virtual DbSet<presupuestos_generados_productos> presupuestos_generados_productos { get; set; }
+        public virtual DbSet<trading_activos> trading_activos { get; set; }
+        public virtual DbSet<trading_lista_estados> trading_lista_estados { get; set; }
+        public virtual DbSet<trading_lista_instrumentos> trading_lista_instrumentos { get; set; }
+        public virtual DbSet<trading_lista_operaciones> trading_lista_operaciones { get; set; }
+        public virtual DbSet<trading_ordenes> trading_ordenes { get; set; }
+        public virtual DbSet<trading_trades> trading_trades { get; set; }
+        public virtual DbSet<trading_lista_mercados> trading_lista_mercados { get; set; }
     }
 }
