@@ -53,3 +53,5 @@ Cartelux1/.vs/Cartelux1/v14/.suo
 Cartelux1/Cartelux1/Web.config
 >>>>>>> 97b970a8d4d87d8cb3300af7e29cd67b247f9bef
 Cartelux1/.vs/Cartelux1/v14/.suo
+*.suo
+*.cache
