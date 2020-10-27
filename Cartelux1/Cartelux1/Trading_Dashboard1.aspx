@@ -172,7 +172,7 @@
 
     <!-- PAGE JS -->
     <script type="text/javascript" src="/Content/js/pages/auxiliar_functions.js"></script>
-    <script type="text/javascript" src="/Content/js/pages/dashboard.js"></script>
+    <script type="text/javascript" src="/Content/js/pages/trading.js"></script>
 
     <!-- STYLES REPORTES TEMPLATE -->
 
@@ -235,7 +235,8 @@
 
                     <div id="tabsFormularios">
                         <ul>
-                            <li><a href="#tabsOrdenes" class="tabsFormularios">Trades activos</a></li>
+                            <li><a href="#tabsOrdenes" class="tabsFormularios">Tiempo real</a></li>
+                            <li><a href="#tabsHistorico" class="tabsFormularios">Histórico</a></li>
                         </ul>
 
                         <div id="tabsOrdenes">
@@ -442,7 +443,7 @@
 
                                                 <asp:TemplateField HeaderText="OPC" ControlStyle-CssClass="btn btn-warning btn-xs">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="btnOPC" runat="server" CommandName="View" CssClass="btn btn-primary btn-xs fa fa-asterisk" />
+                                                        <asp:LinkButton ID="btnOrdenesPendientes" runat="server" CommandName="View" CssClass="btn btn-primary btn-xs fa fa-asterisk" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>

@@ -402,6 +402,7 @@
     <EntitySetMapping Name="trading_lista_estados">
       <EntityTypeMapping TypeName="carteluxdb1Model.trading_lista_estados">
         <MappingFragment StoreEntitySet="trading_lista_estados">
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Estado_ID" ColumnName="Estado_ID" />
@@ -411,6 +412,7 @@
     <EntitySetMapping Name="trading_lista_instrumentos">
       <EntityTypeMapping TypeName="carteluxdb1Model.trading_lista_instrumentos">
         <MappingFragment StoreEntitySet="trading_lista_instrumentos">
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Instrumento_ID" ColumnName="Instrumento_ID" />
         </MappingFragment>
@@ -419,6 +421,7 @@
     <EntitySetMapping Name="trading_lista_operaciones">
       <EntityTypeMapping TypeName="carteluxdb1Model.trading_lista_operaciones">
         <MappingFragment StoreEntitySet="trading_lista_operaciones">
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Operacion_ID" ColumnName="Operacion_ID" />
@@ -449,6 +452,7 @@
     <EntitySetMapping Name="trading_lista_mercados">
       <EntityTypeMapping TypeName="carteluxdb1Model.trading_lista_mercados">
         <MappingFragment StoreEntitySet="trading_lista_mercados">
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Mercado_ID" ColumnName="Mercado_ID" />
         </MappingFragment>

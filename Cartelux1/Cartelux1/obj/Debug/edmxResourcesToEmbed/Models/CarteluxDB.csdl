@@ -417,6 +417,7 @@
     <Property Name="Estado_ID" Type="Int32" Nullable="false" />
     <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Valor" Type="Int32" />
   </EntityType>
   <EntityType Name="trading_lista_instrumentos">
     <Key>
@@ -424,6 +425,7 @@
     </Key>
     <Property Name="Instrumento_ID" Type="Int32" Nullable="false" />
     <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Valor" Type="Int32" />
   </EntityType>
   <EntityType Name="trading_lista_operaciones">
     <Key>
@@ -432,6 +434,7 @@
     <Property Name="Operacion_ID" Type="Int32" Nullable="false" />
     <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Valor" Type="Int32" />
   </EntityType>
   <EntityType Name="trading_ordenes">
     <Key>
@@ -458,5 +461,6 @@
     </Key>
     <Property Name="Mercado_ID" Type="Int32" Nullable="false" />
     <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Valor" Type="Int32" />
   </EntityType>
 </Schema>

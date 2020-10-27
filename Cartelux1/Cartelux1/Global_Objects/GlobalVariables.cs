@@ -22,6 +22,19 @@ namespace Cartelux1.Global_Objects
             Rollup
         };
 
+        public enum Trades_Operaciones : int
+        {
+            BUY = 0,
+            SELL = 1
+        };
+
+        public enum Trades_Estados : int
+        {
+            Pendiente = 0,
+            Ejecutado = 1,
+            Cancelado = 2
+        };
+
         public static DateTime GetDatetimeFormated(string fecha_str)
         {
             // Logger variables
