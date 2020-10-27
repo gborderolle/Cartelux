@@ -16,5 +16,6 @@ namespace Cartelux1.Models
     {
         public int Instrumento_ID { get; set; }
         public string Nombre { get; set; }
+        public Nullable<int> Valor { get; set; }
     }
 }

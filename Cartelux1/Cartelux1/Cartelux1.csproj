@@ -498,6 +498,7 @@
     <Content Include="Content\js\pages\listados.js" />
     <Content Include="Content\js\pages\menu_logs.js" />
     <Content Include="Content\js\pages\presupuestos.js" />
+    <Content Include="Content\js\pages\trading.js" />
     <Content Include="Content\js\pages\validar_documento.js" />
     <Content Include="Content\js\pages\dashboard.js" />
     <Content Include="Content\js\pages\formulario.js" />

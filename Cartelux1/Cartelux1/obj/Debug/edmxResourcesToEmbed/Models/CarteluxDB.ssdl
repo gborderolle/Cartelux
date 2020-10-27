@@ -371,6 +371,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
     <Property Name="Estado_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Valor" Type="int" />
   </EntityType>
   <EntityType Name="trading_lista_instrumentos">
     <Key>
@@ -378,6 +379,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
     </Key>
     <Property Name="Instrumento_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Valor" Type="int" />
   </EntityType>
   <EntityType Name="trading_lista_mercados">
     <Key>
@@ -385,6 +387,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
     </Key>
     <Property Name="Mercado_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Valor" Type="int" />
   </EntityType>
   <EntityType Name="trading_lista_operaciones">
     <Key>
@@ -393,6 +396,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
     <Property Name="Operacion_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Valor" Type="int" />
   </EntityType>
   <EntityType Name="trading_ordenes">
     <Key>

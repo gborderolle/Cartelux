@@ -376,6 +376,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <Property Name="Estado_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Valor" Type="int" />
         </EntityType>
         <EntityType Name="trading_lista_instrumentos">
           <Key>
@@ -383,6 +384,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           </Key>
           <Property Name="Instrumento_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Valor" Type="int" />
         </EntityType>
         <EntityType Name="trading_lista_mercados">
           <Key>
@@ -390,6 +392,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           </Key>
           <Property Name="Mercado_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Valor" Type="int" />
         </EntityType>
         <EntityType Name="trading_lista_operaciones">
           <Key>
@@ -398,6 +401,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <Property Name="Operacion_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Valor" Type="int" />
         </EntityType>
         <EntityType Name="trading_ordenes">
           <Key>
@@ -905,6 +909,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <Property Name="Estado_ID" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Int32" />
         </EntityType>
         <EntityType Name="trading_lista_instrumentos">
           <Key>
@@ -912,6 +917,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           </Key>
           <Property Name="Instrumento_ID" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Int32" />
         </EntityType>
         <EntityType Name="trading_lista_operaciones">
           <Key>
@@ -920,6 +926,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <Property Name="Operacion_ID" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Int32" />
         </EntityType>
         <EntityType Name="trading_ordenes">
           <Key>
@@ -946,6 +953,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           </Key>
           <Property Name="Mercado_ID" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1354,6 +1362,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <EntitySetMapping Name="trading_lista_estados">
             <EntityTypeMapping TypeName="carteluxdb1Model.trading_lista_estados">
               <MappingFragment StoreEntitySet="trading_lista_estados">
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Estado_ID" ColumnName="Estado_ID" />
@@ -1363,6 +1372,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <EntitySetMapping Name="trading_lista_instrumentos">
             <EntityTypeMapping TypeName="carteluxdb1Model.trading_lista_instrumentos">
               <MappingFragment StoreEntitySet="trading_lista_instrumentos">
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Instrumento_ID" ColumnName="Instrumento_ID" />
               </MappingFragment>
@@ -1371,6 +1381,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <EntitySetMapping Name="trading_lista_operaciones">
             <EntityTypeMapping TypeName="carteluxdb1Model.trading_lista_operaciones">
               <MappingFragment StoreEntitySet="trading_lista_operaciones">
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Operacion_ID" ColumnName="Operacion_ID" />
@@ -1401,6 +1412,7 @@ warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not
           <EntitySetMapping Name="trading_lista_mercados">
             <EntityTypeMapping TypeName="carteluxdb1Model.trading_lista_mercados">
               <MappingFragment StoreEntitySet="trading_lista_mercados">
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Mercado_ID" ColumnName="Mercado_ID" />
               </MappingFragment>

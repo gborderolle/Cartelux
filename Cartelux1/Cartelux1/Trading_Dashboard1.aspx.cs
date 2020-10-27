@@ -90,15 +90,15 @@ namespace Cartelux1
                     if (_orden != null)
                     {
 
-                    trading_lista_operaciones _operacion = (trading_lista_operaciones)context.trading_lista_operaciones.FirstOrDefault(c => c.Operacion_ID == _orden.Operacion_ID);
-                    trading_trades _trade = (trading_trades)context.trading_trades.FirstOrDefault(c => c.Trade_ID == _orden.Trade_ID);
-                    if (_operacion != null && _trade != null)
-                    {
-                        Label lbl1 = e.Row.FindControl("lblNumber") as Label;
-                        if (lbl1 != null)
+                        trading_lista_operaciones _operacion = (trading_lista_operaciones)context.trading_lista_operaciones.FirstOrDefault(c => c.Operacion_ID == _orden.Operacion_ID);
+                        trading_trades _trade = (trading_trades)context.trading_trades.FirstOrDefault(c => c.Trade_ID == _orden.Trade_ID);
+                        if (_operacion != null && _trade != null)
                         {
-                            lbl1.Text = e.Row.RowIndex.ToString();
-                        }
+                            Label lbl1 = e.Row.FindControl("lblNumber") as Label;
+                            if (lbl1 != null)
+                            {
+                                lbl1.Text = e.Row.RowIndex.ToString();
+                            }
 
                             lbl1 = e.Row.FindControl("lblOperacion") as Label;
                             if (lbl1 != null)
@@ -342,66 +342,6 @@ namespace Cartelux1
             } // context
         }
 
-        protected void gridTradesActivos_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Source: http://www.codeproject.com/Tips/622720/Fire-GridView-SelectedIndexChanged-Event-without-S
-
-            // Logger variables
-            System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
-            System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
-            string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
-            string methodName = stackFrame.GetMethod().Name;
-
-            foreach (GridViewRow row in gridTradesActivos.Rows)
-            {
-                if (row.RowIndex == gridTradesActivos.SelectedIndex)
-                {
-                    string Orden_ID_str = gridTradesActivos.SelectedRow.Cells[0].Text;
-                    if (!string.IsNullOrWhiteSpace(Orden_ID_str))
-                    {
-                        int Orden_ID = 0;
-                        if (!int.TryParse(Orden_ID_str, out Orden_ID))
-                        {
-                            Orden_ID = 0;
-                            Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, Orden_ID_str);
-                        }
-
-                        if (Orden_ID > 0)
-                        {
-                            using (CarteluxDB context = new CarteluxDB())
-                            {
-                                trading_ordenes _orden = (trading_ordenes)context.trading_ordenes.FirstOrDefault(c => c.Orden_ID == Orden_ID);
-                                if (_orden != null)
-                                {
-                                    //lblClientName_1.Text = lblClientName_2.Text = _orden.Nombre;
-
-                                    //BindGridViajes(cliente_ID);
-
-                                    // Filtrar por fechas del mes corriente por defecto
-                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "gridTradesActivos_OnSelectedIndexChanged", "<script type='text/javascript'></script>", false);
-
-                                    hdn_OrdenID.Value = Orden_ID_str;
-                                }
-                            }
-                        }
-                    }
-                    row.BackColor = ColorTranslator.FromHtml("#A1DCF2");
-                    foreach (TableCell cell in row.Cells)
-                    {
-                        cell.BackColor = ColorTranslator.FromHtml("#A1DCF2");
-                    }
-                }
-                else
-                {
-                    row.BackColor = ColorTranslator.FromHtml("#FFFFFF");
-                    foreach (TableCell cell in row.Cells)
-                    {
-                        cell.BackColor = ColorTranslator.FromHtml("#FFFFFF");
-                    }
-                }
-            }
-        }
-
         protected void gridOrdenesPendientes_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandArgument != null)
@@ -442,7 +382,6 @@ namespace Cartelux1
                     trading_ordenes _orden = (trading_ordenes)(e.Row.DataItem);
                     if (_orden != null)
                     {
-
                         trading_lista_operaciones _operacion = (trading_lista_operaciones)context.trading_lista_operaciones.FirstOrDefault(c => c.Operacion_ID == _orden.Operacion_ID);
                         trading_trades _trade = (trading_trades)context.trading_trades.FirstOrDefault(c => c.Trade_ID == _orden.Trade_ID);
                         if (_operacion != null && _trade != null)
@@ -696,67 +635,6 @@ namespace Cartelux1
             } // context
         }
 
-        protected void gridOrdenesPendientes_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Source: http://www.codeproject.com/Tips/622720/Fire-GridView-SelectedIndexChanged-Event-without-S
-
-            // Logger variables
-            System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
-            System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
-            string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
-            string methodName = stackFrame.GetMethod().Name;
-
-            foreach (GridViewRow row in gridOrdenesPendientes.Rows)
-            {
-                if (row.RowIndex == gridOrdenesPendientes.SelectedIndex)
-                {
-                    string Orden_ID_str = gridOrdenesPendientes.SelectedRow.Cells[0].Text;
-                    if (!string.IsNullOrWhiteSpace(Orden_ID_str))
-                    {
-                        int Orden_ID = 0;
-                        if (!int.TryParse(Orden_ID_str, out Orden_ID))
-                        {
-                            Orden_ID = 0;
-                            Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, Orden_ID_str);
-                        }
-
-                        if (Orden_ID > 0)
-                        {
-                            using (CarteluxDB context = new CarteluxDB())
-                            {
-                                trading_ordenes _orden = (trading_ordenes)context.trading_ordenes.FirstOrDefault(c => c.Orden_ID == Orden_ID);
-                                if (_orden != null)
-                                {
-                                    //lblClientName_1.Text = lblClientName_2.Text = _orden.Nombre;
-
-                                    //BindGridViajes(cliente_ID);
-
-                                    // Filtrar por fechas del mes corriente por defecto
-                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "gridOrdenesPendientes_OnSelectedIndexChanged", "<script type='text/javascript'></script>", false);
-
-                                    hdn_OrdenID.Value = Orden_ID_str;
-                                }
-                            }
-                        }
-                    }
-                    row.BackColor = ColorTranslator.FromHtml("#A1DCF2");
-                    foreach (TableCell cell in row.Cells)
-                    {
-                        cell.BackColor = ColorTranslator.FromHtml("#A1DCF2");
-                    }
-                }
-                else
-                {
-                    row.BackColor = ColorTranslator.FromHtml("#FFFFFF");
-                    foreach (TableCell cell in row.Cells)
-                    {
-                        cell.BackColor = ColorTranslator.FromHtml("#FFFFFF");
-                    }
-                }
-            }
-        }
-
-
         #endregion Events
 
         #region Methods
@@ -775,8 +653,10 @@ namespace Cartelux1
             {
                 if (context.trading_ordenes != null)
                 {
-                    List<trading_ordenes> trading_ordenes_elements = context.trading_ordenes.OrderByDescending(e => e.Datetime).ToList();
+                    trading_lista_operaciones _opreacion = context.trading_lista_operaciones.FirstOrDefault(v => v.Valor != null && v.Valor.Equals(GlobalVariables.Trades_Operaciones.BUY));
+                    trading_lista_estados _estado = context.trading_lista_estados.FirstOrDefault(v => v.Valor != null && v.Valor.Equals(GlobalVariables.Trades_Estados.Ejecutado));
 
+                    List<trading_ordenes> trading_ordenes_elements = context.trading_ordenes.Where(v => v.Estado_ID != null && v.Estado_ID == _estado.Estado_ID && v.Operacion_ID != null && v.Operacion_ID == _opreacion.Operacion_ID).OrderByDescending(e => e.Datetime).ToList();
                     if (trading_ordenes_elements.Count() > 0)
                     {
                         gridTradesActivos.DataSource = trading_ordenes_elements;
@@ -835,8 +715,9 @@ namespace Cartelux1
             {
                 if (context.trading_ordenes != null)
                 {
-                    List<trading_ordenes> trading_ordenes_elements = context.trading_ordenes.OrderByDescending(e => e.Datetime).ToList();
+                    trading_lista_estados _estado = context.trading_lista_estados.FirstOrDefault(v => v.Valor != null && v.Valor.Equals(GlobalVariables.Trades_Estados.Pendiente));
 
+                    List<trading_ordenes> trading_ordenes_elements = context.trading_ordenes.Where(v => v.Estado_ID != null && v.Estado_ID == _estado.Estado_ID).OrderByDescending(e => e.Datetime).ToList();
                     if (trading_ordenes_elements.Count() > 0)
                     {
                         gridOrdenesPendientes.DataSource = trading_ordenes_elements;

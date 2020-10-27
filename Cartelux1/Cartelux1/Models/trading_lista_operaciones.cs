@@ -17,5 +17,6 @@ namespace Cartelux1.Models
         public int Operacion_ID { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
+        public Nullable<int> Valor { get; set; }
     }
 }
