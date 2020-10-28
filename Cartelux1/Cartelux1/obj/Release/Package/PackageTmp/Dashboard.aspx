@@ -364,7 +364,7 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Fecha">
+                                                <asp:TemplateField HeaderText="Fecha entrega">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblFechaEntrega" runat="server" CommandName="View" Text='<%# Eval("Fecha_creado", "{0:dd-MM-yyyy}") %>' />
                                                     </ItemTemplate>

@@ -243,6 +243,7 @@
     <EntitySetMapping Name="usuarios">
       <EntityTypeMapping TypeName="carteluxdb1Model.usuarios">
         <MappingFragment StoreEntitySet="usuarios">
+          <ScalarProperty Name="EsTrader" ColumnName="EsTrader" />
           <ScalarProperty Name="EsAdmin" ColumnName="EsAdmin" />
           <ScalarProperty Name="Rol_usuario_ID" ColumnName="Rol_usuario_ID" />
           <ScalarProperty Name="Clave" ColumnName="Clave" />
@@ -383,6 +384,77 @@
           <ScalarProperty Name="Producto_ID" ColumnName="Producto_ID" />
           <ScalarProperty Name="presupuesto_generado_ID" ColumnName="presupuesto_generado_ID" />
           <ScalarProperty Name="presupuesto_generado_producto_ID" ColumnName="presupuesto_generado_producto_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="trading_activos">
+      <EntityTypeMapping TypeName="carteluxdb1Model.trading_activos">
+        <MappingFragment StoreEntitySet="trading_activos">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Mercado_ID" ColumnName="Mercado_ID" />
+          <ScalarProperty Name="Ticker" ColumnName="Ticker" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Instrumento_ID" ColumnName="Instrumento_ID" />
+          <ScalarProperty Name="Activo_ID" ColumnName="Activo_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="trading_lista_estados">
+      <EntityTypeMapping TypeName="carteluxdb1Model.trading_lista_estados">
+        <MappingFragment StoreEntitySet="trading_lista_estados">
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Estado_ID" ColumnName="Estado_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="trading_lista_instrumentos">
+      <EntityTypeMapping TypeName="carteluxdb1Model.trading_lista_instrumentos">
+        <MappingFragment StoreEntitySet="trading_lista_instrumentos">
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Instrumento_ID" ColumnName="Instrumento_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="trading_lista_operaciones">
+      <EntityTypeMapping TypeName="carteluxdb1Model.trading_lista_operaciones">
+        <MappingFragment StoreEntitySet="trading_lista_operaciones">
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Operacion_ID" ColumnName="Operacion_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="trading_ordenes">
+      <EntityTypeMapping TypeName="carteluxdb1Model.trading_ordenes">
+        <MappingFragment StoreEntitySet="trading_ordenes">
+          <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+          <ScalarProperty Name="Estado_ID" ColumnName="Estado_ID" />
+          <ScalarProperty Name="Trade_ID" ColumnName="Trade_ID" />
+          <ScalarProperty Name="Operacion_ID" ColumnName="Operacion_ID" />
+          <ScalarProperty Name="Orden_ID" ColumnName="Orden_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="trading_trades">
+      <EntityTypeMapping TypeName="carteluxdb1Model.trading_trades">
+        <MappingFragment StoreEntitySet="trading_trades">
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Activo_ID" ColumnName="Activo_ID" />
+          <ScalarProperty Name="Trade_ID" ColumnName="Trade_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="trading_lista_mercados">
+      <EntityTypeMapping TypeName="carteluxdb1Model.trading_lista_mercados">
+        <MappingFragment StoreEntitySet="trading_lista_mercados">
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Mercado_ID" ColumnName="Mercado_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

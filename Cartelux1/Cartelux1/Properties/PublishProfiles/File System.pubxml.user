@@ -85,7 +85,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/30/2018 16:45:30</publishTime>
     </File>
     <File Include="bin/Cartelux1.dll">
-      <publishTime>10/10/2020 00:47:47</publishTime>
+      <publishTime>10/27/2020 18:14:47</publishTime>
     </File>
     <File Include="bin/DataMatrix.net.dll">
       <publishTime>02/28/2017 06:55:46</publishTime>
@@ -256,7 +256,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/15/2018 00:12:47</publishTime>
     </File>
     <File Include="Calculadora.aspx">
-      <publishTime>10/06/2019 06:26:40</publishTime>
+      <publishTime>10/26/2020 21:35:32</publishTime>
     </File>
     <File Include="Cartelux-bolas-ico2.ico">
       <publishTime>09/13/2017 04:01:07</publishTime>
@@ -1181,6 +1181,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/js/pages/presupuestos.js">
       <publishTime>06/26/2020 01:47:15</publishTime>
+    </File>
+    <File Include="Content/js/pages/trading.js">
+      <publishTime>10/27/2020 00:41:00</publishTime>
     </File>
     <File Include="Content/js/pages/validar_documento.js">
       <publishTime>10/18/2018 02:45:15</publishTime>
@@ -6652,7 +6655,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/27/2017 06:39:04</publishTime>
     </File>
     <File Include="Dashboard.aspx">
-      <publishTime>06/01/2020 19:48:19</publishTime>
+      <publishTime>10/26/2020 17:45:56</publishTime>
     </File>
     <File Include="Default.aspx">
       <publishTime>09/11/2017 00:59:15</publishTime>
@@ -6706,7 +6709,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/16/2020 02:06:43</publishTime>
     </File>
     <File Include="Models/CarteluxDB.edmx.diagram">
-      <publishTime>09/17/2020 16:48:27</publishTime>
+      <publishTime>10/26/2020 22:03:43</publishTime>
     </File>
     <File Include="Models/CarteluxModel.edmx.diagram">
       <publishTime>01/26/2018 02:13:56</publishTime>
@@ -6859,13 +6862,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/11/2017 00:59:37</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>06/01/2020 19:53:28</publishTime>
+      <publishTime>10/26/2020 23:37:13</publishTime>
     </File>
     <File Include="Site.Master">
-      <publishTime>10/04/2020 16:04:20</publishTime>
+      <publishTime>10/26/2020 18:28:06</publishTime>
     </File>
     <File Include="Site.Mobile.Master">
-      <publishTime>06/01/2020 17:25:57</publishTime>
+      <publishTime>10/26/2020 18:28:11</publishTime>
     </File>
     <File Include="SiteExternal.Master">
       <publishTime>04/16/2020 00:38:15</publishTime>
@@ -6875,6 +6878,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Test1.aspx">
       <publishTime>01/21/2018 18:53:48</publishTime>
+    </File>
+    <File Include="Trading_Dashboard1.aspx">
+      <publishTime>10/26/2020 23:39:16</publishTime>
     </File>
     <File Include="UniteGallery.aspx">
       <publishTime>06/02/2018 03:56:57</publishTime>
