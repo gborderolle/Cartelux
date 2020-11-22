@@ -28,7 +28,7 @@ namespace Cartelux1
                         bool? esTrader = GlobalVariables.EsTrader(user_ID_str);
                         if (esTrader == true)
                         {
-                            aTrading.Visible = true;
+                            //aTrading.Visible = true;
                         }
                     }
                 }

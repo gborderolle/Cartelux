@@ -258,14 +258,13 @@ function month_paintSelected(month_index) {
     $(".btn-table").filter("td[data-value='" + month_index + "']").toggleClass("btn-warning");
 }
 
-function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, incluirCancelados_value) {
+function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, incluirCancelados_value, chbSoloArteRefinado_value) {
     if (month_value !== null && month_value !== undefined && month_value > 0 && soloVigentes_value !== null && soloVigentes_value !== undefined &&
-        soloEntrCol_value !== null && soloEntrCol_value !== undefined && incluirCancelados_value !== null && incluirCancelados_value !== undefined) {
+        soloEntrCol_value !== null && soloEntrCol_value !== undefined && incluirCancelados_value !== null && incluirCancelados_value !== undefined && chbSoloArteRefinado_value !== null && chbSoloArteRefinado_value !== undefined) {
         
         month_setMonthName(month_value);
         month_clearSelected()
         month_paintSelected(month_value);
-
         month_value += "";
 
         var year_value = 2018; // DUMMY
@@ -284,12 +283,13 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
             console.log("soloVigentes_value, type: " + type(soloVigentes_value) + ", value: " + soloVigentes_value);
             console.log("soloEntrCol_value, type: " + type(soloEntrCol_value) + ", value: " + soloEntrCol_value);
             console.log("incluirCancelados_value, type: " + type(incluirCancelados_value) + ", value: " + incluirCancelados_value);
+            console.log("chbSoloArteRefinado_value, type: " + type(chbSoloArteRefinado_value) + ", value: " + chbSoloArteRefinado_value);
 
             $.ajax({
                 type: "POST",
                 url: "Dashboard.aspx/GetData_BindGridFormularios",
                 contentType: "application/json;charset=utf-8",
-                data: '{year_value: "' + year_value + '",month_value: "' + month_value + '",soloVigentes_value: "' + soloVigentes_value + '",soloEntrCol_value: "' + soloEntrCol_value + '",incluirCancelados_value: "' + incluirCancelados_value + '"}',
+                data: '{year_value: "' + year_value + '",month_value: "' + month_value + '",soloVigentes_value: "' + soloVigentes_value + '",soloEntrCol_value: "' + soloEntrCol_value + '",incluirCancelados_value: "' + incluirCancelados_value + '",chbSoloArteRefinado_value: "' + chbSoloArteRefinado_value + '"}',
                 dataType: "json",
                 success: function (response) {
 
@@ -300,7 +300,12 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
                         for (var i = 0; i < response.d.length; i++) {
 
                             var monto_pedido = check_nullValues(response.d[i].lblMonto);
-                            //total_recaudacion += monto_pedido;
+                            var importeAcumuladoMes = check_nullValues(response.d[i].importeAcumuladoMes);
+
+                            // Set importe total del mes
+                            if (importeAcumuladoMes !== null && importeAcumuladoMes !== undefined && !isNaN(importeAcumuladoMes)) {
+                                month_setTotal(importeAcumuladoMes);
+                            }
 
                             //var goToFormulario = "<a id='btnURL' role='button' href='" + response.d[i].URL_short + "' class='btn btn-warning glyphicon fa fa-wpforms' title='' target='_blank'></a>";
                             var goToFormulario = response.d[i].URL_short;
@@ -371,8 +376,6 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
                                 }
                             }
 
-
-
                             // Click to Chat WhatsApp API
                             var wpp = "https://api.whatsapp.com/send?phone=598";
                             var whatsapp_url = wpp + telefono;
@@ -401,7 +404,10 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
                             console.log(goToGMaps);
                             console.log(goToWPP);
                             console.log("-------------- END --------------");
-                            var goToCTO = "<a id=\"" + btnCTO_id + "\" role='button' href='#' class='btn btn-warning btn-xs fa fa-address-card fa-2x' onclick='return showActionMenu_CTO(\"" + formID + "\", \"" + nombre + "\", \"" + goToFormulario + "\", \"" + goToGMaps + "\", \"" + goToWPP + "\", \"" + btnCTO_id + "\")'></a>";
+
+                            var lbl_comentarios = check_nullValues(response.d[i].lblComentarios);
+
+                            var goToCTO = "<a id=\"" + btnCTO_id + "\" role='button' href='#' class='btn btn-warning btn-xs fa fa-address-card fa-2x' onclick='return showActionMenu_CTO(\"" + formID + "\", \"" + nombre + "\", \"" + goToFormulario + "\", \"" + goToGMaps + "\", \"" + goToWPP + "\", \"" + btnCTO_id + "\", \"" + lbl_comentarios + "\")'></a>";
                             // ----------------------
 
                             var date = moment(response.d[i].lblFechaEntrega, "DD-MM-YYYY").format("DD-MM-YYYY");
@@ -442,15 +448,20 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
 
                         // Volver a cargar eventos sobre la grilla
                         bindDelayEvents();
+                    } // lenght > 0
+                    else {
+                        month_setTotal(0);
                     }
 
                     // Load calendario completo
-                    loadCalendar();
+                    loadCalendar();                    
 
                 }, // end success
                 failure: function (response) {
                 }
             }); // Ajax
+
+            
 
 
             // ------------------ ------------------ ------------------ ------------------ ------------------ ------------------
@@ -516,7 +527,7 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
 
 function month_selectMonth_reports(month_value, soloVigentes_value, soloEntrCol_value, incluirCancelados_value) {
     if (month_value !== null && month_value !== undefined && month_value > 0 && soloVigentes_value !== null && soloVigentes_value !== undefined &&
-        soloEntrCol_value !== null && soloEntrCol_value !== undefined && incluirCancelados_value !== null && incluirCancelados_value !== undefined) {
+        soloEntrCol_value !== null && soloEntrCol_value !== undefined && incluirCancelados_value !== null && incluirCancelados_value !== undefined && incluirCancelados_value !== null && incluirCancelados_value !== undefined) {
 
         month_value += "";
 
@@ -796,7 +807,7 @@ function reportes_loadData(total_pedidos, total_pasacalles, total_banners, total
     console.log("total_palos, type: " + type(total_palos) + ", value: " + total_palos);
     console.log("total_lona_mts, type: " + type(total_lona_mts) + ", value: " + total_lona_mts);
     console.log("total_palos, type: " + type(total_palos) + ", value: " + total_palos);
-    console.log("total_recaudacion, type: " + type(total_recaudacion_txt) + ", value: " + total_recaudacion_txt);
+    console.log("total_recaudacion_txt, type: " + type(total_recaudacion_txt) + ", value: " + total_recaudacion_txt);
 
     // Setea barras
     $("#total_pasacalles_barra1").css("width", total_pasacalles_barra + "%");
@@ -946,6 +957,10 @@ function check_nullValues(value) {
     return value_return;
 }
 
+function month_setTotal(importeAcumuladoMes) {
+    $("#lblTotalMes").text("$" + numberWithCommas(importeAcumuladoMes));
+}
+
 function month_setMonthName(month_value) {
     if (month_value !== null && month_value > 0) {
 
@@ -1090,8 +1105,12 @@ function month_onClickEvent() {
                 $("#chbSoloVigentes").prop('checked', false);
                 $("#chbSoloEntrCol").prop('checked', false);
                 $("#chbInclCancelados").prop('checked', false);
+                $("#chbSoloArteRefinado").prop('checked', false);
                 
-                month_selectMonth(month_value_int, true, false, false);
+                // Set acumulado mes $0
+                month_setTotal(0);
+
+                month_selectMonth(month_value_int, true, false, false, false);
 
                 // Reportes data
                 month_selectMonth_reports(month_value_int, false, false, true);
@@ -1105,6 +1124,7 @@ function month_onClickEvent() {
     });
 }
 
+/* DEPRECATED:filtrar_soloVigentes - NO SE USA */
 function filtrar_soloVigentes() {
     var chbSoloVigentes = $("#chbSoloVigentes");
     var hdn_monthSelected = $("#hdn_monthSelected");
@@ -1119,23 +1139,26 @@ function filtrar_soloVigentes() {
         month_selectMonth(month_value_int, !soloVigentes_value)
     }
 }
+/* DEPRECATED:filtrar_soloVigentes - NO SE USA */
 
 function filtrar() {
     var chbSoloEntrCol = $("#chbSoloEntrCol");
     var chbSoloVigentes = $("#chbSoloVigentes");
     var chbInclCancelados = $("#chbInclCancelados");
+    var chbSoloArteRefinado = $("#chbSoloArteRefinado");
     var hdn_monthSelected = $("#hdn_monthSelected");
-    if (hdn_monthSelected !== null && hdn_monthSelected.val() !== null && chbSoloEntrCol !== null && chbSoloVigentes !== null && chbInclCancelados !== null) {
+    if (hdn_monthSelected !== null && hdn_monthSelected.val() !== null && chbSoloEntrCol !== null && chbSoloVigentes !== null && chbInclCancelados !== null && chbSoloArteRefinado !== null) {
         var soloEntrCol_value = chbSoloEntrCol.is(":checked")
         var soloVigentes_value = chbSoloVigentes.is(":checked")
         var incluirCancelados_value = chbInclCancelados.is(":checked")
+        var chbSoloArteRefinado_value = chbSoloArteRefinado.is(":checked")
         var month_value = hdn_monthSelected.val();
 
         var month_value_int = month_value;
         if (type(month_value) === "string") {
             month_value_int = TryParseInt(month_value, 0);
         }
-        month_selectMonth(month_value_int, !soloVigentes_value, soloEntrCol_value, incluirCancelados_value)
+        month_selectMonth(month_value_int, !soloVigentes_value, soloEntrCol_value, incluirCancelados_value, chbSoloArteRefinado_value)
     }
 }
 
@@ -1206,7 +1229,7 @@ function showActionMenu_OPC(formID, tel, nombre, btnID_value) {
     }
 }
 
-function showActionMenu_CTO(formID, nombre, goToFormulario, goToGMaps, goToWPP, btnID_value) {
+function showActionMenu_CTO(formID, nombre, goToFormulario, goToGMaps, goToWPP, btnID_value, lbl_comentarios) {
     var divPopbox = $("#divPopbox_CTO");
     var btnID = $("#" + btnID_value);
     if (divPopbox !== null && divPopbox !== undefined && btnID !== null && btnID !== undefined) {
@@ -1246,15 +1269,21 @@ function showActionMenu_CTO(formID, nombre, goToFormulario, goToGMaps, goToWPP, 
         var lbl_options_button2 = $("#lbl_options_button2_CTO");
         var lbl_options_button3 = $("#lbl_options_button3_CTO");
         var txbLink = $("#txbLink");
+
+        var lbl_options_info_CTO = $("#lbl_options_info_CTO");
+
         
         if (lbl_options_button1 !== null && lbl_options_button1 !== undefined &&
         lbl_options_button2 !== null && lbl_options_button2 !== undefined &&
         lbl_options_button3 !== null && lbl_options_button3 !== undefined &&
-        txbLink !== null && txbLink !== undefined) {
+        txbLink !== null && txbLink !== undefined &&
+            lbl_options_info_CTO !== null && lbl_options_info_CTO !== undefined) {
             lbl_options_button1.attr('href', goToFormulario);
             lbl_options_button2.attr('href', goToGMaps);
             lbl_options_button3.attr('href', goToWPP);
             txbLink.val(goToWPP);
+
+            lbl_options_info_CTO.text(lbl_comentarios);
         }
     }
 }

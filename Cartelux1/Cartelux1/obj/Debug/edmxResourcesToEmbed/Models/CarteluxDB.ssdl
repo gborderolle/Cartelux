@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="carteluxdb1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="clientes">
+    <Key>
+      <PropertyRef Name="Cliente_ID" />
+    </Key>
+    <Property Name="Cliente_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Departamento_ID" Type="int" />
+    <Property Name="Telefono" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Barrio" Type="varchar" MaxLength="50" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="100" />
+    <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
+    <Property Name="Fecha_update" Type="datetime" Nullable="false" />
+    <Property Name="NroDocumento" Type="int" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="clientes_frecuentes">
+    <Key>
+      <PropertyRef Name="Cliente_Frecuente_ID" />
+    </Key>
+    <Property Name="Cliente_Frecuente_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cliente_ID" Type="int" Nullable="false" />
+    <Property Name="Frecuencia" Type="varchar" MaxLength="100" />
+    <Property Name="Descuento" Type="varchar" MaxLength="100" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="100" />
+    <Property Name="Ultimo_pedido" Type="datetime" />
+  </EntityType>
+  <EntityType Name="config_alarmas">
+    <Key>
+      <PropertyRef Name="Config_alarmas_ID" />
+    </Key>
+    <Property Name="Config_alarmas_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="Aviso_monto_ok" Type="bit" Nullable="false" />
+    <Property Name="Aviso_monto" Type="int" />
+    <Property Name="Aviso_fecha_ok" Type="bit" Nullable="false" />
+    <Property Name="Aviso_fecha" Type="datetime" />
+    <Property Name="EstaActivo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="config_alarmas_ingresosMensual">
+    <Key>
+      <PropertyRef Name="Config_alarmas_ingresosMensual_ID" />
+    </Key>
+    <Property Name="Config_alarmas_ingresosMensual_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Importe" Type="int" />
+    <Property Name="EstaActivo" Type="bit" Nullable="false" />
+    <Property Name="FlagMensual" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="config_emails">
+    <Key>
+      <PropertyRef Name="Config_emails_ID" />
+    </Key>
+    <Property Name="Config_emails_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="Clave" Type="varchar" MaxLength="50" />
+    <Property Name="EsEmisor" Type="bit" Nullable="false" />
+    <Property Name="EsEntrega" Type="bit" Nullable="false" />
+    <Property Name="EstaActivo" Type="bit" Nullable="false" />
+    <Property Name="AlarmasOK" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'carteluxdb1.dbo.config_formularios_anos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="config_formularios_anos">
+    <Key>
+      <PropertyRef Name="Config_formularios_ano_ID" />
+      <PropertyRef Name="Nombre" />
+    </Key>
+    <Property Name="Config_formularios_ano_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'carteluxdb1.dbo.config_material_importes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="config_material_importes">
+    <Key>
+      <PropertyRef Name="Material_Importes_ID" />
+      <PropertyRef Name="Nombre" />
+      <PropertyRef Name="Codigo" />
+      <PropertyRef Name="Unidad" />
+    </Key>
+    <Property Name="Material_Importes_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Costo" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Precio" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Unidad" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="formularios">
+    <Key>
+      <PropertyRef Name="Formulario_ID" />
+    </Key>
+    <Property Name="Formulario_ID" Type="int" Nullable="false" />
+    <Property Name="Cliente_ID" Type="int" Nullable="false" />
+    <Property Name="Serie" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="URL_short" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="URL_completa" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Monto" Type="int" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="200" />
+    <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
+    <Property Name="Fecha_update" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="lista_componentes_unidad">
+    <Key>
+      <PropertyRef Name="componente_unidad_ID" />
+    </Key>
+    <Property Name="componente_unidad_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Codigo" Type="int" />
+    <Property Name="Costo_unidad" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Precio_venta" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="lista_componentes_volumen">
+    <Key>
+      <PropertyRef Name="componente_volumen_ID" />
+    </Key>
+    <Property Name="componente_volumen_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Codigo" Type="int" />
+    <Property Name="Costo_volumen" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Precio_venta" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="200" />
+    <Property Name="isFondoColor" Type="bit" />
+  </EntityType>
+  <EntityType Name="lista_departamentos">
+    <Key>
+      <PropertyRef Name="Departamento_ID" />
+    </Key>
+    <Property Name="Departamento_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="lista_entregas_tipos">
+    <Key>
+      <PropertyRef Name="Entrega_Tipo_ID" />
+    </Key>
+    <Property Name="Entrega_Tipo_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="Agrupacion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="lista_pedido_estados">
+    <Key>
+      <PropertyRef Name="Pedido_Estado_ID" />
+    </Key>
+    <Property Name="Pedido_Estado_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="lista_pedido_materiales">
+    <Key>
+      <PropertyRef Name="Pedido_Material_ID" />
+    </Key>
+    <Property Name="Pedido_Material_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="Agrupacion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="lista_pedido_mediosDePago">
+    <Key>
+      <PropertyRef Name="Pedido_mediosDePago_ID" />
+    </Key>
+    <Property Name="Pedido_mediosDePago_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="lista_pedido_tamanos">
+    <Key>
+      <PropertyRef Name="Pedido_Tamano_ID" />
+    </Key>
+    <Property Name="Pedido_Tamano_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="Agrupacion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="lista_pedido_tematicas">
+    <Key>
+      <PropertyRef Name="Pedido_Tematica_ID" />
+    </Key>
+    <Property Name="Pedido_Tematica_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="lista_productos">
+    <Key>
+      <PropertyRef Name="Producto_ID" />
+    </Key>
+    <Property Name="Producto_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Precio_sugerido" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="lista_proyecto_estados">
+    <Key>
+      <PropertyRef Name="Proyecto_Estado_ID" />
+    </Key>
+    <Property Name="Proyecto_Estado_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="logs">
+    <Key>
+      <PropertyRef Name="Log_ID" />
+    </Key>
+    <Property Name="Log_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Usuario_ID" Type="int" Nullable="false" />
+    <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
+    <Property Name="Usuario" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="IP_client" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Dato_afectado" Type="varchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pedido_disenos">
+    <Key>
+      <PropertyRef Name="Pedido_Diseno_ID" />
+    </Key>
+    <Property Name="Pedido_Diseno_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Codigo_guia" Type="int" />
+    <Property Name="Texto" Type="varchar" MaxLength="100" />
+    <Property Name="Boceto_nombre" Type="varchar" MaxLength="30" />
+    <Property Name="Boceto_extension" Type="varchar" MaxLength="10" />
+    <Property Name="Boceto_PATH" Type="varchar" MaxLength="100" />
+    <Property Name="Diseno_referido" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="pedido_entregas">
+    <Key>
+      <PropertyRef Name="Pedido_Entrega_ID" />
+    </Key>
+    <Property Name="Pedido_Entrega_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Entrega_Tipo_ID" Type="int" Nullable="false" />
+    <Property Name="Departamento_Tipo_ID" Type="int" />
+    <Property Name="Direccion_calle" Type="varchar" MaxLength="300" />
+    <Property Name="Direccion_numero" Type="varchar" MaxLength="300" />
+    <Property Name="Direccion_apto" Type="varchar" MaxLength="300" />
+    <Property Name="Indicaciones" Type="varchar" MaxLength="100" />
+    <Property Name="Barrio" Type="varchar" MaxLength="50" />
+    <Property Name="Ciudad" Type="varchar" MaxLength="50" />
+    <Property Name="Google_maps_URL" Type="varchar" MaxLength="300" />
+    <Property Name="Coordenadas_Y" Type="varchar" MaxLength="200" />
+    <Property Name="Coordenadas_X" Type="varchar" MaxLength="200" />
+    <Property Name="Fecha_entrega" Type="datetime" />
+    <Property Name="Tiene_fecha_entrega" Type="bit" Nullable="false" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="200" />
+    <Property Name="Direccion_esquina" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="pedidos">
+    <Key>
+      <PropertyRef Name="Pedido_ID" />
+    </Key>
+    <Property Name="Pedido_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Formulario_ID" Type="int" Nullable="false" />
+    <Property Name="Pedido_Tipo_ID" Type="int" Nullable="false" />
+    <Property Name="Pedido_Material_ID" Type="int" Nullable="false" />
+    <Property Name="Pedido_Tamano_ID" Type="int" Nullable="false" />
+    <Property Name="Pedido_Tematica_ID" Type="int" Nullable="false" />
+    <Property Name="Pedido_Diseno_ID" Type="int" Nullable="false" />
+    <Property Name="Pedido_Entrega_ID" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
+    <Property Name="Pedido_Estado_ID" Type="int" />
+    <Property Name="Pedido_Estado_UltimaModificacion_Usuario_ID" Type="int" />
+    <Property Name="Pedido_MedioDePago_ID" Type="int" />
+    <Property Name="Tamano_real" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="presupuestos_generados">
+    <Key>
+      <PropertyRef Name="presupuesto_generado_ID" />
+    </Key>
+    <Property Name="presupuesto_generado_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Log_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="presupuestos_generados_productos">
+    <Key>
+      <PropertyRef Name="presupuesto_generado_producto_ID" />
+    </Key>
+    <Property Name="presupuesto_generado_producto_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="presupuesto_generado_ID" Type="int" Nullable="false" />
+    <Property Name="Producto_ID" Type="int" Nullable="false" />
+    <Property Name="Dato_fijo_txbNombre" Type="varchar" MaxLength="50" />
+    <Property Name="Dato_fijo_txbVolumen" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_chkFondoColor" Type="bit" />
+    <Property Name="Dato_fijo_txbCostoUnitario" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_txbPrecioUnitario" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_chkSugerido" Type="bit" />
+    <Property Name="Dato_fijo_txbCantidadTotal" Type="int" />
+    <Property Name="Dato_fijo_txbSubotal1" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_txbDescuento" Type="int" />
+    <Property Name="Dato_fijo_txbSubotal2" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_txbRedondeo" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_txbPrecioFinal" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="Dato_fijo_txbComentarios" Type="varchar" MaxLength="100" />
+    <Property Name="Dato_fijo_txbCostoTotal" Type="decimal" Precision="10" Scale="3" />
+  </EntityType>
+  <EntityType Name="producto_componente_unidad">
+    <Key>
+      <PropertyRef Name="producto_componente_unidad_ID" />
+    </Key>
+    <Property Name="producto_componente_unidad_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Producto_ID" Type="int" />
+    <Property Name="Componente_unidad_ID" Type="int" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="producto_componente_volumen">
+    <Key>
+      <PropertyRef Name="producto_componente_volumen_ID" />
+    </Key>
+    <Property Name="producto_componente_volumen_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Producto_ID" Type="int" />
+    <Property Name="Componente_volumen_ID" Type="int" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="proyectos">
+    <Key>
+      <PropertyRef Name="Proyecto_ID" />
+    </Key>
+    <Property Name="Proyecto_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Proyecto_estado_ID" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="150" />
+    <Property Name="Fecha_estimada" Type="datetime" />
+    <Property Name="Contacto_1_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contacto_1_telefono" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contacto_1_email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contacto_2_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contacto_2_telefono" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contacto_2_email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Comentarios" Type="varchar" MaxLength="150" />
+    <Property Name="Fecha_creado" Type="datetime" Nullable="false" />
+    <Property Name="Fecha_update" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="trading_activos">
+    <Key>
+      <PropertyRef Name="Activo_ID" />
+    </Key>
+    <Property Name="Activo_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Instrumento_ID" Type="int" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Ticker" Type="varchar" MaxLength="50" />
+    <Property Name="Mercado_ID" Type="int" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="trading_lista_estados">
+    <Key>
+      <PropertyRef Name="Estado_ID" />
+    </Key>
+    <Property Name="Estado_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Valor" Type="int" />
+  </EntityType>
+  <EntityType Name="trading_lista_instrumentos">
+    <Key>
+      <PropertyRef Name="Instrumento_ID" />
+    </Key>
+    <Property Name="Instrumento_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Valor" Type="int" />
+  </EntityType>
+  <EntityType Name="trading_lista_mercados">
+    <Key>
+      <PropertyRef Name="Mercado_ID" />
+    </Key>
+    <Property Name="Mercado_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Valor" Type="int" />
+  </EntityType>
+  <EntityType Name="trading_lista_operaciones">
+    <Key>
+      <PropertyRef Name="Operacion_ID" />
+    </Key>
+    <Property Name="Operacion_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Valor" Type="int" />
+  </EntityType>
+  <EntityType Name="trading_ordenes">
+    <Key>
+      <PropertyRef Name="Orden_ID" />
+    </Key>
+    <Property Name="Orden_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Operacion_ID" Type="int" />
+    <Property Name="Trade_ID" Type="int" />
+    <Property Name="Estado_ID" Type="int" />
+    <Property Name="Datetime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="trading_trades">
+    <Key>
+      <PropertyRef Name="Trade_ID" />
+    </Key>
+    <Property Name="Trade_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Activo_ID" Type="int" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Valor" Type="decimal" Precision="7" Scale="3" />
+  </EntityType>
+  <EntityType Name="usuarios">
+    <Key>
+      <PropertyRef Name="Usuario_ID" />
+    </Key>
+    <Property Name="Usuario_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Usuario" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Clave" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Rol_usuario_ID" Type="int" Nullable="false" />
+    <Property Name="EsAdmin" Type="bit" Nullable="false" />
+    <Property Name="EsTrader" Type="bit" />
+  </EntityType>
+  <EntityContainer Name="carteluxdb1ModelStoreContainer">
+    <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="clientes_frecuentes" EntityType="Self.clientes_frecuentes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="config_alarmas" EntityType="Self.config_alarmas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="config_alarmas_ingresosMensual" EntityType="Self.config_alarmas_ingresosMensual" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="config_emails" EntityType="Self.config_emails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="formularios" EntityType="Self.formularios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_componentes_unidad" EntityType="Self.lista_componentes_unidad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_componentes_volumen" EntityType="Self.lista_componentes_volumen" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_departamentos" EntityType="Self.lista_departamentos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_entregas_tipos" EntityType="Self.lista_entregas_tipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_pedido_estados" EntityType="Self.lista_pedido_estados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_pedido_materiales" EntityType="Self.lista_pedido_materiales" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_pedido_mediosDePago" EntityType="Self.lista_pedido_mediosDePago" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_pedido_tamanos" EntityType="Self.lista_pedido_tamanos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_pedido_tematicas" EntityType="Self.lista_pedido_tematicas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_productos" EntityType="Self.lista_productos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lista_proyecto_estados" EntityType="Self.lista_proyecto_estados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="logs" EntityType="Self.logs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pedido_disenos" EntityType="Self.pedido_disenos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pedido_entregas" EntityType="Self.pedido_entregas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pedidos" EntityType="Self.pedidos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="presupuestos_generados" EntityType="Self.presupuestos_generados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="presupuestos_generados_productos" EntityType="Self.presupuestos_generados_productos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="producto_componente_unidad" EntityType="Self.producto_componente_unidad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="producto_componente_volumen" EntityType="Self.producto_componente_volumen" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="proyectos" EntityType="Self.proyectos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="trading_activos" EntityType="Self.trading_activos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="trading_lista_estados" EntityType="Self.trading_lista_estados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="trading_lista_instrumentos" EntityType="Self.trading_lista_instrumentos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="trading_lista_mercados" EntityType="Self.trading_lista_mercados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="trading_lista_operaciones" EntityType="Self.trading_lista_operaciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="trading_ordenes" EntityType="Self.trading_ordenes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="trading_trades" EntityType="Self.trading_trades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="config_formularios_anos" EntityType="Self.config_formularios_anos" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [config_formularios_anos].[Config_formularios_ano_ID] AS [Config_formularios_ano_ID], 
+    [config_formularios_anos].[Nombre] AS [Nombre]
+    FROM [dbo].[config_formularios_anos] AS [config_formularios_anos]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="config_material_importes" EntityType="Self.config_material_importes" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [config_material_importes].[Material_Importes_ID] AS [Material_Importes_ID], 
+    [config_material_importes].[Nombre] AS [Nombre], 
+    [config_material_importes].[Costo] AS [Costo], 
+    [config_material_importes].[Precio] AS [Precio], 
+    [config_material_importes].[Codigo] AS [Codigo], 
+    [config_material_importes].[Unidad] AS [Unidad], 
+    [config_material_importes].[Descripcion] AS [Descripcion], 
+    [config_material_importes].[Comentarios] AS [Comentarios]
+    FROM [dbo].[config_material_importes] AS [config_material_importes]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

@@ -209,3 +209,4 @@
 6/26/2020 1:55:13 AM: [ln:572] Presupuestos: gridElementosSeleccionados_confirmarLista() - Excepcion. Convirtiendo int. ERROR: 103.68.
 10/10/2020 1:05:00 AM: [ln:64] Logs: AddUserLog() - Excepcion. Convirtiendo int. ERROR: -.
 10/10/2020 1:21:50 AM: [ln:64] Logs: AddUserLog() - Excepcion. Convirtiendo int. ERROR: -.
+11/22/2020 7:29:34 AM: [ln:64] Logs: AddUserLog() - Excepcion. Convirtiendo int. ERROR: -.

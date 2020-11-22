@@ -887,7 +887,7 @@ namespace Cartelux1
             }
         }
 
-        public static List<formularios> GetFormularios_PorMes(CarteluxDB context, DateTime date1, DateTime date2, bool incluye_cancelados = false)
+        public static List<formularios> GetFormularios_PorMes(CarteluxDB context, DateTime date1, DateTime date2, bool incluye_cancelados = false, bool chbSoloArteRefinado_value = false)
         {
             List<formularios> formularios_elements = new List<formularios>();
             if (context != null)
@@ -900,28 +900,56 @@ namespace Cartelux1
                     var pedidos_elements = context.pedidos.Where(v => v.Pedido_Entrega_ID == _pedido_entrega.Pedido_Entrega_ID).ToList();
                     foreach (pedidos _pedido in pedidos_elements)
                     {
-                        // Filtro No incluye cancelados
+                        // Filtro NO incluye cancelados
                         if (!incluye_cancelados)
                         {
                             lista_pedido_estados _pedidoEstado = (lista_pedido_estados)context.lista_pedido_estados.FirstOrDefault(c => c.Pedido_Estado_ID == _pedido.Pedido_Estado_ID);
                             if (_pedidoEstado != null)
                             {
-                                if ((_pedido.Pedido_Estado_ID == _pedidoEstado.Pedido_Estado_ID && (_pedidoEstado.Codigo == 2 || _pedidoEstado.Codigo == 3)))
+                                // Estado 2 = Cancelado || Estado 3 = Borrado 
+                                //if ((_pedido.Pedido_Estado_ID == _pedidoEstado.Pedido_Estado_ID && (_pedidoEstado.Codigo == 2 || _pedidoEstado.Codigo == 3)))
+                                if (_pedidoEstado.Codigo == 2 || _pedidoEstado.Codigo == 3)
                                 {
+                                    // Si es Cancelado o Borrado descarta este pedido
                                     continue;
                                 }
                             }
                         }
 
-                        int pedido_entrega_ID = _pedido.Pedido_Entrega_ID;
-                        formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Formulario_ID == _pedido.Formulario_ID);
-                        if (_formulario != null)
+                        // Si NO es ARTE REFINADO descarta este pedido
+                        if (chbSoloArteRefinado_value)
                         {
-                            // Add Formulario
-                            formularios_elements.Add(_formulario);
+                            // Tamaño 10 = ARTE REFINADO
+                            lista_pedido_tamanos _pedidoTamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _pedido.Pedido_Tamano_ID);
+                            if (_pedidoTamano != null)
+                            {
+                                if (_pedidoTamano.Codigo == 10)
+                                {
+                                    // Es AR, agrega el Form
+                                    int pedido_entrega_ID = _pedido.Pedido_Entrega_ID;
+                                    formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Formulario_ID == _pedido.Formulario_ID);
+                                    if (_formulario != null)
+                                    {
+                                        // Add Formulario
+                                        formularios_elements.Add(_formulario);
+                                    }
+                                }
+                            }
                         }
+                        else
+                        {
+                            int pedido_entrega_ID = _pedido.Pedido_Entrega_ID;
+                            formularios _formulario = (formularios)context.formularios.FirstOrDefault(v => v.Formulario_ID == _pedido.Formulario_ID);
+                            if (_formulario != null)
+                            {
+                                // Add Formulario
+                                formularios_elements.Add(_formulario);
+                            }
+                        }
+
                     } // foreach pedidos
                 } // foreach pedido_entregas
+
 
             }
             return formularios_elements;
@@ -960,7 +988,7 @@ namespace Cartelux1
         #region Static Methods
 
         [WebMethod]
-        public static _GridFormularios[] GetData_BindGridFormularios(string year_value, string month_value, bool soloVigentes_value, bool soloEntrCol_value, bool incluirCancelados_value)
+        public static _GridFormularios[] GetData_BindGridFormularios(string year_value, string month_value, bool soloVigentes_value, bool soloEntrCol_value, bool incluirCancelados_value, bool chbSoloArteRefinado_value)
         {
             List<_GridFormularios> _GridFormularios_list = new List<_GridFormularios>();
             if (!string.IsNullOrWhiteSpace(year_value) && !string.IsNullOrWhiteSpace(month_value))
@@ -1012,8 +1040,9 @@ namespace Cartelux1
                         int last_day = DateTime.DaysInMonth(year_int, month_int);
                         DateTime date2 = new DateTime(year_int, month_int, last_day);
 
+                        int? importeAcumuladoMes = 0;
                         int number = 1;
-                        List<formularios> formularios_elements = GetFormularios_PorMes(context, date1, date2, incluirCancelados_value);
+                        List<formularios> formularios_elements = GetFormularios_PorMes(context, date1, date2, incluirCancelados_value, chbSoloArteRefinado_value);
                         foreach (formularios _formulario in formularios_elements)
                         {
                             if (_formulario != null)
@@ -1022,6 +1051,8 @@ namespace Cartelux1
                                 _GridFormulario1.Formulario_ID = _formulario.Formulario_ID.ToString();
                                 _GridFormulario1.URL_short = _formulario.URL_short;
                                 _GridFormulario1.EstadoNro = 0;
+
+                                _GridFormulario1.lblComentarios = _formulario.Comentarios;
 
                                 /*
                                  * Estados de pedidos:
@@ -1164,9 +1195,9 @@ namespace Cartelux1
                                         _tamano_tipo_ID = _pedido.Pedido_Tamano_ID;
                                         Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, tamano_tipo_ID_str);
                                     }
-                                    lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _tamano_tipo_ID);
-
+                                    
                                     //lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _pedido.Pedido_Tamano_ID);
+                                    lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _tamano_tipo_ID);
                                     if (_lista_pedido_tamano != null)
                                     {
                                         _GridFormulario1.lblTipoCartelCodigo = _lista_pedido_tamano.Codigo.ToString();
@@ -1230,6 +1261,8 @@ namespace Cartelux1
                                     #endregion END Pedido Usuario que modifica
 
                                 }
+                                importeAcumuladoMes += _GridFormulario1.lblMonto;
+                                _GridFormulario1.importeAcumuladoMes = importeAcumuladoMes;
                                 _GridFormularios_list.Add(_GridFormulario1);
                             }
                             number++;
@@ -1310,6 +1343,8 @@ namespace Cartelux1
             public string lblDisenoReferido { get; set; }
             public int EstadoNro { get; set; }
             public string lblTipoCartelCodigo { get; set; }
+            public string lblComentarios { get; set; }
+            public int? importeAcumuladoMes { get; set; }
         }
 
         public class _GridProyectos

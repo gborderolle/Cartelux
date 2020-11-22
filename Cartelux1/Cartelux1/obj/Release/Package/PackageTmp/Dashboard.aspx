@@ -309,6 +309,10 @@
                                                     </div>
                                                 </form>
                                             </div>
+                                            <div class="row-short">
+                                                <h4 style="margin-top: 0; float: left;">
+                                                    Total acumulado <label id="lblTotalMes" class="unselectable" style="color:green;">$0</label></h4>
+                                            </div>
                                         </div>
                                         <div class="col-sm-12 col-md-6 pull-right">
                                             <div class="input-group pull-right" style="padding: 5px;">
@@ -330,6 +334,13 @@
                                                     <input id="chbInclCancelados" class="form-check-input" type="checkbox" onclick="filtrar()">
                                                     <label class="form-check-label unselectable" for="chbInclCancelados">
                                                         Incluir cancelados
+                                                    </label>
+                                                </div>
+
+                                                <div class="form-check">
+                                                    <input id="chbSoloArteRefinado" class="form-check-input" type="checkbox" onclick="filtrar()">
+                                                    <label class="form-check-label unselectable" for="chbSoloArteRefinado">
+                                                        Sólo Arte Refinado
                                                     </label>
                                                 </div>
                                             </div>
@@ -1205,7 +1216,7 @@
 
                     <div id="lbl_options_divBox_CTO" class="alert alert-warning" role="alert">
                         <span id="lbl_options_color_CTO" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                        <span id="lbl_options_info_CTO" class="unselectable">Opciones de contacto</span>
+                        <span id="lbl_options_info_CTO" class="unselectable">[Comentarios]</span>
                     </div>
                     <%--<input id="lbl_options_password" type="password" class="form-control" placeholder="Contraseña" name="login-username" required="required" />--%>
                 </div>
