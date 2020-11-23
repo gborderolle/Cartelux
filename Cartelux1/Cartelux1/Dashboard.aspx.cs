@@ -303,21 +303,6 @@ namespace Cartelux1
                                 lbl1.Text = tamanoReal;
                             }
 
-                            //lbl1 = e.Row.FindControl("lblTipo") as Label;
-                            //if (lbl1 != null)
-                            //{
-                            //    lista_productos _lista_pedido_tipo = (lista_productos)context.lista_productos.FirstOrDefault(c => c.Pedido_Tipo_ID == _pedido.Pedido_Tipo_ID);
-                            //    if (_lista_pedido_tipo != null)
-                            //    {
-                            //        string nombre = string.Empty;
-                            //        if (!string.IsNullOrWhiteSpace(_lista_pedido_tipo.Nombre))
-                            //        {
-                            //            nombre = _lista_pedido_tipo.Nombre;
-                            //        }
-                            //        lbl1.Text = nombre;
-                            //    }
-                            //}
-
                             lbl1 = e.Row.FindControl("lblTematica") as Label;
                             if (lbl1 != null)
                             {
@@ -337,6 +322,8 @@ namespace Cartelux1
                                     lbl1.Text = _lista_pedido_mediosDePago.Nombre;
                                 }
                             }
+
+                            //lblOrdenMonto
 
                             lbl1 = e.Row.FindControl("lblMonto") as Label;
                             if (lbl1 != null)
@@ -1196,7 +1183,6 @@ namespace Cartelux1
                                         Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, tamano_tipo_ID_str);
                                     }
                                     
-                                    //lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _pedido.Pedido_Tamano_ID);
                                     lista_pedido_tamanos _lista_pedido_tamano = (lista_pedido_tamanos)context.lista_pedido_tamanos.FirstOrDefault(c => c.Pedido_Tamano_ID == _tamano_tipo_ID);
                                     if (_lista_pedido_tamano != null)
                                     {
@@ -1270,7 +1256,18 @@ namespace Cartelux1
                     }
                 }
             }
-            return _GridFormularios_list.ToArray();
+            if(_GridFormularios_list.Count > 0)
+            {
+                int contador = 1;
+                foreach(_GridFormularios _GridFormularios1 in _GridFormularios_list.OrderByDescending(e => e.lblMonto))
+                {
+                    _GridFormularios1.lblOrdenMonto = contador;
+                    contador++;
+                }
+            }
+
+
+            return _GridFormularios_list.OrderBy(e => e.lblFechaEntrega).ToArray();
         }
 
         [WebMethod]
@@ -1345,6 +1342,8 @@ namespace Cartelux1
             public string lblTipoCartelCodigo { get; set; }
             public string lblComentarios { get; set; }
             public int? importeAcumuladoMes { get; set; }
+            public int lblOrdenMonto { get; set; }
+
         }
 
         public class _GridProyectos
