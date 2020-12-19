@@ -296,7 +296,7 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
                     $("#gridFormularios tbody").remove();
                     if (response.d.length > 0) {
                         $("#gridFormularios").empty();
-                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>T/Entrega</th> <th scope='col'>Tipo</th> <th scope='col'>Tamaño</th> <th scope='col'>Temática</th> <th scope='col'>MedioP</th> <th scope='col'>$ Monto</th> <th scope='col'>Us</th> <th scope='col'>CTO</th> <th scope='col'>OPC</th> </tr></thead><tbody>"); 
+                        $("#gridFormularios").append("<thead><tr><th class='hiddencol hiddencol_real' scope='col'>Formulario_ID</th> <th class='hiddencol hiddencol_real' scope='col'>URL Form</th> <th scope='col'>#</th> <th scope='col'>Fecha</th> <th scope='col'>Teléfono</th> <th scope='col'>Nombre</th> <th scope='col'>T/Entrega</th> <th scope='col'>Tipo</th> <th scope='col'>Tamaño</th> <th scope='col'>Temática</th> <th scope='col'>MedioP</th> <th scope='col'># $</th> <th scope='col'>$ Monto</th> <th scope='col'>Us</th> <th scope='col'>CTO</th> <th scope='col'>OPC</th> </tr></thead><tbody>");
                         for (var i = 0; i < response.d.length; i++) {
 
                             var monto_pedido = check_nullValues(response.d[i].lblMonto);
@@ -428,7 +428,8 @@ function month_selectMonth(month_value, soloVigentes_value, soloEntrCol_value, i
                             check_nullValues(response.d[i].lblTamanoReal) + "</td> <td class='td-very_short' " + text_color + ">" + // Tamaño real
 
                             check_nullValues(response.d[i].lblTematica) + "</td> <td class='td-very_short' " + text_color + ">" +
-                            check_nullValues(response.d[i].lblMedioP) + "</td> <td class='td-very_short price' " + text_color + ">$ " +
+                            check_nullValues(response.d[i].lblMedioP) + "</td> <td class='td-very_short' " + text_color + ">" +
+                            check_nullValues(response.d[i].lblOrdenMonto) + "</td> <td class='td-very_short price' " + text_color + ">$ " +
                             numberWithCommas(monto_pedido) + "</td> <td class='td-very_short' " + text_color + ">" +
                             check_nullValues(response.d[i].lblUsuario) + "</td> <td class='td-very_short' " + text_color + ">" +
                             //check_nullValues(response.d[i].lblCantidad) + "</td> <td class='td-very_short' " + text_color + ">" +

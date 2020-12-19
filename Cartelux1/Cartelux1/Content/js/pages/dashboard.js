@@ -553,7 +553,7 @@ function month_selectMonth_reports(month_value, soloVigentes_value, soloEntrCol_
                 type: "POST",
                 url: "Dashboard.aspx/GetData_BindGridFormularios",
                 contentType: "application/json;charset=utf-8",
-                data: '{year_value: "' + year_value + '",month_value: "' + month_value + '",soloVigentes_value: "' + soloVigentes_value + '",soloEntrCol_value: "' + soloEntrCol_value + '",incluirCancelados_value: "' + incluirCancelados_value + '"}',
+                data: '{year_value: "' + year_value + '",month_value: "' + month_value + '",soloVigentes_value: "' + soloVigentes_value + '",soloEntrCol_value: "' + soloEntrCol_value + '",incluirCancelados_value: "' + incluirCancelados_value + '",chbSoloArteRefinado_value: "' + false + '"}',
                 dataType: "json",
                 success: function (response) {
 

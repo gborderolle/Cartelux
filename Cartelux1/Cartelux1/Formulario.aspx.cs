@@ -534,7 +534,7 @@ namespace Cartelux1
                     {
                         string IP_client = Logs.GetIPAddress();
                         string UserID = "-";
-                        string UserName = "-"; 
+                        string UserName = "-";
                         if (Session["UserID"] != null && !string.IsNullOrWhiteSpace(Session["UserID"].ToString()) && Session["UserName"] != null && !string.IsNullOrWhiteSpace(Session["UserName"].ToString()))
                         {
                             UserID = Session["UserID"].ToString();
@@ -1244,7 +1244,7 @@ namespace Cartelux1
             string mes_actual = DateTime.Now.ToString("MMMM", new CultureInfo("es-UY"));
 
             //set the content 
-            mail.Subject = "CX-META ALCANZADA: $" + importe_meta;
+            mail.Subject = "CX-META ALCANZADA: $" + ((double)(importe_meta / 100m)).ToString("C2");
             mail.Body = "<div><strong>¡Enhorabuena!</strong></div>";
             mail.Body += "<br/><div>Se alcanzó una meta mensual correspondiente a $" + importe_meta + " pesos uruguayos en el mes de " + mes_actual + ".</div>";
             mail.Body += "<br/><br/>";
@@ -2095,12 +2095,26 @@ namespace Cartelux1
 
         private void PedidoNuevo_Email(string serie, bool isColocacion_entrega = false)
         {
+            // Logger variables
+            System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
+            System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackFrame();
+            string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
+            string methodName = stackFrame.GetMethod().Name;
+
             // SOURCE: https://www.smarterasp.net/support/kb/a179/how-to-send-email-in-asp_net.aspx
             string nombre = txbNombre.Value;
             string telefono = txbTelefono.Value;
             string email1 = txbEmail.Value;
             string tipo = ddlTamano1.SelectedItem.Text;
             string tematica = ddlTematica.SelectedItem.Text;
+            string importe = txbMonto.Value;
+
+            int importe_int = 0;
+            if (!int.TryParse(importe, out importe_int))
+            {
+                importe_int = 0;
+                Logs.AddErrorLog("Excepcion. Convirtiendo int. ERROR:", className, methodName, hdnPedidoCantidad.Value);
+            }
 
             string fecha_entrega = GlobalVariables.GetDatetimeFormated(txbFecha.Value).ToString(GlobalVariables.ShortDateTime_format1);
             string day_name = GlobalVariables.GetDatetimeFormated(txbFecha.Value).ToString("ddd", new CultureInfo("es-UY"));
@@ -2189,6 +2203,7 @@ namespace Cartelux1
                 mail.Body += "<div><strong>Teléfono:</strong> " + telefono + "</div>";
                 mail.Body += "<div><strong>Tipo:</strong> " + tipo + "</div>";
                 mail.Body += "<div><strong>Temática:</strong> " + tematica + "</div>";
+                mail.Body += "<div><strong>Importe:</strong> " + ((double)(importe_int / 100m)).ToString("C2") + "</div>";
                 mail.Body += "<div><strong>Entrega:</strong> " + fecha_entrega + "</div>";
                 mail.Body += "<br/><br/>";
                 mail.Body += "<div><font size='2'><strong><span style='color:#e15211'>------------------------------<wbr>------------------------------<wbr>-------------</span></strong></font></div>";
