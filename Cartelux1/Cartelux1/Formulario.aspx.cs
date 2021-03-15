@@ -1244,7 +1244,8 @@ namespace Cartelux1
             string mes_actual = DateTime.Now.ToString("MMMM", new CultureInfo("es-UY"));
 
             //set the content 
-            mail.Subject = "CX-META ALCANZADA: $" + ((double)(importe_meta / 100m)).ToString("C2");
+            //mail.Subject = "CX-META ALCANZADA: " + ((double)(importe_meta / 100m)).ToString("C2");
+            mail.Subject = "CX-META ALCANZADA: " + ((double)importe_meta).ToString("C2");
             mail.Body = "<div><strong>¡Enhorabuena!</strong></div>";
             mail.Body += "<br/><div>Se alcanzó una meta mensual correspondiente a $" + importe_meta + " pesos uruguayos en el mes de " + mes_actual + ".</div>";
             mail.Body += "<br/><br/>";
@@ -1352,7 +1353,6 @@ namespace Cartelux1
             }
             return id;
         }
-
         private void UploadFile(string serie_str)
         {
             if (!string.IsNullOrWhiteSpace(serie_str))
@@ -2203,7 +2203,8 @@ namespace Cartelux1
                 mail.Body += "<div><strong>Teléfono:</strong> " + telefono + "</div>";
                 mail.Body += "<div><strong>Tipo:</strong> " + tipo + "</div>";
                 mail.Body += "<div><strong>Temática:</strong> " + tematica + "</div>";
-                mail.Body += "<div><strong>Importe:</strong> " + ((double)(importe_int / 100m)).ToString("C2") + "</div>";
+                //mail.Body += "<div><strong>Importe:</strong> " + ((double)(importe_int / 100m)).ToString("C2") + "</div>";
+                mail.Body += "<div><strong>Importe:</strong> " + ((double)(importe_int)).ToString("C2") + "</div>";
                 mail.Body += "<div><strong>Entrega:</strong> " + fecha_entrega + "</div>";
                 mail.Body += "<br/><br/>";
                 mail.Body += "<div><font size='2'><strong><span style='color:#e15211'>------------------------------<wbr>------------------------------<wbr>-------------</span></strong></font></div>";

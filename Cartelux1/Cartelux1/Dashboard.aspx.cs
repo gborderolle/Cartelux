@@ -543,7 +543,6 @@ namespace Cartelux1
 
                                     // Filtrar por fechas del mes corriente por defecto
                                     ScriptManager.RegisterStartupScript(this, this.GetType(), "gridFormularios_OnSelectedIndexChanged", "<script type='text/javascript'></script>", false);
-
                                     hdn_FormularioID.Value = Formulario_ID_str;
                                 }
                             }
